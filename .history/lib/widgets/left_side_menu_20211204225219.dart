@@ -1,0 +1,69 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/constant/string.dart';
+
+class SideDrawer extends StatelessWidget {
+  List<ListTile> menu = [
+    ListTile(
+      leading: Icon(Icons.home),
+      title: Text(homepageText),
+      onTap: () => {},
+    ),
+    ListTile(
+      leading: Icon(Icons.home),
+      title: Text(aboutUsText),
+      onTap: () => {},
+    ),
+    ListTile(
+      leading: Icon(Icons.home),
+      title: Text(ourServicesText),
+      onTap: () => {},
+    ),
+    ListTile(
+      leading: Icon(Icons.home),
+      title: Text(faqText),
+      onTap: () => {},
+    ),
+    ListTile(
+      leading: Icon(Icons.home),
+      title: Text(contactUsText),
+      onTap: () => {},
+    ),
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Column(
+        children: <Widget>[
+          const DrawerHeader(
+            child: Center(
+              child: Text(
+                'Side menu FlutterCorner',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white, fontSize: 25),
+              ),
+            ),
+            decoration: BoxDecoration(
+              color: Colors.black,
+            ),
+          ),
+          ListView.builder(
+            itemCount: menu.length,
+            itemBuilder: (context, index) => Card(
+              elevation: 6,
+              margin: EdgeInsets.all(10),
+              child: ListTile(
+                leading: CircleAvatar(
+                  child: Text(menu[index]["id"].toString()),
+                  backgroundColor: Colors.purple,
+                ),
+                title: Text(menu[index]["title"]),
+                subtitle: Text(dummyList[index]["subtitle"]),
+                trailing: Icon(Icons.add_a_photo),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
