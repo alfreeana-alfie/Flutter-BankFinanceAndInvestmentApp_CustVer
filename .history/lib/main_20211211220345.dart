@@ -54,6 +54,18 @@ Future<void> main() async {
         backgroundColor: Styles.whiteColor,
         pageRouteTransition: PageRouteTransition.SlideTransition,
       ),
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primaryColor: Styles.secondaryColor,
+        errorColor: Styles.dangerColor,
+        textTheme: TextTheme(
+          headline5: GoogleFonts.roboto(fontWeight: FontWeight.w400, letterSpacing:0.0, fontSize: 22, color: Styles.textColor),
+          headline6: GoogleFonts.roboto(fontWeight: FontWeight.w500, letterSpacing:0.15, fontSize: 16, color: Styles.textColor),
+          button: GoogleFonts.roboto(fontWeight: FontWeight.w500, letterSpacing:0.75, fontSize: 14, color: Styles.primaryColor),
+          bodyText1: GoogleFonts.nunitoSans(fontWeight: FontWeight.w400, letterSpacing:0.5, fontSize: 15, color: Styles.textColor.withOpacity(0.7)),
+          bodyText2: GoogleFonts.nunitoSans(fontWeight: FontWeight.w400, letterSpacing:0.25, fontSize: 15, color: Styles.textColor),
+        ),
+      ),
     ),
   );
 }

@@ -54,6 +54,62 @@ Future<void> main() async {
         backgroundColor: Styles.whiteColor,
         pageRouteTransition: PageRouteTransition.SlideTransition,
       ),
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primaryColor: Styles.secondaryColor,
+        errorColor: Styles.dangerColor,
+        textTheme: TextTheme(
+          headline5: GoogleFonts.roboto(fontWeight: FontWeight.w400, letterSpacing:0.0, fontSize: 22, color: Styles.textColor),
+          headline6: GoogleFonts.roboto(fontWeight: FontWeight.w500, letterSpacing:0.15, fontSize: 16, color: Styles.textColor),
+          button: GoogleFonts.roboto(fontWeight: FontWeight.w500, letterSpacing:0.75, fontSize: 14, color: Styles.primaryColor),
+          bodyText1: GoogleFonts.nunitoSans(fontWeight: FontWeight.w400, letterSpacing:0.5, fontSize: 15, color: Styles.textColor.withOpacity(0.7)),
+          bodyText2: GoogleFonts.nunitoSans(fontWeight: FontWeight.w400, letterSpacing:0.25, fontSize: 15, color: Styles.textColor),
+        ),
+      ),
     ),
   );
+}
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  var status = prefs.getBool('isLoggedIn') ?? false;
+  // status = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: Str.appNameTxt,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'DMSans',
+        primaryColor: Styles.primaryColor,
+        backgroundColor: Styles.primaryColor,
+      ),
+      routes: {
+        // Forgot Password
+        '/forgot_password': (context) => const ForgotPasswordPage(),
+        // Sign Up
+        '/sign_up': (context) => const SignUpPage(),
+        // Sign In
+        '/sign_in': (context) => const SignInPage(),
+        '/bottom_nav': (context) => const BottomNav(),
+        // '/exchange_money': (context) => const ExchangeMoney(),
+        // '/product_list': (context) => const ProductListPage(),
+        // '/my_profile': (context) => const MyProfilePage(),
+      },
+      home: SplashScreenView(
+        navigateRoute: status == true ? ExchangeMoney() : SignInPage(),
+        duration: 4000,
+        imageSize: 200,
+        imageSrc: Values.logoPath,
+        text: Str.appNameTxt,
+        backgroundColor: Styles.whiteColor,
+        pageRouteTransition: PageRouteTransition.SlideTransition,
+      ),
+    );
 }

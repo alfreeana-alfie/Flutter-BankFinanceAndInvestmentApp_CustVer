@@ -19,10 +19,10 @@ class Styles {
       TextStyle(fontWeight: FontWeight.bold, fontSize: 21, color: Colors.white);
   static const TextStyle subtitleStyle02 =
       TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold);
-  static TextStyle subtitleStyle03 =
+  static const TextStyle subtitleStyle03 =
       TextStyle(
-        color: const Color.fromRGBO(255, 255, 255, 0.7), 
-        fontSize: getProportionateScreenWidth(18), 
+        color: Color.fromRGBO(255, 255, 255, 0.7), 
+        fontSize: 18, 
         fontWeight: FontWeight.bold
       );
 
@@ -31,15 +31,15 @@ class Styles {
         fontWeight: FontWeight.bold, 
         fontSize: getProportionateScreenWidth(21), 
         color: Colors.black);
-  static TextStyle subtitleStyleDark02 =
+  static const TextStyle subtitleStyleDark02 =
       TextStyle(
         color: Colors.black, 
-        fontSize: getProportionateScreenWidth(18), 
+        fontSize: 18, 
         fontWeight: FontWeight.bold);
-  static TextStyle subtitleStyleDark03 =
+  static const TextStyle subtitleStyleDark03 =
       TextStyle(
-        color: const Color.fromRGBO(0, 0, 0, 0.7), 
-        fontSize: getProportionateScreenWidth(18), 
+        color: Color.fromRGBO(0, 0, 0, 0.7), 
+        fontSize: 18, 
         fontWeight: FontWeight.bold
       );
 

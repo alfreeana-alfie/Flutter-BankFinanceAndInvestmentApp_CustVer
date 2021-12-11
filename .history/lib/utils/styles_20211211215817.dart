@@ -38,7 +38,7 @@ class Styles {
         fontWeight: FontWeight.bold);
   static TextStyle subtitleStyleDark03 =
       TextStyle(
-        color: const Color.fromRGBO(0, 0, 0, 0.7), 
+        color: Color.fromRGBO(0, 0, 0, 0.7), 
         fontSize: getProportionateScreenWidth(18), 
         fontWeight: FontWeight.bold
       );

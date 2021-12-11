@@ -143,10 +143,9 @@ class Str {
   static String swiftCodeTxt = 'Swift Code';
   static String accountHolderTxt = 'Account Holder';
   static String accountHolderNameTxt = 'Account Holder Name';
-
   static String sendMoneyTxt = 'Send Money';
   static String sendMoneyPurposeTxt = 'Send Money Purpose';
-  static String exchangeMoneyTxt = 'Exchange Money';
+  static String exchangeMoneyTxt = 'Exchange Money';Send Money Purpose';
   
 
   // Navigation

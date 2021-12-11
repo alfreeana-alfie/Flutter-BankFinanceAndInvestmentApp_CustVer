@@ -143,11 +143,14 @@ class Str {
   static String swiftCodeTxt = 'Swift Code';
   static String accountHolderTxt = 'Account Holder';
   static String accountHolderNameTxt = 'Account Holder Name';
+<<<<<<< Updated upstream
 
+=======
   static String sendMoneyTxt = 'Send Money';
   static String sendMoneyPurposeTxt = 'Send Money Purpose';
   static String exchangeMoneyTxt = 'Exchange Money';
   
+>>>>>>> Stashed changes
 
   // Navigation
   static String addNewTxt = 'Add New';
