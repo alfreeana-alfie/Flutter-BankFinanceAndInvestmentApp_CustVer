@@ -1,0 +1,14 @@
+class User {
+  String id,
+      name,
+      email,
+      phone,
+      role_type,
+      status,
+      profile_pictre,
+      email_verified_at,
+      sms_verified_at,
+      provider,
+      provider_id,
+      country_code;
+}
