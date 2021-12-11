@@ -55,7 +55,7 @@ class Wallet extends StatelessWidget {
           const Gap(20),
           BalanceBox(),
           const Gap(20),
-          BalanceBox(),
+          
         ],
       ),
     );

@@ -153,8 +153,8 @@ class Str {
   static String receiverTxt = 'Receiver';
 
   static String balanceTxt = 'Balance(s)';
-  static String addNewCardTxt = 'Add New Balance';
-
+  static String addNewCardTxt = 'Add New Card';
+  
   // Navigation
   static String addNewTxt = 'Add New';
   static String dashboardTxt = 'Dashboard';
