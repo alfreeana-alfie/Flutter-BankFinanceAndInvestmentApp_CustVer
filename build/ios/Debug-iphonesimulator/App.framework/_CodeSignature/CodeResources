@@ -10,7 +10,7 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		1gdkaw7S7B7216b9BcUmlLaJxk4=
+		vZMAsiebFlqWpWLFyTOSQMOXnmw=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>flutter_assets/NOTICES</key>
 		<data>
-		xm04DUXUQL9pjcn+RN4mdjBy23U=
+		kfkpgfCVCy4O/BuS9PPzBlPd9QU=
 		</data>
 		<key>flutter_assets/assets/.DS_Store</key>
 		<data>
@@ -128,6 +128,10 @@
 		<data>
 		0FCE+WclmN63l5tFVdJ4MkfXuS0=
 		</data>
+		<key>flutter_assets/assets/icons/payment_request.svg</key>
+		<data>
+		qEadjCHb7/heMhCEUr4DPoojiXA=
+		</data>
 		<key>flutter_assets/assets/icons/settings.svg</key>
 		<data>
 		r+mWfeI75Odlp+bh4X8MHlgVXTA=
@@ -226,7 +230,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		clhOH6MMun1tzAeISv+AlD7A1KI=
+		gjHnMiCCng0n/SnRWA5uB/4sXog=
 		</data>
 		<key>flutter_assets/packages/country_code_picker/flags/ad.png</key>
 		<data>
@@ -1547,11 +1551,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			1gdkaw7S7B7216b9BcUmlLaJxk4=
+			vZMAsiebFlqWpWLFyTOSQMOXnmw=
 			</data>
 			<key>hash2</key>
 			<data>
-			XxO9lEz/+UinYcqbKgvcPoQKyzm2k6S25jlxyqR6PPQ=
+			Z5mAgqB0tWm1WXHyeaZacz9tC2+wpcNE+X5k9kKTx7g=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -1569,11 +1573,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			xm04DUXUQL9pjcn+RN4mdjBy23U=
+			kfkpgfCVCy4O/BuS9PPzBlPd9QU=
 			</data>
 			<key>hash2</key>
 			<data>
-			ws46cZAIhbVQFYSbI4QQ1f4DCFp+pl3pzKCDBoWoSVA=
+			2O6z2EoHGOzfto7ijdgo+qXPOTSSR7TO5C337FUcZTA=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/cards/mastercard.png</key>
@@ -1862,6 +1866,17 @@
 			vcNvbX9XzwE1yaFY9MSvO3D/rzeCzF4igXM9iIufbnE=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/icons/payment_request.svg</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			qEadjCHb7/heMhCEUr4DPoojiXA=
+			</data>
+			<key>hash2</key>
+			<data>
+			DrNHtPYPi+pUQ9A7op5IUP9FsulUvFh1jZ2L29P8nS4=
+			</data>
+		</dict>
 		<key>flutter_assets/assets/icons/settings.svg</key>
 		<dict>
 			<key>hash</key>
@@ -2130,11 +2145,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			clhOH6MMun1tzAeISv+AlD7A1KI=
+			gjHnMiCCng0n/SnRWA5uB/4sXog=
 			</data>
 			<key>hash2</key>
 			<data>
-			vu29IsxHRyQjRJArAeR6+TbPaYNqrn3q48ydPT+3YiE=
+			6mk0PA1FdVNDTqYF24MZM3yU/e/GAXvM23KADDv82Po=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/country_code_picker/flags/ad.png</key>
