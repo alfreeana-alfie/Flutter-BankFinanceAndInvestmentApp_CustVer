@@ -35,6 +35,7 @@ Future<void> main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   var status = prefs.getBool('isLoggedIn') ?? false;
+  // status = false;
 
   runApp(
     MaterialApp(
@@ -51,13 +52,11 @@ Future<void> main() async {
         '/sign_up': (context) => const SignUpPage(),
         '/sign_in': (context) => const SignInPage(),
 
-        // MEMBER ROUTE(S)
+        // MEMBER ROUTES
         '/bottom_nav': (context) => const BottomNav(),
         '/new-request': (context) => const NewRequest(),
         '/apply-new-loan': (context) => const ApplyNewLoan(),
         '/apply-new-fdr': (context) => const ApplyNewFDR(),
-
-        // ADMIN ROUTE(S)
       },
       home: SplashScreenView(
         navigateRoute: status == true ? BottomNav() : SignInPage(),

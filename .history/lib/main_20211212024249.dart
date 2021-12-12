@@ -35,6 +35,7 @@ Future<void> main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   var status = prefs.getBool('isLoggedIn') ?? false;
+  // status = false;
 
   runApp(
     MaterialApp(
