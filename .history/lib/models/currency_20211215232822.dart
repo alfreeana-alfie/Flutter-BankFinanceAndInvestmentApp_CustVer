@@ -1,0 +1,4 @@
+class Currency {
+  int? id;
+  
+}
