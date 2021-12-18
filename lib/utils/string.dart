@@ -226,9 +226,13 @@ class RouteSTR {
   static String sendMoney = '/send-money';
   static String exchangeMoney = '/exchange-money';
   static String wireTransfer = '/wire-transfer';
+
+  static String allRequest = '/all-request';
 }
 
 class Field {
+  static String emptyString = '-';
+  static String emptyAmount = '0.00';
   static String data = 'data';
   static String id = 'id';
   static String name = 'name';
@@ -282,10 +286,15 @@ class Field {
   static String roleId = 'role_id';
   static String exchangeRate = 'exchange_rate';
   static String baseCurrency = 'base_currency';
-
   static String minimumAmount = 'minimum_amount';
   static String maximumAmount = 'maximum_amount';
   static String interestRate = 'interest_rate';
   static String duration = 'duration';
   static String durationType = 'duration_type';
+  static String senderId = 'sender_id';
+  static String senderName = 'sender_name';
+  static String receiverId = 'receiver_id';
+  static String receiverName = 'receiver_name';
+  static String createdAt = 'created_at';
+  static String currencyName = 'currency_name';
 }

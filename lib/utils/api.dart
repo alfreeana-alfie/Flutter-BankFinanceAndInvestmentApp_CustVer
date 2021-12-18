@@ -10,7 +10,7 @@ class API {
     'Content-Type': 'multipart/form-data'
   };
 
-  // User uthorizations
+  // User authorizations
   static Uri login = Uri.parse('http://127.0.0.1:8000/api/auth/login');
   static Uri getUserDetails = Uri.parse('http://127.0.0.1:8000/api/auth/user');
   static Uri logout = Uri.parse('http://127.0.0.1:8000/api/auth/logout');
@@ -44,7 +44,7 @@ class API {
   static Uri listOfPaymentRequest =
       Uri.parse('http://127.0.0.1:8000/api/list_of_payment_request');
   static Uri userPaymentRequestList =
-      Uri.parse('');
+      Uri.parse('http://127.0.0.1:8000/api/user_payment_request_list/');
 
   // Loan Request
   static Uri loanRequest = Uri.parse('http://127.0.0.1:8000/api/loan_request');

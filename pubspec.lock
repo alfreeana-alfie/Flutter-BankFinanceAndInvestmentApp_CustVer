@@ -113,6 +113,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.2"
+  file_picker:
+    dependency: "direct main"
+    description:
+      name: file_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.2.8"
   fl_chart:
     dependency: "direct main"
     description:
@@ -153,6 +160,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.5"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -205,6 +219,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.17.0"
   js:
     dependency: transitive
     description:
@@ -247,6 +268,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0"
+  oktoast:
+    dependency: "direct main"
+    description:
+      name: oktoast
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.5"
   path:
     dependency: transitive
     description:
@@ -441,6 +469,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
+  syncfusion_flutter_core:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_core
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "19.4.38"
+  syncfusion_flutter_datepicker:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_datepicker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "19.4.38"
   synchronized:
     dependency: transitive
     description:

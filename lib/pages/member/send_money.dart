@@ -17,10 +17,9 @@ import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
 import 'package:flutter_banking_app/widgets/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/my_app_bar.dart';
-import 'package:flutter_banking_app/widgets/people_slider.dart';
 import 'package:gap/gap.dart';
-import 'dart:math' as math;
 import 'package:http/http.dart' as http;
+import 'package:oktoast/oktoast.dart';
 
 class SendMoney extends StatefulWidget {
   const SendMoney({Key? key}) : super(key: key);
@@ -30,17 +29,16 @@ class SendMoney extends StatefulWidget {
 }
 
 class _SendMoneyState extends State<SendMoney> {
-  SharedPref sharedPref = SharedPref();
-  late FocusNode myFocusNode;
   final ScrollController _scrollController = ScrollController();
 
+  late FocusNode myFocusNode;
   var controller = ScrollController();
   var currentPage = 0;
+  SharedPref sharedPref = SharedPref();
   User userLoad = User();
   List<Customer> customerNewList = [];
 
-  String? amount, note,
-  currency, currencyName, toUserId;
+  String? amount, note, currency, currencyName, toUserId;
   String fee = '12.50',
       drCr = 'Y',
       type = 'send_moeny',
@@ -107,194 +105,196 @@ class _SendMoneyState extends State<SendMoney> {
     final theme = Layouts.getTheme(context);
     final size = Layouts.getSize(context);
 
-    return Scaffold(
-      backgroundColor: Styles.primaryColor,
-      appBar: myAppBar(
-          title: Str.sendMoneyTxt, implyLeading: true, context: context),
-      bottomSheet: Container(
-        color: Styles.primaryColor,
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-        child: elevatedButton(
-          color: Styles.secondaryColor,
-          context: context,
-          callback: () {
-            Map<String, String> body = {
-              Field.userId: userLoad.id.toString(),
-              Field.currencyId: currency ?? '-',
-              Field.amount: amount ?? '0.00',
-              Field.fee: fee,
-              Field.drCr: drCr,
-              Field.type: type,
-              Field.method: method,
-              Field.status: status,
-              Field.note: note ?? '-',
-              Field.loanId: loanId,
-              Field.refId: refId,
-              Field.parentId: parentId,
-              Field.otherBankId: otherBankId,
-              Field.gatewayId: gatewayId,
-              Field.createdUserId: toUserId ?? '-',
-              Field.updatedUserId: updatedUserId,
-              Field.branchId: branchId,
-              Field.transactionsDetails: transactionsDetails
-            };
-
-            // print(toUserId);
-
-            SendMoneyMethods.add(context, body);
-            // SendMoneyMethods.viewAll();
-            // SendMoneyMethods.viewOne('1');
-            // FixedDepositMethods.viewOne('1');
-          },
-          text: Str.sendMoneyTxt,
+    return OKToast(
+      child: Scaffold(
+        backgroundColor: Styles.primaryColor,
+        appBar: myAppBar(
+            title: Str.sendMoneyTxt, implyLeading: true, context: context),
+        bottomSheet: Container(
+          color: Styles.primaryColor,
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+          child: elevatedButton(
+            color: Styles.secondaryColor,
+            context: context,
+            callback: () {
+              Map<String, String> body = {
+                Field.userId: userLoad.id.toString(),
+                Field.currencyId: currency ?? '-',
+                Field.amount: amount ?? '0.00',
+                Field.fee: fee,
+                Field.drCr: drCr,
+                Field.type: type,
+                Field.method: method,
+                Field.status: status,
+                Field.note: note ?? '-',
+                Field.loanId: loanId,
+                Field.refId: refId,
+                Field.parentId: parentId,
+                Field.otherBankId: otherBankId,
+                Field.gatewayId: gatewayId,
+                Field.createdUserId: toUserId ?? '-',
+                Field.updatedUserId: updatedUserId,
+                Field.branchId: branchId,
+                Field.transactionsDetails: transactionsDetails
+              };
+    
+              SendMoneyMethods.add(context, body);
+              // SendMoneyMethods.viewAll();
+              // SendMoneyMethods.viewOne('1');
+              // FixedDepositMethods.viewOne('1');
+            },
+            text: Str.sendMoneyTxt,
+          ),
         ),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(15),
-        children: [
-          // Stack(
-          //   children: [
-          //     Container(
-          //       width: double.infinity,
-          //       padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-          //       decoration: BoxDecoration(
-          //         borderRadius: BorderRadius.circular(15),
-          //         color: Styles.primaryWithOpacityColor,
-          //       ),
-          //       child: Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         children: [
-          //           Row(
-          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //             children: const [
-          //               Padding(
-          //                 padding: EdgeInsets.only(top: 20, left: 5),
-          //                 child: Text('USD', style: Styles.subtitleStyle),
-          //               ),
-          //               Padding(
-          //                 padding: EdgeInsets.only(top: 20, right: 5),
-          //                 child: Text(
-          //                   '\$20,000.00',
-          //                   style: TextStyle(
-          //                       fontWeight: FontWeight.bold,
-          //                       fontSize: 21,
-          //                       color: Colors.white),
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //           const Gap(60),
-          //         ],
-          //       ),
-          //     ),
-          //     Positioned(
-          //       bottom: 0,
-          //       right: 70,
-          //       child: Container(
-          //         padding: const EdgeInsets.all(6),
-          //         decoration: BoxDecoration(
-          //           borderRadius:
-          //               const BorderRadius.vertical(top: Radius.circular(50)),
-          //           color: Styles.primaryColor,
-          //         ),
-          //         child: Container(
-          //           padding: const EdgeInsets.all(6),
-          //           decoration: BoxDecoration(
-          //             shape: BoxShape.circle,
-          //             color: Styles.primaryWithOpacityColor,
-          //           ),
-          //           child: Icon(Icons.keyboard_backspace_rounded,
-          //               color: Colors.white.withOpacity(0.5), size: 18),
-          //         ),
-          //       ),
-          //     ),
-          //     Positioned(
-          //       bottom: 0,
-          //       right: 18,
-          //       child: Container(
-          //         padding: const EdgeInsets.all(6),
-          //         decoration: BoxDecoration(
-          //           borderRadius:
-          //               const BorderRadius.vertical(top: Radius.circular(50)),
-          //           color: Styles.primaryColor,
-          //         ),
-          //         child: Container(
-          //           padding: const EdgeInsets.all(6),
-          //           decoration: BoxDecoration(
-          //             shape: BoxShape.circle,
-          //             color: Styles.primaryWithOpacityColor,
-          //           ),
-          //           child: Transform.rotate(
-          //             angle: math.pi,
-          //             child: const Icon(Icons.keyboard_backspace_rounded,
-          //                 color: Colors.white, size: 18),
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          // const Gap(20),
-          _body(size.height, theme),
-          const Gap(10),
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Styles.primaryWithOpacityColor,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          onChanged: (val) {
-                            amount = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.number,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            hintText: Str.amountNumTxt,
-                            hintStyle: Styles.subtitleStyle,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
+        body: ListView(
+          padding: const EdgeInsets.all(15),
+          children: [
+            // Stack(
+            //   children: [
+            //     Container(
+            //       width: double.infinity,
+            //       padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+            //       decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(15),
+            //         color: Styles.primaryWithOpacityColor,
+            //       ),
+            //       child: Column(
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: [
+            //           Row(
+            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //             children: const [
+            //               Padding(
+            //                 padding: EdgeInsets.only(top: 20, left: 5),
+            //                 child: Text('USD', style: Styles.subtitleStyle),
+            //               ),
+            //               Padding(
+            //                 padding: EdgeInsets.only(top: 20, right: 5),
+            //                 child: Text(
+            //                   '\$20,000.00',
+            //                   style: TextStyle(
+            //                       fontWeight: FontWeight.bold,
+            //                       fontSize: 21,
+            //                       color: Colors.white),
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //           const Gap(60),
+            //         ],
+            //       ),
+            //     ),
+            //     Positioned(
+            //       bottom: 0,
+            //       right: 70,
+            //       child: Container(
+            //         padding: const EdgeInsets.all(6),
+            //         decoration: BoxDecoration(
+            //           borderRadius:
+            //               const BorderRadius.vertical(top: Radius.circular(50)),
+            //           color: Styles.primaryColor,
+            //         ),
+            //         child: Container(
+            //           padding: const EdgeInsets.all(6),
+            //           decoration: BoxDecoration(
+            //             shape: BoxShape.circle,
+            //             color: Styles.primaryWithOpacityColor,
+            //           ),
+            //           child: Icon(Icons.keyboard_backspace_rounded,
+            //               color: Colors.white.withOpacity(0.5), size: 18),
+            //         ),
+            //       ),
+            //     ),
+            //     Positioned(
+            //       bottom: 0,
+            //       right: 18,
+            //       child: Container(
+            //         padding: const EdgeInsets.all(6),
+            //         decoration: BoxDecoration(
+            //           borderRadius:
+            //               const BorderRadius.vertical(top: Radius.circular(50)),
+            //           color: Styles.primaryColor,
+            //         ),
+            //         child: Container(
+            //           padding: const EdgeInsets.all(6),
+            //           decoration: BoxDecoration(
+            //             shape: BoxShape.circle,
+            //             color: Styles.primaryWithOpacityColor,
+            //           ),
+            //           child: Transform.rotate(
+            //             angle: math.pi,
+            //             child: const Icon(Icons.keyboard_backspace_rounded,
+            //                 color: Colors.white, size: 18),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            // const Gap(20),
+            _body(size.height, theme),
+            const Gap(10),
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Styles.primaryWithOpacityColor,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            onChanged: (val) {
+                              amount = val;
+                            },
+                            style: Styles.subtitleStyle,
+                            textInputAction: TextInputAction.done,
+                            keyboardType: TextInputType.number,
+                            maxLines: 1,
+                            decoration: InputDecoration(
+                              hintText: Str.amountNumTxt,
+                              hintStyle: Styles.subtitleStyle,
+                              border: const OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                gapPadding: 0.0,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      DropDownCurrency(
-                        currency: currency,
-                        onChanged: (val) {
-                          setState(
-                            () {
-                              currency = val;
-                            },
-                          );
-                        },
-                      ),
-                    ],
+                        DropDownCurrency(
+                          currency: currency,
+                          currencyName: currencyName,
+                          onChanged: (val) {
+                            setState(
+                              () {
+                                currency = val!.id.toString();
+                                currencyName = val.name;
+                              },
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Divider(color: Styles.primaryColor, thickness: 2),
-                Container(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    child: Text('Send Money Purpose',
-                        style:
-                            TextStyle(color: Colors.white.withOpacity(0.7)))),
-                const Gap(10),
-              ],
+                  Divider(color: Styles.primaryColor, thickness: 2),
+                  Container(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: Text('Send Money Purpose',
+                          style:
+                              TextStyle(color: Colors.white.withOpacity(0.7)))),
+                  const Gap(10),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
