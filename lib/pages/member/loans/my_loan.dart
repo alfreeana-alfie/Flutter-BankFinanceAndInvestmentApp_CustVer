@@ -1,10 +1,13 @@
 import 'dart:convert';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/config.dart';
+import 'package:flutter_banking_app/models/loans.dart';
+import 'package:flutter_banking_app/models/user.dart';
+import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/app_bar_add.dart';
-import 'package:flutter_banking_app/widgets/card_request.dart';
 import 'package:flutter_banking_app/widgets/card_loan.dart';
 import 'package:flutter_banking_app/widgets/my_app_bar.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,40 +21,50 @@ class MyLoan extends StatefulWidget {
 }
 
 class _MyLoanState extends State<MyLoan> {
-  // late Map<String, dynamic> userMap;
-  // late Map<String, dynamic> verifyMap;
-  // List<User> userList = [];
+  SharedPref sharedPref = SharedPref();
+  User userLoad = User();
+  late Map<String, dynamic> requestMap;
+  List<Loan> loanList = [];
 
-  // Future getList() async {
-  //   final response = await http.get(
-  //     getUserList,
-  //     headers: Values.headers,
-  //   );
+  Future viewOne(String userId) async {
+    Uri viewSingleUser =
+        Uri.parse(API.userLoanRequestList.toString() + userId);
+    final response = await http.get(viewSingleUser, headers: API.headers);
 
-  //   if (response.statusCode == 200) {
-  //     verifyMap = jsonDecode(response.body);
+    if (response.statusCode == Status.ok) {
+      var jsonBody = jsonDecode(response.body);
+      for (var req in jsonBody[Field.data]) {
+        final data = Loan.fromMap(req);
+        setState(() {
+          loanList.add(data);
+        });
+      }
+    } else {
+      print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
 
-  //     var verifyData = Verify.fromJSON(verifyMap);
+  loadSharedPrefs() async {
+    try {
+      User user = User.fromJSON(await sharedPref.read(Pref.userData));
+      setState(() {
+        userLoad = user;
 
-  //     if (verifyData.status == ApiSTR.successTxt) {
-  //       userMap = jsonDecode(response.body);
-  //       for (var userData in userMap['data']) {
-  //         final users = User.fromMap(userData);
+        print(userLoad.id.toString());
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
-  //         setState(() {
-  //           userList.add(users);
-  //         });
-  //       }
-  //     }
-  //   }
-  // }
+  @override
+  void initState() {
+    super.initState();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   getList();
-  // }
+    loadSharedPrefs();
+    viewOne('1');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +74,7 @@ class _MyLoanState extends State<MyLoan> {
           implyLeading: 
           true, context: context,
           hasAction: true,
-          path: '/apply-new-loan',
+          path: RouteSTR.applyNewLoan,
       ),
       // drawer: SideDrawer(),
       backgroundColor: Styles.primaryColor,
@@ -74,10 +87,8 @@ class _MyLoanState extends State<MyLoan> {
           padding: const EdgeInsets.only(top: 10.0),
           child: ListView(
             physics: const BouncingScrollPhysics(),
-            children: const [
-              CardLoan(),
-              CardLoan(),
-              // for (User user in userList) Card1(users: user),
+            children: [
+              for (Loan loan in loanList) CardLoan(loan: loan),
             ],
           ),
         ),

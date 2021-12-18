@@ -1,4 +1,4 @@
-# Banking Online App - FVISng.net
+# flutter_banking_app
 
 A new Flutter project.
 

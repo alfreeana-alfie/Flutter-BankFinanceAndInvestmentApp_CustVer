@@ -4,16 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
+import 'package:flutter_banking_app/utils/values.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_banking_app/utils/api.dart';
 
 class FixedDepositMethods {
-  static void add(BuildContext context, Map<String, String> body) async {
-    final response = await http.post(
-      API.fixedDeposit,
-      headers: API.headers,
-      body: body,
-    );
+  static void add(BuildContext context, Map<String, String> body, String filename) async {
+    // final response = await http.post(
+    //   API.fixedDeposit,
+    //   headers: API.headers,
+    //   body: body,
+    // );
+    final request = http.MultipartRequest('POST', API.fixedDeposit)
+      ..fields.addAll(body)
+      ..headers.addAll(API.headersMultiPart)
+      ..files.add(await http.MultipartFile.fromPath(
+          'fixed_deposit_files', filename));
+
+    var response = await request.send();
 
     if (response.statusCode == Status.created) {
       print(Status.successTxt);
@@ -25,7 +33,8 @@ class FixedDepositMethods {
   }
 
   static void viewAll() async {
-    final response = await http.get(API.listOfFixedDeposit, headers: API.headers);
+    final response =
+        await http.get(API.listOfFixedDeposit, headers: API.headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);

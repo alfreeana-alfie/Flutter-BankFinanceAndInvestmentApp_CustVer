@@ -7,7 +7,7 @@ class API {
   static const Map<String, String> headers = {'Accept': 'application/json'};
   static const Map<String, String> headersMultiPart = {
     'Accept': 'application/json',
-    'Content-Type': 'multipart/form-data'
+    // 'Content-Type': 'multipart/form-data'
   };
 
   // User authorizations
@@ -51,7 +51,7 @@ class API {
   static Uri listOfLoanRequest =
       Uri.parse('http://127.0.0.1:8000/api/list_of_loan_request');
   static Uri userLoanRequestList =
-      Uri.parse('');
+      Uri.parse('http://127.0.0.1:8000/api/user_loan_request_list/');
 
   // Fixed Deposit
   static Uri fixedDeposit =
@@ -59,7 +59,7 @@ class API {
   static Uri listOfFixedDeposit =
       Uri.parse('http://127.0.0.1:8000/api/list_of_fixed_deposit');
   static Uri userFixedDepositList =
-      Uri.parse('http://127.0.0.1:8000/api/user_list_of_fixed_deposit/');
+      Uri.parse('http://127.0.0.1:8000/api/user_fixed_deposit_list/');
   
   // Drop Down List(s)
   static Uri listOfCurrency =

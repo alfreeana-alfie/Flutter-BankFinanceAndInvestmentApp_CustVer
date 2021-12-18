@@ -6,6 +6,7 @@ import 'package:flutter_banking_app/pages/auth/forgot_password.dart';
 import 'package:flutter_banking_app/pages/auth/sign_in.dart';
 import 'package:flutter_banking_app/pages/auth/sign_up.dart';
 import 'package:flutter_banking_app/pages/member/exchange_money.dart';
+import 'package:flutter_banking_app/pages/member/loans/my_loan.dart';
 import 'package:flutter_banking_app/pages/member/payment_request/all_request.dart';
 import 'package:flutter_banking_app/pages/member/send_money.dart';
 import 'package:flutter_banking_app/pages/member/wire_transfer.dart';
@@ -68,7 +69,7 @@ Future<void> main() async {
       },
       home: SplashScreenView(
         // navigateRoute: status == true ? const BottomNav() : const SignInPage(),
-        navigateRoute: const FdrHistory(),
+        navigateRoute: const MyLoan(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,

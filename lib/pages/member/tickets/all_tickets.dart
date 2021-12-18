@@ -1,15 +1,9 @@
-import 'dart:convert';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/app_bar_add.dart';
-import 'package:flutter_banking_app/widgets/card_request.dart';
 import 'package:flutter_banking_app/widgets/card_fdr.dart';
-import 'package:flutter_banking_app/widgets/card_loan.dart';
-import 'package:flutter_banking_app/widgets/my_app_bar.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:http/http.dart' as http;
 
 class AllTickets extends StatefulWidget {
   const AllTickets({Key? key}) : super(key: key);
@@ -76,8 +70,8 @@ class _AllTicketsState extends State<AllTickets> {
           child: ListView(
             physics: const BouncingScrollPhysics(),
             children: const [
-              CardFDR(),
-              CardFDR(),
+              // CardFDR(),
+              // CardFDR(),
               // for (User user in userList) Card1(users: user),
             ],
           ),

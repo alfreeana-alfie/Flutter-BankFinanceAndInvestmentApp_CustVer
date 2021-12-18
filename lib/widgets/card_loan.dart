@@ -1,5 +1,6 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/models/loans.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -8,7 +9,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
 class CardLoan extends StatelessWidget {
-  const CardLoan({Key? key}) : super(key: key);
+  const CardLoan({Key? key, required this.loan}) : super(key: key);
+
+  final Loan loan;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +51,7 @@ class CardLoan extends StatelessWidget {
                               color: Styles.primaryColor,
                             ),
                             const Gap(20),
-                            Text('No Name',
+                            Text(loan.remarks ?? Field.remarks,
                                 style: Theme.of(context).textTheme.headline6),
                           ],
                         )),
@@ -119,43 +122,27 @@ class CardLoan extends StatelessWidget {
     return Container(
       color: Styles.accentColor,
       padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
-      child: Column(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                DetailRow(
-                    labelTitle: Str.loanIdTxt, 
-                    labelDetails: '1234143'),
-                DetailRow(
-                    labelTitle: Str.loanProductTxt,
-                    labelDetails: 'Student Loan'),
-                DetailRow(
-                    labelTitle: Str.currencyTxt,
-                    labelDetails: 'USD'),
-                DetailRow(
-                    labelTitle: Str.appliedAmountTxt,
-                    labelDetails: '\$100,000.00'),
-                DetailRow(
-                    labelTitle: Str.totalPayableTxt,
-                    labelDetails: '\$105,000.00'),
-                DetailRow(
-                    labelTitle: Str.amountPaidTxt,
-                    labelDetails: '\$0.00'),
-                DetailRow(
-                    labelTitle: Str.dueAmountTxt,
-                    labelDetails: '\$105,000.00'),
-                DetailRow(
-                    labelTitle: Str.releaseDateTxt,
-                    labelDetails: '-'),
-                DetailRow(
-                    labelTitle: Str.statusTxt,
-                    labelDetails: 'Pending'),
-                _buildButtonRow(context),
-              ],
-            ),
-          ]),
+            DetailRow(labelTitle: Str.loanIdTxt, labelDetails: loan.loanId ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.loanProductTxt, labelDetails: loan.loanProductId ?? Field.emptyString),
+            DetailRow(labelTitle: Str.currencyTxt, labelDetails: loan.currencyId ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.appliedAmountTxt, labelDetails: loan.appliedAmount ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.totalPayableTxt, labelDetails: loan.totalPayable ?? Field.emptyString),
+            DetailRow(labelTitle: Str.amountPaidTxt, labelDetails: loan.totalPaid ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.dueAmountTxt, labelDetails: loan.totalPaid ?? Field.emptyString),
+            DetailRow(labelTitle: Str.releaseDateTxt, labelDetails: loan.releaseDate ?? Field.emptyString),
+            DetailRow(labelTitle: Str.statusTxt, labelDetails: loan.status.toString()),
+            _buildButtonRow(context),
+          ],
+        ),
+      ]),
     );
   }
 
@@ -175,7 +162,6 @@ class CardLoan extends StatelessWidget {
             },
             child: Text(
               Str.payNowTxt.toUpperCase(),
-              
             ),
             style: ElevatedButton.styleFrom(
                 elevation: 0.0, primary: Styles.successColor),
@@ -205,40 +191,39 @@ class CardLoan extends StatelessWidget {
   }
 
   Future<void> _showMyDialog(BuildContext context) async {
-  return showDialog<void>(
-    context: context,
-    barrierDismissible: true,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text(Str.deleteConfirmationTxt),
-        content: Text(Str.areYouSureTxt),
-        actions: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text(
-              Str.cancelTxt.toUpperCase(),
-              style: Theme.of(context).textTheme.bodyText1,
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(Str.deleteConfirmationTxt),
+          content: Text(Str.areYouSureTxt),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                Str.cancelTxt.toUpperCase(),
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              style: ElevatedButton.styleFrom(
+                  elevation: 0.0, primary: Styles.primaryColor),
             ),
-            style: ElevatedButton.styleFrom(
-                elevation: 0.0, primary: Styles.primaryColor),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              // Navigator.of(context).pop();
-            },
-            child: Text(
-              Str.deleteTxt.toUpperCase(),
-              style: Theme.of(context).textTheme.button,
+            ElevatedButton(
+              onPressed: () {
+                // Navigator.of(context).pop();
+              },
+              child: Text(
+                Str.deleteTxt.toUpperCase(),
+                style: Theme.of(context).textTheme.button,
+              ),
+              style: ElevatedButton.styleFrom(
+                  elevation: 0.0, primary: Styles.dangerColor),
             ),
-            style: ElevatedButton.styleFrom(
-                elevation: 0.0, primary: Styles.dangerColor),
-          ),
-          
-        ],
-      );
-    },
-  );
-}
+          ],
+        );
+      },
+    );
+  }
 }

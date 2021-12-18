@@ -1,5 +1,7 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/models/fdrs.dart';
+import 'package:flutter_banking_app/pages/admin/fixed_deposit/all_fdr.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -8,7 +10,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
 class CardFDR extends StatelessWidget {
-  const CardFDR({Key? key}) : super(key: key);
+  const CardFDR({Key? key, required this.fdrPlan}) : super(key: key);
+
+  final FixedDeposit fdrPlan; 
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +52,7 @@ class CardFDR extends StatelessWidget {
                               color: Styles.primaryColor,
                             ),
                             const Gap(20),
-                            Text('No Name',
+                            Text(fdrPlan.remarks ?? Field.emptyString,
                                 style: Theme.of(context).textTheme.headline6),
                           ],
                         )),
@@ -127,19 +131,19 @@ class CardFDR extends StatelessWidget {
               children: [
                 DetailRow(
                     labelTitle: Str.depositPlanTxt, 
-                    labelDetails: 'Basic'),
+                    labelDetails: fdrPlan.fdrPlanId.toString()),
                 DetailRow(
                     labelTitle: Str.currencyTxt,
-                    labelDetails: 'USD'),
+                    labelDetails: '4'),
                 DetailRow(
                     labelTitle: Str.depositAmountTxt,
-                    labelDetails: '\$100,000.00'),
+                    labelDetails: fdrPlan.depositAmount ?? Field.emptyString),
                 DetailRow(
                     labelTitle: Str.returnAmountTxt,
-                    labelDetails: '\$105,000.00'),
+                    labelDetails: fdrPlan.returnAmount ?? Field.emptyString),
                 DetailRow(
                     labelTitle: Str.matureDateTxt,
-                    labelDetails: '-'),
+                    labelDetails: fdrPlan.matureDate ?? Field.emptyString),
                 _buildButtonRow(context),
               ],
             ),

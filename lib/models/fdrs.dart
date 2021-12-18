@@ -1,60 +1,58 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
-class FDR {
-  int? id;
-  String? fdrPlanId,
-      userId,
-      currencyId,
-      depositAmount,
-      returnAmount,
-      attachment,
-      remarks,
-      status,
-      approvedDate,
-      matureDate,
+class FixedDeposit {
+  int? status,
+      fdrPlanId,
       transactionId,
       approvedUserId,
       createdUserId,
       updatedUserId,
-      branchId;
+      branchId,
+      userId;
+  String? depositAmount,
+      returnAmount,
+      attachment,
+      remarks,
+      approvedDate,
+      matureDate,
+      createdAt;
 
-  FDR({
-    this.id, 
-    this.fdrPlanId,
-    this.userId,
-    this.currencyId,
-    this.depositAmount,
-    this.returnAmount,
-    this.attachment, 
-    this.remarks, 
-    this.status,
-    this.approvedDate, 
-    this.matureDate,
-    this.transactionId,
-    this.approvedUserId,
-    this.createdUserId, 
-    this.updatedUserId,
-    this.branchId
-  });
+  FixedDeposit(
+      {this.fdrPlanId,
+      this.userId,
+      // this.currencyId,
+      this.depositAmount,
+      this.returnAmount,
+      this.attachment,
+      this.remarks,
+      this.status,
+      this.approvedDate,
+      this.matureDate,
+      this.transactionId,
+      this.approvedUserId,
+      this.createdUserId,
+      this.updatedUserId,
+      this.branchId,
+      this.createdAt});
 
-  factory FDR.fromMap(Map<String, dynamic> map) {
-    return FDR(
-      id: map[Field.data][Field.id] as int?,
-      fdrPlanId: map[Field.data][Field.fdrPlanId] as String,
-      userId: map[Field.data][Field.userId] as String,
-      currencyId : map[Field.data][Field.currencyId] as String,
-      depositAmount: map[Field.data][Field.depositAmount] as String,
-      returnAmount: map[Field.data][Field.returnAmount] as String,
-      attachment: map[Field.data][Field.attachment] as String,
-      remarks: map[Field.data][Field.remarks] as String,
-      status: map[Field.data][Field.status] as String,
-      approvedDate: map[Field.data][Field.approvedDate] as String,
-      matureDate: map[Field.data][Field.matureDate] as String,
-      transactionId: map[Field.data][Field.transactionId] as String,
-      approvedUserId: map[Field.data][Field.approvedUserId] as String,
-      createdUserId: map[Field.data][Field.createdUserId] as String,
-      updatedUserId: map[Field.data][Field.updatedUserId] as String,
-      branchId: map[Field.data][Field.branchId] as String,
+  factory FixedDeposit.fromMap(Map<String, dynamic> map) {
+    return FixedDeposit(
+      fdrPlanId: map[Field.fdrPlanId] as int?,
+      userId: map[Field.userId] as int?,
+      // currencyId : map[Field.currencyId] as String,
+      depositAmount: map[Field.depositAmount] as String?,
+      returnAmount: map[Field.returnAmount] as String?,
+      attachment: map[Field.attachment] as String?,
+      remarks: map[Field.remarks] as String?,
+      status: map[Field.status] as int?,
+      approvedDate: map[Field.approvedDate] as String?,
+      matureDate: map[Field.matureDate] as String?,
+      transactionId: map[Field.transactionId] as int?,
+      approvedUserId: map[Field.approvedUserId] as int?,
+      createdUserId: map[Field.createdUserId] as int?,
+      updatedUserId: map[Field.updatedUserId] as int?,
+      branchId: map[Field.branchId] as int?,
+      createdAt: map[Field.createdAt] as String?,
     );
   }
 }

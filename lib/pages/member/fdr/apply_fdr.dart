@@ -91,9 +91,9 @@ class _ApplyNewFDRState extends State<ApplyNewFDR> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('File Name: ${file.name}'),
-            Text('File Size: $size'),
-            Text('File Extension: ${file.extension}'),
-            Text('File Path: ${file.path}'),
+            // Text('File Size: $size'),
+            // Text('File Extension: ${file.extension}'),
+            // Text('File Path: ${file.path}'),
           ],
         ),
       );
@@ -112,25 +112,24 @@ class _ApplyNewFDRState extends State<ApplyNewFDR> {
             context: context,
             callback: () {
               Map<String, String> body = {
-                'fdr_plan_Id': '2',
-                'user_Id': '1',
-                'currency_Id': '1',
-                'deposit_amount': '100.3',
-                'return_amount': '100.6',
-                'attachment':
-                    'fixed_deposit_files/SA1I9f7x0OajcjqtqPJcaXY44vvTaaNv5e0sqqG5.png',
-                'remarks': '2',
+                'fdr_plan_Id': planFDR ?? Field.emptyString,
+                'user_Id': userLoad.id.toString(),
+                'currency_Id': currency  ?? Field.emptyString,
+                'deposit_amount': amount  ?? Field.emptyString,
+                'return_amount': amount  ?? Field.emptyString,
+                'attachment': file!.name,
+                'remarks': remarks ?? Field.emptyString,
                 'status': '1',
                 'approved_date': 'null',
                 'mature_date': 'null',
                 'transaction_Id': '1',
-                'approved_user_Id': '3',
-                'created_user_Id': '1',
-                'updated_user_Id': '1',
+                'approved_user_Id': '1',
+                'created_user_Id': userLoad.id.toString(),
+                'updated_user_Id': userLoad.id.toString(),
                 'branch_Id': '2',
               };
 
-              FixedDepositMethods.add(context, body);
+              FixedDepositMethods.add(context, body, file!.name);
             },
             text: Str.applyLoanTxt.toUpperCase(),
           ),
