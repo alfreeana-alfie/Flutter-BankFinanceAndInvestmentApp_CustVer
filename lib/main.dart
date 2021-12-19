@@ -69,7 +69,7 @@ Future<void> main() async {
       },
       home: SplashScreenView(
         // navigateRoute: status == true ? const BottomNav() : const SignInPage(),
-        navigateRoute: const MyLoan(),
+        navigateRoute: const SignInPage(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,
