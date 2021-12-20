@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_banking_app/methods/admin/deposit_methods.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/methods/member/send_money_methods.dart';
 import 'package:flutter_banking_app/models/customer.dart';
@@ -138,7 +139,7 @@ class _MakeDepositState extends State<MakeDeposit> {
                 Field.transactionsDetails: transactionsDetails
               };
     
-              MakeDepositMethods.add(context, body);
+              DepositMethods.add(context, body);
               // MakeDepositMethods.viewAll();
               // MakeDepositMethods.viewOne('1');
               // FixedDepositMethods.viewOne('1');

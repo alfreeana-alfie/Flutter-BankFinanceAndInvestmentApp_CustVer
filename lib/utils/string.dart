@@ -118,6 +118,9 @@ class Str {
   static String interestTypeTxt = 'Interest Type';
   static String termTxt = 'Term';
   static String termPeriodTxt = 'Term Period';
+
+  static String userTypeTxt = 'User Type';
+  static String providerTxt = 'Provider';
 }
 
 class UserSTR {
@@ -339,4 +342,5 @@ class Field {
   static String interestType = 'interest_type';
   static String term = 'term';
   static String termPeriod = 'term_period';
+  static String password = 'password';
 }

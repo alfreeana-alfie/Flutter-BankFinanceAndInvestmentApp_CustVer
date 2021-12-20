@@ -7,6 +7,7 @@ import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
+import 'package:flutter_banking_app/widgets/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/my_app_bar.dart';
 import 'package:gap/gap.dart';
 
@@ -20,9 +21,7 @@ class WireTransfer extends StatefulWidget {
 class _WireTransferState extends State<WireTransfer> {
   final ScrollController _scrollController = ScrollController();
 
-  String? currency;
-
-  List<String> currencyList = ['USD', 'EUR', 'USD'];
+  String? currency, currencyName;
 
   String userId = '1',
       currencyId = '1',
@@ -117,45 +116,17 @@ class _WireTransferState extends State<WireTransfer> {
                               child: Text(Str.bankTxt,
                                   style: Styles.subtitleStyle)),
                           const Gap(20.0),
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.only(
-                                  left: 15, right: 15, top: 8, bottom: 8),
-                              decoration: BoxDecoration(
-                                color: Styles.primaryColor,
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton(
-                                  dropdownColor: Styles.primaryColor,
-                                  hint: currency == null
-                                      ? Text(Str.currencyTxt,
-                                          style: Styles.subtitleStyle02)
-                                      : Text(
-                                          currency!,
-                                          style: Styles.subtitleStyle,
-                                        ),
-                                  isExpanded: true,
-                                  iconSize: 30.0,
-                                  style: Styles.subtitleStyle02,
-                                  items: currencyList.map(
-                                    (val) {
-                                      return DropdownMenuItem<String>(
-                                        value: val,
-                                        child: Text(val),
-                                      );
-                                    },
-                                  ).toList(),
-                                  onChanged: (val) {
-                                    setState(
-                                      () {
-                                        currency = val as String?;
-                                      },
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
+                          DropDownCurrency(
+                            currency: currency,
+                            currencyName: currencyName,
+                            onChanged: (val) {
+                              setState(
+                                () {
+                                  currency = val!.id.toString();
+                                  currencyName = val.name;
+                                },
+                              );
+                            },
                           ),
                         ],
                       ),
@@ -258,7 +229,8 @@ class _WireTransferState extends State<WireTransfer> {
                 // Divider(color: Styles.primaryColor, thickness: 2),
                 Container(
                   decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.vertical(bottom: Radius.circular(15)),
+                    borderRadius: const BorderRadius.vertical(
+                        bottom: Radius.circular(15)),
                     color: Styles.yellowColor,
                   ),
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
