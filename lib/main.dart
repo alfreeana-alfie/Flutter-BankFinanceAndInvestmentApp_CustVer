@@ -1,12 +1,10 @@
 import 'dart:io';
 
-import 'package:flutter_banking_app/methods/auth_methods.dart';
 import 'package:flutter_banking_app/pages/admin/dashboard.dart';
 import 'package:flutter_banking_app/pages/auth/forgot_password.dart';
 import 'package:flutter_banking_app/pages/auth/sign_in.dart';
 import 'package:flutter_banking_app/pages/auth/sign_up.dart';
 import 'package:flutter_banking_app/pages/member/exchange_money.dart';
-import 'package:flutter_banking_app/pages/member/loans/my_loan.dart';
 import 'package:flutter_banking_app/pages/member/payment_request/all_request.dart';
 import 'package:flutter_banking_app/pages/member/send_money.dart';
 import 'package:flutter_banking_app/pages/member/wire_transfer.dart';
@@ -18,7 +16,6 @@ import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/bottom_nav.dart';
 
 import 'pages/member/fdr/apply_fdr.dart';
-import 'pages/member/fdr/fdr_history.dart';
 import 'pages/member/loans/apply_loan.dart';
 import 'pages/member/payment_request/new_request.dart';
 

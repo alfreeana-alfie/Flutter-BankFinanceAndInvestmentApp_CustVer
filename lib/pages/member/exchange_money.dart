@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_banking_app/methods/config.dart';
-import 'package:flutter_banking_app/methods/exchange_money_methods.dart';
+import 'package:flutter_banking_app/methods/member/exchange_money_methods.dart';
 import 'package:flutter_banking_app/models/currency.dart';
 import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/api.dart';

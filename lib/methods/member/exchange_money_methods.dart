@@ -7,7 +7,7 @@ import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_banking_app/utils/api.dart';
 
-import 'config.dart';
+import '../config.dart';
 
 class ExchangeMoneyMethods {
   static void add(BuildContext context, Map<String, String> body) async {

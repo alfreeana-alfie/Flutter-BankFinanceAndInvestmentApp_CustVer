@@ -1,13 +1,11 @@
-import 'package:avatars/avatars.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_banking_app/methods/config.dart';
-import 'package:flutter_banking_app/methods/fixed_deposit_methods.dart';
+import 'package:flutter_banking_app/methods/member/fixed_deposit_methods.dart';
 import 'package:flutter_banking_app/models/user.dart';
-import 'package:flutter_banking_app/utils/layouts.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';

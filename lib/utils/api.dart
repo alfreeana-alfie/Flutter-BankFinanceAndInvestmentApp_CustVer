@@ -1,6 +1,13 @@
 String defaultUserImage =
     'https://villasearch.de/market/resources/assets/images/user.jpg';
 
+  // Header Settings
+  const Map<String, String> headers = {'Accept': 'application/json'};
+  const Map<String, String> headersMultiPart = {
+    'Accept': 'application/json',
+    'Content-Type': 'multipart/form-data'
+  };
+
 // API SETUP(S)
 class API {
   // Header Settings
@@ -68,12 +75,7 @@ class API {
 }
 
 class AdminAPI {
-  // Header Settings
-  static const Map<String, String> headers = {'Accept': 'application/json'};
-  static const Map<String, String> headersMultiPart = {
-    'Accept': 'application/json',
-    // 'Content-Type': 'multipart/form-data'
-  };
+  
 
   // Deposit
   static Uri listOfDeposit = Uri.parse('http://127.0.0.1:8000/api/create_deposit');

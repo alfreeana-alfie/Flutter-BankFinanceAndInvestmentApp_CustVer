@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_banking_app/methods/config.dart';
-import 'package:flutter_banking_app/methods/payment_request_methods.dart';
+import 'package:flutter_banking_app/methods/member/payment_request_methods.dart';
 import 'package:flutter_banking_app/models/customer.dart';
 import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/api.dart';
