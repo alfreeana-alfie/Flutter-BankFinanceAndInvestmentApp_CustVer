@@ -32,7 +32,7 @@ class _FdrHistoryState extends State<FdrHistory> {
   Future viewOne(String userId) async {
     Uri viewSingleUser =
         Uri.parse(API.userFixedDepositList.toString() + userId);
-    final response = await http.get(viewSingleUser, headers: API.headers);
+    final response = await http.get(viewSingleUser, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);

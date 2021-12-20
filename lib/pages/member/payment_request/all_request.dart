@@ -27,7 +27,7 @@ class _AllRequestState extends State<AllRequest> {
   Future viewOne(String userId) async {
     Uri viewSingleUser =
         Uri.parse(API.userPaymentRequestList.toString() + userId);
-    final response = await http.get(viewSingleUser, headers: API.headers);
+    final response = await http.get(viewSingleUser, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);

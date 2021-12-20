@@ -94,6 +94,30 @@ class Str {
   static String branchTxt = 'Branches';
   static String otherBankTxt = 'Other Banks';
   static String currencyListTxt = 'Currency List';
+  static String createCurrencyTxt = 'Create New Currency';
+
+  static String exchangeRateTxt = 'Exchange Rate';
+  static String baseCurrencyTxt = 'Base Currency';
+  static String bankCountryTxt = 'Bank Country';
+  static String bankCurrencyTxt = 'Bank Currency';
+  static String minTransferAmtTxt = 'Minimum Transfer Amount';
+  static String maxTransferAmtTxt = 'Maximum Transfer Amount';
+  static String fixedChargeTxt = 'Fixed Charge';
+  static String chargeInPercentageTxt = 'Charge in Percentage';
+  static String descriptionsTxt = 'Description(s)';
+  static String contactEmailTxt = 'Contact Email';
+  static String contactPhoneTxt = 'Contact Phone';
+  static String addressTxt = 'Address';
+
+  static String minAmtTxt = 'Minimum Amount';
+  static String maxAmtTxt = 'Maximum Amount';
+  static String interestRateTxt = 'Interest Rate';
+  static String durationTxt = 'Duration';
+  static String durationTypeTxt = 'Duration Type';
+
+  static String interestTypeTxt = 'Interest Type';
+  static String termTxt = 'Term';
+  static String termPeriodTxt = 'Term Period';
 }
 
 class UserSTR {
@@ -196,6 +220,10 @@ class Status {
   static int ok = 200;
   static int error = 500;
   static int notFound = 404;
+
+  static int pending = 1;
+  static int approved = 2;
+  static int rejected = 3;
 }
 
 class AuthSTR {
@@ -297,4 +325,18 @@ class Field {
   static String receiverName = 'receiver_name';
   static String createdAt = 'created_at';
   static String currencyName = 'currency_name';
+  static String swiftCode = 'swift_code';
+  static String bankCountry = 'bank_country';
+  static String bankCurrency = 'bank_currency';
+  static String minTransferAmt = 'minimum_transfer_amount';
+  static String maxTransferAmt = 'maximum_transfer_amount';
+  static String fixedCharge = 'fixed_charge';
+  static String chargeInPercentage = 'charge_in_percentage';
+  static String descriptions = 'descriptions';
+  static String contactEmail = 'contact_email';
+  static String contactPhone = 'contact_phone';
+  static String address = 'addresss';
+  static String interestType = 'interest_type';
+  static String term = 'term';
+  static String termPeriod = 'term_period';
 }

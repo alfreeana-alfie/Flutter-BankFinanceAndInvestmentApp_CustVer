@@ -16,7 +16,7 @@ class LoanProductMethods {
 
     if (response.statusCode == Status.created) {
       print(Status.successTxt);
-      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
     } else {
       print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);

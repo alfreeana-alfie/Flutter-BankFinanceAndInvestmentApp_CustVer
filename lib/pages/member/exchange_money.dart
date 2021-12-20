@@ -70,7 +70,7 @@ class _ExchangeMoneyState extends State<ExchangeMoney> {
   }
 
   void getCurrency() async {
-    final response = await http.get(API.listOfCurrency, headers: API.headers);
+    final response = await http.get(API.listOfCurrency, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);

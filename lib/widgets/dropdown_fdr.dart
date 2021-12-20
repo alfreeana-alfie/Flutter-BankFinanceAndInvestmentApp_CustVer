@@ -24,7 +24,7 @@ class _DropDownPlanFDRState extends State<DropDownPlanFDR> {
   List<PlanFDR> planListNew = [];
 
   void getCurrency() async {
-    final response = await http.get(API.listofFdrPlans, headers: API.headers);
+    final response = await http.get(API.listofFdrPlans, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);

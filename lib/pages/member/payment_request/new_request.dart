@@ -56,7 +56,7 @@ class _NewRequestState extends State<NewRequest> {
   }
 
   void getList() async {
-    final response = await http.get(API.listofUsers, headers: API.headers);
+    final response = await http.get(API.listofUsers, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);

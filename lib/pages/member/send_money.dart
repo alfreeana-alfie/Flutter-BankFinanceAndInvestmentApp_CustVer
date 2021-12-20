@@ -41,7 +41,7 @@ class _SendMoneyState extends State<SendMoney> {
   String? amount, note, currency, currencyName, toUserId;
   String fee = '12.50',
       drCr = 'Y',
-      type = 'send_moeny',
+      type = 'send_money',
       method = 'send_money',
       status = '1',
       loanId = '1',
@@ -55,7 +55,7 @@ class _SendMoneyState extends State<SendMoney> {
       transactionsDetails = '1';
 
   void getList() async {
-    final response = await http.get(API.listofUsers, headers: API.headers);
+    final response = await http.get(API.listofUsers, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);

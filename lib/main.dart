@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter_banking_app/pages/admin/currency/create_currency.dart';
 import 'package:flutter_banking_app/pages/admin/dashboard.dart';
 import 'package:flutter_banking_app/pages/auth/forgot_password.dart';
 import 'package:flutter_banking_app/pages/auth/sign_in.dart';
@@ -66,7 +67,7 @@ Future<void> main() async {
       },
       home: SplashScreenView(
         // navigateRoute: status == true ? const BottomNav() : const SignInPage(),
-        navigateRoute: const SignInPage(),
+        navigateRoute: const CreateCurrency(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,

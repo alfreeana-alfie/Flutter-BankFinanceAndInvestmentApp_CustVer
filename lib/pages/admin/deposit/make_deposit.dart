@@ -1,15 +1,25 @@
-import 'dart:io';
+import 'dart:convert';
 
-import 'package:country_code_picker/country_code_picker.dart';
-import 'package:flutter_banking_app/utils/string.dart';
-import 'package:flutter_banking_app/utils/styles.dart';
-import 'package:flutter_banking_app/utils/values.dart';
-import 'package:flutter_banking_app/widgets/app_bar.dart';
-import 'package:flutter_banking_app/widgets/header_1.dart';
-import 'package:flutter_banking_app/widgets/text_field.dart';
-import 'package:http/http.dart' as http;
+import 'package:avatars/avatars.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_banking_app/methods/config.dart';
+import 'package:flutter_banking_app/methods/member/send_money_methods.dart';
+import 'package:flutter_banking_app/models/customer.dart';
+import 'package:flutter_banking_app/models/user.dart';
+import 'package:flutter_banking_app/utils/api.dart';
+import 'package:flutter_banking_app/utils/layouts.dart';
+import 'package:flutter_banking_app/utils/string.dart';
+import 'package:flutter_banking_app/utils/size_config.dart';
+import 'package:flutter_banking_app/utils/styles.dart';
+import 'package:flutter_banking_app/widgets/buttons.dart';
+import 'package:flutter_banking_app/widgets/dropdrown_currency.dart';
+import 'package:flutter_banking_app/widgets/my_app_bar.dart';
+import 'package:gap/gap.dart';
+import 'package:http/http.dart' as http;
+import 'package:oktoast/oktoast.dart';
 
 class MakeDeposit extends StatefulWidget {
   const MakeDeposit({Key? key}) : super(key: key);
@@ -19,436 +29,327 @@ class MakeDeposit extends StatefulWidget {
 }
 
 class _MakeDepositState extends State<MakeDeposit> {
-  final _formKey = GlobalKey<FormState>();
+  final ScrollController _scrollController = ScrollController();
 
-  String name = '',
-      email = '',
-      password = '',
-      countryCode = '',
-      phone = '',
-      branch = '',
-      profilePicture = '';
+  late FocusNode myFocusNode;
+  var controller = ScrollController();
+  var currentPage = 0;
+  SharedPref sharedPref = SharedPref();
+  User userLoad = User();
+  List<Customer> customerNewList = [];
 
-  List<String> verifyList = ['YES', 'NO'];
-  List<String> statusList = ['ACTIVE', 'NOT ACTIVE'];
+  String? amount, note, currency, currencyName, toUserId;
+  String fee = '12.50',
+      drCr = 'Y',
+      type = 'deposit',
+      method = 'deposit',
+      status = '1',
+      loanId = '1',
+      refId = '1',
+      parentId = '1',
+      otherBankId = '1',
+      gatewayId = '1',
+      createdUserId = '1',
+      updatedUserId = '1',
+      branchId = '1',
+      transactionsDetails = '1';
 
-  String? emailVerified, smsVerified, status;
+  void getList() async {
+    final response = await http.get(API.listofUsers, headers: headers);
 
-  // File? _image;
-  // final picker = ImagePicker();
+    if (response.statusCode == Status.ok) {
+      var jsonBody = jsonDecode(response.body);
 
-  // Future getImage() async {
-  //   final pickedFile = await picker.getImage(source: ImageSource.gallery);
-  //   setState(() {
-  //     if (pickedFile != null) {
-  //       _image = File(pickedFile.path);
-  //     } else {
-  //       print('No image selected.');
-  //     }
-  //   });
-  // }
+      for (var customer in jsonBody[Field.data]) {
+        final customers = Customer.fromMap(customer);
 
-  // void addNew(BuildContext context, Map<String, String> body, String profilePicture) async {
-  //   // void addNew(BuildContext context,name, email, password, countryCode, phone, branch,
-  //   //                 status, emailVerified, smsVerified, profilePicture) async {
-  //   final request = http.MultipartRequest('POST', addNewUser)
-  //     ..fields.addAll(body)
-  //     // ..headers.addAll(Values.headersMultiPart)
-  //     ..files.add(await http.MultipartFile.fromPath('profile_picture', profilePicture));
-  //   // final response = await http.put(addNewUser, headers: Values.headers, body: {
-  //   //   "name": name,
-  //   //   "email": email,
-  //   //   "password": password,
-  //   //   "country_code": countryCode,
-  //   //   "phone": phone,
-  //   //   "branch": branch,
-  //   //   "status": status,
-  //   //   "email_verified": emailVerified,
-  //   //   "sms_verified": smsVerified,
-  //   //   "profile_picture": profilePicture,
-  //   //   "user_type": 'customer',
-  //   //   "role_id": '',
-  //   // });
+        setState(() {
+          customerNewList.add(customers);
+        });
+      }
+    } else {
+      print(Status.failedTxt);
+    }
+  }
 
-  //   var response = await request.send();
+  loadSharedPrefs() async {
+    try {
+      User user = User.fromJSON(await sharedPref.read(Pref.userData));
+      setState(() {
+        userLoad = user;
 
-  //   if (response.statusCode == 201) {
-  //     ScaffoldMessenger.of(context)
-  //         .showSnackBar(SnackBar(content: Text(Str.addSuccessTxt)));
-  //   } else {
-  //     ScaffoldMessenger.of(context)
-  //         .showSnackBar(SnackBar(content: Text(Str.addFailedTxt)));
-  //   }
-  // }
+        print(userLoad.id.toString());
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    _scrollController.addListener(() {
+      print(_scrollController.offset);
+    });
+    super.initState();
+
+    myFocusNode = FocusNode();
+    // myFocusNode.dispose();
+
+    loadSharedPrefs();
+    getList();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(Values.appHeight),
-        child: MainAppBar(title: Str.addNewTxt),
-      ),
-      backgroundColor: Styles.backgroundColor,
-      body: Container(
-        color: Styles.backgroundColor,
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Stack(
-            children: [
-              _buildContainer(context),
-            ],
+    SizeConfig.init(context);
+    final theme = Layouts.getTheme(context);
+    final size = Layouts.getSize(context);
+
+    return OKToast(
+      child: Scaffold(
+        backgroundColor: Styles.primaryColor,
+        appBar: myAppBar(
+            title: Str.sendMoneyTxt, implyLeading: true, context: context),
+        bottomSheet: Container(
+          color: Styles.primaryColor,
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+          child: elevatedButton(
+            color: Styles.secondaryColor,
+            context: context,
+            callback: () {
+              Map<String, String> body = {
+                Field.userId: userLoad.id.toString(),
+                Field.currencyId: currency ?? '-',
+                Field.amount: amount ?? '0.00',
+                Field.fee: fee,
+                Field.drCr: drCr,
+                Field.type: type,
+                Field.method: method,
+                Field.status: status,
+                Field.note: note ?? '-',
+                Field.loanId: loanId,
+                Field.refId: refId,
+                Field.parentId: parentId,
+                Field.otherBankId: otherBankId,
+                Field.gatewayId: gatewayId,
+                Field.createdUserId: toUserId ?? '-',
+                Field.updatedUserId: updatedUserId,
+                Field.branchId: branchId,
+                Field.transactionsDetails: transactionsDetails
+              };
+    
+              MakeDepositMethods.add(context, body);
+              // MakeDepositMethods.viewAll();
+              // MakeDepositMethods.viewOne('1');
+              // FixedDepositMethods.viewOne('1');
+            },
+            text: Str.sendMoneyTxt,
           ),
         ),
-      ),
-    );
-  }
-
-  // Form Container
-  _buildContainer(BuildContext context) {
-    return Container(
-      // constraints: BoxConstraints(minWidth: 100, maxWidth: 400),
-      decoration: BoxDecoration(
-        color: Styles.primaryColor,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      margin: const EdgeInsets.all(15),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        body: ListView(
+          padding: const EdgeInsets.all(15),
           children: [
-            // Title
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Header1(
-                title: UserSTR.createUserTxt.toUpperCase(),
-                textStyle: Theme.of(context).textTheme.headline5!,
-                alignment: Alignment.topLeft,
-                margin: const EdgeInsets.all(5.0),
+            // Stack(
+            //   children: [
+            //     Container(
+            //       width: double.infinity,
+            //       padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+            //       decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(15),
+            //         color: Styles.primaryWithOpacityColor,
+            //       ),
+            //       child: Column(
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: [
+            //           Row(
+            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //             children: const [
+            //               Padding(
+            //                 padding: EdgeInsets.only(top: 20, left: 5),
+            //                 child: Text('USD', style: Styles.subtitleStyle),
+            //               ),
+            //               Padding(
+            //                 padding: EdgeInsets.only(top: 20, right: 5),
+            //                 child: Text(
+            //                   '\$20,000.00',
+            //                   style: TextStyle(
+            //                       fontWeight: FontWeight.bold,
+            //                       fontSize: 21,
+            //                       color: Colors.white),
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //           const Gap(60),
+            //         ],
+            //       ),
+            //     ),
+            //     Positioned(
+            //       bottom: 0,
+            //       right: 70,
+            //       child: Container(
+            //         padding: const EdgeInsets.all(6),
+            //         decoration: BoxDecoration(
+            //           borderRadius:
+            //               const BorderRadius.vertical(top: Radius.circular(50)),
+            //           color: Styles.primaryColor,
+            //         ),
+            //         child: Container(
+            //           padding: const EdgeInsets.all(6),
+            //           decoration: BoxDecoration(
+            //             shape: BoxShape.circle,
+            //             color: Styles.primaryWithOpacityColor,
+            //           ),
+            //           child: Icon(Icons.keyboard_backspace_rounded,
+            //               color: Colors.white.withOpacity(0.5), size: 18),
+            //         ),
+            //       ),
+            //     ),
+            //     Positioned(
+            //       bottom: 0,
+            //       right: 18,
+            //       child: Container(
+            //         padding: const EdgeInsets.all(6),
+            //         decoration: BoxDecoration(
+            //           borderRadius:
+            //               const BorderRadius.vertical(top: Radius.circular(50)),
+            //           color: Styles.primaryColor,
+            //         ),
+            //         child: Container(
+            //           padding: const EdgeInsets.all(6),
+            //           decoration: BoxDecoration(
+            //             shape: BoxShape.circle,
+            //             color: Styles.primaryWithOpacityColor,
+            //           ),
+            //           child: Transform.rotate(
+            //             angle: math.pi,
+            //             child: const Icon(Icons.keyboard_backspace_rounded,
+            //                 color: Colors.white, size: 18),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            // const Gap(20),
+            _body(size.height, theme),
+            const Gap(10),
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Styles.primaryWithOpacityColor,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            onChanged: (val) {
+                              amount = val;
+                            },
+                            style: Styles.subtitleStyle,
+                            textInputAction: TextInputAction.done,
+                            keyboardType: TextInputType.number,
+                            maxLines: 1,
+                            decoration: InputDecoration(
+                              hintText: Str.amountNumTxt,
+                              hintStyle: Styles.subtitleStyle,
+                              border: const OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                gapPadding: 0.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        DropDownCurrency(
+                          currency: currency,
+                          currencyName: currencyName,
+                          onChanged: (val) {
+                            setState(
+                              () {
+                                currency = val!.id.toString();
+                                currencyName = val.name;
+                              },
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  Divider(color: Styles.primaryColor, thickness: 2),
+                  Container(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: Text('Send Money Purpose',
+                          style:
+                              TextStyle(color: Colors.white.withOpacity(0.7)))),
+                  const Gap(10),
+                ],
               ),
             ),
-            Divider(
-              height: 1,
-              thickness: 1,
-            ),
-            _buildForm(context),
           ],
         ),
       ),
     );
   }
 
-  // Form
-  _buildForm(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        // NAME
-        Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: Values.horizontalValue * 2,
-              vertical: Values.verticalValue),
-          child: TextFieldCustom(
-            textInputType: TextInputType.name,
-            textInputAction: TextInputAction.next,
-            onSaved: (value) => name = value!,
-            hintText: Str.nameTxt,
-          ),
-        ),
-        // Email address
-        Padding(
-          padding: const EdgeInsets.only(
-              bottom: 10,
-              left: Values.horizontalValue * 2,
-              right: Values.horizontalValue * 2),
-          child: TextFieldCustom(
-            textInputType: TextInputType.emailAddress,
-            textInputAction: TextInputAction.next,
-            onSaved: (value) => email = value!,
-            hintText: Str.emailTxt,
-          ),
-        ),
-        // Password
-        Padding(
-          padding: const EdgeInsets.only(
-              bottom: 10,
-              left: Values.horizontalValue * 2,
-              right: Values.horizontalValue * 2),
-          child: TextFieldCustom(
-            textInputType: TextInputType.visiblePassword,
-            textInputAction: TextInputAction.next,
-            onSaved: (value) => password = value!,
-            hintText: Str.passwordTxt,
-          ),
-        ),
-        // Country Code + Phone No
-        Padding(
-          padding: const EdgeInsets.only(
-              left: Values.horizontalValue * 2,
-              right: Values.horizontalValue * 2,
-              bottom: 10),
-          child: Row(
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black12.withOpacity(0.05),
-                    borderRadius: BorderRadius.circular(7.0),
-                  ),
-                  child: CountryCodePicker(
-                    onChanged: (value) {
-                      setState(() {
-                        countryCode = value.toString();
-                      });
-                    },
-                    onInit: (value) {
-                      countryCode = value.toString();
-                    },
-                    // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                    initialSelection: '+60',
-                    // favorite: ['+60','MS'],
-                    // optional. Shows only country name and flag
-                    showCountryOnly: false,
-                    // optional. Shows only country name and flag when popup is closed.
-                    showOnlyCountryWhenClosed: false,
-                    // optional. aligns the flag and the Text left
-                    alignLeft: false,
-                    padding: EdgeInsets.all(12),
-                    dialogSize: Size(350, 450),
-                    textStyle: GoogleFonts.nunitoSans(
-                      color: Styles.textColor,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                child: TextFieldCustom(
-                  textInputType: TextInputType.phone,
-                  textInputAction: TextInputAction.next,
-                  onSaved: (value) => phone = value!,
-                  hintText: Str.phoneNumberTxt,
-                ),
-              ),
-            ],
-          ),
-        ),
-        // Branch
-        Padding(
-          padding: const EdgeInsets.only(
-              bottom: 10,
-              left: Values.horizontalValue * 2,
-              right: Values.horizontalValue * 2),
-          child: TextFieldCustom(
-            textInputType: TextInputType.text,
-            textInputAction: TextInputAction.next,
-            onSaved: (value) => branch = value!,
-            hintText: Str.branchTxt,
-          ),
-        ),
-        // Status
-        Padding(
-          padding: const EdgeInsets.only(
-              bottom: 10,
-              left: Values.horizontalValue * 2,
-              right: Values.horizontalValue * 2),
-          child: Container(
-            padding:
-                const EdgeInsets.only(left: 15, right: 15, top: 8, bottom: 8),
-            decoration: BoxDecoration(
-              color: Colors.black12.withOpacity(0.05),
-              borderRadius: BorderRadius.circular(7.0),
-            ),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton(
-                dropdownColor: Styles.primaryColor,
-                hint: status == null
-                    ? Text(Str.statusTxt)
-                    : Text(
-                        status!,
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                isExpanded: true,
-                iconSize: 30.0,
-                style: Theme.of(context).textTheme.bodyText1,
-                items: statusList.map(
-                  (val) {
-                    return DropdownMenuItem<String>(
-                      value: val,
-                      child: Text(val),
-                    );
-                  },
-                ).toList(),
-                onChanged: (val) {
-                  setState(
-                    () {
-                      status = val as String?;
-                    },
-                  );
-                },
-              ),
-            ),
-          ),
-        ),
-        // Email Verified
-        Padding(
-          padding: const EdgeInsets.only(
-              bottom: 10,
-              left: Values.horizontalValue * 2,
-              right: Values.horizontalValue * 2),
-          child: Container(
-            padding:
-                const EdgeInsets.only(left: 15, right: 15, top: 8, bottom: 8),
-            decoration: BoxDecoration(
-              color: Colors.black12.withOpacity(0.05),
-              borderRadius: BorderRadius.circular(7.0),
-            ),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton(
-                hint: emailVerified == null
-                    ? Text(UserSTR.emailVerifiedTxt)
-                    : Text(
-                        emailVerified!,
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                isExpanded: true,
-                iconSize: 30.0,
-                style: Theme.of(context).textTheme.bodyText1,
-                items: verifyList.map(
-                  (val) {
-                    return DropdownMenuItem<String>(
-                      value: val,
-                      child: Text(val),
-                    );
-                  },
-                ).toList(),
-                onChanged: (val) {
-                  setState(
-                    () {
-                      emailVerified = val as String?;
-                    },
-                  );
-                },
-              ),
-            ),
-          ),
-        ),
-        // SMS Verified
-        Padding(
-          padding: const EdgeInsets.only(
-              bottom: 10,
-              left: Values.horizontalValue * 2,
-              right: Values.horizontalValue * 2),
-          child: Container(
-            padding:
-                const EdgeInsets.only(left: 15, right: 15, top: 8, bottom: 8),
-            decoration: BoxDecoration(
-              color: Colors.black12.withOpacity(0.05),
-              borderRadius: BorderRadius.circular(7.0),
-            ),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton(
-                hint: smsVerified == null
-                    ? Text(UserSTR.smsVerifiedTxt)
-                    : Text(
-                        smsVerified!,
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                isExpanded: true,
-                iconSize: 30.0,
-                style: Theme.of(context).textTheme.bodyText1,
-                items: verifyList.map(
-                  (val) {
-                    return DropdownMenuItem<String>(
-                      value: val,
-                      child: Text(val),
-                    );
-                  },
-                ).toList(),
-                onChanged: (val) {
-                  setState(
-                    () {
-                      smsVerified = val as String?;
-                    },
-                  );
-                },
-              ),
-            ),
-          ),
-        ),
-        // Profile Picture
-        // Padding(
-        //   padding: const EdgeInsets.only(
-        //       bottom: 10,
-        //       left: Values.horizontalValue * 2,
-        //       right: Values.horizontalValue * 2),
-        //   child: Container(
-        //       child: OutlineButton(onPressed: getImage, child: _buildImage())),
-        //   // TextFieldCustom(
-        //   //   onSaved: (value) => profilePicture = value!,
-        //   //   hintText: Str.profilePictureTxt,
-        //   // ),
-        // ),
-        // Button Sign In
-        Container(
-          height: 50,
-          margin: const EdgeInsets.symmetric(
-              horizontal: Values.horizontalValue * 2,
-              vertical: Values.verticalValue),
-          child: ElevatedButton(
-            onPressed: () {
-              // if (_formKey.currentState!.validate()) {
-              //   _formKey.currentState!.save();
-
-              //   // print(_image?.path);
-
-              // }
-              // Map<String, String> body = {
-              //   "name": name,
-              //   "email": email,
-              //   "password": password,
-              //   "country_code": countryCode,
-              //   "phone": phone,
-              //   "branch": branch,
-              //   "status": status ?? '',
-              //   "email_verified": emailVerified ?? '',
-              //   "sms_verified": smsVerified ?? '',
-              //   "profile_picture": _image!.path,
-              //   "user_type": 'customer',
-              //   "role_id": '',
-              // };
-
-              // print(_image?.path);
-
-              // addNew(context, body, _image!.path);
-
-              // addNew(context, name, email, password, countryCode, phone, branch,
-              //     status, emailVerified, smsVerified, profilePicture);
+  _body(double height, ThemeData theme) {
+    double _height = height * 0.19;
+    return SizedBox(
+      height: _height,
+      child: ListView.builder(
+        controller: controller,
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        itemCount: customerNewList.length,
+        itemBuilder: (context, index) {
+          final item = customerNewList[index];
+          return InkWell(
+            onTap: () {
+              setState(() {
+                currentPage = index;
+                toUserId = item.id.toString();
+              });
             },
-            child: Text(UserSTR.createUserTxt),
-            style: ElevatedButton.styleFrom(
-              primary: Styles.darkBlueColor,
-              elevation: 0.0,
+            focusNode: myFocusNode,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  height: (index == currentPage) ? 70 : 45,
+                  width: (index == currentPage) ? 70 : 45,
+                  margin: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Styles.infoColor,
+                  ),
+                  child: Avatar(
+                    name: item.name,
+                    textStyle: TextStyle(
+                        fontSize: getProportionateScreenWidth(16),
+                        fontWeight: FontWeight.bold,
+                        color: Styles.whiteColor),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                (index == currentPage)
+                    ? Text(item.name ?? '-',
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 16))
+                    : const Text('')
+              ],
             ),
-          ),
-        ),
-      ],
+          );
+        },
+      ),
     );
   }
-
-  // Widget _buildImage() {
-  //   if (_image == null) {
-  //     return Padding(
-  //       padding: const EdgeInsets.fromLTRB(1, 1, 1, 1),
-  //       child: Icon(
-  //         Icons.add,
-  //         color: Colors.grey,
-  //       ),
-  //     );
-  //   } else {
-  //     return Text(_image!.path);
-  //   }
-  // }
 }

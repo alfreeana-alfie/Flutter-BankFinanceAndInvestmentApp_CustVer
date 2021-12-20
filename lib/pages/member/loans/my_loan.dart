@@ -29,7 +29,7 @@ class _MyLoanState extends State<MyLoan> {
   Future viewOne(String userId) async {
     Uri viewSingleUser =
         Uri.parse(API.userLoanRequestList.toString() + userId);
-    final response = await http.get(viewSingleUser, headers: API.headers);
+    final response = await http.get(viewSingleUser, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
