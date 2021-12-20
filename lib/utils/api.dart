@@ -10,13 +10,6 @@ String defaultUserImage =
 
 // API SETUP(S)
 class API {
-  // Header Settings
-  static const Map<String, String> headers = {'Accept': 'application/json'};
-  static const Map<String, String> headersMultiPart = {
-    'Accept': 'application/json',
-    // 'Content-Type': 'multipart/form-data'
-  };
-
   // User authorizations
   static Uri login = Uri.parse('http://127.0.0.1:8000/api/auth/login');
   static Uri getUserDetails = Uri.parse('http://127.0.0.1:8000/api/auth/user');
@@ -75,8 +68,6 @@ class API {
 }
 
 class AdminAPI {
-  
-
   // Deposit
   static Uri listOfDeposit = Uri.parse('http://127.0.0.1:8000/api/create_deposit');
   static Uri createDeposit = Uri.parse('http://127.0.0.1:8000/api/list_of_deposit');

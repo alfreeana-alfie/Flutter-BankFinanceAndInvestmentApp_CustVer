@@ -9,7 +9,7 @@ class PaymentRequestMethods {
   static void add(BuildContext context, Map<String, String> body) async {
     final response = await http.post(
       API.exchangeMoney,
-      headers: API.headers,
+      headers: headers,
       body: body,
     );
 
@@ -21,7 +21,7 @@ class PaymentRequestMethods {
   }
 
   static void viewAll() async {
-    final response = await http.get(API.listOfPaymentRequest, headers: API.headers);
+    final response = await http.get(API.listOfPaymentRequest, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
@@ -37,7 +37,7 @@ class PaymentRequestMethods {
   static void viewOne(String userId) async {
     Uri viewSingleUser =
         Uri.parse(API.userPaymentRequestList.toString() + userId);
-    final response = await http.get(viewSingleUser, headers: API.headers);
+    final response = await http.get(viewSingleUser, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);

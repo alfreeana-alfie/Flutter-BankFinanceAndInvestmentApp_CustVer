@@ -11,7 +11,7 @@ class WireTransferMethods {
   static void add(BuildContext context, Map<String, String> body) async {
     final response = await http.post(
       API.wireTransfer,
-      headers: API.headers,
+      headers: headers,
       body: body,
     );
 
@@ -25,7 +25,7 @@ class WireTransferMethods {
   }
 
   static void viewAll() async {
-    final response = await http.get(API.listOfWireTransfer, headers: API.headers);
+    final response = await http.get(API.listOfWireTransfer, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
@@ -44,7 +44,7 @@ class WireTransferMethods {
   static void viewOne(String userId) async {
     Uri viewSingleUser =
         Uri.parse(API.userWireTransferList.toString() + userId);
-    final response = await http.get(viewSingleUser, headers: API.headers);
+    final response = await http.get(viewSingleUser, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);

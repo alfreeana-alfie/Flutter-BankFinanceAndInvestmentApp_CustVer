@@ -12,7 +12,7 @@ class SendMoneyMethods {
   static void add(BuildContext context, Map<String, String> body) async {
     final response = await http.post(
       API.sendMoney,
-      headers: API.headers,
+      headers: headers,
       body: body,
     );
 
@@ -26,7 +26,7 @@ class SendMoneyMethods {
   }
 
   static void viewAll() async {
-    final response = await http.get(API.listOfSendMoney, headers: API.headers);
+    final response = await http.get(API.listOfSendMoney, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
@@ -42,7 +42,7 @@ class SendMoneyMethods {
 
   static void viewOne(String userId) async {
     Uri viewSingleUser = Uri.parse(API.userSendMoneyList.toString() + '1');
-    final response = await http.get(viewSingleUser, headers: API.headers);
+    final response = await http.get(viewSingleUser, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);

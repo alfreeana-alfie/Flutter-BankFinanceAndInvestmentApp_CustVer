@@ -11,7 +11,7 @@ class LoanRequestMethods {
   static void add(BuildContext context, Map<String, String> body) async {
     final response = await http.post(
       API.loanRequest,
-      headers: API.headers,
+      headers: headers,
       body: body,
     );
 
@@ -25,7 +25,7 @@ class LoanRequestMethods {
   }
 
   static void viewAll() async {
-    final response = await http.get(API.listOfLoanRequest, headers: API.headers);
+    final response = await http.get(API.listOfLoanRequest, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
@@ -42,7 +42,7 @@ class LoanRequestMethods {
   static void viewOne(String userId) async {
     Uri viewSingleUser =
         Uri.parse(API.userLoanRequestList.toString() + userId);
-    final response = await http.get(viewSingleUser, headers: API.headers);
+    final response = await http.get(viewSingleUser, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
