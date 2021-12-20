@@ -12,22 +12,23 @@ import 'package:flutter_banking_app/widgets/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/my_app_bar.dart';
 import 'package:gap/gap.dart';
 
-class ProfileOverview extends StatefulWidget {
-  const ProfileOverview({Key? key}) : super(key: key);
+class LoanCalculator extends StatefulWidget {
+  const LoanCalculator({Key? key}) : super(key: key);
 
   @override
-  _ProfileOverviewState createState() => _ProfileOverviewState();
+  _LoanCalculatorState createState() => _LoanCalculatorState();
 }
 
-class _ProfileOverviewState extends State<ProfileOverview> {
+class _LoanCalculatorState extends State<LoanCalculator> {
   final ScrollController _scrollController = ScrollController();
 
-  String? name,
-      email,
-      phone,
-      branchId,
-      emailVerifiedAt,
-      smsVerifiedAt;
+  String? appliedAmt,
+      interestRatePerYear,
+      interestType,
+      term,
+      termPeriod,
+      firstPaymentDate,
+      latePaymentDate;
 
   @override
   void initState() {
@@ -43,7 +44,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
     return Scaffold(
       backgroundColor: Styles.primaryColor,
       appBar: myAppBar(
-          title: Str.profileOverviewTxt, implyLeading: true, context: context),
+          title: Str.loanCalculatorTxt, implyLeading: true, context: context),
       // bottomSheet: 
       // Container(
       //   color: Styles.primaryColor,
@@ -76,16 +77,16 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                       const Gap(20.0),
                       TextFormField(
                         onChanged: (val) {
-                          name = val;
+                          appliedAmt = val;
                         },
                         style: Styles.subtitleStyle,
                         textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.text,
+                        keyboardType: TextInputType.number,
                         maxLines: 1,
                         decoration: InputDecoration(
-                          labelText: Str.nameTxt,
+                          labelText: Str.appliedAmountTxt,
                           labelStyle: Styles.subtitleStyle,
-                          hintText: Str.nameTxt,
+                          hintText: Str.appliedAmountTxt,
                           hintStyle: Styles.subtitleStyle03,
                           border: const OutlineInputBorder(
                             borderSide: BorderSide.none,
@@ -96,16 +97,16 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                       const Gap(20.0),
                       TextFormField(
                         onChanged: (val) {
-                          email = val;
+                          interestRatePerYear = val;
                         },
                         style: Styles.subtitleStyle,
                         textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.emailAddress,
+                        keyboardType: TextInputType.number,
                         maxLines: 1,
                         decoration: InputDecoration(
-                          labelText: Str.emailTxt,
+                          labelText: Str.interestRatePerYearTxt,
                           labelStyle: Styles.subtitleStyle,
-                          hintText: Str.emailTxt,
+                          hintText: Str.interestRatePerYearTxt,
                           hintStyle: Styles.subtitleStyle03,
                           border: const OutlineInputBorder(
                             borderSide: BorderSide.none,
@@ -116,16 +117,16 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                       const Gap(20.0),
                       TextFormField(
                         onChanged: (val) {
-                          phone = val;
+                          interestType = val;
                         },
                         style: Styles.subtitleStyle,
                         textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.phone,
+                        keyboardType: TextInputType.number,
                         maxLines: 1,
                         decoration: InputDecoration(
-                          labelText: Str.phoneNumberTxt,
+                          labelText: Str.interestTypeTxt,
                           labelStyle: Styles.subtitleStyle,
-                          hintText: Str.phoneNumberTxt,
+                          hintText: Str.interestTypeTxt,
                           hintStyle: Styles.subtitleStyle03,
                           border: const OutlineInputBorder(
                             borderSide: BorderSide.none,
@@ -136,16 +137,16 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                       const Gap(20.0),
                       TextFormField(
                         onChanged: (val) {
-                          branchId = val;
+                          term = val;
                         },
                         style: Styles.subtitleStyle,
                         textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.text,
+                        keyboardType: TextInputType.number,
                         maxLines: 1,
                         decoration: InputDecoration(
-                          labelText: Str.branchTxt,
+                          labelText: Str.termTxt,
                           labelStyle: Styles.subtitleStyle,
-                          hintText: Str.branchTxt,
+                          hintText: Str.termTxt,
                           hintStyle: Styles.subtitleStyle03,
                           border: const OutlineInputBorder(
                             borderSide: BorderSide.none,
@@ -156,16 +157,16 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                       const Gap(20.0),
                       TextFormField(
                         onChanged: (val) {
-                          emailVerifiedAt = val;
+                          termPeriod = val;
                         },
                         style: Styles.subtitleStyle,
                         textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.text,
+                        keyboardType: TextInputType.number,
                         maxLines: 1,
                         decoration: InputDecoration(
-                          labelText: Str.emailVerifiedAtTxt,
+                          labelText: Str.termPeriodTxt,
                           labelStyle: Styles.subtitleStyle,
-                          hintText: Str.emailVerifiedAtTxt,
+                          hintText: Str.termPeriodTxt,
                           hintStyle: Styles.subtitleStyle03,
                           border: const OutlineInputBorder(
                             borderSide: BorderSide.none,
@@ -176,16 +177,36 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                       const Gap(20.0),
                       TextFormField(
                         onChanged: (val) {
-                          smsVerifiedAt = val;
+                          firstPaymentDate = val;
                         },
                         style: Styles.subtitleStyle,
                         textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.text,
+                        keyboardType: TextInputType.number,
                         maxLines: 1,
                         decoration: InputDecoration(
-                          labelText: Str.smsVerifiedAtTxt,
+                          labelText: Str.firstPaymentDateTxt,
                           labelStyle: Styles.subtitleStyle,
-                          hintText: Str.smsVerifiedAtTxt,
+                          hintText: Str.firstPaymentDateTxt,
+                          hintStyle: Styles.subtitleStyle03,
+                          border: const OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            gapPadding: 0.0,
+                          ),
+                        ),
+                      ),
+                      const Gap(20.0),
+                      TextFormField(
+                        onChanged: (val) {
+                          latePaymentDate = val;
+                        },
+                        style: Styles.subtitleStyle,
+                        textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.number,
+                        maxLines: 1,
+                        decoration: InputDecoration(
+                          labelText: Str.latePaymentDateTxt,
+                          labelStyle: Styles.subtitleStyle,
+                          hintText: Str.latePaymentDateTxt,
                           hintStyle: Styles.subtitleStyle03,
                           border: const OutlineInputBorder(
                             borderSide: BorderSide.none,
@@ -198,7 +219,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                         color: Styles.secondaryColor,
                         context: context,
                         callback: () {},
-                        text: Str.saveTxt.toUpperCase(),
+                        text: Str.calculateTxt.toUpperCase(),
                       ),
                     ],
                   ),

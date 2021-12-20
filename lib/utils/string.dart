@@ -121,6 +121,14 @@ class Str {
 
   static String userTypeTxt = 'User Type';
   static String providerTxt = 'Provider';
+  static String interestRatePerYearTxt = 'Interest Rate Per Year';
+  static String latePaymentDateTxt = 'Late Payment Date';
+  static String calculateTxt = 'Calculate';
+  static String loanCalculatorTxt = 'Loan Calculator';
+  static String emailVerifiedAtTxt = 'Email Verified';
+  static String smsVerifiedAtTxt = 'SMS Verified';
+  static String saveTxt = 'Save';
+  static String profileOverviewTxt = 'Profile Overview';
 }
 
 class UserSTR {
