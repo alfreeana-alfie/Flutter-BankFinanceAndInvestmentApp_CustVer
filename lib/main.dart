@@ -1,13 +1,11 @@
 import 'dart:io';
 
-import 'package:flutter_banking_app/pages/admin/currency/create_currency.dart';
 import 'package:flutter_banking_app/pages/admin/dashboard.dart';
 import 'package:flutter_banking_app/pages/auth/forgot_password.dart';
 import 'package:flutter_banking_app/pages/auth/profile_overview.dart';
 import 'package:flutter_banking_app/pages/auth/sign_in.dart';
 import 'package:flutter_banking_app/pages/auth/sign_up.dart';
 import 'package:flutter_banking_app/pages/member/exchange_money.dart';
-import 'package:flutter_banking_app/pages/member/loans/loan_cal.dart';
 import 'package:flutter_banking_app/pages/member/payment_request/all_request.dart';
 import 'package:flutter_banking_app/pages/member/send_money.dart';
 import 'package:flutter_banking_app/pages/member/wire_transfer.dart';
@@ -68,7 +66,6 @@ Future<void> main() async {
         RouteSTR.dashboardAdmin: (context) => const DashboardPage(),
       },
       home: SplashScreenView(
-        // navigateRoute: status == true ? const BottomNav() : const SignInPage(),
         navigateRoute: const ProfileOverview(),
         duration: 4000,
         imageSize: 200,

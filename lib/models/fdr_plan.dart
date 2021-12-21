@@ -1,7 +1,7 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class PlanFDR {
-  int id, duration, status;
+  int? id, duration, status;
   String? name,
       minimumAmount,
       maximumAmount,
@@ -10,14 +10,14 @@ class PlanFDR {
       description;
   
   PlanFDR(
-      {required this.id,
-      required this.name,
-      required this.minimumAmount,
-      required this.maximumAmount,
-      required this.interestRate,
-      required this.duration,
-      required this.durationType,
-      required this.status,
+      {this.id,
+      this.name,
+      this.minimumAmount,
+      this.maximumAmount,
+      this.interestRate,
+      this.duration,
+      this.durationType,
+      this.status,
       this.description});
 
   factory PlanFDR.fromMap(Map<String, dynamic> map) {

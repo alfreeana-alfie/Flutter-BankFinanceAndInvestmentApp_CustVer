@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 import '../config.dart';
 
-class Branch {
+class BranchMethods {
   static void add(BuildContext context, Map<String, String> body) async {
     final response = await http.post(
       AdminAPI.createBranch,

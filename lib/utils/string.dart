@@ -85,6 +85,7 @@ class Str {
   static String subjectTxt = 'Subject';
   static String messageTxt = 'Message';
   static String planTxt = 'FDR Plan';
+  static String roleTxt = 'Role';
 
   // Navigation
   static String addNewTxt = 'Add New';
@@ -129,6 +130,148 @@ class Str {
   static String smsVerifiedAtTxt = 'SMS Verified';
   static String saveTxt = 'Save';
   static String profileOverviewTxt = 'Profile Overview';
+  static String userNameTxt = 'Username';
+  static String feeTxt = 'Fee';
+  static String drCrTxt = 'DR/CR';
+  static String methodTxt = 'Method';
+  static String noteTxt = 'Note';
+  
+}
+
+class Status {
+  static String successTxt = 'SUCCESS';
+  static String failedTxt = 'FAILED';
+  static int created = 201;
+  static int ok = 200;
+  static int error = 500;
+  static int notFound = 404;
+
+  static int pending = 1;
+  static int approved = 2;
+  static int rejected = 3;
+}
+
+class AuthSTR {
+  static String successAuthTxt = 'Authentication Success';
+  static String failedAuthTxt = 'Authentication Failed';
+}
+
+class Pref {
+  static String accessToken = 'access_token';
+  static String userData = 'user_data';
+  static String isLoggedIn = 'is_logged_in';
+  static String message = 'message';
+}
+
+class RouteSTR {
+  static String forgotPassword = '/forgot-password';
+  static String signIn = '/sign-in';
+  static String signUp = '/sign-up';
+
+  static String bottomNav = '/bottom_nav';
+  static String newRequest = '/new-request';
+  static String applyNewLoan = '/apply-new-loan';
+  static String applyNewFDR = '/apply-new-fdr';
+
+  static String dashboardMember = '/dashboard-member';
+  static String dashboardAdmin = '/dashboard-admin';
+
+  static String sendMoney = '/send-money';
+  static String exchangeMoney = '/exchange-money';
+  static String wireTransfer = '/wire-transfer';
+
+  static String allRequest = '/all-request';
+  static String createCurrency = '/create-currency';
+  static String createBranch = '/create-branch';
+  static String createBank = '/create-bank';
+  static String createPlanFDR = '/create-plan';
+  static String createLoanProduct = '/create-product';
+  static String createWireTransfer = '/create-wire-transfer';
+}
+
+class Field {
+  static String emptyString = '-';
+  static String emptyAmount = '0.00';
+  static String data = 'data';
+  static String id = 'id';
+  static String name = 'name';
+  static String email = 'email';
+  static String phone = 'phone';
+  static String userType = 'user_type';
+  static String roleType = 'role_type';
+  static String roledId = 'roled_id';
+  static String profilePicture = 'profile_picture';
+  static String emailVerified = 'email_verified_at';
+  static String smsVerified = 'sms_verified_at';
+  static String provider = 'provider';
+  static String providerId = 'provider_id';
+  static String countryCode = 'country_code';
+  static String loanProductId = 'loan_product_id';
+  static String borrowerId = 'borrower_id';
+  static String firstPaymentDate = 'first_payment_date';
+  static String releaseDate = 'release_date';
+  static String appliedAmount = 'applied_amount';
+  static String totalPayable = 'total_payable';
+  static String totalPaid = 'total_paid';
+  static String latePaymentPenalty = 'late_payment_penalties';
+  static String attachment = 'attachment';
+  static String description = 'description';
+  static String remarks = 'remarks';
+  static String approvedDate = 'approved_date';
+  static String approvedUserId = 'approved_user_id';
+  static String userId = 'user_id';
+  static String currencyId = 'currency_id';
+  static String amount = 'amount';
+  static String fee = 'fee';
+  static String drCr = 'dr_cr';
+  static String type = 'type';
+  static String method = 'method';
+  static String status = 'status';
+  static String note = 'note';
+  static String loanId = 'loan_id';
+  static String refId = 'ref_id';
+  static String parentId = 'parent_id';
+  static String otherBankId = 'other_bank_id';
+  static String gatewayId = 'gateway_id';
+  static String createdUserId = 'created_user_id';
+  static String updatedUserId = 'updated_user_id';
+  static String branchId = 'branch_id';
+  static String transactionsDetails = 'transaction_details';
+  static String fdrPlanId = 'fdr_plan_id';
+  static String depositAmount = 'deposit_amount';
+  static String returnAmount = 'return_amount';
+  static String transactionId = 'transaction_id';
+  static String matureDate = 'mature_date';
+  static String roleId = 'role_id';
+  static String exchangeRate = 'exchange_rate';
+  static String baseCurrency = 'base_currency';
+  static String minimumAmount = 'minimum_amount';
+  static String maximumAmount = 'maximum_amount';
+  static String interestRate = 'interest_rate';
+  static String duration = 'duration';
+  static String durationType = 'duration_type';
+  static String senderId = 'sender_id';
+  static String senderName = 'sender_name';
+  static String receiverId = 'receiver_id';
+  static String receiverName = 'receiver_name';
+  static String createdAt = 'created_at';
+  static String currencyName = 'currency_name';
+  static String swiftCode = 'swift_code';
+  static String bankCountry = 'bank_country';
+  static String bankCurrency = 'bank_currency';
+  static String minTransferAmt = 'minimum_transfer_amount';
+  static String maxTransferAmt = 'maximum_transfer_amount';
+  static String fixedCharge = 'fixed_charge';
+  static String chargeInPercentage = 'charge_in_percentage';
+  static String descriptions = 'descriptions';
+  static String contactEmail = 'contact_email';
+  static String contactPhone = 'contact_phone';
+  static String address = 'addresss';
+  static String interestType = 'interest_type';
+  static String term = 'term';
+  static String termPeriod = 'term_period';
+  static String password = 'password';
+  static String userName = 'user_name';
 }
 
 class UserSTR {
@@ -222,133 +365,4 @@ class AdministrationSTR {
 class LanguageSTR {
   static String languageTxt = 'Languages';
   static String allLanguageTxt = 'All Language';
-}
-
-class Status {
-  static String successTxt = 'SUCCESS';
-  static String failedTxt = 'FAILED';
-  static int created = 201;
-  static int ok = 200;
-  static int error = 500;
-  static int notFound = 404;
-
-  static int pending = 1;
-  static int approved = 2;
-  static int rejected = 3;
-}
-
-class AuthSTR {
-  static String successAuthTxt = 'Authentication Success';
-  static String failedAuthTxt = 'Authentication Failed';
-}
-
-class Pref {
-  static String accessToken = 'access_token';
-  static String userData = 'user_data';
-  static String isLoggedIn = 'is_logged_in';
-  static String message = 'message';
-}
-
-class RouteSTR {
-  static String forgotPassword = '/forgot-password';
-  static String signIn = '/sign-in';
-  static String signUp = '/sign-up';
-
-  static String bottomNav = '/bottom_nav';
-  static String newRequest = '/new-request';
-  static String applyNewLoan = '/apply-new-loan';
-  static String applyNewFDR = '/apply-new-fdr';
-
-  static String dashboardMember = '/dashboard-member';
-  static String dashboardAdmin = '/dashboard-admin';
-
-  static String sendMoney = '/send-money';
-  static String exchangeMoney = '/exchange-money';
-  static String wireTransfer = '/wire-transfer';
-
-  static String allRequest = '/all-request';
-}
-
-class Field {
-  static String emptyString = '-';
-  static String emptyAmount = '0.00';
-  static String data = 'data';
-  static String id = 'id';
-  static String name = 'name';
-  static String email = 'email';
-  static String phone = 'phone';
-  static String userType = 'user_type';
-  static String roleType = 'role_type';
-  static String roledId = 'roled_id';
-  static String profilePicture = 'profile_picture';
-  static String emailVerified = 'email_verified_at';
-  static String smsVerified = 'sms_verified_at';
-  static String provider = 'provider';
-  static String providerId = 'provider_id';
-  static String countryCode = 'country_code';
-  static String loanProductId = 'loan_product_id';
-  static String borrowerId = 'borrower_id';
-  static String firstPaymentDate = 'first_payment_date';
-  static String releaseDate = 'release_date';
-  static String appliedAmount = 'applied_amount';
-  static String totalPayable = 'total_payable';
-  static String totalPaid = 'total_paid';
-  static String latePaymentPenalty = 'late_payment_penalties';
-  static String attachment = 'attachment';
-  static String description = 'description';
-  static String remarks = 'remarks';
-  static String approvedDate = 'approved_date';
-  static String approvedUserId = 'approved_user_id';
-  static String userId = 'user_id';
-  static String currencyId = 'currency_id';
-  static String amount = 'amount';
-  static String fee = 'fee';
-  static String drCr = 'dr_cr';
-  static String type = 'type';
-  static String method = 'method';
-  static String status = 'status';
-  static String note = 'note';
-  static String loanId = 'loan_id';
-  static String refId = 'ref_id';
-  static String parentId = 'parent_id';
-  static String otherBankId = 'other_bank_id';
-  static String gatewayId = 'gateway_id';
-  static String createdUserId = 'created_user_id';
-  static String updatedUserId = 'updated_user_id';
-  static String branchId = 'branch_id';
-  static String transactionsDetails = 'transaction_details';
-  static String fdrPlanId = 'fdr_plan_id';
-  static String depositAmount = 'deposit_amount';
-  static String returnAmount = 'return_amount';
-  static String transactionId = 'transaction_id';
-  static String matureDate = 'mature_date';
-  static String roleId = 'role_id';
-  static String exchangeRate = 'exchange_rate';
-  static String baseCurrency = 'base_currency';
-  static String minimumAmount = 'minimum_amount';
-  static String maximumAmount = 'maximum_amount';
-  static String interestRate = 'interest_rate';
-  static String duration = 'duration';
-  static String durationType = 'duration_type';
-  static String senderId = 'sender_id';
-  static String senderName = 'sender_name';
-  static String receiverId = 'receiver_id';
-  static String receiverName = 'receiver_name';
-  static String createdAt = 'created_at';
-  static String currencyName = 'currency_name';
-  static String swiftCode = 'swift_code';
-  static String bankCountry = 'bank_country';
-  static String bankCurrency = 'bank_currency';
-  static String minTransferAmt = 'minimum_transfer_amount';
-  static String maxTransferAmt = 'maximum_transfer_amount';
-  static String fixedCharge = 'fixed_charge';
-  static String chargeInPercentage = 'charge_in_percentage';
-  static String descriptions = 'descriptions';
-  static String contactEmail = 'contact_email';
-  static String contactPhone = 'contact_phone';
-  static String address = 'addresss';
-  static String interestType = 'interest_type';
-  static String term = 'term';
-  static String termPeriod = 'term_period';
-  static String password = 'password';
 }

@@ -44,17 +44,6 @@ class _ProfileOverviewState extends State<ProfileOverview> {
       backgroundColor: Styles.primaryColor,
       appBar: myAppBar(
           title: Str.profileOverviewTxt, implyLeading: true, context: context),
-      // bottomSheet: 
-      // Container(
-      //   color: Styles.primaryColor,
-      //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      //   child: elevatedButton(
-      //     color: Styles.secondaryColor,
-      //     context: context,
-      //     callback: () {},
-      //     text: Str.applyLoanTxt.toUpperCase(),
-      //   ),
-      // ),
       body: ListView(
         padding: const EdgeInsets.all(15),
         children: [
