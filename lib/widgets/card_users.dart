@@ -132,7 +132,7 @@ class CardUser extends StatelessWidget {
             DetailRow(labelTitle: Str.phoneNumberTxt, labelDetails: users.phone ?? Field.emptyString),
             DetailRow(labelTitle: Str.userTypeTxt, labelDetails: users.userType ?? Field.emptyString),
             DetailRow(labelTitle: Str.roleTxt, labelDetails: users.roleId.toString()),
-            DetailRow(labelTitle: Str.branchTxt, labelDetails: users.branchId ?? Field.emptyString),
+            DetailRow(labelTitle: Str.branchTxt, labelDetails: users.branchId.toString()),
             DetailRow(labelTitle: Str.statusTxt, labelDetails: users.status.toString()),
             DetailRow(labelTitle: Str.profilePictureTxt, labelDetails: users.profilePicture ?? Field.emptyString),
             DetailRow(labelTitle: Str.emailVerifiedAtTxt, labelDetails: users.emailVerifiedAt ?? Field.emptyString),

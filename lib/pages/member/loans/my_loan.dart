@@ -12,6 +12,7 @@ import 'package:flutter_banking_app/widgets/card_loan.dart';
 import 'package:flutter_banking_app/widgets/my_app_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
+import 'package:oktoast/oktoast.dart';
 
 class MyLoan extends StatefulWidget {
   const MyLoan({Key? key}) : super(key: key);
@@ -45,51 +46,53 @@ class _MyLoanState extends State<MyLoan> {
     }
   }
 
-  loadSharedPrefs() async {
-    try {
-      User user = User.fromJSON(await sharedPref.read(Pref.userData));
-      setState(() {
-        userLoad = user;
+  // loadSharedPrefs() async {
+  //   try {
+  //     User user = User.fromJSON(await sharedPref.read(Pref.userData));
+  //     setState(() {
+  //       userLoad = user;
 
-        print(userLoad.id.toString());
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
+  //       print(userLoad.id.toString());
+  //     });
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   @override
   void initState() {
     super.initState();
 
-    loadSharedPrefs();
+    // loadSharedPrefs();
     viewOne('1');
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: addAppBar(
-          title: Str.myLoanTxt, 
-          implyLeading: 
-          true, context: context,
-          hasAction: true,
-          path: RouteSTR.applyNewLoan,
-      ),
-      // drawer: SideDrawer(),
-      backgroundColor: Styles.primaryColor,
-      body: ExpandableTheme(
-        data: const ExpandableThemeData(
-          iconColor: Colors.blue,
-          useInkWell: true,
+    return OKToast(
+      child: Scaffold(
+        appBar: addAppBar(
+            title: Str.myLoanTxt, 
+            implyLeading: 
+            true, context: context,
+            hasAction: true,
+            path: RouteSTR.applyNewLoan,
         ),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 10.0),
-          child: ListView(
-            physics: const BouncingScrollPhysics(),
-            children: [
-              for (Loan loan in loanList) CardLoan(loan: loan),
-            ],
+        // drawer: SideDrawer(),
+        backgroundColor: Styles.primaryColor,
+        body: ExpandableTheme(
+          data: const ExpandableThemeData(
+            iconColor: Colors.blue,
+            useInkWell: true,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: ListView(
+              physics: const BouncingScrollPhysics(),
+              children: [
+                for (Loan loan in loanList) CardLoan(loan: loan),
+              ],
+            ),
           ),
         ),
       ),

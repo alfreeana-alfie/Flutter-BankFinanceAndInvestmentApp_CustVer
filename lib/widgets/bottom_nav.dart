@@ -5,7 +5,6 @@ import 'package:flutter_banking_app/pages/member/stats.dart';
 import 'package:flutter_banking_app/pages/member/wallet.dart';
 import 'package:flutter_banking_app/utils/iconly/iconly_bold.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
-import 'package:flutter_banking_app/widgets/left_side_menu.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({Key? key}) : super(key: key);

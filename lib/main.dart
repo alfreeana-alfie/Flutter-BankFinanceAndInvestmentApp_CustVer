@@ -1,11 +1,18 @@
 import 'dart:io';
 
+import 'package:flutter_banking_app/models/deposit.dart';
 import 'package:flutter_banking_app/pages/admin/dashboard.dart';
+import 'package:flutter_banking_app/pages/admin/deposit/create_deposit.dart';
+import 'package:flutter_banking_app/pages/admin/deposit/deposit_list.dart';
+import 'package:flutter_banking_app/pages/admin/users/add_new_user.dart';
+import 'package:flutter_banking_app/pages/admin/users/users_list.dart';
 import 'package:flutter_banking_app/pages/auth/forgot_password.dart';
 import 'package:flutter_banking_app/pages/auth/profile_overview.dart';
 import 'package:flutter_banking_app/pages/auth/sign_in.dart';
 import 'package:flutter_banking_app/pages/auth/sign_up.dart';
+import 'package:flutter_banking_app/pages/member/dashboard.dart';
 import 'package:flutter_banking_app/pages/member/exchange_money.dart';
+import 'package:flutter_banking_app/pages/member/loans/my_loan.dart';
 import 'package:flutter_banking_app/pages/member/payment_request/all_request.dart';
 import 'package:flutter_banking_app/pages/member/send_money.dart';
 import 'package:flutter_banking_app/pages/member/wire_transfer.dart';
@@ -63,10 +70,16 @@ Future<void> main() async {
         RouteSTR.applyNewFDR:     (context) => const ApplyNewFDR(),
 
         // ADMIN ROUTE(S)
-        RouteSTR.dashboardAdmin: (context) => const DashboardPage(),
+        RouteSTR.dashboardAdmin: (context) => const AdminDashboard(),
+        RouteSTR.depositList: (context) => const DepositList(),
+        RouteSTR.createDeposit: (context) => const CreateDeposit(),
+
+        RouteSTR.usersList: (context) => const UsersList(),
+        // RouteSTR.createUsers: (context) => const CreateUsers(),
+
       },
       home: SplashScreenView(
-        navigateRoute: const ProfileOverview(),
+        navigateRoute: const AdminDashboard(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,

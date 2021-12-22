@@ -11,14 +11,14 @@ import 'package:flutter_banking_app/widgets/my_app_bar.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
 
-class CreateLoanProduct extends StatefulWidget {
-  const CreateLoanProduct({Key? key}) : super(key: key);
+class CreateUsers extends StatefulWidget {
+  const CreateUsers({Key? key}) : super(key: key);
 
   @override
-  _CreateLoanProductState createState() => _CreateLoanProductState();
+  _CreateUsersState createState() => _CreateUsersState();
 }
 
-class _CreateLoanProductState extends State<CreateLoanProduct> {
+class _CreateUsersState extends State<CreateUsers> {
   final ScrollController _scrollController = ScrollController();
 
   String? name,

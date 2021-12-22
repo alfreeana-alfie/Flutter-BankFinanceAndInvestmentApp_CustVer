@@ -44,24 +44,24 @@ class _AllRequestState extends State<AllRequest> {
     }
   }
 
-  loadSharedPrefs() async {
-    try {
-      User user = User.fromJSON(await sharedPref.read(Pref.userData));
-      setState(() {
-        userLoad = user;
+  // loadSharedPrefs() async {
+  //   try {
+  //     User user = User.fromJSON(await sharedPref.read(Pref.userData));
+  //     setState(() {
+  //       userLoad = user;
 
-        print(userLoad.id.toString());
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
+  //       print(userLoad.id.toString());
+  //     });
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   @override
   void initState() {
     super.initState();
 
-    loadSharedPrefs();
+    // loadSharedPrefs();
     viewOne('3');
   }
 

@@ -44,7 +44,7 @@ void getUserDetails(BuildContext context) async {
 
     sharedPref.save(Pref.userData, jsonBody);
 
-    if (jsonBody.userType == UserSTR.customerTxt) {
+    if (jsonBody.userType == Field.customerTxt) {
       Navigator.pushNamed(context, RouteSTR.dashboardMember);
     } else {
       Navigator.pushNamed(context, RouteSTR.dashboardAdmin);

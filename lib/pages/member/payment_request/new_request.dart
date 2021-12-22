@@ -23,6 +23,7 @@ import 'package:flutter_banking_app/widgets/people_slider.dart';
 import 'package:gap/gap.dart';
 import 'dart:math' as math;
 import 'package:http/http.dart' as http;
+import 'package:oktoast/oktoast.dart';
 
 class NewRequest extends StatefulWidget {
   const NewRequest({Key? key}) : super(key: key);
@@ -91,153 +92,155 @@ class _NewRequestState extends State<NewRequest> {
     final theme = Layouts.getTheme(context);
     final size = Layouts.getSize(context);
 
-    return Scaffold(
-      backgroundColor: Styles.primaryColor,
-      appBar: myAppBar(
-          title: Str.newRequestTxt, implyLeading: true, context: context),
-      bottomSheet: Container(
-        color: Styles.primaryColor,
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-        child: elevatedButton(
-          color: Styles.secondaryColor,
-          context: context,
-          callback: () {
-            Map<String, String> body = {
-              Field.currencyId: currency ?? Field.emptyString,
-              Field.amount: amount ?? Field.emptyAmount,
-              Field.status: '1',
-              Field.description: description ?? Field.emptyString,
-              Field.senderId: userLoad.id.toString(),
-              Field.receiverId: receiverId ?? Field.emptyString,
-              Field.transactionId: '1',
-              Field.branchId: '1'
-            };
-
-            PaymentRequestMethods.add(context, body);
-          },
-          text: Str.newRequestTxt.toUpperCase(),
+    return OKToast(
+      child: Scaffold(
+        backgroundColor: Styles.primaryColor,
+        appBar: myAppBar(
+            title: Str.newRequestTxt, implyLeading: true, context: context),
+        bottomSheet: Container(
+          color: Styles.primaryColor,
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+          child: elevatedButton(
+            color: Styles.secondaryColor,
+            context: context,
+            callback: () {
+              Map<String, String> body = {
+                Field.currencyId: currency ?? Field.emptyString,
+                Field.amount: amount ?? Field.emptyAmount,
+                Field.status: '1',
+                Field.description: description ?? Field.emptyString,
+                Field.senderId: '3',
+                Field.receiverId: receiverId ?? Field.emptyString,
+                Field.transactionId: '1',
+                Field.branchId: '1'
+              };
+    
+              PaymentRequestMethods.add(context, body);
+            },
+            text: Str.newRequestTxt.toUpperCase(),
+          ),
         ),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(15),
-        children: [
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Styles.primaryWithOpacityColor,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // TextFormField(
-                      //   // readOnly: true,
-                      //   onChanged: (val) {
-
-                      //   },
-                      //   style: Styles.subtitleStyle,
-                      //   textInputAction: TextInputAction.done,
-                      //   keyboardType: TextInputType.text,
-                      //   maxLines: 1,
-                      //   decoration: InputDecoration(
-                      //     labelText: Str.receiverAccountTxt,
-                      //     labelStyle: Styles.subtitleStyle,
-                      //     hintText: Str.receiverAccountTxt,
-                      //     hintStyle: Styles.subtitleStyle03,
-                      //     border: const OutlineInputBorder(
-                      //       borderSide: BorderSide.none,
-                      //       gapPadding: 0.0,
-                      //     ),
-                      //   ),
-                      // ),
-                      _body(size.height, theme),
-                      const Gap(20.0),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                              padding: const EdgeInsets.fromLTRB(15, 0, 15, 8),
-                              child: Text(Str.currencyTxt,
-                                  style: Styles.subtitleStyle)),
-                          const Gap(20.0),
-                          DropDownCurrency(
-                            currency: currency,
-                            currencyName: currencyName,
-                            onChanged: (val) {
-                              setState(
-                                () {
-                                  currency = val!.id.toString();
-                                  currencyName = val.name;
-                                },
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                      const Gap(20.0),
-                      TextFormField(
-                        onChanged: (val) {
-                          amount = val;
-                        },
-                        style: Styles.subtitleStyle,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.number,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          labelText: Str.amountTxt,
-                          labelStyle: Styles.subtitleStyle,
-                          hintText: Str.amountNumTxt,
-                          hintStyle: Styles.subtitleStyle03,
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            gapPadding: 0.0,
+        body: ListView(
+          padding: const EdgeInsets.all(15),
+          children: [
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Styles.primaryWithOpacityColor,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // TextFormField(
+                        //   // readOnly: true,
+                        //   onChanged: (val) {
+    
+                        //   },
+                        //   style: Styles.subtitleStyle,
+                        //   textInputAction: TextInputAction.done,
+                        //   keyboardType: TextInputType.text,
+                        //   maxLines: 1,
+                        //   decoration: InputDecoration(
+                        //     labelText: Str.receiverAccountTxt,
+                        //     labelStyle: Styles.subtitleStyle,
+                        //     hintText: Str.receiverAccountTxt,
+                        //     hintStyle: Styles.subtitleStyle03,
+                        //     border: const OutlineInputBorder(
+                        //       borderSide: BorderSide.none,
+                        //       gapPadding: 0.0,
+                        //     ),
+                        //   ),
+                        // ),
+                        _body(size.height, theme),
+                        const Gap(20.0),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                                padding: const EdgeInsets.fromLTRB(15, 0, 15, 8),
+                                child: Text(Str.currencyTxt,
+                                    style: Styles.subtitleStyle)),
+                            const Gap(20.0),
+                            DropDownCurrency(
+                              currency: currency,
+                              currencyName: currencyName,
+                              onChanged: (val) {
+                                setState(
+                                  () {
+                                    currency = val!.id.toString();
+                                    currencyName = val.name;
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                        const Gap(20.0),
+                        TextFormField(
+                          onChanged: (val) {
+                            amount = val;
+                          },
+                          style: Styles.subtitleStyle,
+                          textInputAction: TextInputAction.done,
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          decoration: InputDecoration(
+                            labelText: Str.amountTxt,
+                            labelStyle: Styles.subtitleStyle,
+                            hintText: Str.amountNumTxt,
+                            hintStyle: Styles.subtitleStyle03,
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              gapPadding: 0.0,
+                            ),
                           ),
                         ),
-                      ),
-                      // const Gap(20.0),
-                    ],
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.vertical(
-                      bottom: Radius.circular(15),
-                    ),
-                    color: Styles.yellowColor,
-                  ),
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                  child: TextFormField(
-                    onChanged: (val) {
-                      description = val;
-                    },
-                    style: Styles.subtitleStyleDark,
-                    textInputAction: TextInputAction.done,
-                    keyboardType: TextInputType.text,
-                    maxLines: 1,
-                    decoration: InputDecoration(
-                      labelText: Str.descriptionTxt,
-                      labelStyle: Styles.subtitleStyleDark02,
-                      hintText: Str.descriptionTxt,
-                      hintStyle: Styles.subtitleStyleDark03,
-                      border: const OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        gapPadding: 0.0,
-                      ),
+                        // const Gap(20.0),
+                      ],
                     ),
                   ),
-                ),
-                // const Gap(10),
-              ],
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.vertical(
+                        bottom: Radius.circular(15),
+                      ),
+                      color: Styles.yellowColor,
+                    ),
+                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    child: TextFormField(
+                      onChanged: (val) {
+                        description = val;
+                      },
+                      style: Styles.subtitleStyleDark,
+                      textInputAction: TextInputAction.done,
+                      keyboardType: TextInputType.text,
+                      maxLines: 1,
+                      decoration: InputDecoration(
+                        labelText: Str.descriptionTxt,
+                        labelStyle: Styles.subtitleStyleDark02,
+                        hintText: Str.descriptionTxt,
+                        hintStyle: Styles.subtitleStyleDark03,
+                        border: const OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          gapPadding: 0.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  // const Gap(10),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -7,19 +7,19 @@ import 'package:flutter_banking_app/utils/values.dart';
 import 'package:flutter_banking_app/widgets/app_bar.dart';
 import 'package:flutter_banking_app/widgets/left_menu.dart';
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+class AdminDashboard extends StatefulWidget {
+  const AdminDashboard({Key? key}) : super(key: key);
 
   @override
-  _DashboardPageState createState() => _DashboardPageState();
+  _AdminDashboardState createState() => _AdminDashboardState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _AdminDashboardState extends State<AdminDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(Values.appHeight),
+        preferredSize: const Size.fromHeight(Values.appHeight),
         child: MainAppBar(title: Str.dashboardTxt),
       ),
       drawer: SideDrawer(),
