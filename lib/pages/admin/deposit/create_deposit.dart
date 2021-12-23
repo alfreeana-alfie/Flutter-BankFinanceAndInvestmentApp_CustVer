@@ -105,45 +105,45 @@ class _CreateDepositState extends State<CreateDeposit> {
     final theme = Layouts.getTheme(context);
     final size = Layouts.getSize(context);
 
-    return OKToast(
-      child: Scaffold(
-        backgroundColor: Styles.primaryColor,
-        appBar: myAppBar(
-            title: Str.createDepositTxt, implyLeading: true, context: context),
-        // bottomSheet: Container(
-        //   color: Styles.primaryColor,
-        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-        //   child: elevatedButton(
-        //     color: Styles.secondaryColor,
-        //     context: context,
-        //     callback: () {
-        //       Map<String, String> body = {
-        //         Field.userId: '3',
-        //         Field.currencyId: currency ?? '-',
-        //         Field.amount: amount ?? '0.00',
-        //         Field.fee: fee,
-        //         Field.drCr: drCr,
-        //         Field.type: type,
-        //         Field.method: method,
-        //         Field.status: status,
-        //         Field.note: note ?? '-',
-        //         Field.loanId: loanId,
-        //         Field.refId: refId,
-        //         Field.parentId: parentId,
-        //         Field.otherBankId: otherBankId,
-        //         Field.gatewayId: gatewayId,
-        //         Field.createdUserId: toUserId ?? '-',
-        //         Field.updatedUserId: updatedUserId,
-        //         Field.branchId: branchId,
-        //         Field.transactionsDetails: transactionsDetails
-        //       };
+    return Scaffold(
+      backgroundColor: Styles.primaryColor,
+      appBar: myAppBar(
+          title: Str.createDepositTxt, implyLeading: true, context: context),
+      // bottomSheet: Container(
+      //   color: Styles.primaryColor,
+      //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+      //   child: elevatedButton(
+      //     color: Styles.secondaryColor,
+      //     context: context,
+      //     callback: () {
+      //       Map<String, String> body = {
+      //         Field.userId: '3',
+      //         Field.currencyId: currency ?? '-',
+      //         Field.amount: amount ?? '0.00',
+      //         Field.fee: fee,
+      //         Field.drCr: drCr,
+      //         Field.type: type,
+      //         Field.method: method,
+      //         Field.status: status,
+      //         Field.note: note ?? '-',
+      //         Field.loanId: loanId,
+      //         Field.refId: refId,
+      //         Field.parentId: parentId,
+      //         Field.otherBankId: otherBankId,
+      //         Field.gatewayId: gatewayId,
+      //         Field.createdUserId: toUserId ?? '-',
+      //         Field.updatedUserId: updatedUserId,
+      //         Field.branchId: branchId,
+      //         Field.transactionsDetails: transactionsDetails
+      //       };
 
-        //       DepositMethods.add(context, body);
-        //     },
-        //     text: Str.sendMoneyTxt,
-        //   ),
-        // ),
-        body: ListView(
+      //       DepositMethods.add(context, body);
+      //     },
+      //     text: Str.sendMoneyTxt,
+      //   ),
+      // ),
+      body: OKToast(
+        child: ListView(
           padding: const EdgeInsets.all(15),
           children: [
             // Stack(
@@ -284,7 +284,9 @@ class _CreateDepositState extends State<CreateDeposit> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
                     child: TextFormField(
-                      onChanged: (val) {},
+                      onChanged: (val) {
+                        note = val;
+                      },
                       style: Styles.subtitleStyle,
                       textInputAction: TextInputAction.done,
                       keyboardType: TextInputType.text,
@@ -306,34 +308,34 @@ class _CreateDepositState extends State<CreateDeposit> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 30),
                     child: elevatedButton(
-                        color: Styles.secondaryColor,
-                        context: context,
-                        callback: () {
-                          Map<String, String> body = {
-                            Field.userId: '3',
-                            Field.currencyId: currency ?? '-',
-                            Field.amount: amount ?? '0.00',
-                            Field.fee: fee,
-                            Field.drCr: drCr,
-                            Field.type: type,
-                            Field.method: method,
-                            Field.status: status,
-                            Field.note: note ?? '-',
-                            Field.loanId: loanId,
-                            Field.refId: refId,
-                            Field.parentId: parentId,
-                            Field.otherBankId: otherBankId,
-                            Field.gatewayId: gatewayId,
-                            Field.createdUserId: toUserId ?? '-',
-                            Field.updatedUserId: updatedUserId,
-                            Field.branchId: branchId,
-                            Field.transactionsDetails: transactionsDetails
-                          };
-
-                          DepositMethods.add(context, body);
-                        },
-                        text: Str.createDepositTxt,
-                      ),
+                      color: Styles.secondaryColor,
+                      context: context,
+                      callback: () {
+                        Map<String, String> body = {
+                          Field.userId: '3',
+                          Field.currencyId: currency ?? '-',
+                          Field.amount: amount ?? '0.00',
+                          Field.fee: fee,
+                          Field.drCr: drCr,
+                          Field.type: type,
+                          Field.method: method,
+                          Field.status: status,
+                          Field.note: note ?? '-',
+                          Field.loanId: loanId,
+                          Field.refId: refId,
+                          Field.parentId: parentId,
+                          Field.otherBankId: otherBankId,
+                          Field.gatewayId: gatewayId,
+                          Field.createdUserId: toUserId ?? '-',
+                          Field.updatedUserId: updatedUserId,
+                          Field.branchId: branchId,
+                          Field.transactionsDetails: note ?? '-'
+                        };
+      
+                        DepositMethods.add(context, body);
+                      },
+                      text: Str.createDepositTxt,
+                    ),
                   ),
                 ],
               ),

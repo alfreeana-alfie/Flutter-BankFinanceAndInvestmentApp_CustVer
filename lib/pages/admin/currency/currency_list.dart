@@ -9,6 +9,7 @@ import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/app_bar_add.dart';
 import 'package:flutter_banking_app/widgets/card_currency.dart';
+import 'package:flutter_banking_app/widgets/left_menu.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
@@ -72,9 +73,8 @@ class _CurrencyListState extends State<CurrencyList> {
           implyLeading: true,
           context: context,
           hasAction: true,
-          path: RouteSTR.createCurrency,
+          path: RouteSTR.createCurrency
         ),
-        // drawer: SideDrawer(),
         backgroundColor: Styles.primaryColor,
         body: ExpandableTheme(
           data: const ExpandableThemeData(

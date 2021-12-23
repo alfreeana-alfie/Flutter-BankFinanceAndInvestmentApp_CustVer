@@ -18,6 +18,7 @@ class ExchangeMoneyMethods {
     if (response.statusCode == Status.created) {
       // print(Status.successTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+      Navigator.pop(context);
     } else {
       // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);

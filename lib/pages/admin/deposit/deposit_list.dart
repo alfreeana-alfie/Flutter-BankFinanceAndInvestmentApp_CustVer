@@ -11,6 +11,7 @@ import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/app_bar_add.dart';
 import 'package:flutter_banking_app/widgets/card_deposit.dart';
 import 'package:flutter_banking_app/widgets/card_transaction.dart';
+import 'package:flutter_banking_app/widgets/left_menu.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
@@ -70,13 +71,14 @@ class _DepositListState extends State<DepositList> {
     return OKToast(
       child: Scaffold(
         appBar: addAppBar(
-          title: Str.currencyListTxt,
+          title: Str.depositTxt,
           implyLeading: true,
           context: context,
           hasAction: true,
           path: RouteSTR.createDeposit,
+          // onTap: () => Scaffold.of(context).openDrawer(),
         ),
-        // drawer: SideDrawer(),
+        drawer: const SideDrawer(),
         backgroundColor: Styles.primaryColor,
         body: ExpandableTheme(
           data: const ExpandableThemeData(

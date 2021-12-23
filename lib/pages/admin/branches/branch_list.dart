@@ -72,7 +72,7 @@ class _BranchListState extends State<BranchList> {
           implyLeading: true,
           context: context,
           hasAction: true,
-          path: RouteSTR.createBranch,
+          path: RouteSTR.createBranch
         ),
         // drawer: SideDrawer(),
         backgroundColor: Styles.primaryColor,

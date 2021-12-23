@@ -119,7 +119,6 @@ Future<void> main() async {
         RouteSTR.currencyList:        (context) => const CurrencyList(),
         RouteSTR.createCurrency:      (context) => const CreateCurrency(),
       },
-      
     ),
   );
 }
