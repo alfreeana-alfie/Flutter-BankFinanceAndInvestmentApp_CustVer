@@ -91,7 +91,7 @@ class AdminAPI {
 
   // Loan Product
   static Uri listOfLoanProduct =
-      Uri.parse('$android/list_of_loan_request');
+      Uri.parse('$android/list_of_loan_product');
   static Uri createLoanProduct =
       Uri.parse('$android/loan_product');
   static Uri updateLoanProductStatus =

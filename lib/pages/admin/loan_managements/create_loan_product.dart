@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_banking_app/methods/admin/loan_product_methods.dart';
 import 'package:flutter_banking_app/methods/admin/other_bank_methods.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
@@ -27,7 +28,7 @@ class _CreateLoanProductState extends State<CreateLoanProduct> {
       description,
       interestRate,
       interestType,
-      term, 
+      term,
       termPeriod;
 
   @override
@@ -46,30 +47,30 @@ class _CreateLoanProductState extends State<CreateLoanProduct> {
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
             title: Str.createCurrencyTxt, implyLeading: true, context: context),
-        bottomSheet: Container(
-          color: Styles.primaryColor,
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-          child: elevatedButton(
-            color: Styles.secondaryColor,
-            context: context,
-            callback: () {
-              Map<String, String> body = {
-                Field.name: name!,
-                Field.minimumAmount: minAmt ?? Field.emptyString,
-                Field.maximumAmount: maxAmt ?? Field.emptyString,
-                Field.description: description ?? Field.emptyString,
-                Field.interestRate: interestRate ?? Field.emptyString,
-                Field.interestType: interestType ?? Field.emptyString,
-                Field.term: term ?? Field.emptyString,
-                Field.termPeriod: termPeriod ?? Field.emptyString,
-                Field.status: Status.pending.toString(),
-              };
+        // bottomSheet: Container(
+        //   color: Styles.primaryColor,
+        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+        //   child: elevatedButton(
+        //     color: Styles.secondaryColor,
+        //     context: context,
+        //     callback: () {
+        //       Map<String, String> body = {
+        //         Field.name: name!,
+        //         Field.minimumAmount: minAmt ?? Field.emptyString,
+        //         Field.maximumAmount: maxAmt ?? Field.emptyString,
+        //         Field.description: description ?? Field.emptyString,
+        //         Field.interestRate: interestRate ?? Field.emptyString,
+        //         Field.interestType: interestType ?? Field.emptyString,
+        //         Field.term: term ?? Field.emptyString,
+        //         Field.termPeriod: termPeriod ?? Field.emptyString,
+        //         Field.status: Status.pending.toString(),
+        //       };
 
-              OtherBankMethods.add(context, body);
-            },
-            text: Str.createCurrencyTxt.toUpperCase(),
-          ),
-        ),
+        //       OtherBankMethods.add(context, body);
+        //     },
+        //     text: Str.createCurrencyTxt.toUpperCase(),
+        //   ),
+        // ),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -245,6 +246,37 @@ class _CreateLoanProductState extends State<CreateLoanProduct> {
                               borderSide: BorderSide.none,
                               gapPadding: 0.0,
                             ),
+                          ),
+                        ),
+                        Container(
+                          // color: Styles.primaryColor,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 40),
+                          child: elevatedButton(
+                            color: Styles.secondaryColor,
+                            context: context,
+                            callback: () {
+                              Map<String, String> body = {
+                                Field.name: name!,
+                                Field.minimumAmount:
+                                    minAmt ?? Field.emptyString,
+                                Field.maximumAmount:
+                                    maxAmt ?? Field.emptyString,
+                                Field.description:
+                                    description ?? Field.emptyString,
+                                Field.interestRate:
+                                    interestRate ?? Field.emptyString,
+                                Field.interestType:
+                                    interestType ?? Field.emptyString,
+                                Field.term: term ?? Field.emptyString,
+                                Field.termPeriod:
+                                    termPeriod ?? Field.emptyString,
+                                Field.status: Status.pending.toString(),
+                              };
+
+                              LoanProductMethods.add(context, body);
+                            },
+                            text: Str.createLoanProductTxt.toUpperCase(),
                           ),
                         ),
                       ],

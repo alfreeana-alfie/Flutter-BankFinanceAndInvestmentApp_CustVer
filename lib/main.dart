@@ -9,6 +9,7 @@ import 'package:flutter_banking_app/pages/admin/dashboard.dart';
 import 'package:flutter_banking_app/pages/admin/deposit/create_deposit.dart';
 import 'package:flutter_banking_app/pages/admin/deposit/deposit_list.dart';
 import 'package:flutter_banking_app/pages/admin/fdr/fdr_plans_list.dart';
+import 'package:flutter_banking_app/pages/admin/loan_managements/create_loan_product.dart';
 import 'package:flutter_banking_app/pages/admin/loan_managements/loan_product_list.dart';
 import 'package:flutter_banking_app/pages/admin/other_banks/bank_list.dart';
 import 'package:flutter_banking_app/pages/admin/other_banks/create_bank.dart';
@@ -46,7 +47,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       home: SplashScreenView(
-        navigateRoute: const WireTransferList(),
+        navigateRoute: const LoanProductList(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,
@@ -105,7 +106,7 @@ Future<void> main() async {
         RouteSTR.createWireTransfer:  (context) => const CreateWireTransfer(),
 
         RouteSTR.loanProductList:     (context) => const LoanProductList(),
-        RouteSTR.createLoanProduct:   (context) => const CreateWireTransfer(),
+        RouteSTR.createLoanProduct:   (context) => const CreateLoanProduct(),
 
         RouteSTR.fdrPlanList:         (context) => const FdrPlanList(),
         RouteSTR.createPlanFDR:       (context) => const CreateWireTransfer(),
