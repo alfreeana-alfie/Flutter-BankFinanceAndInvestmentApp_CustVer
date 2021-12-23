@@ -14,6 +14,7 @@ import 'package:flutter_banking_app/pages/admin/other_banks/bank_list.dart';
 import 'package:flutter_banking_app/pages/admin/other_banks/create_bank.dart';
 import 'package:flutter_banking_app/pages/admin/users/create_users.dart';
 import 'package:flutter_banking_app/pages/admin/users/users_list.dart';
+import 'package:flutter_banking_app/pages/admin/wire_transfer/wire_list.dart';
 import 'package:flutter_banking_app/pages/admin/wire_transfer/wire_transfer.dart';
 import 'package:flutter_banking_app/pages/auth/forgot_password.dart';
 import 'package:flutter_banking_app/pages/auth/sign_in.dart';
@@ -45,7 +46,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       home: SplashScreenView(
-        navigateRoute: UsersList(),
+        navigateRoute: const WireTransferList(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,
