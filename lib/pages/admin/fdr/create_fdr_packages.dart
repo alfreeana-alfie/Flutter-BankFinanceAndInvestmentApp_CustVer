@@ -44,30 +44,30 @@ class _CreateFdrPackageState extends State<CreateFdrPackage> {
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.createCurrencyTxt, implyLeading: true, context: context),
-        bottomSheet: Container(
-          color: Styles.primaryColor,
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-          child: elevatedButton(
-            color: Styles.secondaryColor,
-            context: context,
-            callback: () {
-              Map<String, String> body = {
-                Field.name: name!,
-                Field.minimumAmount: minAmt ?? Field.emptyString,
-                Field.maximumAmount: maxAmt ?? Field.emptyString,
-                Field.interestRate: interestRate ?? Field.emptyString,
-                Field.duration: duration ?? Field.emptyString,
-                Field.durationType: durationType ?? Field.emptyString,
-                Field.description: description ?? Field.emptyString,
-                Field.status: Status.pending.toString(),
-              };
+            title: Str.createFdrPlanTxt, implyLeading: true, context: context),
+        // bottomSheet: Container(
+        //   color: Styles.primaryColor,
+        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+        //   child: elevatedButton(
+        //     color: Styles.secondaryColor,
+        //     context: context,
+        //     callback: () {
+        //       Map<String, String> body = {
+        //         Field.name: name!,
+        //         Field.minimumAmount: minAmt ?? Field.emptyString,
+        //         Field.maximumAmount: maxAmt ?? Field.emptyString,
+        //         Field.interestRate: interestRate ?? Field.emptyString,
+        //         Field.duration: duration ?? Field.emptyString,
+        //         Field.durationType: durationType ?? Field.emptyString,
+        //         Field.description: description ?? Field.emptyString,
+        //         Field.status: Status.pending.toString(),
+        //       };
 
-              OtherBankMethods.add(context, body);
-            },
-            text: Str.createCurrencyTxt.toUpperCase(),
-          ),
-        ),
+        //       OtherBankMethods.add(context, body);
+        //     },
+        //     text: Str.createCurrencyTxt.toUpperCase(),
+        //   ),
+        // ),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -223,6 +223,35 @@ class _CreateFdrPackageState extends State<CreateFdrPackage> {
                               borderSide: BorderSide.none,
                               gapPadding: 0.0,
                             ),
+                          ),
+                        ),
+                        Container(
+                          // color: Styles.primaryColor,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 40),
+                          child: elevatedButton(
+                            color: Styles.secondaryColor,
+                            context: context,
+                            callback: () {
+                              Map<String, String> body = {
+                                Field.name: name!,
+                                Field.minimumAmount:
+                                    minAmt ?? Field.emptyString,
+                                Field.maximumAmount:
+                                    maxAmt ?? Field.emptyString,
+                                Field.interestRate:
+                                    interestRate ?? Field.emptyString,
+                                Field.duration: duration ?? Field.emptyString,
+                                Field.durationType:
+                                    durationType ?? Field.emptyString,
+                                Field.description:
+                                    description ?? Field.emptyString,
+                                Field.status: Status.pending.toString(),
+                              };
+
+                              OtherBankMethods.add(context, body);
+                            },
+                            text: Str.createFdrPlanTxt.toUpperCase(),
                           ),
                         ),
                       ],

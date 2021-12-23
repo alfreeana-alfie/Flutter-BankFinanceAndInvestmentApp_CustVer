@@ -66,7 +66,7 @@ class _FdrPlanListState extends State<FdrPlanList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: addAppBar(
-        title: Str.currencyListTxt,
+        title: Str.fdrPackagesTxt,
         implyLeading: true,
         context: context,
         hasAction: true,

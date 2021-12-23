@@ -202,6 +202,7 @@ class Str {
   static String transactionDetailsTxt = 'Transaction Detail(s)';
   static String createDepositTxt = 'Create Deposit';
   static String createLoanProductTxt = 'Create Loan Product';
+  static String createFdrPlanTxt = 'Create Plan';
   static String userListTxt = 'User List';
 }
 
