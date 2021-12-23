@@ -67,8 +67,8 @@ void signOut(BuildContext context) async {
   });
 
   if (response.statusCode == Status.created) {
-    var jsonBody = MessageAPI.fromJSON(jsonDecode(response.body));
-    String? message = jsonBody.message;
+    // var jsonBody = MessageAPI.fromJSON(jsonDecode(response.body));
+    // String? message = jsonBody.message;
 
     // print(message);
     sharedPref.remove(Pref.accessToken);

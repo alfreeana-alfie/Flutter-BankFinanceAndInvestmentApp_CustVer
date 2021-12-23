@@ -1,10 +1,8 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
-import 'package:flutter_banking_app/utils/values.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_banking_app/utils/api.dart';
 
@@ -37,11 +35,11 @@ class FixedDepositMethods {
         await http.get(API.listOfFixedDeposit, headers: headers);
 
     if (response.statusCode == Status.ok) {
-      var jsonBody = jsonDecode(response.body);
+      // var jsonBody = jsonDecode(response.body);
 
-      for (var userData in jsonBody[Field.data]) {
-        // print(userData);
-      }
+      // for (var userData in jsonBody[Field.data]) {
+      //   // print(userData);
+      // }
     } else {
       // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
@@ -54,11 +52,11 @@ class FixedDepositMethods {
     final response = await http.get(viewSingleUser, headers: headers);
 
     if (response.statusCode == Status.ok) {
-      var jsonBody = jsonDecode(response.body);
+      // var jsonBody = jsonDecode(response.body);
 
-      for (var userData in jsonBody[Field.data]) {
-        // print(userData);
-      }
+      // for (var userData in jsonBody[Field.data]) {
+      //   // print(userData);
+      // }
     } else {
       // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);

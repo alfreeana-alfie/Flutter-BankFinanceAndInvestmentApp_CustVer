@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_banking_app/methods/auth_methods.dart';
 import 'package:flutter_banking_app/pages/auth/sign_in.dart';
 import 'package:flutter_banking_app/pages/member/exchange_money/add_exchange_money.dart';
 import 'package:flutter_banking_app/pages/member/loans/loan_list.dart';
