@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_banking_app/methods/admin/branch_methods.dart';
 import 'package:flutter_banking_app/methods/admin/other_bank_methods.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
@@ -39,26 +40,26 @@ class _CreateBranchState extends State<CreateBranch> {
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
             title: Str.createCurrencyTxt, implyLeading: true, context: context),
-        bottomSheet: Container(
-          color: Styles.primaryColor,
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-          child: elevatedButton(
-            color: Styles.secondaryColor,
-            context: context,
-            callback: () {
-              Map<String, String> body = {
-                Field.name: name!,
-                Field.contactEmail: contactEmail ?? Field.emptyString,
-                Field.contactPhone: contactPhone ?? Field.emptyString,
-                Field.address: address ?? Field.emptyString,
-                Field.descriptions: descriptions ?? Field.emptyString
-              };
+        // bottomSheet: Container(
+        //   color: Styles.primaryColor,
+        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+        //   child: elevatedButton(
+        //     color: Styles.secondaryColor,
+        //     context: context,
+        //     callback: () {
+        //       Map<String, String> body = {
+        //         Field.name: name!,
+        //         Field.contactEmail: contactEmail ?? Field.emptyString,
+        //         Field.contactPhone: contactPhone ?? Field.emptyString,
+        //         Field.address: address ?? Field.emptyString,
+        //         Field.descriptions: descriptions ?? Field.emptyString
+        //       };
 
-              OtherBankMethods.add(context, body);
-            },
-            text: Str.createCurrencyTxt.toUpperCase(),
-          ),
-        ),
+        //       OtherBankMethods.add(context, body);
+        //     },
+        //     text: Str.createCurrencyTxt.toUpperCase(),
+        //   ),
+        // ),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -174,6 +175,30 @@ class _CreateBranchState extends State<CreateBranch> {
                               borderSide: BorderSide.none,
                               gapPadding: 0.0,
                             ),
+                          ),
+                        ),
+                        Container(
+                          // color: Styles.primaryColor,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 30),
+                          child: elevatedButton(
+                            color: Styles.secondaryColor,
+                            context: context,
+                            callback: () {
+                              Map<String, String> body = {
+                                Field.name: name!,
+                                Field.contactEmail:
+                                    contactEmail ?? Field.emptyString,
+                                Field.contactPhone:
+                                    contactPhone ?? Field.emptyString,
+                                Field.address: address ?? Field.emptyString,
+                                Field.descriptions:
+                                    descriptions ?? Field.emptyString
+                              };
+
+                              BranchMethods.add(context, body);
+                            },
+                            text: Str.createBranchTxt.toUpperCase(),
                           ),
                         ),
                       ],

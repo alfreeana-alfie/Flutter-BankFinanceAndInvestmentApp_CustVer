@@ -1,17 +1,14 @@
 import 'dart:convert';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_banking_app/methods/admin/branch_methods.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/branch.dart';
-import 'package:flutter_banking_app/models/currency.dart';
 import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/app_bar_add.dart';
 import 'package:flutter_banking_app/widgets/card_branch.dart';
-import 'package:flutter_banking_app/widgets/card_currency.dart';
 import 'package:http/http.dart' as http;
 
 class BranchList extends StatefulWidget {
@@ -69,7 +66,7 @@ class _BranchListState extends State<BranchList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: addAppBar(
-        title: Str.currencyListTxt,
+        title: Str.branchTxt,
         implyLeading: true,
         context: context,
         hasAction: true,

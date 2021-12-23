@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter_banking_app/models/branch.dart';
 import 'package:flutter_banking_app/models/deposit.dart';
 import 'package:flutter_banking_app/pages/admin/branches/branch_list.dart';
 import 'package:flutter_banking_app/pages/admin/branches/create_branch.dart';
@@ -48,7 +49,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       home: SplashScreenView(
-        navigateRoute: const FdrPlanList(),
+        navigateRoute: const OtherBankList(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,

@@ -47,32 +47,32 @@ class _CreateOtherBankState extends State<CreateOtherBank> {
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
             title: Str.createCurrencyTxt, implyLeading: true, context: context),
-        bottomSheet: Container(
-          color: Styles.primaryColor,
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-          child: elevatedButton(
-            color: Styles.secondaryColor,
-            context: context,
-            callback: () {
-              Map<String, String> body = {
-                Field.name: name!,
-                Field.swiftCode: swiftCode ?? Field.emptyAmount,
-                Field.bankCountry: bankCountry ?? Field.emptyString,
-                Field.bankCurrency: bankCurrency ?? Field.emptyAmount,
-                Field.minTransferAmt: minTransferAmt ?? Field.emptyAmount,
-                Field.maxTransferAmt: maxTransferAmt ?? Field.emptyAmount,
-                Field.fixedCharge: fixedCharge ?? Field.emptyAmount,
-                Field.chargeInPercentage:
-                    chargeInPercentage ?? Field.emptyAmount,
-                Field.descriptions: descriptions ?? Field.emptyString,
-                Field.status: Status.pending.toString()
-              };
+        // bottomSheet: Container(
+        //   color: Styles.primaryColor,
+        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+        //   child: elevatedButton(
+        //     color: Styles.secondaryColor,
+        //     context: context,
+        //     callback: () {
+        //       Map<String, String> body = {
+        //         Field.name: name!,
+        //         Field.swiftCode: swiftCode ?? Field.emptyAmount,
+        //         Field.bankCountry: bankCountry ?? Field.emptyString,
+        //         Field.bankCurrency: bankCurrency ?? Field.emptyAmount,
+        //         Field.minTransferAmt: minTransferAmt ?? Field.emptyAmount,
+        //         Field.maxTransferAmt: maxTransferAmt ?? Field.emptyAmount,
+        //         Field.fixedCharge: fixedCharge ?? Field.emptyAmount,
+        //         Field.chargeInPercentage:
+        //             chargeInPercentage ?? Field.emptyAmount,
+        //         Field.descriptions: descriptions ?? Field.emptyString,
+        //         Field.status: Status.pending.toString()
+        //       };
 
-              OtherBankMethods.add(context, body);
-            },
-            text: Str.createCurrencyTxt.toUpperCase(),
-          ),
-        ),
+        //       OtherBankMethods.add(context, body);
+        //     },
+        //     text: Str.createCurrencyTxt.toUpperCase(),
+        //   ),
+        // ),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -268,6 +268,39 @@ class _CreateOtherBankState extends State<CreateOtherBank> {
                               borderSide: BorderSide.none,
                               gapPadding: 0.0,
                             ),
+                          ),
+                        ),
+                        Container(
+                          // color: Styles.primaryColor,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 40),
+                          child: elevatedButton(
+                            color: Styles.secondaryColor,
+                            context: context,
+                            callback: () {
+                              Map<String, String> body = {
+                                Field.name: name!,
+                                Field.swiftCode: swiftCode ?? Field.emptyAmount,
+                                Field.bankCountry:
+                                    bankCountry ?? Field.emptyString,
+                                Field.bankCurrency:
+                                    bankCurrency ?? Field.emptyAmount,
+                                Field.minTransferAmt:
+                                    minTransferAmt ?? Field.emptyAmount,
+                                Field.maxTransferAmt:
+                                    maxTransferAmt ?? Field.emptyAmount,
+                                Field.fixedCharge:
+                                    fixedCharge ?? Field.emptyAmount,
+                                Field.chargeInPercentage:
+                                    chargeInPercentage ?? Field.emptyAmount,
+                                Field.descriptions:
+                                    descriptions ?? Field.emptyString,
+                                Field.status: Status.pending.toString()
+                              };
+
+                              OtherBankMethods.add(context, body);
+                            },
+                            text: Str.createCurrencyTxt.toUpperCase(),
                           ),
                         ),
                       ],

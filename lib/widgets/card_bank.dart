@@ -8,6 +8,7 @@ import 'package:flutter_banking_app/widgets/detail.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class CardBank extends StatelessWidget {
   const CardBank({Key? key, required this.bank}) : super(key: key);
@@ -120,6 +121,11 @@ class CardBank extends StatelessWidget {
   }
 
   buildExpanded1(BuildContext context) {
+    
+    DateTime tempDate = DateTime.parse(bank.createdAt ?? '-');
+    String createdAt = DateFormat('yyyy-MM-dd hh:mm:ss').format(tempDate);
+
+
     return Container(
       color: Styles.accentColor,
       padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
@@ -130,14 +136,14 @@ class CardBank extends StatelessWidget {
             DetailRow(labelTitle: Str.nameTxt, labelDetails: bank.name ?? Field.emptyString),
             DetailRow(labelTitle: Str.swiftCodeTxt, labelDetails: bank.swiftCode ?? Field.emptyString),
             DetailRow(labelTitle: Str.bankCountryTxt, labelDetails: bank.bankCountry ?? Field.emptyString),
-            DetailRow(labelTitle: Str.bankCurrencyTxt, labelDetails: bank.bankCurrency ?? Field.emptyString),
+            DetailRow(labelTitle: Str.bankCurrencyTxt, labelDetails: bank.bankCurrency.toString()),
             DetailRow(labelTitle: Str.minTransferAmtTxt, labelDetails: bank.minTransferAmt ?? Field.emptyString),
             DetailRow(labelTitle: Str.maxTransferAmtTxt, labelDetails: bank.maxTransferAmt ?? Field.emptyString),
             DetailRow(labelTitle: Str.fixedChargeTxt, labelDetails: bank.fixedCharge ?? Field.emptyString),
             DetailRow(labelTitle: Str.chargeInPercentageTxt, labelDetails: bank.chargeInPercentage ?? Field.emptyString),
             DetailRow(labelTitle: Str.descriptionsTxt, labelDetails: bank.descriptions ?? Field.emptyString),
-            DetailRow(labelTitle: Str.statusTxt, labelDetails: bank.status ?? Field.emptyString),
-            DetailRow(labelTitle: Str.createdTxt, labelDetails: bank.createdAt ?? Field.emptyString),
+            DetailRow(labelTitle: Str.statusTxt, labelDetails: bank.status.toString()),
+            DetailRow(labelTitle: Str.createdTxt, labelDetails: createdAt),
             _buildButtonRow(context),
           ],
         ),

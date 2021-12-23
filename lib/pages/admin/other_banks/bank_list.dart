@@ -66,7 +66,7 @@ class _OtherBankListState extends State<OtherBankList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: addAppBar(
-        title: Str.currencyListTxt,
+        title: Str.otherBankTxt,
         implyLeading: true,
         context: context,
         hasAction: true,
