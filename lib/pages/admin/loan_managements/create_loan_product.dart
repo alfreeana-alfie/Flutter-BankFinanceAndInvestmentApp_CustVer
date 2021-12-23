@@ -46,7 +46,7 @@ class _CreateLoanProductState extends State<CreateLoanProduct> {
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.createCurrencyTxt, implyLeading: true, context: context),
+            title: Str.createLoanProductTxt, implyLeading: true, context: context),
         // bottomSheet: Container(
         //   color: Styles.primaryColor,
         //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),

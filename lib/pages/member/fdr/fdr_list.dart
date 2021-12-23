@@ -16,14 +16,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
-class FdrHistory extends StatefulWidget {
-  const FdrHistory({Key? key}) : super(key: key);
+class MFdrList extends StatefulWidget {
+  const MFdrList({Key? key}) : super(key: key);
 
   @override
-  _FdrHistoryState createState() => _FdrHistoryState();
+  _MFdrListState createState() => _MFdrListState();
 }
 
-class _FdrHistoryState extends State<FdrHistory> {
+class _MFdrListState extends State<MFdrList> {
   SharedPref sharedPref = SharedPref();
   User userLoad = User();
   late Map<String, dynamic> requestMap;
@@ -78,7 +78,7 @@ class _FdrHistoryState extends State<FdrHistory> {
           implyLeading: true,
           context: context,
           hasAction: true,
-          path: RouteSTR.applyNewFDR,
+          path: RouteSTR.addFdrM,
         ),
         // drawer: SideDrawer(),
         backgroundColor: Styles.primaryColor,

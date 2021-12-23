@@ -15,7 +15,7 @@ List shortcutList = [
   {
     'color': const Color(0xFF026EF4),
     'icon': IconlyBold.Download,
-    'route': const PaymentRequestList(),
+    'route': const MPaymentRequestList(),
   },
   {
     'color': const Color(0xFF2BB33A),
@@ -25,7 +25,7 @@ List shortcutList = [
   {
     'color': const Color(0xFFAF52C1),
     'icon': Icons.money,
-    'route': const LoanList(),
+    'route': const MLoanList(),
   },
 ];
 

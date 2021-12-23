@@ -15,12 +15,22 @@ import 'package:flutter_banking_app/pages/admin/other_banks/bank_list.dart';
 import 'package:flutter_banking_app/pages/admin/other_banks/create_bank.dart';
 import 'package:flutter_banking_app/pages/admin/users/create_users.dart';
 import 'package:flutter_banking_app/pages/admin/users/users_list.dart';
+import 'package:flutter_banking_app/pages/admin/wire_transfer/wire_list.dart';
 import 'package:flutter_banking_app/pages/admin/wire_transfer/wire_transfer.dart';
 import 'package:flutter_banking_app/pages/auth/forgot_password.dart';
 import 'package:flutter_banking_app/pages/auth/sign_in.dart';
 import 'package:flutter_banking_app/pages/auth/sign_up.dart';
 import 'package:flutter_banking_app/pages/coming_soon.dart';
 import 'package:flutter_banking_app/pages/coming_soon_menu.dart';
+import 'package:flutter_banking_app/pages/member/exchange_money/add_exchange_money.dart';
+import 'package:flutter_banking_app/pages/member/fdr/add_fdr.dart';
+import 'package:flutter_banking_app/pages/member/fdr/fdr_list.dart';
+import 'package:flutter_banking_app/pages/member/loans/add_loan.dart';
+import 'package:flutter_banking_app/pages/member/loans/loan_list.dart';
+import 'package:flutter_banking_app/pages/member/payment_request/add_payment_request.dart';
+import 'package:flutter_banking_app/pages/member/payment_request/payment_request_list.dart';
+import 'package:flutter_banking_app/pages/member/send_money/add_send_money.dart';
+import 'package:flutter_banking_app/pages/member/wire_transfer/wire_transfer.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/values.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
@@ -63,34 +73,34 @@ Future<void> main() async {
         backgroundColor: Styles.primaryColor,
       ),
       routes: {
-        RouteSTR.comingSoon:      (context) => const ComingSoon(),
-        RouteSTR.comingSoonMenu:  (context) => const ComingSoonMenu(),
+        RouteSTR.comingSoon:            (context) => const ComingSoon(),
+        RouteSTR.comingSoonMenu:        (context) => const ComingSoonMenu(),
         // AUTH - MEMBER & ADMIN
-        RouteSTR.forgotPassword:  (context) => const ForgotPasswordPage(),
-        RouteSTR.signUp:          (context) => const SignUpPage(),
-        RouteSTR.signIn:          (context) => const SignInPage(),
+        RouteSTR.forgotPassword:        (context) => const ForgotPasswordPage(),
+        RouteSTR.signUp:                (context) => const SignUpPage(),
+        RouteSTR.signIn:                (context) => const SignInPage(),
 
         // MEMBER ROUTE(S)
-        RouteSTR.dashboardMember: (context) => const BottomNav(),
-        RouteSTR.bottomNav:       (context) => const BottomNav(),
+        RouteSTR.dashboardMember:       (context) => const BottomNav(),
+        RouteSTR.bottomNav:             (context) => const BottomNav(),
         
-        // RouteSTR.allRequestM:      (context) => const MPaymentRequestList(),
-        // RouteSTR.newRequestM:      (context) => const MCreatePaymentRequest(),
+        RouteSTR.paymentRequestM:       (context) => const MPaymentRequestList(),
+        RouteSTR.addPaymentRequestM:    (context) => const MCreatePaymentRequest(),
 
-        // RouteSTR.sendMoneyM:           (context) => const MCreateSendMoney(),
+        RouteSTR.sendMoneyM:            (context) => const MCreateSendMoney(),
         // RouteSTR.sendMoneyListM:       (context) => const MSendMoneyList(),
         
-        // RouteSTR.exchangeMoneyM:       (context) => const MCreateExchangeMoney(),
+        RouteSTR.exchangeMoneyM:        (context) => const MCreateExchangeMoney(),
         // RouteSTR.exchangeMoneyListM: (context) => const MExchangeMoneyList(),
 
-        // RouteSTR.wireTransferM:     (context) => const MCreateWireTransfer(),
+        RouteSTR.wireTransferM:         (context) => const MCreateWireTransfer(),
         // RouteSTR.wireTransferListM: (context) => const MWireTransferList(),
 
-        // RouteSTR.applyNewLoan:      (context) => const MCreateLoan(),
-        // RouteSTR.loanListM:         (context) => const MLoanList(),
+        RouteSTR.addLoanM:              (context) => const MCreateLoan(),
+        RouteSTR.loanListM:             (context) => const MLoanList(),
 
-        // RouteSTR.applyNewFDR:       (context) => const MCreateFDR(),
-        // RouteSTR.fdrListM:          (context) => const MFdrList(),
+        RouteSTR.addFdrM:               (context) => const MCreateFDR(),
+        RouteSTR.fdrListM:              (context) => const MFdrList(),
 
         // ADMIN ROUTE(S)
         RouteSTR.dashboardAdmin:      (context) => const AdminDashboard(),
@@ -101,7 +111,7 @@ Future<void> main() async {
         RouteSTR.usersList:           (context) => const UsersList(),
         RouteSTR.createUsers:         (context) => const CreateUsers(),
 
-        RouteSTR.wireTransferList:    (context) => const UsersList(),
+        RouteSTR.wireTransferList:    (context) => const WireTransferList(),
         RouteSTR.createWireTransfer:  (context) => const CreateWireTransfer(),
 
         RouteSTR.loanProductList:     (context) => const LoanProductList(),

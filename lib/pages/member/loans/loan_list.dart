@@ -14,14 +14,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
-class LoanList extends StatefulWidget {
-  const LoanList({Key? key}) : super(key: key);
+class MLoanList extends StatefulWidget {
+  const MLoanList({Key? key}) : super(key: key);
 
   @override
-  _MyLoanState createState() => _MyLoanState();
+  _MLoanListState createState() => _MLoanListState();
 }
 
-class _MyLoanState extends State<LoanList> {
+class _MLoanListState extends State<MLoanList> {
   SharedPref sharedPref = SharedPref();
   User userLoad = User();
   late Map<String, dynamic> requestMap;
@@ -76,7 +76,7 @@ class _MyLoanState extends State<LoanList> {
             implyLeading: 
             true, context: context,
             hasAction: true,
-            path: RouteSTR.applyNewLoan,
+            path: RouteSTR.addLoanM,
         ),
         // drawer: SideDrawer(),
         backgroundColor: Styles.primaryColor,

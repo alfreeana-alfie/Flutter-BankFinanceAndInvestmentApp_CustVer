@@ -241,18 +241,27 @@ class RouteSTR {
   static String signUp = '/sign-up';
 
   static String bottomNav = '/bottom_nav';
-  static String newRequest = '/new-request';
-  static String applyNewLoan = '/apply-new-loan';
-  static String applyNewFDR = '/apply-new-fdr';
+  // static String newRequest = '/new-request';
+  static String addLoanM = '/apply-new-loan';
+  static String loanListM = '/loan-list';
+
+  static String addFdrM = '/apply-new-fdr';
+  static String fdrListM = '/fdr-list';
 
   static String dashboardMember = '/dashboard-member';
   static String dashboardAdmin = '/dashboard-admin';
 
-  static String sendMoney = '/send-money';
-  static String exchangeMoney = '/exchange-money';
-  static String wireTransfer = '/wire-transfer';
+  static String sendMoneyM = '/send-money';
+  static String sendMoneyListM = '/send-money-list';
 
-  static String allRequest = '/all-request';
+  static String exchangeMoneyM = '/exchange-money';
+  static String exchangeMoneyListM = '/exchange-money-list';
+
+  static String wireTransferM = '/wire-transfer';
+  static String wireTransferListM = '/wire-transfer-list';
+
+  static String paymentRequestM = '/payment-request';
+  static String addPaymentRequestM = '/add-payment-request';
 
   // Admin Route(s)
   static String depositList = '/deposit-list-a';

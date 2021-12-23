@@ -11,14 +11,14 @@ import 'package:flutter_banking_app/widgets/app_bar_add.dart';
 import 'package:flutter_banking_app/widgets/card_requests.dart';
 import 'package:http/http.dart' as http;
 
-class PaymentRequestList extends StatefulWidget {
-  const PaymentRequestList({Key? key}) : super(key: key);
+class MPaymentRequestList extends StatefulWidget {
+  const MPaymentRequestList({Key? key}) : super(key: key);
 
   @override
-  _AllRequestState createState() => _AllRequestState();
+  _MPaymentRequestListtState createState() => _MPaymentRequestListtState();
 }
 
-class _AllRequestState extends State<PaymentRequestList> {
+class _MPaymentRequestListtState extends State<MPaymentRequestList> {
   SharedPref sharedPref = SharedPref();
   User userLoad = User();
   late Map<String, dynamic> requestMap;
@@ -73,7 +73,8 @@ class _AllRequestState extends State<PaymentRequestList> {
           implyLeading: true,
           context: context,
           hasAction: true,
-          path: RouteSTR.newRequest),
+          path: RouteSTR.addPaymentRequestM
+        ),
       // drawer: SideDrawer(),
       backgroundColor: Styles.primaryColor,
       body: ExpandableTheme(
