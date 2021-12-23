@@ -32,8 +32,8 @@ class CustomToast {
       text,
       backgroundColor: color,
       position: ToastPosition.bottom,
-      textPadding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
-      radius: 40,
+      textPadding: const EdgeInsets.fromLTRB(60, 10, 60, 10),
+      radius: 60,
     );
   }
 }

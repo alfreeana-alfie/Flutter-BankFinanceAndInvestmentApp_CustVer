@@ -16,10 +16,10 @@ class LoanRequestMethods {
     );
 
     if (response.statusCode == Status.created) {
-      print(Status.successTxt);
+      // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
     } else {
-      print(Status.failedTxt);
+      // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
@@ -31,10 +31,10 @@ class LoanRequestMethods {
       var jsonBody = jsonDecode(response.body);
 
       for (var userData in jsonBody[Field.data]) {
-        print(userData);
+        // print(userData);
       }
     } else {
-      print(Status.failedTxt);
+      // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
@@ -48,10 +48,10 @@ class LoanRequestMethods {
       var jsonBody = jsonDecode(response.body);
 
       for (var userData in jsonBody[Field.data]) {
-        print(userData);
+        // print(userData);
       }
     } else {
-      print(Status.failedTxt);
+      // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }

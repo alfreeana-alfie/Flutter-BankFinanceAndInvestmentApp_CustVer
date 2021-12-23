@@ -18,10 +18,10 @@ class ExchangeMoneyMethods {
     );
 
     if (response.statusCode == Status.created) {
-      print(Status.successTxt);
+      // print(Status.successTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     } else {
-      print(Status.failedTxt);
+      // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
@@ -34,9 +34,9 @@ class ExchangeMoneyMethods {
       var jsonBody = jsonDecode(response.body);
       var jsonData = Transaction.fromMap(jsonBody);
 
-      print(jsonData.amount);
+      // print(jsonData.amount);
     } else {
-      print(Status.failedTxt);
+      // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
@@ -50,10 +50,10 @@ class ExchangeMoneyMethods {
       var jsonBody = jsonDecode(response.body);
 
       for (var userData in jsonBody[Field.data]) {
-        print(userData);
+        // print(userData);
       }
     } else {
-      print(Status.failedTxt);
+      // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }

@@ -5,6 +5,7 @@ import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/models/token.dart';
 import 'package:flutter_banking_app/models/user.dart';
+import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:http/http.dart' as http;
 
 import 'config.dart';
@@ -26,7 +27,8 @@ void signIn(BuildContext context, Map<String, String> body) async {
 
     getUserDetails(context);
   } else {
-    print(AuthSTR.failedAuthTxt);
+    // print(AuthSTR.failedAuthTxt);
+    CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
   }
 }
 
@@ -50,7 +52,8 @@ void getUserDetails(BuildContext context) async {
       Navigator.pushNamed(context, RouteSTR.dashboardAdmin);
     }
   } else {
-    print(Status.failedTxt);
+    // print(Status.failedTxt);
+    CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
   }
 }
 
@@ -67,16 +70,18 @@ void signOut(BuildContext context) async {
     var jsonBody = MessageAPI.fromJSON(jsonDecode(response.body));
     String? message = jsonBody.message;
 
-    print(message);
+    // print(message);
     sharedPref.remove(Pref.accessToken);
     sharedPref.remove(Pref.userData);
 
     if (response.statusCode == Status.ok) {
       Navigator.pushNamed(context, RouteSTR.dashboardMember);
     } else {
-      print(Status.failedTxt);
+      // print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   } else {
-    print(Status.failedTxt);
+    // print(Status.failedTxt);
+    CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
   }
 }
