@@ -101,37 +101,37 @@ class _ApplyNewFDRState extends State<MCreateFDR> {
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.applyLoanTxt, implyLeading: true, context: context),
-        bottomSheet: Container(
-          color: Styles.primaryColor,
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-          child: elevatedButton(
-            color: Styles.secondaryColor,
-            context: context,
-            callback: () {
-              Map<String, String> body = {
-                'fdr_plan_Id': planFDR ?? Field.emptyString,
-                'user_Id': userLoad.id.toString(),
-                'currency_Id': currency  ?? Field.emptyString,
-                'deposit_amount': amount  ?? Field.emptyString,
-                'return_amount': amount  ?? Field.emptyString,
-                'attachment': file!.name,
-                'remarks': remarks ?? Field.emptyString,
-                'status': '1',
-                'approved_date': 'null',
-                'mature_date': 'null',
-                'transaction_Id': '1',
-                'approved_user_Id': '1',
-                'created_user_Id': userLoad.id.toString(),
-                'updated_user_Id': userLoad.id.toString(),
-                'branch_Id': '2',
-              };
+            title: Str.applyDepositTxt, implyLeading: true, context: context),
+        // bottomSheet: Container(
+        //   color: Styles.primaryColor,
+        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+        //   child: elevatedButton(
+        //     color: Styles.secondaryColor,
+        //     context: context,
+        //     callback: () {
+        //       Map<String, String> body = {
+        //         'fdr_plan_Id': planFDR ?? Field.emptyString,
+        //         'user_Id': userLoad.id.toString(),
+        //         'currency_Id': currency  ?? Field.emptyString,
+        //         'deposit_amount': amount  ?? Field.emptyString,
+        //         'return_amount': amount  ?? Field.emptyString,
+        //         'attachment': file!.name,
+        //         'remarks': remarks ?? Field.emptyString,
+        //         'status': '1',
+        //         'approved_date': 'null',
+        //         'mature_date': 'null',
+        //         'transaction_Id': '1',
+        //         'approved_user_Id': '1',
+        //         'created_user_Id': userLoad.id.toString(),
+        //         'updated_user_Id': userLoad.id.toString(),
+        //         'branch_Id': '2',
+        //       };
 
-              FixedDepositMethods.add(context, body, file!.name);
-            },
-            text: Str.applyLoanTxt.toUpperCase(),
-          ),
-        ),
+        //       FixedDepositMethods.add(context, body, file!.name);
+        //     },
+        //     text: Str.applyLoanTxt.toUpperCase(),
+        //   ),
+        // ),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -273,15 +273,50 @@ class _ApplyNewFDRState extends State<MCreateFDR> {
                                 onPressed: () async {
                                   pickFiles(fileType);
                                 },
-                                child: Text('Pick file'),
+                                child: Text(Str.browseTxt),
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 0.0,
+                                  primary: Styles.accentColor,
+                                  
+                                ),
                               ),
                             ),
-                            if (file != null) fileDetails(file!),
+                            // if (file != null) fileDetails(file!),
                           ],
                         ),
                       ],
                     ),
                   ),
+                  Container(
+          color: Styles.primaryColor,
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+          child: elevatedButton(
+            color: Styles.secondaryColor,
+            context: context,
+            callback: () {
+              Map<String, String> body = {
+                'fdr_plan_Id': planFDR ?? Field.emptyString,
+                'user_Id': userLoad.id.toString(),
+                'currency_Id': currency  ?? Field.emptyString,
+                'deposit_amount': amount  ?? Field.emptyString,
+                'return_amount': amount  ?? Field.emptyString,
+                'attachment': file!.name,
+                'remarks': remarks ?? Field.emptyString,
+                'status': '1',
+                'approved_date': 'null',
+                'mature_date': 'null',
+                'transaction_Id': '1',
+                'approved_user_Id': '1',
+                'created_user_Id': userLoad.id.toString(),
+                'updated_user_Id': userLoad.id.toString(),
+                'branch_Id': '2',
+              };
+
+              FixedDepositMethods.add(context, body, file!.name);
+            },
+            text: Str.applyDepositTxt.toUpperCase(),
+          ),
+        ),
                 ],
               ),
             ),

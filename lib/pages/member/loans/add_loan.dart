@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -23,6 +24,9 @@ class _ApplyNewLoanState extends State<MCreateLoan> {
   final ScrollController _scrollController = ScrollController();
 
   String? currency, currencyName, planFDR, planFDRName;
+  FilePickerResult? result;
+  PlatformFile? file;
+  String fileType = 'All';
 
   @override
   void initState() {
@@ -39,41 +43,40 @@ class _ApplyNewLoanState extends State<MCreateLoan> {
       backgroundColor: Styles.primaryColor,
       appBar: myAppBar(
           title: Str.applyLoanTxt, implyLeading: true, context: context),
-      bottomSheet: Container(
-        color: Styles.primaryColor,
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-        child: elevatedButton(
-          color: Styles.secondaryColor,
-          context: context,
-          callback: () {
-            Map<String, String> body = {
-              'loan_Id': '2',
-              'loan_product_Id': '1',
-              'borrower_Id': '1',
-              'first_payment_date': '2021-07-09',
-              'release_date': '2021-07-09',
-              'currency_Id': '3',
-              'applied_amount': '1',
-              'total_payable': '2',
-              'total_paid': '2',
-              'late_payment_penalties': '10',
-              'attachment':
-                  'loan_files/bQURCY5sVoNOCsGPX0VbXx69iNO7HD6yNZY6lLbk.png',
-              'description': 'test-description',
-              'remarks': '3',
-              'status': '1',
-              'approved_date': 'null',
-              'approved_user_Id': '2',
-              'created_user_Id': '1',
-              'branch_Id': '2',
-            };
+      // bottomSheet: Container(
+      //   color: Styles.primaryColor,
+      //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+      //   child: elevatedButton(
+      //     color: Styles.secondaryColor,
+      //     context: context,
+      //     callback: () {
+      //       Map<String, String> body = {
+      //         'loan_Id': '2',
+      //         'loan_product_Id': '1',
+      //         'borrower_Id': '1',
+      //         'first_payment_date': '2021-07-09',
+      //         'release_date': '2021-07-09',
+      //         'currency_Id': '3',
+      //         'applied_amount': '1',
+      //         'total_payable': '2',
+      //         'total_paid': '2',
+      //         'late_payment_penalties': '10',
+      //         'attachment':
+      //             'loan_files/bQURCY5sVoNOCsGPX0VbXx69iNO7HD6yNZY6lLbk.png',
+      //         'description': 'test-description',
+      //         'remarks': '3',
+      //         'status': '1',
+      //         'approved_date': 'null',
+      //         'approved_user_Id': '2',
+      //         'created_user_Id': '1',
+      //         'branch_Id': '2',
+      //       };
 
-            LoanRequestMethods.add(context, body);
-            
-          },
-          text: Str.applyLoanTxt.toUpperCase(),
-        ),
-      ),
+      //       LoanRequestMethods.add(context, body);
+      //     },
+      //     text: Str.applyLoanTxt.toUpperCase(),
+      //   ),
+      // ),
       body: ListView(
         padding: const EdgeInsets.all(15),
         children: [
@@ -244,13 +247,17 @@ class _ApplyNewLoanState extends State<MCreateLoan> {
                             ),
                           ),
                           Expanded(
-                            child: elevatedButton(
-                              color: Styles.accentColor,
-                              context: context,
-                              callback: () {},
-                              text: Str.browseTxt,
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                pickFiles(fileType);
+                              },
+                              child: Text(Str.browseTxt),
+                              style: ElevatedButton.styleFrom(
+                                elevation: 0.0,
+                                primary: Styles.accentColor,
+                              ),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ],
@@ -259,8 +266,75 @@ class _ApplyNewLoanState extends State<MCreateLoan> {
               ],
             ),
           ),
+          Container(
+            // color: Styles.primaryColor,
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+            child: elevatedButton(
+              color: Styles.secondaryColor,
+              context: context,
+              callback: () {
+                Map<String, String> body = {
+                  'loan_Id': '2',
+                  'loan_product_Id': '1',
+                  'borrower_Id': '1',
+                  'first_payment_date': '2021-07-09',
+                  'release_date': '2021-07-09',
+                  'currency_Id': '3',
+                  'applied_amount': '1',
+                  'total_payable': '2',
+                  'total_paid': '2',
+                  'late_payment_penalties': '10',
+                  'attachment':
+                      'loan_files/bQURCY5sVoNOCsGPX0VbXx69iNO7HD6yNZY6lLbk.png',
+                  'description': 'test-description',
+                  'remarks': '3',
+                  'status': '1',
+                  'approved_date': 'null',
+                  'approved_user_Id': '2',
+                  'created_user_Id': '1',
+                  'branch_Id': '2',
+                };
+
+                LoanRequestMethods.add(context, body);
+              },
+              text: Str.applyLoanTxt.toUpperCase(),
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  void pickFiles(String? filetype) async {
+    switch (filetype) {
+      case 'Image':
+        result = await FilePicker.platform.pickFiles(type: FileType.image);
+        if (result == null) return;
+        file = result!.files.first;
+        setState(() {});
+        break;
+      case 'Video':
+        result = await FilePicker.platform.pickFiles(type: FileType.video);
+        if (result == null) return;
+        file = result!.files.first;
+        setState(() {});
+        break;
+      case 'Audio':
+        result = await FilePicker.platform.pickFiles(type: FileType.audio);
+        if (result == null) return;
+        file = result!.files.first;
+        setState(() {});
+        break;
+      case 'All':
+        result = await FilePicker.platform.pickFiles();
+        if (result == null) return;
+        file = result!.files.first;
+        setState(() {});
+        break;
+      case 'MultipleFile':
+        result = await FilePicker.platform.pickFiles(allowMultiple: true);
+        if (result == null) return;
+        break;
+    }
   }
 }

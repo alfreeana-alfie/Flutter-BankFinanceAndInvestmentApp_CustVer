@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_banking_app/methods/admin/currency_methods.dart';
-import 'package:flutter_banking_app/methods/member/wire_transfer_methods.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -40,25 +39,25 @@ class _CreateCurrencyState extends State<CreateCurrency> {
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
             title: Str.createCurrencyTxt, implyLeading: true, context: context),
-        bottomSheet: Container(
-          color: Styles.primaryColor,
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-          child: elevatedButton(
-            color: Styles.secondaryColor,
-            context: context,
-            callback: () {
-              Map<String, String> body = {
-                Field.name: name!,
-                Field.exchangeRate: exchangeRate ?? Field.emptyAmount,
-                Field.baseCurrency: baseCurrency ?? Field.emptyAmount,
-                Field.status: Status.pending.toString()
-              };
-    
-              CurrencyMethods.add(context, body);
-            },
-            text: Str.createCurrencyTxt.toUpperCase(),
-          ),
-        ),
+        // bottomSheet: Container(
+        //   color: Styles.primaryColor,
+        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+        //   child: elevatedButton(
+        //     color: Styles.secondaryColor,
+        //     context: context,
+        //     callback: () {
+        //       Map<String, String> body = {
+        //         Field.name: name!,
+        //         Field.exchangeRate: exchangeRate ?? Field.emptyAmount,
+        //         Field.baseCurrency: baseCurrency ?? Field.emptyAmount,
+        //         Field.status: Status.pending.toString()
+        //       };
+
+        //       CurrencyMethods.add(context, body);
+        //     },
+        //     text: Str.createCurrencyTxt.toUpperCase(),
+        //   ),
+        // ),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -134,6 +133,28 @@ class _CreateCurrencyState extends State<CreateCurrency> {
                               borderSide: BorderSide.none,
                               gapPadding: 0.0,
                             ),
+                          ),
+                        ),
+                        Container(
+                          // color: Styles.primaryColor,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 40),
+                          child: elevatedButton(
+                            color: Styles.secondaryColor,
+                            context: context,
+                            callback: () {
+                              Map<String, String> body = {
+                                Field.name: name!,
+                                Field.exchangeRate:
+                                    exchangeRate ?? Field.emptyAmount,
+                                Field.baseCurrency:
+                                    baseCurrency ?? Field.emptyAmount,
+                                Field.status: Status.pending.toString()
+                              };
+
+                              CurrencyMethods.add(context, body);
+                            },
+                            text: Str.createCurrencyTxt.toUpperCase(),
                           ),
                         ),
                       ],

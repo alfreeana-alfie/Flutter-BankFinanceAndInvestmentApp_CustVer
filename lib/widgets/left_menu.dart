@@ -42,6 +42,15 @@ class SideDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.dashboard),
+            title: Text('Change to Member Panel',
+                style: GoogleFonts.nunitoSans(
+                    color: Styles.textColor.withOpacity(1))),
+            onTap: () => {
+              Navigator.pushReplacementNamed(context, RouteSTR.dashboardMember)
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.dashboard),
             title: Text(Str.dashboardTxt,
                 style: GoogleFonts.nunitoSans(
                     color: Styles.textColor.withOpacity(1))),

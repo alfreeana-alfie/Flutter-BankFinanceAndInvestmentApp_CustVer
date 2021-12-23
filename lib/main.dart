@@ -24,6 +24,9 @@ import 'package:flutter_banking_app/pages/auth/sign_in.dart';
 import 'package:flutter_banking_app/pages/auth/sign_up.dart';
 import 'package:flutter_banking_app/pages/coming_soon.dart';
 import 'package:flutter_banking_app/pages/coming_soon_menu.dart';
+import 'package:flutter_banking_app/pages/member/fdr/add_fdr.dart';
+import 'package:flutter_banking_app/pages/member/loans/add_loan.dart';
+import 'package:flutter_banking_app/pages/member/payment_request/add_payment_request.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/values.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
@@ -49,7 +52,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       home: SplashScreenView(
-        navigateRoute: const OtherBankList(),
+        navigateRoute: const MCreateFDR(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,
@@ -66,8 +69,8 @@ Future<void> main() async {
         backgroundColor: Styles.primaryColor,
       ),
       routes: {
-        RouteSTR.comingSoon: (context) => const ComingSoon(),
-        RouteSTR.comingSoonMenu: (context) => const ComingSoonMenu(),
+        RouteSTR.comingSoon:      (context) => const ComingSoon(),
+        RouteSTR.comingSoonMenu:  (context) => const ComingSoonMenu(),
         // AUTH - MEMBER & ADMIN
         RouteSTR.forgotPassword:  (context) => const ForgotPasswordPage(),
         RouteSTR.signUp:          (context) => const SignUpPage(),
@@ -80,10 +83,10 @@ Future<void> main() async {
         // RouteSTR.allRequestM:      (context) => const MPaymentRequestList(),
         // RouteSTR.newRequestM:      (context) => const MCreatePaymentRequest(),
 
-        // RouteSTR.sendMoneyM:          (context) => const MCreateSendMoney(),
-        // RouteSTR.sendMoneyListM:      (context) => const MSendMoneyList(),
+        // RouteSTR.sendMoneyM:           (context) => const MCreateSendMoney(),
+        // RouteSTR.sendMoneyListM:       (context) => const MSendMoneyList(),
         
-        // RouteSTR.exchangeMoneyM:      (context) => const MCreateExchangeMoney(),
+        // RouteSTR.exchangeMoneyM:       (context) => const MCreateExchangeMoney(),
         // RouteSTR.exchangeMoneyListM: (context) => const MExchangeMoneyList(),
 
         // RouteSTR.wireTransferM:     (context) => const MCreateWireTransfer(),

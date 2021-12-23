@@ -55,7 +55,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Container(
       constraints: BoxConstraints(minWidth: 100, maxWidth: 400),
       decoration: BoxDecoration(
-        color: Styles.primaryColor,
+        color: Styles.whiteColor,
         borderRadius: BorderRadius.circular(20),
       ),
       margin: const EdgeInsets.all(15),
@@ -187,7 +187,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   vertical: Values.verticalValue),
               child: ElevatedButton(
                 onPressed: () {
-                  print(countryCode);
+                  // print(countryCode);
+                  Navigator.pushNamed(context, RouteSTR.dashboardAdmin);
                 },
                 child: Text(Str.createMyAccountTxt),
                 style: ElevatedButton.styleFrom(
@@ -201,7 +202,7 @@ class _SignUpPageState extends State<SignUpPage> {
               padding: const EdgeInsets.only(
                 left: Values.horizontalValue * 2,
                 right: Values.horizontalValue * 2,
-                top: 30, 
+                top: 30,
                 bottom: 30,
               ),
               child: Row(
@@ -223,7 +224,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     fontWeight: FontWeight.w400,
                     tapGestureRecognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        Navigator.pushNamed(context, '/sign_in');
+                        Navigator.pushNamed(context, RouteSTR.signIn);
                       },
                     margin: const EdgeInsets.symmetric(
                         horizontal: Values.horizontalValue, vertical: 5),

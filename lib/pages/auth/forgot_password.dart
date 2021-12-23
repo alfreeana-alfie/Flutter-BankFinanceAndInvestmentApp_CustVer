@@ -47,9 +47,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   _buildForm() {
     return Container(
-      constraints: BoxConstraints(minWidth: 100, maxWidth: 400),
+      constraints: const BoxConstraints(minWidth: 100, maxWidth: 400),
       decoration: BoxDecoration(
-        color: Styles.primaryColor,
+        color: Styles.whiteColor,
         borderRadius: BorderRadius.circular(20),
       ),
       margin: const EdgeInsets.all(15),
@@ -111,7 +111,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 fontWeight: FontWeight.w400,
                 tapGestureRecognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    Navigator.pushNamed(context, '/sign_in');
+                    Navigator.pushNamed(context, RouteSTR.signIn);
                   },
                 margin: const EdgeInsets.symmetric(
                     horizontal: Values.horizontalValue, vertical: 5),

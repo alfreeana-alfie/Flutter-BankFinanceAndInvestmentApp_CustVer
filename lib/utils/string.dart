@@ -205,6 +205,7 @@ class Str {
   static String createFdrPlanTxt = 'Create Plan';
   static String createBranchTxt = 'Create Branch';
   static String userListTxt = 'User List';
+  static String applyDepositTxt = 'Apply New Deposit';
 }
 
 class Status {

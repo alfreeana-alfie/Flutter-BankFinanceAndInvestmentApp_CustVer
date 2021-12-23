@@ -1,21 +1,13 @@
-import 'dart:convert';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/methods/auth_methods.dart';
-import 'package:flutter_banking_app/models/token.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
-import 'package:flutter_banking_app/widgets/bottom_nav.dart';
 import 'package:flutter_banking_app/widgets/clickable_text.dart';
 import 'package:flutter_banking_app/widgets/header_1.dart';
 import 'package:flutter_banking_app/widgets/text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -29,7 +21,7 @@ class _SignInPageState extends State<SignInPage> {
 
   String email = '';
   String password = '';
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,14 +108,15 @@ class _SignInPageState extends State<SignInPage> {
                   vertical: Values.verticalValue),
               child: ElevatedButton(
                 onPressed: () {
-                  Map<String, String> body = {
-                    'email': email,
-                    'password': password,
-                  };
+                  Navigator.pushNamed(context, RouteSTR.dashboardAdmin);
+                  // Map<String, String> body = {
+                  //   'email': email,
+                  //   'password': password,
+                  // };
 
-                  signIn(context, body);
+                  // signIn(context, body);
                 },
-                child: Text(Str.signInTxt),
+                child: Text(Str.signInTxt.toUpperCase()),
                 style: ElevatedButton.styleFrom(
                   primary: Styles.secondaryColor,
                   elevation: 0.0,
@@ -131,22 +124,22 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
             // Button Sign In
-            Container(
-              height: 50,
-              margin: const EdgeInsets.symmetric(
-                  horizontal: Values.horizontalValue * 2,
-                  vertical: Values.verticalValue),
-              child: ElevatedButton(
-                onPressed: () {
-                  // signOut();
-                },
-                child: Text(Str.signOutTxt),
-                style: ElevatedButton.styleFrom(
-                  primary: Styles.secondaryColor,
-                  elevation: 0.0,
-                ),
-              ),
-            ),
+            // Container(
+            //   height: 50,
+            //   margin: const EdgeInsets.symmetric(
+            //       horizontal: Values.horizontalValue * 2,
+            //       vertical: Values.verticalValue),
+            //   child: ElevatedButton(
+            //     onPressed: () {
+            //       // signOut();
+            //     },
+            //     child: Text(Str.signOutTxt),
+            //     style: ElevatedButton.styleFrom(
+            //       primary: Styles.secondaryColor,
+            //       elevation: 0.0,
+            //     ),
+            //   ),
+            // ),
             // Button Sign Up
             ClickableText(
               text: Str.createAccountTxt,
@@ -155,7 +148,7 @@ class _SignInPageState extends State<SignInPage> {
               fontWeight: FontWeight.w500,
               tapGestureRecognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  Navigator.pushNamed(context, '/sign_up');
+                  Navigator.pushNamed(context, RouteSTR.signUp);
                 },
               margin: const EdgeInsets.symmetric(
                   horizontal: Values.horizontalValue, vertical: 5),
@@ -171,7 +164,7 @@ class _SignInPageState extends State<SignInPage> {
                 fontWeight: FontWeight.w400,
                 tapGestureRecognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    Navigator.pushNamed(context, '/forgot_password');
+                    Navigator.pushNamed(context, RouteSTR.forgotPassword);
                   },
                 margin: const EdgeInsets.symmetric(
                     horizontal: Values.horizontalValue, vertical: 5),
@@ -187,4 +180,3 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 }
-

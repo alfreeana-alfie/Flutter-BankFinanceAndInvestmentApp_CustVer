@@ -12,16 +12,12 @@ import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/layouts.dart';
 import 'package:flutter_banking_app/utils/string.dart';
-import 'package:flutter_banking_app/generated/assets.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
-import 'package:flutter_banking_app/utils/values.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
 import 'package:flutter_banking_app/widgets/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/my_app_bar.dart';
-import 'package:flutter_banking_app/widgets/people_slider.dart';
 import 'package:gap/gap.dart';
-import 'dart:math' as math;
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
@@ -97,29 +93,29 @@ class _NewRequestState extends State<MCreatePaymentRequest> {
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
             title: Str.newRequestTxt, implyLeading: true, context: context),
-        bottomSheet: Container(
-          color: Styles.primaryColor,
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-          child: elevatedButton(
-            color: Styles.secondaryColor,
-            context: context,
-            callback: () {
-              Map<String, String> body = {
-                Field.currencyId: currency ?? Field.emptyString,
-                Field.amount: amount ?? Field.emptyAmount,
-                Field.status: '1',
-                Field.description: description ?? Field.emptyString,
-                Field.senderId: '3',
-                Field.receiverId: receiverId ?? Field.emptyString,
-                Field.transactionId: '1',
-                Field.branchId: '1'
-              };
-    
-              PaymentRequestMethods.add(context, body);
-            },
-            text: Str.newRequestTxt.toUpperCase(),
-          ),
-        ),
+        // bottomSheet: Container(
+        //   color: Styles.primaryColor,
+        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+        //   child: elevatedButton(
+        //     color: Styles.secondaryColor,
+        //     context: context,
+        //     callback: () {
+        //       Map<String, String> body = {
+        //         Field.currencyId: currency ?? Field.emptyString,
+        //         Field.amount: amount ?? Field.emptyAmount,
+        //         Field.status: '1',
+        //         Field.description: description ?? Field.emptyString,
+        //         Field.senderId: '3',
+        //         Field.receiverId: receiverId ?? Field.emptyString,
+        //         Field.transactionId: '1',
+        //         Field.branchId: '1'
+        //       };
+
+        //       PaymentRequestMethods.add(context, body);
+        //     },
+        //     text: Str.newRequestTxt.toUpperCase(),
+        //   ),
+        // ),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -141,7 +137,7 @@ class _NewRequestState extends State<MCreatePaymentRequest> {
                         // TextFormField(
                         //   // readOnly: true,
                         //   onChanged: (val) {
-    
+
                         //   },
                         //   style: Styles.subtitleStyle,
                         //   textInputAction: TextInputAction.done,
@@ -165,7 +161,8 @@ class _NewRequestState extends State<MCreatePaymentRequest> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                                padding: const EdgeInsets.fromLTRB(15, 0, 15, 8),
+                                padding:
+                                    const EdgeInsets.fromLTRB(15, 0, 15, 8),
                                 child: Text(Str.currencyTxt,
                                     style: Styles.subtitleStyle)),
                             const Gap(20.0),
@@ -235,7 +232,30 @@ class _NewRequestState extends State<MCreatePaymentRequest> {
                       ),
                     ),
                   ),
-                  // const Gap(10),
+                  Container(
+                    color: Styles.primaryColor,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 40),
+                    child: elevatedButton(
+                      color: Styles.secondaryColor,
+                      context: context,
+                      callback: () {
+                        Map<String, String> body = {
+                          Field.currencyId: currency ?? Field.emptyString,
+                          Field.amount: amount ?? Field.emptyAmount,
+                          Field.status: '1',
+                          Field.description: description ?? Field.emptyString,
+                          Field.senderId: '3',
+                          Field.receiverId: receiverId ?? Field.emptyString,
+                          Field.transactionId: '1',
+                          Field.branchId: '1'
+                        };
+
+                        PaymentRequestMethods.add(context, body);
+                      },
+                      text: Str.newRequestTxt.toUpperCase(),
+                    ),
+                  ),
                 ],
               ),
             ),

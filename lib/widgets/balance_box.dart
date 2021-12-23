@@ -11,7 +11,7 @@ class BalanceBox extends StatelessWidget {
     
     return FittedBox(
       child: SizedBox(
-        height: size.height * 0.12,
+        height: size.height * 0.17,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

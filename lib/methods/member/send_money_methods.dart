@@ -6,7 +6,6 @@ import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_banking_app/utils/api.dart';
-import 'package:oktoast/oktoast.dart';
 
 class SendMoneyMethods {
   static void add(BuildContext context, Map<String, String> body) async {
