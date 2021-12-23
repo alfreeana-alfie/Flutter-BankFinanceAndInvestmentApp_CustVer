@@ -10,6 +10,7 @@ import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/app_bar_add.dart';
 import 'package:flutter_banking_app/widgets/card_users.dart';
 import 'package:http/http.dart' as http;
+import 'package:oktoast/oktoast.dart';
 
 class UsersList extends StatefulWidget {
   const UsersList({Key? key}) : super(key: key);
@@ -64,28 +65,30 @@ class _UsersListState extends State<UsersList> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: addAppBar(
-        title: Str.userListTxt,
-        implyLeading: true,
-        context: context,
-        hasAction: true,
-        path: RouteSTR.createUsers,
-      ),
-      // drawer: SideDrawer(),
-      backgroundColor: Styles.primaryColor,
-      body: ExpandableTheme(
-        data: const ExpandableThemeData(
-          iconColor: Colors.blue,
-          useInkWell: true,
+    return OKToast(
+      child: Scaffold(
+        appBar: addAppBar(
+          title: Str.userListTxt,
+          implyLeading: true,
+          context: context,
+          hasAction: true,
+          path: RouteSTR.createUsers,
         ),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 10.0),
-          child: ListView(
-            physics: const BouncingScrollPhysics(),
-            children: [
-              for (Users user in userList) CardUser(users: user),
-            ],
+        // drawer: SideDrawer(),
+        backgroundColor: Styles.primaryColor,
+        body: ExpandableTheme(
+          data: const ExpandableThemeData(
+            iconColor: Colors.blue,
+            useInkWell: true,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: ListView(
+              physics: const BouncingScrollPhysics(),
+              children: [
+                for (Users user in userList) CardUser(users: user),
+              ],
+            ),
           ),
         ),
       ),

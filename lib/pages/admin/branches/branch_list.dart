@@ -10,6 +10,7 @@ import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/app_bar_add.dart';
 import 'package:flutter_banking_app/widgets/card_branch.dart';
 import 'package:http/http.dart' as http;
+import 'package:oktoast/oktoast.dart';
 
 class BranchList extends StatefulWidget {
   const BranchList({Key? key}) : super(key: key);
@@ -64,28 +65,30 @@ class _BranchListState extends State<BranchList> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: addAppBar(
-        title: Str.branchTxt,
-        implyLeading: true,
-        context: context,
-        hasAction: true,
-        path: RouteSTR.createBranch,
-      ),
-      // drawer: SideDrawer(),
-      backgroundColor: Styles.primaryColor,
-      body: ExpandableTheme(
-        data: const ExpandableThemeData(
-          iconColor: Colors.blue,
-          useInkWell: true,
+    return OKToast(
+      child: Scaffold(
+        appBar: addAppBar(
+          title: Str.branchTxt,
+          implyLeading: true,
+          context: context,
+          hasAction: true,
+          path: RouteSTR.createBranch,
         ),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 10.0),
-          child: ListView(
-            physics: const BouncingScrollPhysics(),
-            children: [
-              for (Branch branch in branchList) CardBranch(branch: branch),
-            ],
+        // drawer: SideDrawer(),
+        backgroundColor: Styles.primaryColor,
+        body: ExpandableTheme(
+          data: const ExpandableThemeData(
+            iconColor: Colors.blue,
+            useInkWell: true,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: ListView(
+              physics: const BouncingScrollPhysics(),
+              children: [
+                for (Branch branch in branchList) CardBranch(branch: branch),
+              ],
+            ),
           ),
         ),
       ),

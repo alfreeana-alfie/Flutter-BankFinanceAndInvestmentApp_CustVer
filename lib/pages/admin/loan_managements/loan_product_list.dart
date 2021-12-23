@@ -10,6 +10,7 @@ import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/app_bar_add.dart';
 import 'package:flutter_banking_app/widgets/card_loan_product.dart';
 import 'package:http/http.dart' as http;
+import 'package:oktoast/oktoast.dart';
 
 class LoanProductList extends StatefulWidget {
   const LoanProductList({Key? key}) : super(key: key);
@@ -64,28 +65,30 @@ class _LoanProductListState extends State<LoanProductList> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: addAppBar(
-        title: Str.loanProductTxt,
-        implyLeading: true,
-        context: context,
-        hasAction: true,
-        path: RouteSTR.createLoanProduct,
-      ),
-      // drawer: SideDrawer(),
-      backgroundColor: Styles.primaryColor,
-      body: ExpandableTheme(
-        data: const ExpandableThemeData(
-          iconColor: Colors.blue,
-          useInkWell: true,
+    return OKToast(
+      child: Scaffold(
+        appBar: addAppBar(
+          title: Str.loanProductTxt,
+          implyLeading: true,
+          context: context,
+          hasAction: true,
+          path: RouteSTR.createLoanProduct,
         ),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 10.0),
-          child: ListView(
-            physics: const BouncingScrollPhysics(),
-            children: [
-              for (LoanProduct product in productList) CardLoanProduct(product: product),
-            ],
+        // drawer: SideDrawer(),
+        backgroundColor: Styles.primaryColor,
+        body: ExpandableTheme(
+          data: const ExpandableThemeData(
+            iconColor: Colors.blue,
+            useInkWell: true,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: ListView(
+              physics: const BouncingScrollPhysics(),
+              children: [
+                for (LoanProduct product in productList) CardLoanProduct(product: product),
+              ],
+            ),
           ),
         ),
       ),
