@@ -9,7 +9,7 @@ const Map<String, String> headersMultiPart = {
 };
 
 String android = 'http://10.0.2.2:8000/api';
-String iod = 'http://127.0.0.1:8000/api/';
+String ios = 'http://127.0.0.1:8000/api/';
 
 // API SETUP(S)
 class API {
@@ -74,9 +74,8 @@ class API {
 
 class AdminAPI {
   // Deposit
-  static Uri listOfDeposit = Uri.parse('$android/create_deposit');
-  static Uri createDeposit =
-      Uri.parse('$android/list_of_deposit');
+  static Uri listOfDeposit = Uri.parse('$android/list_of_deposit');
+  static Uri createDeposit = Uri.parse('$android/create_deposit');
 
   // Users
   static Uri listOfUser = Uri.parse('$android/users');

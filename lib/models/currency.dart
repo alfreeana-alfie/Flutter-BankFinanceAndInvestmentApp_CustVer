@@ -5,11 +5,11 @@ class Currency {
   String? name, exchangeRate;
 
   Currency(
-      {required this.id,
-      required this.name,
-      required this.exchangeRate,
-      required this.baseCurrency,
-      required this.status});
+      {this.id,
+      this.name,
+      this.exchangeRate,
+      this.baseCurrency,
+      this.status});
 
   factory Currency.fromMap(Map<String, dynamic> map) {
     return Currency(

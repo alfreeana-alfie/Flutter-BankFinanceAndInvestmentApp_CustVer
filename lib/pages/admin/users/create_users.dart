@@ -48,7 +48,7 @@ class _CreateUsersState extends State<CreateUsers> {
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.createCurrencyTxt, implyLeading: true, context: context),
+            title: Str.createUserTxt, implyLeading: true, context: context),
         bottomSheet: Container(
           color: Styles.primaryColor,
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),

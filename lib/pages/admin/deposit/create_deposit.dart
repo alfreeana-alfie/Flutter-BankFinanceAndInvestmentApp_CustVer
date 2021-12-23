@@ -7,7 +7,6 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_banking_app/methods/admin/deposit_methods.dart';
 import 'package:flutter_banking_app/methods/config.dart';
-import 'package:flutter_banking_app/methods/member/send_money_methods.dart';
 import 'package:flutter_banking_app/models/customer.dart';
 import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/api.dart';
@@ -73,18 +72,18 @@ class _CreateDepositState extends State<CreateDeposit> {
     }
   }
 
-  loadSharedPrefs() async {
-    try {
-      User user = User.fromJSON(await sharedPref.read(Pref.userData));
-      setState(() {
-        userLoad = user;
+  // loadSharedPrefs() async {
+  //   try {
+  //     User user = User.fromJSON(await sharedPref.read(Pref.userData));
+  //     setState(() {
+  //       userLoad = user;
 
-        print(userLoad.id.toString());
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
+  //       print(userLoad.id.toString());
+  //     });
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   @override
   void initState() {
@@ -96,7 +95,7 @@ class _CreateDepositState extends State<CreateDeposit> {
     myFocusNode = FocusNode();
     // myFocusNode.dispose();
 
-    loadSharedPrefs();
+    // loadSharedPrefs();
     getList();
   }
 
@@ -110,43 +109,40 @@ class _CreateDepositState extends State<CreateDeposit> {
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.sendMoneyTxt, implyLeading: true, context: context),
-        bottomSheet: Container(
-          color: Styles.primaryColor,
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-          child: elevatedButton(
-            color: Styles.secondaryColor,
-            context: context,
-            callback: () {
-              Map<String, String> body = {
-                Field.userId: userLoad.id.toString(),
-                Field.currencyId: currency ?? '-',
-                Field.amount: amount ?? '0.00',
-                Field.fee: fee,
-                Field.drCr: drCr,
-                Field.type: type,
-                Field.method: method,
-                Field.status: status,
-                Field.note: note ?? '-',
-                Field.loanId: loanId,
-                Field.refId: refId,
-                Field.parentId: parentId,
-                Field.otherBankId: otherBankId,
-                Field.gatewayId: gatewayId,
-                Field.createdUserId: toUserId ?? '-',
-                Field.updatedUserId: updatedUserId,
-                Field.branchId: branchId,
-                Field.transactionsDetails: transactionsDetails
-              };
-    
-              DepositMethods.add(context, body);
-              // MakeDepositMethods.viewAll();
-              // MakeDepositMethods.viewOne('1');
-              // FixedDepositMethods.viewOne('1');
-            },
-            text: Str.sendMoneyTxt,
-          ),
-        ),
+            title: Str.createDepositTxt, implyLeading: true, context: context),
+        // bottomSheet: Container(
+        //   color: Styles.primaryColor,
+        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+        //   child: elevatedButton(
+        //     color: Styles.secondaryColor,
+        //     context: context,
+        //     callback: () {
+        //       Map<String, String> body = {
+        //         Field.userId: '3',
+        //         Field.currencyId: currency ?? '-',
+        //         Field.amount: amount ?? '0.00',
+        //         Field.fee: fee,
+        //         Field.drCr: drCr,
+        //         Field.type: type,
+        //         Field.method: method,
+        //         Field.status: status,
+        //         Field.note: note ?? '-',
+        //         Field.loanId: loanId,
+        //         Field.refId: refId,
+        //         Field.parentId: parentId,
+        //         Field.otherBankId: otherBankId,
+        //         Field.gatewayId: gatewayId,
+        //         Field.createdUserId: toUserId ?? '-',
+        //         Field.updatedUserId: updatedUserId,
+        //         Field.branchId: branchId,
+        //         Field.transactionsDetails: transactionsDetails
+        //       };
+
+        //       DepositMethods.add(context, body);
+        //     },
+        //     text: Str.sendMoneyTxt,
+        //   ),
+        // ),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -232,7 +228,7 @@ class _CreateDepositState extends State<CreateDeposit> {
             //     ),
             //   ],
             // ),
-            // const Gap(20),
+            const Gap(20),
             _body(size.height, theme),
             const Gap(10),
             Container(
@@ -284,13 +280,61 @@ class _CreateDepositState extends State<CreateDeposit> {
                       ],
                     ),
                   ),
+                  const Gap(20.0),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                    child: TextFormField(
+                      onChanged: (val) {},
+                      style: Styles.subtitleStyle,
+                      textInputAction: TextInputAction.done,
+                      keyboardType: TextInputType.text,
+                      maxLines: 1,
+                      decoration: InputDecoration(
+                        labelText: Str.noteTxt,
+                        labelStyle: Styles.subtitleStyle,
+                        hintText: Str.noteTxt,
+                        hintStyle: Styles.subtitleStyle03,
+                        border: const OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          gapPadding: 0.0,
+                        ),
+                      ),
+                    ),
+                  ),
                   Divider(color: Styles.primaryColor, thickness: 2),
-                  Container(
-                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: Text('Send Money Purpose',
-                          style:
-                              TextStyle(color: Colors.white.withOpacity(0.7)))),
                   const Gap(10),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+                    child: elevatedButton(
+                        color: Styles.secondaryColor,
+                        context: context,
+                        callback: () {
+                          Map<String, String> body = {
+                            Field.userId: '3',
+                            Field.currencyId: currency ?? '-',
+                            Field.amount: amount ?? '0.00',
+                            Field.fee: fee,
+                            Field.drCr: drCr,
+                            Field.type: type,
+                            Field.method: method,
+                            Field.status: status,
+                            Field.note: note ?? '-',
+                            Field.loanId: loanId,
+                            Field.refId: refId,
+                            Field.parentId: parentId,
+                            Field.otherBankId: otherBankId,
+                            Field.gatewayId: gatewayId,
+                            Field.createdUserId: toUserId ?? '-',
+                            Field.updatedUserId: updatedUserId,
+                            Field.branchId: branchId,
+                            Field.transactionsDetails: transactionsDetails
+                          };
+
+                          DepositMethods.add(context, body);
+                        },
+                        text: Str.createDepositTxt,
+                      ),
+                  ),
                 ],
               ),
             ),

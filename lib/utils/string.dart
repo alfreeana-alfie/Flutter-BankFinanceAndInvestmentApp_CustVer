@@ -194,6 +194,13 @@ class Str {
   static String allLanguageTxt = 'All Language';
   static String comingSoonTxt = 'Coming Soon!';
   static String systemSettingsTxt = 'System Settings';
+  static String typeTxt = 'Type';
+  static String loanTxt = 'Loan';
+  static String refTxt = 'Reference';
+  static String parentIdTxt = 'Parent ID';
+  static String gatewayTxt = 'Gateway';
+  static String transactionDetailsTxt = 'Transaction Detail(s)';
+  static String createDepositTxt = 'Create Deposit';
 }
 
 class Status {
