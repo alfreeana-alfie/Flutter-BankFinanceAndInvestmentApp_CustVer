@@ -14,12 +14,12 @@ class Branch {
 
   factory Branch.fromMap(Map<String, dynamic> map) {
     return Branch(
-      id: map[Field.id] as int,
-      name: map[Field.name] as String,
-      contactEmail: map[Field.contactEmail] as String,
-      contactPhone: map[Field.contactPhone] as String,
-      address: map[Field.address] as String,
-      descriptions: map[Field.descriptions] as String,
+      id: map[Field.id] as int?,
+      name: map[Field.name] as String?,
+      contactEmail: map[Field.contactEmail] as String?,
+      contactPhone: map[Field.contactPhone] as String?,
+      address: map[Field.address] as String?,
+      descriptions: map[Field.descriptions] as String?,
     );
   }
 }

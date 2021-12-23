@@ -1,8 +1,8 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class Currency {
-  int id, baseCurrency, status;
-  String name, exchangeRate;
+  int? id, baseCurrency, status;
+  String? name, exchangeRate;
 
   Currency(
       {required this.id,

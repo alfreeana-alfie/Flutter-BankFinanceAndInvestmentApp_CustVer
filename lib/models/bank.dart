@@ -30,18 +30,18 @@ class Bank {
 
   factory Bank.fromMap(Map<String, dynamic> map) {
     return Bank(
-      id: map[Field.id] as int,
-      name: map[Field.name] as String,
-      swiftCode: map[Field.swiftCode] as String,
-      bankCountry: map[Field.bankCountry] as String,
-      bankCurrency: map[Field.bankCurrency] as String,
-      minTransferAmt: map[Field.minTransferAmt] as String,
-      maxTransferAmt: map[Field.maxTransferAmt] as String,
-      fixedCharge: map[Field.fixedCharge] as String,
-      chargeInPercentage: map[Field.chargeInPercentage] as String,
-      descriptions: map[Field.descriptions] as String,
-      status: map[Field.status] as String,
-      createdAt: map[Field.createdAt] as String,
+      id: map[Field.id] as int?,
+      name: map[Field.name] as String?,
+      swiftCode: map[Field.swiftCode] as String?,
+      bankCountry: map[Field.bankCountry] as String?,
+      bankCurrency: map[Field.bankCurrency] as String?,
+      minTransferAmt: map[Field.minTransferAmt] as String?,
+      maxTransferAmt: map[Field.maxTransferAmt] as String?,
+      fixedCharge: map[Field.fixedCharge] as String?,
+      chargeInPercentage: map[Field.chargeInPercentage] as String?,
+      descriptions: map[Field.descriptions] as String?,
+      status: map[Field.status] as String?,
+      createdAt: map[Field.createdAt] as String?,
     );
   }
 }

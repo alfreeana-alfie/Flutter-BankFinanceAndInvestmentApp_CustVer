@@ -15,10 +15,10 @@ class BranchMethods {
     );
 
     if (response.statusCode == Status.created) {
-      print(Status.successTxt);
+      // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
     } else {
-      print(Status.failedTxt);
+      // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }

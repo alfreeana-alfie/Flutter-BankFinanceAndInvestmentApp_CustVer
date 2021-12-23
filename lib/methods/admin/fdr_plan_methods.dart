@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 import '../config.dart';
 
-class FdrPackageMethods {
+class FdrPlanMethods {
   static void add(BuildContext context, Map<String, String> body) async {
     final response = await http.post(
       AdminAPI.createFdrPackage,
@@ -15,10 +15,10 @@ class FdrPackageMethods {
     );
 
     if (response.statusCode == Status.created) {
-      print(Status.successTxt);
+      // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
     } else {
-      print(Status.failedTxt);
+      // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
