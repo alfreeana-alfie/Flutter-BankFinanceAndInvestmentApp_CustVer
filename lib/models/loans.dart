@@ -41,25 +41,22 @@ class Loan {
 
   factory Loan.fromMap(Map<String, dynamic> map) {
     return Loan(
-      loanId: map[Field.loanId] as String,
-      // loanProductId: map[Field.loanProductId] as String,
+      loanId: map[Field.loanId] as String?,
       borrowerId: map[Field.borrowerId] as int?,
-      firstPaymentDate: map[Field.firstPaymentDate] as String,
-      releaseDate: map[Field.releaseDate] as String,
-      // currencyId: map[Field.currencyId] as String,
-      appliedAmount: map[Field.appliedAmount] as String,
-      totalPayable: map[Field.totalPayable] as String,
-      totalPaid: map[Field.totalPaid] as String,
-      latePaymentPenalty: map[Field.latePaymentPenalty] as String,
-      attachment: map[Field.attachment] as String,
-      description: map[Field.description] as String,
-      remarks: map[Field.remarks] as String,
+      firstPaymentDate: map[Field.firstPaymentDate] as String?,
+      releaseDate: map[Field.releaseDate] as String?,
+      appliedAmount: map[Field.appliedAmount] as String?,
+      totalPayable: map[Field.totalPayable] as String?,
+      totalPaid: map[Field.totalPaid] as String?,
+      latePaymentPenalty: map[Field.latePaymentPenalty] as String?,
+      attachment: map[Field.attachment] as String?,
+      description: map[Field.description] as String?,
+      remarks: map[Field.remarks] as String?,
       status: map[Field.status] as int?,
-      // approvedDate: map[Field.approvedDate] as String,
       approvedUserId: map[Field.approvedUserId] as int?,
       createdUserId: map[Field.createdUserId] as int?,
       branchId: map[Field.branchId] as int?,
-      createdAt: map[Field.createdAt] as String,
+      createdAt: map[Field.createdAt] as String?,
     );
   }
 }

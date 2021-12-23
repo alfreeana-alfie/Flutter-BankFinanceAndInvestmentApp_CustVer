@@ -22,14 +22,14 @@ class PlanFDR {
 
   factory PlanFDR.fromMap(Map<String, dynamic> map) {
     return PlanFDR(
-      id: map[Field.id] as int,
-      name: map[Field.name] as String,
-      minimumAmount: map[Field.minimumAmount] as String,
-      maximumAmount: map[Field.maximumAmount] as String,
-      interestRate: map[Field.interestRate] as String,
-      duration: map[Field.duration] as int,
-      durationType: map[Field.durationType] as String,
-      status: map[Field.status] as int
+      id: map[Field.id] as int?,
+      name: map[Field.name] as String?,
+      minimumAmount: map[Field.minimumAmount] as String?,
+      maximumAmount: map[Field.maximumAmount] as String?,
+      interestRate: map[Field.interestRate] as String?,
+      duration: map[Field.duration] as int?,
+      durationType: map[Field.durationType] as String?,
+      status: map[Field.status] as int?
     );
   }
 }

@@ -13,11 +13,11 @@ class Currency {
 
   factory Currency.fromMap(Map<String, dynamic> map) {
     return Currency(
-      id: map[Field.id] as int,
-      name: map[Field.name] as String,
-      exchangeRate: map[Field.exchangeRate] as String,
-      baseCurrency: map[Field.baseCurrency] as int,
-      status: map[Field.status] as int,
+      id: map[Field.id] as int?,
+      name: map[Field.name] as String?,
+      exchangeRate: map[Field.exchangeRate] as String?,
+      baseCurrency: map[Field.baseCurrency] as int?,
+      status: map[Field.status] as int?,
     );
   }
 }

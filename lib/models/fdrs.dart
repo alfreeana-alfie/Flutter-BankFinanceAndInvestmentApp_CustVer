@@ -20,7 +20,6 @@ class FixedDeposit {
   FixedDeposit(
       {this.fdrPlanId,
       this.userId,
-      // this.currencyId,
       this.depositAmount,
       this.returnAmount,
       this.attachment,
@@ -39,7 +38,6 @@ class FixedDeposit {
     return FixedDeposit(
       fdrPlanId: map[Field.fdrPlanId] as int?,
       userId: map[Field.userId] as int?,
-      // currencyId : map[Field.currencyId] as String,
       depositAmount: map[Field.depositAmount] as String?,
       returnAmount: map[Field.returnAmount] as String?,
       attachment: map[Field.attachment] as String?,
