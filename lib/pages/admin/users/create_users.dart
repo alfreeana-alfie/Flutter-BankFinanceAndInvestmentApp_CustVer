@@ -49,33 +49,33 @@ class _CreateUsersState extends State<CreateUsers> {
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
             title: Str.createUserTxt, implyLeading: true, context: context),
-        bottomSheet: Container(
-          color: Styles.primaryColor,
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-          child: elevatedButton(
-            color: Styles.secondaryColor,
-            context: context,
-            callback: () {
-              Map<String, String> body = {
-                Field.name: name!,
-                Field.email: email ?? Field.emptyString,
-                Field.phone: phone ?? Field.emptyString,
-                Field.userType: userType ?? Field.emptyString,
-                Field.roleId: roleId ?? Field.emptyString,
-                Field.branchId: branchId ?? Field.emptyString,
-                Field.status: Status.pending.toString(),
-                Field.profilePicture: profilePicture ?? Field.emptyString,
-                Field.password: password ?? Field.emptyString,
-                Field.provider: provider ?? Field.emptyString,
-                Field.providerId: providerId ?? Field.emptyString,
-                Field.countryCode: countryCode ?? Field.emptyString,
-              };
+        // bottomSheet: Container(
+        //   color: Styles.primaryColor,
+        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+        //   child: elevatedButton(
+        //     color: Styles.secondaryColor,
+        //     context: context,
+        //     callback: () {
+        //       Map<String, String> body = {
+        //         Field.name: name!,
+        //         Field.email: email ?? Field.emptyString,
+        //         Field.phone: phone ?? Field.emptyString,
+        //         Field.userType: userType ?? Field.emptyString,
+        //         Field.roleId: roleId ?? Field.emptyString,
+        //         Field.branchId: branchId ?? Field.emptyString,
+        //         Field.status: Status.pending.toString(),
+        //         Field.profilePicture: profilePicture ?? Field.emptyString,
+        //         Field.password: password ?? Field.emptyString,
+        //         Field.provider: provider ?? Field.emptyString,
+        //         Field.providerId: providerId ?? Field.emptyString,
+        //         Field.countryCode: countryCode ?? Field.emptyString,
+        //       };
 
-              OtherBankMethods.add(context, body);
-            },
-            text: Str.createCurrencyTxt.toUpperCase(),
-          ),
-        ),
+        //       OtherBankMethods.add(context, body);
+        //     },
+        //     text: Str.createCurrencyTxt.toUpperCase(),
+        //   ),
+        // ),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -173,7 +173,6 @@ class _CreateUsersState extends State<CreateUsers> {
                             ),
                           ),
                         ),
-                        
                         const Gap(20.0),
                         TextFormField(
                           onChanged: (val) {
@@ -252,6 +251,39 @@ class _CreateUsersState extends State<CreateUsers> {
                               borderSide: BorderSide.none,
                               gapPadding: 0.0,
                             ),
+                          ),
+                        ),
+                        const Gap(10),
+                        Divider(color: Styles.primaryColor, thickness: 2),
+                        Container(
+                          // color: Styles.primaryColor,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 20),
+                          child: elevatedButton(
+                            color: Styles.secondaryColor,
+                            context: context,
+                            callback: () {
+                              Map<String, String> body = {
+                                Field.name: name!,
+                                Field.email: email ?? Field.emptyString,
+                                Field.phone: phone ?? Field.emptyString,
+                                Field.userType: userType ?? Field.emptyString,
+                                Field.roleId: roleId ?? Field.emptyString,
+                                Field.branchId: branchId ?? Field.emptyString,
+                                Field.status: Status.pending.toString(),
+                                Field.profilePicture:
+                                    profilePicture ?? Field.emptyString,
+                                Field.password: password ?? Field.emptyString,
+                                Field.provider: provider ?? Field.emptyString,
+                                Field.providerId:
+                                    providerId ?? Field.emptyString,
+                                Field.countryCode:
+                                    countryCode ?? Field.emptyString,
+                              };
+
+                              OtherBankMethods.add(context, body);
+                            },
+                            text: Str.createUserTxt.toUpperCase(),
                           ),
                         ),
                       ],

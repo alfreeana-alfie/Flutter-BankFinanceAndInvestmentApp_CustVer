@@ -41,24 +41,24 @@ class _UsersListState extends State<UsersList> {
     }
   }
 
-  loadSharedPrefs() async {
-    try {
-      User user = User.fromJSON(await sharedPref.read(Pref.userData));
-      setState(() {
-        userLoad = user;
+  // loadSharedPrefs() async {
+  //   try {
+  //     User user = User.fromJSON(await sharedPref.read(Pref.userData));
+  //     setState(() {
+  //       userLoad = user;
 
-        print(userLoad.id.toString());
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
+  //       print(userLoad.id.toString());
+  //     });
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   @override
   void initState() {
     super.initState();
 
-    loadSharedPrefs();
+    // loadSharedPrefs();
     viewOne('1');
   }
 
@@ -66,11 +66,11 @@ class _UsersListState extends State<UsersList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: addAppBar(
-        title: Str.currencyListTxt,
+        title: Str.userListTxt,
         implyLeading: true,
         context: context,
         hasAction: true,
-        path: RouteSTR.createWireTransfer,
+        path: RouteSTR.createUsers,
       ),
       // drawer: SideDrawer(),
       backgroundColor: Styles.primaryColor,

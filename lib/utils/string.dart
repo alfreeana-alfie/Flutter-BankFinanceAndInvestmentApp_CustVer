@@ -201,6 +201,7 @@ class Str {
   static String gatewayTxt = 'Gateway';
   static String transactionDetailsTxt = 'Transaction Detail(s)';
   static String createDepositTxt = 'Create Deposit';
+  static String userListTxt = 'User List';
 }
 
 class Status {
