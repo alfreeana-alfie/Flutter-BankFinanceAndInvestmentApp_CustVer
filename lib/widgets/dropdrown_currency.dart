@@ -77,7 +77,7 @@ class _DropDownCurrencyState extends State<DropDownCurrency> {
               (val) {
                 return DropdownMenuItem<Currency>(
                   value: val,
-                  child: Text(val.name),
+                  child: Text(val.name ?? Field.emptyString),
                 );
               },
             ).toList(),

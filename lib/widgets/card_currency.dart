@@ -52,7 +52,7 @@ class CardCurrency extends StatelessWidget {
                               color: Styles.primaryColor,
                             ),
                             const Gap(20),
-                            Text(currency.name,
+                            Text(currency.name ?? Field.emptyString,
                                 style: Theme.of(context).textTheme.headline6),
                           ],
                         )),
@@ -127,9 +127,9 @@ class CardCurrency extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DetailRow(labelTitle: Str.nameTxt, labelDetails: currency.name),
+            DetailRow(labelTitle: Str.nameTxt, labelDetails: currency.name ?? Field.emptyString),
             DetailRow(
-                labelTitle: Str.exchangeRateTxt, labelDetails: currency.exchangeRate),
+                labelTitle: Str.exchangeRateTxt, labelDetails: currency.exchangeRate ?? Field.emptyString),
             DetailRow(labelTitle: Str.baseCurrencyTxt, labelDetails: currency.baseCurrency.toString()),
             DetailRow(labelTitle: Str.statusTxt, labelDetails: currency.status.toString()),
             _buildButtonRow(context),
