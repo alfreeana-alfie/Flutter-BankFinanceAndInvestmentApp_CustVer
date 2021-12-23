@@ -21,6 +21,7 @@ import 'package:flutter_banking_app/pages/auth/sign_in.dart';
 import 'package:flutter_banking_app/pages/auth/sign_up.dart';
 import 'package:flutter_banking_app/pages/coming_soon.dart';
 import 'package:flutter_banking_app/pages/coming_soon_menu.dart';
+import 'package:flutter_banking_app/pages/member/dashboard.dart';
 import 'package:flutter_banking_app/pages/member/exchange_money/add_exchange_money.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -47,7 +48,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       home: SplashScreenView(
-        navigateRoute: const MCreateExchangeMoney(),
+        navigateRoute: SignInPage(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,

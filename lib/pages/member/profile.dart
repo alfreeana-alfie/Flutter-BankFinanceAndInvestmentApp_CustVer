@@ -4,6 +4,7 @@ import 'package:flutter_banking_app/generated/assets.dart';
 import 'package:flutter_banking_app/json/shortcut_list.dart';
 import 'package:flutter_banking_app/methods/auth_methods.dart';
 import 'package:flutter_banking_app/utils/iconly/iconly_bold.dart';
+import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/my_app_bar.dart';
 import 'package:gap/gap.dart';
@@ -84,26 +85,32 @@ class Profile extends StatelessWidget {
             ],
           ),
           const Gap(35),
-          customListTile(
-              icon: IconlyBold.Profile,
-              color: const Color(0xFFC76CD9),
-              title: 'Information'),
+          // customListTile(
+          //     icon: IconlyBold.Profile,
+          //     color: const Color(0xFFC76CD9),
+          //     title: 'Information'),
           // customListTile(
           //     icon: IconlyBold.Shield_Done,
           //     color: const Color(0xFF229e76),
           //     title: 'Security'),
+          // customListTile(
+          //     icon: IconlyBold.Message,
+          //     color: const Color(0xFFe17a0a),
+          //     title: 'Contact us',
+          //     context: context,
+          //     path: '/create-ticket'),
+          // customListTile(
+          //     icon: IconlyBold.Document,
+          //     color: const Color(0xFF064c6d),
+          //     title: 'Support',
+          //     context: context,
+          //     path: '/all-tickets'),
           customListTile(
-              icon: IconlyBold.Message,
-              color: const Color(0xFFe17a0a),
-              title: 'Contact us',
-              context: context,
-              path: '/create-ticket'),
-          customListTile(
-              icon: IconlyBold.Document,
+              icon: IconlyBold.User,
               color: const Color(0xFF064c6d),
-              title: 'Support',
+              title: 'Change to Admin Panel',
               context: context,
-              path: '/all-tickets'),
+              path: RouteSTR.dashboardAdmin),
           signOut(context),
           // customListTile(
           //     icon: Icons.dark_mode,
@@ -169,7 +176,8 @@ class Profile extends StatelessWidget {
           ),
           child: const Icon(IconlyBold.Logout, color: Color(0xFF229e76), size: 18),
         ),
-        onTap: () => signOut(context),
+        onTap: () => Navigator.pushNamed(context, RouteSTR.signIn),
+        // onTap: () => signOut(context),
       ),
       minLeadingWidth: 50,
       horizontalTitleGap: 13,

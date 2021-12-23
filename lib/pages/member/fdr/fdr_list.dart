@@ -66,7 +66,7 @@ class _FdrHistoryState extends State<FdrHistory> {
     super.initState();
 
     loadSharedPrefs();
-    viewOne('1');
+    viewOne('3');
   }
 
   @override

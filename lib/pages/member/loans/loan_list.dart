@@ -64,7 +64,7 @@ class _MyLoanState extends State<LoanList> {
     super.initState();
 
     // loadSharedPrefs();
-    viewOne('1');
+    viewOne('3');
   }
 
   @override

@@ -10,8 +10,8 @@ import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/balance_box.dart';
 import 'package:gap/gap.dart';
 
-class DashboardPage extends StatelessWidget {
-  DashboardPage({Key? key}) : super(key: key);
+class DashboardMember extends StatelessWidget {
+  DashboardMember({Key? key}) : super(key: key);
 
   GlobalKey<ScaffoldState> _key = GlobalKey();
 
