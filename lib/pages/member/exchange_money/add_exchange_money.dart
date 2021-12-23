@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_banking_app/methods/member/wire_transfer_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
+import 'package:flutter_banking_app/methods/member/exchange_money_methods.dart';
+import 'package:flutter_banking_app/models/currency.dart';
+import 'package:flutter_banking_app/models/user.dart';
+import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -10,28 +16,34 @@ import 'package:flutter_banking_app/widgets/buttons.dart';
 import 'package:flutter_banking_app/widgets/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/my_app_bar.dart';
 import 'package:gap/gap.dart';
+import 'package:http/http.dart' as http;
 
-class WireTransfer extends StatefulWidget {
-  const WireTransfer({Key? key}) : super(key: key);
+class MCreateExchangeMoney extends StatefulWidget {
+  const MCreateExchangeMoney({Key? key}) : super(key: key);
 
   @override
-  _WireTransferState createState() => _WireTransferState();
+  _ExchangeMoneyState createState() => _ExchangeMoneyState();
 }
 
-class _WireTransferState extends State<WireTransfer> {
+class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
+  SharedPref sharedPref = SharedPref();
+  User userLoad = User();
+
   final ScrollController _scrollController = ScrollController();
 
-  String? currency, currencyName;
+  String? exchangeFrom,
+      exchangeFromName,
+      exchangeTo,
+      exchangeToName,
+      amount,
+      note;
 
-  String userId = '1',
-      currencyId = '1',
-      amount = '1',
+  String currencyId = '1',
       fee = '1',
       drCr = '1',
       type = '1',
-      method = '1',
-      status = '1',
-      note = '1',
+      method = 'wire_transfer',
+      status = 'wire_transfer',
       loanId = '1',
       refId = '1',
       parentId = '1',
@@ -42,12 +54,50 @@ class _WireTransferState extends State<WireTransfer> {
       branchId = '1',
       transactionsDetails = '1';
 
+  List<Currency> currencyListNew = [];
+
+  loadSharedPrefs() async {
+    try {
+      User user = User.fromJSON(await sharedPref.read(Pref.userData));
+      setState(() {
+        userLoad = user;
+
+        print(userLoad.id.toString());
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void getCurrency() async {
+    final response = await http.get(API.listOfCurrency, headers: headers);
+
+    if (response.statusCode == Status.ok) {
+      var jsonBody = jsonDecode(response.body);
+      // var jsonData = Currency.fromMap(jsonBody);
+
+      for (var currency in jsonBody['data']) {
+        final currencies = Currency.fromMap(currency);
+
+        setState(() {
+          currencyListNew.add(currencies);
+        });
+      }
+
+      // print(jsonData.name);
+    } else {
+      print(Status.failedTxt);
+    }
+  }
+
   @override
   void initState() {
     _scrollController.addListener(() {
       print(_scrollController.offset);
     });
     super.initState();
+    getCurrency();
+    loadSharedPrefs();
   }
 
   @override
@@ -56,7 +106,7 @@ class _WireTransferState extends State<WireTransfer> {
     return Scaffold(
       backgroundColor: Styles.primaryColor,
       appBar: myAppBar(
-          title: Str.wireTransferTxt, implyLeading: true, context: context),
+          title: Str.exchangeMoneyTxt, implyLeading: true, context: context),
       bottomSheet: Container(
         color: Styles.primaryColor,
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
@@ -65,15 +115,15 @@ class _WireTransferState extends State<WireTransfer> {
           context: context,
           callback: () {
             Map<String, String> body = {
-              Field.userId: userId,
+              Field.userId: userLoad.id.toString(),
               Field.currencyId: currencyId,
-              Field.amount: amount,
+              Field.amount: amount ?? '0.00',
               Field.fee: fee,
               Field.drCr: drCr,
               Field.type: type,
               Field.method: method,
               Field.status: status,
-              Field.note: note,
+              Field.note: note ?? '-',
               Field.loanId: loanId,
               Field.refId: refId,
               Field.parentId: parentId,
@@ -85,9 +135,9 @@ class _WireTransferState extends State<WireTransfer> {
               Field.transactionsDetails: transactionsDetails
             };
 
-            WireTransferMethods.add(context, body);
+            ExchangeMoneyMethods.add(context, body);
           },
-          text: Str.wireTransferTxt.toUpperCase(),
+          text: Str.exchangeMoneyTxt.toUpperCase(),
         ),
       ),
       body: ListView(
@@ -111,19 +161,35 @@ class _WireTransferState extends State<WireTransfer> {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                              padding: const EdgeInsets.fromLTRB(15, 15, 15, 8),
-                              child: Text(Str.bankTxt,
-                                  style: Styles.subtitleStyle)),
-                          const Gap(20.0),
                           DropDownCurrency(
-                            currency: currency,
-                            currencyName: currencyName,
+                            currency: exchangeFrom,
+                            currencyName: exchangeFromName,
                             onChanged: (val) {
                               setState(
                                 () {
-                                  currency = val!.id.toString();
-                                  currencyName = val.name;
+                                  exchangeFrom = val!.id.toString();
+                                  exchangeFromName = val.name;
+                                },
+                              );
+                            },
+                          ),
+                          const Gap(20.0),
+                          Center(
+                            child: Container(
+                                padding:
+                                    const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                                child: const Text('TO',
+                                    style: Styles.subtitleStyle02)),
+                          ),
+                          const Gap(20.0),
+                          DropDownCurrency(
+                            currency: exchangeTo,
+                            currencyName: exchangeToName,
+                            onChanged: (val) {
+                              setState(
+                                () {
+                                  exchangeTo = val!.id.toString();
+                                  exchangeToName = val.name;
                                 },
                               );
                             },
@@ -133,80 +199,9 @@ class _WireTransferState extends State<WireTransfer> {
                       const Gap(20.0),
                       TextFormField(
                         readOnly: true,
-                        onChanged: (val) {},
-                        style: Styles.subtitleStyle,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.number,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          labelText: Str.swiftCodeTxt,
-                          labelStyle: Styles.subtitleStyle,
-                          hintText: Str.swiftCodeTxt,
-                          hintStyle: Styles.subtitleStyle03,
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            gapPadding: 0.0,
-                          ),
-                        ),
-                      ),
-                      const Gap(20.0),
-                      TextFormField(
-                        readOnly: true,
-                        onChanged: (val) {},
-                        style: Styles.subtitleStyle,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.number,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          labelText: Str.currencyTxt,
-                          labelStyle: Styles.subtitleStyle,
-                          hintText: Str.amountNumTxt,
-                          hintStyle: Styles.subtitleStyle03,
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            gapPadding: 0.0,
-                          ),
-                        ),
-                      ),
-                      const Gap(20.0),
-                      TextFormField(
-                        onChanged: (val) {},
-                        style: Styles.subtitleStyle,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.number,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          labelText: Str.accountHolderTxt,
-                          labelStyle: Styles.subtitleStyle,
-                          hintText: Str.accountHolderTxt,
-                          hintStyle: Styles.subtitleStyle03,
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            gapPadding: 0.0,
-                          ),
-                        ),
-                      ),
-                      const Gap(20.0),
-                      TextFormField(
-                        onChanged: (val) {},
-                        style: Styles.subtitleStyle,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.number,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          labelText: Str.accountHolderNameTxt,
-                          labelStyle: Styles.subtitleStyle,
-                          hintText: Str.accountHolderNameTxt,
-                          hintStyle: Styles.subtitleStyle03,
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            gapPadding: 0.0,
-                          ),
-                        ),
-                      ),
-                      const Gap(20.0),
-                      TextFormField(
-                        onChanged: (val) {},
+                        onChanged: (val) {
+                          amount = val;
+                        },
                         style: Styles.subtitleStyle,
                         textInputAction: TextInputAction.done,
                         keyboardType: TextInputType.number,
@@ -222,11 +217,9 @@ class _WireTransferState extends State<WireTransfer> {
                           ),
                         ),
                       ),
-                      // const Gap(20.0),
                     ],
                   ),
                 ),
-                // Divider(color: Styles.primaryColor, thickness: 2),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.vertical(
@@ -235,7 +228,9 @@ class _WireTransferState extends State<WireTransfer> {
                   ),
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: TextFormField(
-                    onChanged: (val) {},
+                    onChanged: (val) {
+                      note = val;
+                    },
                     style: Styles.subtitleStyleDark,
                     textInputAction: TextInputAction.done,
                     keyboardType: TextInputType.number,
@@ -258,21 +253,6 @@ class _WireTransferState extends State<WireTransfer> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget customColumn({required String title, required String subtitle}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title.toUpperCase(),
-            style:
-                TextStyle(fontSize: 11, color: Colors.white.withOpacity(0.5))),
-        const Gap(2),
-        Text(subtitle,
-            style:
-                TextStyle(fontSize: 16, color: Colors.white.withOpacity(0.8))),
-      ],
     );
   }
 }

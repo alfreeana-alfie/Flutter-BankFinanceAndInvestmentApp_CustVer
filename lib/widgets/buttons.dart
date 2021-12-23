@@ -13,8 +13,8 @@ Widget elevatedButton({required BuildContext context, required VoidCallback call
             elevation: 0,
             //shadowColor: Colors.indigoAccent,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-            padding: EdgeInsets.symmetric(vertical: 15),
-            textStyle: TextStyle(fontFamily: 'DMSans', color: Colors.white, fontWeight: FontWeight.w500, fontSize: 17)),
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            textStyle: const TextStyle(fontFamily: 'DMSans', color: Colors.white, fontWeight: FontWeight.w500, fontSize: 17)),
         onPressed: callback
       ),
   );
@@ -30,7 +30,7 @@ Widget outlinedButton({required BuildContext context, required VoidCallback call
       elevation: 0,
       side: BorderSide(color: Colors.grey.shade400, width: 1),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(getProportionateScreenWidth(10))),
-      padding: EdgeInsets.symmetric(vertical: 13, horizontal: 15),
+      padding: const EdgeInsets.symmetric(vertical: 13, horizontal: 15),
     ),
   );
 }

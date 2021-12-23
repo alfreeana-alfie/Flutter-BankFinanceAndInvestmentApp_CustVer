@@ -16,14 +16,14 @@ import 'package:flutter_banking_app/widgets/my_app_bar.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
 
-class ApplyNewFDR extends StatefulWidget {
-  const ApplyNewFDR({Key? key}) : super(key: key);
+class MCreateFDR extends StatefulWidget {
+  const MCreateFDR({Key? key}) : super(key: key);
 
   @override
   _ApplyNewFDRState createState() => _ApplyNewFDRState();
 }
 
-class _ApplyNewFDRState extends State<ApplyNewFDR> {
+class _ApplyNewFDRState extends State<MCreateFDR> {
   final ScrollController _scrollController = ScrollController();
   SharedPref sharedPref = SharedPref();
   User userLoad = User();

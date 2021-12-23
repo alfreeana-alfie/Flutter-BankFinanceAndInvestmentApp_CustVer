@@ -21,14 +21,14 @@ import 'package:gap/gap.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
-class SendMoney extends StatefulWidget {
-  const SendMoney({Key? key}) : super(key: key);
+class MCreateSendMoney extends StatefulWidget {
+  const MCreateSendMoney({Key? key}) : super(key: key);
 
   @override
   _SendMoneyState createState() => _SendMoneyState();
 }
 
-class _SendMoneyState extends State<SendMoney> {
+class _SendMoneyState extends State<MCreateSendMoney> {
   final ScrollController _scrollController = ScrollController();
 
   late FocusNode myFocusNode;

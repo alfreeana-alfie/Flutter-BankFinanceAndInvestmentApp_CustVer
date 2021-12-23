@@ -1,14 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_banking_app/methods/config.dart';
-import 'package:flutter_banking_app/methods/member/exchange_money_methods.dart';
-import 'package:flutter_banking_app/models/currency.dart';
-import 'package:flutter_banking_app/models/user.dart';
-import 'package:flutter_banking_app/utils/api.dart';
+import 'package:flutter_banking_app/methods/member/wire_transfer_methods.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -16,34 +10,28 @@ import 'package:flutter_banking_app/widgets/buttons.dart';
 import 'package:flutter_banking_app/widgets/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/my_app_bar.dart';
 import 'package:gap/gap.dart';
-import 'package:http/http.dart' as http;
 
-class ExchangeMoney extends StatefulWidget {
-  const ExchangeMoney({Key? key}) : super(key: key);
+class MCreateWireTransfer extends StatefulWidget {
+  const MCreateWireTransfer({Key? key}) : super(key: key);
 
   @override
-  _ExchangeMoneyState createState() => _ExchangeMoneyState();
+  _WireTransferState createState() => _WireTransferState();
 }
 
-class _ExchangeMoneyState extends State<ExchangeMoney> {
-  SharedPref sharedPref = SharedPref();
-  User userLoad = User();
-
+class _WireTransferState extends State<MCreateWireTransfer> {
   final ScrollController _scrollController = ScrollController();
 
-  String? exchangeFrom,
-      exchangeFromName,
-      exchangeTo,
-      exchangeToName,
-      amount,
-      note;
+  String? currency, currencyName;
 
-  String currencyId = '1',
+  String userId = '1',
+      currencyId = '1',
+      amount = '1',
       fee = '1',
       drCr = '1',
       type = '1',
-      method = 'wire_transfer',
-      status = 'wire_transfer',
+      method = '1',
+      status = '1',
+      note = '1',
       loanId = '1',
       refId = '1',
       parentId = '1',
@@ -54,50 +42,12 @@ class _ExchangeMoneyState extends State<ExchangeMoney> {
       branchId = '1',
       transactionsDetails = '1';
 
-  List<Currency> currencyListNew = [];
-
-  loadSharedPrefs() async {
-    try {
-      User user = User.fromJSON(await sharedPref.read(Pref.userData));
-      setState(() {
-        userLoad = user;
-
-        print(userLoad.id.toString());
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  void getCurrency() async {
-    final response = await http.get(API.listOfCurrency, headers: headers);
-
-    if (response.statusCode == Status.ok) {
-      var jsonBody = jsonDecode(response.body);
-      // var jsonData = Currency.fromMap(jsonBody);
-
-      for (var currency in jsonBody['data']) {
-        final currencies = Currency.fromMap(currency);
-
-        setState(() {
-          currencyListNew.add(currencies);
-        });
-      }
-
-      // print(jsonData.name);
-    } else {
-      print(Status.failedTxt);
-    }
-  }
-
   @override
   void initState() {
     _scrollController.addListener(() {
       print(_scrollController.offset);
     });
     super.initState();
-    getCurrency();
-    loadSharedPrefs();
   }
 
   @override
@@ -106,7 +56,7 @@ class _ExchangeMoneyState extends State<ExchangeMoney> {
     return Scaffold(
       backgroundColor: Styles.primaryColor,
       appBar: myAppBar(
-          title: Str.exchangeMoneyTxt, implyLeading: true, context: context),
+          title: Str.wireTransferTxt, implyLeading: true, context: context),
       bottomSheet: Container(
         color: Styles.primaryColor,
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
@@ -115,15 +65,15 @@ class _ExchangeMoneyState extends State<ExchangeMoney> {
           context: context,
           callback: () {
             Map<String, String> body = {
-              Field.userId: userLoad.id.toString(),
+              Field.userId: userId,
               Field.currencyId: currencyId,
-              Field.amount: amount ?? '0.00',
+              Field.amount: amount,
               Field.fee: fee,
               Field.drCr: drCr,
               Field.type: type,
               Field.method: method,
               Field.status: status,
-              Field.note: note ?? '-',
+              Field.note: note,
               Field.loanId: loanId,
               Field.refId: refId,
               Field.parentId: parentId,
@@ -135,9 +85,9 @@ class _ExchangeMoneyState extends State<ExchangeMoney> {
               Field.transactionsDetails: transactionsDetails
             };
 
-            ExchangeMoneyMethods.add(context, body);
+            WireTransferMethods.add(context, body);
           },
-          text: Str.exchangeMoneyTxt.toUpperCase(),
+          text: Str.wireTransferTxt.toUpperCase(),
         ),
       ),
       body: ListView(
@@ -161,35 +111,19 @@ class _ExchangeMoneyState extends State<ExchangeMoney> {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Container(
+                              padding: const EdgeInsets.fromLTRB(15, 15, 15, 8),
+                              child: Text(Str.bankTxt,
+                                  style: Styles.subtitleStyle)),
+                          const Gap(20.0),
                           DropDownCurrency(
-                            currency: exchangeFrom,
-                            currencyName: exchangeFromName,
+                            currency: currency,
+                            currencyName: currencyName,
                             onChanged: (val) {
                               setState(
                                 () {
-                                  exchangeFrom = val!.id.toString();
-                                  exchangeFromName = val.name;
-                                },
-                              );
-                            },
-                          ),
-                          const Gap(20.0),
-                          Center(
-                            child: Container(
-                                padding:
-                                    const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                                child: const Text('TO',
-                                    style: Styles.subtitleStyle02)),
-                          ),
-                          const Gap(20.0),
-                          DropDownCurrency(
-                            currency: exchangeTo,
-                            currencyName: exchangeToName,
-                            onChanged: (val) {
-                              setState(
-                                () {
-                                  exchangeTo = val!.id.toString();
-                                  exchangeToName = val.name;
+                                  currency = val!.id.toString();
+                                  currencyName = val.name;
                                 },
                               );
                             },
@@ -199,9 +133,80 @@ class _ExchangeMoneyState extends State<ExchangeMoney> {
                       const Gap(20.0),
                       TextFormField(
                         readOnly: true,
-                        onChanged: (val) {
-                          amount = val;
-                        },
+                        onChanged: (val) {},
+                        style: Styles.subtitleStyle,
+                        textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.number,
+                        maxLines: 1,
+                        decoration: InputDecoration(
+                          labelText: Str.swiftCodeTxt,
+                          labelStyle: Styles.subtitleStyle,
+                          hintText: Str.swiftCodeTxt,
+                          hintStyle: Styles.subtitleStyle03,
+                          border: const OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            gapPadding: 0.0,
+                          ),
+                        ),
+                      ),
+                      const Gap(20.0),
+                      TextFormField(
+                        readOnly: true,
+                        onChanged: (val) {},
+                        style: Styles.subtitleStyle,
+                        textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.number,
+                        maxLines: 1,
+                        decoration: InputDecoration(
+                          labelText: Str.currencyTxt,
+                          labelStyle: Styles.subtitleStyle,
+                          hintText: Str.amountNumTxt,
+                          hintStyle: Styles.subtitleStyle03,
+                          border: const OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            gapPadding: 0.0,
+                          ),
+                        ),
+                      ),
+                      const Gap(20.0),
+                      TextFormField(
+                        onChanged: (val) {},
+                        style: Styles.subtitleStyle,
+                        textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.number,
+                        maxLines: 1,
+                        decoration: InputDecoration(
+                          labelText: Str.accountHolderTxt,
+                          labelStyle: Styles.subtitleStyle,
+                          hintText: Str.accountHolderTxt,
+                          hintStyle: Styles.subtitleStyle03,
+                          border: const OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            gapPadding: 0.0,
+                          ),
+                        ),
+                      ),
+                      const Gap(20.0),
+                      TextFormField(
+                        onChanged: (val) {},
+                        style: Styles.subtitleStyle,
+                        textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.number,
+                        maxLines: 1,
+                        decoration: InputDecoration(
+                          labelText: Str.accountHolderNameTxt,
+                          labelStyle: Styles.subtitleStyle,
+                          hintText: Str.accountHolderNameTxt,
+                          hintStyle: Styles.subtitleStyle03,
+                          border: const OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            gapPadding: 0.0,
+                          ),
+                        ),
+                      ),
+                      const Gap(20.0),
+                      TextFormField(
+                        onChanged: (val) {},
                         style: Styles.subtitleStyle,
                         textInputAction: TextInputAction.done,
                         keyboardType: TextInputType.number,
@@ -217,9 +222,11 @@ class _ExchangeMoneyState extends State<ExchangeMoney> {
                           ),
                         ),
                       ),
+                      // const Gap(20.0),
                     ],
                   ),
                 ),
+                // Divider(color: Styles.primaryColor, thickness: 2),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.vertical(
@@ -228,9 +235,7 @@ class _ExchangeMoneyState extends State<ExchangeMoney> {
                   ),
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: TextFormField(
-                    onChanged: (val) {
-                      note = val;
-                    },
+                    onChanged: (val) {},
                     style: Styles.subtitleStyleDark,
                     textInputAction: TextInputAction.done,
                     keyboardType: TextInputType.number,
@@ -253,6 +258,21 @@ class _ExchangeMoneyState extends State<ExchangeMoney> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget customColumn({required String title, required String subtitle}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title.toUpperCase(),
+            style:
+                TextStyle(fontSize: 11, color: Colors.white.withOpacity(0.5))),
+        const Gap(2),
+        Text(subtitle,
+            style:
+                TextStyle(fontSize: 16, color: Colors.white.withOpacity(0.8))),
+      ],
     );
   }
 }

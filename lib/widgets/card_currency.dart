@@ -205,7 +205,7 @@ class CardCurrency extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                // Navigator.of(context).pop();
+                Navigator.of(context).pop();
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

@@ -13,14 +13,16 @@ import 'package:flutter_banking_app/pages/admin/other_banks/bank_list.dart';
 import 'package:flutter_banking_app/pages/admin/other_banks/create_bank.dart';
 import 'package:flutter_banking_app/pages/admin/users/create_users.dart';
 import 'package:flutter_banking_app/pages/admin/users/users_list.dart';
+import 'package:flutter_banking_app/pages/admin/wire_transfer/wire_list.dart';
 import 'package:flutter_banking_app/pages/admin/wire_transfer/wire_transfer.dart';
 import 'package:flutter_banking_app/pages/auth/forgot_password.dart';
 import 'package:flutter_banking_app/pages/auth/sign_in.dart';
 import 'package:flutter_banking_app/pages/auth/sign_up.dart';
-import 'package:flutter_banking_app/pages/member/exchange_money.dart';
-import 'package:flutter_banking_app/pages/member/payment_request/all_request.dart';
-import 'package:flutter_banking_app/pages/member/send_money.dart';
-import 'package:flutter_banking_app/pages/member/wire_transfer.dart';
+import 'package:flutter_banking_app/pages/member/exchange_money/add_exchange_money.dart';
+import 'package:flutter_banking_app/pages/member/payment_request/add_payment_request.dart';
+import 'package:flutter_banking_app/pages/member/payment_request/payment_request_list.dart';
+import 'package:flutter_banking_app/pages/member/send_money/add_send_money.dart';
+import 'package:flutter_banking_app/pages/member/wire_transfer/wire_transfer.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/values.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
@@ -28,9 +30,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/bottom_nav.dart';
 
-import 'pages/member/fdr/apply_fdr.dart';
-import 'pages/member/loans/apply_loan.dart';
-import 'pages/member/payment_request/new_request.dart';
+import 'pages/member/fdr/add_fdr.dart';
+import 'pages/member/loans/add_loan.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -64,14 +65,24 @@ Future<void> main() async {
         // MEMBER ROUTE(S)
         RouteSTR.dashboardMember: (context) => const BottomNav(),
         RouteSTR.bottomNav:       (context) => const BottomNav(),
-        RouteSTR.newRequest:      (context) => const NewRequest(),
-        RouteSTR.allRequest:      (context) => const AllRequest(),
-        RouteSTR.sendMoney:       (context) => const SendMoney(),
-        RouteSTR.exchangeMoney:   (context) => const ExchangeMoney(),
-        RouteSTR.wireTransfer:    (context) => const WireTransfer(),
+        
+        // RouteSTR.allRequestM:      (context) => const MPaymentRequestList(),
+        // RouteSTR.newRequestM:      (context) => const MCreatePaymentRequest(),
 
-        RouteSTR.applyNewLoan:    (context) => const ApplyNewLoan(),
-        RouteSTR.applyNewFDR:     (context) => const ApplyNewFDR(),
+        // RouteSTR.sendMoneyM:          (context) => const MCreateSendMoney(),
+        // RouteSTR.sendMoneyListM:      (context) => const MSendMoneyList(),
+        
+        // RouteSTR.exchangeMoneyM:      (context) => const MCreateExchangeMoney(),
+        // RouteSTR.exchangeMoneyListM: (context) => const MExchangeMoneyList(),
+
+        // RouteSTR.wireTransferM:     (context) => const MCreateWireTransfer(),
+        // RouteSTR.wireTransferListM: (context) => const MWireTransferList(),
+
+        // RouteSTR.applyNewLoan:      (context) => const MCreateLoan(),
+        // RouteSTR.loanListM:         (context) => const MLoanList(),
+
+        // RouteSTR.applyNewFDR:       (context) => const MCreateFDR(),
+        // RouteSTR.fdrListM:          (context) => const MFdrList(),
 
         // ADMIN ROUTE(S)
         RouteSTR.dashboardAdmin:      (context) => const AdminDashboard(),

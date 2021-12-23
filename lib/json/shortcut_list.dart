@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/auth_methods.dart';
-import 'package:flutter_banking_app/pages/member/exchange_money.dart';
-import 'package:flutter_banking_app/pages/member/loans/my_loan.dart';
-import 'package:flutter_banking_app/pages/member/payment_request/all_request.dart';
-import 'package:flutter_banking_app/pages/member/send_money.dart';
+import 'package:flutter_banking_app/pages/member/exchange_money/add_exchange_money.dart';
+import 'package:flutter_banking_app/pages/member/loans/loan_list.dart';
+import 'package:flutter_banking_app/pages/member/payment_request/payment_request_list.dart';
+import 'package:flutter_banking_app/pages/member/send_money/add_send_money.dart';
 import 'package:flutter_banking_app/utils/iconly/iconly_bold.dart';
 
 List shortcutList = [

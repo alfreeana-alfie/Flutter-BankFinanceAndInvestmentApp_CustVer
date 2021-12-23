@@ -7,6 +7,7 @@ import 'package:flutter_banking_app/utils/values.dart';
 import 'package:flutter_banking_app/widgets/detail.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CardFDR extends StatelessWidget {
   const CardFDR({Key? key, required this.fdrPlan}) : super(key: key);
@@ -172,25 +173,25 @@ class CardFDR extends StatelessWidget {
                 elevation: 0.0, primary: Styles.successColor),
           ),
         ),
-        // const Gap(20),
-        // Expanded(
-        //   child: ElevatedButton(
-        //     onPressed: () {
-        //       _showMyDialog(context);
-        //     },
-        //     child: Text(
-        //       Str.deleteTxt.toUpperCase(),
-        //       style: GoogleFonts.nunitoSans(
-        //         fontSize: 14,
-        //         fontWeight: FontWeight.bold,
-        //         color: Styles.primaryColor,
-        //         letterSpacing: 0.5,
-        //       ),
-        //     ),
-        //     style: ElevatedButton.styleFrom(
-        //         elevation: 0.0, primary: Styles.dangerColor),
-        //   ),
-        // ),
+        const Gap(20),
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {
+              _showMyDialog(context);
+            },
+            child: Text(
+              Str.deleteTxt.toUpperCase(),
+              style: GoogleFonts.nunitoSans(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Styles.primaryColor,
+                letterSpacing: 0.5,
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+                elevation: 0.0, primary: Styles.dangerColor),
+          ),
+        ),
       ],
     );
   }

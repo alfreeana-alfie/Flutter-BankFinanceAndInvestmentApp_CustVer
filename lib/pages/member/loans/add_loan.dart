@@ -12,14 +12,14 @@ import 'package:flutter_banking_app/widgets/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/my_app_bar.dart';
 import 'package:gap/gap.dart';
 
-class ApplyNewLoan extends StatefulWidget {
-  const ApplyNewLoan({Key? key}) : super(key: key);
+class MCreateLoan extends StatefulWidget {
+  const MCreateLoan({Key? key}) : super(key: key);
 
   @override
   _ApplyNewLoanState createState() => _ApplyNewLoanState();
 }
 
-class _ApplyNewLoanState extends State<ApplyNewLoan> {
+class _ApplyNewLoanState extends State<MCreateLoan> {
   final ScrollController _scrollController = ScrollController();
 
   String? currency, currencyName, planFDR, planFDRName;

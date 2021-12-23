@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/utils/layouts.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
-import 'package:gap/gap.dart';
 
 class BalanceBox extends StatelessWidget {
   const BalanceBox({Key? key}) : super(key: key);

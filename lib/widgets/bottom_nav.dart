@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/pages/member/dashboard.dart';
 import 'package:flutter_banking_app/pages/member/profile.dart';
 import 'package:flutter_banking_app/pages/member/stats.dart';
-import 'package:flutter_banking_app/pages/member/wallet.dart';
+import 'package:flutter_banking_app/pages/member/wallet/wallet.dart';
 import 'package:flutter_banking_app/utils/iconly/iconly_bold.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 

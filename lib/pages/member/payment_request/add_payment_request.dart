@@ -25,14 +25,14 @@ import 'dart:math' as math;
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
-class NewRequest extends StatefulWidget {
-  const NewRequest({Key? key}) : super(key: key);
+class MCreatePaymentRequest extends StatefulWidget {
+  const MCreatePaymentRequest({Key? key}) : super(key: key);
 
   @override
   _NewRequestState createState() => _NewRequestState();
 }
 
-class _NewRequestState extends State<NewRequest> {
+class _NewRequestState extends State<MCreatePaymentRequest> {
   final ScrollController _scrollController = ScrollController();
   SharedPref sharedPref = SharedPref();
   late FocusNode myFocusNode;
