@@ -22,21 +22,20 @@ class _AdminDashboardState extends State<AdminDashboard> {
         preferredSize: const Size.fromHeight(Values.appHeight),
         child: MainAppBar(title: Str.dashboardTxt),
       ),
-      drawer: SideDrawer(),
+      drawer: const SideDrawer(),
       backgroundColor: Styles.primaryColor,
-      body: ExpandableTheme(
-        data: const ExpandableThemeData(
-          iconColor: Colors.blue,
-          useInkWell: true,
-        ),
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: <Widget>[
-            // Card1(),
-            // Card2(),
-          ],
-        ),
-      ),
+      // body: ExpandableTheme(
+      //   data: const ExpandableThemeData(
+      //     iconColor: Colors.blue,
+      //     useInkWell: true,
+      //   ),
+      //   child: ListView(
+      //     physics: const BouncingScrollPhysics(),
+      //     children: [
+      //       Card1(),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }

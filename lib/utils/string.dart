@@ -237,17 +237,31 @@ class RouteSTR {
   static String wireTransfer = '/wire-transfer';
 
   static String allRequest = '/all-request';
-  static String createCurrency = '/create-currency';
-  static String createBranch = '/create-branch';
-  static String createBank = '/create-bank';
-  static String createPlanFDR = '/create-plan';
-  static String createLoanProduct = '/create-product';
-  static String createWireTransfer = '/create-wire-transfer';
-
+  
+  // Admin Route(s)
   static String depositList = '/deposit-list-a';
   static String createDeposit = '/create-deposit';
 
   static String usersList = '/users-list-a';
+  static String createUsers = '/create-users';
+
+  static String wireTransferList = '/wire-transfer-list-a';
+  static String createWireTransfer = '/create-wire-transfer';
+
+  static String loanProductList = '/loan-product-list-a';
+  static String createLoanProduct = '/create-product';
+
+  static String fdrPlanList = '/fdr-plan-list-a';
+  static String createPlanFDR = '/create-plan';
+
+  static String branchList = '/branch-list-a';
+  static String createBranch = '/create-branch';
+  
+  static String otherBankList = '/other-bank-list-a';
+  static String createBank = '/create-bank';
+  
+  static String currencyList = '/currency-list-a';
+  static String createCurrency = '/create-currency';
 }
 
 class Field {

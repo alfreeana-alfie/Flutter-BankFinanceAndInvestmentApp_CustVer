@@ -3,28 +3,22 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/bank.dart';
-import 'package:flutter_banking_app/models/currency.dart';
-import 'package:flutter_banking_app/models/loans.dart';
 import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/app_bar_add.dart';
 import 'package:flutter_banking_app/widgets/card_bank.dart';
-import 'package:flutter_banking_app/widgets/card_currency.dart';
-import 'package:flutter_banking_app/widgets/card_loan.dart';
-import 'package:flutter_banking_app/widgets/my_app_bar.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 
-class BankList extends StatefulWidget {
-  const BankList({Key? key}) : super(key: key);
+class OtherBankList extends StatefulWidget {
+  const OtherBankList({Key? key}) : super(key: key);
 
   @override
-  _BankListState createState() => _BankListState();
+  _OtherBankListState createState() => _OtherBankListState();
 }
 
-class _BankListState extends State<BankList> {
+class _OtherBankListState extends State<OtherBankList> {
   SharedPref sharedPref = SharedPref();
   User userLoad = User();
   late Map<String, dynamic> requestMap;

@@ -11,14 +11,14 @@ import 'package:flutter_banking_app/widgets/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/my_app_bar.dart';
 import 'package:gap/gap.dart';
 
-class WireTransfer extends StatefulWidget {
-  const WireTransfer({Key? key}) : super(key: key);
+class CreateWireTransfer extends StatefulWidget {
+  const CreateWireTransfer({Key? key}) : super(key: key);
 
   @override
-  _WireTransferState createState() => _WireTransferState();
+  _CreateWireTransferState createState() => _CreateWireTransferState();
 }
 
-class _WireTransferState extends State<WireTransfer> {
+class _CreateWireTransferState extends State<CreateWireTransfer> {
   final ScrollController _scrollController = ScrollController();
 
   String? currency, currencyName;

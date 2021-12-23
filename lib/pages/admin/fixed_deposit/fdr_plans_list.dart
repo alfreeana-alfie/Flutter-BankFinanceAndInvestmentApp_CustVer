@@ -11,14 +11,14 @@ import 'package:flutter_banking_app/widgets/app_bar_add.dart';
 import 'package:flutter_banking_app/widgets/card_fdr_plan.dart';
 import 'package:http/http.dart' as http;
 
-class FdrList extends StatefulWidget {
-  const FdrList({Key? key}) : super(key: key);
+class FdrPlanList extends StatefulWidget {
+  const FdrPlanList({Key? key}) : super(key: key);
 
   @override
-  _FdrListState createState() => _FdrListState();
+  _FdrPlanListState createState() => _FdrPlanListState();
 }
 
-class _FdrListState extends State<FdrList> {
+class _FdrPlanListState extends State<FdrPlanList> {
   SharedPref sharedPref = SharedPref();
   User userLoad = User();
   late Map<String, dynamic> requestMap;

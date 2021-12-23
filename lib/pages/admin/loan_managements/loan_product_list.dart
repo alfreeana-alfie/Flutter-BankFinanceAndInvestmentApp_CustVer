@@ -20,14 +20,14 @@ import 'package:flutter_banking_app/widgets/my_app_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 
-class LoanList extends StatefulWidget {
-  const LoanList({Key? key}) : super(key: key);
+class LoanProductList extends StatefulWidget {
+  const LoanProductList({Key? key}) : super(key: key);
 
   @override
-  _LoanListState createState() => _LoanListState();
+  _LoanProductListState createState() => _LoanProductListState();
 }
 
-class _LoanListState extends State<LoanList> {
+class _LoanProductListState extends State<LoanProductList> {
   SharedPref sharedPref = SharedPref();
   User userLoad = User();
   late Map<String, dynamic> requestMap;
