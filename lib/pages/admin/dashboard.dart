@@ -1,6 +1,7 @@
 
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/pages/coming_soon.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -24,6 +25,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
       ),
       drawer: const SideDrawer(),
       backgroundColor: Styles.primaryColor,
+      body: const ComingSoon(),
       // body: ExpandableTheme(
       //   data: const ExpandableThemeData(
       //     iconColor: Colors.blue,

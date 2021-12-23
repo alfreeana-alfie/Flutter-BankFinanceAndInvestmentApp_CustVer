@@ -192,6 +192,8 @@ class Str {
   static String databaseBackupTxt = 'Database Backup';
   static String languageTxt = 'Languages';
   static String allLanguageTxt = 'All Language';
+  static String comingSoonTxt = 'Coming Soon!';
+  static String systemSettingsTxt = 'System Settings';
 }
 
 class Status {
@@ -220,6 +222,8 @@ class Pref {
 }
 
 class RouteSTR {
+  static String comingSoon = '/coming-soon';
+  static String comingSoonMenu = '/coming-soon-menu';
   static String forgotPassword = '/forgot-password';
   static String signIn = '/sign-in';
   static String signUp = '/sign-up';
@@ -237,7 +241,7 @@ class RouteSTR {
   static String wireTransfer = '/wire-transfer';
 
   static String allRequest = '/all-request';
-  
+
   // Admin Route(s)
   static String depositList = '/deposit-list-a';
   static String createDeposit = '/create-deposit';
@@ -256,10 +260,10 @@ class RouteSTR {
 
   static String branchList = '/branch-list-a';
   static String createBranch = '/create-branch';
-  
+
   static String otherBankList = '/other-bank-list-a';
   static String createBank = '/create-bank';
-  
+
   static String currencyList = '/currency-list-a';
   static String createCurrency = '/create-currency';
 }
@@ -351,88 +355,3 @@ class Field {
   static String password = 'password';
   static String userName = 'user_name';
 }
-
-// class UserSTR {
-//   static String usersTxt = 'Users';
-//   static String allUsersTxt = 'All Users';
-//   static String emailVerifiedTxt = 'Email Verified';
-//   static String smsVerifiedTxt = 'SMS Verified';
-//   static String emailUnverifiedTxt = 'Email Unverified';
-//   static String smsUnverifiedTxt = 'SMS Unverified';
-//   static String createUserTxt = 'Create User';
-
-//   // Variable Names
-//   static String customerTxt = 'customer';
-//   static String adminTxt = 'admin';
-// }
-
-// class DepositSTR {
-//   static String depositTxt = 'Deposit';
-//   static String depositRequestTxt = 'Deposit Request';
-//   static String makeDepositTxt = 'Make Deposit';
-//   static String depositHistoryTxt = 'Deposit History';
-// }
-
-// class WithdrawSTR {
-//   static String withdrawTxt = 'Withdraw';
-//   static String withdrawRequestTxt = 'Withdraw Request';
-//   static String makeWithdrawTxt = 'Make Withdraw';
-//   static String withdrawHistoryTxt = 'Withdraw History';
-// }
-
-// class FixedDepositSTR {
-//   static String fixedDepositTxt = 'Fixed Deposit';
-//   static String allFdrTxt = 'All FDR';
-//   static String fdrPackageTxt = 'FDR Package';
-// }
-
-// class GiftCardSTR {
-//   static String giftCardTxt = 'Gift Card';
-//   static String giftCardsTxt = 'Gift Cards';
-//   static String usedGiftCardTxt = 'Used Cards';
-// }
-
-// class SupportTicketSTR {
-//   static String supportTicketTxt = 'Support Ticket';
-//   static String activeTicketTxt = 'Active Ticket';
-//   static String pendingTicketTxt = 'Pending Ticket';
-//   static String closedTicketTxt = 'Closed Ticket';
-//   static String addNewTicketTxt = 'Add New Ticket';
-// }
-
-// class SystemUserSTR {
-//   static String systemUsersTxt = 'System Users';
-//   static String allUsersTxt = 'All Users';
-//   static String userRolesTxt = 'User Roles';
-//   static String accessControlTxt = 'Access Control';
-// }
-
-// class TransactionSettingSTR {
-//   static String transactionSettingsTxt = 'Transaction Settings';
-//   static String depositGatewayTxt = 'Deposit Gateways';
-//   static String depositMethodTxt = 'Deposit Methods';
-//   static String withdrawMethodsTxt = 'Withdraw Methods';
-//   static String transactionsFeeTxt = 'Transaction Fee';
-// }
-
-// class WebsiteManagementSTR {
-//   static String websiteManagementTxt = 'Website Management';
-//   static String servicesTxt = 'Services';
-//   static String faqTxt = 'FAQ';
-//   static String testimonialsTxt = 'Testimonials';
-//   static String teamsTxt = 'Teams';
-//   static String pagesTxt = 'Pages';
-//   static String menuManagementTxt = 'Menu Management';
-//   static String themeOptionsTxt = 'Theme Options';
-// }
-
-// class AdministrationSTR {
-//   static String administrationTxt = 'Administration';
-//   static String generalSettingTxt = 'General Settings';
-//   static String databaseBackupTxt = 'Database Backup';
-// }
-
-// class LanguageSTR {
-//   static String languageTxt = 'Languages';
-//   static String allLanguageTxt = 'All Language';
-// }

@@ -17,53 +17,51 @@ class SideDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            decoration: const BoxDecoration(
-              color: Styles.secondaryColor,
+            decoration: BoxDecoration(
+              color: Styles.accentColor,
             ),
             child: Column(
               children: [
                 Container(
                   width: 100,
-                  height: 100, 
+                  height: 100,
                   constraints: const BoxConstraints(minWidth: 20, maxWidth: 70),
                   child: CircleAvatar(
                     backgroundImage: AssetImage(Values.userPath),
-                    minRadius: 20,
-                    maxRadius: 50,
+                    minRadius: 10,
+                    maxRadius: 40,
                   ),
                 ),
-                Text('Admin Admin'),
+                Text('Admin Admin',
+                    style: GoogleFonts.nunito(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Styles.whiteColor)),
               ],
             ),
           ),
           ListTile(
             leading: const Icon(Icons.dashboard),
             title: Text(Str.dashboardTxt,
-              style: GoogleFonts.nunitoSans(
-                color: Styles.textColor.withOpacity(1)
-              )),
-            onTap: () =>
-                {Navigator.pushReplacementNamed(context, RouteSTR.dashboardAdmin)},
+                style: GoogleFonts.nunitoSans(
+                    color: Styles.textColor.withOpacity(1))),
+            onTap: () => {
+              Navigator.pushReplacementNamed(context, RouteSTR.dashboardAdmin)
+            },
           ),
           ListTile(
             leading: const Icon(Icons.request_page),
             title: Text(Str.depositTxt,
-              style: GoogleFonts.nunitoSans(
-                color: Styles.textColor.withOpacity(1)
-              )),
-            onTap: () => {
-              Navigator.pushNamed(context, RouteSTR.depositList)
-            },
+                style: GoogleFonts.nunitoSans(
+                    color: Styles.textColor.withOpacity(1))),
+            onTap: () => {Navigator.pushNamed(context, RouteSTR.depositList)},
           ),
           ListTile(
             leading: const Icon(Icons.people),
             title: Text(Str.usersTxt,
-              style: GoogleFonts.nunitoSans(
-                color: Styles.textColor.withOpacity(1)
-              )),
-            onTap: () => {
-              Navigator.pushNamed(context, RouteSTR.usersList)
-            },
+                style: GoogleFonts.nunitoSans(
+                    color: Styles.textColor.withOpacity(1))),
+            onTap: () => {Navigator.pushNamed(context, RouteSTR.usersList)},
           ),
           ExpansionTile(
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -71,53 +69,53 @@ class SideDrawer extends StatelessWidget {
             title: Text(Str.loanManagementTxt),
             children: [
               DrawerChild(
-                title: Str.loanListTxt, 
+                title: Str.loanListTxt,
                 onNavigate: TapGestureRecognizer()
-                ..onTap = () {
-                  // Navigator.pushNamed(context, '/make-deposit');
-                },
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.loanProductList);
+                  },
               ),
               DrawerChild(
-                title: Str.loanCalculatorTxt, 
+                title: Str.loanCalculatorTxt,
                 onNavigate: TapGestureRecognizer()
-                ..onTap = () {
-                  // Navigator.pushNamed(context, '/deposit-req');
-                },
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.comingSoonMenu);
+                  },
               ),
             ],
           ),
           ExpansionTile(
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-            leading: Icon(Icons.money),
+            leading: const Icon(Icons.money),
             title: Text(Str.fixedDepositTxt),
             children: [
               DrawerChild(
-                title: Str.allFdrTxt, 
+                title: Str.allFdrTxt,
                 onNavigate: TapGestureRecognizer()
-                ..onTap = () {
-                  Navigator.pushNamed(context, '/fdr');
-                },
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.comingSoonMenu);
+                  },
               ),
               DrawerChild(
-                title: Str.fdrPackageTxt, 
+                title: Str.fdrPackageTxt,
                 onNavigate: TapGestureRecognizer()
-                ..onTap = () {
-                  Navigator.pushNamed(context, '/fdr-package');
-                },
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.fdrPlanList);
+                  },
               ),
             ],
           ),
           ExpansionTile(
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-            leading: Icon(Icons.list_alt),
+            leading: const Icon(Icons.list_alt),
             title: Text(Str.allTransactionsTxt),
             children: [
               DrawerChild(
-                title: Str.wireTransferTxt, 
+                title: Str.wireTransferTxt,
                 onNavigate: TapGestureRecognizer()
-                ..onTap = () {
-                  Navigator.pushNamed(context, '/gift-cards');
-                },
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.wireTransferList);
+                  },
               ),
             ],
           ),
@@ -132,7 +130,7 @@ class SideDrawer extends StatelessWidget {
                 horizontal: Values.horizontalValue * 2,
                 vertical: Values.verticalValue),
             child: Text(
-              'System Settings',
+              Str.systemSettingsTxt,
               style: GoogleFonts.nunitoSans(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
@@ -143,33 +141,23 @@ class SideDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.business),
             title: Text(Str.branchTxt,
-              style: GoogleFonts.nunitoSans(
-                color: Styles.textColor.withOpacity(1)
-              )),
-            onTap: () => {
-              // Navigator.pushNamed(context, '/bottom_nav')
-            },
+                style: GoogleFonts.nunitoSans(
+                    color: Styles.textColor.withOpacity(1))),
+            onTap: () => {Navigator.pushNamed(context, RouteSTR.branchList)},
           ),
           ListTile(
             leading: const Icon(Icons.business),
             title: Text(Str.otherBankTxt,
-              style: GoogleFonts.nunitoSans(
-                color: Styles.textColor.withOpacity(1)
-              )),
-            onTap: () => {
-              // Navigator.pushNamed(context, '/bottom_nav')
-            },
+                style: GoogleFonts.nunitoSans(
+                    color: Styles.textColor.withOpacity(1))),
+            onTap: () => {Navigator.pushNamed(context, RouteSTR.otherBankList)},
           ),
           ListTile(
-            leading: Icon(Icons.money),
-            title: Text(
-              Str.currencyTxt,
-              style: GoogleFonts.nunitoSans(
-                color: Styles.textColor.withOpacity(1)
-              )),
-            onTap: () => {
-              // Navigator.pushNamed(context, '/bottom_nav')
-            },
+            leading: const Icon(Icons.money),
+            title: Text(Str.currencyTxt,
+                style: GoogleFonts.nunitoSans(
+                    color: Styles.textColor.withOpacity(1))),
+            onTap: () => {Navigator.pushNamed(context, RouteSTR.currencyList)},
           ),
           // ExpansionTile(
           //   expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -177,28 +165,28 @@ class SideDrawer extends StatelessWidget {
           //   title: Text(TransactionSettingSTR.transactionSettingsTxt),
           //   children: [
           //     DrawerChild(
-          //       title: TransactionSettingSTR.depositMethodTxt, 
+          //       title: TransactionSettingSTR.depositMethodTxt,
           //       onNavigate: TapGestureRecognizer()
           //       ..onTap = () {
           //         Navigator.pushNamed(context, '/trans-deposit-meth');
           //       },
           //     ),
           //     DrawerChild(
-          //       title: TransactionSettingSTR.depositGatewayTxt, 
+          //       title: TransactionSettingSTR.depositGatewayTxt,
           //       onNavigate: TapGestureRecognizer()
           //       ..onTap = () {
           //         Navigator.pushNamed(context, '/trans-deposit-gate');
           //       },
           //     ),
           //     DrawerChild(
-          //       title: TransactionSettingSTR.withdrawMethodsTxt, 
+          //       title: TransactionSettingSTR.withdrawMethodsTxt,
           //       onNavigate: TapGestureRecognizer()
           //       ..onTap = () {
           //         Navigator.pushNamed(context, '/trans-withdraw-meth');
           //       },
           //     ),
           //     DrawerChild(
-          //       title: TransactionSettingSTR.transactionsFeeTxt, 
+          //       title: TransactionSettingSTR.transactionsFeeTxt,
           //       onNavigate: TapGestureRecognizer()
           //       ..onTap = () {
           //         Navigator.pushNamed(context, '/trans-fees');
@@ -212,49 +200,49 @@ class SideDrawer extends StatelessWidget {
           //   title: Text(WebsiteManagementSTR.websiteManagementTxt),
           //   children: [
           //     DrawerChild(
-          //       title: WebsiteManagementSTR.faqTxt, 
+          //       title: WebsiteManagementSTR.faqTxt,
           //       onNavigate: TapGestureRecognizer()
           //       ..onTap = () {
           //         Navigator.pushNamed(context, '/faq');
           //       },
           //     ),
           //     DrawerChild(
-          //       title: WebsiteManagementSTR.servicesTxt, 
+          //       title: WebsiteManagementSTR.servicesTxt,
           //       onNavigate: TapGestureRecognizer()
           //       ..onTap = () {
           //         Navigator.pushNamed(context, '/services');
           //       },
           //     ),
           //     DrawerChild(
-          //       title: WebsiteManagementSTR.pagesTxt, 
+          //       title: WebsiteManagementSTR.pagesTxt,
           //       onNavigate: TapGestureRecognizer()
           //       ..onTap = () {
           //         Navigator.pushNamed(context, '/pages');
           //       },
           //     ),
           //     DrawerChild(
-          //       title: WebsiteManagementSTR.teamsTxt, 
+          //       title: WebsiteManagementSTR.teamsTxt,
           //       onNavigate: TapGestureRecognizer()
           //       ..onTap = () {
           //         Navigator.pushNamed(context, '/teams');
           //       },
           //     ),
           //     DrawerChild(
-          //       title: WebsiteManagementSTR.testimonialsTxt, 
+          //       title: WebsiteManagementSTR.testimonialsTxt,
           //       onNavigate: TapGestureRecognizer()
           //       ..onTap = () {
           //         Navigator.pushNamed(context, '/testimonials');
           //       },
           //     ),
           //     DrawerChild(
-          //       title: WebsiteManagementSTR.themeOptionsTxt, 
+          //       title: WebsiteManagementSTR.themeOptionsTxt,
           //       onNavigate: TapGestureRecognizer()
           //       ..onTap = () {
           //         Navigator.pushNamed(context, '/theme-opt');
           //       },
           //     ),
           //     DrawerChild(
-          //       title: WebsiteManagementSTR.menuManagementTxt, 
+          //       title: WebsiteManagementSTR.menuManagementTxt,
           //       onNavigate: TapGestureRecognizer()
           //       ..onTap = () {
           //         Navigator.pushNamed(context, '/menu-manage');
@@ -268,14 +256,14 @@ class SideDrawer extends StatelessWidget {
           //   title: Text(AdministrationSTR.administrationTxt),
           //   children: [
           //     DrawerChild(
-          //       title: AdministrationSTR.generalSettingTxt, 
+          //       title: AdministrationSTR.generalSettingTxt,
           //       onNavigate: TapGestureRecognizer()
           //       ..onTap = () {
           //         Navigator.pushNamed(context, '/general-settings');
           //       },
           //     ),
           //     DrawerChild(
-          //       title: AdministrationSTR.databaseBackupTxt, 
+          //       title: AdministrationSTR.databaseBackupTxt,
           //       onNavigate: TapGestureRecognizer()
           //       ..onTap = () {
           //         Navigator.pushNamed(context, '/db-backup');
@@ -289,14 +277,14 @@ class SideDrawer extends StatelessWidget {
           //   title: Text(LanguageSTR.languageTxt),
           //   children: [
           //     DrawerChild(
-          //       title: LanguageSTR.allLanguageTxt, 
+          //       title: LanguageSTR.allLanguageTxt,
           //       onNavigate: TapGestureRecognizer()
           //       ..onTap = () {
           //         Navigator.pushNamed(context, '/langs');
           //       },
           //     ),
           //     DrawerChild(
-          //       title: LanguageSTR.languageTxt, 
+          //       title: LanguageSTR.languageTxt,
           //       onNavigate: TapGestureRecognizer()
           //       ..onTap = () {
           //         Navigator.pushNamed(context, '/add-lang');
@@ -307,11 +295,9 @@ class SideDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.logout_rounded),
             title: Text(Str.signOutTxt,
-              style: GoogleFonts.nunitoSans(
-                color: Styles.textColor.withOpacity(1)
-              )),
-            // onTap: () =>
-            //     {Navigator.pushReplacementNamed(context, '/SIGN')},
+                style: GoogleFonts.nunitoSans(
+                    color: Styles.textColor.withOpacity(1))),
+            onTap: () => {Navigator.pushReplacementNamed(context, RouteSTR.signIn)},
           ),
         ],
       ),

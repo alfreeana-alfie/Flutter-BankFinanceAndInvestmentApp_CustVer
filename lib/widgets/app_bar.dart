@@ -10,13 +10,17 @@ class MainAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Styles.secondaryColor,
+      backgroundColor: Styles.transparentColor,
       centerTitle: false,
       title: Text(
-        title,
-        style: GoogleFonts.roboto(),
+        title.toUpperCase(),
+        style: GoogleFonts.roboto(
+          fontSize: 18, 
+          letterSpacing: 0.5,
+          fontWeight: FontWeight.bold,
+        ),
       ),
-      elevation: 0.5,
+      elevation: 0.0,
     );
   }
 }
