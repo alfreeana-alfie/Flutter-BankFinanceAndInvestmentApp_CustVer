@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter_banking_app/models/branch.dart';
-import 'package:flutter_banking_app/models/deposit.dart';
 import 'package:flutter_banking_app/pages/admin/branches/branch_list.dart';
 import 'package:flutter_banking_app/pages/admin/branches/create_branch.dart';
 import 'package:flutter_banking_app/pages/admin/currency/create_currency.dart';
@@ -17,16 +15,13 @@ import 'package:flutter_banking_app/pages/admin/other_banks/bank_list.dart';
 import 'package:flutter_banking_app/pages/admin/other_banks/create_bank.dart';
 import 'package:flutter_banking_app/pages/admin/users/create_users.dart';
 import 'package:flutter_banking_app/pages/admin/users/users_list.dart';
-import 'package:flutter_banking_app/pages/admin/wire_transfer/wire_list.dart';
 import 'package:flutter_banking_app/pages/admin/wire_transfer/wire_transfer.dart';
 import 'package:flutter_banking_app/pages/auth/forgot_password.dart';
 import 'package:flutter_banking_app/pages/auth/sign_in.dart';
 import 'package:flutter_banking_app/pages/auth/sign_up.dart';
 import 'package:flutter_banking_app/pages/coming_soon.dart';
 import 'package:flutter_banking_app/pages/coming_soon_menu.dart';
-import 'package:flutter_banking_app/pages/member/fdr/add_fdr.dart';
-import 'package:flutter_banking_app/pages/member/loans/add_loan.dart';
-import 'package:flutter_banking_app/pages/member/payment_request/add_payment_request.dart';
+import 'package:flutter_banking_app/pages/member/exchange_money/add_exchange_money.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/values.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
@@ -52,7 +47,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       home: SplashScreenView(
-        navigateRoute: const MCreateFDR(),
+        navigateRoute: const MCreateExchangeMoney(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,

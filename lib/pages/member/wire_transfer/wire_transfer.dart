@@ -57,39 +57,39 @@ class _WireTransferState extends State<MCreateWireTransfer> {
       backgroundColor: Styles.primaryColor,
       appBar: myAppBar(
           title: Str.wireTransferTxt, implyLeading: true, context: context),
-      bottomSheet: Container(
-        color: Styles.primaryColor,
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-        child: elevatedButton(
-          color: Styles.secondaryColor,
-          context: context,
-          callback: () {
-            Map<String, String> body = {
-              Field.userId: userId,
-              Field.currencyId: currencyId,
-              Field.amount: amount,
-              Field.fee: fee,
-              Field.drCr: drCr,
-              Field.type: type,
-              Field.method: method,
-              Field.status: status,
-              Field.note: note,
-              Field.loanId: loanId,
-              Field.refId: refId,
-              Field.parentId: parentId,
-              Field.otherBankId: otherBankId,
-              Field.gatewayId: gatewayId,
-              Field.createdUserId: createdUserId,
-              Field.updatedUserId: updatedUserId,
-              Field.branchId: branchId,
-              Field.transactionsDetails: transactionsDetails
-            };
+      // bottomSheet: Container(
+      //   color: Styles.primaryColor,
+      //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+      //   child: elevatedButton(
+      //     color: Styles.secondaryColor,
+      //     context: context,
+      //     callback: () {
+      //       Map<String, String> body = {
+      //         Field.userId: userId,
+      //         Field.currencyId: currencyId,
+      //         Field.amount: amount,
+      //         Field.fee: fee,
+      //         Field.drCr: drCr,
+      //         Field.type: type,
+      //         Field.method: method,
+      //         Field.status: status,
+      //         Field.note: note,
+      //         Field.loanId: loanId,
+      //         Field.refId: refId,
+      //         Field.parentId: parentId,
+      //         Field.otherBankId: otherBankId,
+      //         Field.gatewayId: gatewayId,
+      //         Field.createdUserId: createdUserId,
+      //         Field.updatedUserId: updatedUserId,
+      //         Field.branchId: branchId,
+      //         Field.transactionsDetails: transactionsDetails
+      //       };
 
-            WireTransferMethods.add(context, body);
-          },
-          text: Str.wireTransferTxt.toUpperCase(),
-        ),
-      ),
+      //       WireTransferMethods.add(context, body);
+      //     },
+      //     text: Str.wireTransferTxt.toUpperCase(),
+      //   ),
+      // ),
       body: ListView(
         padding: const EdgeInsets.all(15),
         children: [
@@ -253,6 +253,40 @@ class _WireTransferState extends State<MCreateWireTransfer> {
                   ),
                 ),
                 // const Gap(10),
+                Container(
+                  color: Styles.primaryColor,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+                  child: elevatedButton(
+                    color: Styles.secondaryColor,
+                    context: context,
+                    callback: () {
+                      Map<String, String> body = {
+                        Field.userId: userId,
+                        Field.currencyId: currencyId,
+                        Field.amount: amount,
+                        Field.fee: fee,
+                        Field.drCr: drCr,
+                        Field.type: type,
+                        Field.method: method,
+                        Field.status: status,
+                        Field.note: note,
+                        Field.loanId: loanId,
+                        Field.refId: refId,
+                        Field.parentId: parentId,
+                        Field.otherBankId: otherBankId,
+                        Field.gatewayId: gatewayId,
+                        Field.createdUserId: createdUserId,
+                        Field.updatedUserId: updatedUserId,
+                        Field.branchId: branchId,
+                        Field.transactionsDetails: transactionsDetails
+                      };
+
+                      WireTransferMethods.add(context, body);
+                    },
+                    text: Str.wireTransferTxt.toUpperCase(),
+                  ),
+                ),
               ],
             ),
           ),

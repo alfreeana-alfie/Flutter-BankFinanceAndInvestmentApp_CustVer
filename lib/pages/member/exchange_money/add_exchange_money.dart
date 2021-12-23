@@ -107,39 +107,39 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
       backgroundColor: Styles.primaryColor,
       appBar: myAppBar(
           title: Str.exchangeMoneyTxt, implyLeading: true, context: context),
-      bottomSheet: Container(
-        color: Styles.primaryColor,
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-        child: elevatedButton(
-          color: Styles.secondaryColor,
-          context: context,
-          callback: () {
-            Map<String, String> body = {
-              Field.userId: userLoad.id.toString(),
-              Field.currencyId: currencyId,
-              Field.amount: amount ?? '0.00',
-              Field.fee: fee,
-              Field.drCr: drCr,
-              Field.type: type,
-              Field.method: method,
-              Field.status: status,
-              Field.note: note ?? '-',
-              Field.loanId: loanId,
-              Field.refId: refId,
-              Field.parentId: parentId,
-              Field.otherBankId: otherBankId,
-              Field.gatewayId: gatewayId,
-              Field.createdUserId: createdUserId,
-              Field.updatedUserId: updatedUserId,
-              Field.branchId: branchId,
-              Field.transactionsDetails: transactionsDetails
-            };
+      // bottomSheet: Container(
+      //   color: Styles.primaryColor,
+      //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+      //   child: elevatedButton(
+      //     color: Styles.secondaryColor,
+      //     context: context,
+      //     callback: () {
+      //       Map<String, String> body = {
+      //         Field.userId: userLoad.id.toString(),
+      //         Field.currencyId: currencyId,
+      //         Field.amount: amount ?? '0.00',
+      //         Field.fee: fee,
+      //         Field.drCr: drCr,
+      //         Field.type: type,
+      //         Field.method: method,
+      //         Field.status: status,
+      //         Field.note: note ?? '-',
+      //         Field.loanId: loanId,
+      //         Field.refId: refId,
+      //         Field.parentId: parentId,
+      //         Field.otherBankId: otherBankId,
+      //         Field.gatewayId: gatewayId,
+      //         Field.createdUserId: createdUserId,
+      //         Field.updatedUserId: updatedUserId,
+      //         Field.branchId: branchId,
+      //         Field.transactionsDetails: transactionsDetails
+      //       };
 
-            ExchangeMoneyMethods.add(context, body);
-          },
-          text: Str.exchangeMoneyTxt.toUpperCase(),
-        ),
-      ),
+      //       ExchangeMoneyMethods.add(context, body);
+      //     },
+      //     text: Str.exchangeMoneyTxt.toUpperCase(),
+      //   ),
+      // ),
       body: ListView(
         padding: const EdgeInsets.all(15),
         children: [
@@ -248,6 +248,40 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
                   ),
                 ),
                 // const Gap(10),
+                Container(
+                  color: Styles.primaryColor,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+                  child: elevatedButton(
+                    color: Styles.secondaryColor,
+                    context: context,
+                    callback: () {
+                      Map<String, String> body = {
+                        Field.userId: '3',
+                        Field.currencyId: currencyId,
+                        Field.amount: amount ?? '0.00',
+                        Field.fee: fee,
+                        Field.drCr: drCr,
+                        Field.type: type,
+                        Field.method: method,
+                        Field.status: status,
+                        Field.note: note ?? '-',
+                        Field.loanId: loanId,
+                        Field.refId: refId,
+                        Field.parentId: parentId,
+                        Field.otherBankId: otherBankId,
+                        Field.gatewayId: gatewayId,
+                        Field.createdUserId: createdUserId,
+                        Field.updatedUserId: updatedUserId,
+                        Field.branchId: branchId,
+                        Field.transactionsDetails: note ?? '-'
+                      };
+
+                      ExchangeMoneyMethods.add(context, body);
+                    },
+                    text: Str.exchangeMoneyTxt.toUpperCase(),
+                  ),
+                ),
               ],
             ),
           ),
