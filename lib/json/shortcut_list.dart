@@ -10,22 +10,22 @@ List shortcutList = [
   {
     'color': const Color(0xFFFB6A4B),
     'icon': IconlyBold.Upload,
-    'route': const SendMoney(),
+    'route': const MCreateSendMoney(),
   },
   {
     'color': const Color(0xFF026EF4),
     'icon': IconlyBold.Download,
-    'route': const AllRequest(),
+    'route': const PaymentRequestList(),
   },
   {
     'color': const Color(0xFF2BB33A),
     'icon': Icons.change_circle,
-    'route': const ExchangeMoney(),
+    'route': const MCreateExchangeMoney(),
   },
   {
     'color': const Color(0xFFAF52C1),
     'icon': Icons.money,
-    'route': const MyLoan(),
+    'route': const LoanList(),
   },
 ];
 
