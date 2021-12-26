@@ -21,28 +21,21 @@ class API {
 
   // Send Money
   static Uri sendMoney = Uri.parse('$android/send_money');
-  static Uri listOfSendMoney =
-      Uri.parse('$android/list_of_send_money');
-  static Uri userSendMoneyList =
-      Uri.parse('$android/user_send_money_list/');
+  static Uri listOfSendMoney = Uri.parse('$android/list_of_send_money');
+  static Uri userSendMoneyList = Uri.parse('$android/user_send_money_list/');
 
   // Exchange Money
-  static Uri exchangeMoney =
-      Uri.parse('$android/exchange_money');
-  static Uri listOfExchangeMoney =
-      Uri.parse('$android/list_of_exchange_money');
+  static Uri exchangeMoney = Uri.parse('$android/exchange_money');
+  static Uri listOfExchangeMoney = Uri.parse('$android/list_of_exchange_money');
   static Uri userExchangeMoneyList = Uri.parse('');
 
   // Wire Transfer
-  static Uri wireTransfer =
-      Uri.parse('$android/wire_transfer');
-  static Uri listOfWireTransfer =
-      Uri.parse('$android/list_of_wire_transfer');
+  static Uri wireTransfer = Uri.parse('$android/wire_transfer');
+  static Uri listOfWireTransfer = Uri.parse('$android/list_of_wire_transfer');
   static Uri userWireTransferList = Uri.parse('');
 
   // Payment Request
-  static Uri paymentRequest =
-      Uri.parse('$android/payment_request');
+  static Uri paymentRequest = Uri.parse('$android/payment_request');
   static Uri listOfPaymentRequest =
       Uri.parse('$android/list_of_payment_request');
   static Uri userPaymentRequestList =
@@ -50,28 +43,21 @@ class API {
 
   // Loan Request
   static Uri loanRequest = Uri.parse('$android/loan_request');
-  static Uri listOfLoanRequest =
-      Uri.parse('$android/list_of_loan_request');
+  static Uri listOfLoanRequest = Uri.parse('$android/list_of_loan_request');
   static Uri userLoanRequestList =
       Uri.parse('$android/user_loan_request_list/');
 
   // Fixed Deposit
-  static Uri fixedDeposit =
-      Uri.parse('$android/fixed_deposit');
-  static Uri listOfFixedDeposit =
-      Uri.parse('$android/list_of_fixed_deposit');
+  static Uri fixedDeposit = Uri.parse('$android/fixed_deposit');
+  static Uri listOfFixedDeposit = Uri.parse('$android/list_of_fixed_deposit');
   static Uri userFixedDepositList =
       Uri.parse('$android/user_fixed_deposit_list/');
 
   // Drop Down List(s)
-  static Uri listOfCurrency =
-      Uri.parse('$android/list_of_currency');
-  static Uri listofFdrPlans =
-      Uri.parse('$android/list_of_fdr_plans');
+  static Uri listOfCurrency = Uri.parse('$android/list_of_currency');
+  static Uri listofFdrPlans = Uri.parse('$android/list_of_fdr_plans');
   static Uri listofUsers = Uri.parse('$android/users');
 }
-
-
 
 class AdminAPI {
   // Deposit
@@ -83,38 +69,28 @@ class AdminAPI {
   static Uri createUser = Uri.parse('$android/create_user');
 
   // Wire Transfer
-  static Uri listOfWireTransfer =
-      Uri.parse('$android/list_of_wire_transfer');
-  static Uri createWireTransfer =
-      Uri.parse('$android/wire_transfer');
-  static Uri updateWireTransferStatus =
-      Uri.parse('$android/update_status/');
+  static Uri listOfWireTransfer = Uri.parse('$android/list_of_wire_transfer');
+  static Uri createWireTransfer = Uri.parse('$android/wire_transfer');
+  static Uri updateWireTransferStatus = Uri.parse('$android/update_status/');
 
   // Loan Product
-  static Uri listOfLoanProduct =
-      Uri.parse('$android/list_of_loan_product');
-  static Uri createLoanProduct =
-      Uri.parse('$android/loan_product');
+  static Uri listOfLoanProduct = Uri.parse('$android/list_of_loan_product');
+  static Uri createLoanProduct = Uri.parse('$android/loan_product');
   static Uri updateLoanProductStatus =
       Uri.parse('$android/user_loan_request_list/');
 
   // FDR Packages
-  static Uri listOfFdrPackage =
-      Uri.parse('$android/list_of_fdr_plans');
+  static Uri listOfFdrPackage = Uri.parse('$android/list_of_fdr_plans');
   static Uri createFdrPackage = Uri.parse('$android/fdr_plan');
-  static Uri updateFdrPackageStatus =
-      Uri.parse('$android/fdr_update_status/');
+  static Uri updateFdrPackageStatus = Uri.parse('$android/fdr_update_status/');
 
   // Branch
-  static Uri listOfBranch =
-      Uri.parse('$android/list_of_branches');
+  static Uri listOfBranch = Uri.parse('$android/list_of_branches');
   static Uri createBranch = Uri.parse('$android/branch');
 
   // Other Banks
-  static Uri listOfOtherBank =
-      Uri.parse('$android/list_of_other_banks');
-  static Uri createOtherBank =
-      Uri.parse('$android/other_bank');
+  static Uri listOfOtherBank = Uri.parse('$android/list_of_other_banks');
+  static Uri createOtherBank = Uri.parse('$android/other_bank');
   static Uri updateOtherBankStatus = Uri.parse('$android/update_other_bank/');
 
   // Currency
@@ -122,4 +98,23 @@ class AdminAPI {
   static Uri createCurrency = Uri.parse('$android/currency');
   static Uri updateCurrencyStatus =
       Uri.parse('$android/update_currency_status/');
+
+  // Service
+  static Uri listOfService = Uri.parse('$android/list_of_currency');
+  static Uri createService = Uri.parse('$android/list_of_currency');
+
+  // FAQ
+  static Uri listOfFaq = Uri.parse('$android/list_of_faqs');
+  static Uri createFaq = Uri.parse('$android/create_faq');
+  static Uri updateFaqStatus = Uri.parse('$android/update_faq_status/');
+
+  // Testimonials
+  static Uri listOfTestimonial = Uri.parse('$android/list_of_testimonials');
+  static Uri createTestimonial = Uri.parse('$android/create_testimonial');
+  static Uri updateTestimonialStatus =
+      Uri.parse('$android/update_testimonial_status/');
+
+  // Teams
+  static Uri listOfTeam = Uri.parse('$android/list_of_teams');
+  static Uri createTeam = Uri.parse('$android/create_team');
 }

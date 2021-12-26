@@ -203,62 +203,62 @@ class SideDrawer extends StatelessWidget {
           //     ),
           //   ],
           // ),
-          // ExpansionTile(
-          //   expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-          //   leading: Icon(Icons.web),
-          //   title: Text(WebsiteManagementSTR.websiteManagementTxt),
-          //   children: [
-          //     DrawerChild(
-          //       title: WebsiteManagementSTR.faqTxt,
-          //       onNavigate: TapGestureRecognizer()
-          //       ..onTap = () {
-          //         Navigator.pushNamed(context, '/faq');
-          //       },
-          //     ),
-          //     DrawerChild(
-          //       title: WebsiteManagementSTR.servicesTxt,
-          //       onNavigate: TapGestureRecognizer()
-          //       ..onTap = () {
-          //         Navigator.pushNamed(context, '/services');
-          //       },
-          //     ),
-          //     DrawerChild(
-          //       title: WebsiteManagementSTR.pagesTxt,
-          //       onNavigate: TapGestureRecognizer()
-          //       ..onTap = () {
-          //         Navigator.pushNamed(context, '/pages');
-          //       },
-          //     ),
-          //     DrawerChild(
-          //       title: WebsiteManagementSTR.teamsTxt,
-          //       onNavigate: TapGestureRecognizer()
-          //       ..onTap = () {
-          //         Navigator.pushNamed(context, '/teams');
-          //       },
-          //     ),
-          //     DrawerChild(
-          //       title: WebsiteManagementSTR.testimonialsTxt,
-          //       onNavigate: TapGestureRecognizer()
-          //       ..onTap = () {
-          //         Navigator.pushNamed(context, '/testimonials');
-          //       },
-          //     ),
-          //     DrawerChild(
-          //       title: WebsiteManagementSTR.themeOptionsTxt,
-          //       onNavigate: TapGestureRecognizer()
-          //       ..onTap = () {
-          //         Navigator.pushNamed(context, '/theme-opt');
-          //       },
-          //     ),
-          //     DrawerChild(
-          //       title: WebsiteManagementSTR.menuManagementTxt,
-          //       onNavigate: TapGestureRecognizer()
-          //       ..onTap = () {
-          //         Navigator.pushNamed(context, '/menu-manage');
-          //       },
-          //     ),
-          //   ],
-          // ),
+          ExpansionTile(
+            expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            leading: Icon(Icons.web),
+            title: Text(Str.websiteManagementTxt),
+            children: [
+              DrawerChild(
+                title: Str.faqTxt,
+                onNavigate: TapGestureRecognizer()
+                ..onTap = () {
+                  Navigator.pushNamed(context, RouteSTR.faqList);
+                },
+              ),
+              DrawerChild(
+                title: Str.servicesTxt,
+                onNavigate: TapGestureRecognizer()
+                ..onTap = () {
+                  Navigator.pushNamed(context, RouteSTR.serviceList);
+                },
+              ),
+              // DrawerChild(
+              //   title: WebsiteManagementSTR.pagesTxt,
+              //   onNavigate: TapGestureRecognizer()
+              //   ..onTap = () {
+              //     Navigator.pushNamed(context, '/pages');
+              //   },
+              // ),
+              DrawerChild(
+                title: Str.teamsTxt,
+                onNavigate: TapGestureRecognizer()
+                ..onTap = () {
+                  Navigator.pushNamed(context, RouteSTR.teamList);
+                },
+              ),
+              DrawerChild(
+                title: Str.testimonialsTxt,
+                onNavigate: TapGestureRecognizer()
+                ..onTap = () {
+                  Navigator.pushNamed(context, RouteSTR.testimonialList);
+                },
+              ),
+              // DrawerChild(
+              //   title: WebsiteManagementSTR.themeOptionsTxt,
+              //   onNavigate: TapGestureRecognizer()
+              //   ..onTap = () {
+              //     Navigator.pushNamed(context, '/theme-opt');
+              //   },
+              // ),
+              // DrawerChild(
+              //   title: WebsiteManagementSTR.menuManagementTxt,
+              //   onNavigate: TapGestureRecognizer()
+              //   ..onTap = () {
+              //     Navigator.pushNamed(context, '/menu-manage');
+              //   },
+              // ),
+            ],
+          ),
           // ExpansionTile(
           //   expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
           //   leading: Icon(Icons.settings),

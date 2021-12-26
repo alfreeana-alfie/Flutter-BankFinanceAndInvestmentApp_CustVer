@@ -206,6 +206,11 @@ class Str {
   static String createBranchTxt = 'Create Branch';
   static String userListTxt = 'User List';
   static String applyDepositTxt = 'Apply New Deposit';
+
+  static String answerTxt = 'Answer';
+  static String localeTxt = 'Locale';
+  static String iconTxt = 'Icon';
+  static String imageTxt = 'Image';
 }
 
 class Status {
@@ -287,10 +292,23 @@ class RouteSTR {
 
   static String currencyList = '/currency-list-a';
   static String createCurrency = '/create-currency';
+
+  static String faqList = '/faq-list-a';
+  static String createFaq = '/create-faq';
+
+  static String teamList = '/team-list-a';
+  static String createTeam = '/create-team';
+
+  static String testimonialList = '/testmonial-list-a';
+  static String createTestimonial = '/create-testmonial';
+
+  static String serviceList = '/service-list-a';
+  static String createService = '/create-service';
 }
 
 class Field {
   // Variable Names
+  static String icon = 'icon';
   static String customerTxt = 'customer';
   static String adminTxt = 'admin';
   static String emptyString = '-';
@@ -375,4 +393,13 @@ class Field {
   static String termPeriod = 'term_period';
   static String password = 'password';
   static String userName = 'user_name';
+
+  static String answer = 'answer';
+  static String question = 'question';
+  static String locale = 'locale';
+
+  static String testimonials = 'testimonials';
+
+  static String image = 'image';
+  static String role = 'role';
 }
