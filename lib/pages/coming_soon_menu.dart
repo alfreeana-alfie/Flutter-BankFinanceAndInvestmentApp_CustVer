@@ -13,7 +13,7 @@ class ComingSoonMenu extends StatelessWidget {
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Styles.primaryColor,
+        backgroundColor: Styles.accentColor,
         centerTitle: false,
         elevation: 0.0,
       ),
@@ -26,7 +26,7 @@ class ComingSoonMenu extends StatelessWidget {
           child: Text(
             Str.comingSoonTxt,
             style: const TextStyle(
-              color: Colors.white,
+              color: Styles.textColor,
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),

@@ -18,7 +18,7 @@ class ComingSoon extends StatelessWidget {
         child: Text(
           Str.comingSoonTxt,
           style: const TextStyle(
-            color: Colors.white,
+            color: Styles.textColor,
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),

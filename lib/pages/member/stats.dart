@@ -39,7 +39,7 @@ class _StatsState extends State<Stats> {
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: Styles.primaryWithOpacityColor,
+              color: Styles.thirdColor,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +50,7 @@ class _StatsState extends State<Stats> {
                     child: Text('Total Balance',
                         style:
                             TextStyle(color: Colors.white.withOpacity(0.8)))),
-                Divider(
+                const Divider(
                   color: Styles.primaryColor,
                   thickness: 2,
                 ),
@@ -69,7 +69,7 @@ class _StatsState extends State<Stats> {
             width: double.infinity,
             padding: const EdgeInsets.all(6),
             decoration: BoxDecoration(
-              color: Styles.primaryWithOpacityColor,
+              color: Styles.thirdColor,
               borderRadius: BorderRadius.circular(100),
             ),
             child: Row(
@@ -83,7 +83,7 @@ class _StatsState extends State<Stats> {
                       borderRadius: BorderRadius.circular(100),
                       color: Styles.primaryColor),
                   child: const Text('Income',
-                      style: TextStyle(color: Colors.white, fontSize: 18)),
+                      style: TextStyle(color: Styles.thirdColor, fontSize: 18)),
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 10),
@@ -105,7 +105,7 @@ class _StatsState extends State<Stats> {
               borderRadius: const BorderRadius.all(
                 Radius.circular(20),
               ),
-              color: Styles.primaryWithOpacityColor,
+              color: Styles.thirdColor,
             ),
             child: Column(
               children: [
@@ -134,15 +134,15 @@ class _StatsState extends State<Stats> {
                             horizontal: 18, vertical: 10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
-                          color: Styles.primaryColor,
+                          color: Styles.accentColor,
                         ),
                         child: Row(
                           children: [
                             const Text('This week',
-                                style: TextStyle(color: Colors.white)),
+                                style: TextStyle(color: Styles.primaryColor)),
                             const Gap(8),
                             Icon(CupertinoIcons.chevron_down,
-                                color: Colors.white.withOpacity(0.8), size: 17)
+                                color: Styles.primaryColor.withOpacity(0.8), size: 17)
                           ],
                         ),
                       ),
@@ -164,19 +164,19 @@ class _StatsState extends State<Stats> {
             children: [
               const Text('Transactions',
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Styles.textColor,
                       fontSize: 18,
                       fontWeight: FontWeight.bold)),
               Row(
                 children: [
                   Text('View all',
                       style: TextStyle(
-                          color: Colors.white.withOpacity(0.8), fontSize: 16)),
+                          color: Styles.textColor.withOpacity(0.8), fontSize: 16)),
                   const Gap(3),
                   Transform.rotate(
                       angle: math.pi,
                       child: Icon(Icons.keyboard_backspace_rounded,
-                          color: Colors.white.withOpacity(0.8), size: 18))
+                          color: Styles.textColor.withOpacity(0.8), size: 18))
                 ],
               )
             ],
@@ -198,11 +198,11 @@ class _StatsState extends State<Stats> {
                   height: 35,
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Styles.primaryWithOpacityColor,
+                    color: Styles.thirdColor,
                     boxShadow: [
                       BoxShadow(
                           offset: const Offset(0, 1),
-                          color: Colors.white.withOpacity(0.1),
+                          color: Styles.textColor.withOpacity(0.1),
                           blurRadius: 2,
                           spreadRadius: 1)
                     ],
@@ -220,11 +220,11 @@ class _StatsState extends State<Stats> {
                       : const SizedBox(),
                 ),
                 title: Text(trs['name'],
-                    style: const TextStyle(color: Colors.white)),
+                    style: const TextStyle(color: Styles.textColor)),
                 subtitle: Text(trs['date'],
-                    style: TextStyle(color: Colors.white.withOpacity(0.5))),
+                    style: TextStyle(color: Styles.textColor.withOpacity(0.5))),
                 trailing: Text(trs['amount'],
-                    style: const TextStyle(fontSize: 17, color: Colors.white)),
+                    style: const TextStyle(fontSize: 17, color: Styles.textColor)),
               );
             },
           )

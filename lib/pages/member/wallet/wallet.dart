@@ -33,7 +33,7 @@ class Wallet extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
-                    color: Styles.primaryWithOpacityColor,
+                    color: Styles.accentColor,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

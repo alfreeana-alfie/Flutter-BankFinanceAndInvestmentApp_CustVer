@@ -17,10 +17,10 @@ class MCreateLoan extends StatefulWidget {
   const MCreateLoan({Key? key}) : super(key: key);
 
   @override
-  _ApplyNewLoanState createState() => _ApplyNewLoanState();
+  _MCreateLoanState createState() => _MCreateLoanState();
 }
 
-class _ApplyNewLoanState extends State<MCreateLoan> {
+class _MCreateLoanState extends State<MCreateLoan> {
   final ScrollController _scrollController = ScrollController();
 
   String? currency, currencyName, planFDR, planFDRName;
@@ -84,7 +84,7 @@ class _ApplyNewLoanState extends State<MCreateLoan> {
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: Styles.primaryWithOpacityColor,
+              color: Styles.accentColor,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -182,11 +182,11 @@ class _ApplyNewLoanState extends State<MCreateLoan> {
                   ),
                 ),
                 Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.vertical(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.vertical(
                       bottom: Radius.circular(15),
                     ),
-                    color: Styles.yellowColor,
+                    color: Styles.thirdColor,
                   ),
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: Column(

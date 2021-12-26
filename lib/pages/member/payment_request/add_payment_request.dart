@@ -25,10 +25,10 @@ class MCreatePaymentRequest extends StatefulWidget {
   const MCreatePaymentRequest({Key? key}) : super(key: key);
 
   @override
-  _NewRequestState createState() => _NewRequestState();
+  _MCreatePaymentRequestState createState() => _MCreatePaymentRequestState();
 }
 
-class _NewRequestState extends State<MCreatePaymentRequest> {
+class _MCreatePaymentRequestState extends State<MCreatePaymentRequest> {
   final ScrollController _scrollController = ScrollController();
   SharedPref sharedPref = SharedPref();
   late FocusNode myFocusNode;
@@ -123,7 +123,7 @@ class _NewRequestState extends State<MCreatePaymentRequest> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Styles.primaryWithOpacityColor,
+                color: Styles.accentColor,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -205,11 +205,11 @@ class _NewRequestState extends State<MCreatePaymentRequest> {
                     ),
                   ),
                   Container(
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.vertical(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.vertical(
                         bottom: Radius.circular(15),
                       ),
-                      color: Styles.yellowColor,
+                      color: Styles.thirdColor,
                     ),
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: TextFormField(
@@ -232,7 +232,11 @@ class _NewRequestState extends State<MCreatePaymentRequest> {
                       ),
                     ),
                   ),
-                  Container(
+                  
+                ],
+              ),
+            ),
+            Container(
                     color: Styles.primaryColor,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 15, vertical: 40),
@@ -256,9 +260,6 @@ class _NewRequestState extends State<MCreatePaymentRequest> {
                       text: Str.newRequestTxt.toUpperCase(),
                     ),
                   ),
-                ],
-              ),
-            ),
           ],
         ),
       ),
@@ -309,8 +310,9 @@ class _NewRequestState extends State<MCreatePaymentRequest> {
                 (index == currentPage)
                     ? Text(item.name ?? '-',
                         style:
-                            const TextStyle(color: Colors.white, fontSize: 16))
-                    : const Text('')
+                            const TextStyle(color: Styles.primaryColor, fontSize: 16))
+                    : const Text('',style:
+                            TextStyle(color: Styles.primaryColor, fontSize: 16))
               ],
             ),
           );

@@ -17,7 +17,7 @@ class SideDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Styles.accentColor,
             ),
             child: Column(

@@ -42,7 +42,7 @@ class DashboardMember extends StatelessWidget {
                   //     },
                   //     child: const Icon(
                   //       IconlyBold.Filter,
-                  //       color: Colors.white,
+                  //       color: Styles.textColor,
                   //       size: 30,
                   //       ),
                   //   ),
@@ -52,11 +52,11 @@ class DashboardMember extends StatelessWidget {
                     children: [
                       Text('Hi Tino',
                       style: TextStyle(
-                          color: Colors.white.withOpacity(0.5), fontSize: 16)),
+                          color: Styles.textColor, fontSize: 16)),
                   const Gap(3),
                   const Text('Welcome back',
                       style: TextStyle(
-                          color: Colors.white,
+                          color: Styles.textColor,
                           fontSize: 18,
                           fontWeight: FontWeight.bold))
                     ],
@@ -68,9 +68,9 @@ class DashboardMember extends StatelessWidget {
                   padding: const EdgeInsets.all(10),
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.white,
+                    color: Styles.thirdColor,
                   ),
-                  child: const Icon(IconlyBold.Notification),
+                  child: const Icon(IconlyBold.Notification, color: Styles.primaryColor,),
                 ),
               )
             ],
@@ -110,17 +110,17 @@ class DashboardMember extends StatelessWidget {
             children: [
               const Text('Transactions',
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Styles.textColor,
                       fontSize: 18,
                       fontWeight: FontWeight.bold)),
               Row(
                 children: [
                   Text('Today',
                       style: TextStyle(
-                          color: Colors.white.withOpacity(0.5), fontSize: 16)),
+                          color: Styles.textColor.withOpacity(0.5), fontSize: 16)),
                   const Gap(3),
                   Icon(CupertinoIcons.chevron_down,
-                      color: Colors.white.withOpacity(0.5), size: 17)
+                      color: Styles.textColor.withOpacity(0.5), size: 17)
                 ],
               )
             ],
@@ -144,7 +144,7 @@ class DashboardMember extends StatelessWidget {
                       boxShadow: [
                         BoxShadow(
                           offset: const Offset(0, 1),
-                          color: Colors.white.withOpacity(0.1),
+                          color: Styles.textColor.withOpacity(0.1),
                           blurRadius: 2,
                           spreadRadius: 1,
                         )
@@ -162,11 +162,11 @@ class DashboardMember extends StatelessWidget {
                             color: const Color(0xFFFF736C), size: 20)
                         : const SizedBox()),
                 title: Text(trs['name'],
-                    style: const TextStyle(color: Colors.white)),
+                    style: const TextStyle(color: Styles.textColor)),
                 subtitle: Text(trs['date'],
-                    style: TextStyle(color: Colors.white.withOpacity(0.5))),
+                    style: TextStyle(color: Styles.textColor.withOpacity(0.5))),
                 trailing: Text(trs['amount'],
-                    style: const TextStyle(fontSize: 17, color: Colors.white)),
+                    style: const TextStyle(fontSize: 17, color: Styles.textColor)),
               );
             },
           )

@@ -60,7 +60,7 @@ class _LoanCalculatorState extends State<LoanCalculator> {
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: Styles.primaryWithOpacityColor,
+              color: Styles.accentColor,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -211,19 +211,21 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                           ),
                         ),
                       ),
-                      const Gap(20),
+                      
+                    ],
+                  ),
+                ),
+                
+              ],
+            ),
+          ),
+          const Gap(20),
                       elevatedButton(
                         color: Styles.secondaryColor,
                         context: context,
                         callback: () {},
                         text: Str.calculateTxt.toUpperCase(),
                       ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
         ],
       ),
     );

@@ -8,9 +8,7 @@ import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/app_bar_add.dart';
-import 'package:flutter_banking_app/widgets/card_loan.dart';
-import 'package:flutter_banking_app/widgets/my_app_bar.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_banking_app/widgets/card/card_loan.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/app_bar_add.dart';
-import 'package:flutter_banking_app/widgets/card_fdr.dart';
 
 class AllTickets extends StatefulWidget {
   const AllTickets({Key? key}) : super(key: key);

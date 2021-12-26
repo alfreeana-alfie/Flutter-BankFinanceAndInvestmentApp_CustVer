@@ -45,10 +45,9 @@ class BalanceBox extends StatelessWidget {
             Container(
               width: size.width * 0.17,
               // padding: const EdgeInsets.fromLTRB(20, 10, 0, 20),
-              decoration: BoxDecoration(
-                borderRadius:
-                    const BorderRadius.horizontal(right: Radius.circular(15)),
-                color: Styles.yellowColor,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.horizontal(right: Radius.circular(15)),
+                color: Styles.thirdColor,
               ),
               child: Center(
                 child: Column(
@@ -58,7 +57,7 @@ class BalanceBox extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(10),
                       // margin: const EdgeInsets.only(top: 10),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         color: Styles.accentColor,
                       ),

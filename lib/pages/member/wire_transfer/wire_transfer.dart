@@ -15,10 +15,10 @@ class MCreateWireTransfer extends StatefulWidget {
   const MCreateWireTransfer({Key? key}) : super(key: key);
 
   @override
-  _WireTransferState createState() => _WireTransferState();
+  _MCreateWireTransferState createState() => _MCreateWireTransferState();
 }
 
-class _WireTransferState extends State<MCreateWireTransfer> {
+class _MCreateWireTransferState extends State<MCreateWireTransfer> {
   final ScrollController _scrollController = ScrollController();
 
   String? currency, currencyName;
@@ -97,7 +97,7 @@ class _WireTransferState extends State<MCreateWireTransfer> {
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: Styles.primaryWithOpacityColor,
+              color: Styles.accentColor,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,7 +132,7 @@ class _WireTransferState extends State<MCreateWireTransfer> {
                       ),
                       const Gap(20.0),
                       TextFormField(
-                        readOnly: true,
+                        // readOnly: true,
                         onChanged: (val) {},
                         style: Styles.subtitleStyle,
                         textInputAction: TextInputAction.done,
@@ -151,7 +151,7 @@ class _WireTransferState extends State<MCreateWireTransfer> {
                       ),
                       const Gap(20.0),
                       TextFormField(
-                        readOnly: true,
+                        // readOnly: true,
                         onChanged: (val) {},
                         style: Styles.subtitleStyle,
                         textInputAction: TextInputAction.done,
@@ -228,10 +228,10 @@ class _WireTransferState extends State<MCreateWireTransfer> {
                 ),
                 // Divider(color: Styles.primaryColor, thickness: 2),
                 Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.vertical(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.vertical(
                         bottom: Radius.circular(15)),
-                    color: Styles.yellowColor,
+                    color: Styles.thirdColor,
                   ),
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: TextFormField(
@@ -253,7 +253,11 @@ class _WireTransferState extends State<MCreateWireTransfer> {
                   ),
                 ),
                 // const Gap(10),
-                Container(
+                
+              ],
+            ),
+          ),
+          Container(
                   color: Styles.primaryColor,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
@@ -287,9 +291,6 @@ class _WireTransferState extends State<MCreateWireTransfer> {
                     text: Str.wireTransferTxt.toUpperCase(),
                   ),
                 ),
-              ],
-            ),
-          ),
         ],
       ),
     );

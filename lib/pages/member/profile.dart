@@ -31,7 +31,7 @@ class Profile extends StatelessWidget {
                   height: 230,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Styles.primaryWithOpacityColor,
+                    color: Styles.accentColor,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -136,7 +136,7 @@ class Profile extends StatelessWidget {
           width: 42,
           height: 42,
           padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Styles.primaryWithOpacityColor,
             shape: BoxShape.circle,
           ),
@@ -147,17 +147,17 @@ class Profile extends StatelessWidget {
       minLeadingWidth: 50,
       horizontalTitleGap: 13,
       title: Text(title,
-          style: const TextStyle(fontSize: 17, color: Colors.white)),
+          style: const TextStyle(fontSize: 17, color: Styles.textColor)),
       trailing: isDarkMode == true
           ? CupertinoSwitch(
               // trackColor: Styles.blueColor,
-              activeColor: Colors.white,
-              trackColor: Colors.white,
+              activeColor: Styles.accentColor,
+              trackColor: Styles.accentColor,
               value: true,
               onChanged: (v) {},
             )
           : Icon(CupertinoIcons.arrow_right,
-              color: Colors.white.withOpacity(0.7)),
+              color: Styles.accentColor.withOpacity(0.7)),
       onTap: callback,
     );
   }
@@ -170,7 +170,7 @@ class Profile extends StatelessWidget {
           width: 42,
           height: 42,
           padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Styles.primaryWithOpacityColor,
             shape: BoxShape.circle,
           ),
@@ -182,9 +182,9 @@ class Profile extends StatelessWidget {
       minLeadingWidth: 50,
       horizontalTitleGap: 13,
       title: const Text('Sign Out',
-          style: TextStyle(fontSize: 17, color: Colors.white)),
+          style: TextStyle(fontSize: 17, color: Styles.textColor)),
       trailing: Icon(CupertinoIcons.arrow_right,
-              color: Colors.white.withOpacity(0.7)),
+              color: Styles.accentColor.withOpacity(0.7)),
       // onTap: callback,
     );
   }

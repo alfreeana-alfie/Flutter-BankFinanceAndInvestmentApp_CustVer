@@ -20,10 +20,10 @@ class MCreateFDR extends StatefulWidget {
   const MCreateFDR({Key? key}) : super(key: key);
 
   @override
-  _ApplyNewFDRState createState() => _ApplyNewFDRState();
+  _MCreateFDRState createState() => _MCreateFDRState();
 }
 
-class _ApplyNewFDRState extends State<MCreateFDR> {
+class _MCreateFDRState extends State<MCreateFDR> {
   final ScrollController _scrollController = ScrollController();
   SharedPref sharedPref = SharedPref();
   User userLoad = User();
@@ -139,7 +139,7 @@ class _ApplyNewFDRState extends State<MCreateFDR> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Styles.primaryWithOpacityColor,
+                color: Styles.accentColor,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -221,11 +221,11 @@ class _ApplyNewFDRState extends State<MCreateFDR> {
                     ),
                   ),
                   Container(
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.vertical(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.vertical(
                         bottom: Radius.circular(15),
                       ),
-                      color: Styles.yellowColor,
+                      color: Styles.thirdColor,
                     ),
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: Column(
@@ -250,23 +250,9 @@ class _ApplyNewFDRState extends State<MCreateFDR> {
                         Row(
                           children: [
                             Expanded(
-                              child: TextFormField(
-                                onChanged: (val) {},
-                                style: Styles.subtitleStyleDark,
-                                textInputAction: TextInputAction.done,
-                                keyboardType: TextInputType.number,
-                                maxLines: 1,
-                                decoration: InputDecoration(
-                                  labelText: Str.attachmentTxt,
-                                  labelStyle: Styles.subtitleStyleDark02,
-                                  hintText: Str.attachmentTxt,
-                                  hintStyle: Styles.subtitleStyleDark03,
-                                  border: const OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    gapPadding: 0.0,
-                                  ),
-                                ),
-                              ),
+                              child: 
+                              Text(Str.attachmentTxt, style: Styles.subtitleStyleDark02),
+                              
                             ),
                             Expanded(
                               child: ElevatedButton(
@@ -287,7 +273,11 @@ class _ApplyNewFDRState extends State<MCreateFDR> {
                       ],
                     ),
                   ),
-                  Container(
+                  
+                ],
+              ),
+            ),
+            Container(
           color: Styles.primaryColor,
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
           child: elevatedButton(
@@ -317,9 +307,6 @@ class _ApplyNewFDRState extends State<MCreateFDR> {
             text: Str.applyDepositTxt.toUpperCase(),
           ),
         ),
-                ],
-              ),
-            ),
           ],
         ),
       ),

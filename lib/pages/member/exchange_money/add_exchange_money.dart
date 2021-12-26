@@ -147,7 +147,7 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: Styles.primaryWithOpacityColor,
+              color: Styles.accentColor,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -198,7 +198,6 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
                       ),
                       const Gap(20.0),
                       TextFormField(
-                        readOnly: true,
                         onChanged: (val) {
                           amount = val;
                         },
@@ -221,10 +220,10 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
                   ),
                 ),
                 Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.vertical(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.vertical(
                         bottom: Radius.circular(15)),
-                    color: Styles.yellowColor,
+                    color: Styles.thirdColor,
                   ),
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: TextFormField(
@@ -248,8 +247,13 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
                   ),
                 ),
                 // const Gap(10),
-                Container(
-                  color: Styles.primaryColor,
+                
+              ],
+            ),
+            
+          ),
+          Container(
+                  color: Styles.transparentColor,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
                   child: elevatedButton(
@@ -282,9 +286,6 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
                     text: Str.exchangeMoneyTxt.toUpperCase(),
                   ),
                 ),
-              ],
-            ),
-          ),
         ],
       ),
     );

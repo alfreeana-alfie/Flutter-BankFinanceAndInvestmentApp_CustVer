@@ -8,8 +8,7 @@ import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/app_bar_add.dart';
-import 'package:flutter_banking_app/widgets/card_currency.dart';
-import 'package:flutter_banking_app/widgets/left_menu.dart';
+import 'package:flutter_banking_app/widgets/card/card_currency.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
