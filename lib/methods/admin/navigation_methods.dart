@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
@@ -6,54 +7,37 @@ import 'package:http/http.dart' as http;
 
 import '../config.dart';
 
-class UserMethods {
+class NavigationMethods {
   static void add(BuildContext context, Map<String, String> body) async {
     final response = await http.post(
-      AdminAPI.createUser,
+      AdminAPI.createNavigation,
       headers: headers,
       body: body,
     );
 
     if (response.statusCode == Status.created) {
-      // print(Status.successTxt);
+      print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
       Navigator.pop(context);
     } else {
-      // print(Status.failedTxt);
+      print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
 
-  static void addUserRole(BuildContext context, Map<String, String> body) async {
+  static void addItem(BuildContext context, Map<String, String> body) async {
     final response = await http.post(
-      AdminAPI.createUserRole,
+      AdminAPI.createNavigationItem,
       headers: headers,
       body: body,
     );
 
     if (response.statusCode == Status.created) {
-      // print(Status.successTxt);
+      print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
       Navigator.pop(context);
     } else {
-      // print(Status.failedTxt);
-      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
-    }
-  }
-
-  static void addPermission(BuildContext context, Map<String, String> body) async {
-    final response = await http.post(
-      AdminAPI.createPermission,
-      headers: headers,
-      body: body,
-    );
-
-    if (response.statusCode == Status.created) {
-      // print(Status.successTxt);
-      CustomToast.showMsg(Status.successTxt, Styles.successColor);
-      Navigator.pop(context);
-    } else {
-      // print(Status.failedTxt);
+      print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }

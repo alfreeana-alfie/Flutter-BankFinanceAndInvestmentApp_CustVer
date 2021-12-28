@@ -67,6 +67,8 @@ class AdminAPI {
   // Users
   static Uri listOfUser = Uri.parse('$android/users');
   static Uri createUser = Uri.parse('$android/create_user');
+  static Uri createUserRole = Uri.parse('$android/user_role');
+  static Uri createPermission = Uri.parse('$android/access_permission');
 
   // Wire Transfer
   static Uri listOfWireTransfer = Uri.parse('$android/list_of_wire_transfer');
@@ -126,4 +128,14 @@ class AdminAPI {
   // Transaction 
   static Uri listOfExchangeMoney = Uri.parse('$android/list_of_exchange_money');
   static Uri listOfSendMoney = Uri.parse('$android/list_of_send_money');
+
+  // Navigation
+  static Uri createNavigation = Uri.parse('$android/navigation');
+  static Uri listOfNavigation = Uri.parse('$android/list_of_navigations');
+  static Uri createNavigationItem = Uri.parse('$android/navigation_item');
+  static Uri listOfNavigationItem = Uri.parse('$android/list_of_navigation_items');
+
+  // Support Ticket
+  static Uri createSupportTicket = Uri.parse('$android/support_ticket');
+  static Uri listOfSupportTicket = Uri.parse('$android/list_of_support_tickets');
 }
