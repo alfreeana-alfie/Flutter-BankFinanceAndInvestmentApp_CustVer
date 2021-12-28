@@ -24,38 +24,4 @@ class WireTransferMethods {
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
-
-  static void viewAll() async {
-    final response = await http.get(API.listOfWireTransfer, headers: headers);
-
-    if (response.statusCode == Status.ok) {
-      var jsonBody = jsonDecode(response.body);
-
-      for (var userData in jsonBody['data']) {
-        // print(userData);
-      }
-
-      // // print(jsonData.amount);
-    } else {
-      // print(Status.failedTxt);
-      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
-    }
-  }
-
-  static void viewOne(String userId) async {
-    Uri viewSingleUser =
-        Uri.parse(API.userWireTransferList.toString() + userId);
-    final response = await http.get(viewSingleUser, headers: headers);
-
-    if (response.statusCode == Status.ok) {
-      var jsonBody = jsonDecode(response.body);
-
-      for (var userData in jsonBody['data']) {
-        // print(userData);
-      }
-    } else {
-      // print(Status.failedTxt);
-      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
-    }
-  }
 }

@@ -24,36 +24,4 @@ class ExchangeMoneyMethods {
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
-
-  static void viewAll() async {
-    final response =
-        await http.get(API.listOfExchangeMoney, headers: headers);
-
-    if (response.statusCode == Status.ok) {
-      // var jsonBody = jsonDecode(response.body);
-      // var jsonData = Transaction.fromMap(jsonBody);
-
-      // print(jsonData.amount);
-    } else {
-      // print(Status.failedTxt);
-      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
-    }
-  }
-
-  static void viewOne(String userId) async {
-    Uri viewSingleUser =
-        Uri.parse(API.userExchangeMoneyList.toString() + userId);
-    final response = await http.get(viewSingleUser, headers: headers);
-
-    if (response.statusCode == Status.ok) {
-      // var jsonBody = jsonDecode(response.body);
-
-      // for (var userData in jsonBody[Field.data]) {
-      //   // print(userData);
-      // }
-    } else {
-      // print(Status.failedTxt);
-      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
-    }
-  }
 }

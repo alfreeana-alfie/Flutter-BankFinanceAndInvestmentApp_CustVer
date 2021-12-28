@@ -12,14 +12,14 @@ import 'package:flutter_banking_app/widgets/card/card_transaction.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
-class MWireTransferList extends StatefulWidget {
-  const MWireTransferList({Key? key}) : super(key: key);
+class MExchangeMoneyList extends StatefulWidget {
+  const MExchangeMoneyList({Key? key}) : super(key: key);
 
   @override
-  _MWireTransferListState createState() => _MWireTransferListState();
+  _MExchangeMoneyListState createState() => _MExchangeMoneyListState();
 }
 
-class _MWireTransferListState extends State<MWireTransferList> {
+class _MExchangeMoneyListState extends State<MExchangeMoneyList> {
   SharedPref sharedPref = SharedPref();
   User userLoad = User();
   late Map<String, dynamic> requestMap;
@@ -27,7 +27,7 @@ class _MWireTransferListState extends State<MWireTransferList> {
 
   Future viewOne(String userId) async {
     Uri viewSingleUser =
-        Uri.parse(API.userWireTransferList.toString() + userId);
+        Uri.parse('API.userExchangeMoneyList.toString()' + userId);
     final response = await http.get(viewSingleUser, headers: headers);
 
     if (response.statusCode == Status.ok) {

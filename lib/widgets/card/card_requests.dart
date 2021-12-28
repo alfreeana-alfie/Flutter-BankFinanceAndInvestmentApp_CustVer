@@ -33,10 +33,10 @@ class Card1 extends StatelessWidget {
                 scrollOnExpand: true,
                 scrollOnCollapse: false,
                 child: Container(
-                  color: Styles.yellowColor,
+                  color: Styles.thirdColor,
                   child: ExpandablePanel(
-                    theme: ExpandableThemeData(
-                      iconColor: Styles.primaryColor,
+                    theme: const ExpandableThemeData(
+                      iconColor: Styles.accentColor,
                       headerAlignment: ExpandablePanelHeaderAlignment.center,
                       tapBodyToCollapse: true,
                     ),
@@ -49,7 +49,7 @@ class Card1 extends StatelessWidget {
                               'assets/icons/payment_request.svg',
                               width: 30,
                               height: 30,
-                              color: Styles.primaryColor,
+                              color: Styles.accentColor,
                             ),
                             const Gap(20),
                             Container(
@@ -183,7 +183,7 @@ class Card1 extends StatelessWidget {
               // );
             },
             child: Text(
-              Str.payNowTxt.toUpperCase(),
+              Str.editTxt.toUpperCase(),
             ),
             style: ElevatedButton.styleFrom(
                 elevation: 0.0, primary: Styles.successColor),

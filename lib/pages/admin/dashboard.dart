@@ -24,7 +24,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
         child: MainAppBar(title: Str.dashboardTxt),
       ),
       drawer: const SideDrawer(),
-      backgroundColor: Styles.primaryColor,
+      backgroundColor: Styles.accentColor,
       body: const ComingSoon(),
       // body: ExpandableTheme(
       //   data: const ExpandableThemeData(

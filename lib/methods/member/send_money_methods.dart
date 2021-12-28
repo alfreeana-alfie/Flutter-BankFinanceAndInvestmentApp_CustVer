@@ -25,34 +25,4 @@ class SendMoneyMethods {
     }
   }
 
-  static void viewAll() async {
-    final response = await http.get(API.listOfSendMoney, headers: headers);
-
-    if (response.statusCode == Status.ok) {
-      var jsonBody = jsonDecode(response.body);
-
-      for (var userData in jsonBody[Field.data]) {
-        // print(userData);
-      }
-    } else {
-      // print(Status.failedTxt);
-      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
-    }
-  }
-
-  static void viewOne(String userId) async {
-    Uri viewSingleUser = Uri.parse(API.userSendMoneyList.toString() + '1');
-    final response = await http.get(viewSingleUser, headers: headers);
-
-    if (response.statusCode == Status.ok) {
-      var jsonBody = jsonDecode(response.body);
-
-      for (var userData in jsonBody[Field.data]) {
-        // print(userData);
-      }
-    } else {
-      // print(Status.failedTxt);
-      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
-    }
-  }
 }

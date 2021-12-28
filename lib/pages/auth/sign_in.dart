@@ -108,13 +108,13 @@ class _SignInPageState extends State<SignInPage> {
                   vertical: Values.verticalValue),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, RouteSTR.dashboardAdmin);
-                  // Map<String, String> body = {
-                  //   'email': email,
-                  //   'password': password,
-                  // };
+                  // Navigator.pushNamed(context, RouteSTR.dashboardAdmin);
+                  Map<String, String> body = {
+                    Field.email: email,
+                    Field.password: password,
+                  };
 
-                  // signIn(context, body);
+                  signIn(context, body);
                 },
                 child: Text(Str.signInTxt.toUpperCase()),
                 style: ElevatedButton.styleFrom(
@@ -123,23 +123,6 @@ class _SignInPageState extends State<SignInPage> {
                 ),
               ),
             ),
-            // Button Sign In
-            // Container(
-            //   height: 50,
-            //   margin: const EdgeInsets.symmetric(
-            //       horizontal: Values.horizontalValue * 2,
-            //       vertical: Values.verticalValue),
-            //   child: ElevatedButton(
-            //     onPressed: () {
-            //       // signOut();
-            //     },
-            //     child: Text(Str.signOutTxt),
-            //     style: ElevatedButton.styleFrom(
-            //       primary: Styles.secondaryColor,
-            //       elevation: 0.0,
-            //     ),
-            //   ),
-            // ),
             // Button Sign Up
             ClickableText(
               text: Str.createAccountTxt,

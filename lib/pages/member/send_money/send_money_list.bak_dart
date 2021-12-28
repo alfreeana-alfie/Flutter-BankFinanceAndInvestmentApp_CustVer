@@ -27,7 +27,7 @@ class _MSendMoneyListState extends State<MSendMoneyList> {
 
   Future viewOne(String userId) async {
     Uri viewSingleUser =
-        Uri.parse(API.userSendMoneyList.toString() + userId);
+        Uri.parse('API.userSendMoneyList.toString()' + userId);
     final response = await http.get(viewSingleUser, headers: headers);
 
     if (response.statusCode == Status.ok) {

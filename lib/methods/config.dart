@@ -17,7 +17,7 @@ class SharedPref {
 
   read(String key) async {
     final prefs = await SharedPreferences.getInstance();
-    return json.decode(prefs.getString(key) ?? '');
+    return jsonDecode(prefs.getString(key) ?? '');
   }
 
   remove(String key) async {
