@@ -65,7 +65,7 @@ class _CreateCurrencyState extends State<CreateCurrency> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Styles.primaryWithOpacityColor,
+                color: Styles.accentColor,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,32 +135,29 @@ class _CreateCurrencyState extends State<CreateCurrency> {
                             ),
                           ),
                         ),
-                        Container(
-                          // color: Styles.primaryColor,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 40),
-                          child: elevatedButton(
-                            color: Styles.secondaryColor,
-                            context: context,
-                            callback: () {
-                              Map<String, String> body = {
-                                Field.name: name!,
-                                Field.exchangeRate:
-                                    exchangeRate ?? Field.emptyAmount,
-                                Field.baseCurrency:
-                                    baseCurrency ?? Field.emptyAmount,
-                                Field.status: Status.pending.toString()
-                              };
-
-                              CurrencyMethods.add(context, body);
-                            },
-                            text: Str.createCurrencyTxt.toUpperCase(),
-                          ),
-                        ),
                       ],
                     ),
                   ),
                 ],
+              ),
+            ),
+            Container(
+              // color: Styles.primaryColor,
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+              child: elevatedButton(
+                color: Styles.secondaryColor,
+                context: context,
+                callback: () {
+                  Map<String, String> body = {
+                    Field.name: name!,
+                    Field.exchangeRate: exchangeRate ?? Field.emptyAmount,
+                    Field.baseCurrency: baseCurrency ?? Field.emptyAmount,
+                    Field.status: Status.pending.toString()
+                  };
+
+                  CurrencyMethods.add(context, body);
+                },
+                text: Str.createCurrencyTxt.toUpperCase(),
               ),
             ),
           ],

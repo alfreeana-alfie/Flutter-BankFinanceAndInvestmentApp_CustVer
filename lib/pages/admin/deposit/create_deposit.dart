@@ -229,18 +229,19 @@ class _CreateDepositState extends State<CreateDeposit> {
             //   ],
             // ),
             const Gap(20),
-            _body(size.height, theme),
-            const Gap(10),
+            
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Styles.primaryWithOpacityColor,
+                color: Styles.accentColor,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  _body(size.height, theme),
+                  const Gap(10),
                   Container(
                     padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
                     child: Row(
@@ -303,9 +304,10 @@ class _CreateDepositState extends State<CreateDeposit> {
                       ),
                     ),
                   ),
-                  Divider(color: Styles.primaryColor, thickness: 2),
-                  const Gap(10),
-                  Padding(
+                ],
+              ),
+            ),
+            Padding(
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 30),
                     child: elevatedButton(
                       color: Styles.secondaryColor,
@@ -337,9 +339,6 @@ class _CreateDepositState extends State<CreateDeposit> {
                       text: Str.createDepositTxt,
                     ),
                   ),
-                ],
-              ),
-            ),
           ],
         ),
       ),
@@ -390,8 +389,9 @@ class _CreateDepositState extends State<CreateDeposit> {
                 (index == currentPage)
                     ? Text(item.name ?? '-',
                         style:
-                            const TextStyle(color: Colors.white, fontSize: 16))
-                    : const Text('')
+                            const TextStyle(color: Styles.primaryColor, fontSize: 16))
+                    : const Text('',style:
+                            TextStyle(color: Styles.primaryColor, fontSize: 16))
               ],
             ),
           );

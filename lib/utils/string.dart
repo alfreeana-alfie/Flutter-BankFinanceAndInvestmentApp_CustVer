@@ -204,10 +204,13 @@ class Str {
   static String createLoanProductTxt = 'Create Loan Product';
   static String createFdrPlanTxt = 'Create Plan';
   static String createBranchTxt = 'Create Branch';
+  static String createFaqTxt = 'Create FAQ';
+  static String submitTxt = 'Submit';
   static String userListTxt = 'User List';
   static String applyDepositTxt = 'Apply New Deposit';
 
   static String answerTxt = 'Answer';
+  static String questionTxt = 'Question';
   static String localeTxt = 'Locale';
   static String iconTxt = 'Icon';
   static String imageTxt = 'Image';
@@ -224,6 +227,8 @@ class Status {
   static int pending = 1;
   static int approved = 2;
   static int rejected = 3;
+
+  static String english = 'English';
 }
 
 class AuthSTR {

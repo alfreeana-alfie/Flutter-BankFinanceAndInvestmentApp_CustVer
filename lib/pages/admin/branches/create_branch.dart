@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_banking_app/methods/admin/branch_methods.dart';
-import 'package:flutter_banking_app/methods/admin/other_bank_methods.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -67,7 +66,7 @@ class _CreateBranchState extends State<CreateBranch> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Styles.primaryWithOpacityColor,
+                color: Styles.accentColor,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,34 +176,30 @@ class _CreateBranchState extends State<CreateBranch> {
                             ),
                           ),
                         ),
-                        Container(
-                          // color: Styles.primaryColor,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 30),
-                          child: elevatedButton(
-                            color: Styles.secondaryColor,
-                            context: context,
-                            callback: () {
-                              Map<String, String> body = {
-                                Field.name: name!,
-                                Field.contactEmail:
-                                    contactEmail ?? Field.emptyString,
-                                Field.contactPhone:
-                                    contactPhone ?? Field.emptyString,
-                                Field.address: address ?? Field.emptyString,
-                                Field.descriptions:
-                                    descriptions ?? Field.emptyString
-                              };
-
-                              BranchMethods.add(context, body);
-                            },
-                            text: Str.createBranchTxt.toUpperCase(),
-                          ),
-                        ),
                       ],
                     ),
                   ),
                 ],
+              ),
+            ),
+            Container(
+              // color: Styles.primaryColor,
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
+              child: elevatedButton(
+                color: Styles.secondaryColor,
+                context: context,
+                callback: () {
+                  Map<String, String> body = {
+                    Field.name: name!,
+                    Field.contactEmail: contactEmail ?? Field.emptyString,
+                    Field.contactPhone: contactPhone ?? Field.emptyString,
+                    Field.address: address ?? Field.emptyString,
+                    Field.descriptions: descriptions ?? Field.emptyString
+                  };
+
+                  BranchMethods.add(context, body);
+                },
+                text: Str.createBranchTxt.toUpperCase(),
               ),
             ),
           ],

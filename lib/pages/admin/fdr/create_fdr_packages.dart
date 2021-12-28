@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_banking_app/methods/admin/fdr_plan_methods.dart';
 import 'package:flutter_banking_app/methods/admin/other_bank_methods.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
@@ -75,7 +76,7 @@ class _CreateFdrPackageState extends State<CreateFdrPackage> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Styles.primaryWithOpacityColor,
+                color: Styles.accentColor,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -225,39 +226,32 @@ class _CreateFdrPackageState extends State<CreateFdrPackage> {
                             ),
                           ),
                         ),
-                        Container(
-                          // color: Styles.primaryColor,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 40),
-                          child: elevatedButton(
-                            color: Styles.secondaryColor,
-                            context: context,
-                            callback: () {
-                              Map<String, String> body = {
-                                Field.name: name!,
-                                Field.minimumAmount:
-                                    minAmt ?? Field.emptyString,
-                                Field.maximumAmount:
-                                    maxAmt ?? Field.emptyString,
-                                Field.interestRate:
-                                    interestRate ?? Field.emptyString,
-                                Field.duration: duration ?? Field.emptyString,
-                                Field.durationType:
-                                    durationType ?? Field.emptyString,
-                                Field.description:
-                                    description ?? Field.emptyString,
-                                Field.status: Status.pending.toString(),
-                              };
-
-                              OtherBankMethods.add(context, body);
-                            },
-                            text: Str.createFdrPlanTxt.toUpperCase(),
-                          ),
-                        ),
                       ],
                     ),
                   ),
                 ],
+              ),
+            ),
+            Container(
+              // color: Styles.primaryColor,
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+              child: elevatedButton(
+                color: Styles.secondaryColor,
+                context: context,
+                callback: () {
+                  Map<String, String> body = {
+                    Field.name: name!,
+                    Field.minimumAmount: minAmt ?? Field.emptyString,
+                    Field.maximumAmount: maxAmt ?? Field.emptyString,
+                    Field.interestRate: interestRate ?? Field.emptyString,
+                    Field.duration: duration ?? Field.emptyString,
+                    Field.durationType: durationType ?? Field.emptyString,
+                    Field.description: description ?? Field.emptyString,
+                    Field.status: Status.pending.toString(),
+                  };
+                  FdrPlanMethods.add(context, body);
+                },
+                text: Str.submitTxt.toUpperCase(),
               ),
             ),
           ],

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_banking_app/methods/admin/faq_methods.dart';
 import 'package:flutter_banking_app/methods/admin/other_bank_methods.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
@@ -21,15 +22,8 @@ class CreateFaq extends StatefulWidget {
 class _CreateFaqState extends State<CreateFaq> {
   final ScrollController _scrollController = ScrollController();
 
-  String? name,
-      swiftCode,
-      bankCountry,
-      bankCurrency,
-      minTransferAmt,
-      maxTransferAmt,
-      fixedCharge,
-      chargeInPercentage,
-      descriptions;
+  String? answer,
+      question;
 
   @override
   void initState() {
@@ -46,33 +40,7 @@ class _CreateFaqState extends State<CreateFaq> {
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.createCurrencyTxt, implyLeading: true, context: context),
-        // bottomSheet: Container(
-        //   color: Styles.primaryColor,
-        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-        //   child: elevatedButton(
-        //     color: Styles.secondaryColor,
-        //     context: context,
-        //     callback: () {
-        //       Map<String, String> body = {
-        //         Field.name: name!,
-        //         Field.swiftCode: swiftCode ?? Field.emptyAmount,
-        //         Field.bankCountry: bankCountry ?? Field.emptyString,
-        //         Field.bankCurrency: bankCurrency ?? Field.emptyAmount,
-        //         Field.minTransferAmt: minTransferAmt ?? Field.emptyAmount,
-        //         Field.maxTransferAmt: maxTransferAmt ?? Field.emptyAmount,
-        //         Field.fixedCharge: fixedCharge ?? Field.emptyAmount,
-        //         Field.chargeInPercentage:
-        //             chargeInPercentage ?? Field.emptyAmount,
-        //         Field.descriptions: descriptions ?? Field.emptyString,
-        //         Field.status: Status.pending.toString()
-        //       };
-
-        //       OtherBankMethods.add(context, body);
-        //     },
-        //     text: Str.createCurrencyTxt.toUpperCase(),
-        //   ),
-        // ),
+            title: Str.createFaqTxt, implyLeading: true, context: context),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -80,7 +48,7 @@ class _CreateFaqState extends State<CreateFaq> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Styles.primaryWithOpacityColor,
+                color: Styles.accentColor,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,16 +61,16 @@ class _CreateFaqState extends State<CreateFaq> {
                       children: [
                         TextFormField(
                           onChanged: (val) {
-                            name = val;
+                            question = val;
                           },
                           style: Styles.subtitleStyle,
                           textInputAction: TextInputAction.done,
                           keyboardType: TextInputType.text,
                           maxLines: 1,
                           decoration: InputDecoration(
-                            labelText: Str.nameTxt,
+                            labelText: Str.questionTxt,
                             labelStyle: Styles.subtitleStyle,
-                            hintText: Str.nameTxt,
+                            hintText: Str.questionTxt,
                             hintStyle: Styles.subtitleStyle03,
                             border: const OutlineInputBorder(
                               borderSide: BorderSide.none,
@@ -110,203 +78,50 @@ class _CreateFaqState extends State<CreateFaq> {
                             ),
                           ),
                         ),
-                        const Gap(20.0),
+                        const Gap(20),
                         TextFormField(
                           onChanged: (val) {
-                            swiftCode = val;
+                            answer = val;
                           },
                           style: Styles.subtitleStyle,
                           textInputAction: TextInputAction.done,
                           keyboardType: TextInputType.text,
                           maxLines: 1,
                           decoration: InputDecoration(
-                            labelText: Str.swiftCodeTxt,
+                            labelText: Str.answerTxt,
                             labelStyle: Styles.subtitleStyle,
-                            hintText: Str.swiftCodeTxt,
+                            hintText: Str.answerTxt,
                             hintStyle: Styles.subtitleStyle03,
                             border: const OutlineInputBorder(
                               borderSide: BorderSide.none,
                               gapPadding: 0.0,
                             ),
-                          ),
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {
-                            bankCountry = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.bankCountryTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.bankCountryTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {
-                            bankCurrency = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.bankCurrencyTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.bankCurrencyTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {
-                            minTransferAmt = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.minTransferAmtTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.minTransferAmtTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {
-                            maxTransferAmt = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.maxTransferAmtTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.maxTransferAmtTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {
-                            fixedCharge = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.fixedChargeTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.fixedChargeTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {
-                            chargeInPercentage = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.chargeInPercentageTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.chargeInPercentageTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {
-                            descriptions = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.descriptionsTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.descriptionsTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          // color: Styles.primaryColor,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 40),
-                          child: elevatedButton(
-                            color: Styles.secondaryColor,
-                            context: context,
-                            callback: () {
-                              Map<String, String> body = {
-                                Field.name: name!,
-                                Field.swiftCode: swiftCode ?? Field.emptyAmount,
-                                Field.bankCountry:
-                                    bankCountry ?? Field.emptyString,
-                                Field.bankCurrency:
-                                    bankCurrency ?? Field.emptyAmount,
-                                Field.minTransferAmt:
-                                    minTransferAmt ?? Field.emptyAmount,
-                                Field.maxTransferAmt:
-                                    maxTransferAmt ?? Field.emptyAmount,
-                                Field.fixedCharge:
-                                    fixedCharge ?? Field.emptyAmount,
-                                Field.chargeInPercentage:
-                                    chargeInPercentage ?? Field.emptyAmount,
-                                Field.descriptions:
-                                    descriptions ?? Field.emptyString,
-                                Field.status: Status.pending.toString()
-                              };
-
-                              OtherBankMethods.add(context, body);
-                            },
-                            text: Str.createCurrencyTxt.toUpperCase(),
                           ),
                         ),
                       ],
                     ),
                   ),
                 ],
+              ),
+            ),
+            Container(
+              // color: Styles.primaryColor,
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+              child: elevatedButton(
+                color: Styles.secondaryColor,
+                context: context,
+                callback: () {
+                  Map<String, String> body = {
+                    Field.question: question ?? Field.emptyString,
+                    Field.answer: answer ?? Field.emptyString,
+                    Field.locale: Status.english,
+                    
+                    Field.status: Status.pending.toString()
+                  };
+
+                  FaqMethods.add(context, body);
+                },
+                text: Str.submitTxt.toUpperCase(),
               ),
             ),
           ],

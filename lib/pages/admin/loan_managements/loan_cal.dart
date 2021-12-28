@@ -44,7 +44,7 @@ class _LoanCalculatorState extends State<LoanCalculator> {
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
             title: Str.loanCalculatorTxt, implyLeading: true, context: context),
-        // bottomSheet: 
+        // bottomSheet:
         // Container(
         //   color: Styles.primaryColor,
         //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -62,7 +62,7 @@ class _LoanCalculatorState extends State<LoanCalculator> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Styles.primaryWithOpacityColor,
+                color: Styles.accentColor,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -213,17 +213,35 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                             ),
                           ),
                         ),
-                        const Gap(20),
-                        elevatedButton(
-                          color: Styles.secondaryColor,
-                          context: context,
-                          callback: () {},
-                          text: Str.calculateTxt.toUpperCase(),
-                        ),
+                        // const Gap(20),
                       ],
                     ),
                   ),
                 ],
+              ),
+            ),
+            Container(
+              // color: Styles.primaryColor,
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+              child: elevatedButton(
+                color: Styles.secondaryColor,
+                context: context,
+                callback: () {
+                  Map<String, String> body = {
+                  //   Field.name: name!,
+                  //   Field.minimumAmount: minAmt ?? Field.emptyString,
+                  //   Field.maximumAmount: maxAmt ?? Field.emptyString,
+                  //   Field.description: description ?? Field.emptyString,
+                  //   Field.interestRate: interestRate ?? Field.emptyString,
+                  //   Field.interestType: interestType ?? Field.emptyString,
+                  //   Field.term: term ?? Field.emptyString,
+                  //   Field.termPeriod: termPeriod ?? Field.emptyString,
+                  //   Field.status: Status.pending.toString(),
+                  };
+
+                  // LoanProductMethods.add(context, body);
+                },
+                text: Str.calculateTxt.toUpperCase(),
               ),
             ),
           ],
