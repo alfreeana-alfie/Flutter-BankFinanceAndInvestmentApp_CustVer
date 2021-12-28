@@ -25,16 +25,16 @@ class _FaqListState extends State<FaqList> {
   late Map<String, dynamic> requestMap;
   List<Question> questionList = [];
 
-  Future viewOne(String userId) async {
+  Future view() async {
     final response = await http.get(AdminAPI.listOfFaq, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
       for (var req in jsonBody[Field.data]) {
         final data = Question.fromMap(req);
-        setState(() {
+        if (mounted) {
           questionList.add(data);
-        });
+        }
       }
     } else {
       print(Status.failedTxt);
@@ -55,13 +55,13 @@ class _FaqListState extends State<FaqList> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
+  // @override
+  // void initState() {
+  //   super.initState();
 
-    loadSharedPrefs();
-    viewOne('1');
-  }
+  //   loadSharedPrefs();
+  //   viewOne('1');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,26 @@ class _FaqListState extends State<FaqList> {
         ),
         // drawer: SideDrawer(),
         backgroundColor: Styles.primaryColor,
-        body: ExpandableTheme(
+        body: _innerContainer(),
+      ),
+    );
+  }
+
+  _innerContainer() {
+    return FutureBuilder(
+      future: view(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Styles.accentColor,
+            ),
+          );
+        } else {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return ExpandableTheme(
           data: const ExpandableThemeData(
             iconColor: Colors.blue,
             useInkWell: true,
@@ -90,8 +109,10 @@ class _FaqListState extends State<FaqList> {
               ],
             ),
           ),
-        ),
-      ),
+        );
+          }
+        }
+      },
     );
   }
 }

@@ -33,9 +33,9 @@ class _DepositListState extends State<DepositList> {
       var jsonBody = jsonDecode(response.body);
       for (var req in jsonBody[Field.data]) {
         final data = Deposit.fromMap(req);
-        setState(() {
+        if (mounted) {
           depositList.add(data);
-        });
+        }
       }
     } else {
       print(Status.failedTxt);
@@ -56,13 +56,13 @@ class _DepositListState extends State<DepositList> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
+  // @override
+  // void initState() {
+  //   super.initState();
 
-    // loadSharedPrefs();
-    view();
-  }
+  //   // loadSharedPrefs();
+  //   view();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +78,26 @@ class _DepositListState extends State<DepositList> {
         ),
         drawer: const SideDrawer(),
         backgroundColor: Styles.primaryColor,
-        body: ExpandableTheme(
+        body: _innerContainer(),
+      ),
+    );
+  }
+
+  _innerContainer() {
+    return FutureBuilder(
+      future: view(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Styles.accentColor,
+            ),
+          );
+        } else {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return ExpandableTheme(
           data: const ExpandableThemeData(
             iconColor: Colors.blue,
             useInkWell: true,
@@ -88,12 +107,15 @@ class _DepositListState extends State<DepositList> {
             child: ListView(
               physics: const BouncingScrollPhysics(),
               children: [
-                for (Deposit deposit in depositList) CardDeposit(deposit: deposit),
+                for (Deposit deposit in depositList)
+                  CardDeposit(deposit: deposit),
               ],
             ),
           ),
-        ),
-      ),
+        );
+          }
+        }
+      },
     );
   }
 }

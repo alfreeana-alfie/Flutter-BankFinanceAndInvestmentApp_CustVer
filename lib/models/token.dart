@@ -1,11 +1,13 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class Token {
-  String token;
+  String? token, expiredAt;
 
-  Token(this.token);
+  Token(this.token, this.expiredAt);
 
-  Token.fromJSON(Map<String, dynamic> json) : token = json[Pref.accessToken];
+  Token.fromJSON(Map<String, dynamic> json)
+      : token     = json[Pref.accessToken],
+        expiredAt = json[Pref.expiredAt];
 }
 
 class MessageAPI {

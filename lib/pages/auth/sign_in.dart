@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/config.dart';
+import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/methods/auth_methods.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_banking_app/widgets/clickable_text.dart';
 import 'package:flutter_banking_app/widgets/header_1.dart';
 import 'package:flutter_banking_app/widgets/text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -22,6 +25,40 @@ class _SignInPageState extends State<SignInPage> {
   String email = '';
   String password = '';
 
+  SharedPref sharedPref = SharedPref();
+
+  Future check() async {
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('yyyy-MM-dd kk:mm:ss').format(now);
+
+    // print(formattedDate);
+
+    try {
+      String? expiredAt = await sharedPref.read(Pref.expiredAt);
+
+      // print(expiredAt);
+      User user = User.fromJSON(await sharedPref.read(Pref.userData));
+
+      DateTime expires = DateTime.parse(expiredAt!);
+
+      print(expires);
+
+      if (expiredAt.isNotEmpty) {
+        if (expires.compareTo(now) < 0) {
+          if (user.userType == Field.customerTxt) {
+            Navigator.pushNamed(context, RouteSTR.dashboardMember);
+          } else {
+            Navigator.pushNamed(context, RouteSTR.dashboardAdmin);
+          }
+        }
+      } else {
+        Navigator.pushNamed(context, RouteSTR.signIn);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,17 +69,7 @@ class _SignInPageState extends State<SignInPage> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Center(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                _buildForm(),
-              ],
-            ),
-          ),
-        ),
+        child: _innerContainer(),
       ),
     );
   }
@@ -160,6 +187,37 @@ class _SignInPageState extends State<SignInPage> {
           ],
         ),
       ),
+    );
+  }
+
+  _innerContainer() {
+    return FutureBuilder(
+      future: check(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Styles.accentColor,
+            ),
+          );
+        } else {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return Center(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    _buildForm(),
+                  ],
+                ),
+              ),
+            );
+          }
+        }
+      },
     );
   }
 }

@@ -25,16 +25,16 @@ class _GiftCardListState extends State<GiftCardList> {
   late Map<String, dynamic> requestMap;
   List<GiftCard> giftCardList = [];
 
-  Future viewOne(String userId) async {
+  Future view() async {
     final response = await http.get(AdminAPI.listOfGiftCard, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
       for (var req in jsonBody[Field.data]) {
         final data = GiftCard.fromMap(req);
-        setState(() {
+        if (mounted) {
           giftCardList.add(data);
-        });
+        }
       }
     } else {
       print(Status.failedTxt);
@@ -55,42 +55,63 @@ class _GiftCardListState extends State<GiftCardList> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
+  // @override
+  // void initState() {
+  //   super.initState();
 
-    loadSharedPrefs();
-    viewOne('1');
-  }
+  //   loadSharedPrefs();
+  //   viewOne('1');
+  // }
 
   @override
   Widget build(BuildContext context) {
     return OKToast(
       child: Scaffold(
         appBar: addAppBar(
-          title: Str.giftCardTxt,
-          implyLeading: true,
-          context: context,
-          hasAction: true,
-          path: RouteSTR.createGiftCard
-        ),
+            title: Str.giftCardTxt,
+            implyLeading: true,
+            context: context,
+            hasAction: true,
+            path: RouteSTR.createGiftCard),
         backgroundColor: Styles.primaryColor,
-        body: ExpandableTheme(
-          data: const ExpandableThemeData(
-            iconColor: Colors.blue,
-            useInkWell: true,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: ListView(
-              physics: const BouncingScrollPhysics(),
-              children: [
-                for (GiftCard giftCard in giftCardList) CardGiftCard(giftCard: giftCard),
-              ],
-            ),
-          ),
-        ),
+        body: _innerContainer(),
       ),
+    );
+  }
+
+  _innerContainer() {
+    return FutureBuilder(
+      future: view(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Styles.accentColor,
+            ),
+          );
+        } else {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return ExpandableTheme(
+              data: const ExpandableThemeData(
+                iconColor: Colors.blue,
+                useInkWell: true,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: ListView(
+                  physics: const BouncingScrollPhysics(),
+                  children: [
+                    for (GiftCard giftCard in giftCardList)
+                      CardGiftCard(giftCard: giftCard),
+                  ],
+                ),
+              ),
+            );
+          }
+        }
+      },
     );
   }
 }

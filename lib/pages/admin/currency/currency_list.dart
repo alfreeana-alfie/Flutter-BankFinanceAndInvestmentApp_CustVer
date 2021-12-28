@@ -25,16 +25,16 @@ class _CurrencyListState extends State<CurrencyList> {
   late Map<String, dynamic> requestMap;
   List<Currency> currList = [];
 
-  Future viewOne(String userId) async {
+  Future view() async {
     final response = await http.get(AdminAPI.listOfCurrency, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
       for (var req in jsonBody[Field.data]) {
         final data = Currency.fromMap(req);
-        setState(() {
+        if (mounted) {
           currList.add(data);
-        });
+        }
       }
     } else {
       print(Status.failedTxt);
@@ -55,13 +55,13 @@ class _CurrencyListState extends State<CurrencyList> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
+  // @override
+  // void initState() {
+  //   super.initState();
 
-    loadSharedPrefs();
-    viewOne('1');
-  }
+  //   loadSharedPrefs();
+  //   viewOne('1');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,26 @@ class _CurrencyListState extends State<CurrencyList> {
           path: RouteSTR.createCurrency
         ),
         backgroundColor: Styles.primaryColor,
-        body: ExpandableTheme(
+        body: _innerContainer(),
+      ),
+    );
+  }
+
+  _innerContainer() {
+    return FutureBuilder(
+      future: view(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Styles.accentColor,
+            ),
+          );
+        } else {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return ExpandableTheme(
           data: const ExpandableThemeData(
             iconColor: Colors.blue,
             useInkWell: true,
@@ -89,8 +108,10 @@ class _CurrencyListState extends State<CurrencyList> {
               ],
             ),
           ),
-        ),
-      ),
+        );
+          }
+        }
+      },
     );
   }
 }

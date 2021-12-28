@@ -4,7 +4,8 @@ import 'package:flutter_banking_app/utils/size_config.dart';
 class Styles {
   // LIGHT MODE
   static const Color primaryColor = Color.fromRGBO(255, 255, 255, 1);
-  static const Color primaryWithOpacityColor = Color.fromRGBO(102, 153, 255, 0.3);
+  static const Color primaryWithOpacityColor =
+      Color.fromRGBO(102, 153, 255, 0.3);
   static const Color accentColor = Color.fromRGBO(0, 51, 153, 1);
   static const Color secondaryColor = Color.fromRGBO(0, 122, 254, 1);
   static const Color thirdColor = Color.fromRGBO(102, 153, 255, 1);
@@ -41,13 +42,15 @@ class Styles {
       fontSize: getProportionateScreenWidth(19),
       fontWeight: FontWeight.w500);
 
-  static const TextStyle headingStyle01 =
-      TextStyle(fontWeight: FontWeight.w500, fontSize: 19, color: Styles.textColorWhite);
+  static const TextStyle headingStyle01 = TextStyle(
+      fontWeight: FontWeight.w500, fontSize: 19, color: Styles.textColorWhite);
+  static const TextStyle titleApp = TextStyle(
+      fontWeight: FontWeight.w500, fontSize: 19, color: Styles.textColor);
 
-  static const TextStyle subtitleStyle =
-      TextStyle(fontWeight: FontWeight.bold, fontSize: 21, color: Styles.textColorWhite);
-  static const TextStyle subtitleStyle02 =
-      TextStyle(color: Styles.textColorWhite, fontSize: 18, fontWeight: FontWeight.bold);
+  static const TextStyle subtitleStyle = TextStyle(
+      fontWeight: FontWeight.bold, fontSize: 21, color: Styles.textColorWhite);
+  static const TextStyle subtitleStyle02 = TextStyle(
+      color: Styles.textColorWhite, fontSize: 18, fontWeight: FontWeight.bold);
   static TextStyle subtitleStyle03 = TextStyle(
       color: Styles.textColorWhite.withOpacity(0.7),
       fontSize: getProportionateScreenWidth(18),

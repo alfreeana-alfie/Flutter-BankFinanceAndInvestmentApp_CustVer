@@ -7,6 +7,7 @@ import 'package:flutter_banking_app/models/token.dart';
 import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 import 'config.dart';
 
@@ -23,7 +24,7 @@ void signIn(BuildContext context, Map<String, String> body) async {
     var jsonBody = Token.fromJSON(jsonDecode(response.body));
 
     sharedPref.save(Pref.accessToken, jsonBody.token);
-    sharedPref.saveLogged(Pref.isLoggedIn, true);
+    sharedPref.save(Pref.expiredAt, jsonBody.expiredAt);
 
     getUserDetails(context);
   } else {
@@ -46,17 +47,12 @@ void getUserDetails(BuildContext context) async {
 
     sharedPref.save(Pref.userData, jsonBody);
 
-    print(response.body);
-
-    print(jsonBody.userType);
-
     if (jsonBody.userType == Field.customerTxt) {
       Navigator.pushNamed(context, RouteSTR.dashboardMember);
     } else {
       Navigator.pushNamed(context, RouteSTR.dashboardAdmin);
     }
   } else {
-    // print(Status.failedTxt);
     CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
   }
 }
@@ -74,8 +70,8 @@ void signOut(BuildContext context) async {
     // var jsonBody = MessageAPI.fromJSON(jsonDecode(response.body));
     // String? message = jsonBody.message;
 
-    // print(message);
     sharedPref.remove(Pref.accessToken);
+    sharedPref.remove(Pref.expiredAt);
     sharedPref.remove(Pref.userData);
 
     if (response.statusCode == Status.ok) {

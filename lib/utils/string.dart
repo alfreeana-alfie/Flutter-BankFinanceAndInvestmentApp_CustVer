@@ -246,6 +246,7 @@ class Pref {
   static String userData = 'user_data';
   static String isLoggedIn = 'is_logged_in';
   static String message = 'message';
+  static String expiredAt = 'expires_at';
 }
 
 class RouteSTR {
@@ -267,10 +268,8 @@ class RouteSTR {
   static String dashboardAdmin = '/dashboard-admin';
 
   static String sendMoneyM = '/send-money';
-  static String sendMoneyListM = '/send-money-list';
 
   static String exchangeMoneyM = '/exchange-money';
-  static String exchangeMoneyListM = '/exchange-money-list';
 
   static String wireTransferM = '/wire-transfer';
   static String wireTransferListM = '/wire-transfer-list';
@@ -318,6 +317,9 @@ class RouteSTR {
   static String giftCardList = '/gift-card-list-a';
   static String usedGiftCardList = '/used-gift-card-list-a';
   static String createGiftCard = '/create-gift-card';
+
+  static String sendMoneyList = '/send-money-list-a';
+  static String exchangeMoneyList = '/exchange-money-list-a';
 }
 
 class Field {

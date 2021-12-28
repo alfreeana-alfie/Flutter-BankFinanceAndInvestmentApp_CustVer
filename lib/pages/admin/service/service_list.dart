@@ -25,16 +25,16 @@ class _ServiceListState extends State<ServiceList> {
   late Map<String, dynamic> requestMap;
   List<Service> serviceList = [];
 
-  Future viewOne(String userId) async {
+  Future view() async {
     final response = await http.get(AdminAPI.listOfService, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
       for (var req in jsonBody[Field.data]) {
         final data = Service.fromMap(req);
-        setState(() {
+        if (mounted) {
           serviceList.add(data);
-        });
+        }
       }
     } else {
       print(Status.failedTxt);
@@ -55,13 +55,13 @@ class _ServiceListState extends State<ServiceList> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
+  // @override
+  // void initState() {
+  //   super.initState();
 
-    loadSharedPrefs();
-    viewOne('1');
-  }
+  //   loadSharedPrefs();
+  //   viewOne('1');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -76,22 +76,44 @@ class _ServiceListState extends State<ServiceList> {
         ),
         // drawer: SideDrawer(),
         backgroundColor: Styles.primaryColor,
-        body: ExpandableTheme(
-          data: const ExpandableThemeData(
-            iconColor: Colors.blue,
-            useInkWell: true,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: ListView(
-              physics: const BouncingScrollPhysics(),
-              children: [
-                for (Service service in serviceList) CardService(service: service),
-              ],
-            ),
-          ),
-        ),
+        body: _innerContainer(),
       ),
+    );
+  }
+
+  _innerContainer() {
+    return FutureBuilder(
+      future: view(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Styles.accentColor,
+            ),
+          );
+        } else {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return ExpandableTheme(
+              data: const ExpandableThemeData(
+                iconColor: Colors.blue,
+                useInkWell: true,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: ListView(
+                  physics: const BouncingScrollPhysics(),
+                  children: [
+                    for (Service service in serviceList)
+                      CardService(service: service),
+                  ],
+                ),
+              ),
+            );
+          }
+        }
+      },
     );
   }
 }

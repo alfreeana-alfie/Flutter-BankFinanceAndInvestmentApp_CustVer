@@ -25,7 +25,7 @@ class _UsersListState extends State<UsersList> {
   late Map<String, dynamic> requestMap;
   List<Users> userList = [];
 
-  Future viewOne(String userId) async {
+  Future view() async {
     final response = await http.get(AdminAPI.listOfUser, headers: headers);
 
     if (response.statusCode == Status.ok) {
@@ -42,26 +42,26 @@ class _UsersListState extends State<UsersList> {
     }
   }
 
-  // loadSharedPrefs() async {
-  //   try {
-  //     User user = User.fromJSON(await sharedPref.read(Pref.userData));
-  //     setState(() {
-  //       userLoad = user;
+  loadSharedPrefs() async {
+    try {
+      User user = User.fromJSON(await sharedPref.read(Pref.userData));
+      setState(() {
+        userLoad = user;
 
-  //       print(userLoad.id.toString());
-  //     });
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
-
-  @override
-  void initState() {
-    super.initState();
-
-    // loadSharedPrefs();
-    viewOne('1');
+        print(userLoad.id.toString());
+      });
+    } catch (e) {
+      print(e);
+    }
   }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  //   loadSharedPrefs();
+  //   viewOne('1');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,26 @@ class _UsersListState extends State<UsersList> {
         ),
         // drawer: SideDrawer(),
         backgroundColor: Styles.primaryColor,
-        body: ExpandableTheme(
+        body: _innerContainer(),
+      ),
+    );
+  }
+
+  _innerContainer() {
+    return FutureBuilder(
+      future: view(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Styles.accentColor,
+            ),
+          );
+        } else {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return ExpandableTheme(
           data: const ExpandableThemeData(
             iconColor: Colors.blue,
             useInkWell: true,
@@ -90,8 +109,10 @@ class _UsersListState extends State<UsersList> {
               ],
             ),
           ),
-        ),
-      ),
+        );
+          }
+        }
+      },
     );
   }
 }
