@@ -117,4 +117,9 @@ class AdminAPI {
   // Teams
   static Uri listOfTeam = Uri.parse('$android/list_of_teams');
   static Uri createTeam = Uri.parse('$android/create_team');
+
+  // Gift Card 
+  static Uri listOfGiftCard = Uri.parse('$android/list_of_gift_cards');
+  static Uri listOfUsedGiftCard = Uri.parse('$android/list_of_used_gift_cards');
+  static Uri createGiftCard = Uri.parse('$android/gift_card');
 }

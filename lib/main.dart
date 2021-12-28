@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
+import 'pages/admin/gift_card/create_gift_card.dart';
 import 'pages/admin/loan_managements/create_loan_product.dart';
 import 'pages/admin/loan_managements/loan_cal.dart';
 import 'pages/admin/loan_managements/loan_product_list.dart';
@@ -22,7 +23,7 @@ Future<void> main() async {
   // var status = prefs.getBool(Pref.isLoggedIn) ?? false;
 
   runApp(
-    const MaterialApp(home: LoanProductList()),
+    const MaterialApp(home: CreateGiftCard()),
   // );
     // MaterialApp(
     //   home: SplashScreenView(

@@ -204,6 +204,7 @@ class Str {
   static String createLoanProductTxt = 'Create Loan Product';
   static String createFdrPlanTxt = 'Create Plan';
   static String createBranchTxt = 'Create Branch';
+  static String createGiftCardTxt = 'Create Gift Card';
   static String createFaqTxt = 'Create FAQ';
   static String submitTxt = 'Submit';
   static String userListTxt = 'User List';
@@ -214,6 +215,10 @@ class Str {
   static String localeTxt = 'Locale';
   static String iconTxt = 'Icon';
   static String imageTxt = 'Image';
+
+  static String codeTxt = 'Code';
+  static String usedAtTxt = 'Used At';
+  static String userTxt = 'User';
 }
 
 class Status {
@@ -309,6 +314,10 @@ class RouteSTR {
 
   static String serviceList = '/service-list-a';
   static String createService = '/create-service';
+
+  static String giftCardList = '/gift-card-list-a';
+  static String usedGiftCardList = '/used-gift-card-list-a';
+  static String createGiftCard = '/create-gift-card';
 }
 
 class Field {
@@ -407,4 +416,7 @@ class Field {
 
   static String image = 'image';
   static String role = 'role';
+
+  static String usedAt = 'used_at';
+  static String code = 'code';
 }
