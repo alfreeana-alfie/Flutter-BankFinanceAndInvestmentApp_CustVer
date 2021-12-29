@@ -300,7 +300,7 @@ class _MCreateLoanState extends State<MCreateLoan> {
 
                 LoanRequestMethods.add(context, body);
               },
-              text: Str.sendMoneyTxt,
+              text: Str.submitTxt,
             ),
           ),
           // Container(

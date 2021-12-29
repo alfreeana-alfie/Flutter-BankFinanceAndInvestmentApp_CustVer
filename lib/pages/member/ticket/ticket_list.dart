@@ -78,6 +78,7 @@ class _MSupportTicketListState extends State<MSupportTicketList> {
           context: context,
           hasAction: true,
           path: RouteSTR.addSupportTicketM,
+          onPressed: () => Navigator.pushNamed(context, RouteSTR.dashboardMember),
         ),
         // drawer: SideDrawer(),
         backgroundColor: Styles.primaryColor,

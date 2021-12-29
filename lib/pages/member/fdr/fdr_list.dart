@@ -74,12 +74,13 @@ class _MFdrListState extends State<MFdrList> {
   Widget build(BuildContext context) {
     return OKToast(
       child: Scaffold(
-        appBar: noBackAppBar(
+        appBar: addAppBar(
           title: Str.fdrHistoryTxt,
           implyLeading: true,
           context: context,
           hasAction: true,
           path: RouteSTR.addFdrM,
+          onPressed: () => Navigator.pushNamed(context, RouteSTR.dashboardMember),
         ),
         // drawer: SideDrawer(),
         backgroundColor: Styles.primaryColor,

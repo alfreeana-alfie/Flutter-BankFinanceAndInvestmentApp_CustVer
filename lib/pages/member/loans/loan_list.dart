@@ -72,12 +72,13 @@ class _MLoanListState extends State<MLoanList> {
   Widget build(BuildContext context) {
     return OKToast(
       child: Scaffold(
-        appBar: noBackAppBar(
+        appBar: addAppBar(
           title: Str.myLoanTxt,
           implyLeading: true,
           context: context,
           hasAction: true,
           path: RouteSTR.addLoanM,
+          onPressed: () => Navigator.pushNamed(context, RouteSTR.dashboardMember),
         ),
         // drawer: SideDrawer(),
         backgroundColor: Styles.primaryColor,

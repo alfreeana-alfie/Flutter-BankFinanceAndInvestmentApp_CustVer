@@ -8,6 +8,7 @@ import 'package:flutter_banking_app/widgets/detail.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class CardTicket extends StatelessWidget {
   const CardTicket({Key? key, required this.ticket}) : super(key: key);
@@ -52,8 +53,11 @@ class CardTicket extends StatelessWidget {
                               color: Styles.accentColor,
                             ),
                             const Gap(20),
-                            Text(ticket.supportTicketId.toString(),
-                                style: Theme.of(context).textTheme.headline6),
+                            Container(
+                              constraints: const BoxConstraints(minWidth: 100, maxWidth: 220),
+                              child: Text(ticket.supportTicketId.toString(),
+                                  style: Theme.of(context).textTheme.headline6, overflow: TextOverflow.ellipsis,),
+                            ),
                           ],
                         )),
                     collapsed: const Text(
@@ -153,6 +157,10 @@ class CardTicket extends StatelessWidget {
         priority = 'Default';
     }
 
+    DateTime tempDate = DateTime.parse(ticket.createdAt ?? '-');
+    String createdAt = DateFormat('yyyy-MM-dd hh:mm:ss').format(tempDate);
+
+
     return Container(
       color: Styles.accentColor,
       padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
@@ -174,7 +182,7 @@ class CardTicket extends StatelessWidget {
                 labelDetails: priority),
             DetailRow(
                 labelTitle: Str.createdTxt,
-                labelDetails: ticket.createdAt ?? Field.emptyString),
+                labelDetails: createdAt),
             // _buildButtonRow(context),
           ],
         ),

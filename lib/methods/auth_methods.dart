@@ -14,14 +14,18 @@ import 'config.dart';
 SharedPref sharedPref = SharedPref();
 
 void signIn(BuildContext context, Map<String, String> body) async {
-  User user = User.fromJSON(await sharedPref.read(Pref.userData));
+  // try {
+  //   User user = User.fromJSON(await sharedPref.read(Pref.userData));
 
-  if(user.id.toString().isNotEmpty){
-    sharedPref.remove(Pref.accessToken);
-    sharedPref.remove(Pref.expiredAt);
-    sharedPref.remove(Pref.userData);
-  }
-  
+  // if(user.id.toString().isNotEmpty){
+  //   sharedPref.remove(Pref.accessToken);
+  //   sharedPref.remove(Pref.expiredAt);
+  //   sharedPref.remove(Pref.userData);
+  // }
+  // } catch (e) {
+  //   print(e);
+  // }
+
   final response = await http.post(
     API.login,
     headers: headers,

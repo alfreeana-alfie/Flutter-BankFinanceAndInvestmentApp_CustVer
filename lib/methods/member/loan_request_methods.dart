@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/utils/string.dart';
@@ -16,19 +15,11 @@ class LoanRequestMethods {
     );
 
     if (response.statusCode == Status.created) {
-      // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
+
       Future.delayed(const Duration(milliseconds: 2000), () {
-
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const BottomNavInt(
-                      index: 1,
-                    )));
-
+        Navigator.pushReplacementNamed(context, RouteSTR.loanListM);
       });
-      
     } else {
       print(response.body);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);

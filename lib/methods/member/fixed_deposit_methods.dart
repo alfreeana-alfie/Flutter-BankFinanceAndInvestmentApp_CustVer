@@ -26,12 +26,13 @@ class FixedDepositMethods {
       // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
       Future.delayed(const Duration(milliseconds: 2000), () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const BottomNavInt(
-                      index: 2,
-                    )));
+        Navigator.pushReplacementNamed(context, RouteSTR.fdrListM);
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) => const BottomNavInt(
+        //               index: 2,
+        //             )));
         // Navigator.pop(context);
       });
     } else {

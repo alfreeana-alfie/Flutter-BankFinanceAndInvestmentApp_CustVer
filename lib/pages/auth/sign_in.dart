@@ -122,6 +122,7 @@ class _SignInPageState extends State<SignInPage> {
               padding: const EdgeInsets.symmetric(
                   horizontal: Values.horizontalValue * 2),
               child: TextFieldCustom(
+                obsecure: true,
                 onSaved: (value) => password = value!,
                 hintText: Str.passwordTxt,
               ),

@@ -65,7 +65,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       home: SplashScreenView(
-        navigateRoute: const SignInPage(),
+        navigateRoute: const BottomNav(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,

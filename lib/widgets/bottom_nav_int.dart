@@ -18,7 +18,6 @@ class BottomNavInt extends StatefulWidget {
 }
 
 class _BottomNavIntState extends State<BottomNavInt> {
-  int _selectedIndex = 0;
   static final List<Widget> widgetOptions = <Widget>[
     const MemberDasboard(),
     const MLoanList(),
@@ -26,19 +25,21 @@ class _BottomNavIntState extends State<BottomNavInt> {
     const Profile(),
   ];
 
+  @override
+  Widget build(BuildContext context) {
+    int _selectedIndex = widget.index;
+  
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       // drawer: SideDrawer(),
       backgroundColor: Styles.primaryColor,
       body: Center(
-        child: widgetOptions.elementAt(widget.index),
+        child: widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0,

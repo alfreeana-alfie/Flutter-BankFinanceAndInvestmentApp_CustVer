@@ -13,6 +13,7 @@ import 'package:flutter_banking_app/widgets/dropdown_fdr.dart';
 import 'package:flutter_banking_app/widgets/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/my_app_bar.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 
 class ProfileOverview extends StatefulWidget {
   const ProfileOverview({Key? key}) : super(key: key);
@@ -31,7 +32,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
   loadSharedPrefs() async {
     try {
       User user = User.fromJSON(await sharedPref.read(Pref.userData));
-      if(mounted) {
+      if (mounted) {
         userLoad = user;
       }
     } catch (e) {
@@ -54,7 +55,11 @@ class _ProfileOverviewState extends State<ProfileOverview> {
     return Scaffold(
       backgroundColor: Styles.primaryColor,
       appBar: myAppBar(
-          title: Str.profileOverviewTxt, implyLeading: true, context: context, onPressedBack: () => Navigator.pop(context),),
+        title: Str.profileOverviewTxt,
+        implyLeading: true,
+        context: context,
+        onPressedBack: () => Navigator.pop(context),
+      ),
       body: _innerContainer(),
     );
   }
@@ -73,169 +78,179 @@ class _ProfileOverviewState extends State<ProfileOverview> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
+            DateTime emailtempDate =
+                DateTime.parse(userLoad.emailVerifiedAt ?? '-');
+            String emailVerifiedAt =
+                DateFormat('yyyy-MM-dd hh:mm:ss').format(emailtempDate);
+
+            // DateTime smstempDate =
+            //     DateTime.parse(userLoad.smsVerifiedAt ?? '-');
+            // String smsVerifiedAt =
+            //     DateFormat('yyyy-MM-dd hh:mm:ss').format(smstempDate);
+
             return ListView(
-        padding: const EdgeInsets.all(15),
-        children: [
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Styles.accentColor,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+              padding: const EdgeInsets.all(15),
               children: [
                 Container(
-                  padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Styles.accentColor,
+                  ),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // const Gap(20.0),
-                      TextFormField(
-                        initialValue: userLoad.name,
-                        onChanged: (val) {
-                          name = val;
-                        },
-                        style: Styles.subtitleStyle,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.text,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          labelText: Str.nameTxt,
-                          labelStyle: Styles.subtitleStyle,
-                          hintText: Str.nameTxt,
-                          hintStyle: Styles.subtitleStyle03,
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            gapPadding: 0.0,
-                          ),
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // const Gap(20.0),
+                            TextFormField(
+                              initialValue: userLoad.name,
+                              onChanged: (val) {
+                                name = val;
+                              },
+                              style: Styles.subtitleStyle,
+                              textInputAction: TextInputAction.done,
+                              keyboardType: TextInputType.text,
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                labelText: Str.nameTxt,
+                                labelStyle: Styles.subtitleStyle,
+                                hintText: Str.nameTxt,
+                                hintStyle: Styles.subtitleStyle03,
+                                border: const OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  gapPadding: 0.0,
+                                ),
+                              ),
+                            ),
+                            const Gap(20.0),
+                            TextFormField(
+                              initialValue: userLoad.email,
+                              onChanged: (val) {
+                                email = val;
+                              },
+                              style: Styles.subtitleStyle,
+                              textInputAction: TextInputAction.done,
+                              keyboardType: TextInputType.emailAddress,
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                labelText: Str.emailTxt,
+                                labelStyle: Styles.subtitleStyle,
+                                hintText: Str.emailTxt,
+                                hintStyle: Styles.subtitleStyle03,
+                                border: const OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  gapPadding: 0.0,
+                                ),
+                              ),
+                            ),
+                            const Gap(20.0),
+                            TextFormField(
+                              initialValue: userLoad.phone,
+                              onChanged: (val) {
+                                phone = val;
+                              },
+                              style: Styles.subtitleStyle,
+                              textInputAction: TextInputAction.done,
+                              keyboardType: TextInputType.phone,
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                labelText: Str.phoneNumberTxt,
+                                labelStyle: Styles.subtitleStyle,
+                                hintText: Str.phoneNumberTxt,
+                                hintStyle: Styles.subtitleStyle03,
+                                border: const OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  gapPadding: 0.0,
+                                ),
+                              ),
+                            ),
+                            const Gap(20.0),
+
+                            TextFormField(
+                              initialValue: userLoad.branchId ?? 'Default',
+                              onChanged: (val) {
+                                branchId = val;
+                              },
+                              style: Styles.subtitleStyle,
+                              textInputAction: TextInputAction.done,
+                              keyboardType: TextInputType.text,
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                labelText: Str.branchTxt,
+                                labelStyle: Styles.subtitleStyle,
+                                hintText: Str.branchTxt,
+                                hintStyle: Styles.subtitleStyle03,
+                                border: const OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  gapPadding: 0.0,
+                                ),
+                              ),
+                            ),
+                            const Gap(20.0),
+                            TextFormField(
+                              readOnly: true,
+                              initialValue: emailVerifiedAt,
+                              onChanged: (val) {
+                                emailVerifiedAt = val;
+                              },
+                              style: Styles.subtitleStyle,
+                              textInputAction: TextInputAction.done,
+                              keyboardType: TextInputType.text,
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                labelText: Str.emailVerifiedAtTxt,
+                                labelStyle: Styles.subtitleStyle,
+                                hintText: Str.emailVerifiedAtTxt,
+                                hintStyle: Styles.subtitleStyle03,
+                                border: const OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  gapPadding: 0.0,
+                                ),
+                              ),
+                            ),
+                            const Gap(20.0),
+                            TextFormField(
+                              readOnly: true,
+                              initialValue: userLoad.smsVerifiedAt ?? 'NO',
+                              onChanged: (val) {
+                                smsVerifiedAt = val;
+                              },
+                              style: Styles.subtitleStyle,
+                              textInputAction: TextInputAction.done,
+                              keyboardType: TextInputType.text,
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                labelText: Str.smsVerifiedAtTxt,
+                                labelStyle: Styles.subtitleStyle,
+                                hintText: Str.smsVerifiedAtTxt,
+                                hintStyle: Styles.subtitleStyle03,
+                                border: const OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  gapPadding: 0.0,
+                                ),
+                              ),
+                            ),
+                            // const Gap(20),
+                          ],
                         ),
                       ),
-                      const Gap(20.0),
-                      TextFormField(
-                        initialValue: userLoad.email,
-                        onChanged: (val) {
-                          email = val;
-                        },
-                        style: Styles.subtitleStyle,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.emailAddress,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          labelText: Str.emailTxt,
-                          labelStyle: Styles.subtitleStyle,
-                          hintText: Str.emailTxt,
-                          hintStyle: Styles.subtitleStyle03,
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            gapPadding: 0.0,
-                          ),
-                        ),
-                      ),
-                      const Gap(20.0),
-                      TextFormField(
-                        initialValue: userLoad.phone,
-                        onChanged: (val) {
-                          phone = val;
-                        },
-                        style: Styles.subtitleStyle,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.phone,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          labelText: Str.phoneNumberTxt,
-                          labelStyle: Styles.subtitleStyle,
-                          hintText: Str.phoneNumberTxt,
-                          hintStyle: Styles.subtitleStyle03,
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            gapPadding: 0.0,
-                          ),
-                        ),
-                      ),
-                      const Gap(20.0),
-                      
-                      TextFormField(
-                        initialValue: userLoad.branchId ?? 'Default',
-                        onChanged: (val) {
-                          branchId = val;
-                        },
-                        style: Styles.subtitleStyle,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.text,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          labelText: Str.branchTxt,
-                          labelStyle: Styles.subtitleStyle,
-                          hintText: Str.branchTxt,
-                          hintStyle: Styles.subtitleStyle03,
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            gapPadding: 0.0,
-                          ),
-                        ),
-                      ),
-                      const Gap(20.0),
-                      TextFormField(
-                        readOnly: true,
-                        initialValue: userLoad.emailVerifiedAt ?? 'NO',
-                        onChanged: (val) {
-                          emailVerifiedAt = val;
-                        },
-                        style: Styles.subtitleStyle,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.text,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          labelText: Str.emailVerifiedAtTxt,
-                          labelStyle: Styles.subtitleStyle,
-                          hintText: Str.emailVerifiedAtTxt,
-                          hintStyle: Styles.subtitleStyle03,
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            gapPadding: 0.0,
-                          ),
-                        ),
-                      ),
-                      const Gap(20.0),
-                      TextFormField(
-                        readOnly: true,
-                        initialValue: userLoad.smsVerifiedAt ?? 'NO',
-                        onChanged: (val) {
-                          smsVerifiedAt = val;
-                        },
-                        style: Styles.subtitleStyle,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.text,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          labelText: Str.smsVerifiedAtTxt,
-                          labelStyle: Styles.subtitleStyle,
-                          hintText: Str.smsVerifiedAtTxt,
-                          hintStyle: Styles.subtitleStyle03,
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            gapPadding: 0.0,
-                          ),
-                        ),
-                      ),
-                      // const Gap(20),
                     ],
                   ),
                 ),
+                // const Gap(20),
+                // elevatedButton(
+                //   color: Styles.secondaryColor,
+                //   context: context,
+                //   callback: () {},
+                //   text: Str.saveTxt.toUpperCase(),
+                // ),
               ],
-            ),
-          ),
-          // const Gap(20),
-          // elevatedButton(
-          //   color: Styles.secondaryColor,
-          //   context: context,
-          //   callback: () {},
-          //   text: Str.saveTxt.toUpperCase(),
-          // ),
-        ],
-      );
+            );
           }
         }
       },
