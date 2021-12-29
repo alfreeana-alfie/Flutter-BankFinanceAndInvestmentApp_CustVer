@@ -9,8 +9,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 
-class Card1 extends StatelessWidget {
-  const Card1({Key? key, required this.requests}) : super(key: key);
+class CardPaymentRequest extends StatelessWidget {
+  const CardPaymentRequest({Key? key, required this.requests}) : super(key: key);
 
   final PaymentRequest requests;
 
@@ -125,7 +125,6 @@ class Card1 extends StatelessWidget {
     );
   }
 
-
   buildExpanded1(BuildContext context) {
 
     DateTime tempDate = DateTime.parse(requests.createdAt ?? '-');
@@ -161,7 +160,7 @@ class Card1 extends StatelessWidget {
               labelTitle: Str.receiverTxt,
               labelDetails: requests.receiverName ?? Field.emptyString,
             ),
-            _buildButtonRow(context),
+            // _buildButtonRow(context),
           ],
         ),
       ]),

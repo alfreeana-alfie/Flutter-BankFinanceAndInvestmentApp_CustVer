@@ -24,7 +24,11 @@ class _MPaymentRequestListtState extends State<MPaymentRequestList> {
   late Map<String, dynamic> requestMap;
   List<PaymentRequest> requestList = [];
 
-  Future viewOne(String userId) async {
+  Future view() async {
+    User user = User.fromJSON(await sharedPref.read(Pref.userData));
+
+    String userId = user.id.toString();
+
     Uri viewSingleUser =
         Uri.parse(API.userPaymentRequestList.toString() + userId);
     final response = await http.get(viewSingleUser, headers: headers);
@@ -34,9 +38,9 @@ class _MPaymentRequestListtState extends State<MPaymentRequestList> {
       for (var req in jsonBody[Field.data]) {
         final requests = PaymentRequest.fromMap(req);
 
-        setState(() {
+        if(mounted) {
           requestList.add(requests);
-        });
+        }
       }
     } else {
       print(Status.failedTxt);
@@ -57,13 +61,13 @@ class _MPaymentRequestListtState extends State<MPaymentRequestList> {
   //   }
   // }
 
-  @override
-  void initState() {
-    super.initState();
+  // @override
+  // void initState() {
+  //   super.initState();
 
-    // loadSharedPrefs();
-    viewOne('3');
-  }
+  //   // loadSharedPrefs();
+  //   viewOne('3');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +81,25 @@ class _MPaymentRequestListtState extends State<MPaymentRequestList> {
         ),
       // drawer: SideDrawer(),
       backgroundColor: Styles.primaryColor,
-      body: ExpandableTheme(
+      body: _innerContainer(),
+    );
+  }
+
+  _innerContainer() {
+    return FutureBuilder(
+      future: view(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Styles.accentColor,
+            ),
+          );
+        } else {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return ExpandableTheme(
         data: const ExpandableThemeData(
           iconColor: Colors.blue,
           useInkWell: true,
@@ -87,11 +109,14 @@ class _MPaymentRequestListtState extends State<MPaymentRequestList> {
           child: ListView(
             physics: const BouncingScrollPhysics(),
             children: [
-              for (PaymentRequest request in requestList) Card1(requests: request),
+              for (PaymentRequest request in requestList) CardPaymentRequest(requests: request),
             ],
           ),
         ),
-      ),
+      );
+          }
+        }
+      },
     );
   }
 }

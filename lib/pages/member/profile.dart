@@ -3,122 +3,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/generated/assets.dart';
 import 'package:flutter_banking_app/json/shortcut_list.dart';
 import 'package:flutter_banking_app/methods/auth_methods.dart';
+import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/iconly/iconly_bold.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/my_app_bar.dart';
+import 'package:flutter_banking_app/widgets/no_back_appbar.dart';
 import 'package:gap/gap.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
+
+  @override
+  _ProfileState createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  String? name, email;
+
+  loadSharedPrefs() async {
+    try {
+      User user = User.fromJSON(await sharedPref.read(Pref.userData));
+      if (mounted) {
+        name = user.name;
+        email = user.email;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Styles.primaryColor,
-      appBar: myAppBar(title: '', implyLeading: true, context: context),
-      body: ListView(
-        padding: const EdgeInsets.all(15),
-        children: [
-          const Gap(40),
-          Stack(
-            children: [
-              Container(
-                height: 280,
-                alignment: Alignment.bottomCenter,
-                color: Styles.primaryColor,
-                child: Container(
-                  height: 230,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Styles.accentColor,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Gap(60),
-                      const Center(
-                          child: Text('Tino Well',
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 25))),
-                      const Gap(10),
-                      Text('FCW-587462',
-                          style:
-                              TextStyle(color: Colors.white.withOpacity(0.7))),
-                      const Gap(25),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: profilesShortcutList.map<Widget>((e) {
-                          return Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 15),
-                            padding: const EdgeInsets.all(13),
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                            ),
-                            child: Icon(e['icon'], color: e['color']),
-                          );
-                        }).toList(),
-                      ),
-                      const Gap(25)
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 30,
-                right: 30,
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color(0xFFE486DD),
-                  ),
-                  child: Transform.scale(
-                    scale: 0.55,
-                    child: Image.asset(Assets.dash),
-                  ),
-                ),
-              )
-            ],
-          ),
-          const Gap(35),
-          // customListTile(
-          //     icon: IconlyBold.Profile,
-          //     color: const Color(0xFFC76CD9),
-          //     title: 'Information'),
-          // customListTile(
-          //     icon: IconlyBold.Shield_Done,
-          //     color: const Color(0xFF229e76),
-          //     title: 'Security'),
-          // customListTile(
-          //     icon: IconlyBold.Message,
-          //     color: const Color(0xFFe17a0a),
-          //     title: 'Contact us',
-          //     context: context,
-          //     path: '/create-ticket'),
-          // customListTile(
-          //     icon: IconlyBold.Document,
-          //     color: const Color(0xFF064c6d),
-          //     title: 'Support',
-          //     context: context,
-          //     path: '/all-tickets'),
-          customListTile(
-              icon: IconlyBold.User,
-              color: const Color(0xFF064c6d),
-              title: 'Change to Admin Panel',
-              context: context,
-              path: RouteSTR.dashboardAdmin),
-          signOut(context),
-          // customListTile(
-          //     icon: Icons.dark_mode,
-          //     color: const Color(0xFF0536e8),
-          //     title: 'Dark Mode',
-          //     isDarkMode: true),
-        ],
-      ),
+      appBar: noBackAppBar(title: '', implyLeading: true, context: context),
+      body: _innerContainer(),
     );
   }
 
@@ -127,8 +47,9 @@ class Profile extends StatelessWidget {
       required String title,
       VoidCallback? callback,
       required Color color,
-      bool? isDarkMode, 
-      BuildContext? context, String? path}) {
+      bool? isDarkMode,
+      BuildContext? context,
+      String? path}) {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(vertical: 2),
       leading: InkWell(
@@ -174,7 +95,8 @@ class Profile extends StatelessWidget {
             color: Styles.primaryWithOpacityColor,
             shape: BoxShape.circle,
           ),
-          child: const Icon(IconlyBold.Logout, color: Color(0xFF229e76), size: 18),
+          child:
+              const Icon(IconlyBold.Logout, color: Color(0xFF229e76), size: 18),
         ),
         onTap: () => Navigator.pushNamed(context, RouteSTR.signIn),
         // onTap: () => signOut(context),
@@ -184,8 +106,134 @@ class Profile extends StatelessWidget {
       title: const Text('Sign Out',
           style: TextStyle(fontSize: 17, color: Styles.textColor)),
       trailing: Icon(CupertinoIcons.arrow_right,
-              color: Styles.accentColor.withOpacity(0.7)),
+          color: Styles.accentColor.withOpacity(0.7)),
       // onTap: callback,
+    );
+  }
+
+  _innerContainer() {
+    return FutureBuilder(
+      future: loadSharedPrefs(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Styles.accentColor,
+            ),
+          );
+        } else {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return ListView(
+              padding: const EdgeInsets.all(15),
+              children: [
+                const Gap(40),
+                Stack(
+                  children: [
+                    Container(
+                      height: 280,
+                      alignment: Alignment.bottomCenter,
+                      color: Styles.primaryColor,
+                      child: Container(
+                        height: 230,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Styles.accentColor,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Gap(60),
+                            Center(
+                                child: Text(name ?? Field.emptyString,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 25))),
+                            const Gap(10),
+                            Text(email ?? Field.emptyString,
+                                style: TextStyle(
+                                    color: Colors.white.withOpacity(0.7))),
+                            const Gap(25),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: profilesShortcutList.map<Widget>((e) {
+                                return InkWell(
+                                  onTap: () => Navigator.pushNamed(context, RouteSTR.profileOverview),
+                                  child: Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 15),
+                                    padding: const EdgeInsets.all(13),
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.white,
+                                    ),
+                                    child: Icon(e['icon'], color: e['color']),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                            const Gap(25)
+                          ],
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      left: 30,
+                      right: 30,
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xFFE486DD),
+                        ),
+                        child: Transform.scale(
+                          scale: 0.55,
+                          child: Image.asset(Assets.dash),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                const Gap(35),
+                // customListTile(
+                //     icon: IconlyBold.Profile,
+                //     color: const Color(0xFFC76CD9),
+                //     title: 'Information'),
+                // customListTile(
+                //     icon: IconlyBold.Shield_Done,
+                //     color: const Color(0xFF229e76),
+                //     title: 'Security'),
+                // customListTile(
+                //     icon: IconlyBold.Message,
+                //     color: const Color(0xFFe17a0a),
+                //     title: 'Contact us',
+                //     context: context,
+                //     path: '/create-ticket'),
+                // customListTile(
+                //     icon: IconlyBold.Document,
+                //     color: const Color(0xFF064c6d),
+                //     title: 'Support',
+                //     context: context,
+                //     path: '/all-tickets'),
+                customListTile(
+                    icon: IconlyBold.User,
+                    color: const Color(0xFF064c6d),
+                    title: Str.supportTicketTxt,
+                    context: context,
+                    path: RouteSTR.supportTicketListM),
+                signOut(context),
+                // customListTile(
+                //     icon: Icons.dark_mode,
+                //     color: const Color(0xFF0536e8),
+                //     title: 'Dark Mode',
+                //     isDarkMode: true),
+              ],
+            );
+          }
+        }
+      },
     );
   }
 }

@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/methods/member/loan_request_methods.dart';
+import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -21,21 +23,30 @@ class ProfileOverview extends StatefulWidget {
 
 class _ProfileOverviewState extends State<ProfileOverview> {
   final ScrollController _scrollController = ScrollController();
+  SharedPref sharedPref = SharedPref();
+  User userLoad = User();
 
-  String? name,
-      email,
-      phone,
-      branchId,
-      emailVerifiedAt,
-      smsVerifiedAt;
+  String? name, email, phone, branchId, emailVerifiedAt, smsVerifiedAt;
 
-  @override
-  void initState() {
-    _scrollController.addListener(() {
-      print(_scrollController.offset);
-    });
-    super.initState();
+  loadSharedPrefs() async {
+    try {
+      User user = User.fromJSON(await sharedPref.read(Pref.userData));
+      if(mounted) {
+        userLoad = user;
+      }
+    } catch (e) {
+      print(e);
+    }
   }
+
+  // @override
+  // void initState() {
+  //   _scrollController.addListener(() {
+  //     print(_scrollController.offset);
+  //   });
+  //   super.initState();
+  //   loadSharedPrefs();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -44,14 +55,32 @@ class _ProfileOverviewState extends State<ProfileOverview> {
       backgroundColor: Styles.primaryColor,
       appBar: myAppBar(
           title: Str.profileOverviewTxt, implyLeading: true, context: context),
-      body: ListView(
+      body: _innerContainer(),
+    );
+  }
+
+  _innerContainer() {
+    return FutureBuilder(
+      future: loadSharedPrefs(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Styles.accentColor,
+            ),
+          );
+        } else {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return ListView(
         padding: const EdgeInsets.all(15),
         children: [
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: Styles.primaryWithOpacityColor,
+              color: Styles.accentColor,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,8 +91,9 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Gap(20.0),
+                      // const Gap(20.0),
                       TextFormField(
+                        initialValue: userLoad.name,
                         onChanged: (val) {
                           name = val;
                         },
@@ -84,6 +114,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                       ),
                       const Gap(20.0),
                       TextFormField(
+                        initialValue: userLoad.email,
                         onChanged: (val) {
                           email = val;
                         },
@@ -104,6 +135,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                       ),
                       const Gap(20.0),
                       TextFormField(
+                        initialValue: userLoad.phone,
                         onChanged: (val) {
                           phone = val;
                         },
@@ -123,7 +155,9 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                         ),
                       ),
                       const Gap(20.0),
+                      
                       TextFormField(
+                        initialValue: userLoad.branchId ?? 'Default',
                         onChanged: (val) {
                           branchId = val;
                         },
@@ -144,6 +178,8 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                       ),
                       const Gap(20.0),
                       TextFormField(
+                        readOnly: true,
+                        initialValue: userLoad.emailVerifiedAt ?? 'NO',
                         onChanged: (val) {
                           emailVerifiedAt = val;
                         },
@@ -164,6 +200,8 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                       ),
                       const Gap(20.0),
                       TextFormField(
+                        readOnly: true,
+                        initialValue: userLoad.smsVerifiedAt ?? 'NO',
                         onChanged: (val) {
                           smsVerifiedAt = val;
                         },
@@ -182,21 +220,25 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                           ),
                         ),
                       ),
-                      const Gap(20),
-                      elevatedButton(
-                        color: Styles.secondaryColor,
-                        context: context,
-                        callback: () {},
-                        text: Str.saveTxt.toUpperCase(),
-                      ),
+                      // const Gap(20),
                     ],
                   ),
                 ),
               ],
             ),
           ),
+          // const Gap(20),
+          // elevatedButton(
+          //   color: Styles.secondaryColor,
+          //   context: context,
+          //   callback: () {},
+          //   text: Str.saveTxt.toUpperCase(),
+          // ),
         ],
-      ),
+      );
+          }
+        }
+      },
     );
   }
 }

@@ -2,6 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/pages/admin/branches/branch_list.dart';
+import 'package:flutter_banking_app/pages/member/dashboard.dart';
+import 'package:flutter_banking_app/pages/member/profile.dart';
+import 'package:flutter_banking_app/pages/member/ticket/create_ticket.dart';
+import 'package:flutter_banking_app/pages/member/ticket/ticket_list.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
 
 import 'pages/admin/branches/create_branch.dart';
@@ -29,6 +33,7 @@ import 'pages/admin/transaction/wire_transfer/wire_transfer.dart';
 import 'pages/admin/users/create_users.dart';
 import 'pages/admin/users/users_list.dart';
 import 'pages/auth/forgot_password.dart';
+import 'pages/auth/profile_overview.dart';
 import 'pages/auth/sign_in.dart';
 import 'pages/auth/sign_up.dart';
 import 'pages/coming_soon.dart';
@@ -65,7 +70,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       home: SplashScreenView(
-        navigateRoute: const SignInPage(),
+        navigateRoute: const BottomNav(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,
@@ -94,6 +99,7 @@ Future<void> main() async {
         RouteSTR.forgotPassword:        (context) => const ForgotPasswordPage(),
         RouteSTR.signUp:                (context) => const SignUpPage(),
         RouteSTR.signIn:                (context) => const SignInPage(),
+        RouteSTR.profileOverview:       (context) => const ProfileOverview(),
 
         // MEMBER ROUTE(S)
         RouteSTR.dashboardMember:       (context) => const BottomNav(),
@@ -113,6 +119,9 @@ Future<void> main() async {
 
         RouteSTR.addFdrM:               (context) => const MCreateFDR(),
         RouteSTR.fdrListM:              (context) => const MFdrList(),
+
+        RouteSTR.supportTicketListM:    (context) => const MSupportTicketList(),
+        RouteSTR.addSupportTicketM:     (context) => const MCreateSupportTicket(),
 
         // ADMIN ROUTE(S)
         RouteSTR.dashboardAdmin:      (context) => const AdminDashboard(),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_banking_app/methods/member/wire_transfer_methods.dart';
+import 'package:flutter_banking_app/pages/admin/other_banks/bank_list.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -108,35 +109,55 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                              padding: const EdgeInsets.fromLTRB(15, 15, 15, 8),
-                              child: Text(Str.bankTxt,
-                                  style: Styles.subtitleStyle)),
-                          const Gap(20.0),
-                          DropDownCurrency(
-                            currency: currency,
-                            currencyName: currencyName,
-                            onChanged: (val) {
-                              setState(
-                                () {
-                                  currency = val!.id.toString();
-                                  currencyName = val.name;
-                                },
-                              );
-                            },
+                      TextFormField(
+                        // readOnly: true,
+                        onChanged: (val) {
+                          otherBankId = '1';
+                        },
+                        style: Styles.subtitleStyle,
+                        textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.text,
+                        maxLines: 1,
+                        decoration: InputDecoration(
+                          labelText: Str.bankTxt,
+                          labelStyle: Styles.subtitleStyle,
+                          hintText: Str.bankTxt,
+                          hintStyle: Styles.subtitleStyle03,
+                          border: const OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            gapPadding: 0.0,
                           ),
-                        ],
+                        ),
                       ),
+                      // Row(
+                      //   crossAxisAlignment: CrossAxisAlignment.start,
+                      //   children: [
+                      //     Container(
+                      //         padding: const EdgeInsets.fromLTRB(15, 15, 15, 8),
+                      //         child: Text(Str.bankTxt,
+                      //             style: Styles.subtitleStyle)),
+                      //     const Gap(20.0),
+                      //     DropDownCurrency(
+                      //       currency: currency,
+                      //       currencyName: currencyName,
+                      //       onChanged: (val) {
+                      //         setState(
+                      //           () {
+                      //             currency = val!.id.toString();
+                      //             currencyName = val.name;
+                      //           },
+                      //         );
+                      //       },
+                      //     ),
+                      //   ],
+                      // ),
                       const Gap(20.0),
                       TextFormField(
                         // readOnly: true,
                         onChanged: (val) {},
                         style: Styles.subtitleStyle,
                         textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.text,
                         maxLines: 1,
                         decoration: InputDecoration(
                           labelText: Str.swiftCodeTxt,
@@ -155,7 +176,7 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                         onChanged: (val) {},
                         style: Styles.subtitleStyle,
                         textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.text,
                         maxLines: 1,
                         decoration: InputDecoration(
                           labelText: Str.currencyTxt,
@@ -173,7 +194,7 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                         onChanged: (val) {},
                         style: Styles.subtitleStyle,
                         textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.text,
                         maxLines: 1,
                         decoration: InputDecoration(
                           labelText: Str.accountHolderTxt,
@@ -191,7 +212,7 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                         onChanged: (val) {},
                         style: Styles.subtitleStyle,
                         textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.text,
                         maxLines: 1,
                         decoration: InputDecoration(
                           labelText: Str.accountHolderNameTxt,
@@ -209,7 +230,7 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                         onChanged: (val) {},
                         style: Styles.subtitleStyle,
                         textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.text,
                         maxLines: 1,
                         decoration: InputDecoration(
                           labelText: Str.amountTxt,
@@ -229,8 +250,8 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                 // Divider(color: Styles.primaryColor, thickness: 2),
                 Container(
                   decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.vertical(
-                        bottom: Radius.circular(15)),
+                    borderRadius:
+                        BorderRadius.vertical(bottom: Radius.circular(15)),
                     color: Styles.thirdColor,
                   ),
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -238,7 +259,7 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                     onChanged: (val) {},
                     style: Styles.subtitleStyleDark,
                     textInputAction: TextInputAction.done,
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.text,
                     maxLines: 1,
                     decoration: InputDecoration(
                       labelText: Str.descriptionTxt,
@@ -253,44 +274,42 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                   ),
                 ),
                 // const Gap(10),
-                
               ],
             ),
           ),
           Container(
-                  color: Styles.primaryColor,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-                  child: elevatedButton(
-                    color: Styles.secondaryColor,
-                    context: context,
-                    callback: () {
-                      Map<String, String> body = {
-                        Field.userId: userId,
-                        Field.currencyId: currencyId,
-                        Field.amount: amount,
-                        Field.fee: fee,
-                        Field.drCr: drCr,
-                        Field.type: type,
-                        Field.method: method,
-                        Field.status: status,
-                        Field.note: note,
-                        Field.loanId: loanId,
-                        Field.refId: refId,
-                        Field.parentId: parentId,
-                        Field.otherBankId: otherBankId,
-                        Field.gatewayId: gatewayId,
-                        Field.createdUserId: createdUserId,
-                        Field.updatedUserId: updatedUserId,
-                        Field.branchId: branchId,
-                        Field.transactionsDetails: transactionsDetails
-                      };
+            color: Styles.primaryColor,
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+            child: elevatedButton(
+              color: Styles.secondaryColor,
+              context: context,
+              callback: () {
+                Map<String, String> body = {
+                  Field.userId: userId,
+                  Field.currencyId: currencyId,
+                  Field.amount: amount,
+                  Field.fee: fee,
+                  Field.drCr: drCr,
+                  Field.type: type,
+                  Field.method: method,
+                  Field.status: status,
+                  Field.note: note,
+                  Field.loanId: loanId,
+                  Field.refId: refId,
+                  Field.parentId: parentId,
+                  Field.otherBankId: otherBankId,
+                  Field.gatewayId: gatewayId,
+                  Field.createdUserId: createdUserId,
+                  Field.updatedUserId: updatedUserId,
+                  Field.branchId: branchId,
+                  Field.transactionsDetails: transactionsDetails
+                };
 
-                      WireTransferMethods.add(context, body);
-                    },
-                    text: Str.wireTransferTxt.toUpperCase(),
-                  ),
-                ),
+                WireTransferMethods.add(context, body);
+              },
+              text: Str.wireTransferTxt.toUpperCase(),
+            ),
+          ),
         ],
       ),
     );

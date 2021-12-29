@@ -9,6 +9,7 @@ import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/app_bar_add.dart';
 import 'package:flutter_banking_app/widgets/card/card_loan.dart';
+import 'package:flutter_banking_app/widgets/no_back_appbar.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
@@ -25,18 +26,21 @@ class _MLoanListState extends State<MLoanList> {
   late Map<String, dynamic> requestMap;
   List<Loan> loanList = [];
 
-  Future viewOne(String userId) async {
-    Uri viewSingleUser =
-        Uri.parse(API.userLoanRequestList.toString() + userId);
+  Future view() async {
+    User user = User.fromJSON(await sharedPref.read(Pref.userData));
+
+    String userId = user.id.toString();
+
+    Uri viewSingleUser = Uri.parse(API.userLoanRequestList.toString() + userId);
     final response = await http.get(viewSingleUser, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
       for (var req in jsonBody[Field.data]) {
         final data = Loan.fromMap(req);
-        setState(() {
+        if(mounted) {
           loanList.add(data);
-        });
+        }
       }
     } else {
       print(Status.failedTxt);
@@ -57,43 +61,63 @@ class _MLoanListState extends State<MLoanList> {
   //   }
   // }
 
-  @override
-  void initState() {
-    super.initState();
+  // @override
+  // void initState() {
+  //   super.initState();
 
-    // loadSharedPrefs();
-    viewOne('3');
-  }
+  //   viewOne('3');
+  // }
 
   @override
   Widget build(BuildContext context) {
     return OKToast(
       child: Scaffold(
-        appBar: addAppBar(
-            title: Str.myLoanTxt, 
-            implyLeading: 
-            true, context: context,
-            hasAction: true,
-            path: RouteSTR.addLoanM,
+        appBar: noBackAppBar(
+          title: Str.myLoanTxt,
+          implyLeading: true,
+          context: context,
+          hasAction: true,
+          path: RouteSTR.addLoanM,
         ),
         // drawer: SideDrawer(),
         backgroundColor: Styles.primaryColor,
-        body: ExpandableTheme(
-          data: const ExpandableThemeData(
-            iconColor: Colors.blue,
-            useInkWell: true,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: ListView(
-              physics: const BouncingScrollPhysics(),
-              children: [
-                for (Loan loan in loanList) CardLoan(loan: loan),
-              ],
-            ),
-          ),
-        ),
+        body: _innerContainer(),
       ),
+    );
+  }
+
+  _innerContainer() {
+    return FutureBuilder(
+      future: view(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Styles.accentColor,
+            ),
+          );
+        } else {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return ExpandableTheme(
+              data: const ExpandableThemeData(
+                iconColor: Colors.blue,
+                useInkWell: true,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: ListView(
+                  physics: const BouncingScrollPhysics(),
+                  children: [
+                    for (Loan loan in loanList) CardLoan(loan: loan),
+                  ],
+                ),
+              ),
+            );
+          }
+        }
+      },
     );
   }
 }

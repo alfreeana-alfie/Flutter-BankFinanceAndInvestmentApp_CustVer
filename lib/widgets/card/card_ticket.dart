@@ -1,14 +1,18 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/models/ticket.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
 import 'package:flutter_banking_app/widgets/detail.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CardTicket extends StatelessWidget {
-  const CardTicket({Key? key}) : super(key: key);
+  const CardTicket({Key? key, required this.ticket}) : super(key: key);
+
+  final Ticket ticket;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +52,7 @@ class CardTicket extends StatelessWidget {
                               color: Styles.accentColor,
                             ),
                             const Gap(20),
-                            Text('No Name',
+                            Text(ticket.supportTicketId.toString(),
                                 style: Theme.of(context).textTheme.headline6),
                           ],
                         )),
@@ -116,46 +120,65 @@ class CardTicket extends StatelessWidget {
   }
 
   buildExpanded1(BuildContext context) {
+
+    // Status
+    String? status;
+    switch (ticket.status) {
+      case 1:
+        status = 'Pending';
+        break;
+      case 2:
+        status = 'Approved';
+        break;
+      case 3:
+        status = 'Rejected/Canceled';
+        break;
+      default:
+        status = 'Default';
+    }
+
+    // Priority
+    String? priority;
+    switch (ticket.priority) {
+      case 1:
+        priority = 'Low';
+        break;
+      case 2:
+        priority = 'Moderate';
+        break;
+      case 3:
+        priority = 'High';
+        break;
+      default:
+        priority = 'Default';
+    }
+
     return Container(
       color: Styles.accentColor,
       padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
-      child: Column(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                DetailRow(
-                    labelTitle: Str.loanIdTxt, 
-                    labelDetails: '1234143'),
-                DetailRow(
-                    labelTitle: Str.loanProductTxt,
-                    labelDetails: 'Student Loan'),
-                DetailRow(
-                    labelTitle: Str.currencyTxt,
-                    labelDetails: 'USD'),
-                DetailRow(
-                    labelTitle: Str.appliedAmountTxt,
-                    labelDetails: '\$100,000.00'),
-                DetailRow(
-                    labelTitle: Str.totalPayableTxt,
-                    labelDetails: '\$105,000.00'),
-                DetailRow(
-                    labelTitle: Str.amountPaidTxt,
-                    labelDetails: '\$0.00'),
-                DetailRow(
-                    labelTitle: Str.dueAmountTxt,
-                    labelDetails: '\$105,000.00'),
-                DetailRow(
-                    labelTitle: Str.releaseDateTxt,
-                    labelDetails: '-'),
-                DetailRow(
-                    labelTitle: Str.statusTxt,
-                    labelDetails: 'Pending'),
-                _buildButtonRow(context),
-              ],
-            ),
-          ]),
+            DetailRow(
+                labelTitle: Str.subjectTxt,
+                labelDetails: ticket.subject ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.messageTxt,
+                labelDetails: ticket.message ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.statusTxt,
+                labelDetails: status),
+            DetailRow(
+                labelTitle: Str.priorityTxt,
+                labelDetails: priority),
+            DetailRow(
+                labelTitle: Str.createdTxt,
+                labelDetails: ticket.createdAt ?? Field.emptyString),
+            // _buildButtonRow(context),
+          ],
+        ),
+      ]),
     );
   }
 
@@ -175,70 +198,68 @@ class CardTicket extends StatelessWidget {
             },
             child: Text(
               Str.editTxt.toUpperCase(),
-              
             ),
             style: ElevatedButton.styleFrom(
                 elevation: 0.0, primary: Styles.successColor),
           ),
         ),
-        // const Gap(20),
-        // Expanded(
-        //   child: ElevatedButton(
-        //     onPressed: () {
-        //       _showMyDialog(context);
-        //     },
-        //     child: Text(
-        //       Str.deleteTxt.toUpperCase(),
-        //       style: GoogleFonts.nunitoSans(
-        //         fontSize: 14,
-        //         fontWeight: FontWeight.bold,
-        //         color: Styles.primaryColor,
-        //         letterSpacing: 0.5,
-        //       ),
-        //     ),
-        //     style: ElevatedButton.styleFrom(
-        //         elevation: 0.0, primary: Styles.dangerColor),
-        //   ),
-        // ),
+        const Gap(20),
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {
+              _showMyDialog(context);
+            },
+            child: Text(
+              Str.deleteTxt.toUpperCase(),
+              style: GoogleFonts.nunitoSans(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Styles.primaryColor,
+                letterSpacing: 0.5,
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+                elevation: 0.0, primary: Styles.dangerColor),
+          ),
+        ),
       ],
     );
   }
 
   Future<void> _showMyDialog(BuildContext context) async {
-  return showDialog<void>(
-    context: context,
-    barrierDismissible: true,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text(Str.deleteConfirmationTxt),
-        content: Text(Str.areYouSureTxt),
-        actions: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text(
-              Str.cancelTxt.toUpperCase(),
-              style: Theme.of(context).textTheme.bodyText1,
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(Str.deleteConfirmationTxt),
+          content: Text(Str.areYouSureTxt),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                Str.cancelTxt.toUpperCase(),
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              style: ElevatedButton.styleFrom(
+                  elevation: 0.0, primary: Styles.primaryColor),
             ),
-            style: ElevatedButton.styleFrom(
-                elevation: 0.0, primary: Styles.primaryColor),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              // Navigator.of(context).pop();
-            },
-            child: Text(
-              Str.deleteTxt.toUpperCase(),
-              style: Theme.of(context).textTheme.button,
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                Str.deleteTxt.toUpperCase(),
+                style: Theme.of(context).textTheme.button,
+              ),
+              style: ElevatedButton.styleFrom(
+                  elevation: 0.0, primary: Styles.dangerColor),
             ),
-            style: ElevatedButton.styleFrom(
-                elevation: 0.0, primary: Styles.dangerColor),
-          ),
-          
-        ],
-      );
-    },
-  );
-}
+          ],
+        );
+      },
+    );
+  }
 }

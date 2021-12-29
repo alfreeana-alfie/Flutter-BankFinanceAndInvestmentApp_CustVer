@@ -144,7 +144,7 @@ class CardFDR extends StatelessWidget {
                 DetailRow(
                     labelTitle: Str.matureDateTxt,
                     labelDetails: fdrPlan.matureDate ?? Field.emptyString),
-                _buildButtonRow(context),
+                // _buildButtonRow(context),
               ],
             ),
           ]),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/pages/member/dashboard.dart';
+import 'package:flutter_banking_app/pages/member/fdr/fdr_list.dart';
+import 'package:flutter_banking_app/pages/member/loans/loan_list.dart';
 import 'package:flutter_banking_app/pages/member/profile.dart';
 import 'package:flutter_banking_app/pages/member/stats.dart';
 import 'package:flutter_banking_app/pages/member/wallet/wallet.dart';
@@ -16,9 +18,9 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
-    DashboardMember(),
-    const Wallet(),
-    const Stats(),
+    const MemberDasboard(),
+    const MLoanList(),
+    const MFdrList(),
     const Profile(),
   ];
 
@@ -41,7 +43,7 @@ class _BottomNavState extends State<BottomNav> {
         backgroundColor: Styles.primaryWithOpacityColor,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        selectedLabelStyle: TextStyle(fontSize: 20, color: Styles.primaryColor),
+        selectedLabelStyle: const TextStyle(fontSize: 20, color: Styles.primaryColor),
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Styles.blueColor,
         unselectedItemColor: const Color(0xFF526480),
@@ -51,12 +53,12 @@ class _BottomNavState extends State<BottomNav> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(IconlyBold.Wallet),
-            label: 'Wallet',
+            icon: Icon(IconlyBold.Document),
+            label: 'Loan',
           ),
           BottomNavigationBarItem(
-            icon: Icon(IconlyBold.Chart),
-            label: 'Stats',
+            icon: Icon(Icons.monetization_on_rounded),
+            label: 'Fixed Deposit',
           ),
           BottomNavigationBarItem(
             icon: Icon(IconlyBold.Profile),

@@ -9,6 +9,7 @@ import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/app_bar_add.dart';
 import 'package:flutter_banking_app/widgets/card/card_fdr.dart';
+import 'package:flutter_banking_app/widgets/no_back_appbar.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
@@ -25,7 +26,11 @@ class _MFdrListState extends State<MFdrList> {
   late Map<String, dynamic> requestMap;
   List<FixedDeposit> fdrList = [];
 
-  Future viewOne(String userId) async {
+  Future view() async {
+    User user = User.fromJSON(await sharedPref.read(Pref.userData));
+
+    String userId = user.id.toString();
+
     Uri viewSingleUser =
         Uri.parse(API.userFixedDepositList.toString() + userId);
     final response = await http.get(viewSingleUser, headers: headers);
@@ -34,9 +39,9 @@ class _MFdrListState extends State<MFdrList> {
       var jsonBody = jsonDecode(response.body);
       for (var req in jsonBody[Field.data]) {
         final data = FixedDeposit.fromMap(req);
-        setState(() {
+        if(mounted) {
           fdrList.add(data);
-        });
+        }
       }
     } else {
       print(Status.failedTxt);
@@ -44,32 +49,32 @@ class _MFdrListState extends State<MFdrList> {
     }
   }
 
-  loadSharedPrefs() async {
-    try {
-      User user = User.fromJSON(await sharedPref.read(Pref.userData));
-      setState(() {
-        userLoad = user;
+  // loadSharedPrefs() async {
+  //   try {
+  //     User user = User.fromJSON(await sharedPref.read(Pref.userData));
+  //     setState(() {
+  //       userLoad = user;
 
-        print(userLoad.id.toString());
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
+  //       print(userLoad.id.toString());
+  //     });
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
-  @override
-  void initState() {
-    super.initState();
+  // @override
+  // void initState() {
+  //   super.initState();
 
-    loadSharedPrefs();
-    viewOne('3');
-  }
+  //   loadSharedPrefs();
+  //   viewOne('3');
+  // }
 
   @override
   Widget build(BuildContext context) {
     return OKToast(
       child: Scaffold(
-        appBar: addAppBar(
+        appBar: noBackAppBar(
           title: Str.fdrHistoryTxt,
           implyLeading: true,
           context: context,
@@ -78,22 +83,43 @@ class _MFdrListState extends State<MFdrList> {
         ),
         // drawer: SideDrawer(),
         backgroundColor: Styles.primaryColor,
-        body: ExpandableTheme(
-          data: const ExpandableThemeData(
-            iconColor: Colors.blue,
-            useInkWell: true,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: ListView(
-              physics: const BouncingScrollPhysics(),
-              children: [
-                for (FixedDeposit fdr in fdrList) CardFDR(fdrPlan: fdr),
-              ],
-            ),
-          ),
-        ),
+        body: _innerContainer(),
       ),
+    );
+  }
+
+  _innerContainer() {
+    return FutureBuilder(
+      future: view(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Styles.accentColor,
+            ),
+          );
+        } else {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return ExpandableTheme(
+              data: const ExpandableThemeData(
+                iconColor: Colors.blue,
+                useInkWell: true,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: ListView(
+                  physics: const BouncingScrollPhysics(),
+                  children: [
+                    for (FixedDeposit fdr in fdrList) CardFDR(fdrPlan: fdr),
+                  ],
+                ),
+              ),
+            );
+          }
+        }
+      },
     );
   }
 }

@@ -140,7 +140,7 @@ class CardLoan extends StatelessWidget {
                 labelTitle: Str.dueAmountTxt, labelDetails: loan.totalPaid ?? Field.emptyString),
             DetailRow(labelTitle: Str.releaseDateTxt, labelDetails: loan.releaseDate ?? Field.emptyString),
             DetailRow(labelTitle: Str.statusTxt, labelDetails: loan.status.toString()),
-            _buildButtonRow(context),
+            // _buildButtonRow(context),
           ],
         ),
       ]),

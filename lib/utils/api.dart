@@ -53,6 +53,10 @@ class API {
   static Uri userFixedDepositList =
       Uri.parse('$android/user_fixed_deposit_list/');
 
+  // Support Ticket
+  static Uri createSupportTicket = Uri.parse('$android/support_ticket');
+  static Uri listOfSupportTicket = Uri.parse('$android/list_of_support_tickets');
+
   // Drop Down List(s)
   static Uri listOfCurrency = Uri.parse('$android/list_of_currency');
   static Uri listofFdrPlans = Uri.parse('$android/list_of_fdr_plans');
@@ -134,8 +138,4 @@ class AdminAPI {
   static Uri listOfNavigation = Uri.parse('$android/list_of_navigations');
   static Uri createNavigationItem = Uri.parse('$android/navigation_item');
   static Uri listOfNavigationItem = Uri.parse('$android/list_of_navigation_items');
-
-  // Support Ticket
-  static Uri createSupportTicket = Uri.parse('$android/support_ticket');
-  static Uri listOfSupportTicket = Uri.parse('$android/list_of_support_tickets');
 }

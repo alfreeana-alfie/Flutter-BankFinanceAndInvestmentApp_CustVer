@@ -205,6 +205,7 @@ class Str {
   static String createFdrPlanTxt = 'Create Plan';
   static String createBranchTxt = 'Create Branch';
   static String createGiftCardTxt = 'Create Gift Card';
+  static String createSupportTicketTxt = 'Create Support Ticket';
   static String createFaqTxt = 'Create FAQ';
   static String submitTxt = 'Submit';
   static String userListTxt = 'User List';
@@ -219,6 +220,9 @@ class Str {
   static String codeTxt = 'Code';
   static String usedAtTxt = 'Used At';
   static String userTxt = 'User';
+  
+  static String priorityTxt = 'Priority';
+
 }
 
 class Status {
@@ -255,6 +259,7 @@ class RouteSTR {
   static String forgotPassword = '/forgot-password';
   static String signIn = '/sign-in';
   static String signUp = '/sign-up';
+  static String profileOverview = '/profile-overview';
 
   static String bottomNav = '/bottom_nav';
   // static String newRequest = '/new-request';
@@ -276,6 +281,9 @@ class RouteSTR {
 
   static String paymentRequestM = '/payment-request';
   static String addPaymentRequestM = '/add-payment-request';
+
+  static String supportTicketListM = '/support-ticket-list';
+  static String addSupportTicketM = '/add-support-ticket-list';
 
   // Admin Route(s)
   static String depositList = '/deposit-list-a';
@@ -421,4 +429,18 @@ class Field {
 
   static String usedAt = 'used_at';
   static String code = 'code';
+
+  static String pageId = 'page_id';
+  static String url = 'url';
+  static String target = 'target';
+  static String position = 'position';
+  static String cssClass = 'css_class';
+  static String cssId = 'css_id';
+
+  static String supportTicketId = 'support_ticket_id';
+  static String subject = 'subject';
+  static String message = 'message';
+  static String priority = 'priority';
+  static String operatorId = 'operator_id';
+  static String closedUserId = 'closed_user_id';
 }
