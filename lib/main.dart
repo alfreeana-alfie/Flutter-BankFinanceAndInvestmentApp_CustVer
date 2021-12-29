@@ -1,11 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_banking_app/pages/admin/branches/branch_list.dart';
-import 'package:flutter_banking_app/pages/member/dashboard.dart';
-import 'package:flutter_banking_app/pages/member/profile.dart';
-import 'package:flutter_banking_app/pages/member/ticket/create_ticket.dart';
-import 'package:flutter_banking_app/pages/member/ticket/ticket_list.dart';
+import 'pages/admin/branches/branch_list.dart';
+import 'pages/member/ticket/create_ticket.dart';
+import 'pages/member/ticket/ticket_list.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
 
 import 'pages/admin/branches/create_branch.dart';
@@ -52,7 +50,6 @@ import 'utils/styles.dart';
 import 'utils/values.dart';
 import 'widgets/bottom_nav.dart';
 
-
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
@@ -64,13 +61,11 @@ class MyHttpOverrides extends HttpOverrides {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // final prefs = await SharedPreferences.getInstance();
-  // var status = prefs.getBool(Pref.isLoggedIn) ?? false;
 
   runApp(
     MaterialApp(
       home: SplashScreenView(
-        navigateRoute: const BottomNav(),
+        navigateRoute: const SignInPage(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,
@@ -83,7 +78,6 @@ Future<void> main() async {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'DMSans',
-        
         primaryColor: Styles.primaryColor,
         backgroundColor: Styles.primaryColor,
       ),
@@ -93,74 +87,74 @@ Future<void> main() async {
         backgroundColor: Styles.primaryColorDark,
       ),
       routes: {
-        RouteSTR.comingSoon:            (context) => const ComingSoon(),
-        RouteSTR.comingSoonMenu:        (context) => const ComingSoonMenu(),
+        RouteSTR.comingSoon: (context) => const ComingSoon(),
+        RouteSTR.comingSoonMenu: (context) => const ComingSoonMenu(),
         // AUTH - MEMBER & ADMIN
-        RouteSTR.forgotPassword:        (context) => const ForgotPasswordPage(),
-        RouteSTR.signUp:                (context) => const SignUpPage(),
-        RouteSTR.signIn:                (context) => const SignInPage(),
-        RouteSTR.profileOverview:       (context) => const ProfileOverview(),
+        RouteSTR.forgotPassword: (context) => const ForgotPasswordPage(),
+        RouteSTR.signUp: (context) => const SignUpPage(),
+        RouteSTR.signIn: (context) => const SignInPage(),
+        RouteSTR.profileOverview: (context) => const ProfileOverview(),
 
         // MEMBER ROUTE(S)
-        RouteSTR.dashboardMember:       (context) => const BottomNav(),
-        RouteSTR.bottomNav:             (context) => const BottomNav(),
+        RouteSTR.dashboardMember: (context) => const BottomNav(),
+        RouteSTR.bottomNav: (context) => const BottomNav(),
 
-        RouteSTR.paymentRequestM:       (context) => const MPaymentRequestList(),
-        RouteSTR.addPaymentRequestM:    (context) => const MCreatePaymentRequest(),
+        RouteSTR.paymentRequestM: (context) => const MPaymentRequestList(),
+        RouteSTR.addPaymentRequestM: (context) => const MCreatePaymentRequest(),
 
-        RouteSTR.sendMoneyM:            (context) => const MCreateSendMoney(),
+        RouteSTR.sendMoneyM: (context) => const MCreateSendMoney(),
 
-        RouteSTR.exchangeMoneyM:        (context) => const MCreateExchangeMoney(),
+        RouteSTR.exchangeMoneyM: (context) => const MCreateExchangeMoney(),
 
-        RouteSTR.wireTransferM:         (context) => const MCreateWireTransfer(),
+        RouteSTR.wireTransferM: (context) => const MCreateWireTransfer(),
 
-        RouteSTR.addLoanM:              (context) => const MCreateLoan(),
-        RouteSTR.loanListM:             (context) => const MLoanList(),
+        RouteSTR.addLoanM: (context) => const MCreateLoan(),
+        RouteSTR.loanListM: (context) => const MLoanList(),
 
-        RouteSTR.addFdrM:               (context) => const MCreateFDR(),
-        RouteSTR.fdrListM:              (context) => const MFdrList(),
+        RouteSTR.addFdrM: (context) => const MCreateFDR(),
+        RouteSTR.fdrListM: (context) => const MFdrList(),
 
-        RouteSTR.supportTicketListM:    (context) => const MSupportTicketList(),
-        RouteSTR.addSupportTicketM:     (context) => const MCreateSupportTicket(),
+        RouteSTR.supportTicketListM: (context) => const MSupportTicketList(),
+        RouteSTR.addSupportTicketM: (context) => const MCreateSupportTicket(),
 
         // ADMIN ROUTE(S)
-        RouteSTR.dashboardAdmin:      (context) => const AdminDashboard(),
+        RouteSTR.dashboardAdmin: (context) => const AdminDashboard(),
 
-        RouteSTR.depositList:         (context) => const DepositList(),
-        RouteSTR.createDeposit:       (context) => const CreateDeposit(),
+        RouteSTR.depositList: (context) => const DepositList(),
+        RouteSTR.createDeposit: (context) => const CreateDeposit(),
 
-        RouteSTR.usersList:           (context) => const UsersList(),
-        RouteSTR.createUsers:         (context) => const CreateUsers(),
+        RouteSTR.usersList: (context) => const UsersList(),
+        RouteSTR.createUsers: (context) => const CreateUsers(),
 
-        RouteSTR.wireTransferList:    (context) => const WireTransferList(),
-        RouteSTR.createWireTransfer:  (context) => const CreateWireTransfer(),
+        RouteSTR.wireTransferList: (context) => const WireTransferList(),
+        RouteSTR.createWireTransfer: (context) => const CreateWireTransfer(),
 
-        RouteSTR.loanProductList:     (context) => const LoanProductList(),
-        RouteSTR.createLoanProduct:   (context) => const CreateLoanProduct(),
+        RouteSTR.loanProductList: (context) => const LoanProductList(),
+        RouteSTR.createLoanProduct: (context) => const CreateLoanProduct(),
 
-        RouteSTR.fdrPlanList:         (context) => const FdrPlanList(),
-        RouteSTR.createPlanFDR:       (context) => const CreateFdrPackage(),
+        RouteSTR.fdrPlanList: (context) => const FdrPlanList(),
+        RouteSTR.createPlanFDR: (context) => const CreateFdrPackage(),
 
-        RouteSTR.branchList:          (context) => const BranchList(),
-        RouteSTR.createBranch:        (context) => const CreateBranch(),
+        RouteSTR.branchList: (context) => const BranchList(),
+        RouteSTR.createBranch: (context) => const CreateBranch(),
 
-        RouteSTR.otherBankList:       (context) => const OtherBankList(),
-        RouteSTR.createBank:          (context) => const CreateOtherBank(),
+        RouteSTR.otherBankList: (context) => const OtherBankList(),
+        RouteSTR.createBank: (context) => const CreateOtherBank(),
 
-        RouteSTR.currencyList:        (context) => const CurrencyList(),
-        RouteSTR.createCurrency:      (context) => const CreateCurrency(),
+        RouteSTR.currencyList: (context) => const CurrencyList(),
+        RouteSTR.createCurrency: (context) => const CreateCurrency(),
 
-        RouteSTR.serviceList:         (context) => const ServiceList(),
-        RouteSTR.createService:       (context) => const CreateService(),
+        RouteSTR.serviceList: (context) => const ServiceList(),
+        RouteSTR.createService: (context) => const CreateService(),
 
-        RouteSTR.faqList:             (context) => const FaqList(),
-        RouteSTR.createFaq:           (context) => const CreateFaq(),
+        RouteSTR.faqList: (context) => const FaqList(),
+        RouteSTR.createFaq: (context) => const CreateFaq(),
 
-        RouteSTR.teamList:            (context) => const TeamList(),
-        RouteSTR.createService:       (context) => const CreateTeam(),
+        RouteSTR.teamList: (context) => const TeamList(),
+        RouteSTR.createService: (context) => const CreateTeam(),
 
-        RouteSTR.testimonialList:     (context) => const TestimonialList(),
-        RouteSTR.createTestimonial:   (context) => const CreateTestimonial(),
+        RouteSTR.testimonialList: (context) => const TestimonialList(),
+        RouteSTR.createTestimonial: (context) => const CreateTestimonial(),
       },
     ),
   );

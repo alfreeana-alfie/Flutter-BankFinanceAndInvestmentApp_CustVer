@@ -220,9 +220,8 @@ class Str {
   static String codeTxt = 'Code';
   static String usedAtTxt = 'Used At';
   static String userTxt = 'User';
-  
-  static String priorityTxt = 'Priority';
 
+  static String priorityTxt = 'Priority';
 }
 
 class Status {
@@ -332,11 +331,13 @@ class RouteSTR {
 
 class Field {
   // Variable Names
+  static String emptyString = '-';
+  static String emptyAmount = '0.00';
+  static String empty = '0';
+  
   static String icon = 'icon';
   static String customerTxt = 'customer';
   static String adminTxt = 'admin';
-  static String emptyString = '-';
-  static String emptyAmount = '0.00';
   static String data = 'data';
   static String id = 'id';
   static String name = 'name';

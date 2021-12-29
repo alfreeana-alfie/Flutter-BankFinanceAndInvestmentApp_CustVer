@@ -3,7 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/methods/member/loan_request_methods.dart';
+import 'package:flutter_banking_app/methods/member/send_money_methods.dart';
+import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -22,11 +25,30 @@ class MCreateLoan extends StatefulWidget {
 
 class _MCreateLoanState extends State<MCreateLoan> {
   final ScrollController _scrollController = ScrollController();
+  SharedPref sharedPref = SharedPref();
 
-  String? currency, currencyName, planFDR, planFDRName;
+  String? currency,
+      currencyName,
+      planFDR,
+      planFDRName,
+      userId,
+      appliedAmount,
+      description,
+      remarks;
   FilePickerResult? result;
   PlatformFile? file;
   String fileType = 'All';
+
+  loadSharedPrefs() async {
+    try {
+      User user = User.fromJSON(await sharedPref.read(Pref.userData));
+      setState(() {
+        userId = user.id.toString();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   void initState() {
@@ -34,6 +56,7 @@ class _MCreateLoanState extends State<MCreateLoan> {
       print(_scrollController.offset);
     });
     super.initState();
+    loadSharedPrefs();
   }
 
   @override
@@ -42,41 +65,12 @@ class _MCreateLoanState extends State<MCreateLoan> {
     return Scaffold(
       backgroundColor: Styles.primaryColor,
       appBar: myAppBar(
-          title: Str.applyLoanTxt, implyLeading: true, context: context),
-      // bottomSheet: Container(
-      //   color: Styles.primaryColor,
-      //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-      //   child: elevatedButton(
-      //     color: Styles.secondaryColor,
-      //     context: context,
-      //     callback: () {
-      //       Map<String, String> body = {
-      //         'loan_Id': '2',
-      //         'loan_product_Id': '1',
-      //         'borrower_Id': '1',
-      //         'first_payment_date': '2021-07-09',
-      //         'release_date': '2021-07-09',
-      //         'currency_Id': '3',
-      //         'applied_amount': '1',
-      //         'total_payable': '2',
-      //         'total_paid': '2',
-      //         'late_payment_penalties': '10',
-      //         'attachment':
-      //             'loan_files/bQURCY5sVoNOCsGPX0VbXx69iNO7HD6yNZY6lLbk.png',
-      //         'description': 'test-description',
-      //         'remarks': '3',
-      //         'status': '1',
-      //         'approved_date': 'null',
-      //         'approved_user_Id': '2',
-      //         'created_user_Id': '1',
-      //         'branch_Id': '2',
-      //       };
-
-      //       LoanRequestMethods.add(context, body);
-      //     },
-      //     text: Str.applyLoanTxt.toUpperCase(),
-      //   ),
-      // ),
+        title: Str.applyLoanTxt,
+        implyLeading: true,
+        context: context,
+        onPressedBack: () =>
+            Navigator.pushReplacementNamed(context, RouteSTR.loanListM),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(15),
         children: [
@@ -147,7 +141,7 @@ class _MCreateLoanState extends State<MCreateLoan> {
                         onChanged: (val) {},
                         style: Styles.subtitleStyle,
                         textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.text,
                         maxLines: 1,
                         decoration: InputDecoration(
                           labelText: Str.firstPaymentDateTxt,
@@ -162,10 +156,12 @@ class _MCreateLoanState extends State<MCreateLoan> {
                       ),
                       const Gap(20.0),
                       TextFormField(
-                        onChanged: (val) {},
+                        onChanged: (val) {
+                          appliedAmount = val;
+                        },
                         style: Styles.subtitleStyle,
                         textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.text,
                         maxLines: 1,
                         decoration: InputDecoration(
                           labelText: Str.appliedAmountTxt,
@@ -192,10 +188,12 @@ class _MCreateLoanState extends State<MCreateLoan> {
                   child: Column(
                     children: [
                       TextFormField(
-                        onChanged: (val) {},
+                        onChanged: (val) {
+                          description = val;
+                        },
                         style: Styles.subtitleStyleDark,
                         textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.text,
                         maxLines: 1,
                         decoration: InputDecoration(
                           labelText: Str.descriptionTxt,
@@ -209,10 +207,12 @@ class _MCreateLoanState extends State<MCreateLoan> {
                         ),
                       ),
                       TextFormField(
-                        onChanged: (val) {},
+                        onChanged: (val) {
+                          remarks = val;
+                        },
                         style: Styles.subtitleStyleDark,
                         textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.text,
                         maxLines: 1,
                         decoration: InputDecoration(
                           labelText: Str.remarkTxt,
@@ -232,7 +232,7 @@ class _MCreateLoanState extends State<MCreateLoan> {
                               onChanged: (val) {},
                               style: Styles.subtitleStyleDark,
                               textInputAction: TextInputAction.done,
-                              keyboardType: TextInputType.number,
+                              keyboardType: TextInputType.text,
                               maxLines: 1,
                               decoration: InputDecoration(
                                 labelText: Str.attachmentTxt,
@@ -268,42 +268,93 @@ class _MCreateLoanState extends State<MCreateLoan> {
           ),
           Container(
             // color: Styles.primaryColor,
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
             child: elevatedButton(
               color: Styles.secondaryColor,
               context: context,
               callback: () {
-                Map<String, String> body = {
-                  'loan_Id': '2',
+                
+                     Map<String, String> body = {
+                  'loan_Id': planFDR ?? Field.empty,
                   'loan_product_Id': '1',
-                  'borrower_Id': '1',
+                  'borrower_Id': userId ?? Field.empty,
                   'first_payment_date': '2021-07-09',
                   'release_date': '2021-07-09',
-                  'currency_Id': '3',
-                  'applied_amount': '1',
+                  'currency_Id': currency ?? Field.empty,
+                  'applied_amount': appliedAmount ?? Field.emptyAmount,
                   'total_payable': '2',
                   'total_paid': '2',
                   'late_payment_penalties': '10',
-                  'attachment':
-                      'loan_files/bQURCY5sVoNOCsGPX0VbXx69iNO7HD6yNZY6lLbk.png',
-                  'description': 'test-description',
-                  'remarks': '3',
-                  'status': '1',
-                  'approved_date': 'null',
-                  'approved_user_Id': '2',
-                  'created_user_Id': '1',
+                  // 'attachment':
+                  //     'loan_files/bQURCY5sVoNOCsGPX0VbXx69iNO7HD6yNZY6lLbk.png',
+                  'description': description ?? Field.emptyString,
+                  'remarks': remarks ?? Field.emptyString,
+                  'status': Status.pending.toString(),
+                  'approved_date': '2021-02-09',
+                  'approved_user_Id': '1',
+                  'created_user_Id': userId ?? Field.empty,
                   'branch_Id': '2',
                 };
 
+                print(body);
+
                 LoanRequestMethods.add(context, body);
               },
-              text: Str.applyLoanTxt.toUpperCase(),
+              text: Str.sendMoneyTxt,
             ),
           ),
+          // Container(
+          //   // color: Styles.primaryColor,
+          //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+          //   child: elevatedButton(
+          //     color: Styles.secondaryColor,
+          //     context: context,
+          //     callback: () {
+          //       Map<String, String> body = {
+          //         'loan_Id': planFDR ?? Field.empty,
+          //         'loan_product_Id': '1',
+          //         'borrower_Id': userId ?? Field.empty,
+          //         'first_payment_date': '2021-07-09',
+          //         'release_date': '2021-07-09',
+          //         'currency_Id': currency ?? Field.empty,
+          //         'applied_amount': appliedAmount ?? Field.emptyAmount,
+          //         'total_payable': Field.emptyAmount,
+          //         'total_paid': Field.emptyAmount,
+          //         'late_payment_penalties': '10',
+          //         // 'attachment':
+          //         //     'loan_files/bQURCY5sVoNOCsGPX0VbXx69iNO7HD6yNZY6lLbk.png',
+          //         'description': description ?? Field.emptyString,
+          //         'remarks': remarks ?? Field.emptyString,
+          //         'status': Status.pending.toString(),
+          //         'approved_date': 'null',
+          //         'approved_user_Id': Field.empty,
+          //         'created_user_Id': userId ?? Field.empty,
+          //         'branch_Id': '2',
+          //       };
+
+          //       LoanRequestMethods.add(context, body);
+          //     },
+          //     text: Str.submitTxt.toUpperCase(),
+          //   ),
+          // ),
         ],
       ),
     );
   }
+
+  // _selectDate(BuildContext context) async {
+  //   final DateTime? selected = await showDatePicker(
+  //     context: context,
+  //     initialDate: selectedDate,
+  //     firstDate: DateTime(2010),
+  //     lastDate: DateTime(2025),
+  //   );
+  //   if (selected != null && selected != selectedDate) {
+  //     setState(() {
+  //       selectedDate = selected;
+  //     });
+  //   }
+  // }
 
   void pickFiles(String? filetype) async {
     switch (filetype) {

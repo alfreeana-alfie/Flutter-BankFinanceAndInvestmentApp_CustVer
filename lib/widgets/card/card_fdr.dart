@@ -120,6 +120,22 @@ class CardFDR extends StatelessWidget {
   }
 
   buildExpanded1(BuildContext context) {
+    // Status
+    String? status;
+    switch (fdrPlan.status) {
+      case 1:
+        status = 'Pending';
+        break;
+      case 2:
+        status = 'Approved';
+        break;
+      case 3:
+        status = 'Rejected/Canceled';
+        break;
+      default:
+        status = 'Default';
+    }
+
     return Container(
       color: Styles.accentColor,
       padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),

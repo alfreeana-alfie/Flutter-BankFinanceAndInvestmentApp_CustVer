@@ -8,6 +8,7 @@ import 'package:flutter_banking_app/utils/iconly/iconly_bold.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/my_app_bar.dart';
+import 'package:flutter_banking_app/widgets/no_back_add_appbar.dart';
 import 'package:flutter_banking_app/widgets/no_back_appbar.dart';
 import 'package:gap/gap.dart';
 
@@ -37,7 +38,7 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Styles.primaryColor,
-      appBar: noBackAppBar(title: '', implyLeading: true, context: context),
+      appBar: noBackAddAppBar(title: '', implyLeading: true, context: context),
       body: _innerContainer(),
     );
   }

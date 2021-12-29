@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
+import 'package:flutter_banking_app/widgets/bottom_nav_int.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_banking_app/utils/api.dart';
 
@@ -17,41 +18,19 @@ class LoanRequestMethods {
     if (response.statusCode == Status.created) {
       // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
-      Navigator.pop(context);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const BottomNavInt(
+                      index: 1,
+                    )));
+
+      });
+      
     } else {
-      // print(Status.failedTxt);
-      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
-    }
-  }
-
-  static void viewAll() async {
-    final response = await http.get(API.listOfLoanRequest, headers: headers);
-
-    if (response.statusCode == Status.ok) {
-      // var jsonBody = jsonDecode(response.body);
-
-      // for (var userData in jsonBody[Field.data]) {
-      //   // print(userData);
-      // }
-    } else {
-      // print(Status.failedTxt);
-      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
-    }
-  }
-
-  static void viewOne(String userId) async {
-    Uri viewSingleUser =
-        Uri.parse(API.userLoanRequestList.toString() + userId);
-    final response = await http.get(viewSingleUser, headers: headers);
-
-    if (response.statusCode == Status.ok) {
-      // var jsonBody = jsonDecode(response.body);
-
-      // for (var userData in jsonBody[Field.data]) {
-      //   // print(userData);
-      // }
-    } else {
-      // print(Status.failedTxt);
+      print(response.body);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }

@@ -37,15 +37,14 @@ class _MCreatePaymentRequestState extends State<MCreatePaymentRequest> {
   User userLoad = User();
   List<Customer> customerNewList = [];
 
-  String? currency, currencyName, amount, receiverId, description;
+  String? currency, currencyName, amount, receiverId, description, userId;
 
   loadSharedPrefs() async {
     try {
       User user = User.fromJSON(await sharedPref.read(Pref.userData));
       setState(() {
         userLoad = user;
-
-        print(userLoad.id.toString());
+        userId = userLoad.id.toString();
       });
     } catch (e) {
       print(e);
@@ -92,30 +91,12 @@ class _MCreatePaymentRequestState extends State<MCreatePaymentRequest> {
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.newRequestTxt, implyLeading: true, context: context),
-        // bottomSheet: Container(
-        //   color: Styles.primaryColor,
-        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-        //   child: elevatedButton(
-        //     color: Styles.secondaryColor,
-        //     context: context,
-        //     callback: () {
-        //       Map<String, String> body = {
-        //         Field.currencyId: currency ?? Field.emptyString,
-        //         Field.amount: amount ?? Field.emptyAmount,
-        //         Field.status: '1',
-        //         Field.description: description ?? Field.emptyString,
-        //         Field.senderId: '3',
-        //         Field.receiverId: receiverId ?? Field.emptyString,
-        //         Field.transactionId: '1',
-        //         Field.branchId: '1'
-        //       };
-
-        //       PaymentRequestMethods.add(context, body);
-        //     },
-        //     text: Str.newRequestTxt.toUpperCase(),
-        //   ),
-        // ),
+          title: Str.newRequestTxt,
+          implyLeading: true,
+          context: context,
+          onPressedBack: () =>
+              Navigator.pushReplacementNamed(context, RouteSTR.paymentRequestM),
+        ),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -232,34 +213,32 @@ class _MCreatePaymentRequestState extends State<MCreatePaymentRequest> {
                       ),
                     ),
                   ),
-                  
                 ],
               ),
             ),
             Container(
-                    color: Styles.primaryColor,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 15, vertical: 40),
-                    child: elevatedButton(
-                      color: Styles.secondaryColor,
-                      context: context,
-                      callback: () {
-                        Map<String, String> body = {
-                          Field.currencyId: currency ?? Field.emptyString,
-                          Field.amount: amount ?? Field.emptyAmount,
-                          Field.status: '1',
-                          Field.description: description ?? Field.emptyString,
-                          Field.senderId: '3',
-                          Field.receiverId: receiverId ?? Field.emptyString,
-                          Field.transactionId: '1',
-                          Field.branchId: '1'
-                        };
+              color: Styles.primaryColor,
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+              child: elevatedButton(
+                color: Styles.secondaryColor,
+                context: context,
+                callback: () {
+                  Map<String, String> body = {
+                    Field.currencyId: currency ?? Field.emptyString,
+                    Field.amount: amount ?? Field.emptyAmount,
+                    Field.status: '1',
+                    Field.description: description ?? Field.emptyString,
+                    Field.senderId: userId ?? '0',
+                    Field.receiverId: receiverId ?? Field.emptyString,
+                    Field.transactionId: '1',
+                    Field.branchId: '1'
+                  };
 
-                        PaymentRequestMethods.add(context, body);
-                      },
-                      text: Str.newRequestTxt.toUpperCase(),
-                    ),
-                  ),
+                  PaymentRequestMethods.add(context, body);
+                },
+                text: Str.newRequestTxt.toUpperCase(),
+              ),
+            ),
           ],
         ),
       ),
@@ -309,9 +288,10 @@ class _MCreatePaymentRequestState extends State<MCreatePaymentRequest> {
                 const SizedBox(height: 10),
                 (index == currentPage)
                     ? Text(item.name ?? '-',
+                        style: const TextStyle(
+                            color: Styles.primaryColor, fontSize: 16))
+                    : const Text('',
                         style:
-                            const TextStyle(color: Styles.primaryColor, fontSize: 16))
-                    : const Text('',style:
                             TextStyle(color: Styles.primaryColor, fontSize: 16))
               ],
             ),

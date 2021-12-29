@@ -48,27 +48,6 @@ class _MPaymentRequestListtState extends State<MPaymentRequestList> {
     }
   }
 
-  // loadSharedPrefs() async {
-  //   try {
-  //     User user = User.fromJSON(await sharedPref.read(Pref.userData));
-  //     setState(() {
-  //       userLoad = user;
-
-  //       print(userLoad.id.toString());
-  //     });
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   // loadSharedPrefs();
-  //   viewOne('3');
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +56,8 @@ class _MPaymentRequestListtState extends State<MPaymentRequestList> {
           implyLeading: true,
           context: context,
           hasAction: true,
-          path: RouteSTR.addPaymentRequestM
+          path: RouteSTR.addPaymentRequestM,
+          onPressed: () => Navigator.pushReplacementNamed(context, RouteSTR.dashboardMember)
         ),
       // drawer: SideDrawer(),
       backgroundColor: Styles.primaryColor,

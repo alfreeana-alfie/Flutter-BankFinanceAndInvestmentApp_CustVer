@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -18,9 +17,11 @@ class PaymentRequestMethods {
     if (response.statusCode == Status.created) {
       // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
-      Navigator.pop(context);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+        Navigator.popAndPushNamed(context, RouteSTR.paymentRequestM);
+      });
     } else {
-      // print(Status.failedTxt);
+      print(response.body);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }

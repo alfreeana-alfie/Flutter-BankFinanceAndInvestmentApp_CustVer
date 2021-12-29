@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
@@ -30,6 +31,7 @@ class CustomToast {
   static showMsg(String text, Color color) {
     showToast(
       text,
+      // duration: const Duration(seconds: 5),
       backgroundColor: color,
       position: ToastPosition.bottom,
       textPadding: const EdgeInsets.fromLTRB(60, 10, 60, 10),
@@ -37,3 +39,10 @@ class CustomToast {
     );
   }
 }
+
+// const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+const _chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+Random _rnd = Random();
+
+String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
+    length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));

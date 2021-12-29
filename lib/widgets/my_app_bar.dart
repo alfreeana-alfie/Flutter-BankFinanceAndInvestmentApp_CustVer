@@ -9,7 +9,8 @@ AppBar myAppBar(
     String? stringColor,
     required bool implyLeading,
     required BuildContext context,
-    bool? hasAction}) {
+    bool? hasAction,
+    void Function()? onPressedBack}) {
   return AppBar(
     centerTitle: true,
     title: Text(
@@ -24,7 +25,7 @@ AppBar myAppBar(
             child: IconButton(
               icon: const Icon(Icons.keyboard_backspace_rounded,
                   size: 33, color: Styles.accentColor),
-              onPressed: () => Navigator.pop(context),
+              onPressed:  onPressedBack,
             ))
         : SizedBox(),
     actions: hasAction == true ? [Icon(IconlyBroken.Search), Gap(15)] : null,

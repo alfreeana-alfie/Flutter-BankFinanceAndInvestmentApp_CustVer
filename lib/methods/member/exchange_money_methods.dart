@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -16,10 +15,14 @@ class ExchangeMoneyMethods {
     );
 
     if (response.statusCode == Status.created) {
-      // print(Status.successTxt);
-      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
-      Navigator.pop(context);
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pop(context);
+
+      });
     } else {
+      print(response.body);
       // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }

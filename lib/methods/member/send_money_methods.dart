@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/utils/string.dart';
@@ -18,11 +16,15 @@ class SendMoneyMethods {
     if (response.statusCode == Status.created) {
       // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
-      Navigator.pop(context);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pop(context);
+
+      });
+      
     } else {
       // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
-
 }

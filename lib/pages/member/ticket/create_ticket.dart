@@ -56,7 +56,9 @@ class _MCreateSupportTicketState extends State<MCreateSupportTicket> {
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.createSupportTicketTxt, implyLeading: true, context: context),
+            title: Str.createSupportTicketTxt,
+            implyLeading: true,
+            context: context),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -126,11 +128,8 @@ class _MCreateSupportTicketState extends State<MCreateSupportTicket> {
                 color: Styles.secondaryColor,
                 context: context,
                 callback: () {
-                  Random random = Random();
-                  int randomNumber = random.nextInt(100000); 
-
                   Map<String, String> body = {
-                    Field.supportTicketId: randomNumber.toString(),
+                    Field.supportTicketId: '#${getRandomString(12)}',
                     Field.subject: subject ?? Field.emptyString,
                     Field.message: message ?? Field.emptyAmount,
                     Field.senderId: userId ?? Field.emptyString,

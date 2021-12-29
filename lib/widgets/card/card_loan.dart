@@ -120,6 +120,23 @@ class CardLoan extends StatelessWidget {
   }
 
   buildExpanded1(BuildContext context) {
+
+    // Status
+    String? status;
+    switch (loan.status) {
+      case 1:
+        status = 'Pending';
+        break;
+      case 2:
+        status = 'Approved';
+        break;
+      case 3:
+        status = 'Rejected/Canceled';
+        break;
+      default:
+        status = 'Default';
+    }
+
     return Container(
       color: Styles.accentColor,
       padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
@@ -139,7 +156,7 @@ class CardLoan extends StatelessWidget {
             DetailRow(
                 labelTitle: Str.dueAmountTxt, labelDetails: loan.totalPaid ?? Field.emptyString),
             DetailRow(labelTitle: Str.releaseDateTxt, labelDetails: loan.releaseDate ?? Field.emptyString),
-            DetailRow(labelTitle: Str.statusTxt, labelDetails: loan.status.toString()),
+            DetailRow(labelTitle: Str.statusTxt, labelDetails: status),
             // _buildButtonRow(context),
           ],
         ),

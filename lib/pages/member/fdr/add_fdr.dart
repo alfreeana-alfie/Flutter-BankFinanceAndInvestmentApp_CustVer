@@ -101,7 +101,11 @@ class _MCreateFDRState extends State<MCreateFDR> {
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.applyDepositTxt, implyLeading: true, context: context),
+          title: Str.applyDepositTxt,
+          implyLeading: true,
+          context: context,
+          onPressedBack: () => Navigator.pop(context),
+        ),
         // bottomSheet: Container(
         //   color: Styles.primaryColor,
         //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
@@ -201,10 +205,12 @@ class _MCreateFDRState extends State<MCreateFDR> {
                         ),
                         const Gap(20.0),
                         TextFormField(
-                          onChanged: (val) {},
+                          onChanged: (val) {
+                            amount = val;
+                          },
                           style: Styles.subtitleStyle,
                           textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.text,
                           maxLines: 1,
                           decoration: InputDecoration(
                             labelText: Str.depositAmountTxt,
@@ -231,10 +237,12 @@ class _MCreateFDRState extends State<MCreateFDR> {
                     child: Column(
                       children: [
                         TextFormField(
-                          onChanged: (val) {},
+                          onChanged: (val) {
+                            remarks = val;
+                          },
                           style: Styles.subtitleStyleDark,
                           textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.text,
                           maxLines: 1,
                           decoration: InputDecoration(
                             labelText: Str.remarkTxt,
@@ -247,66 +255,66 @@ class _MCreateFDRState extends State<MCreateFDR> {
                             ),
                           ),
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: 
-                              Text(Str.attachmentTxt, style: Styles.subtitleStyleDark02),
-                              
-                            ),
-                            Expanded(
-                              child: ElevatedButton(
-                                onPressed: () async {
-                                  pickFiles(fileType);
-                                },
-                                child: Text(Str.browseTxt),
-                                style: ElevatedButton.styleFrom(
-                                  elevation: 0.0,
-                                  primary: Styles.accentColor,
-                                  
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(Str.attachmentTxt,
+                                    style: Styles.subtitleStyleDark02),
+                              ),
+                              Expanded(
+                                child: ElevatedButton(
+                                  onPressed: () async {
+                                    pickFiles(fileType);
+                                  },
+                                  child: Text(Str.browseTxt),
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 0.0,
+                                    primary: Styles.accentColor,
+                                  ),
                                 ),
                               ),
-                            ),
-                            // if (file != null) fileDetails(file!),
-                          ],
+                              // if (file != null) fileDetails(file!),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  
                 ],
               ),
             ),
             Container(
-          color: Styles.primaryColor,
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-          child: elevatedButton(
-            color: Styles.secondaryColor,
-            context: context,
-            callback: () {
-              Map<String, String> body = {
-                'fdr_plan_Id': planFDR ?? Field.emptyString,
-                'user_Id': userLoad.id.toString(),
-                'currency_Id': currency  ?? Field.emptyString,
-                'deposit_amount': amount  ?? Field.emptyString,
-                'return_amount': amount  ?? Field.emptyString,
-                'attachment': file!.name,
-                'remarks': remarks ?? Field.emptyString,
-                'status': '1',
-                'approved_date': 'null',
-                'mature_date': 'null',
-                'transaction_Id': '1',
-                'approved_user_Id': '1',
-                'created_user_Id': userLoad.id.toString(),
-                'updated_user_Id': userLoad.id.toString(),
-                'branch_Id': '2',
-              };
+              color: Styles.primaryColor,
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+              child: elevatedButton(
+                color: Styles.secondaryColor,
+                context: context,
+                callback: () {
+                  Map<String, String> body = {
+                    'fdr_plan_Id': planFDR ?? Field.emptyString,
+                    'user_Id': userLoad.id.toString(),
+                    'currency_Id': currency ?? Field.emptyString,
+                    'deposit_amount': amount ?? Field.emptyString,
+                    'return_amount': amount ?? Field.emptyString,
+                    // 'attachment': file!.name,
+                    'remarks': remarks ?? Field.emptyString,
+                    'status': '1',
+                    'approved_date': '2021-09-09',
+                    'mature_date': '2021-09-09',
+                    'transaction_Id': '1',
+                    'approved_user_Id': '1',
+                    'created_user_Id': userLoad.id.toString(),
+                    'updated_user_Id': userLoad.id.toString(),
+                    'branch_Id': '2',
+                  };
 
-              FixedDepositMethods.add(context, body, file!.name);
-            },
-            text: Str.applyDepositTxt.toUpperCase(),
-          ),
-        ),
+                  FixedDepositMethods.add(context, body, 'test');
+                },
+                text: Str.applyDepositTxt.toUpperCase(),
+              ),
+            ),
           ],
         ),
       ),
@@ -344,7 +352,5 @@ class _MCreateFDRState extends State<MCreateFDR> {
         if (result == null) return;
         break;
     }
-
-    
   }
 }

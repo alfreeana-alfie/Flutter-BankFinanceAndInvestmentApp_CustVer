@@ -38,7 +38,7 @@ class _SendMoneyState extends State<MCreateSendMoney> {
   User userLoad = User();
   List<Customer> customerNewList = [];
 
-  String? amount, note, currency, currencyName, toUserId;
+  String? amount, note, currency, currencyName, toUserId, userId;
   String fee = '12.50',
       drCr = 'Y',
       type = 'send_money',
@@ -78,7 +78,7 @@ class _SendMoneyState extends State<MCreateSendMoney> {
       setState(() {
         userLoad = user;
 
-        print(userLoad.id.toString());
+        userId = user.id.toString();
       });
     } catch (e) {
       print(e);
@@ -232,7 +232,7 @@ class _SendMoneyState extends State<MCreateSendMoney> {
             //   ],
             // ),
             // const Gap(20),
-            
+
             const Gap(10),
             Container(
               width: double.infinity,
@@ -244,8 +244,10 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
-                  child: _body(size.height, theme),),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
+                    child: _body(size.height, theme),
+                  ),
                   Container(
                     padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
                     child: Row(
@@ -302,7 +304,7 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                       callback: () {
                         Map<String, String> body = {
                           // Field.userId: 'userLoad.id.toString()',
-                          Field.userId: '3',
+                          Field.userId: userId ?? Field.emptyString,
                           Field.currencyId: currency ?? '-',
                           Field.amount: amount ?? '0.00',
                           Field.fee: fee,
@@ -379,9 +381,10 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                 const SizedBox(height: 10),
                 (index == currentPage)
                     ? Text(item.name ?? '-',
+                        style: const TextStyle(
+                            color: Styles.primaryColor, fontSize: 16))
+                    : const Text('',
                         style:
-                            const TextStyle(color: Styles.primaryColor, fontSize: 16))
-                    : const Text('',style:
                             TextStyle(color: Styles.primaryColor, fontSize: 16))
               ],
             ),

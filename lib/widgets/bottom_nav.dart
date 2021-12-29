@@ -17,7 +17,7 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   int _selectedIndex = 0;
-  static final List<Widget> _widgetOptions = <Widget>[
+  static final List<Widget> widgetOptions = <Widget>[
     const MemberDasboard(),
     const MLoanList(),
     const MFdrList(),
@@ -36,7 +36,7 @@ class _BottomNavState extends State<BottomNav> {
       // drawer: SideDrawer(),
       backgroundColor: Styles.primaryColor,
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child: widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0,

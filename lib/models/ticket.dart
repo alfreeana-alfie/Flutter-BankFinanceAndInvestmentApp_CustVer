@@ -2,14 +2,13 @@ import 'package:flutter_banking_app/utils/string.dart';
 
 class Ticket {
   int? id,
-      supportTicketId,
       senderId,
       status,
       operatorId,
       priority,
       closedUserId;
 
-  String? subject, message,  createdAt;
+  String? supportTicketId, subject, message,  createdAt;
 
    Ticket(
       {this.id,
@@ -26,7 +25,7 @@ class Ticket {
   factory Ticket.fromMap(Map<String, dynamic> map) {
     return Ticket(
       id: map[Field.id] as int?,
-      supportTicketId: map[Field.supportTicketId] as int?,
+      supportTicketId: map[Field.supportTicketId] as String?,
       subject: map[Field.subject] as String?,
       message: map[Field.message] as String?,
       senderId: map[Field.senderId] as int?,

@@ -130,6 +130,22 @@ class CardPaymentRequest extends StatelessWidget {
     DateTime tempDate = DateTime.parse(requests.createdAt ?? '-');
     String createdAt = DateFormat('yyyy-MM-dd hh:mm:ss').format(tempDate);
 
+    // Status
+    String? status;
+    switch (requests.status) {
+      case 1:
+        status = 'Pending';
+        break;
+      case 2:
+        status = 'Approved';
+        break;
+      case 3:
+        status = 'Rejected/Canceled';
+        break;
+      default:
+        status = 'Default';
+    }
+
     return Container(
       color: Styles.accentColor,
       padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
@@ -148,7 +164,7 @@ class CardPaymentRequest extends StatelessWidget {
                 labelDetails: requests.amount ?? Field.emptyAmount),
             DetailRow(
                 labelTitle: Str.statusTxt,
-                labelDetails: requests.status.toString()),
+                labelDetails: status),
             DetailRow(
                 labelTitle: Str.descriptionTxt,
                 labelDetails: requests.description ?? Field.emptyString),

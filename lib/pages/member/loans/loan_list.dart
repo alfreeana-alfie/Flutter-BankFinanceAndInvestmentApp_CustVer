@@ -43,7 +43,7 @@ class _MLoanListState extends State<MLoanList> {
         }
       }
     } else {
-      print(Status.failedTxt);
+      // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }

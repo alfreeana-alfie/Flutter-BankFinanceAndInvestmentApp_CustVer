@@ -8,7 +8,8 @@ AppBar addAppBar(
     required bool implyLeading,
     required BuildContext context,
     bool? hasAction,
-    required path}) {
+    required path,
+    void Function()? onPressed}) {
   return AppBar(
       centerTitle: true,
       title: Text(
@@ -23,7 +24,7 @@ AppBar addAppBar(
               child: IconButton(
                 icon: const Icon(Icons.keyboard_backspace_rounded,
                     size: 33, color: Styles.accentColor),
-                onPressed: () => Navigator.pop(context),
+                onPressed: onPressed,
               ))
           : const SizedBox(),
       actions: [

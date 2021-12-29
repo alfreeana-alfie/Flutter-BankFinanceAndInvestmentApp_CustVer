@@ -16,7 +16,9 @@ class SupportTicketMethods {
     if (response.statusCode == Status.ok) {
       // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
-      Navigator.pop(context);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+        Navigator.popAndPushNamed(context, RouteSTR.supportTicketListM);
+      });
     } else {
       // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
