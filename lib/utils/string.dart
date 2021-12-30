@@ -222,6 +222,7 @@ class Str {
   static String userTxt = 'User';
 
   static String priorityTxt = 'Priority';
+  static String permissionTxt = 'Permission';
 }
 
 class Status {
@@ -327,6 +328,13 @@ class RouteSTR {
 
   static String sendMoneyList = '/send-money-list-a';
   static String exchangeMoneyList = '/exchange-money-list-a';
+
+  // NEW
+  static String userRoleList = '/user-role-list-a';
+  static String createUserRole = '/create-user-role';
+
+  static String permissionList = '/permission-list-a';
+  static String createPermission = '/create-permission';
 }
 
 class Field {
@@ -334,7 +342,7 @@ class Field {
   static String emptyString = '-';
   static String emptyAmount = '0.00';
   static String empty = '0';
-  
+
   static String icon = 'icon';
   static String customerTxt = 'customer';
   static String adminTxt = 'admin';
@@ -444,4 +452,6 @@ class Field {
   static String priority = 'priority';
   static String operatorId = 'operator_id';
   static String closedUserId = 'closed_user_id';
+
+  static String permission = 'permission';
 }

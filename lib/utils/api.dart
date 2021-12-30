@@ -70,6 +70,9 @@ class AdminAPI {
 
   // Users
   static Uri listOfUser = Uri.parse('$android/users');
+  static Uri listOfUserRole = Uri.parse('$android/list_of_user_roles');
+  static Uri listOfPermission = Uri.parse('$android/users');
+
   static Uri createUser = Uri.parse('$android/create_user');
   static Uri createUserRole = Uri.parse('$android/user_role');
   static Uri createPermission = Uri.parse('$android/access_permission');

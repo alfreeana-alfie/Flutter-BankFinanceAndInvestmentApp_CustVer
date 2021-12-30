@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/pages/admin/users/user_role_list.dart';
 import 'pages/admin/branches/branch_list.dart';
+import 'pages/admin/users/permission_list.dart';
 import 'pages/member/ticket/create_ticket.dart';
 import 'pages/member/ticket/ticket_list.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
@@ -65,7 +67,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       home: SplashScreenView(
-        navigateRoute: const BottomNav(),
+        navigateRoute: const AdminDashboard(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,
@@ -125,6 +127,12 @@ Future<void> main() async {
 
         RouteSTR.usersList: (context) => const UsersList(),
         RouteSTR.createUsers: (context) => const CreateUsers(),
+
+        RouteSTR.userRoleList: (context) => const UserRoleList(),
+        // RouteSTR.createUserRole: (context) => const CreateUserRole(),
+
+        RouteSTR.permissionList: (context) => const PermissionList(),
+        // RouteSTR.createPermission: (context) => const CreatePermssion(),
 
         RouteSTR.wireTransferList: (context) => const WireTransferList(),
         RouteSTR.createWireTransfer: (context) => const CreateWireTransfer(),
