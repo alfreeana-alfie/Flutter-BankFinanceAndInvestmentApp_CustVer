@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/pages/admin/navigation/navigation_list.dart';
 import 'package:flutter_banking_app/pages/admin/users/user_role_list.dart';
 import 'pages/admin/branches/branch_list.dart';
 import 'pages/admin/users/permission_list.dart';
@@ -163,6 +164,12 @@ Future<void> main() async {
 
         RouteSTR.testimonialList: (context) => const TestimonialList(),
         RouteSTR.createTestimonial: (context) => const CreateTestimonial(),
+
+        RouteSTR.navigationList: (context) => const NavigationList(),
+        RouteSTR.createNavigation: (context) => const CreateNavigation(),
+
+        RouteSTR.navigationItemList: (context) => const NavigationItemList(),
+        RouteSTR.createNavigationItem: (context) => const CreateNavigationItem(),
       },
     ),
   );

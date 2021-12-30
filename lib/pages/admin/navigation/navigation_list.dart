@@ -3,12 +3,14 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/loan_product.dart';
+import 'package:flutter_banking_app/models/navigation.dart';
 import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/app_bar_add.dart';
 import 'package:flutter_banking_app/widgets/card/card_loan_product.dart';
+import 'package:flutter_banking_app/widgets/card/card_navigation.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
@@ -23,18 +25,18 @@ class _NavigationListState extends State<NavigationList> {
   SharedPref sharedPref = SharedPref();
   User userLoad = User();
   late Map<String, dynamic> requestMap;
-  List<LoanProduct> productList = [];
+  List<Navigation> navigationList = [];
 
   Future view() async {
     final response =
-        await http.get(AdminAPI.listOfLoanProduct, headers: headers);
+        await http.get(AdminAPI.listOfNavigation, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
       for (var req in jsonBody[Field.data]) {
-        final data = LoanProduct.fromMap(req);
+        final data = Navigation.fromMap(req);
         if (mounted) {
-          productList.add(data);
+          navigationList.add(data);
         }
       }
     } else {
@@ -73,7 +75,7 @@ class _NavigationListState extends State<NavigationList> {
           implyLeading: true,
           context: context,
           hasAction: true,
-          path: RouteSTR.createLoanProduct,
+          path: RouteSTR.createNavigation,
         ),
         // drawer: SideDrawer(),
         backgroundColor: Styles.primaryColor,
@@ -106,8 +108,8 @@ class _NavigationListState extends State<NavigationList> {
                 child: ListView(
                   physics: const BouncingScrollPhysics(),
                   children: [
-                    for (LoanProduct product in productList)
-                      CardLoanProduct(product: product),
+                    for (Navigation navigation in navigationList)
+                      CardNavigation(navigation: navigation),
                   ],
                 ),
               ),

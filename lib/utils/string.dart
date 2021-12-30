@@ -223,6 +223,12 @@ class Str {
 
   static String priorityTxt = 'Priority';
   static String permissionTxt = 'Permission';
+  
+  static String urlTxt = 'URL';
+  static String targetTxt = 'Target';
+  static String positionTxt = 'Position';
+  static String cssClassTxt = 'CSS Class';
+  static String cssIdTxt = 'CSS ID';
 }
 
 class Status {
@@ -335,6 +341,12 @@ class RouteSTR {
 
   static String permissionList = '/permission-list-a';
   static String createPermission = '/create-permission';
+
+  static String navigationList = '/navigation-list-a';
+  static String createNavigation = '/create-navigation';
+
+  static String navigationItemList = '/navigation-item-list-a';
+  static String createNavigationItem = '/create-navigation-item';
 }
 
 class Field {
