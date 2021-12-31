@@ -77,7 +77,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       home: SplashScreenView(
-        navigateRoute: const MLoanList(),
+        navigateRoute: const MCreateSupportTicket(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,
