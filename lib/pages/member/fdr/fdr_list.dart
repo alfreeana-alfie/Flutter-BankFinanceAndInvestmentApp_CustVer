@@ -9,6 +9,8 @@ import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/appbar/app_bar_add.dart';
 import 'package:flutter_banking_app/widgets/card/card_fdr.dart';
+import 'package:flutter_banking_app/widgets/left_menu_member.dart';
+import 'package:gap/gap.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
@@ -48,27 +50,6 @@ class _MFdrListState extends State<MFdrList> {
     }
   }
 
-  // loadSharedPrefs() async {
-  //   try {
-  //     User user = User.fromJSON(await sharedPref.read(Pref.userData));
-  //     setState(() {
-  //       userLoad = user;
-
-  //       print(userLoad.id.toString());
-  //     });
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   loadSharedPrefs();
-  //   viewOne('3');
-  // }
-
   @override
   Widget build(BuildContext context) {
     return OKToast(
@@ -81,7 +62,7 @@ class _MFdrListState extends State<MFdrList> {
           path: RouteSTR.addFdrM,
           onPressed: () => Navigator.pushNamed(context, RouteSTR.dashboardMember),
         ),
-        // drawer: SideDrawer(),
+        drawer: const SideDrawerMember(),
         backgroundColor: Styles.primaryColor,
         body: _innerContainer(),
       ),
@@ -110,8 +91,59 @@ class _MFdrListState extends State<MFdrList> {
               child: Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: ListView(
-                  physics: const BouncingScrollPhysics(),
-                  children: [
+                  scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
+              children: [
+                SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      // crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        InkWell(
+                          onTap: () => Scaffold.of(context).openDrawer(),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Styles.transparentColor,
+                            ),
+                            child: const Icon(
+                              Icons.menu,
+                              color: Styles.accentColor,
+                            ),
+                          ),
+                        ),
+                        const Gap(10),
+                        Center(
+                          child: Text(
+                            Str.fdrHistoryTxt,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w500,
+                                color: Styles.textColor, fontSize: 19),
+                          ),
+                        ),
+                        const Gap(10),
+                        InkWell(
+                          onTap: () => Navigator.pushNamed(context, RouteSTR.addLoanM),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Styles.transparentColor,
+                            ),
+                            child: const Icon(
+                              Icons.add,
+                              color: Styles.accentColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                     for (FixedDeposit fdr in fdrList) CardFDR(fdrPlan: fdr),
                   ],
                 ),

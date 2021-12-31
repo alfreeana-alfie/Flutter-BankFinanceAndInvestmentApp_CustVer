@@ -9,6 +9,8 @@ import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/appbar/app_bar_add.dart';
 import 'package:flutter_banking_app/widgets/card/card_transaction.dart';
+import 'package:flutter_banking_app/widgets/left_menu_member.dart';
+import 'package:gap/gap.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
@@ -58,7 +60,7 @@ class _MExchangeMoneyListState extends State<MExchangeMoneyList> {
           hasAction: true,
           path: RouteSTR.addFdrM,
         ),
-        // drawer: SideDrawer(),
+        drawer: const SideDrawerMember(),
         backgroundColor: Styles.primaryColor,
         body: _innerContainer(),
       ),
@@ -87,8 +89,59 @@ class _MExchangeMoneyListState extends State<MExchangeMoneyList> {
           child: Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: ListView(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
               physics: const BouncingScrollPhysics(),
               children: [
+                SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      // crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        InkWell(
+                          onTap: () => Scaffold.of(context).openDrawer(),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Styles.transparentColor,
+                            ),
+                            child: const Icon(
+                              Icons.menu,
+                              color: Styles.accentColor,
+                            ),
+                          ),
+                        ),
+                        const Gap(10),
+                        Center(
+                          child: Text(
+                            Str.exchangeMoneyListTxt,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w500,
+                                color: Styles.textColor, fontSize: 19),
+                          ),
+                        ),
+                        const Gap(10),
+                        InkWell(
+                          onTap: () => Navigator.pushNamed(context, RouteSTR.addLoanM),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Styles.transparentColor,
+                            ),
+                            child: const Icon(
+                              Icons.add,
+                              color: Styles.accentColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 for (Transaction transaction in transactionList) CardTransaction(transaction: transaction),
               ],
             ),
