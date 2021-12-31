@@ -2,11 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/pages/admin/navigation/navigation_list.dart';
+import 'package:flutter_banking_app/pages/admin/users/create_permission.dart';
 import 'package:flutter_banking_app/pages/admin/users/user_role_list.dart';
 import 'pages/admin/branches/branch_list.dart';
 import 'pages/admin/navigation/create_navigation.dart';
 import 'pages/admin/navigation/create_navigation_item.dart';
 import 'pages/admin/navigation/navigation_item_list.dart';
+import 'pages/admin/users/create_user_role.dart';
 import 'pages/admin/users/permission_list.dart';
 import 'pages/member/ticket/create_ticket.dart';
 import 'pages/member/ticket/ticket_list.dart';
@@ -133,10 +135,10 @@ Future<void> main() async {
         RouteSTR.createUsers: (context) => const CreateUsers(),
 
         RouteSTR.userRoleList: (context) => const UserRoleList(),
-        // RouteSTR.createUserRole: (context) => const CreateUserRole(),
+        RouteSTR.createUserRole: (context) => const CreateUserRole(),
 
         RouteSTR.permissionList: (context) => const PermissionList(),
-        // RouteSTR.createPermission: (context) => const CreatePermssion(),
+        RouteSTR.createPermission: (context) => const CreateUserPermission(),
 
         RouteSTR.wireTransferList: (context) => const WireTransferList(),
         RouteSTR.createWireTransfer: (context) => const CreateWireTransfer(),
