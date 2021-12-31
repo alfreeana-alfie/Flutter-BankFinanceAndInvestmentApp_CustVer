@@ -232,6 +232,13 @@ class Str {
 
   static String createNavigationTxt = 'Create New Navigation';
   static String createNavigationItemTxt = 'Create Navigation Item';
+
+  static String sendMoneyListTxt = 'Send Money List';
+  static String exchangeMoneyListTxt = 'Exchange Money List';
+  static String wireTransferListTxt = 'Wire Transfer List';
+  static String paymentRequestTxt = 'Payment Request';
+  static String allRequestTxt = 'All Request(s)';
+
 }
 
 class Status {
@@ -268,6 +275,7 @@ class RouteSTR {
   static String forgotPassword = '/forgot-password';
   static String signIn = '/sign-in';
   static String signUp = '/sign-up';
+  static String signOut = '/sign-out';
   static String profileOverview = '/profile-overview';
 
   static String bottomNav = '/bottom_nav';

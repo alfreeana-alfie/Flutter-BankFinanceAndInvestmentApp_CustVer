@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/pages/admin/navigation/navigation_list.dart';
 import 'package:flutter_banking_app/pages/admin/users/create_permission.dart';
 import 'package:flutter_banking_app/pages/admin/users/user_role_list.dart';
+import 'package:flutter_banking_app/pages/auth/sign_out.dart';
 import 'package:flutter_banking_app/pages/member/exchange_money/exchange_money_list.dart';
 import 'package:flutter_banking_app/pages/member/send_money/send_money_list.dart';
 import 'package:flutter_banking_app/pages/member/wire_transfer/wire_transfer_list.dart';
@@ -104,6 +105,7 @@ Future<void> main() async {
         RouteSTR.forgotPassword: (context) => const ForgotPasswordPage(),
         RouteSTR.signUp: (context) => const SignUpPage(),
         RouteSTR.signIn: (context) => const SignInPage(),
+        RouteSTR.signOut: (context) => const SignOut(),
         RouteSTR.profileOverview: (context) => const ProfileOverview(),
 
         // MEMBER ROUTE(S)

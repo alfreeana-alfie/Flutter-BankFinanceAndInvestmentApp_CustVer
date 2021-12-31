@@ -40,97 +40,128 @@ class SideDrawerMember extends StatelessWidget {
               ],
             ),
           ),
-          // ListTile(
-          //   leading: const Icon(Icons.dashboard),
-          //   title: Text('Change to Member Panel',
-          //       style: GoogleFonts.nunitoSans(
-          //           color: Styles.textColor.withOpacity(1))),
-          //   onTap: () => {
-          //     Navigator.pushReplacementNamed(context, RouteSTR.dashboardMember)
-          //   },
-          // ),
-          ListTile(
-            leading: const Icon(Icons.dashboard),
-            title: Text(Str.dashboardTxt,
-                style: GoogleFonts.nunitoSans(
-                    color: Styles.textColor.withOpacity(1))),
-            onTap: () => {
-              Navigator.pushReplacementNamed(context, RouteSTR.dashboardAdmin)
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.request_page),
-            title: Text(Str.depositTxt,
-                style: GoogleFonts.nunitoSans(
-                    color: Styles.textColor.withOpacity(1))),
-            onTap: () => {Navigator.pushNamed(context, RouteSTR.depositList)},
-          ),
-          ListTile(
-            leading: const Icon(Icons.people),
-            title: Text(Str.usersTxt,
-                style: GoogleFonts.nunitoSans(
-                    color: Styles.textColor.withOpacity(1))),
-            onTap: () => {Navigator.pushNamed(context, RouteSTR.usersList)},
+          ExpansionTile(
+            expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            leading: const Icon(Icons.transfer_within_a_station),
+            title: Text(Str.sendMoneyTxt),
+            children: [
+              DrawerChild(
+                title: Str.sendMoneyTxt,
+                onNavigate: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.sendMoneyM);
+                  },
+              ),
+              DrawerChild(
+                title: Str.sendMoneyListTxt,
+                onNavigate: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.sendMoneyListM);
+                  },
+              ),
+            ],
           ),
           ExpansionTile(
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
             leading: const Icon(Icons.transfer_within_a_station),
-            title: Text(Str.loanManagementTxt),
+            title: Text(Str.exchangeMoneyTxt),
             children: [
               DrawerChild(
-                title: Str.loanListTxt,
+                title: Str.exchangeMoneyTxt,
                 onNavigate: TapGestureRecognizer()
                   ..onTap = () {
-                    Navigator.pushNamed(context, RouteSTR.loanProductList);
+                    Navigator.pushNamed(context, RouteSTR.exchangeMoneyM);
                   },
               ),
               DrawerChild(
-                title: Str.loanCalculatorTxt,
+                title: Str.exchangeMoneyListTxt,
                 onNavigate: TapGestureRecognizer()
                   ..onTap = () {
-                    Navigator.pushNamed(context, RouteSTR.comingSoonMenu);
+                    Navigator.pushNamed(context, RouteSTR.exchangeMoneyListM);
                   },
               ),
             ],
           ),
           ExpansionTile(
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-            leading: const Icon(Icons.money),
-            title: Text(Str.fixedDepositTxt),
-            children: [
-              DrawerChild(
-                title: Str.allFdrTxt,
-                onNavigate: TapGestureRecognizer()
-                  ..onTap = () {
-                    Navigator.pushNamed(context, RouteSTR.comingSoonMenu);
-                  },
-              ),
-              DrawerChild(
-                title: Str.fdrPackageTxt,
-                onNavigate: TapGestureRecognizer()
-                  ..onTap = () {
-                    Navigator.pushNamed(context, RouteSTR.fdrPlanList);
-                  },
-              ),
-            ],
-          ),
-          ExpansionTile(
-            expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-            leading: const Icon(Icons.list_alt),
-            title: Text(Str.allTransactionsTxt),
+            leading: const Icon(Icons.transfer_within_a_station),
+            title: Text(Str.wireTransferTxt),
             children: [
               DrawerChild(
                 title: Str.wireTransferTxt,
                 onNavigate: TapGestureRecognizer()
                   ..onTap = () {
-                    Navigator.pushNamed(context, RouteSTR.wireTransferList);
+                    Navigator.pushNamed(context, RouteSTR.wireTransferM);
                   },
               ),
               DrawerChild(
-                title: Str.sendMoneyTxt,
+                title: Str.wireTransferListTxt,
                 onNavigate: TapGestureRecognizer()
                   ..onTap = () {
-                    Navigator.pushNamed(context, RouteSTR.sendMoneyList);
+                    Navigator.pushNamed(context, RouteSTR.wireTransferListM);
+                  },
+              ),
+            ],
+          ),
+          ExpansionTile(
+            expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            leading: const Icon(Icons.transfer_within_a_station),
+            title: Text(Str.paymentRequestTxt),
+            children: [
+              DrawerChild(
+                title: Str.newRequestTxt,
+                onNavigate: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.addPaymentRequestM);
+                  },
+              ),
+              DrawerChild(
+                title: Str.allRequestTxt,
+                onNavigate: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.paymentRequestM);
+                  },
+              ),
+            ],
+          ),
+          ExpansionTile(
+            expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            leading: const Icon(Icons.transfer_within_a_station),
+            title: Text(Str.loanTxt),
+            children: [
+              DrawerChild(
+                title: Str.applyLoanTxt,
+                onNavigate: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.addLoanM);
+                  },
+              ),
+              DrawerChild(
+                title: Str.myLoanTxt,
+                onNavigate: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.loanListM);
+                  },
+              ),
+            ],
+          ),
+          ExpansionTile(
+            expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            leading: const Icon(Icons.transfer_within_a_station),
+            title: Text(Str.fixedDepositTxt),
+            children: [
+              DrawerChild(
+                title: Str.applyDepositTxt,
+                onNavigate: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.addFdrM);
+                  },
+              ),
+              DrawerChild(
+                title: Str.fdrHistoryTxt,
+                onNavigate: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.fdrListM);
                   },
               ),
             ],
@@ -156,164 +187,19 @@ class SideDrawerMember extends StatelessWidget {
           // SYSTEM SETTINGS
           ListTile(
             leading: const Icon(Icons.business),
-            title: Text(Str.branchTxt,
+            title: Text(Str.profileOverviewTxt,
                 style: GoogleFonts.nunitoSans(
                     color: Styles.textColor.withOpacity(1))),
-            onTap: () => {Navigator.pushNamed(context, RouteSTR.branchList)},
+            onTap: () =>
+                {Navigator.pushNamed(context, RouteSTR.profileOverview)},
           ),
-          ListTile(
-            leading: const Icon(Icons.business),
-            title: Text(Str.otherBankTxt,
-                style: GoogleFonts.nunitoSans(
-                    color: Styles.textColor.withOpacity(1))),
-            onTap: () => {Navigator.pushNamed(context, RouteSTR.otherBankList)},
-          ),
-          ListTile(
-            leading: const Icon(Icons.money),
-            title: Text(Str.currencyTxt,
-                style: GoogleFonts.nunitoSans(
-                    color: Styles.textColor.withOpacity(1))),
-            onTap: () => {Navigator.pushNamed(context, RouteSTR.currencyList)},
-          ),
-          // ExpansionTile(
-          //   expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-          //   leading: Icon(Icons.card_membership),
-          //   title: Text(TransactionSettingSTR.transactionSettingsTxt),
-          //   children: [
-          //     DrawerChild(
-          //       title: TransactionSettingSTR.depositMethodTxt,
-          //       onNavigate: TapGestureRecognizer()
-          //       ..onTap = () {
-          //         Navigator.pushNamed(context, '/trans-deposit-meth');
-          //       },
-          //     ),
-          //     DrawerChild(
-          //       title: TransactionSettingSTR.depositGatewayTxt,
-          //       onNavigate: TapGestureRecognizer()
-          //       ..onTap = () {
-          //         Navigator.pushNamed(context, '/trans-deposit-gate');
-          //       },
-          //     ),
-          //     DrawerChild(
-          //       title: TransactionSettingSTR.withdrawMethodsTxt,
-          //       onNavigate: TapGestureRecognizer()
-          //       ..onTap = () {
-          //         Navigator.pushNamed(context, '/trans-withdraw-meth');
-          //       },
-          //     ),
-          //     DrawerChild(
-          //       title: TransactionSettingSTR.transactionsFeeTxt,
-          //       onNavigate: TapGestureRecognizer()
-          //       ..onTap = () {
-          //         Navigator.pushNamed(context, '/trans-fees');
-          //       },
-          //     ),
-          //   ],
-          // ),
-          ExpansionTile(
-            expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-            leading: Icon(Icons.web),
-            title: Text(Str.websiteManagementTxt),
-            children: [
-              DrawerChild(
-                title: Str.faqTxt,
-                onNavigate: TapGestureRecognizer()
-                ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.faqList);
-                },
-              ),
-              DrawerChild(
-                title: Str.servicesTxt,
-                onNavigate: TapGestureRecognizer()
-                ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.serviceList);
-                },
-              ),
-              // DrawerChild(
-              //   title: WebsiteManagementSTR.pagesTxt,
-              //   onNavigate: TapGestureRecognizer()
-              //   ..onTap = () {
-              //     Navigator.pushNamed(context, '/pages');
-              //   },
-              // ),
-              DrawerChild(
-                title: Str.teamsTxt,
-                onNavigate: TapGestureRecognizer()
-                ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.teamList);
-                },
-              ),
-              DrawerChild(
-                title: Str.testimonialsTxt,
-                onNavigate: TapGestureRecognizer()
-                ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.testimonialList);
-                },
-              ),
-              // DrawerChild(
-              //   title: WebsiteManagementSTR.themeOptionsTxt,
-              //   onNavigate: TapGestureRecognizer()
-              //   ..onTap = () {
-              //     Navigator.pushNamed(context, '/theme-opt');
-              //   },
-              // ),
-              // DrawerChild(
-              //   title: WebsiteManagementSTR.menuManagementTxt,
-              //   onNavigate: TapGestureRecognizer()
-              //   ..onTap = () {
-              //     Navigator.pushNamed(context, '/menu-manage');
-              //   },
-              // ),
-            ],
-          ),
-          // ExpansionTile(
-          //   expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-          //   leading: Icon(Icons.settings),
-          //   title: Text(AdministrationSTR.administrationTxt),
-          //   children: [
-          //     DrawerChild(
-          //       title: AdministrationSTR.generalSettingTxt,
-          //       onNavigate: TapGestureRecognizer()
-          //       ..onTap = () {
-          //         Navigator.pushNamed(context, '/general-settings');
-          //       },
-          //     ),
-          //     DrawerChild(
-          //       title: AdministrationSTR.databaseBackupTxt,
-          //       onNavigate: TapGestureRecognizer()
-          //       ..onTap = () {
-          //         Navigator.pushNamed(context, '/db-backup');
-          //       },
-          //     ),
-          //   ],
-          // ),
-          // ExpansionTile(
-          //   expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-          //   leading: Icon(Icons.language),
-          //   title: Text(LanguageSTR.languageTxt),
-          //   children: [
-          //     DrawerChild(
-          //       title: LanguageSTR.allLanguageTxt,
-          //       onNavigate: TapGestureRecognizer()
-          //       ..onTap = () {
-          //         Navigator.pushNamed(context, '/langs');
-          //       },
-          //     ),
-          //     DrawerChild(
-          //       title: LanguageSTR.languageTxt,
-          //       onNavigate: TapGestureRecognizer()
-          //       ..onTap = () {
-          //         Navigator.pushNamed(context, '/add-lang');
-          //       },
-          //     ),
-          //   ],
-          // ),
           ListTile(
             leading: const Icon(Icons.logout_rounded),
             title: Text(Str.signOutTxt,
                 style: GoogleFonts.nunitoSans(
                     color: Styles.textColor.withOpacity(1))),
-            onTap: () => {Navigator.pushReplacementNamed(context, RouteSTR.signIn)},
+            onTap: () =>
+                {Navigator.pushReplacementNamed(context, RouteSTR.signOut)},
           ),
         ],
       ),
