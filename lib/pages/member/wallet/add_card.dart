@@ -5,8 +5,8 @@ import 'package:flutter_banking_app/utils/layouts.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
-import 'package:flutter_banking_app/widgets/default_text_field.dart';
-import 'package:flutter_banking_app/widgets/my_app_bar.dart';
+import 'package:flutter_banking_app/widgets/textfield/default_text_field.dart';
+import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
 import 'package:gap/gap.dart';
 
 class AddCard extends StatefulWidget {

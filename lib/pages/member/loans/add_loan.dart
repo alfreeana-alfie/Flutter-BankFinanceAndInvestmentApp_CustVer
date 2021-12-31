@@ -5,15 +5,14 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/methods/member/loan_request_methods.dart';
-import 'package:flutter_banking_app/methods/member/send_money_methods.dart';
 import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
-import 'package:flutter_banking_app/widgets/dropdown_fdr.dart';
-import 'package:flutter_banking_app/widgets/dropdrown_currency.dart';
-import 'package:flutter_banking_app/widgets/my_app_bar.dart';
+import 'package:flutter_banking_app/widgets/dropdown/dropdown_fdr.dart';
+import 'package:flutter_banking_app/widgets/dropdown/dropdrown_currency.dart';
+import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
 import 'package:gap/gap.dart';
 
 class MCreateLoan extends StatefulWidget {

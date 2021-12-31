@@ -4,7 +4,7 @@ import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/layouts.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/balance_box.dart';
-import 'package:flutter_banking_app/widgets/my_app_bar.dart';
+import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
 import 'package:gap/gap.dart';
 
 import 'add_card.dart';

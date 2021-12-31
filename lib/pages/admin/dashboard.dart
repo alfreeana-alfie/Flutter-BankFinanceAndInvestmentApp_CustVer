@@ -1,11 +1,10 @@
 
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/pages/coming_soon.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
-import 'package:flutter_banking_app/widgets/app_bar.dart';
+import 'package:flutter_banking_app/widgets/appbar/app_bar.dart';
 import 'package:flutter_banking_app/widgets/left_menu.dart';
 
 class AdminDashboard extends StatefulWidget {

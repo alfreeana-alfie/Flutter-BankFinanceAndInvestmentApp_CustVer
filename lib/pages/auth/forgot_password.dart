@@ -5,7 +5,7 @@ import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
 import 'package:flutter_banking_app/widgets/clickable_text.dart';
 import 'package:flutter_banking_app/widgets/header_1.dart';
-import 'package:flutter_banking_app/widgets/text_field.dart';
+import 'package:flutter_banking_app/widgets/textfield/text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
