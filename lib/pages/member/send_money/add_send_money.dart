@@ -110,43 +110,7 @@ class _SendMoneyState extends State<MCreateSendMoney> {
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
             title: Str.sendMoneyTxt, implyLeading: true, context: context),
-        // bottomSheet: Container(
-        //   color: Styles.primaryColor,
-        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-        //   child: elevatedButton(
-        //     color: Styles.secondaryColor,
-        //     context: context,
-        //     callback: () {
-        //       Map<String, String> body = {
-        //         Field.userId: userLoad.id.toString(),
-        //         Field.currencyId: currency ?? '-',
-        //         Field.amount: amount ?? '0.00',
-        //         Field.fee: fee,
-        //         Field.drCr: drCr,
-        //         Field.type: type,
-        //         Field.method: method,
-        //         Field.status: status,
-        //         Field.note: note ?? '-',
-        //         Field.loanId: loanId,
-        //         Field.refId: refId,
-        //         Field.parentId: parentId,
-        //         Field.otherBankId: otherBankId,
-        //         Field.gatewayId: gatewayId,
-        //         Field.createdUserId: toUserId ?? '-',
-        //         Field.updatedUserId: updatedUserId,
-        //         Field.branchId: branchId,
-        //         Field.transactionsDetails: transactionsDetails
-        //       };
-
-        //       SendMoneyMethods.add(context, body);
-        //       // SendMoneyMethods.viewAll();
-        //       // SendMoneyMethods.viewOne('1');
-        //       // FixedDepositMethods.viewOne('1');
-        //     },
-        //     text: Str.sendMoneyTxt,
-        //   ),
-        // ),
-        body: ListView(
+       body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
             // Stack(

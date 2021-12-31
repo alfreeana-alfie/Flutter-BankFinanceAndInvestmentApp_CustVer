@@ -239,6 +239,7 @@ class Str {
   static String paymentRequestTxt = 'Payment Request';
   static String allRequestTxt = 'All Request(s)';
 
+  static String welcomeBackTxt = 'Welcome Back!';
 }
 
 class Status {

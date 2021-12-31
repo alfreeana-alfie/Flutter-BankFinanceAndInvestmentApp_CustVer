@@ -8,6 +8,7 @@ import 'package:flutter_banking_app/widgets/detail.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class CardTransaction extends StatelessWidget {
   const CardTransaction({Key? key, required this.transaction}) : super(key: key);
@@ -120,6 +121,26 @@ class CardTransaction extends StatelessWidget {
   }
 
   buildExpanded1(BuildContext context) {
+    
+    // Status
+    String? status;
+    switch (transaction.status) {
+      case 1:
+        status = 'Pending';
+        break;
+      case 2:
+        status = 'Approved';
+        break;
+      case 3:
+        status = 'Rejected/Canceled';
+        break;
+      default:
+        status = 'Default';
+    }
+
+    DateTime tempDate = DateTime.parse(transaction.createdAt ?? '');
+    String createdAt = DateFormat(Styles.formatDate).format(tempDate);
+
     return Container(
       color: Styles.accentColor,
       padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
@@ -127,7 +148,7 @@ class CardTransaction extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DetailRow(labelTitle: Str.userNameTxt, labelDetails: transaction.userId ?? Field.emptyString),
+            DetailRow(labelTitle: Str.userNameTxt, labelDetails: transaction.userId.toString()),
             DetailRow(
                 labelTitle: Str.currencyTxt, labelDetails: transaction.currencyId ?? Field.emptyString),
             DetailRow(labelTitle: Str.amountTxt, labelDetails: transaction.amount ?? Field.emptyString),
@@ -138,7 +159,7 @@ class CardTransaction extends StatelessWidget {
             DetailRow(labelTitle: Str.typeTxt, labelDetails: transaction.type ?? Field.emptyString),
             DetailRow(
                 labelTitle: Str.methodTxt, labelDetails: transaction.method ?? Field.emptyString),
-            DetailRow(labelTitle: Str.statusTxt, labelDetails: transaction.status ?? Field.emptyString),
+            DetailRow(labelTitle: Str.statusTxt, labelDetails: status),
             DetailRow(labelTitle: Str.noteTxt, labelDetails: transaction.note ?? Field.emptyString),
 
             DetailRow(labelTitle: Str.loanTxt, labelDetails: transaction.loanId ?? Field.emptyString),
@@ -148,7 +169,7 @@ class CardTransaction extends StatelessWidget {
             DetailRow(labelTitle: Str.gatewayTxt, labelDetails: transaction.gatewayId ?? Field.emptyString),
             DetailRow(labelTitle: Str.branchTxt, labelDetails: transaction.branchId ?? Field.emptyString),
             DetailRow(labelTitle: Str.transactionDetailsTxt, labelDetails: transaction.transactionsDetails ?? Field.emptyString),
-            DetailRow(labelTitle: Str.createdTxt, labelDetails: transaction.createdAt ?? Field.emptyString),
+            DetailRow(labelTitle: Str.createdTxt, labelDetails: createdAt),
             _buildButtonRow(context),
           ],
         ),

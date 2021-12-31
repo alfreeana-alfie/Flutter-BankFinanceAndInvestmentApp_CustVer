@@ -7,7 +7,6 @@ import 'package:flutter_banking_app/models/token.dart';
 import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 
 import 'config.dart';
 

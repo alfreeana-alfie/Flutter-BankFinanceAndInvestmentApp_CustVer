@@ -29,8 +29,7 @@ class _MSendMoneyListState extends State<MSendMoneyList> {
     User user = User.fromJSON(await sharedPref.read(Pref.userData));
     String userId = user.id.toString();
     
-    Uri viewSingleUser =
-        Uri.parse(API.userSendMoneyList.toString() + userId);
+    Uri viewSingleUser = Uri.parse(API.userSendMoneyList.toString() + userId);
     final response = await http.get(viewSingleUser, headers: headers);
 
     if (response.statusCode == Status.ok) {

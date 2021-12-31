@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 
 class Styles {
+
+  static String formatDate = 'yyyy-MM-dd hh:mm:ss';
   // LIGHT MODE
   static const Color primaryColor = Color.fromRGBO(255, 255, 255, 1);
   static const Color primaryWithOpacityColor =

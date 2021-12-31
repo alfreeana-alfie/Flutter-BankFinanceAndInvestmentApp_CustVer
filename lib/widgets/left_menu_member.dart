@@ -40,9 +40,17 @@ class SideDrawerMember extends StatelessWidget {
               ],
             ),
           ),
+          ListTile(
+            leading: const Icon(Icons.dashboard),
+            title: Text(Str.dashboardTxt,
+                style: GoogleFonts.nunitoSans(
+                    color: Styles.textColor.withOpacity(1))),
+            onTap: () =>
+                {Navigator.pushNamed(context, RouteSTR.dashboardMember)},
+          ),
           ExpansionTile(
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-            leading: const Icon(Icons.transfer_within_a_station),
+            leading: const Icon(Icons.send_rounded),
             title: Text(Str.sendMoneyTxt),
             children: [
               DrawerChild(
@@ -63,7 +71,7 @@ class SideDrawerMember extends StatelessWidget {
           ),
           ExpansionTile(
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-            leading: const Icon(Icons.transfer_within_a_station),
+            leading: const Icon(Icons.arrow_circle_down_rounded),
             title: Text(Str.exchangeMoneyTxt),
             children: [
               DrawerChild(

@@ -10,6 +10,7 @@ import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/balance_box.dart';
+import 'package:flutter_banking_app/widgets/left_menu_member.dart';
 import 'package:gap/gap.dart';
 
 class MemberDasboard extends StatefulWidget {
@@ -48,7 +49,10 @@ class _MemberDasboardState extends State<MemberDasboard> {
     return Material(
       color: Styles.primaryColor,
       elevation: 0,
-      child: _innerContainer(),
+      child: Scaffold(
+        drawer: const SideDrawerMember(),
+        body: _innerContainer(),
+      ),
     );
   }
 
@@ -77,6 +81,20 @@ class _MemberDasboardState extends State<MemberDasboard> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        InkWell(
+                          onTap: () => Scaffold.of(context).openDrawer(),
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Styles.transparentColor,
+                        ),
+                        child: const Icon(
+                          Icons.menu,
+                          color: Styles.accentColor,
+                        ),
+                      ),
+                    ),
                         const Gap(10),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,8 +103,8 @@ class _MemberDasboardState extends State<MemberDasboard> {
                                 style: const TextStyle(
                                     color: Styles.textColor, fontSize: 16)),
                             const Gap(3),
-                            const Text('Welcome back',
-                                style: TextStyle(
+                            Text(Str.welcomeBackTxt,
+                                style: const TextStyle(
                                     color: Styles.textColor,
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold))
@@ -110,7 +128,7 @@ class _MemberDasboardState extends State<MemberDasboard> {
                   ],
                 ),
                 const Gap(25),
-                BalanceBox(),
+                const BalanceBox(),
                 const Gap(20),
                 Container(
                   padding:
