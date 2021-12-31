@@ -20,7 +20,7 @@ class WireTransferMethods {
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
       Future.delayed(const Duration(milliseconds: 2000), () {
 
-        Navigator.pop(context);
+        Navigator.pushReplacementNamed(context, RouteSTR.wireTransferListM);
 
       });
     } else {
