@@ -223,12 +223,15 @@ class Str {
 
   static String priorityTxt = 'Priority';
   static String permissionTxt = 'Permission';
-  
+
   static String urlTxt = 'URL';
   static String targetTxt = 'Target';
   static String positionTxt = 'Position';
   static String cssClassTxt = 'CSS Class';
   static String cssIdTxt = 'CSS ID';
+
+  static String createNavigationTxt = 'Create New Navigation';
+  static String createNavigationItemTxt = 'Create Navigation Item';
 }
 
 class Status {
@@ -451,6 +454,7 @@ class Field {
   static String usedAt = 'used_at';
   static String code = 'code';
 
+  static String navigationId = 'navigation_id';
   static String pageId = 'page_id';
   static String url = 'url';
   static String target = 'target';

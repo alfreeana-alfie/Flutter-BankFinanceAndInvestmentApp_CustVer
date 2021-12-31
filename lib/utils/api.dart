@@ -128,9 +128,10 @@ class AdminAPI {
   static Uri createTeam = Uri.parse('$android/create_team');
 
   // Gift Card 
-  static Uri listOfGiftCard = Uri.parse('$android/list_of_gift_cards');
-  static Uri listOfUsedGiftCard = Uri.parse('$android/list_of_used_gift_cards');
   static Uri createGiftCard = Uri.parse('$android/gift_card');
+  static Uri listOfGiftCard = Uri.parse('$android/list_of_gift_cards');
+  
+  static Uri listOfUsedGiftCard = Uri.parse('$android/list_of_used_gift_cards');
 
   // Transaction 
   static Uri listOfExchangeMoney = Uri.parse('$android/list_of_exchange_money');
@@ -139,6 +140,7 @@ class AdminAPI {
   // Navigation
   static Uri createNavigation = Uri.parse('$android/navigation');
   static Uri listOfNavigation = Uri.parse('$android/list_of_navigations');
+
   static Uri createNavigationItem = Uri.parse('$android/navigation_item');
   static Uri listOfNavigationItem = Uri.parse('$android/list_of_navigation_items');
 }
