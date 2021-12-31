@@ -22,17 +22,17 @@ class API {
   // Send Money
   static Uri sendMoney = Uri.parse('$android/send_money');
   // static Uri listOfSendMoney = Uri.parse('$android/list_of_send_money');
-  // static Uri userSendMoneyList = Uri.parse('$android/user_send_money_list/');
+  static Uri userSendMoneyList = Uri.parse('$android/user_send_money_list/');
 
   // Exchange Money
   static Uri exchangeMoney = Uri.parse('$android/exchange_money');
   // static Uri listOfExchangeMoney = Uri.parse('$android/list_of_exchange_money');
-  // static Uri userExchangeMoneyList = Uri.parse('');
+  static Uri userExchangeMoneyList = Uri.parse('user_exchange_money_list/');
 
   // Wire Transfer
   static Uri wireTransfer = Uri.parse('$android/wire_transfer');
   // static Uri listOfWireTransfer = Uri.parse('$android/list_of_wire_transfer');
-  // static Uri userWireTransferList = Uri.parse('');
+  static Uri userWireTransferList = Uri.parse('user_wire_transfer_list/');
 
   // Payment Request
   static Uri paymentRequest = Uri.parse('$android/payment_request');

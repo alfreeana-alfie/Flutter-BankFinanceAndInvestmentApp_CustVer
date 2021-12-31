@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/pages/admin/navigation/navigation_list.dart';
 import 'package:flutter_banking_app/pages/admin/users/create_permission.dart';
 import 'package:flutter_banking_app/pages/admin/users/user_role_list.dart';
+import 'package:flutter_banking_app/pages/member/exchange_money/exchange_money_list.dart';
+import 'package:flutter_banking_app/pages/member/send_money/send_money_list.dart';
+import 'package:flutter_banking_app/pages/member/wire_transfer/wire_transfer_list.dart';
 import 'pages/admin/branches/branch_list.dart';
 import 'pages/admin/navigation/create_navigation.dart';
 import 'pages/admin/navigation/create_navigation_item.dart';
@@ -111,10 +114,13 @@ Future<void> main() async {
         RouteSTR.addPaymentRequestM: (context) => const MCreatePaymentRequest(),
 
         RouteSTR.sendMoneyM: (context) => const MCreateSendMoney(),
+        RouteSTR.sendMoneyListM: (context) => const MSendMoneyList(),
 
         RouteSTR.exchangeMoneyM: (context) => const MCreateExchangeMoney(),
+        RouteSTR.exchangeMoneyListM: (context) => const MExchangeMoneyList(),
 
         RouteSTR.wireTransferM: (context) => const MCreateWireTransfer(),
+        RouteSTR.wireTransferM: (context) => const MWireTransferList(),
 
         RouteSTR.addLoanM: (context) => const MCreateLoan(),
         RouteSTR.loanListM: (context) => const MLoanList(),
