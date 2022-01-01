@@ -86,44 +86,6 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
     SizeConfig.init(context);
     return OKToast(
       child: Scaffold(
-        bottomSheet: Container(
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
-                color: Styles.greyColor,
-              ),
-              // color: Styles.primaryColor,
-              margin: const   EdgeInsets.fromLTRB(15,0,15,15),
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-              child: elevatedButton(
-                color: Styles.secondaryColor,
-                context: context,
-                callback: () {
-                  Map<String, String> body = {
-                    Field.userId: userId ?? '0',
-                    Field.currencyId: exchangeTo ?? Field.emptyString,
-                    Field.amount: amount ?? '0.00',
-                    Field.fee: fee,
-                    Field.drCr: drCr,
-                    Field.type: type,
-                    Field.method: method,
-                    Field.status: Status.pending.toString(),
-                    Field.note: note ?? '-',
-                    Field.loanId: loanId,
-                    Field.refId: refId,
-                    Field.parentId: parentId,
-                    Field.otherBankId: otherBankId,
-                    Field.gatewayId: gatewayId,
-                    Field.createdUserId: userId ?? Field.emptyString,
-                    Field.updatedUserId: userId ?? Field.emptyString,
-                    Field.branchId: branchId,
-                    Field.transactionsDetails: note ?? '-'
-                  };
-
-                  ExchangeMoneyMethods.add(context, body);
-                },
-                text: Str.exchangeMoneyTxt.toUpperCase(),
-              ),
-            ),
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
             title: Str.exchangeMoneyTxt, implyLeading: true, context: context),
@@ -131,7 +93,14 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
           margin: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: Styles.greyColor,
+            color: Styles.cardColor,
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.grey,
+                offset: Offset(0.0, 1.0), //(x,y)
+                blurRadius: 6.0,
+              ),
+            ],
           ),
           child: ListView(
             children: [
@@ -209,8 +178,46 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
                           NewField(
                               onSaved: (val) => note = val,
                               hintText: Str.noteTxt),
-                          
                         ],
+                      ),
+                    ),
+                    Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(15),
+                            bottomRight: Radius.circular(15)),
+                        color: Styles.primaryColor,
+                      ),
+                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: elevatedButton(
+                        color: Styles.secondaryColor,
+                        context: context,
+                        callback: () {
+                          Map<String, String> body = {
+                            Field.userId: userId ?? '0',
+                            Field.currencyId: exchangeTo ?? Field.emptyString,
+                            Field.amount: amount ?? '0.00',
+                            Field.fee: fee,
+                            Field.drCr: drCr,
+                            Field.type: type,
+                            Field.method: method,
+                            Field.status: Status.pending.toString(),
+                            Field.note: note ?? '-',
+                            Field.loanId: loanId,
+                            Field.refId: refId,
+                            Field.parentId: parentId,
+                            Field.otherBankId: otherBankId,
+                            Field.gatewayId: gatewayId,
+                            Field.createdUserId: userId ?? Field.emptyString,
+                            Field.updatedUserId: userId ?? Field.emptyString,
+                            Field.branchId: branchId,
+                            Field.transactionsDetails: note ?? '-'
+                          };
+                          ExchangeMoneyMethods.add(context, body);
+                        },
+                        text: Str.exchangeMoneyTxt.toUpperCase(),
                       ),
                     ),
                   ],

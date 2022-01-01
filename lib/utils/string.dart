@@ -240,6 +240,7 @@ class Str {
   static String allRequestTxt = 'All Request(s)';
 
   static String welcomeBackTxt = 'Welcome Back!';
+  static String userAccountTxt = 'User Account';
 }
 
 class Status {

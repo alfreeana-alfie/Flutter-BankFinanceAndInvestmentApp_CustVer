@@ -50,42 +50,40 @@ class _DropDownPlanFDRState extends State<DropDownPlanFDR> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.only(left: 15, right: 15),
-        decoration: BoxDecoration(
-          color: Colors.black12.withOpacity(0.05),
-          borderRadius: BorderRadius.circular(7.0),
-        ),
-        child: DropdownButtonHideUnderline(
-          child: DropdownButton(
-            dropdownColor: Styles.greyColor,
-            icon: const RotatedBox(
-                quarterTurns: 3,
-                child: Icon(
-                  Icons.chevron_left,
-                  size: 20,
-                  color: Styles.textColor,
-                )),
-            hint: widget.planName == null
-                ? Text(Str.planTxt, style: Styles.primaryTitle)
-                : Text(
-                    widget.planName!,
-                    style: Styles.primaryTitle,
-                  ),
-            isExpanded: true,
-            iconSize: 30.0,
-            style: Styles.primaryTitle,
-            items: planListNew.map(
-              (val) {
-                return DropdownMenuItem<PlanFDR>(
-                  value: val,
-                  child: Text(val.name ?? '-'),
-                );
-              },
-            ).toList(),
-            onChanged: widget.onChanged,
-          ),
+    return Container(
+      padding: const EdgeInsets.only(left: 15, right: 15),
+      decoration: BoxDecoration(
+        color: Colors.black12.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(7.0),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton(
+          dropdownColor: Styles.greyColor,
+          icon: const RotatedBox(
+              quarterTurns: 3,
+              child: Icon(
+                Icons.chevron_left,
+                size: 20,
+                color: Styles.textColor,
+              )),
+          hint: widget.planName == null
+              ? Text(Str.planTxt, style: Styles.primaryTitle)
+              : Text(
+                  widget.planName!,
+                  style: Styles.primaryTitle,
+                ),
+          isExpanded: true,
+          iconSize: 30.0,
+          style: Styles.primaryTitle,
+          items: planListNew.map(
+            (val) {
+              return DropdownMenuItem<PlanFDR>(
+                value: val,
+                child: Text(val.name ?? '-'),
+              );
+            },
+          ).toList(),
+          onChanged: widget.onChanged,
         ),
       ),
     );

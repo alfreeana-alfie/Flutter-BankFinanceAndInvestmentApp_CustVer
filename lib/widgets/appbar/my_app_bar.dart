@@ -9,13 +9,12 @@ AppBar myAppBar(
     String? stringColor,
     required bool implyLeading,
     required BuildContext context,
-    bool? hasAction,
-    void Function()? onPressedBack}) {
+    bool? hasAction}) {
   return AppBar(
     centerTitle: true,
     title: Text(
       title,
-      style: TextStyle(color: Styles.textColor, fontSize: 18),
+      style: const TextStyle(color: Styles.textColor, fontSize: 18),
     ),
     backgroundColor: Colors.transparent,
     elevation: 0,
@@ -25,9 +24,11 @@ AppBar myAppBar(
             child: IconButton(
               icon: const Icon(Icons.keyboard_backspace_rounded,
                   size: 33, color: Styles.accentColor),
-              onPressed:  onPressedBack,
+              onPressed: () => Navigator.pop(context),
             ))
-        : SizedBox(),
-    actions: hasAction == true ? [Icon(IconlyBroken.Search), Gap(15)] : null,
+        : const SizedBox(),
+    actions: hasAction == true
+        ? [const Icon(IconlyBroken.Search), const Gap(15)]
+        : null,
   );
 }

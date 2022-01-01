@@ -11,7 +11,9 @@ class NewField extends StatefulWidget {
       this.initialValue,
       this.obsecure,
       this.maxLines,
-      this.labelText});
+      this.labelText,
+      this.mandatory,
+      this.controller});
 
   final String hintText;
   final FormFieldSetter<String> onSaved;
@@ -21,6 +23,8 @@ class NewField extends StatefulWidget {
   final bool? obsecure;
   final int? maxLines;
   final String? labelText;
+  final bool? mandatory;
+  final TextEditingController? controller;
 
   @override
   _NewFieldState createState() => _NewFieldState();
@@ -32,14 +36,34 @@ class _NewFieldState extends State<NewField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
-          child: Text(
-            widget.hintText,
-            style: Styles.primaryTitle,
-          ),
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+              child: Text(
+                widget.hintText,
+                style: Styles.primaryTitle,
+              ),
+            ),
+            widget.mandatory == true
+                ? const Padding(
+                    padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                    child: Text(
+                      '*',
+                      style: TextStyle(color: Styles.dangerColor),
+                    ),
+                  )
+                : const Padding(
+                    padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                    child: Text(
+                      '',
+                      style: TextStyle(color: Styles.dangerColor),
+                    ),
+                  ),
+          ],
         ),
         TextFormField(
+          controller: widget.controller,
           maxLines: widget.maxLines,
           obscureText: widget.obsecure ?? false,
           initialValue: widget.initialValue,

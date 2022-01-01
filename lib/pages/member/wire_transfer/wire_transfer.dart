@@ -9,8 +9,10 @@ import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
+import 'package:flutter_banking_app/widgets/dropdown/dropdown_bank.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
+import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
 
@@ -25,7 +27,16 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
   final ScrollController _scrollController = ScrollController();
   SharedPref sharedPref = SharedPref();
 
-  String? currency, currencyName, userId, otherBankId, amount, note;
+  String? currency,
+      currencyName,
+      userId,
+      otherBankId,
+      otherBankName,
+      amount,
+      note,
+      swiftCode,
+      accountHolder,
+      accountHolderName;
 
   String fee = '1',
       drCr = '1',
@@ -76,7 +87,14 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Styles.accentColor,
+                color: Styles.cardColor,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 1.0), //(x,y)
+                    blurRadius: 6.0,
+                  ),
+                ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,212 +105,205 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        TextFormField(
-                          // readOnly: true,
-                          onChanged: (val) {
-                            otherBankId = '1';
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.bankTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.bankTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                              child:
+                                  Text(Str.bankTxt, style: Styles.primaryTitle),
                             ),
+                            const Padding(
+                              padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                              child: Text(
+                                '*',
+                                style: TextStyle(color: Styles.dangerColor),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          child: DropDownBank(
+                            bank: otherBankId,
+                            bankName: otherBankName,
+                            onChanged: (val) {
+                              setState(
+                                () {
+                                  otherBankId = val!.id.toString();
+                                  otherBankName = val.name;
+                                },
+                              );
+                            },
                           ),
                         ),
-                        // Row(
-                        //   crossAxisAlignment: CrossAxisAlignment.start,
-                        //   children: [
-                        //     Container(
-                        //         padding: const EdgeInsets.fromLTRB(15, 15, 15, 8),
-                        //         child: Text(Str.bankTxt,
-                        //             style: Styles.subtitleStyle)),
-                        //     const Gap(20.0),
-                        //     DropDownCurrency(
-                        //       currency: currency,
-                        //       currencyName: currencyName,
-                        //       onChanged: (val) {
-                        //         setState(
-                        //           () {
-                        //             currency = val!.id.toString();
-                        //             currencyName = val.name;
-                        //           },
-                        //         );
-                        //       },
+                        const Gap(20.0),
+                        NewField(
+                            mandatory: true,
+                            onSaved: (val) => swiftCode = val,
+                            hintText: Str.swiftCodeTxt),
+                        const Gap(20.0),
+                        NewField(
+                          mandatory: true,
+                          onSaved: (val) => amount = val,
+                          hintText: Str.amountTxt,
+                          labelText: Str.amountNumTxt,
+                        ),
+                        const Gap(20.0),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                              child: Text(Str.currencyTxt,
+                                  style: Styles.primaryTitle),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                              child: Text(
+                                '*',
+                                style: TextStyle(color: Styles.dangerColor),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          child: DropDownCurrency(
+                            currency: currency,
+                            currencyName: currencyName,
+                            onChanged: (val) {
+                              setState(
+                                () {
+                                  currency = val!.id.toString();
+                                  currencyName = val.name;
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                        // const Gap(20.0),
+                        // TextFormField(
+                        //   onChanged: (val) {},
+                        //   style: Styles.subtitleStyle,
+                        //   textInputAction: TextInputAction.done,
+                        //   keyboardType: TextInputType.text,
+                        //   maxLines: 1,
+                        //   decoration: InputDecoration(
+                        //     labelText: Str.accountHolderTxt,
+                        //     labelStyle: Styles.subtitleStyle,
+                        //     hintText: Str.accountHolderTxt,
+                        //     hintStyle: Styles.subtitleStyle03,
+                        //     border: const OutlineInputBorder(
+                        //       borderSide: BorderSide.none,
+                        //       gapPadding: 0.0,
                         //     ),
-                        //   ],
+                        //   ),
                         // ),
                         const Gap(20.0),
-                        TextFormField(
-                          // readOnly: true,
-                          onChanged: (val) {
-                            // otherBankId = '1';
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.swiftCodeTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.swiftCodeTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
+                        NewField(
+                          mandatory: true,
+                          onSaved: (val) => accountHolder = val,
+                          hintText: Str.accountHolderTxt,
+                        ),
+                        // const Gap(20.0),
+                        // TextFormField(
+                        //   onChanged: (val) {},
+                        //   style: Styles.subtitleStyle,
+                        //   textInputAction: TextInputAction.done,
+                        //   keyboardType: TextInputType.text,
+                        //   maxLines: 1,
+                        //   decoration: InputDecoration(
+                        //     labelText: Str.accountHolderNameTxt,
+                        //     labelStyle: Styles.subtitleStyle,
+                        //     hintText: Str.accountHolderNameTxt,
+                        //     hintStyle: Styles.subtitleStyle03,
+                        //     border: const OutlineInputBorder(
+                        //       borderSide: BorderSide.none,
+                        //       gapPadding: 0.0,
+                        //     ),
+                        //   ),
+                        // ),
+                        const Gap(20.0),
+                        NewField(
+                          mandatory: true,
+                          onSaved: (val) => accountHolderName = val,
+                          hintText: Str.accountHolderNameTxt,
                         ),
                         const Gap(20.0),
-                        Container(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: TextFormField(
-                                  onChanged: (val) {
-                                    amount = val;
-                                  },
-                                  style: Styles.subtitleStyle,
-                                  textInputAction: TextInputAction.done,
-                                  keyboardType: TextInputType.number,
-                                  maxLines: 1,
-                                  decoration: InputDecoration(
-                                    hintText: Str.amountNumTxt,
-                                    hintStyle: Styles.subtitleStyle,
-                                    border: const OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      gapPadding: 0.0,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              DropDownCurrency(
-                                currency: currency,
-                                currencyName: currencyName,
-                                onChanged: (val) {
-                                  setState(
-                                    () {
-                                      currency = val!.id.toString();
-                                      currencyName = val.name;
-                                    },
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
+                        NewField(
+                          onSaved: (val) => note = val,
+                          hintText: Str.descriptionTxt,
                         ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {},
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.accountHolderTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.accountHolderTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {},
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.accountHolderNameTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.accountHolderNameTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        
                       ],
                     ),
                   ),
                   // Divider(color: Styles.primaryColor, thickness: 2),
+                  // Container(
+                  //   decoration: const BoxDecoration(
+                  //     borderRadius:
+                  //         BorderRadius.vertical(bottom: Radius.circular(15)),
+                  //     color: Styles.thirdColor,
+                  //   ),
+                  //   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  //   child: TextFormField(
+                  //     onChanged: (val) {
+                  //       note = val;
+                  //     },
+                  //     style: Styles.subtitleStyleDark,
+                  //     textInputAction: TextInputAction.done,
+                  //     keyboardType: TextInputType.text,
+                  //     maxLines: 1,
+                  //     decoration: InputDecoration(
+                  //       labelText: Str.descriptionTxt,
+                  //       labelStyle: Styles.subtitleStyleDark02,
+                  //       hintText: Str.descriptionTxt,
+                  //       hintStyle: Styles.subtitleStyleDark03,
+                  //       border: const OutlineInputBorder(
+                  //         borderSide: BorderSide.none,
+                  //         gapPadding: 0.0,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // const Gap(10),
                   Container(
-                    decoration: const BoxDecoration(
-                      borderRadius:
-                          BorderRadius.vertical(bottom: Radius.circular(15)),
-                      color: Styles.thirdColor,
-                    ),
-                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                    child: TextFormField(
-                      onChanged: (val) {
-                        note = val;
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15)),
+                    color: Styles.primaryColor,
+                  ),
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: elevatedButton(
+                    color: Styles.secondaryColor,
+                    context: context,
+                      callback: () {
+                        Map<String, String> body = {
+                          Field.userId: userId ?? Field.empty,
+                          Field.currencyId: currency ?? Field.empty,
+                          Field.amount: amount ?? Field.emptyAmount,
+                          Field.fee: fee,
+                          Field.drCr: drCr,
+                          Field.type: type,
+                          Field.method: method,
+                          Field.status: status,
+                          Field.note: note ?? Field.emptyString,
+                          Field.loanId: loanId,
+                          Field.refId: refId,
+                          Field.parentId: parentId,
+                          Field.otherBankId: otherBankId ?? Field.empty,
+                          Field.gatewayId: gatewayId,
+                          Field.createdUserId: userId ?? Field.empty,
+                          Field.updatedUserId: userId ?? Field.empty,
+                          Field.branchId: branchId,
+                          Field.transactionsDetails: transactionsDetails
+                        };
+
+                        WireTransferMethods.add(context, body);
                       },
-                      style: Styles.subtitleStyleDark,
-                      textInputAction: TextInputAction.done,
-                      keyboardType: TextInputType.text,
-                      maxLines: 1,
-                      decoration: InputDecoration(
-                        labelText: Str.descriptionTxt,
-                        labelStyle: Styles.subtitleStyleDark02,
-                        hintText: Str.descriptionTxt,
-                        hintStyle: Styles.subtitleStyleDark03,
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          gapPadding: 0.0,
-                        ),
-                      ),
+                      text: Str.wireTransferTxt.toUpperCase(),
                     ),
                   ),
-                  // const Gap(10),
                 ],
-              ),
-            ),
-            Container(
-              color: Styles.primaryColor,
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-              child: elevatedButton(
-                color: Styles.secondaryColor,
-                context: context,
-                callback: () {
-                  Map<String, String> body = {
-                    Field.userId: userId ?? '0',
-                    Field.currencyId: currency ?? '0',
-                    Field.amount: amount ?? Field.emptyAmount,
-                    Field.fee: fee,
-                    Field.drCr: drCr,
-                    Field.type: type,
-                    Field.method: method,
-                    Field.status: status,
-                    Field.note: note ?? Field.emptyString,
-                    Field.loanId: loanId,
-                    Field.refId: refId,
-                    Field.parentId: parentId,
-                    Field.otherBankId: otherBankId ?? '0',
-                    Field.gatewayId: gatewayId,
-                    Field.createdUserId: userId ?? '0',
-                    Field.updatedUserId: userId ?? '0',
-                    Field.branchId: branchId,
-                    Field.transactionsDetails: transactionsDetails
-                  };
-
-                  WireTransferMethods.add(context, body);
-                },
-                text: Str.wireTransferTxt.toUpperCase(),
               ),
             ),
           ],

@@ -105,7 +105,6 @@ class _MCreateFDRState extends State<MCreateFDR> {
           title: Str.applyDepositTxt,
           implyLeading: true,
           context: context,
-          onPressedBack: () => Navigator.pop(context),
         ),
         body: Container(
           margin: const EdgeInsets.all(15),
@@ -121,7 +120,6 @@ class _MCreateFDRState extends State<MCreateFDR> {
                   ),
                 ],
           ),
-          
           child: ListView(
             children: [
               SizedBox(
@@ -176,25 +174,6 @@ class _MCreateFDRState extends State<MCreateFDR> {
                             ),
                           ),
                           const Gap(20.0),
-                          // TextFormField(
-                          //   onChanged: (val) {
-                          //     amount = val;
-                          //   },
-                          //   style: Styles.subtitleStyle,
-                          //   textInputAction: TextInputAction.done,
-                          //   keyboardType: TextInputType.text,
-                          //   maxLines: 1,
-                          //   decoration: InputDecoration(
-                          //     labelText: Str.depositAmountTxt,
-                          //     labelStyle: Styles.subtitleStyle,
-                          //     hintText: Str.amountNumTxt,
-                          //     hintStyle: Styles.subtitleStyle03,
-                          //     border: const OutlineInputBorder(
-                          //       borderSide: BorderSide.none,
-                          //       gapPadding: 0.0,
-                          //     ),
-                          //   ),
-                          // ),
                           NewField(
                             onSaved: (val) => amount = val,
                             hintText: Str.depositAmountTxt,
@@ -215,25 +194,6 @@ class _MCreateFDRState extends State<MCreateFDR> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          // TextFormField(
-                          //   onChanged: (val) {
-                          //     remarks = val;
-                          //   },
-                          //   style: Styles.subtitleStyleDark,
-                          //   textInputAction: TextInputAction.done,
-                          //   keyboardType: TextInputType.text,
-                          //   maxLines: 1,
-                          //   decoration: InputDecoration(
-                          //     labelText: Str.remarkTxt,
-                          //     labelStyle: Styles.subtitleStyleDark02,
-                          //     hintText: Str.remarkTxt,
-                          //     hintStyle: Styles.subtitleStyleDark03,
-                          //     border: const OutlineInputBorder(
-                          //       borderSide: BorderSide.none,
-                          //       gapPadding: 0.0,
-                          //     ),
-                          //   ),
-                          // ),
                           NewField(
                               onSaved: (val) => remarks = val,
                               hintText: Str.remarkTxt),

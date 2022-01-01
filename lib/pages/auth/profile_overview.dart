@@ -54,7 +54,6 @@ class _ProfileOverviewState extends State<ProfileOverview> {
         title: Str.profileOverviewTxt,
         implyLeading: true,
         context: context,
-        onPressedBack: () => Navigator.pop(context),
       ),
       body: _innerContainer(),
     );

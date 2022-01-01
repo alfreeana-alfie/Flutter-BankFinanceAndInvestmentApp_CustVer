@@ -13,7 +13,11 @@ import 'package:flutter_banking_app/widgets/buttons.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdown_fdr.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
+import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
+import 'package:oktoast/oktoast.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class MCreateLoan extends StatefulWidget {
   const MCreateLoan({Key? key}) : super(key: key);
@@ -25,6 +29,7 @@ class MCreateLoan extends StatefulWidget {
 class _MCreateLoanState extends State<MCreateLoan> {
   final ScrollController _scrollController = ScrollController();
   SharedPref sharedPref = SharedPref();
+  var txt = TextEditingController();
 
   String? currency,
       currencyName,
@@ -33,6 +38,7 @@ class _MCreateLoanState extends State<MCreateLoan> {
       userId,
       appliedAmount,
       description,
+      firstPaymentDate,
       remarks;
   FilePickerResult? result;
   PlatformFile? file;
@@ -61,43 +67,58 @@ class _MCreateLoanState extends State<MCreateLoan> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Scaffold(
-      backgroundColor: Styles.primaryColor,
-      appBar: myAppBar(
-        title: Str.applyLoanTxt,
-        implyLeading: true,
-        context: context,
-        onPressedBack: () =>
-            Navigator.pushReplacementNamed(context, RouteSTR.loanListM),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(15),
-        children: [
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Styles.accentColor,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                              padding: const EdgeInsets.fromLTRB(15, 0, 15, 8),
+    return OKToast(
+      child: Scaffold(
+        backgroundColor: Styles.primaryColor,
+        appBar: myAppBar(
+          title: Str.applyLoanTxt,
+          implyLeading: true,
+          context: context,
+        ),
+        body: ListView(
+          padding: const EdgeInsets.all(15),
+          children: [
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Styles.cardColor,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 1.0), //(x,y)
+                    blurRadius: 6.0,
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
                               child: Text(Str.depositPlanTxt,
-                                  style: Styles.subtitleStyle)),
-                          const Gap(20.0),
-                          DropDownPlanFDR(
+                                  style: Styles.primaryTitle),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                              child: Text(
+                                '*',
+                                style: TextStyle(color: Styles.dangerColor),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          child: DropDownPlanFDR(
                             plan: planFDR,
                             planName: planFDRName,
                             onChanged: (val) {
@@ -109,19 +130,26 @@ class _MCreateLoanState extends State<MCreateLoan> {
                               );
                             },
                           ),
-                        ],
-                      ),
-                      const Gap(20.0),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                              padding: const EdgeInsets.fromLTRB(15, 0, 15, 8),
+                        ),
+                        const Gap(20.0),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
                               child: Text(Str.currencyTxt,
-                                  style: Styles.subtitleStyle)),
-                          const Gap(20.0),
-                          DropDownCurrency(
+                                  style: Styles.primaryTitle),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                              child: Text(
+                                '*',
+                                style: TextStyle(color: Styles.dangerColor),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          child: DropDownCurrency(
                             currency: currency,
                             currencyName: currencyName,
                             onChanged: (val) {
@@ -133,227 +161,139 @@ class _MCreateLoanState extends State<MCreateLoan> {
                               );
                             },
                           ),
-                        ],
-                      ),
-                      const Gap(20.0),
-                      TextFormField(
-                        onChanged: (val) {},
-                        style: Styles.subtitleStyle,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.text,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          labelText: Str.firstPaymentDateTxt,
-                          labelStyle: Styles.subtitleStyle,
+                        ),
+                        const Gap(20.0),
+                        ElevatedButton(
+                            onPressed: () {
+                              _showDatePickerDialog();
+                            },
+                            child: Text('Date')),
+                        NewField(
+                          mandatory: true,
+                          controller: txt,
+                          onSaved: (val) => firstPaymentDate = val,
                           hintText: Str.firstPaymentDateTxt,
-                          hintStyle: Styles.subtitleStyle03,
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            gapPadding: 0.0,
-                          ),
                         ),
-                      ),
-                      const Gap(20.0),
-                      TextFormField(
-                        onChanged: (val) {
-                          appliedAmount = val;
-                        },
-                        style: Styles.subtitleStyle,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.text,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          labelText: Str.appliedAmountTxt,
-                          labelStyle: Styles.subtitleStyle,
-                          hintText: Str.appliedAmountTxt,
-                          hintStyle: Styles.subtitleStyle03,
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            gapPadding: 0.0,
-                          ),
+                        const Gap(20.0),
+                        NewField(
+                          mandatory: true,
+                          onSaved: (val) => appliedAmount = val,
+                          hintText: Str.depositAmountTxt,
+                          labelText: Str.amountNumTxt,
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.vertical(
-                      bottom: Radius.circular(15),
-                    ),
-                    color: Styles.thirdColor,
-                  ),
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        onChanged: (val) {
-                          description = val;
-                        },
-                        style: Styles.subtitleStyleDark,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.text,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          labelText: Str.descriptionTxt,
-                          labelStyle: Styles.subtitleStyleDark02,
+                        const Gap(20.0),
+                        NewField(
+                          onSaved: (val) => description = val,
                           hintText: Str.descriptionTxt,
-                          hintStyle: Styles.subtitleStyleDark03,
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            gapPadding: 0.0,
+                          labelText: Str.descriptionTxt,
+                        ),
+                        const Gap(20),
+                        NewField(
+                            onSaved: (val) => remarks = val,
+                            hintText: Str.remarkTxt),
+                        const Gap(20.0),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child:
+                              Text(Str.attachmentTxt, style: Styles.primaryTitle),
+                        ),
+                        ElevatedButton(
+                          onPressed: () async {
+                            pickFiles(fileType);
+                          },
+                          child: Text(Str.browseTxt),
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0.0,
+                            primary: Styles.accentColor,
                           ),
                         ),
-                      ),
-                      TextFormField(
-                        onChanged: (val) {
-                          remarks = val;
-                        },
-                        style: Styles.subtitleStyleDark,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.text,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          labelText: Str.remarkTxt,
-                          labelStyle: Styles.subtitleStyleDark02,
-                          hintText: Str.remarkTxt,
-                          hintStyle: Styles.subtitleStyleDark03,
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            gapPadding: 0.0,
-                          ),
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              onChanged: (val) {},
-                              style: Styles.subtitleStyleDark,
-                              textInputAction: TextInputAction.done,
-                              keyboardType: TextInputType.text,
-                              maxLines: 1,
-                              decoration: InputDecoration(
-                                labelText: Str.attachmentTxt,
-                                labelStyle: Styles.subtitleStyleDark02,
-                                hintText: Str.attachmentTxt,
-                                hintStyle: Styles.subtitleStyleDark03,
-                                border: const OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  gapPadding: 0.0,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: ElevatedButton(
-                              onPressed: () async {
-                                pickFiles(fileType);
-                              },
-                              child: Text(Str.browseTxt),
-                              style: ElevatedButton.styleFrom(
-                                elevation: 0.0,
-                                primary: Styles.accentColor,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(15),
+                          bottomRight: Radius.circular(15)),
+                      color: Styles.primaryColor,
+                    ),
+                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: elevatedButton(
+                      color: Styles.secondaryColor,
+                      context: context,
+                      callback: () {
+                        Map<String, String> body = {
+                          'loan_Id': planFDR ?? Field.empty,
+                          'loan_product_Id': planFDR ?? Field.empty,
+                          'borrower_Id': userId ?? Field.empty,
+                          Field.firstPaymentDate: firstPaymentDate!,
+                          Field.releaseDate: '',
+                          'currency_Id': currency ?? Field.empty,
+                          Field.appliedAmount: appliedAmount ?? Field.emptyAmount,
+                          Field.totalPayable:  appliedAmount ?? Field.emptyAmount,
+                          Field.totalPaid: Field.emptyAmount,
+                          Field.latePaymentPenalty: '10',
+                          // 'attachment':
+                          //     'loan_files/bQURCY5sVoNOCsGPX0VbXx69iNO7HD6yNZY6lLbk.png',
+                          Field.description: description ?? Field.emptyString,
+                          Field.remarks: remarks ?? Field.emptyString,
+                          Field.status: Status.pending.toString(),
+                          Field.approvedDate: '',
+                          'approved_user_Id': '',
+                          'created_user_Id': userId ?? Field.empty,
+                          'branch_Id': '2',
+                        };
+
+                        LoanRequestMethods.add(context, body);
+                      },
+                      text: Str.submitTxt,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Container(
-            // color: Styles.primaryColor,
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-            child: elevatedButton(
-              color: Styles.secondaryColor,
-              context: context,
-              callback: () {
-                
-                     Map<String, String> body = {
-                  'loan_Id': planFDR ?? Field.empty,
-                  'loan_product_Id': '1',
-                  'borrower_Id': userId ?? Field.empty,
-                  'first_payment_date': '2021-07-09',
-                  'release_date': '2021-07-09',
-                  'currency_Id': currency ?? Field.empty,
-                  'applied_amount': appliedAmount ?? Field.emptyAmount,
-                  'total_payable': '2',
-                  'total_paid': '2',
-                  'late_payment_penalties': '10',
-                  // 'attachment':
-                  //     'loan_files/bQURCY5sVoNOCsGPX0VbXx69iNO7HD6yNZY6lLbk.png',
-                  'description': description ?? Field.emptyString,
-                  'remarks': remarks ?? Field.emptyString,
-                  'status': Status.pending.toString(),
-                  'approved_date': '2021-02-09',
-                  'approved_user_Id': '1',
-                  'created_user_Id': userId ?? Field.empty,
-                  'branch_Id': '2',
-                };
-
-                print(body);
-
-                LoanRequestMethods.add(context, body);
-              },
-              text: Str.submitTxt,
-            ),
-          ),
-          // Container(
-          //   // color: Styles.primaryColor,
-          //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-          //   child: elevatedButton(
-          //     color: Styles.secondaryColor,
-          //     context: context,
-          //     callback: () {
-          //       Map<String, String> body = {
-          //         'loan_Id': planFDR ?? Field.empty,
-          //         'loan_product_Id': '1',
-          //         'borrower_Id': userId ?? Field.empty,
-          //         'first_payment_date': '2021-07-09',
-          //         'release_date': '2021-07-09',
-          //         'currency_Id': currency ?? Field.empty,
-          //         'applied_amount': appliedAmount ?? Field.emptyAmount,
-          //         'total_payable': Field.emptyAmount,
-          //         'total_paid': Field.emptyAmount,
-          //         'late_payment_penalties': '10',
-          //         // 'attachment':
-          //         //     'loan_files/bQURCY5sVoNOCsGPX0VbXx69iNO7HD6yNZY6lLbk.png',
-          //         'description': description ?? Field.emptyString,
-          //         'remarks': remarks ?? Field.emptyString,
-          //         'status': Status.pending.toString(),
-          //         'approved_date': 'null',
-          //         'approved_user_Id': Field.empty,
-          //         'created_user_Id': userId ?? Field.empty,
-          //         'branch_Id': '2',
-          //       };
-
-          //       LoanRequestMethods.add(context, body);
-          //     },
-          //     text: Str.submitTxt.toUpperCase(),
-          //   ),
-          // ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  // _selectDate(BuildContext context) async {
-  //   final DateTime? selected = await showDatePicker(
-  //     context: context,
-  //     initialDate: selectedDate,
-  //     firstDate: DateTime(2010),
-  //     lastDate: DateTime(2025),
-  //   );
-  //   if (selected != null && selected != selectedDate) {
-  //     setState(() {
-  //       selectedDate = selected;
-  //     });
-  //   }
-  // }
+  _showDatePickerDialog() {
+    return showDialog<Widget>(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return Container(
+            padding: const EdgeInsets.all(20),
+            margin: const EdgeInsets.all(40),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Styles.primaryColor),
+            child: SfDateRangePicker(
+              todayHighlightColor: Styles.secondaryColor,
+              allowViewNavigation: true,
+              showNavigationArrow: true,
+              showTodayButton: true,
+              showActionButtons: true,
+              onSubmit: (value) {
+                setState(() {
+                  var formattedDate = DateFormat(Styles.formatDateOnly)
+                      .format(DateTime.parse(value.toString()));
+
+                  txt.text = formattedDate;
+                  firstPaymentDate = formattedDate.toString();
+                });
+                Navigator.pop(context);
+              },
+              onCancel: () {
+                Navigator.pop(context);
+              },
+            ),
+          );
+        });
+  }
 
   void pickFiles(String? filetype) async {
     switch (filetype) {

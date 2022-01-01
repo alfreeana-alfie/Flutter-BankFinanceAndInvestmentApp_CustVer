@@ -29,7 +29,7 @@ class _MemberDasboardState extends State<MemberDasboard> {
   loadSharedPrefs() async {
     try {
       User user = User.fromJSON(await sharedPref.read(Pref.userData));
-      if(mounted) {
+      if (mounted) {
         userName = user.name;
       }
     } catch (e) {
@@ -83,18 +83,18 @@ class _MemberDasboardState extends State<MemberDasboard> {
                       children: [
                         InkWell(
                           onTap: () => Scaffold.of(context).openDrawer(),
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Styles.transparentColor,
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Styles.transparentColor,
+                            ),
+                            child: const Icon(
+                              Icons.menu,
+                              color: Styles.accentColor,
+                            ),
+                          ),
                         ),
-                        child: const Icon(
-                          Icons.menu,
-                          color: Styles.accentColor,
-                        ),
-                      ),
-                    ),
                         const Gap(10),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,32 +131,28 @@ class _MemberDasboardState extends State<MemberDasboard> {
                 const BalanceBox(),
                 const Gap(20),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  height: 75.0,
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Styles.primaryWithOpacityColor,
+                    color: Styles.fourthColor,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: shortcutList.map<Widget>((item) {
-                      return InkWell(
-                        onTap: () => item['route'] == null
-                            ? null
-                            : Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (c) => item['route'])),
-                        child: Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: item['color'].withOpacity(0.15),
-                          ),
-                          child: Icon(item['icon'], color: item['color']),
-                        ),
-                      );
-                    }).toList(),
+                  child: ListView(
+                    // This next line does the trick.
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      _horizontalSlider(Str.sendMoneyTxt, RouteSTR.sendMoneyM),
+                      const Gap(10),
+                      _horizontalSlider(Str.exchangeMoneyTxt, RouteSTR.exchangeMoneyM),
+                      const Gap(10),
+                      _horizontalSlider(Str.wireTransferTxt, RouteSTR.wireTransferM),
+                      const Gap(10),
+                      _horizontalSlider(Str.newRequestTxt, RouteSTR.addPaymentRequestM),
+                      const Gap(10),
+                      _horizontalSlider(Str.applyLoanTxt, RouteSTR.addLoanM),
+                      const Gap(10),
+                      _horizontalSlider(Str.applyDepositTxt, RouteSTR.addFdrM),
+                    ],
                   ),
                 ),
                 const Gap(15),
@@ -188,6 +184,20 @@ class _MemberDasboardState extends State<MemberDasboard> {
         }
       },
     );
+  }
+
+  _horizontalSlider(String title, String routeName) {
+    return ElevatedButton(
+        onPressed: () {
+          Navigator.pushNamed(context, routeName);
+        },
+        child: Text(title, style: const TextStyle(color: Styles.accentColor, fontWeight: FontWeight.w700, fontSize: 14, letterSpacing: 0.5)),
+        style: ElevatedButton.styleFrom(
+            elevation: 0.0,
+            shape: RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(getProportionateScreenWidth(10))),
+            primary: Styles.primaryColor));
   }
 }
 
@@ -231,17 +241,14 @@ class TransactionTodayList extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: i == 0
-                  ? Icon(trs['icon'],
-                      color: const Color(0xFFFF736C), size: 20)
+                  ? Icon(trs['icon'], color: const Color(0xFFFF736C), size: 20)
                   : const SizedBox()),
           title: Text(trs['name'],
               style: const TextStyle(color: Styles.textColor)),
           subtitle: Text(trs['date'],
-              style: TextStyle(
-                  color: Styles.textColor.withOpacity(0.5))),
+              style: TextStyle(color: Styles.textColor.withOpacity(0.5))),
           trailing: Text(trs['amount'],
-              style: const TextStyle(
-                  fontSize: 17, color: Styles.textColor)),
+              style: const TextStyle(fontSize: 17, color: Styles.textColor)),
         );
       },
     );

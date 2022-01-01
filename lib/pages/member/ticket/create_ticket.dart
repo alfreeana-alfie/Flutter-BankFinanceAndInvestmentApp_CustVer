@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -23,7 +24,10 @@ class MCreateSupportTicket extends StatefulWidget {
 
 class _MCreateSupportTicketState extends State<MCreateSupportTicket> {
   final ScrollController _scrollController = ScrollController();
+
+  var controller = ScrollController();
   SharedPref sharedPref = SharedPref();
+  User userLoad = User();
 
   String? subject, message, supportTicketId, userId;
 
@@ -31,6 +35,8 @@ class _MCreateSupportTicketState extends State<MCreateSupportTicket> {
     try {
       User user = User.fromJSON(await sharedPref.read(Pref.userData));
       setState(() {
+        userLoad = user;
+
         userId = user.id.toString();
       });
     } catch (e) {
@@ -50,35 +56,34 @@ class _MCreateSupportTicketState extends State<MCreateSupportTicket> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.createSupportTicketTxt,
-            implyLeading: true,
-            context: context),
-        body: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: ListView(
-            // padding: const EdgeInsets.all(15),
-            children: [
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Styles.greyColor,
-                ),
+            title: Str.sendMoneyTxt, implyLeading: true, context: context),
+        body: ListView(
+          padding: const EdgeInsets.all(15),
+          children: [
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Styles.cardColor,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 1.0), //(x,y)
+                    blurRadius: 6.0,
+                  ),
+                ],
+              ),
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          NewField(
+                    NewField(
                               onSaved: (val) => subject = val,
                               hintText: Str.subjectTxt),
                           const Gap(20.0),
@@ -112,14 +117,11 @@ class _MCreateSupportTicketState extends State<MCreateSupportTicket> {
                               text: Str.submitTxt.toUpperCase(),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

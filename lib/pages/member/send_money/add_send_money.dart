@@ -17,6 +17,8 @@ import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
+import 'package:flutter_banking_app/widgets/dropdown/dropdrown_user.dart';
+import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
@@ -31,14 +33,11 @@ class MCreateSendMoney extends StatefulWidget {
 class _SendMoneyState extends State<MCreateSendMoney> {
   final ScrollController _scrollController = ScrollController();
 
-  late FocusNode myFocusNode;
   var controller = ScrollController();
-  var currentPage = 0;
   SharedPref sharedPref = SharedPref();
   User userLoad = User();
-  List<Customer> customerNewList = [];
 
-  String? amount, note, currency, currencyName, toUserId, userId;
+  String? amount, note, currency, currencyName, toUserId, toUserName, userId;
   String fee = '12.50',
       drCr = 'Y',
       type = 'send_money',
@@ -53,24 +52,6 @@ class _SendMoneyState extends State<MCreateSendMoney> {
       updatedUserId = '1',
       branchId = '1',
       transactionsDetails = '1';
-
-  void getList() async {
-    final response = await http.get(API.listofUsers, headers: headers);
-
-    if (response.statusCode == Status.ok) {
-      var jsonBody = jsonDecode(response.body);
-
-      for (var customer in jsonBody[Field.data]) {
-        final customers = Customer.fromMap(customer);
-
-        setState(() {
-          customerNewList.add(customers);
-        });
-      }
-    } else {
-      print(Status.failedTxt);
-    }
-  }
 
   loadSharedPrefs() async {
     try {
@@ -91,269 +72,150 @@ class _SendMoneyState extends State<MCreateSendMoney> {
       print(_scrollController.offset);
     });
     super.initState();
-
-    myFocusNode = FocusNode();
-    // myFocusNode.dispose();
-
     loadSharedPrefs();
-    getList();
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    final theme = Layouts.getTheme(context);
-    final size = Layouts.getSize(context);
-
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
             title: Str.sendMoneyTxt, implyLeading: true, context: context),
-       body: ListView(
+        body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
-            // Stack(
-            //   children: [
-            //     Container(
-            //       width: double.infinity,
-            //       padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-            //       decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.circular(15),
-            //         color: Styles.primaryWithOpacityColor,
-            //       ),
-            //       child: Column(
-            //         crossAxisAlignment: CrossAxisAlignment.start,
-            //         children: [
-            //           Row(
-            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //             children: const [
-            //               Padding(
-            //                 padding: EdgeInsets.only(top: 20, left: 5),
-            //                 child: Text('USD', style: Styles.subtitleStyle),
-            //               ),
-            //               Padding(
-            //                 padding: EdgeInsets.only(top: 20, right: 5),
-            //                 child: Text(
-            //                   '\$20,000.00',
-            //                   style: TextStyle(
-            //                       fontWeight: FontWeight.bold,
-            //                       fontSize: 21,
-            //                       color: Colors.white),
-            //                 ),
-            //               ),
-            //             ],
-            //           ),
-            //           const Gap(60),
-            //         ],
-            //       ),
-            //     ),
-            //     Positioned(
-            //       bottom: 0,
-            //       right: 70,
-            //       child: Container(
-            //         padding: const EdgeInsets.all(6),
-            //         decoration: BoxDecoration(
-            //           borderRadius:
-            //               const BorderRadius.vertical(top: Radius.circular(50)),
-            //           color: Styles.primaryColor,
-            //         ),
-            //         child: Container(
-            //           padding: const EdgeInsets.all(6),
-            //           decoration: BoxDecoration(
-            //             shape: BoxShape.circle,
-            //             color: Styles.primaryWithOpacityColor,
-            //           ),
-            //           child: Icon(Icons.keyboard_backspace_rounded,
-            //               color: Colors.white.withOpacity(0.5), size: 18),
-            //         ),
-            //       ),
-            //     ),
-            //     Positioned(
-            //       bottom: 0,
-            //       right: 18,
-            //       child: Container(
-            //         padding: const EdgeInsets.all(6),
-            //         decoration: BoxDecoration(
-            //           borderRadius:
-            //               const BorderRadius.vertical(top: Radius.circular(50)),
-            //           color: Styles.primaryColor,
-            //         ),
-            //         child: Container(
-            //           padding: const EdgeInsets.all(6),
-            //           decoration: BoxDecoration(
-            //             shape: BoxShape.circle,
-            //             color: Styles.primaryWithOpacityColor,
-            //           ),
-            //           child: Transform.rotate(
-            //             angle: math.pi,
-            //             child: const Icon(Icons.keyboard_backspace_rounded,
-            //                 color: Colors.white, size: 18),
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            // const Gap(20),
-
-            const Gap(10),
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Styles.accentColor,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
-                    child: _body(size.height, theme),
+                color: Styles.cardColor,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 1.0), //(x,y)
+                    blurRadius: 6.0,
                   ),
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                ],
+              ),
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
                       children: [
-                        Expanded(
-                          child: TextFormField(
-                            onChanged: (val) {
-                              amount = val;
-                            },
-                            style: Styles.subtitleStyle,
-                            textInputAction: TextInputAction.done,
-                            keyboardType: TextInputType.number,
-                            maxLines: 1,
-                            decoration: InputDecoration(
-                              hintText: Str.amountNumTxt,
-                              hintStyle: Styles.subtitleStyle,
-                              border: const OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                gapPadding: 0.0,
-                              ),
-                            ),
-                          ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(Str.userAccountTxt,
+                              style: Styles.primaryTitle),
                         ),
-                        DropDownCurrency(
-                          currency: currency,
-                          currencyName: currencyName,
-                          onChanged: (val) {
-                            setState(
-                              () {
-                                currency = val!.id.toString();
-                                currencyName = val.name;
-                              },
-                            );
-                          },
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(
+                            '*',
+                            style: TextStyle(color: Styles.dangerColor),
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                  const Divider(color: Styles.primaryColor, thickness: 2),
-                  Container(
-                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: Text('Send Money Purpose',
-                          style:
-                              TextStyle(color: Colors.white.withOpacity(0.7)))),
-                  const Gap(10),
-                  Container(
-                    // color: Styles.primaryColor,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 15, vertical: 20),
-                    child: elevatedButton(
-                      color: Styles.secondaryColor,
-                      context: context,
-                      callback: () {
-                        Map<String, String> body = {
-                          // Field.userId: 'userLoad.id.toString()',
-                          Field.userId: userId ?? Field.emptyString,
-                          Field.currencyId: currency ?? '-',
-                          Field.amount: amount ?? '0.00',
-                          Field.fee: fee,
-                          Field.drCr: drCr,
-                          Field.type: type,
-                          Field.method: method,
-                          Field.status: status,
-                          Field.note: note ?? '-',
-                          Field.loanId: loanId,
-                          Field.refId: refId,
-                          Field.parentId: parentId,
-                          Field.otherBankId: otherBankId,
-                          Field.gatewayId: gatewayId,
-                          Field.createdUserId: toUserId ?? '-',
-                          Field.updatedUserId: updatedUserId,
-                          Field.branchId: branchId,
-                          Field.transactionsDetails: transactionsDetails
-                        };
-
-                        SendMoneyMethods.add(context, body);
-                      },
-                      text: Str.sendMoneyTxt,
+                    SizedBox(
+                      child: DropDownUser(
+                        users: toUserId,
+                        usersName: toUserName,
+                        onChanged: (val) {
+                          setState(
+                            () {
+                              toUserId = val!.id.toString();
+                              toUserName = val.name;
+                            },
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                    const Gap(20.0),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child:
+                              Text(Str.currencyTxt, style: Styles.primaryTitle),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(
+                            '*',
+                            style: TextStyle(color: Styles.dangerColor),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      child: DropDownCurrency(
+                        currency: currency,
+                        currencyName: currencyName,
+                        onChanged: (val) {
+                          setState(
+                            () {
+                              currency = val!.id.toString();
+                              currencyName = val.name;
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    const Gap(20.0),
+                    NewField(
+                        onSaved: (val) => amount = val,
+                        hintText: Str.descriptionTxt),
+                    const Gap(10),
+                    Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(15),
+                            bottomRight: Radius.circular(15)),
+                        color: Styles.primaryColor,
+                      ),
+                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 10),
+                      child: elevatedButton(
+                        color: Styles.secondaryColor,
+                        context: context,
+                        callback: () {
+                          Map<String, String> body = {
+                            Field.userId: userId ?? Field.emptyString,
+                            Field.currencyId: currency ?? '-',
+                            Field.amount: amount ?? '0.00',
+                            Field.fee: fee,
+                            Field.drCr: drCr,
+                            Field.type: type,
+                            Field.method: method,
+                            Field.status: status,
+                            Field.note: note ?? '-',
+                            Field.loanId: loanId,
+                            Field.refId: refId,
+                            Field.parentId: parentId,
+                            Field.otherBankId: otherBankId,
+                            Field.gatewayId: gatewayId,
+                            Field.createdUserId: toUserId ?? '-',
+                            Field.updatedUserId: updatedUserId,
+                            Field.branchId: branchId,
+                            Field.transactionsDetails: transactionsDetails
+                          };
+                          SendMoneyMethods.add(context, body);
+                        },
+                        text: Str.sendMoneyTxt,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  _body(double height, ThemeData theme) {
-    double _height = height * 0.19;
-    return SizedBox(
-      height: _height,
-      child: ListView.builder(
-        controller: controller,
-        scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
-        itemCount: customerNewList.length,
-        itemBuilder: (context, index) {
-          final item = customerNewList[index];
-          return InkWell(
-            onTap: () {
-              setState(() {
-                currentPage = index;
-                toUserId = item.id.toString();
-              });
-            },
-            focusNode: myFocusNode,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  height: (index == currentPage) ? 70 : 45,
-                  width: (index == currentPage) ? 70 : 45,
-                  margin: const EdgeInsets.symmetric(horizontal: 12),
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Styles.infoColor,
-                  ),
-                  child: Avatar(
-                    name: item.name,
-                    textStyle: TextStyle(
-                        fontSize: getProportionateScreenWidth(16),
-                        fontWeight: FontWeight.bold,
-                        color: Styles.whiteColor),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                (index == currentPage)
-                    ? Text(item.name ?? '-',
-                        style: const TextStyle(
-                            color: Styles.primaryColor, fontSize: 16))
-                    : const Text('',
-                        style:
-                            TextStyle(color: Styles.primaryColor, fontSize: 16))
-              ],
-            ),
-          );
-        },
       ),
     );
   }

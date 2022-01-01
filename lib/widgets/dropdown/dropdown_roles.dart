@@ -55,42 +55,40 @@ class _DropDownUserRolesState extends State<DropDownUserRoles> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.only(left: 15, right: 15, top: 8, bottom: 8),
-        decoration: BoxDecoration(
-          color: Colors.black12.withOpacity(0.05),
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        child: DropdownButtonHideUnderline(
-          child: DropdownButton(
-            dropdownColor: Styles.greyColor,
-            icon: const RotatedBox(
-                quarterTurns: 3,
-                child: Icon(
-                  Icons.chevron_left,
-                  size: 20,
-                  color: Styles.textColor,
-                )),
-            hint: widget.roleName == null
-                ? Text(Str.roleTxt, style: Styles.primaryTitle)
-                : Text(
-                    widget.roleName!,
-                    style: Styles.primaryTitle,
-                  ),
-            isExpanded: true,
-            iconSize: 30.0,
-            style: Styles.primaryTitle,
-            items: roleListNew.map(
-              (val) {
-                return DropdownMenuItem<UserRole>(
-                  value: val,
-                  child: Text(val.name ?? Field.emptyString),
-                );
-              },
-            ).toList(),
-            onChanged: widget.onChanged,
-          ),
+    return Container(
+      padding: const EdgeInsets.only(left: 15, right: 15, top: 8, bottom: 8),
+      decoration: BoxDecoration(
+        color: Colors.black12.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton(
+          dropdownColor: Styles.greyColor,
+          icon: const RotatedBox(
+              quarterTurns: 3,
+              child: Icon(
+                Icons.chevron_left,
+                size: 20,
+                color: Styles.textColor,
+              )),
+          hint: widget.roleName == null
+              ? Text(Str.roleTxt, style: Styles.primaryTitle)
+              : Text(
+                  widget.roleName!,
+                  style: Styles.primaryTitle,
+                ),
+          isExpanded: true,
+          iconSize: 30.0,
+          style: Styles.primaryTitle,
+          items: roleListNew.map(
+            (val) {
+              return DropdownMenuItem<UserRole>(
+                value: val,
+                child: Text(val.name ?? Field.emptyString),
+              );
+            },
+          ).toList(),
+          onChanged: widget.onChanged,
         ),
       ),
     );

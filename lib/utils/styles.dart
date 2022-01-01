@@ -3,6 +3,7 @@ import 'package:flutter_banking_app/utils/size_config.dart';
 
 class Styles {
   static String formatDate = 'yyyy-MM-dd hh:mm:ss';
+  static String formatDateOnly = 'yyyy-MM-dd';
   // LIGHT MODE
   static const Color primaryColor = Color.fromRGBO(255, 255, 255, 1);
   static const Color primaryWithOpacityColor =
@@ -10,6 +11,7 @@ class Styles {
   static const Color accentColor = Color.fromRGBO(0, 51, 153, 1);
   static const Color secondaryColor = Color.fromRGBO(0, 122, 254, 1);
   static const Color thirdColor = Color.fromRGBO(102, 153, 255, 1);
+  static const Color fourthColor = Color.fromRGBO(158, 190, 255, 1);
   static const Color yellowColor = Color.fromRGBO(223, 233, 75, 1);
   static const Color textColor = Color.fromRGBO(33, 34, 42, 1);
   static const Color textColorWhite = Color.fromRGBO(255, 255, 255, 1);
