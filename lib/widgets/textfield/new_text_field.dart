@@ -10,7 +10,8 @@ class NewField extends StatefulWidget {
       this.textInputAction,
       this.initialValue,
       this.obsecure,
-      this.maxLines});
+      this.maxLines,
+      this.labelText});
 
   final String hintText;
   final FormFieldSetter<String> onSaved;
@@ -19,6 +20,7 @@ class NewField extends StatefulWidget {
   final String? initialValue;
   final bool? obsecure;
   final int? maxLines;
+  final String? labelText;
 
   @override
   _NewFieldState createState() => _NewFieldState();
@@ -31,13 +33,10 @@ class _NewFieldState extends State<NewField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(7,0,0, 10),
+          padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
           child: Text(
             widget.hintText,
-            style: const TextStyle(
-                color: Styles.textColor,
-                fontSize: 16,
-                fontWeight: FontWeight.bold),
+            style: Styles.primaryTitle,
           ),
         ),
         TextFormField(
@@ -50,7 +49,7 @@ class _NewFieldState extends State<NewField> {
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.black12.withOpacity(0.05),
-            hintText: widget.hintText,
+            hintText: widget.labelText ?? widget.hintText,
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(7),
                 borderSide: BorderSide.none),

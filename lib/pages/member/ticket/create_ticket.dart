@@ -5,13 +5,11 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/methods/member/support_ticket_methods.dart';
 import 'package:flutter_banking_app/models/user.dart';
-import 'package:flutter_banking_app/utils/layouts.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
-import 'package:flutter_banking_app/widgets/textfield/bigger_new_text_field.dart';
 import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
@@ -52,7 +50,6 @@ class _MCreateSupportTicketState extends State<MCreateSupportTicket> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    final size = Layouts.getSize(context);
     
     return OKToast(
       child: Scaffold(

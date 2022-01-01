@@ -15,6 +15,7 @@ import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
+import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
@@ -71,34 +72,12 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
     }
   }
 
-  void getCurrency() async {
-    final response = await http.get(API.listOfCurrency, headers: headers);
-
-    if (response.statusCode == Status.ok) {
-      var jsonBody = jsonDecode(response.body);
-      // var jsonData = Currency.fromMap(jsonBody);
-
-      for (var currency in jsonBody['data']) {
-        final currencies = Currency.fromMap(currency);
-
-        setState(() {
-          currencyListNew.add(currencies);
-        });
-      }
-
-      // print(jsonData.name);
-    } else {
-      print(Status.failedTxt);
-    }
-  }
-
   @override
   void initState() {
     _scrollController.addListener(() {
       print(_scrollController.offset);
     });
     super.initState();
-    getCurrency();
     loadSharedPrefs();
   }
 
@@ -117,7 +96,7 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Styles.accentColor,
+                color: Styles.greyColor,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,7 +128,7 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 20, 0, 20),
                                   child: const Text('TO',
-                                      style: Styles.subtitleStyle02)),
+                                      style: Styles.primaryTitle)),
                             ),
                             const Gap(20.0),
                             DropDownCurrency(
@@ -167,55 +146,60 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
                           ],
                         ),
                         const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {
-                            amount = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.amountTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.amountNumTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
+                        NewField(
+                            onSaved: (val) => amount = val,
+                            hintText: Str.amountTxt, 
+                            labelText: Str.amountNumTxt,),
+                        // TextFormField(
+                        //   onChanged: (val) {
+                        //     amount = val;
+                        //   },
+                        //   style: Styles.subtitleStyle,
+                        //   textInputAction: TextInputAction.done,
+                        //   keyboardType: TextInputType.text,
+                        //   maxLines: 1,
+                        //   decoration: InputDecoration(
+                        //     labelText: Str.amountTxt,
+                        //     labelStyle: Styles.subtitleStyle,
+                        //     hintText: Str.amountNumTxt,
+                        //     hintStyle: Styles.subtitleStyle03,
+                        //     border: const OutlineInputBorder(
+                        //       borderSide: BorderSide.none,
+                        //       gapPadding: 0.0,
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
-                  Container(
-                    decoration: const BoxDecoration(
-                      borderRadius:
-                          BorderRadius.vertical(bottom: Radius.circular(15)),
-                      color: Styles.thirdColor,
-                    ),
-                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                    child: TextFormField(
-                      onChanged: (val) {
-                        note = val;
-                      },
-                      style: Styles.subtitleStyleDark,
-                      textInputAction: TextInputAction.done,
-                      keyboardType: TextInputType.text,
-                      maxLines: 1,
-                      decoration: InputDecoration(
-                        labelText: Str.descriptionTxt,
-                        labelStyle: Styles.subtitleStyleDark02,
-                        hintText: Str.descriptionTxt,
-                        hintStyle: Styles.subtitleStyleDark03,
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          gapPadding: 0.0,
-                        ),
-                      ),
-                    ),
-                  ),
+                  NewField(onSaved: (val) => note = val, hintText: Str.noteTxt),
+                  // Container(
+                  //   decoration: const BoxDecoration(
+                  //     borderRadius:
+                  //         BorderRadius.vertical(bottom: Radius.circular(15)),
+                  //     color: Styles.thirdColor,
+                  //   ),
+                  //   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  //   child: TextFormField(
+                  //     onChanged: (val) {
+                  //       note = val;
+                  //     },
+                  //     style: Styles.subtitleStyleDark,
+                  //     textInputAction: TextInputAction.done,
+                  //     keyboardType: TextInputType.text,
+                  //     maxLines: 1,
+                  //     decoration: InputDecoration(
+                  //       labelText: Str.descriptionTxt,
+                  //       labelStyle: Styles.subtitleStyleDark02,
+                  //       hintText: Str.descriptionTxt,
+                  //       hintStyle: Styles.subtitleStyleDark03,
+                  //       border: const OutlineInputBorder(
+                  //         borderSide: BorderSide.none,
+                  //         gapPadding: 0.0,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   // const Gap(10),
                 ],
               ),

@@ -9,13 +9,12 @@ import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:http/http.dart' as http;
 
 class DropDownCurrency extends StatefulWidget {
-   const DropDownCurrency(
+  const DropDownCurrency(
       {Key? key,
       this.currency,
       this.currencyName,
       // required this.currencyList,
-      required this.onChanged
-      })
+      required this.onChanged})
       : super(key: key);
 
   final String? currency, currencyName;
@@ -57,24 +56,30 @@ class _DropDownCurrencyState extends State<DropDownCurrency> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.only(left: 15, right: 15, top: 8, bottom: 8),
+        padding: const EdgeInsets.only(left: 15, right: 15),
         decoration: BoxDecoration(
-          color: Styles.secondaryColor,
-          borderRadius: BorderRadius.circular(15.0),
+          color: Colors.black12.withOpacity(0.05),
+          borderRadius: BorderRadius.circular(7.0),
         ),
         child: DropdownButtonHideUnderline(
           child: DropdownButton(
-            dropdownColor: Styles.secondaryColor,
-            icon: const Icon(IconlyBold.Arrow___Down_2, color: Styles.primaryColor,),
+            dropdownColor: Styles.greyColor,
+            icon: const RotatedBox(
+                quarterTurns: 3,
+                child: Icon(
+                  Icons.chevron_left,
+                  size: 20,
+                  color: Styles.textColor,
+                )),
             hint: widget.currencyName == null
-                ? Text(Str.currencyTxt, style: Styles.subtitleStyle02)
+                ? Text(Str.currencyTxt, style: Styles.primaryTitle)
                 : Text(
                     widget.currencyName!,
-                    style: Styles.subtitleStyle,
+                    style: Styles.primaryTitle,
                   ),
             isExpanded: true,
             iconSize: 30.0,
-            style: Styles.subtitleStyle02,
+            style: Styles.primaryTitle,
             items: currencyListNew.map(
               (val) {
                 return DropdownMenuItem<Currency>(

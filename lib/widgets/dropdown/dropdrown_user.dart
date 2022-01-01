@@ -1,45 +1,45 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_banking_app/models/role.dart';
+import 'package:flutter_banking_app/models/users.dart';
+import 'package:flutter_banking_app/models/users.dart';
 import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/iconly/iconly_bold.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:http/http.dart' as http;
 
-class DropDownUserRoles extends StatefulWidget {
-   const DropDownUserRoles(
+class DropDownUser extends StatefulWidget {
+  const DropDownUser(
       {Key? key,
-      this.role,
-      this.roleName,
-      // required this.roleList,
-      required this.onChanged
-      })
+      this.users,
+      this.usersName,
+      // required this.usersList,
+      required this.onChanged})
       : super(key: key);
 
-  final String? role, roleName;
-  final void Function(UserRole?) onChanged;
-  // final List<UserRole> roleList;
+  final String? users, usersName;
+  final void Function(Users?) onChanged;
+  // final List<Users> usersList;
 
   @override
-  _DropDownUserRolesState createState() => _DropDownUserRolesState();
+  _DropDownUserState createState() => _DropDownUserState();
 }
 
-class _DropDownUserRolesState extends State<DropDownUserRoles> {
-  List<UserRole> roleListNew = [];
+class _DropDownUserState extends State<DropDownUser> {
+  List<Users> userListNew = [];
 
-  void getUserRole() async {
-    final response = await http.get(AdminAPI.listOfUserRole, headers: headers);
+  void getCurrency() async {
+    final response = await http.get(API.listofUsers, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
 
-      for (var role in jsonBody[Field.data]) {
-        final data = UserRole.fromMap(role);
+      for (var data in jsonBody[Field.data]) {
+        final user = Users.fromMap(data);
 
         setState(() {
-          roleListNew.add(data);
+          userListNew.add(user);
         });
       }
     } else {
@@ -50,17 +50,17 @@ class _DropDownUserRolesState extends State<DropDownUserRoles> {
   @override
   void initState() {
     super.initState();
-    getUserRole();
+    getCurrency();
   }
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.only(left: 15, right: 15, top: 8, bottom: 8),
+        padding: const EdgeInsets.only(left: 15, right: 15),
         decoration: BoxDecoration(
           color: Colors.black12.withOpacity(0.05),
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(7.0),
         ),
         child: DropdownButtonHideUnderline(
           child: DropdownButton(
@@ -72,18 +72,18 @@ class _DropDownUserRolesState extends State<DropDownUserRoles> {
                   size: 20,
                   color: Styles.textColor,
                 )),
-            hint: widget.roleName == null
-                ? Text(Str.roleTxt, style: Styles.primaryTitle)
+            hint: widget.usersName == null
+                ? Text(Str.usersTxt, style: Styles.primaryTitle)
                 : Text(
-                    widget.roleName!,
+                    widget.usersName!,
                     style: Styles.primaryTitle,
                   ),
             isExpanded: true,
             iconSize: 30.0,
             style: Styles.primaryTitle,
-            items: roleListNew.map(
+            items: userListNew.map(
               (val) {
-                return DropdownMenuItem<UserRole>(
+                return DropdownMenuItem<Users>(
                   value: val,
                   child: Text(val.name ?? Field.emptyString),
                 );

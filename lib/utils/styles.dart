@@ -37,6 +37,11 @@ class Styles {
 
   static const Color transparentColor = Color.fromRGBO(0, 0, 0, 0);
 
+  static const TextStyle primaryTitle = TextStyle(
+                color: Styles.textColor,
+                fontSize: 16,
+                fontWeight: FontWeight.bold);
+
   static TextStyle textStyle =
       TextStyle(fontSize: getProportionateScreenWidth(15));
   static TextStyle titleStyle = TextStyle(

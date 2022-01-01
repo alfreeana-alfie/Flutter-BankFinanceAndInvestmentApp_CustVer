@@ -54,22 +54,28 @@ class _DropDownPlanFDRState extends State<DropDownPlanFDR> {
       child: Container(
         padding: const EdgeInsets.only(left: 15, right: 15, top: 8, bottom: 8),
         decoration: BoxDecoration(
-          color: Styles.secondaryColor,
+          color: Colors.black12.withOpacity(0.05),
           borderRadius: BorderRadius.circular(15.0),
         ),
         child: DropdownButtonHideUnderline(
           child: DropdownButton(
-            dropdownColor: Styles.secondaryColor,
-            icon: const Icon(IconlyBold.Arrow___Down_2, color: Styles.primaryColor,),
+            dropdownColor: Styles.greyColor,
+            icon: const RotatedBox(
+                quarterTurns: 3,
+                child: Icon(
+                  Icons.chevron_left,
+                  size: 20,
+                  color: Styles.textColor,
+                )),
             hint: widget.planName == null
-                ? Text(Str.planTxt, style: Styles.subtitleStyle02)
+                ? Text(Str.planTxt, style: Styles.primaryTitle)
                 : Text(
                     widget.planName!,
-                    style: Styles.subtitleStyle,
+                    style: Styles.primaryTitle,
                   ),
             isExpanded: true,
             iconSize: 30.0,
-            style: Styles.subtitleStyle02,
+            style: Styles.primaryTitle,
             items: planListNew.map(
               (val) {
                 return DropdownMenuItem<PlanFDR>(
