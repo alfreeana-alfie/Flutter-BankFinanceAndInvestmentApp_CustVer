@@ -14,6 +14,7 @@ import 'package:flutter_banking_app/widgets/dropdown/dropdown_fdr.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
 import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
+import 'package:flutter_banking_app/widgets/textfield/new_text_field_clickable.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:oktoast/oktoast.dart';
@@ -163,17 +164,24 @@ class _MCreateLoanState extends State<MCreateLoan> {
                           ),
                         ),
                         const Gap(20.0),
-                        ElevatedButton(
-                            onPressed: () {
-                              _showDatePickerDialog();
-                            },
-                            child: Text('Date')),
-                        NewField(
+                        NewFieldClickable(
                           mandatory: true,
                           controller: txt,
                           onSaved: (val) => firstPaymentDate = val,
                           hintText: Str.firstPaymentDateTxt,
+                          onTap: _showDatePickerDialog,
                         ),
+                        // NewField(
+                        //         mandatory: true,
+                        //         controller: txt,
+                        //         onSaved: (val) => firstPaymentDate = val,
+                        //         hintText: Str.firstPaymentDateTxt,
+                        //       ),
+                        //       ElevatedButton(
+                        //             onPressed: () {
+                        //               _showDatePickerDialog();
+                        //             },
+                        //             child:const Icon(Icons.calendar_today)),
                         const Gap(20.0),
                         NewField(
                           mandatory: true,
@@ -194,8 +202,8 @@ class _MCreateLoanState extends State<MCreateLoan> {
                         const Gap(20.0),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
-                          child:
-                              Text(Str.attachmentTxt, style: Styles.primaryTitle),
+                          child: Text(Str.attachmentTxt,
+                              style: Styles.primaryTitle),
                         ),
                         ElevatedButton(
                           onPressed: () async {
@@ -218,8 +226,8 @@ class _MCreateLoanState extends State<MCreateLoan> {
                       color: Styles.primaryColor,
                     ),
                     margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
                     child: elevatedButton(
                       color: Styles.secondaryColor,
                       context: context,
@@ -231,8 +239,10 @@ class _MCreateLoanState extends State<MCreateLoan> {
                           Field.firstPaymentDate: firstPaymentDate!,
                           Field.releaseDate: '',
                           'currency_Id': currency ?? Field.empty,
-                          Field.appliedAmount: appliedAmount ?? Field.emptyAmount,
-                          Field.totalPayable:  appliedAmount ?? Field.emptyAmount,
+                          Field.appliedAmount:
+                              appliedAmount ?? Field.emptyAmount,
+                          Field.totalPayable:
+                              appliedAmount ?? Field.emptyAmount,
                           Field.totalPaid: Field.emptyAmount,
                           Field.latePaymentPenalty: '10',
                           // 'attachment':
