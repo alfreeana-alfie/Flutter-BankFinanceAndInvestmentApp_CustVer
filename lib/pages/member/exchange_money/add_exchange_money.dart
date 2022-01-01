@@ -104,22 +104,20 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
           ),
           child: ListView(
             children: [
-              SizedBox(
-                width: double.infinity,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              DropDownCurrency(
+              Container(
+                    padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: DropDownCurrency(
                                 currency: exchangeFrom,
                                 currencyName: exchangeFromName,
                                 onChanged: (val) {
@@ -131,12 +129,16 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
                                   );
                                 },
                               ),
-                              const Gap(20.0),
-                              const Center(
+                            ),
+                            const Expanded(
+                              flex: 1,
+                              child: Center(
                                 child: Text('TO', style: Styles.primaryTitle),
                               ),
-                              const Gap(20.0),
-                              DropDownCurrency(
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: DropDownCurrency(
                                 currency: exchangeTo,
                                 currencyName: exchangeToName,
                                 onChanged: (val) {
@@ -148,81 +150,62 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
                                   );
                                 },
                               ),
-                            ],
-                          ),
-                          const Gap(20.0),
-                          NewField(
-                            onSaved: (val) => amount = val,
-                            hintText: Str.amountTxt,
-                            labelText: Str.amountNumTxt,
-                          ),
-                          // TextFormField(
-                          //   onChanged: (val) {
-                          //     amount = val;
-                          //   },
-                          //   style: Styles.subtitleStyle,
-                          //   textInputAction: TextInputAction.done,
-                          //   keyboardType: TextInputType.text,
-                          //   maxLines: 1,
-                          //   decoration: InputDecoration(
-                          //     labelText: Str.amountTxt,
-                          //     labelStyle: Styles.subtitleStyle,
-                          //     hintText: Str.amountNumTxt,
-                          //     hintStyle: Styles.subtitleStyle03,
-                          //     border: const OutlineInputBorder(
-                          //       borderSide: BorderSide.none,
-                          //       gapPadding: 0.0,
-                          //     ),
-                          //   ),
-                          // ),
-                          NewField(
-                              onSaved: (val) => note = val,
-                              hintText: Str.noteTxt),
-                        ],
-                      ),
+                            ),
+                          ],
+                        ),
+                        const Gap(20.0),
+                        NewField(
+                          onSaved: (val) => amount = val,
+                          hintText: Str.amountTxt,
+                          labelText: Str.amountNumTxt,
+                        ),
+                        NewField(
+                            onSaved: (val) => note = val,
+                            hintText: Str.noteTxt),
+                      ],
                     ),
-                    Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(15),
-                            bottomRight: Radius.circular(15)),
-                        color: Styles.primaryColor,
-                      ),
-                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      child: elevatedButton(
-                        color: Styles.secondaryColor,
-                        context: context,
-                        callback: () {
-                          Map<String, String> body = {
-                            Field.userId: userId ?? '0',
-                            Field.currencyId: exchangeTo ?? Field.emptyString,
-                            Field.amount: amount ?? '0.00',
-                            Field.fee: fee,
-                            Field.drCr: drCr,
-                            Field.type: type,
-                            Field.method: method,
-                            Field.status: Status.pending.toString(),
-                            Field.note: note ?? '-',
-                            Field.loanId: loanId,
-                            Field.refId: refId,
-                            Field.parentId: parentId,
-                            Field.otherBankId: otherBankId,
-                            Field.gatewayId: gatewayId,
-                            Field.createdUserId: userId ?? Field.emptyString,
-                            Field.updatedUserId: userId ?? Field.emptyString,
-                            Field.branchId: branchId,
-                            Field.transactionsDetails: note ?? '-'
-                          };
-                          ExchangeMoneyMethods.add(context, body);
-                        },
-                        text: Str.exchangeMoneyTxt.toUpperCase(),
-                      ),
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(15),
+                          bottomRight: Radius.circular(15)),
+                      color: Styles.primaryColor,
                     ),
-                  ],
-                ),
-              ),
+                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    child: elevatedButton(
+                      color: Styles.secondaryColor,
+                      context: context,
+                      callback: () {
+                        Map<String, String> body = {
+                          Field.userId: userId ?? '0',
+                          Field.currencyId: exchangeTo ?? Field.emptyString,
+                          Field.amount: amount ?? '0.00',
+                          Field.fee: fee,
+                          Field.drCr: drCr,
+                          Field.type: type,
+                          Field.method: method,
+                          Field.status: Status.pending.toString(),
+                          Field.note: note ?? '-',
+                          Field.loanId: loanId,
+                          Field.refId: refId,
+                          Field.parentId: parentId,
+                          Field.otherBankId: otherBankId,
+                          Field.gatewayId: gatewayId,
+                          Field.createdUserId: userId ?? Field.emptyString,
+                          Field.updatedUserId: userId ?? Field.emptyString,
+                          Field.branchId: branchId,
+                          Field.transactionsDetails: note ?? '-'
+                        };
+                        ExchangeMoneyMethods.add(context, body);
+                      },
+                      text: Str.exchangeMoneyTxt.toUpperCase(),
+                    ),
+                  ),
+              //   ],
+              // ),
             ],
           ),
         ),

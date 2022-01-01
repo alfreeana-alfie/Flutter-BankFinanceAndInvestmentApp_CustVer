@@ -53,14 +53,14 @@ class _MPaymentRequestListtState extends State<MPaymentRequestList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: addAppBar(
-          title: Str.newRequestTxt,
-          implyLeading: true,
-          context: context,
-          hasAction: true,
-          path: RouteSTR.addPaymentRequestM,
-          onPressed: () => Navigator.pushReplacementNamed(context, RouteSTR.dashboardMember)
-        ),
+      // appBar: addAppBar(
+      //     title: Str.newRequestTxt,
+      //     implyLeading: true,
+      //     context: context,
+      //     hasAction: true,
+      //     path: RouteSTR.addPaymentRequestM,
+      //     onPressed: () => Navigator.pushReplacementNamed(context, RouteSTR.dashboardMember)
+      //   ),
         drawer: const SideDrawerMember(),
       backgroundColor: Styles.primaryColor,
       body: _innerContainer(),

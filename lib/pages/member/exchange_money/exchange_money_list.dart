@@ -53,13 +53,13 @@ class _MExchangeMoneyListState extends State<MExchangeMoneyList> {
   Widget build(BuildContext context) {
     return OKToast(
       child: Scaffold(
-        appBar: addAppBar(
-          title: Str.fdrHistoryTxt,
-          implyLeading: true,
-          context: context,
-          hasAction: true,
-          path: RouteSTR.addFdrM,
-        ),
+        // appBar: addAppBar(
+        //   title: Str.fdrHistoryTxt,
+        //   implyLeading: true,
+        //   context: context,
+        //   hasAction: true,
+        //   path: RouteSTR.addFdrM,
+        // ),
         drawer: const SideDrawerMember(),
         backgroundColor: Styles.primaryColor,
         body: _innerContainer(),

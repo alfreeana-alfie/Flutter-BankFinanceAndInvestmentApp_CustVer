@@ -53,14 +53,14 @@ class _MSupportTicketListState extends State<MSupportTicketList> {
   Widget build(BuildContext context) {
     return OKToast(
       child: Scaffold(
-        appBar: addAppBar(
-          title: Str.supportTicketTxt,
-          implyLeading: true,
-          context: context,
-          hasAction: true,
-          path: RouteSTR.addSupportTicketM,
-          onPressed: () => Navigator.pushNamed(context, RouteSTR.dashboardMember),
-        ),
+        // appBar: addAppBar(
+        //   title: Str.supportTicketTxt,
+        //   implyLeading: true,
+        //   context: context,
+        //   hasAction: true,
+        //   path: RouteSTR.addSupportTicketM,
+        //   onPressed: () => Navigator.pushNamed(context, RouteSTR.dashboardMember),
+        // ),
         drawer: const SideDrawerMember(),
         backgroundColor: Styles.primaryColor,
         body: _innerContainer(),

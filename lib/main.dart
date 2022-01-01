@@ -78,7 +78,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       home: SplashScreenView(
-        navigateRoute: const MCreateLoan(),
+        navigateRoute: const MemberDasboard(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,
@@ -123,7 +123,7 @@ Future<void> main() async {
         RouteSTR.exchangeMoneyListM: (context) => const MExchangeMoneyList(),
 
         RouteSTR.wireTransferM: (context) => const MCreateWireTransfer(),
-        RouteSTR.wireTransferM: (context) => const MWireTransferList(),
+        RouteSTR.wireTransferListM: (context) => const MWireTransferList(),
 
         RouteSTR.addLoanM: (context) => const MCreateLoan(),
         RouteSTR.loanListM: (context) => const MLoanList(),
