@@ -52,10 +52,10 @@ class _DropDownPlanFDRState extends State<DropDownPlanFDR> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.only(left: 15, right: 15, top: 8, bottom: 8),
+        padding: const EdgeInsets.only(left: 15, right: 15),
         decoration: BoxDecoration(
           color: Colors.black12.withOpacity(0.05),
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(7.0),
         ),
         child: DropdownButtonHideUnderline(
           child: DropdownButton(

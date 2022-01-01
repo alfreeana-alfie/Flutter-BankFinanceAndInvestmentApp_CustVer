@@ -13,6 +13,7 @@ import 'package:flutter_banking_app/widgets/buttons.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdown_fdr.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
+import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
 
@@ -106,65 +107,42 @@ class _MCreateFDRState extends State<MCreateFDR> {
           context: context,
           onPressedBack: () => Navigator.pop(context),
         ),
-        // bottomSheet: Container(
-        //   color: Styles.primaryColor,
-        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-        //   child: elevatedButton(
-        //     color: Styles.secondaryColor,
-        //     context: context,
-        //     callback: () {
-        //       Map<String, String> body = {
-        //         'fdr_plan_Id': planFDR ?? Field.emptyString,
-        //         'user_Id': userLoad.id.toString(),
-        //         'currency_Id': currency  ?? Field.emptyString,
-        //         'deposit_amount': amount  ?? Field.emptyString,
-        //         'return_amount': amount  ?? Field.emptyString,
-        //         'attachment': file!.name,
-        //         'remarks': remarks ?? Field.emptyString,
-        //         'status': '1',
-        //         'approved_date': 'null',
-        //         'mature_date': 'null',
-        //         'transaction_Id': '1',
-        //         'approved_user_Id': '1',
-        //         'created_user_Id': userLoad.id.toString(),
-        //         'updated_user_Id': userLoad.id.toString(),
-        //         'branch_Id': '2',
-        //       };
-
-        //       FixedDepositMethods.add(context, body, file!.name);
-        //     },
-        //     text: Str.applyLoanTxt.toUpperCase(),
-        //   ),
-        // ),
-        body: ListView(
-          padding: const EdgeInsets.all(15),
-          children: [
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Styles.accentColor,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                                padding:
-                                    const EdgeInsets.fromLTRB(15, 0, 15, 8),
-                                child: Text(Str.depositPlanTxt,
-                                    style: Styles.subtitleStyle)),
-                            const Gap(20.0),
-                            DropDownPlanFDR(
+        body: Container(
+          margin: const EdgeInsets.all(15),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: Styles.cardColor,
+            boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 1.0), //(x,y)
+                    blurRadius: 6.0,
+                  ),
+                ],
+          ),
+          
+          child: ListView(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                            child: Text(Str.depositPlanTxt,
+                                style: Styles.primaryTitle),
+                          ),
+                          SizedBox(
+                            child: DropDownPlanFDR(
                               plan: planFDR,
                               planName: planFDRName,
                               onChanged: (val) {
@@ -176,20 +154,15 @@ class _MCreateFDRState extends State<MCreateFDR> {
                                 );
                               },
                             ),
-                          ],
-                        ),
-                        const Gap(20.0),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                                padding:
-                                    const EdgeInsets.fromLTRB(15, 0, 15, 8),
-                                child: Text(Str.currencyTxt,
-                                    style: Styles.subtitleStyle)),
-                            const Gap(20.0),
-                            DropDownCurrency(
+                          ),
+                          const Gap(20.0),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                            child: Text(Str.currencyTxt,
+                                style: Styles.primaryTitle),
+                          ),
+                          SizedBox(
+                            child: DropDownCurrency(
                               currency: currency,
                               currencyName: currencyName,
                               onChanged: (val) {
@@ -201,121 +174,131 @@ class _MCreateFDRState extends State<MCreateFDR> {
                                 );
                               },
                             ),
-                          ],
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {
-                            amount = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.depositAmountTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.amountNumTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.vertical(
-                        bottom: Radius.circular(15),
+                          const Gap(20.0),
+                          // TextFormField(
+                          //   onChanged: (val) {
+                          //     amount = val;
+                          //   },
+                          //   style: Styles.subtitleStyle,
+                          //   textInputAction: TextInputAction.done,
+                          //   keyboardType: TextInputType.text,
+                          //   maxLines: 1,
+                          //   decoration: InputDecoration(
+                          //     labelText: Str.depositAmountTxt,
+                          //     labelStyle: Styles.subtitleStyle,
+                          //     hintText: Str.amountNumTxt,
+                          //     hintStyle: Styles.subtitleStyle03,
+                          //     border: const OutlineInputBorder(
+                          //       borderSide: BorderSide.none,
+                          //       gapPadding: 0.0,
+                          //     ),
+                          //   ),
+                          // ),
+                          NewField(
+                            onSaved: (val) => amount = val,
+                            hintText: Str.depositAmountTxt,
+                            labelText: Str.amountNumTxt,
+                          ),
+                        ],
                       ),
-                      color: Styles.thirdColor,
                     ),
-                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          onChanged: (val) {
-                            remarks = val;
-                          },
-                          style: Styles.subtitleStyleDark,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.remarkTxt,
-                            labelStyle: Styles.subtitleStyleDark02,
-                            hintText: Str.remarkTxt,
-                            hintStyle: Styles.subtitleStyleDark03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
+                    Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.vertical(
+                          bottom: Radius.circular(15),
+                        ),
+                        color: Styles.cardColor,
+                      ),
+                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          // TextFormField(
+                          //   onChanged: (val) {
+                          //     remarks = val;
+                          //   },
+                          //   style: Styles.subtitleStyleDark,
+                          //   textInputAction: TextInputAction.done,
+                          //   keyboardType: TextInputType.text,
+                          //   maxLines: 1,
+                          //   decoration: InputDecoration(
+                          //     labelText: Str.remarkTxt,
+                          //     labelStyle: Styles.subtitleStyleDark02,
+                          //     hintText: Str.remarkTxt,
+                          //     hintStyle: Styles.subtitleStyleDark03,
+                          //     border: const OutlineInputBorder(
+                          //       borderSide: BorderSide.none,
+                          //       gapPadding: 0.0,
+                          //     ),
+                          //   ),
+                          // ),
+                          NewField(
+                              onSaved: (val) => remarks = val,
+                              hintText: Str.remarkTxt),
+                              const Gap(20.0),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                            child: Text(Str.attachmentTxt,
+                                style: Styles.primaryTitle),
+                          ),
+                          ElevatedButton(
+                            onPressed: () async {
+                              pickFiles(fileType);
+                            },
+                            child: Text(Str.browseTxt),
+                            style: ElevatedButton.styleFrom(
+                              elevation: 0.0,
+                              primary: Styles.accentColor,
                             ),
                           ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Text(Str.attachmentTxt,
-                                    style: Styles.subtitleStyleDark02),
-                              ),
-                              Expanded(
-                                child: ElevatedButton(
-                                  onPressed: () async {
-                                    pickFiles(fileType);
-                                  },
-                                  child: Text(Str.browseTxt),
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 0.0,
-                                    primary: Styles.accentColor,
-                                  ),
-                                ),
-                              ),
-                              // if (file != null) fileDetails(file!),
-                            ],
-                          ),
-                        ),
-                      ],
+                          // if (file != null) fileDetails(file!),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Container(
-              color: Styles.primaryColor,
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-              child: elevatedButton(
-                color: Styles.secondaryColor,
-                context: context,
-                callback: () {
-                  Map<String, String> body = {
-                    'fdr_plan_Id': planFDR ?? Field.emptyString,
-                    'user_Id': userLoad.id.toString(),
-                    'currency_Id': currency ?? Field.emptyString,
-                    'deposit_amount': amount ?? Field.emptyString,
-                    'return_amount': amount ?? Field.emptyString,
-                    // 'attachment': file!.name,
-                    'remarks': remarks ?? Field.emptyString,
-                    'status': '1',
-                    'approved_date': '2021-09-09',
-                    'mature_date': '2021-09-09',
-                    'transaction_Id': '1',
-                    'approved_user_Id': '1',
-                    'created_user_Id': userLoad.id.toString(),
-                    'updated_user_Id': userLoad.id.toString(),
-                    'branch_Id': '2',
-                  };
+              Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15)),
+                  color: Styles.primaryColor,
+                ),
+                margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: elevatedButton(
+                  color: Styles.secondaryColor,
+                  context: context,
+                  callback: () {
+                    Map<String, String> body = {
+                      'fdr_plan_Id': planFDR ?? Field.emptyString,
+                      'user_Id': userLoad.id.toString(),
+                      'currency_Id': currency ?? Field.emptyString,
+                      'deposit_amount': amount ?? Field.emptyString,
+                      'return_amount': amount ?? Field.emptyString,
+                      // 'attachment': file!.name,
+                      'remarks': remarks ?? Field.emptyString,
+                      'status': '1',
+                      'approved_date': '2021-09-09',
+                      'mature_date': '2021-09-09',
+                      'transaction_Id': '1',
+                      'approved_user_Id': '1',
+                      'created_user_Id': userLoad.id.toString(),
+                      'updated_user_Id': userLoad.id.toString(),
+                      'branch_Id': '2',
+                    };
 
-                  FixedDepositMethods.add(context, body, 'test');
-                },
-                text: Str.applyDepositTxt.toUpperCase(),
+                    FixedDepositMethods.add(context, body, 'test');
+                  },
+                  text: Str.applyDepositTxt.toUpperCase(),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -12,7 +12,7 @@ Widget elevatedButton({required BuildContext context, required VoidCallback call
             primary: color ?? Styles.primaryColor,
             elevation: 0,
             //shadowColor: Colors.indigoAccent,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
             padding: const EdgeInsets.symmetric(vertical: 15),
             textStyle: const TextStyle(fontFamily: 'DMSans', color: Colors.white, fontWeight: FontWeight.w500, fontSize: 17)),
         onPressed: callback

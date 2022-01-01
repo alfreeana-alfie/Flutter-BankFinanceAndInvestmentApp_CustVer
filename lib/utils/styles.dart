@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 
 class Styles {
-
   static String formatDate = 'yyyy-MM-dd hh:mm:ss';
   // LIGHT MODE
   static const Color primaryColor = Color.fromRGBO(255, 255, 255, 1);
@@ -22,6 +21,7 @@ class Styles {
   static Color accentColorDark = const Color(0xFF024751);
 
   static Color greyColor = const Color(0xFFDFE1E3);
+  static const cardColor = Color.fromRGBO(255, 255, 255, 1);
   static Color buttonColor = const Color(0xFF4C66EE);
   static Color blueColor = const Color(0xFF4BACF7);
   static const Color whiteColor = Color.fromRGBO(255, 255, 255, 1);
@@ -38,9 +38,7 @@ class Styles {
   static const Color transparentColor = Color.fromRGBO(0, 0, 0, 0);
 
   static const TextStyle primaryTitle = TextStyle(
-                color: Styles.textColor,
-                fontSize: 16,
-                fontWeight: FontWeight.bold);
+      color: Styles.textColor, fontSize: 16, fontWeight: FontWeight.bold);
 
   static TextStyle textStyle =
       TextStyle(fontSize: getProportionateScreenWidth(15));
