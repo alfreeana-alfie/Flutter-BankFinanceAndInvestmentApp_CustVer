@@ -65,10 +65,10 @@ class _NewFieldClickableState extends State<NewFieldClickable> {
           ],
         ),
         Row(
-          mainAxis
-          childrasdfen: [
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
             Expanded(
-              flex: 3,
+              flex: 5,
               child: TextFormField(
                 readOnly: true,
                 controller: widget.controller,
@@ -91,10 +91,14 @@ class _NewFieldClickableState extends State<NewFieldClickable> {
             Expanded(
               flex: 1, 
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: ElevatedButton(
                     onPressed: widget.onTap,
-                    child: const Icon(Icons.calendar_today)),
+                    child: const Icon(Icons.calendar_today, color: Styles.textColor), 
+                    style: ElevatedButton.styleFrom(
+                      primary: Styles.transparentColor, 
+                      elevation: 0.0
+                    ),),
               ),
             ),
           ],
