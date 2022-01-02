@@ -96,3 +96,24 @@ void signOut(BuildContext context) async {
     CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
   }
 }
+
+void signUp(BuildContext context, Map<String, String> body) async {
+    final response = await http.post(
+      API.signUp,
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == Status.created) {
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pushReplacementNamed(context, RouteSTR.signIn);
+
+      });
+    } else {
+      print(response.body);
+      // print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }

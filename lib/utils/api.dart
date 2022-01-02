@@ -15,6 +15,7 @@ String ios = 'http://127.0.0.1:8000/api/';
 // API SETUP(S)
 class API {
   // User authorizations
+  static Uri signUp = Uri.parse('$android/auth/signup');
   static Uri login = Uri.parse('$android/auth/login');
   static Uri getUserDetails = Uri.parse('$android/auth/user');
   static Uri logout = Uri.parse('$android/auth/logout');

@@ -16,6 +16,7 @@ import 'pages/admin/navigation/create_navigation_item.dart';
 import 'pages/admin/navigation/navigation_item_list.dart';
 import 'pages/admin/users/create_user_role.dart';
 import 'pages/admin/users/permission_list.dart';
+import 'pages/member/loans/loan_cal.dart';
 import 'pages/member/ticket/create_ticket.dart';
 import 'pages/member/ticket/ticket_list.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';

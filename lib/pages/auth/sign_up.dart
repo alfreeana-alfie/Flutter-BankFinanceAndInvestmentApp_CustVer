@@ -1,6 +1,8 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/auth_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_banking_app/widgets/clickable_text.dart';
 import 'package:flutter_banking_app/widgets/header_1.dart';
 import 'package:flutter_banking_app/widgets/textfield/text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oktoast/oktoast.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -28,22 +31,24 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(Values.loginBgPath),
-            fit: BoxFit.cover,
+    return OKToast(
+      child: Scaffold(
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(Values.loginBgPath),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        child: Center(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                _buildForm(),
-              ],
+          child: Center(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  _buildForm(),
+                ],
+              ),
             ),
           ),
         ),
@@ -138,8 +143,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         showOnlyCountryWhenClosed: false,
                         // optional. aligns the flag and the Text left
                         alignLeft: false,
-                        padding: EdgeInsets.all(12),
-                        dialogSize: Size(350, 450),
+                        padding: const EdgeInsets.all(12),
+                        dialogSize: const Size(350, 450),
                         textStyle: GoogleFonts.nunitoSans(
                           color: Styles.textColor,
                         ),
@@ -179,7 +184,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 hintText: Str.confirmTxt,
               ),
             ),
-            // Button Sign In
+            // Button Sign Up
             Container(
               height: 50,
               margin: const EdgeInsets.symmetric(
@@ -187,8 +192,19 @@ class _SignUpPageState extends State<SignUpPage> {
                   vertical: Values.verticalValue),
               child: ElevatedButton(
                 onPressed: () {
-                  // print(countryCode);
-                  Navigator.pushNamed(context, RouteSTR.dashboardAdmin);
+                  Map<String, String> body = {
+                    Field.name: name,
+                    Field.email: email,
+                    Field.phone: phoneNo,
+                    Field.userType: Field.customerTxt,
+                    Field.password: password,
+                  };
+
+                  if(confirmPassword == password){
+                    signUp(context, body);
+                  }else{
+                    CustomToast.showMsg('Erorr! Please check you details before try again', Styles.dangerColor);
+                  }
                 },
                 child: Text(Str.createMyAccountTxt),
                 style: ElevatedButton.styleFrom(
@@ -197,7 +213,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
             ),
-            // Button Sign Up
+            // Button Sign In
             Padding(
               padding: const EdgeInsets.only(
                 left: Values.horizontalValue * 2,
