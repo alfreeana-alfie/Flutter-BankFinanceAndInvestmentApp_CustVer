@@ -80,7 +80,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       home: SplashScreenView(
-        navigateRoute: const BottomNav(),
+        navigateRoute: const AdminDashboard(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,

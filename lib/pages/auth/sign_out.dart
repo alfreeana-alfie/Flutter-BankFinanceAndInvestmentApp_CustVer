@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/config.dart';
+import 'package:flutter_banking_app/pages/auth/sign_in.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 
@@ -14,8 +15,8 @@ class _SignOutState extends State<SignOut> {
   SharedPref sharedPref = SharedPref();
 
   Future check() async {
-    sharedPref.remove(Pref.accessToken);
     sharedPref.remove(Pref.expiredAt);
+    sharedPref.remove(Pref.accessToken);
     sharedPref.remove(Pref.userData);
   }
 
@@ -41,7 +42,7 @@ class _SignOutState extends State<SignOut> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return const Center(child: Text('Successfully Sign Out!'));
+            return const SignInPage();
           }
         }
       },
