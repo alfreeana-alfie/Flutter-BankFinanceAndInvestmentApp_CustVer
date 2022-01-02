@@ -89,8 +89,8 @@ class _MWireTransferListState extends State<MWireTransferList> {
                 padding: const EdgeInsets.only(top: 10.0),
                 child: ListView(
                   scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
               children: [
                 SafeArea(
                   child: Padding(

@@ -81,7 +81,7 @@ class _MCreateFDRState extends State<MCreateFDR> {
     Widget fileDetails(PlatformFile file) {
       final kb = file.size / 1024;
       final mb = kb / 1024;
-      final size = (mb >= 1)
+      final szize = (mb >= 1)
           ? '${mb.toStringAsFixed(2)} MB'
           : '${kb.toStringAsFixed(2)} KB';
       return Padding(
@@ -134,11 +134,22 @@ class _MCreateFDRState extends State<MCreateFDR> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
-                            child: Text(Str.depositPlanTxt,
-                                style: Styles.primaryTitle),
-                          ),
+                          Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                              child: Text(Str.planTxt,
+                                  style: Styles.primaryTitle),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                              child: Text(
+                                '*',
+                                style: TextStyle(color: Styles.dangerColor),
+                              ),
+                            ),
+                          ],
+                        ),
                           SizedBox(
                             child: DropDownPlanFDR(
                               plan: planFDR,
@@ -154,11 +165,22 @@ class _MCreateFDRState extends State<MCreateFDR> {
                             ),
                           ),
                           const Gap(20.0),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
-                            child: Text(Str.currencyTxt,
-                                style: Styles.primaryTitle),
-                          ),
+                          Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                              child: Text(Str.currencyTxt,
+                                  style: Styles.primaryTitle),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                              child: Text(
+                                '*',
+                                style: TextStyle(color: Styles.dangerColor),
+                              ),
+                            ),
+                          ],
+                        ),
                           SizedBox(
                             child: DropDownCurrency(
                               currency: currency,
@@ -175,6 +197,7 @@ class _MCreateFDRState extends State<MCreateFDR> {
                           ),
                           const Gap(20.0),
                           NewField(
+                            mandatory: true,
                             onSaved: (val) => amount = val,
                             hintText: Str.depositAmountTxt,
                             labelText: Str.amountNumTxt,
@@ -213,7 +236,7 @@ class _MCreateFDRState extends State<MCreateFDR> {
                               primary: Styles.accentColor,
                             ),
                           ),
-                          // if (file != null) fileDetails(file!),
+                          if (file != null) fileDetails(file!),
                         ],
                       ),
                     ),
@@ -238,13 +261,13 @@ class _MCreateFDRState extends State<MCreateFDR> {
                       'fdr_plan_Id': planFDR ?? Field.emptyString,
                       'user_Id': userLoad.id.toString(),
                       'currency_Id': currency ?? Field.emptyString,
-                      'deposit_amount': amount ?? Field.emptyString,
-                      'return_amount': amount ?? Field.emptyString,
-                      // 'attachment': file!.name,
-                      'remarks': remarks ?? Field.emptyString,
-                      'status': '1',
-                      'approved_date': '2021-09-09',
-                      'mature_date': '2021-09-09',
+                      Field.depositAmount: amount ?? Field.emptyString,
+                      Field.returnAmount: amount ?? Field.emptyString,
+                      Field.attachment: file!.name,
+                      Field.remarks: remarks ?? Field.emptyString,
+                      Field.status: Status.pending.toString(),
+                      Field.approvedDate: '',
+                      Field.matureDate: '',
                       'transaction_Id': '1',
                       'approved_user_Id': '1',
                       'created_user_Id': userLoad.id.toString(),
@@ -252,7 +275,7 @@ class _MCreateFDRState extends State<MCreateFDR> {
                       'branch_Id': '2',
                     };
 
-                    FixedDepositMethods.add(context, body, 'test');
+                    FixedDepositMethods.add(context, body, file!.path ?? file!.name);
                   },
                   text: Str.applyDepositTxt.toUpperCase(),
                 ),

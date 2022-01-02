@@ -24,15 +24,19 @@ class API {
   // static Uri listOfSendMoney = Uri.parse('$android/list_of_send_money');
   static Uri userSendMoneyList = Uri.parse('$android/user_send_money_list/');
 
+  static Uri userTransactionHistoryList = Uri.parse('$android/user_payment_history/');
+
   // Exchange Money
   static Uri exchangeMoney = Uri.parse('$android/exchange_money');
   // static Uri listOfExchangeMoney = Uri.parse('$android/list_of_exchange_money');
-  static Uri userExchangeMoneyList = Uri.parse('$android/user_exchange_money_list/');
+  static Uri userExchangeMoneyList =
+      Uri.parse('$android/user_exchange_money_list/');
 
   // Wire Transfer
   static Uri wireTransfer = Uri.parse('$android/wire_transfer');
   // static Uri listOfWireTransfer = Uri.parse('$android/list_of_wire_transfer');
-  static Uri userWireTransferList = Uri.parse('$android/user_wire_transfer_list/');
+  static Uri userWireTransferList =
+      Uri.parse('$android/user_wire_transfer_list/');
 
   // Payment Request
   static Uri paymentRequest = Uri.parse('$android/payment_request');
@@ -55,7 +59,8 @@ class API {
 
   // Support Ticket
   static Uri createSupportTicket = Uri.parse('$android/support_ticket');
-  static Uri listOfSupportTicket = Uri.parse('$android/list_of_support_tickets');
+  static Uri listOfSupportTicket =
+      Uri.parse('$android/list_of_support_tickets');
 
   // Drop Down List(s)
   static Uri listOfCurrency = Uri.parse('$android/list_of_currency');
@@ -127,13 +132,13 @@ class AdminAPI {
   static Uri listOfTeam = Uri.parse('$android/list_of_teams');
   static Uri createTeam = Uri.parse('$android/create_team');
 
-  // Gift Card 
+  // Gift Card
   static Uri createGiftCard = Uri.parse('$android/gift_card');
   static Uri listOfGiftCard = Uri.parse('$android/list_of_gift_cards');
-  
+
   static Uri listOfUsedGiftCard = Uri.parse('$android/list_of_used_gift_cards');
 
-  // Transaction 
+  // Transaction
   static Uri listOfExchangeMoney = Uri.parse('$android/list_of_exchange_money');
   static Uri listOfSendMoney = Uri.parse('$android/list_of_send_money');
 
@@ -142,5 +147,6 @@ class AdminAPI {
   static Uri listOfNavigation = Uri.parse('$android/list_of_navigations');
 
   static Uri createNavigationItem = Uri.parse('$android/navigation_item');
-  static Uri listOfNavigationItem = Uri.parse('$android/list_of_navigation_items');
+  static Uri listOfNavigationItem =
+      Uri.parse('$android/list_of_navigation_items');
 }

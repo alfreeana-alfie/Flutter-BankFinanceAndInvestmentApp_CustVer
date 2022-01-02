@@ -8,6 +8,7 @@ import 'package:flutter_banking_app/pages/auth/sign_out.dart';
 import 'package:flutter_banking_app/pages/member/dashboard.dart';
 import 'package:flutter_banking_app/pages/member/exchange_money/exchange_money_list.dart';
 import 'package:flutter_banking_app/pages/member/send_money/send_money_list.dart';
+import 'package:flutter_banking_app/pages/member/stats.dart';
 import 'package:flutter_banking_app/pages/member/wire_transfer/wire_transfer_list.dart';
 import 'pages/admin/branches/branch_list.dart';
 import 'pages/admin/navigation/create_navigation.dart';
@@ -78,7 +79,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       home: SplashScreenView(
-        navigateRoute: const MemberDasboard(),
+        navigateRoute: const BottomNav(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,
@@ -133,6 +134,8 @@ Future<void> main() async {
 
         RouteSTR.supportTicketListM: (context) => const MSupportTicketList(),
         RouteSTR.addSupportTicketM: (context) => const MCreateSupportTicket(),
+
+        RouteSTR.statsM: (context) => const Stats(),
 
         // ADMIN ROUTE(S)
         RouteSTR.dashboardAdmin: (context) => const AdminDashboard(),

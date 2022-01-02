@@ -241,6 +241,7 @@ class Str {
 
   static String welcomeBackTxt = 'Welcome Back!';
   static String userAccountTxt = 'User Account';
+  static String statsTxt = 'Statistic';
 }
 
 class Status {
@@ -279,6 +280,8 @@ class RouteSTR {
   static String signUp = '/sign-up';
   static String signOut = '/sign-out';
   static String profileOverview = '/profile-overview';
+  static String statsM = '/stats';
+  
 
   static String bottomNav = '/bottom_nav';
   // static String newRequest = '/new-request';
@@ -369,6 +372,7 @@ class Field {
   static String emptyString = '-';
   static String emptyAmount = '0.00';
   static String empty = '0';
+  static String postMethod = 'POST';
 
   static String icon = 'icon';
   static String customerTxt = 'customer';

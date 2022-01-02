@@ -99,7 +99,7 @@
     },
     {
       "name": "file_picker",
-      "rootUri": "file:///C:/Users/User-PC/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/file_picker-4.2.8",
+      "rootUri": "file:///C:/Users/User-PC/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/file_picker-4.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -500,7 +500,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-01-01T15:55:55.985125Z",
+  "generated": "2022-01-02T05:39:11.468110Z",
   "generator": "pub",
   "generatorVersion": "2.14.3"
 }

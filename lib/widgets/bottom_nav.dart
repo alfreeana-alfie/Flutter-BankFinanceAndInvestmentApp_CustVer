@@ -17,10 +17,9 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   int _selectedIndex = 0;
-  static final List<Widget> widgetOptions = <Widget>[
+  static final List<Widget> widgetOptions = [
     const MemberDasboard(),
-    const MLoanList(),
-    const MFdrList(),
+    const Stats(),
     const Profile(),
   ];
 
@@ -53,13 +52,13 @@ class _BottomNavState extends State<BottomNav> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(IconlyBold.Document),
-            label: 'Loan',
+            icon: Icon(IconlyBold.Activity),
+            label: 'Report',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.monetization_on_rounded),
-            label: 'Fixed Deposit',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.monetization_on_rounded),
+          //   label: 'Fixed Deposit',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(IconlyBold.Profile),
             label: 'Profile',

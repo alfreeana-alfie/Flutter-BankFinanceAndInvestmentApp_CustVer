@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/utils/iconly/iconly_bold.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -48,6 +49,14 @@ class SideDrawerMember extends StatelessWidget {
             onTap: () =>
                 {Navigator.pushNamed(context, RouteSTR.dashboardMember)},
           ),
+          ListTile(
+            leading: const Icon(IconlyBold.Activity),
+            title: Text(Str.statsTxt,
+                style: GoogleFonts.nunitoSans(
+                    color: Styles.textColor.withOpacity(1))),
+            onTap: () =>
+                {Navigator.pushNamed(context, RouteSTR.statsM)},
+          ),
           ExpansionTile(
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
             leading: const Icon(Icons.send_rounded),
@@ -71,7 +80,7 @@ class SideDrawerMember extends StatelessWidget {
           ),
           ExpansionTile(
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-            leading: const Icon(Icons.arrow_circle_down_rounded),
+            leading: const Icon(Icons.change_circle),
             title: Text(Str.exchangeMoneyTxt),
             children: [
               DrawerChild(
@@ -92,7 +101,7 @@ class SideDrawerMember extends StatelessWidget {
           ),
           ExpansionTile(
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-            leading: const Icon(Icons.transfer_within_a_station),
+            leading: const Icon(Icons.swap_horizontal_circle),
             title: Text(Str.wireTransferTxt),
             children: [
               DrawerChild(
@@ -113,7 +122,7 @@ class SideDrawerMember extends StatelessWidget {
           ),
           ExpansionTile(
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-            leading: const Icon(Icons.transfer_within_a_station),
+            leading: const Icon(Icons.request_page),
             title: Text(Str.paymentRequestTxt),
             children: [
               DrawerChild(
@@ -134,7 +143,7 @@ class SideDrawerMember extends StatelessWidget {
           ),
           ExpansionTile(
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-            leading: const Icon(Icons.transfer_within_a_station),
+            leading: const Icon(Icons.receipt),
             title: Text(Str.loanTxt),
             children: [
               DrawerChild(
@@ -155,7 +164,7 @@ class SideDrawerMember extends StatelessWidget {
           ),
           ExpansionTile(
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-            leading: const Icon(Icons.transfer_within_a_station),
+            leading: const Icon(Icons.local_atm_rounded),
             title: Text(Str.fixedDepositTxt),
             children: [
               DrawerChild(

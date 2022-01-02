@@ -11,6 +11,7 @@ import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/balance_box.dart';
 import 'package:flutter_banking_app/widgets/left_menu_member.dart';
+import 'package:flutter_banking_app/widgets/transaction_today.dart';
 import 'package:gap/gap.dart';
 
 class MemberDasboard extends StatefulWidget {
@@ -41,6 +42,7 @@ class _MemberDasboardState extends State<MemberDasboard> {
   // void initState() {
   //   super.initState();
   // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -201,56 +203,56 @@ class _MemberDasboardState extends State<MemberDasboard> {
   }
 }
 
-class TransactionTodayList extends StatelessWidget {
-  const TransactionTodayList({
-    Key? key,
-  }) : super(key: key);
+// class TransactionTodayList extends StatelessWidget {
+//   const TransactionTodayList({
+//     Key? key,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const BouncingScrollPhysics(),
-      itemCount: transactions.length,
-      itemBuilder: (c, i) {
-        final trs = transactions[i];
-        return ListTile(
-          isThreeLine: true,
-          minLeadingWidth: 10,
-          contentPadding: const EdgeInsets.all(0),
-          leading: Container(
-              width: 35,
-              height: 35,
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Styles.primaryWithOpacityColor,
-                boxShadow: [
-                  BoxShadow(
-                    offset: const Offset(0, 1),
-                    color: Styles.textColor.withOpacity(0.1),
-                    blurRadius: 2,
-                    spreadRadius: 1,
-                  )
-                ],
-                image: i == 0
-                    ? null
-                    : DecorationImage(
-                        image: AssetImage(trs['avatar']),
-                        fit: BoxFit.cover,
-                      ),
-                shape: BoxShape.circle,
-              ),
-              child: i == 0
-                  ? Icon(trs['icon'], color: const Color(0xFFFF736C), size: 20)
-                  : const SizedBox()),
-          title: Text(trs['name'],
-              style: const TextStyle(color: Styles.textColor)),
-          subtitle: Text(trs['date'],
-              style: TextStyle(color: Styles.textColor.withOpacity(0.5))),
-          trailing: Text(trs['amount'],
-              style: const TextStyle(fontSize: 17, color: Styles.textColor)),
-        );
-      },
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return ListView.builder(
+//       shrinkWrap: true,
+//       physics: const BouncingScrollPhysics(),
+//       itemCount: transactions.length,
+//       itemBuilder: (c, i) {
+//         final trs = transactions[i];
+//         return ListTile(
+//           isThreeLine: true,
+//           minLeadingWidth: 10,
+//           contentPadding: const EdgeInsets.all(0),
+//           leading: Container(
+//               width: 35,
+//               height: 35,
+//               padding: const EdgeInsets.all(8),
+//               decoration: BoxDecoration(
+//                 color: Styles.primaryWithOpacityColor,
+//                 boxShadow: [
+//                   BoxShadow(
+//                     offset: const Offset(0, 1),
+//                     color: Styles.textColor.withOpacity(0.1),
+//                     blurRadius: 2,
+//                     spreadRadius: 1,
+//                   )
+//                 ],
+//                 image: i == 0
+//                     ? null
+//                     : DecorationImage(
+//                         image: AssetImage(trs['avatar']),
+//                         fit: BoxFit.cover,
+//                       ),
+//                 shape: BoxShape.circle,
+//               ),
+//               child: i == 0
+//                   ? Icon(trs['icon'], color: const Color(0xFFFF736C), size: 20)
+//                   : const SizedBox()),
+//           title: Text(trs['name'],
+//               style: const TextStyle(color: Styles.textColor)),
+//           subtitle: Text(trs['date'],
+//               style: TextStyle(color: Styles.textColor.withOpacity(0.5))),
+//           trailing: Text(trs['amount'],
+//               style: const TextStyle(fontSize: 17, color: Styles.textColor)),
+//         );
+//       },
+//     );
+//   }
+// }

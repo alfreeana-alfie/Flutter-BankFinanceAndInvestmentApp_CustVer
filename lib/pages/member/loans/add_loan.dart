@@ -106,7 +106,7 @@ class _MCreateLoanState extends State<MCreateLoan> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
-                              child: Text(Str.depositPlanTxt,
+                              child: Text(Str.planTxt,
                                   style: Styles.primaryTitle),
                             ),
                             const Padding(
@@ -245,8 +245,7 @@ class _MCreateLoanState extends State<MCreateLoan> {
                               appliedAmount ?? Field.emptyAmount,
                           Field.totalPaid: Field.emptyAmount,
                           Field.latePaymentPenalty: '10',
-                          // 'attachment':
-                          //     'loan_files/bQURCY5sVoNOCsGPX0VbXx69iNO7HD6yNZY6lLbk.png',
+                          Field.attachment: file!.name,
                           Field.description: description ?? Field.emptyString,
                           Field.remarks: remarks ?? Field.emptyString,
                           Field.status: Status.pending.toString(),
@@ -256,7 +255,7 @@ class _MCreateLoanState extends State<MCreateLoan> {
                           'branch_Id': '2',
                         };
 
-                        LoanRequestMethods.add(context, body);
+                        LoanRequestMethods.add(context, body, file!.path ?? file!.name);
                       },
                       text: Str.submitTxt,
                     ),
