@@ -103,23 +103,6 @@ class _CreateUserRoleState extends State<CreateUserRole> {
                 ),
               ),
             ),
-            Container(
-              // color: Styles.primaryColor,
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-              child: elevatedButton(
-                color: Styles.secondaryColor,
-                context: context,
-                callback: () {
-                  Map<String, String> body = {
-                    Field.name: name ?? Field.emptyString,
-                    Field.description: description ?? Field.emptyString
-                  };
-
-                  UserMethods.addUserRole(context, body);
-                },
-                text: Str.submitTxt.toUpperCase(),
-              ),
-            ),
           ],
         ),
       ),

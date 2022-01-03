@@ -151,7 +151,7 @@ class CardNavigationItem extends StatelessWidget {
                 labelDetails: navigationItem.type ?? Field.emptyString),
             DetailRow(
                 labelTitle: Str.pagesTxt,
-                labelDetails: navigationItem.pageId ?? Field.emptyString),
+                labelDetails: navigationItem.pageId.toString()),
             DetailRow(
                 labelTitle: Str.urlTxt,
                 labelDetails: navigationItem.url ?? Field.emptyString),

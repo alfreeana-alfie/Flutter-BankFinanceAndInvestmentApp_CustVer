@@ -3,6 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/pages/admin/gift_card/create_gift_card.dart';
 import 'package:flutter_banking_app/pages/admin/navigation/navigation_list.dart';
+import 'package:flutter_banking_app/pages/admin/ticket/create_ticket.dart';
+import 'package:flutter_banking_app/pages/admin/ticket/ticket_list.dart';
+import 'package:flutter_banking_app/pages/admin/transaction/exchange_money/exchange_money_list.dart';
+import 'package:flutter_banking_app/pages/admin/transaction/send_money/send_money_list.dart';
 import 'package:flutter_banking_app/pages/admin/users/create_permission.dart';
 import 'package:flutter_banking_app/pages/admin/users/user_role_list.dart';
 import 'package:flutter_banking_app/pages/auth/sign_out.dart';
@@ -82,7 +86,7 @@ Future<void> main() async {
     MaterialApp(
       // home: const AdminDashboard(),
       home: SplashScreenView(
-        navigateRoute: const BottomNav(),
+        navigateRoute: const AdminDashboard(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,
@@ -156,10 +160,13 @@ Future<void> main() async {
         RouteSTR.createPermission: (context) => const CreateUserPermission(),
 
         RouteSTR.wireTransferList: (context) => const WireTransferList(),
+        RouteSTR.sendMoneyList: (context) => const SendMoneyList(),
+        RouteSTR.exchangeMoneyList: (context) => const ExchangeMoneyList(),
         RouteSTR.createWireTransfer: (context) => const CreateWireTransfer(),
 
         RouteSTR.loanProductList: (context) => const LoanProductList(),
         RouteSTR.createLoanProduct: (context) => const CreateLoanProduct(),
+        RouteSTR.loanCalculator: (context) => const LoanCalculator(),
 
         RouteSTR.fdrPlanList: (context) => const FdrPlanList(),
         RouteSTR.createPlanFDR: (context) => const CreateFdrPackage(),
@@ -180,7 +187,7 @@ Future<void> main() async {
         RouteSTR.createFaq: (context) => const CreateFaq(),
 
         RouteSTR.teamList: (context) => const TeamList(),
-        RouteSTR.createService: (context) => const CreateTeam(),
+        RouteSTR.createTicket: (context) => const CreateTeam(),
 
         RouteSTR.testimonialList: (context) => const TestimonialList(),
         RouteSTR.createTestimonial: (context) => const CreateTestimonial(),
@@ -190,6 +197,10 @@ Future<void> main() async {
 
         RouteSTR.navigationItemList: (context) => const NavigationItemList(),
         RouteSTR.createNavigationItem: (context) => const CreateNavigationItem(),
+
+        RouteSTR.ticketList: (context) => const SupportTicketList(),
+        RouteSTR.createTicket: (context) => const CreateSupportTicket(),
+
       },
     ),
   );

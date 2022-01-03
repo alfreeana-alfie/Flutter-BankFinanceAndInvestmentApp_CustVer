@@ -24,7 +24,7 @@ class _DropDownBankState extends State<DropDownBank> {
   List<Bank> planListNew = [];
 
   void getCurrency() async {
-    final response = await http.get(API.listofFdrPlans, headers: headers);
+    final response = await http.get(AdminAPI.listOfOtherBank, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);

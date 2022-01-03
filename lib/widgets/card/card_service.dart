@@ -123,7 +123,7 @@ class CardService extends StatelessWidget {
 
   buildExpanded1(BuildContext context) {
     
-    DateTime tempDate = DateTime.parse(service.createdAt ?? '-');
+    DateTime tempDate = DateTime.parse(service.createdAt ?? '2021-01-01');
     String createdAt = DateFormat('yyyy-MM-dd hh:mm:ss').format(tempDate);
     return Container(
       color: Styles.accentColor,

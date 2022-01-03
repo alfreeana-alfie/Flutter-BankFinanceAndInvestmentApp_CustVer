@@ -1,8 +1,8 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class NavigationItem {
-  int? position, status;
-  String? name, type, pageId, url, icon, target, parentId, cssClass, cssId;
+  int? position, pageId, status;
+  String? name, type, url, icon, target, parentId, cssClass, cssId;
 
    NavigationItem(
       {this.name,
@@ -21,7 +21,7 @@ class NavigationItem {
     return NavigationItem(
       name: map[Field.name] as String?,
       type: map[Field.type] as String?,
-      pageId: map[Field.pageId] as String?,
+      pageId: map[Field.pageId] as int?,
       url: map[Field.url] as String?,
       icon: map[Field.icon] as String?,
       target: map[Field.target] as String?,

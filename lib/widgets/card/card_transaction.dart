@@ -138,7 +138,7 @@ class CardTransaction extends StatelessWidget {
         status = 'Default';
     }
 
-    DateTime tempDate = DateTime.parse(transaction.createdAt ?? '');
+    DateTime tempDate = DateTime.parse(transaction.createdAt ?? '2021-01-01');
     String createdAt = DateFormat(Styles.formatDate).format(tempDate);
 
     return Container(

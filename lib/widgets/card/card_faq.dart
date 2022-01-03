@@ -53,8 +53,11 @@ class CardFaq extends StatelessWidget {
                               color: Styles.accentColor,
                             ),
                             const Gap(20),
-                            Text(question.question ?? Field.emptyString,
-                                style: Theme.of(context).textTheme.headline6),
+                            Container(
+                              constraints: const BoxConstraints(minWidth: 100, maxWidth: 220),
+                              child: Text(question.question ?? Field.emptyString,
+                                  style: Theme.of(context).textTheme.headline6),
+                            ),
                           ],
                         )),
                     collapsed: const Text(

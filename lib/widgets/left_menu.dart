@@ -199,7 +199,7 @@ class SideDrawer extends StatelessWidget {
                 title: Str.exchangeMoneyListTxt,
                 onNavigate: TapGestureRecognizer()
                   ..onTap = () {
-                    Navigator.pushNamed(context, RouteSTR.wireTransferList);
+                    Navigator.pushNamed(context, RouteSTR.exchangeMoneyList);
                   },
               ),
             ],
