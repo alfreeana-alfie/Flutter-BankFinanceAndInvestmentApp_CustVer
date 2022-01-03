@@ -9,6 +9,8 @@ import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/appbar/app_bar_add.dart';
 import 'package:flutter_banking_app/widgets/card/card_navigation.dart';
+import 'package:flutter_banking_app/widgets/left_menu.dart';
+import 'package:gap/gap.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
@@ -43,39 +45,18 @@ class _NavigationListState extends State<NavigationList> {
     }
   }
 
-  loadSharedPrefs() async {
-    try {
-      User user = User.fromJSON(await sharedPref.read(Pref.userData));
-      setState(() {
-        userLoad = user;
-
-        print(userLoad.id.toString());
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   loadSharedPrefs();
-  //   viewOne('1');
-  // }
-
   @override
   Widget build(BuildContext context) {
     return OKToast(
       child: Scaffold(
-        appBar: addAppBar(
-          title: Str.loanProductTxt,
-          implyLeading: true,
-          context: context,
-          hasAction: true,
-          path: RouteSTR.createNavigation,
-        ),
-        // drawer: SideDrawer(),
+        // appBar: addAppBar(
+        //   title: Str.loanProductTxt,
+        //   implyLeading: true,
+        //   context: context,
+        //   hasAction: true,
+        //   path: RouteSTR.createNavigation,
+        // ),
+        drawer: const SideDrawer(),
         backgroundColor: Styles.primaryColor,
         body: _innerContainer(),
       ),
@@ -104,8 +85,59 @@ class _NavigationListState extends State<NavigationList> {
               child: Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: ListView(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
-                  children: [
+              children: [
+                SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      // crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        InkWell(
+                          onTap: () => Scaffold.of(context).openDrawer(),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Styles.transparentColor,
+                            ),
+                            child: const Icon(
+                              Icons.menu,
+                              color: Styles.accentColor,
+                            ),
+                          ),
+                        ),
+                        const Gap(10),
+                        Center(
+                          child: Text(
+                            Str.navigationListTxt,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w500,
+                                color: Styles.textColor, fontSize: 19),
+                          ),
+                        ),
+                        const Gap(10),
+                        InkWell(
+                          onTap: () => Navigator.pushNamed(context, RouteSTR.createNavigation),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Styles.transparentColor,
+                            ),
+                            child: const Icon(
+                              Icons.add,
+                              color: Styles.accentColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                     for (Navigation navigation in navigationList)
                       CardNavigation(navigation: navigation),
                   ],

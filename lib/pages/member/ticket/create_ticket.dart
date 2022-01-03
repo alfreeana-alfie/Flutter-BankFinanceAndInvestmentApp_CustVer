@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -84,39 +83,38 @@ class _MCreateSupportTicketState extends State<MCreateSupportTicket> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     NewField(
-                              onSaved: (val) => subject = val,
-                              hintText: Str.subjectTxt),
-                          const Gap(20.0),
-                          NewField(
-                            onSaved: (val) => message = val,
-                            hintText: Str.messageTxt,
-                            maxLines: 10,
-                          ),
-                          const Gap(20),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 10),
-                            child: elevatedButton(
-                              color: Styles.secondaryColor,
-                              context: context,
-                              callback: () {
-                                Map<String, String> body = {
-                                  Field.supportTicketId:
-                                      '#${getRandomString(12)}',
-                                  Field.subject: subject ?? Field.emptyString,
-                                  Field.message: message ?? Field.emptyAmount,
-                                  Field.senderId: userId ?? Field.emptyString,
-                                  Field.status: Status.pending.toString(),
-                                  Field.priority: Status.pending.toString(),
-                                  Field.operatorId: '0',
-                                  Field.closedUserId: '0',
-                                };
+                        onSaved: (val) => subject = val,
+                        hintText: Str.subjectTxt),
+                    const Gap(20.0),
+                    NewField(
+                      onSaved: (val) => message = val,
+                      hintText: Str.messageTxt,
+                      maxLines: 10,
+                    ),
+                    const Gap(20),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 10),
+                      child: elevatedButton(
+                        color: Styles.secondaryColor,
+                        context: context,
+                        callback: () {
+                          Map<String, String> body = {
+                            Field.supportTicketId: '#${getRandomString(12)}',
+                            Field.subject: subject ?? Field.emptyString,
+                            Field.message: message ?? Field.emptyAmount,
+                            Field.senderId: userId ?? Field.emptyString,
+                            Field.status: Status.pending.toString(),
+                            Field.priority: Status.pending.toString(),
+                            Field.operatorId: '0',
+                            Field.closedUserId: '0',
+                          };
 
-                                SupportTicketMethods.add(context, body);
-                              },
-                              text: Str.submitTxt.toUpperCase(),
-                            ),
-                          ),
+                          SupportTicketMethods.add(context, body);
+                        },
+                        text: Str.submitTxt.toUpperCase(),
+                      ),
+                    ),
                   ],
                 ),
               ),

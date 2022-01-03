@@ -9,6 +9,8 @@ import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
+import 'package:flutter_banking_app/widgets/dropdown/dropdown_roles.dart';
+import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
 
@@ -22,7 +24,7 @@ class CreateUserPermission extends StatefulWidget {
 class _CreateUserPermissionState extends State<CreateUserPermission> {
   final ScrollController _scrollController = ScrollController();
 
-  String? roleId, permission;
+  String? roleId, roleName, permission;
 
   @override
   void initState() {
@@ -39,7 +41,7 @@ class _CreateUserPermissionState extends State<CreateUserPermission> {
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.createNavigationTxt, implyLeading: true, context: context),
+            title: Str.createPermissionTxt, implyLeading: true, context: context),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -47,77 +49,83 @@ class _CreateUserPermissionState extends State<CreateUserPermission> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Styles.accentColor,
+                color: Styles.cardColor,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 1.0), //(x,y)
+                    blurRadius: 6.0,
+                  ),
+                ],
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
                       children: [
-                        TextFormField(
-                          onChanged: (val) {
-                            roleId = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.roleTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.roleTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(Str.bankTxt, style: Styles.primaryTitle),
                         ),
-                        const Gap(20),
-                        TextFormField(
-                          onChanged: (val) {
-                            permission = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.permissionTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.permissionTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(
+                            '*',
+                            style: TextStyle(color: Styles.dangerColor),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              // color: Styles.primaryColor,
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-              child: elevatedButton(
-                color: Styles.secondaryColor,
-                context: context,
-                callback: () {
-                  Map<String, String> body = {
-                    Field.roleId: roleId ?? Field.emptyString,
-                    Field.permission: permission ?? Field.emptyString
-                  };
+                    SizedBox(
+                      child: DropDownUserRoles(
+                        role: roleId,
+                        roleName: roleName,
+                        onChanged: (val) {
+                          setState(
+                            () {
+                              roleId = val!.id.toString();
+                              roleName = val.name;
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    const Gap(20),
+                    NewField(
+                      mandatory: true,
+                      onSaved: (val) => permission = val,
+                      hintText: Str.permissionTxt,
+                    ),
+                    const Gap(10),
+                    Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(15),
+                            bottomRight: Radius.circular(15)),
+                        color: Styles.primaryColor,
+                      ),
+                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 10),
+                      child: elevatedButton(
+                        color: Styles.secondaryColor,
+                        context: context,
+                        callback: () {
+                          Map<String, String> body = {
+                            Field.roleId: roleId ?? Field.emptyString,
+                            Field.permission: permission ?? Field.emptyString
+                          };
 
-                  UserMethods.addPermission(context, body);
-                },
-                text: Str.submitTxt.toUpperCase(),
+                          UserMethods.addPermission(context, body);
+                        },
+                        text: Str.submitTxt,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

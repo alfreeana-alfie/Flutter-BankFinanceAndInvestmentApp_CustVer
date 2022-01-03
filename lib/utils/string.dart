@@ -238,10 +238,35 @@ class Str {
   static String wireTransferListTxt = 'Wire Transfer List';
   static String paymentRequestTxt = 'Payment Request';
   static String allRequestTxt = 'All Request(s)';
+  static String testimonialTxt = 'Testimonial';
 
   static String welcomeBackTxt = 'Welcome Back!';
   static String userAccountTxt = 'User Account';
   static String statsTxt = 'Statistic';
+  static String navigationTxt = 'Navigation';
+  static String createOtherBankTxt = 'Create Other Bank';
+  static String createServiceTxt = 'Create Service';
+  static String createTestimonialTxt = 'Create Testimonial';
+  static String createUserRoleTxt = 'Create User Role';
+  static String createPermissionTxt = 'Create Permission';
+  static String createTicket = 'Create Support Ticket';
+
+  static String branchListTxt = 'Branch(es) List';
+  static String depositListTxt = 'Deposit List';
+  static String faqListTxt = 'FAQ List';
+  static String fdrPlanListTxt = 'FDR Plan List';
+  static String giftCardListTxt = 'Gift Card List';
+  static String usedGiftCardListTxt = 'Used Gift Card List';
+  static String loanProductListTxt = 'Loan Product List';
+  static String navigationItemListTxt = 'Navigation Item List';
+  static String navigationListTxt = 'Navigation List';
+  static String otherBankListTxt = 'Other Bank List';
+  static String serviceListTxt = 'Service List';
+  static String teamListTxt = 'Team List';
+  static String testimonialListTxt = 'Testimonial List';
+  static String permissionListTxt = 'Permission List';
+  static String userRoleListTxt = 'User Role List';
+  static String usersListTxt = 'User List';
 }
 
 class Status {
@@ -281,7 +306,6 @@ class RouteSTR {
   static String signOut = '/sign-out';
   static String profileOverview = '/profile-overview';
   static String statsM = '/stats';
-  
 
   static String bottomNav = '/bottom_nav';
   // static String newRequest = '/new-request';
@@ -365,6 +389,9 @@ class RouteSTR {
 
   static String navigationItemList = '/navigation-item-list-a';
   static String createNavigationItem = '/create-navigation-item';
+
+  static String ticketList = '/ticket-list-a';
+  static String createTicket = '/create-ticket';
 }
 
 class Field {

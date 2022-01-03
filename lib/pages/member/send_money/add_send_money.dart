@@ -169,7 +169,9 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                     const Gap(20.0),
                     NewField(
                         onSaved: (val) => amount = val,
-                        hintText: Str.descriptionTxt),
+                        hintText: Str.amountTxt,
+                        labelText: Str.amountNumTxt,
+                    ),
                     const Gap(10),
                     Container(
                       decoration: const BoxDecoration(

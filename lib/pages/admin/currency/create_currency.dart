@@ -8,6 +8,7 @@ import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
+import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
 
@@ -39,25 +40,6 @@ class _CreateCurrencyState extends State<CreateCurrency> {
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
             title: Str.createCurrencyTxt, implyLeading: true, context: context),
-        // bottomSheet: Container(
-        //   color: Styles.primaryColor,
-        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-        //   child: elevatedButton(
-        //     color: Styles.secondaryColor,
-        //     context: context,
-        //     callback: () {
-        //       Map<String, String> body = {
-        //         Field.name: name!,
-        //         Field.exchangeRate: exchangeRate ?? Field.emptyAmount,
-        //         Field.baseCurrency: baseCurrency ?? Field.emptyAmount,
-        //         Field.status: Status.pending.toString()
-        //       };
-
-        //       CurrencyMethods.add(context, body);
-        //     },
-        //     text: Str.createCurrencyTxt.toUpperCase(),
-        //   ),
-        // ),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -65,99 +47,54 @@ class _CreateCurrencyState extends State<CreateCurrency> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Styles.accentColor,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextFormField(
-                          onChanged: (val) {
-                            name = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.nameTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.nameTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {
-                            exchangeRate = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.number,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.currencyTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.amountNumTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {
-                            baseCurrency = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.number,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.baseCurrencyTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.baseCurrencyTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                color: Styles.cardColor,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 1.0), //(x,y)
+                    blurRadius: 6.0,
                   ),
                 ],
               ),
-            ),
-            Container(
-              // color: Styles.primaryColor,
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-              child: elevatedButton(
-                color: Styles.secondaryColor,
-                context: context,
-                callback: () {
-                  Map<String, String> body = {
-                    Field.name: name!,
-                    Field.exchangeRate: exchangeRate ?? Field.emptyAmount,
-                    Field.baseCurrency: baseCurrency ?? Field.emptyAmount,
-                    Field.status: Status.pending.toString()
-                  };
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    NewField(
+                        onSaved: (val) => name = val,
+                        hintText: Str.nameTxt),
+                    const Gap(20.0),
+                    NewField(
+                        onSaved: (val) => exchangeRate = val,
+                        hintText: Str.exchangeRateTxt),
+                    const Gap(20),
+                    NewField(
+                        onSaved: (val) => baseCurrency = val,
+                        hintText: Str.baseCurrencyTxt),
+                    const Gap(20),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 10),
+                      child: elevatedButton(
+                        color: Styles.secondaryColor,
+                        context: context,
+                        callback: () {
+                          Map<String, String> body = {
+                            Field.name: name ?? Field.emptyString,
+                            Field.exchangeRate: exchangeRate ?? Field.exchangeRate,
+                            Field.baseCurrency: baseCurrency ?? Field.emptyAmount,
+                            Field.status: Status.pending.toString(),
+                          };
 
-                  CurrencyMethods.add(context, body);
-                },
-                text: Str.createCurrencyTxt.toUpperCase(),
+                          CurrencyMethods.add(context, body);
+                        },
+                        text: Str.submitTxt.toUpperCase(),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

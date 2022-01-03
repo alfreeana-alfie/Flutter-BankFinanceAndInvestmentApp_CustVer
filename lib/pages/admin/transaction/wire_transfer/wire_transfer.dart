@@ -2,13 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/methods/member/wire_transfer_methods.dart';
+import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
+import 'package:flutter_banking_app/widgets/dropdown/dropdown_bank.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
+import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
 
@@ -21,27 +25,43 @@ class CreateWireTransfer extends StatefulWidget {
 
 class _CreateWireTransferState extends State<CreateWireTransfer> {
   final ScrollController _scrollController = ScrollController();
+  SharedPref sharedPref = SharedPref();
 
-  String? currency, currencyName;
+  String? currency,
+      currencyName,
+      userId,
+      otherBankId,
+      otherBankName,
+      amount,
+      note,
+      swiftCode,
+      accountHolder,
+      accountHolderName;
 
-  String userId = '1',
-      currencyId = '1',
-      amount = '1',
-      fee = '1',
+  String fee = '1',
       drCr = '1',
       type = '1',
-      method = '1',
+      method = 'wire_transfer',
       status = '1',
-      note = '1',
       loanId = '1',
       refId = '1',
       parentId = '1',
-      otherBankId = '1',
       gatewayId = '1',
       createdUserId = '1',
       updatedUserId = '1',
       branchId = '1',
-      transactionsDetails = '1';
+      transactionsDetails = 'wire_transfer';
+
+  loadSharedPrefs() async {
+    try {
+      User user = User.fromJSON(await sharedPref.read(Pref.userData));
+      setState(() {
+        userId = user.id.toString();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   void initState() {
@@ -49,6 +69,7 @@ class _CreateWireTransferState extends State<CreateWireTransfer> {
       print(_scrollController.offset);
     });
     super.initState();
+    loadSharedPrefs();
   }
 
   @override
@@ -59,39 +80,6 @@ class _CreateWireTransferState extends State<CreateWireTransfer> {
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
             title: Str.wireTransferTxt, implyLeading: true, context: context),
-        // bottomSheet: Container(
-        //   color: Styles.primaryColor,
-        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-        //   child: elevatedButton(
-        //     color: Styles.secondaryColor,
-        //     context: context,
-        //     callback: () {
-        //       Map<String, String> body = {
-        //         Field.userId: userId,
-        //         Field.currencyId: currencyId,
-        //         Field.amount: amount,
-        //         Field.fee: fee,
-        //         Field.drCr: drCr,
-        //         Field.type: type,
-        //         Field.method: method,
-        //         Field.status: status,
-        //         Field.note: note,
-        //         Field.loanId: loanId,
-        //         Field.refId: refId,
-        //         Field.parentId: parentId,
-        //         Field.otherBankId: otherBankId,
-        //         Field.gatewayId: gatewayId,
-        //         Field.createdUserId: createdUserId,
-        //         Field.updatedUserId: updatedUserId,
-        //         Field.branchId: branchId,
-        //         Field.transactionsDetails: transactionsDetails
-        //       };
-    
-        //       WireTransferMethods.add(context, body);
-        //     },
-        //     text: Str.wireTransferTxt.toUpperCase(),
-        //   ),
-        // ),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -99,198 +87,223 @@ class _CreateWireTransferState extends State<CreateWireTransfer> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Styles.primaryWithOpacityColor,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                                padding: const EdgeInsets.fromLTRB(15, 15, 15, 8),
-                                child: Text(Str.bankTxt,
-                                    style: Styles.subtitleStyle)),
-                            const Gap(20.0),
-                            DropDownCurrency(
-                              currency: currency,
-                              currencyName: currencyName,
-                              onChanged: (val) {
-                                setState(
-                                  () {
-                                    currency = val!.id.toString();
-                                    currencyName = val.name;
-                                  },
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          readOnly: true,
-                          onChanged: (val) {},
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.number,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.swiftCodeTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.swiftCodeTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          readOnly: true,
-                          onChanged: (val) {},
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.number,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.currencyTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.amountNumTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {},
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.number,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.accountHolderTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.accountHolderTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {},
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.number,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.accountHolderNameTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.accountHolderNameTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {},
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.number,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.amountTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.amountNumTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        // const Gap(20.0),
-                      ],
-                    ),
+                color: Styles.cardColor,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 1.0), //(x,y)
+                    blurRadius: 6.0,
                   ),
-                  // Divider(color: Styles.primaryColor, thickness: 2),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.vertical(
-                          bottom: Radius.circular(15)),
-                      color: Styles.yellowColor,
-                    ),
-                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                    child: TextFormField(
-                      onChanged: (val) {},
-                      style: Styles.subtitleStyleDark,
-                      textInputAction: TextInputAction.done,
-                      keyboardType: TextInputType.number,
-                      maxLines: 1,
-                      decoration: InputDecoration(
-                        labelText: Str.descriptionTxt,
-                        labelStyle: Styles.subtitleStyleDark02,
-                        hintText: Str.descriptionTxt,
-                        hintStyle: Styles.subtitleStyleDark03,
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          gapPadding: 0.0,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    color: Styles.primaryColor,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-                    child: elevatedButton(
-                      color: Styles.secondaryColor,
-                      context: context,
-                      callback: () {
-                        Map<String, String> body = {
-                          Field.userId: userId,
-                          Field.currencyId: currencyId,
-                          Field.amount: amount,
-                          Field.fee: fee,
-                          Field.drCr: drCr,
-                          Field.type: type,
-                          Field.method: method,
-                          Field.status: status,
-                          Field.note: note,
-                          Field.loanId: loanId,
-                          Field.refId: refId,
-                          Field.parentId: parentId,
-                          Field.otherBankId: otherBankId,
-                          Field.gatewayId: gatewayId,
-                          Field.createdUserId: createdUserId,
-                          Field.updatedUserId: updatedUserId,
-                          Field.branchId: branchId,
-                          Field.transactionsDetails: transactionsDetails
-                        };
-    
-                        WireTransferMethods.add(context, body);
-                      },
-                      text: Str.wireTransferTxt.toUpperCase(),
-                    ),
-                  ),
-                  // const Gap(10),
                 ],
               ),
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(Str.bankTxt, style: Styles.primaryTitle),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(
+                            '*',
+                            style: TextStyle(color: Styles.dangerColor),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      child: DropDownBank(
+                        bank: otherBankId,
+                        bankName: otherBankName,
+                        onChanged: (val) {
+                          setState(
+                            () {
+                              otherBankId = val!.id.toString();
+                              otherBankName = val.name;
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    const Gap(20.0),
+                    NewField(
+                      mandatory: true,
+                      onSaved: (val) => swiftCode = val,
+                      hintText: Str.swiftCodeTxt,
+                    ),
+                    const Gap(20.0),
+                    NewField(
+                      mandatory: true,
+                      onSaved: (val) => amount = val,
+                      hintText: Str.amountTxt,
+                      labelText: Str.amountNumTxt,
+                    ),
+                    const Gap(20.0),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child:
+                              Text(Str.currencyTxt, style: Styles.primaryTitle),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(
+                            '*',
+                            style: TextStyle(color: Styles.dangerColor),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      child: DropDownCurrency(
+                        currency: currency,
+                        currencyName: currencyName,
+                        onChanged: (val) {
+                          setState(
+                            () {
+                              currency = val!.id.toString();
+                              currencyName = val.name;
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    // const Gap(20.0),
+                    // TextFormField(
+                    //   onChanged: (val) {},
+                    //   style: Styles.subtitleStyle,
+                    //   textInputAction: TextInputAction.done,
+                    //   keyboardType: TextInputType.text,
+                    //   maxLines: 1,
+                    //   decoration: InputDecoration(
+                    //     labelText: Str.accountHolderTxt,
+                    //     labelStyle: Styles.subtitleStyle,
+                    //     hintText: Str.accountHolderTxt,
+                    //     hintStyle: Styles.subtitleStyle03,
+                    //     border: const OutlineInputBorder(
+                    //       borderSide: BorderSide.none,
+                    //       gapPadding: 0.0,
+                    //     ),
+                    //   ),
+                    // ),
+                    const Gap(20.0),
+                    NewField(
+                      mandatory: true,
+                      onSaved: (val) => accountHolder = val,
+                      hintText: Str.accountHolderTxt,
+                    ),
+                    // const Gap(20.0),
+                    // TextFormField(
+                    //   onChanged: (val) {},
+                    //   style: Styles.subtitleStyle,
+                    //   textInputAction: TextInputAction.done,
+                    //   keyboardType: TextInputType.text,
+                    //   maxLines: 1,
+                    //   decoration: InputDecoration(
+                    //     labelText: Str.accountHolderNameTxt,
+                    //     labelStyle: Styles.subtitleStyle,
+                    //     hintText: Str.accountHolderNameTxt,
+                    //     hintStyle: Styles.subtitleStyle03,
+                    //     border: const OutlineInputBorder(
+                    //       borderSide: BorderSide.none,
+                    //       gapPadding: 0.0,
+                    //     ),
+                    //   ),
+                    // ),
+                    const Gap(20.0),
+                    NewField(
+                      mandatory: true,
+                      onSaved: (val) => accountHolderName = val,
+                      hintText: Str.accountHolderNameTxt,
+                    ),
+                    const Gap(20.0),
+                    NewField(
+                      onSaved: (val) => note = val,
+                      hintText: Str.descriptionTxt,
+                    ),
+                    const Gap(20),
+                    Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(15),
+                            bottomRight: Radius.circular(15)),
+                        color: Styles.primaryColor,
+                      ),
+                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 10),
+                      child: elevatedButton(
+                        color: Styles.secondaryColor,
+                        context: context,
+                        callback: () {
+                          Map<String, String> body = {
+                            Field.userId: userId ?? Field.empty,
+                            Field.currencyId: currency ?? Field.empty,
+                            Field.amount: amount ?? Field.emptyAmount,
+                            Field.fee: fee,
+                            Field.drCr: drCr,
+                            Field.type: type,
+                            Field.method: method,
+                            Field.status: status,
+                            Field.note: note ?? Field.emptyString,
+                            Field.loanId: loanId,
+                            Field.refId: refId,
+                            Field.parentId: parentId,
+                            Field.otherBankId: otherBankId ?? Field.empty,
+                            Field.gatewayId: gatewayId,
+                            Field.createdUserId: userId ?? Field.empty,
+                            Field.updatedUserId: userId ?? Field.empty,
+                            Field.branchId: branchId,
+                            Field.transactionsDetails: transactionsDetails
+                          };
+
+                          WireTransferMethods.add(context, body);
+                        },
+                        text: Str.wireTransferTxt.toUpperCase(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // Divider(color: Styles.primaryColor, thickness: 2),
+              // Container(
+              //   decoration: const BoxDecoration(
+              //     borderRadius:
+              //         BorderRadius.vertical(bottom: Radius.circular(15)),
+              //     color: Styles.thirdColor,
+              //   ),
+              //   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+              //   child: TextFormField(
+              //     onChanged: (val) {
+              //       note = val;
+              //     },
+              //     style: Styles.subtitleStyleDark,
+              //     textInputAction: TextInputAction.done,
+              //     keyboardType: TextInputType.text,
+              //     maxLines: 1,
+              //     decoration: InputDecoration(
+              //       labelText: Str.descriptionTxt,
+              //       labelStyle: Styles.subtitleStyleDark02,
+              //       hintText: Str.descriptionTxt,
+              //       hintStyle: Styles.subtitleStyleDark03,
+              //       border: const OutlineInputBorder(
+              //         borderSide: BorderSide.none,
+              //         gapPadding: 0.0,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // const Gap(10),
+
+              //   ],
+              // ),
             ),
           ],
         ),

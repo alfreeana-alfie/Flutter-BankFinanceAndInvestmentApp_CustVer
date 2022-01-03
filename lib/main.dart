@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/pages/admin/gift_card/create_gift_card.dart';
 import 'package:flutter_banking_app/pages/admin/navigation/navigation_list.dart';
 import 'package:flutter_banking_app/pages/admin/users/create_permission.dart';
 import 'package:flutter_banking_app/pages/admin/users/user_role_list.dart';
@@ -79,116 +80,117 @@ Future<void> main() async {
 
   runApp(
     MaterialApp(
-      home: SplashScreenView(
-        navigateRoute: const AdminDashboard(),
-        duration: 4000,
-        imageSize: 200,
-        imageSrc: Values.logoPath,
-        text: Str.appNameTxt,
-        textStyle: Styles.titleApp,
-        backgroundColor: Styles.primaryColor,
-        pageRouteTransition: PageRouteTransition.SlideTransition,
-      ),
-      title: Str.appNameTxt,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'DMSans',
-        primaryColor: Styles.primaryColor,
-        backgroundColor: Styles.primaryColor,
-      ),
-      darkTheme: ThemeData(
-        fontFamily: 'DMSans',
-        primaryColor: Styles.primaryColorDark,
-        backgroundColor: Styles.primaryColorDark,
-      ),
-      routes: {
-        RouteSTR.comingSoon: (context) => const ComingSoon(),
-        RouteSTR.comingSoonMenu: (context) => const ComingSoonMenu(),
-        // AUTH - MEMBER & ADMIN
-        RouteSTR.forgotPassword: (context) => const ForgotPasswordPage(),
-        RouteSTR.signUp: (context) => const SignUpPage(),
-        RouteSTR.signIn: (context) => const SignInPage(),
-        RouteSTR.signOut: (context) => const SignOut(),
-        RouteSTR.profileOverview: (context) => const ProfileOverview(),
+      home: const BranchList(),
+      // home: SplashScreenView(
+      //   navigateRoute: const BottomNav(),
+      //   duration: 4000,
+      //   imageSize: 200,
+      //   imageSrc: Values.logoPath,
+      //   text: Str.appNameTxt,
+      //   textStyle: Styles.titleApp,
+      //   backgroundColor: Styles.primaryColor,
+      //   pageRouteTransition: PageRouteTransition.SlideTransition,
+      // ),
+      // title: Str.appNameTxt,
+      // debugShowCheckedModeBanner: false,
+      // theme: ThemeData(
+      //   fontFamily: 'DMSans',
+      //   primaryColor: Styles.primaryColor,
+      //   backgroundColor: Styles.primaryColor,
+      // ),
+      // darkTheme: ThemeData(
+      //   fontFamily: 'DMSans',
+      //   primaryColor: Styles.primaryColorDark,
+      //   backgroundColor: Styles.primaryColorDark,
+      // ),
+      // routes: {
+      //   RouteSTR.comingSoon: (context) => const ComingSoon(),
+      //   RouteSTR.comingSoonMenu: (context) => const ComingSoonMenu(),
+      //   // AUTH - MEMBER & ADMIN
+      //   RouteSTR.forgotPassword: (context) => const ForgotPasswordPage(),
+      //   RouteSTR.signUp: (context) => const SignUpPage(),
+      //   RouteSTR.signIn: (context) => const SignInPage(),
+      //   RouteSTR.signOut: (context) => const SignOut(),
+      //   RouteSTR.profileOverview: (context) => const ProfileOverview(),
 
-        // MEMBER ROUTE(S)
-        RouteSTR.dashboardMember: (context) => const BottomNav(),
-        RouteSTR.bottomNav: (context) => const BottomNav(),
+      //   // MEMBER ROUTE(S)
+      //   RouteSTR.dashboardMember: (context) => const BottomNav(),
+      //   RouteSTR.bottomNav: (context) => const BottomNav(),
 
-        RouteSTR.paymentRequestM: (context) => const MPaymentRequestList(),
-        RouteSTR.addPaymentRequestM: (context) => const MCreatePaymentRequest(),
+      //   RouteSTR.paymentRequestM: (context) => const MPaymentRequestList(),
+      //   RouteSTR.addPaymentRequestM: (context) => const MCreatePaymentRequest(),
 
-        RouteSTR.sendMoneyM: (context) => const MCreateSendMoney(),
-        RouteSTR.sendMoneyListM: (context) => const MSendMoneyList(),
+      //   RouteSTR.sendMoneyM: (context) => const MCreateSendMoney(),
+      //   RouteSTR.sendMoneyListM: (context) => const MSendMoneyList(),
 
-        RouteSTR.exchangeMoneyM: (context) => const MCreateExchangeMoney(),
-        RouteSTR.exchangeMoneyListM: (context) => const MExchangeMoneyList(),
+      //   RouteSTR.exchangeMoneyM: (context) => const MCreateExchangeMoney(),
+      //   RouteSTR.exchangeMoneyListM: (context) => const MExchangeMoneyList(),
 
-        RouteSTR.wireTransferM: (context) => const MCreateWireTransfer(),
-        RouteSTR.wireTransferListM: (context) => const MWireTransferList(),
+      //   RouteSTR.wireTransferM: (context) => const MCreateWireTransfer(),
+      //   RouteSTR.wireTransferListM: (context) => const MWireTransferList(),
 
-        RouteSTR.addLoanM: (context) => const MCreateLoan(),
-        RouteSTR.loanListM: (context) => const MLoanList(),
+      //   RouteSTR.addLoanM: (context) => const MCreateLoan(),
+      //   RouteSTR.loanListM: (context) => const MLoanList(),
 
-        RouteSTR.addFdrM: (context) => const MCreateFDR(),
-        RouteSTR.fdrListM: (context) => const MFdrList(),
+      //   RouteSTR.addFdrM: (context) => const MCreateFDR(),
+      //   RouteSTR.fdrListM: (context) => const MFdrList(),
 
-        RouteSTR.supportTicketListM: (context) => const MSupportTicketList(),
-        RouteSTR.addSupportTicketM: (context) => const MCreateSupportTicket(),
+      //   RouteSTR.supportTicketListM: (context) => const MSupportTicketList(),
+      //   RouteSTR.addSupportTicketM: (context) => const MCreateSupportTicket(),
 
-        RouteSTR.statsM: (context) => const Stats(),
+      //   RouteSTR.statsM: (context) => const Stats(),
 
-        // ADMIN ROUTE(S)
-        RouteSTR.dashboardAdmin: (context) => const AdminDashboard(),
+      //   // ADMIN ROUTE(S)
+      //   RouteSTR.dashboardAdmin: (context) => const AdminDashboard(),
 
-        RouteSTR.depositList: (context) => const DepositList(),
-        RouteSTR.createDeposit: (context) => const CreateDeposit(),
+      //   RouteSTR.depositList: (context) => const DepositList(),
+      //   RouteSTR.createDeposit: (context) => const CreateDeposit(),
 
-        RouteSTR.usersList: (context) => const UsersList(),
-        RouteSTR.createUsers: (context) => const CreateUsers(),
+      //   RouteSTR.usersList: (context) => const UsersList(),
+      //   RouteSTR.createUsers: (context) => const CreateUsers(),
 
-        RouteSTR.userRoleList: (context) => const UserRoleList(),
-        RouteSTR.createUserRole: (context) => const CreateUserRole(),
+      //   RouteSTR.userRoleList: (context) => const UserRoleList(),
+      //   RouteSTR.createUserRole: (context) => const CreateUserRole(),
 
-        RouteSTR.permissionList: (context) => const PermissionList(),
-        RouteSTR.createPermission: (context) => const CreateUserPermission(),
+      //   RouteSTR.permissionList: (context) => const PermissionList(),
+      //   RouteSTR.createPermission: (context) => const CreateUserPermission(),
 
-        RouteSTR.wireTransferList: (context) => const WireTransferList(),
-        RouteSTR.createWireTransfer: (context) => const CreateWireTransfer(),
+      //   RouteSTR.wireTransferList: (context) => const WireTransferList(),
+      //   RouteSTR.createWireTransfer: (context) => const CreateWireTransfer(),
 
-        RouteSTR.loanProductList: (context) => const LoanProductList(),
-        RouteSTR.createLoanProduct: (context) => const CreateLoanProduct(),
+      //   RouteSTR.loanProductList: (context) => const LoanProductList(),
+      //   RouteSTR.createLoanProduct: (context) => const CreateLoanProduct(),
 
-        RouteSTR.fdrPlanList: (context) => const FdrPlanList(),
-        RouteSTR.createPlanFDR: (context) => const CreateFdrPackage(),
+      //   RouteSTR.fdrPlanList: (context) => const FdrPlanList(),
+      //   RouteSTR.createPlanFDR: (context) => const CreateFdrPackage(),
 
-        RouteSTR.branchList: (context) => const BranchList(),
-        RouteSTR.createBranch: (context) => const CreateBranch(),
+      //   RouteSTR.branchList: (context) => const BranchList(),
+      //   RouteSTR.createBranch: (context) => const CreateBranch(),
 
-        RouteSTR.otherBankList: (context) => const OtherBankList(),
-        RouteSTR.createBank: (context) => const CreateOtherBank(),
+      //   RouteSTR.otherBankList: (context) => const OtherBankList(),
+      //   RouteSTR.createBank: (context) => const CreateOtherBank(),
 
-        RouteSTR.currencyList: (context) => const CurrencyList(),
-        RouteSTR.createCurrency: (context) => const CreateCurrency(),
+      //   RouteSTR.currencyList: (context) => const CurrencyList(),
+      //   RouteSTR.createCurrency: (context) => const CreateCurrency(),
 
-        RouteSTR.serviceList: (context) => const ServiceList(),
-        RouteSTR.createService: (context) => const CreateService(),
+      //   RouteSTR.serviceList: (context) => const ServiceList(),
+      //   RouteSTR.createService: (context) => const CreateService(),
 
-        RouteSTR.faqList: (context) => const FaqList(),
-        RouteSTR.createFaq: (context) => const CreateFaq(),
+      //   RouteSTR.faqList: (context) => const FaqList(),
+      //   RouteSTR.createFaq: (context) => const CreateFaq(),
 
-        RouteSTR.teamList: (context) => const TeamList(),
-        RouteSTR.createService: (context) => const CreateTeam(),
+      //   RouteSTR.teamList: (context) => const TeamList(),
+      //   RouteSTR.createService: (context) => const CreateTeam(),
 
-        RouteSTR.testimonialList: (context) => const TestimonialList(),
-        RouteSTR.createTestimonial: (context) => const CreateTestimonial(),
+      //   RouteSTR.testimonialList: (context) => const TestimonialList(),
+      //   RouteSTR.createTestimonial: (context) => const CreateTestimonial(),
 
-        RouteSTR.navigationList: (context) => const NavigationList(),
-        RouteSTR.createNavigation: (context) => const CreateNavigation(),
+      //   RouteSTR.navigationList: (context) => const NavigationList(),
+      //   RouteSTR.createNavigation: (context) => const CreateNavigation(),
 
-        RouteSTR.navigationItemList: (context) => const NavigationItemList(),
-        RouteSTR.createNavigationItem: (context) => const CreateNavigationItem(),
-      },
+      //   RouteSTR.navigationItemList: (context) => const NavigationItemList(),
+      //   RouteSTR.createNavigationItem: (context) => const CreateNavigationItem(),
+      // },
     ),
   );
 }

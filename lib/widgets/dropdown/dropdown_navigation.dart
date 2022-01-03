@@ -66,7 +66,7 @@ class _DropDowNavigationState extends State<DropDowNavigation> {
                 color: Styles.textColor,
               )),
           hint: widget.navigationName == null
-              ? Text(Str.planTxt, style: Styles.primaryTitle)
+              ? Text(Str.navigationTxt, style: Styles.primaryTitle)
               : Text(
                   widget.navigationName!,
                   style: Styles.primaryTitle,

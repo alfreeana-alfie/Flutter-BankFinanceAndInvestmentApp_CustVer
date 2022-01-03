@@ -7,19 +7,35 @@ import 'package:http/http.dart' as http;
 import '../config.dart';
 
 class TeamMethods {
-  static void add(BuildContext context, Map<String, String> body) async {
-    final response = await http.post(
-      AdminAPI.createTeam,
-      headers: headers,
-      body: body,
-    );
+  static void add(
+      BuildContext context, Map<String, String> body, String filename) async {
+    // final response = await http.post(
+    //   API.loanRequest,
+    //   headers: headers,
+    //   body: body,
+    // );
+    final request = http.MultipartRequest(Field.postMethod, AdminAPI.createTeam)
+      ..fields.addAll(body)
+      ..headers.addAll(headersMultiPart)
+      ..files.add(await http.MultipartFile.fromPath(
+          Field.attachment, filename));
+
+    var response = await request.send();
+
+    var responseData = await response.stream.toBytes();
+    var responseString = String.fromCharCodes(responseData);
+    print(responseString);
 
     if (response.statusCode == Status.created) {
       // print(Status.successTxt);
+      
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
-      Navigator.pop(context);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+        Navigator.pushReplacementNamed(context, RouteSTR.loanListM);
+      });
     } else {
-      // print(Status.failedTxt);
+      // print(response.body);
+
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }

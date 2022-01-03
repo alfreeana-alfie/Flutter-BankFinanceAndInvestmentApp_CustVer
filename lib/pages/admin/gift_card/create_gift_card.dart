@@ -9,6 +9,7 @@ import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
+import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
 
@@ -47,102 +48,95 @@ class _CreateGiftCardState extends State<CreateGiftCard> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Styles.accentColor,
+                color: Styles.cardColor,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 1.0), //(x,y)
+                    blurRadius: 6.0,
+                  ),
+                ],
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    NewField(
+                      mandatory: true,
+                      onSaved: (val) => code = val,
+                      hintText: Str.codeTxt,
+                    ),
+                    const Gap(20.0),
+                    NewField(
+                      mandatory: true,
+                      onSaved: (val) => amount = val,
+                      hintText: Str.amountTxt,
+                    ),
+                    const Gap(20),
+                    Row(
                       children: [
-                        TextFormField(
-                          onChanged: (val) {
-                            code = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.codeTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.codeTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child:
+                              Text(Str.currencyTxt, style: Styles.primaryTitle),
                         ),
-                        const Gap(20.0),
-                        Container(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: TextFormField(
-                                  onChanged: (val) {
-                                    amount = val;
-                                  },
-                                  style: Styles.subtitleStyle,
-                                  textInputAction: TextInputAction.done,
-                                  keyboardType: TextInputType.number,
-                                  maxLines: 1,
-                                  decoration: InputDecoration(
-                                    hintText: Str.amountNumTxt,
-                                    hintStyle: Styles.subtitleStyle,
-                                    border: const OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      gapPadding: 0.0,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              DropDownCurrency(
-                                currency: currency,
-                                currencyName: currencyName,
-                                onChanged: (val) {
-                                  setState(
-                                    () {
-                                      currency = val!.id.toString();
-                                      currencyName = val.name;
-                                    },
-                                  );
-                                },
-                              ),
-                            ],
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(
+                            '*',
+                            style: TextStyle(color: Styles.dangerColor),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              // color: Styles.primaryColor,
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-              child: elevatedButton(
-                color: Styles.secondaryColor,
-                context: context,
-                callback: () {
-                  Map<String, String> body = {
-                    Field.code: code ?? Field.emptyString,
-                    Field.currencyId: currency ?? Field.emptyString,
-                    Field.amount: amount ?? Field.emptyAmount,
-                    Field.status: Status.pending.toString(),
-                    Field.userId: Field.emptyString,
-                    Field.branchId: Field.emptyString,
-                    Field.usedAt: Field.emptyString,
-                  };
+                    SizedBox(
+                      child: DropDownCurrency(
+                        currency: currency,
+                        currencyName: currencyName,
+                        onChanged: (val) {
+                          setState(
+                            () {
+                              currency = val!.id.toString();
+                              currencyName = val.name;
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    const Gap(10),
+                    Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(15),
+                            bottomRight: Radius.circular(15)),
+                        color: Styles.primaryColor,
+                      ),
+                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 10),
+                      child: elevatedButton(
+                        color: Styles.secondaryColor,
+                        context: context,
+                        callback: () {
+                          Map<String, String> body = {
+                            Field.code: code ?? Field.emptyString,
+                            Field.currencyId: currency ?? Field.emptyString,
+                            Field.amount: amount ?? Field.emptyAmount,
+                            Field.status: Status.pending.toString(),
+                            Field.userId: Field.emptyString,
+                            Field.branchId: Field.emptyString,
+                            Field.usedAt: Field.emptyString,
+                          };
 
-                  GiftCardMethods.add(context, body);
-                },
-                text: Str.submitTxt.toUpperCase(),
+                          GiftCardMethods.add(context, body);
+                        },
+                        text: Str.submitTxt,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

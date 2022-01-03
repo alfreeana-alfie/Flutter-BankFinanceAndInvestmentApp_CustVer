@@ -8,6 +8,7 @@ import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
+import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
 
@@ -38,27 +39,7 @@ class _CreateBranchState extends State<CreateBranch> {
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.createCurrencyTxt, implyLeading: true, context: context),
-        // bottomSheet: Container(
-        //   color: Styles.primaryColor,
-        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-        //   child: elevatedButton(
-        //     color: Styles.secondaryColor,
-        //     context: context,
-        //     callback: () {
-        //       Map<String, String> body = {
-        //         Field.name: name!,
-        //         Field.contactEmail: contactEmail ?? Field.emptyString,
-        //         Field.contactPhone: contactPhone ?? Field.emptyString,
-        //         Field.address: address ?? Field.emptyString,
-        //         Field.descriptions: descriptions ?? Field.emptyString
-        //       };
-
-        //       OtherBankMethods.add(context, body);
-        //     },
-        //     text: Str.createCurrencyTxt.toUpperCase(),
-        //   ),
-        // ),
+            title: Str.createBranchTxt, implyLeading: true, context: context),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -66,140 +47,71 @@ class _CreateBranchState extends State<CreateBranch> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Styles.accentColor,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextFormField(
-                          onChanged: (val) {
-                            name = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.nameTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.nameTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {
-                            contactEmail = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.contactEmailTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.contactEmailTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {
-                            contactPhone = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.contactPhoneTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.contactPhoneTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {
-                            address = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.addressTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.addressTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                        const Gap(20.0),
-                        TextFormField(
-                          onChanged: (val) {
-                            descriptions = val;
-                          },
-                          style: Styles.subtitleStyle,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            labelText: Str.descriptionsTxt,
-                            labelStyle: Styles.subtitleStyle,
-                            hintText: Str.descriptionsTxt,
-                            hintStyle: Styles.subtitleStyle03,
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                color: Styles.cardColor,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 1.0), //(x,y)
+                    blurRadius: 6.0,
                   ),
                 ],
               ),
-            ),
-            Container(
-              // color: Styles.primaryColor,
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-              child: elevatedButton(
-                color: Styles.secondaryColor,
-                context: context,
-                callback: () {
-                  Map<String, String> body = {
-                    Field.name: name!,
-                    Field.contactEmail: contactEmail ?? Field.emptyString,
-                    Field.contactPhone: contactPhone ?? Field.emptyString,
-                    Field.address: address ?? Field.emptyString,
-                    Field.descriptions: descriptions ?? Field.emptyString
-                  };
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    NewField(
+                        onSaved: (val) => name = val,
+                        hintText: Str.nameTxt),
+                    const Gap(20.0),
+                    NewField(
+                      onSaved: (val) => contactEmail = val,
+                      hintText: Str.contactEmailTxt,
+                      // maxLines: 10,
+                    ),
+                    const Gap(20.0),
+                    NewField(
+                      onSaved: (val) => contactPhone = val,
+                      hintText: Str.contactPhoneTxt,
+                      // maxLines: 10,
+                    ),
+                    const Gap(20.0),
+                    NewField(
+                      onSaved: (val) => address = val,
+                      hintText: Str.addressTxt,
+                      // maxLines: 10,
+                    ),
+                    const Gap(20.0),
+                    NewField(
+                      onSaved: (val) => descriptions = val,
+                      hintText: Str.descriptionsTxt,
+                      maxLines: 5,
+                    ),
+                    const Gap(20),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 10),
+                      child: elevatedButton(
+                        color: Styles.secondaryColor,
+                        context: context,
+                        callback: () {
+                          Map<String, String> body = {
+                            Field.name: name ?? Field.emptyString,
+                            Field.contactEmail: contactEmail ?? Field.emptyString,
+                            Field.contactPhone: contactPhone ?? Field.emptyAmount,
+                            Field.address: address ?? Field.emptyString,
+                            Field.descriptions: descriptions ?? Field.emptyString,
+                          };
 
-                  BranchMethods.add(context, body);
-                },
-                text: Str.createBranchTxt.toUpperCase(),
+                          BranchMethods.add(context, body);
+                        },
+                        text: Str.submitTxt.toUpperCase(),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
