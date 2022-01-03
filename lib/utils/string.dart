@@ -250,6 +250,7 @@ class Str {
   static String createUserRoleTxt = 'Create User Role';
   static String createPermissionTxt = 'Create Permission';
   static String createTicket = 'Create Support Ticket';
+  static String createTeamTxt = 'Create Team';
 
   static String branchListTxt = 'Branch(es) List';
   static String depositListTxt = 'Deposit List';
@@ -344,6 +345,7 @@ class RouteSTR {
   static String createWireTransfer = '/create-wire-transfer';
 
   static String loanProductList = '/loan-product-list-a';
+  static String loanCalculator = '/loan-calculator';
   static String createLoanProduct = '/create-product';
 
   static String fdrPlanList = '/fdr-plan-list-a';
