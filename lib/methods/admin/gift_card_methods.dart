@@ -25,20 +25,53 @@ class GiftCardMethods {
     }
   }
 
-  static void edit(BuildContext context, Map<String, String> body) async {
-    final response = await http.post(
-      AdminAPI.updateGiftCard,
+  static void edit(BuildContext context, Map<String, String> body, String id) async {
+    Uri url =
+        Uri.parse(AdminAPI.updateGiftCard.toString() + id);
+
+    final response = await http.put(
+      url,
       headers: headers,
       body: body,
     );
 
-    if (response.statusCode == Status.created) {
+    if (response.statusCode == Status.ok) {
       // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
-      Navigator.pop(context);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pushReplacementNamed(context, RouteSTR.currencyList);
+
+      });
     } else {
       // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
+
+  static void editUsedAt(BuildContext context, Map<String, String> body, String code) async {
+    Uri url =
+        Uri.parse(AdminAPI.updateUsedGiftCard.toString() + code);
+
+    final response = await http.put(
+      url,
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == Status.ok) {
+      // print(Status.successTxt);
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pushReplacementNamed(context, RouteSTR.currencyList);
+
+      });
+    } else {
+      // print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
+
+
 }

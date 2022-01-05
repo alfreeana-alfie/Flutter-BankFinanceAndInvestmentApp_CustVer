@@ -17,24 +17,35 @@ class FaqMethods {
     if (response.statusCode == Status.created) {
       // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
-      // Navigator.pop(context);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pushReplacementNamed(context, RouteSTR.faqList);
+
+      });
     } else {
       // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
 
-  static void editStatus(BuildContext context, Map<String, String> body) async {
-    final response = await http.post(
-      AdminAPI.updateFaqStatus,
+  static void editStatus(BuildContext context, Map<String, String> body, String id) async {
+    Uri url =
+        Uri.parse(AdminAPI.updateFaqStatus.toString() + id);
+
+    final response = await http.put(
+      url,
       headers: headers,
       body: body,
     );
 
-    if (response.statusCode == Status.created) {
+    if (response.statusCode == Status.ok) {
       // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
-      // Navigator.pop(context);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pushReplacementNamed(context, RouteSTR.faqList);
+
+      });
     } else {
       // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);

@@ -42,37 +42,51 @@ class NavigationMethods {
     }
   }
 
-  // static void edit(BuildContext context, Map<String, String> body) async {
-  //   final response = await http.post(
-  //     AdminAPI.createNavigation,
-  //     headers: headers,
-  //     body: body,
-  //   );
+  static void edit(BuildContext context, Map<String, String> body, String id) async {
+    Uri url =
+        Uri.parse(AdminAPI.updateNavigation.toString() + id);
 
-  //   if (response.statusCode == Status.created) {
-  //     print(Status.successTxt);
-  //     CustomToast.showMsg(Status.successTxt, Styles.successColor);
-  //     Navigator.pop(context);
-  //   } else {
-  //     print(Status.failedTxt);
-  //     CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
-  //   }
-  // }
+    final response = await http.put(
+      url,
+      headers: headers,
+      body: body,
+    );
 
-  // static void editItem(BuildContext context, Map<String, String> body) async {
-  //   final response = await http.post(
-  //     AdminAPI.createNavigationItem,
-  //     headers: headers,
-  //     body: body,
-  //   );
+    if (response.statusCode == Status.ok) {
+      // print(Status.successTxt);
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+      Future.delayed(const Duration(milliseconds: 2000), () {
 
-  //   if (response.statusCode == Status.created) {
-  //     print(Status.successTxt);
-  //     CustomToast.showMsg(Status.successTxt, Styles.successColor);
-  //     Navigator.pop(context);
-  //   } else {
-  //     print(Status.failedTxt);
-  //     CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
-  //   }
-  // }
+        Navigator.pushReplacementNamed(context, RouteSTR.navigationList);
+
+      });
+    } else {
+      print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
+
+  static void editItem(BuildContext context, Map<String, String> body, String id) async {
+    Uri url =
+        Uri.parse(AdminAPI.updateNavigationItem.toString() + id);
+
+    final response = await http.put(
+      url,
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == Status.ok) {
+      // print(Status.successTxt);
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pushReplacementNamed(context, RouteSTR.navigationItemList);
+
+      });
+    } else {
+      print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
 }

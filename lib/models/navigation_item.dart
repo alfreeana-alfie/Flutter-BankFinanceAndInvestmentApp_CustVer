@@ -1,11 +1,12 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class NavigationItem {
-  int? position, pageId, status;
+  int? id, position, pageId, status;
   String? name, type, url, icon, target, parentId, cssClass, cssId;
 
    NavigationItem(
-      {this.name,
+      {this.id, 
+        this.name,
       this.type,
       this.pageId,
       this.url,
@@ -19,6 +20,7 @@ class NavigationItem {
 
   factory NavigationItem.fromMap(Map<String, dynamic> map) {
     return NavigationItem(
+      id: map[Field.id] as int?,
       name: map[Field.name] as String?,
       type: map[Field.type] as String?,
       pageId: map[Field.pageId] as int?,
