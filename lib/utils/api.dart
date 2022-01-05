@@ -80,6 +80,8 @@ class AdminAPI {
   // Users
   static Uri createUser = Uri.parse('$android/create_user');
   static Uri listOfUser = Uri.parse('$android/users');
+  static Uri updateUser = Uri.parse('$android/update_user/');
+  static Uri deleteUser = Uri.parse('$android/delete_user/');
 
   static Uri createUserRole = Uri.parse('$android/user_role');
   static Uri listOfUserRole = Uri.parse('$android/list_of_user_roles');

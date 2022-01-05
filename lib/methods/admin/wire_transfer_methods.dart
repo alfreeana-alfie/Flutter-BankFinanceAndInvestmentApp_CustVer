@@ -24,7 +24,7 @@ class WireTransferMethods {
     }
   }
 
-  static void edit(BuildContext context, Map<String, String> body, String id) async {
+  static void editStatus(BuildContext context, Map<String, String> body, String id) async {
      Uri url =
         Uri.parse(AdminAPI.updateWireTransferStatus.toString() + id);
 

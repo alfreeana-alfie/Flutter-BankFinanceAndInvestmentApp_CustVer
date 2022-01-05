@@ -18,7 +18,11 @@ class NavigationMethods {
     if (response.statusCode == Status.created) {
       print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
-      Navigator.pop(context);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pushReplacementNamed(context, RouteSTR.navigationList);
+
+      });
     } else {
       print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
@@ -35,7 +39,11 @@ class NavigationMethods {
     if (response.statusCode == Status.created) {
       print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
-      Navigator.pop(context);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pushReplacementNamed(context, RouteSTR.navigationItemList);
+
+      });
     } else {
       print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
@@ -84,6 +92,50 @@ class NavigationMethods {
         Navigator.pushReplacementNamed(context, RouteSTR.navigationItemList);
 
       });
+    } else {
+      print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
+
+  static void delete(BuildContext context, String id) async {
+    Uri url =
+        Uri.parse(AdminAPI.deleteNavigation.toString() + id);
+
+    final response = await http.delete(
+      url,
+      headers: headers
+    );
+
+    if (response.statusCode == Status.ok) {
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+      // Future.delayed(const Duration(milliseconds: 2000), () {
+
+      //   Navigator.pushReplacementNamed(context, RouteSTR.currencyList);
+
+      // });
+    } else {
+      print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
+
+  static void deleteItem(BuildContext context, String id) async {
+    Uri url =
+        Uri.parse(AdminAPI.deleteNavigationItem.toString() + id);
+
+    final response = await http.delete(
+      url,
+      headers: headers
+    );
+
+    if (response.statusCode == Status.ok) {
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+      // Future.delayed(const Duration(milliseconds: 2000), () {
+
+      //   Navigator.pushReplacementNamed(context, RouteSTR.currencyList);
+
+      // });
     } else {
       print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);

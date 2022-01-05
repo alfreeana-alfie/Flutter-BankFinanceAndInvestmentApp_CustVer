@@ -17,16 +17,21 @@ class BranchMethods {
     if (response.statusCode == Status.created) {
       // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
-      Navigator.pop(context);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+        Navigator.pushReplacementNamed(context, RouteSTR.branchList);
+      });
     } else {
       // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
 
-  static void edit(BuildContext context, Map<String, String> body) async {
-    final response = await http.post(
-      AdminAPI.updateBranch,
+  static void edit(
+      BuildContext context, Map<String, String> body, String id) async {
+    Uri url = Uri.parse(AdminAPI.updateBranch.toString() + id);
+
+    final response = await http.put(
+      url,
       headers: headers,
       body: body,
     );
@@ -34,11 +39,25 @@ class BranchMethods {
     if (response.statusCode == Status.created) {
       // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
-      Navigator.pop(context);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+        Navigator.pushReplacementNamed(context, RouteSTR.branchList);
+      });
     } else {
       // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
 
+  static void delete(BuildContext context, String id) async {
+    Uri url = Uri.parse(AdminAPI.deleteBranch.toString() + id);
+
+    final response = await http.delete(url, headers: headers);
+
+    if (response.statusCode == Status.ok) {
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+    } else {
+      print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
 }
