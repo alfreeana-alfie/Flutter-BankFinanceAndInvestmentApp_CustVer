@@ -73,15 +73,22 @@ class AdminAPI {
   // Deposit
   static Uri listOfDeposit = Uri.parse('$android/list_of_deposit');
   static Uri createDeposit = Uri.parse('$android/create_deposit');
+  static Uri updateDeposit = Uri.parse('$android/update_deposit/');
+  static Uri deleteDeposit = Uri.parse('$android/delete_deposit/');
 
   // Users
-  static Uri listOfUser = Uri.parse('$android/users');
-  static Uri listOfUserRole = Uri.parse('$android/list_of_user_roles');
-  static Uri listOfPermission = Uri.parse('$android/list_of_access_permission');
-
   static Uri createUser = Uri.parse('$android/create_user');
+  static Uri listOfUser = Uri.parse('$android/users');
+
   static Uri createUserRole = Uri.parse('$android/user_role');
+  static Uri listOfUserRole = Uri.parse('$android/list_of_user_roles');
+  static Uri updateUserRole = Uri.parse('$android/update_user_role/');
+  static Uri deleteUserRole = Uri.parse('$android/delete_user_role/');
+  
   static Uri createPermission = Uri.parse('$android/access_permission');
+  static Uri listOfPermission = Uri.parse('$android/list_of_access_permission');
+  static Uri updatePermission = Uri.parse('$android/update_access_permission/');
+  static Uri deletePermission = Uri.parse('$android/delete_access_permission/');
 
   // Wire Transfer
   static Uri listOfWireTransfer = Uri.parse('$android/list_of_wire_transfer');
@@ -124,10 +131,9 @@ class AdminAPI {
   static Uri updateFaqStatus = Uri.parse('$android/update_faq_status/');
 
   // Testimonials
-  static Uri listOfTestimonial = Uri.parse('$android/list_of_testimonials');
-  static Uri createTestimonial = Uri.parse('$android/create_testimonial');
-  static Uri updateTestimonialStatus =
-      Uri.parse('$android/update_testimonial_status/');
+  static Uri listOfTestimonial        = Uri.parse('$android/list_of_testimonials');
+  static Uri createTestimonial        = Uri.parse('$android/create_testimonial');
+  static Uri updateTestimonialStatus  = Uri.parse('$android/update_testimonial_status/');
 
   // Teams
   static Uri listOfTeam = Uri.parse('$android/list_of_teams');
@@ -136,18 +142,25 @@ class AdminAPI {
   // Gift Card
   static Uri createGiftCard = Uri.parse('$android/gift_card');
   static Uri listOfGiftCard = Uri.parse('$android/list_of_gift_cards');
+  static Uri updateGiftCard = Uri.parse('$android/update_gift_card/');
+  static Uri deleteGiftCard = Uri.parse('$android/delete_gift_card/');
 
   static Uri listOfUsedGiftCard = Uri.parse('$android/list_of_used_gift_cards');
+  static Uri updateUsedGiftCard = Uri.parse('$android/update_used_time/');
+
 
   // Transaction
-  static Uri listOfExchangeMoney = Uri.parse('$android/list_of_exchange_money');
-  static Uri listOfSendMoney = Uri.parse('$android/list_of_send_money');
+  static Uri listOfExchangeMoney  = Uri.parse('$android/list_of_exchange_money');
+  static Uri listOfSendMoney      = Uri.parse('$android/list_of_send_money');
 
   // Navigation
   static Uri createNavigation = Uri.parse('$android/navigation');
   static Uri listOfNavigation = Uri.parse('$android/list_of_navigations');
+  static Uri updateNavigation = Uri.parse('$android/update_navigation/');
+  static Uri deleteNavigation = Uri.parse('$android/delete_navigation/');
 
   static Uri createNavigationItem = Uri.parse('$android/navigation_item');
-  static Uri listOfNavigationItem =
-      Uri.parse('$android/list_of_navigation_items');
+  static Uri listOfNavigationItem = Uri.parse('$android/list_of_navigation_items');
+  static Uri updateNavigationItem = Uri.parse('$android/update_navigation_item/');
+  static Uri deleteNavigationItem = Uri.parse('$android/delete_navigation_item/');
 }

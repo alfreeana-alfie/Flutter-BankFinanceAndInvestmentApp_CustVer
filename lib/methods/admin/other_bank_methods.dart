@@ -23,4 +23,29 @@ class OtherBankMethods {
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
+
+  static void edit(BuildContext context, Map<String, String> body, String id) async {
+    Uri url =
+        Uri.parse(AdminAPI.updateOtherBankStatus.toString() + id);
+
+    final response = await http.put(
+      url,
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == Status.ok) {
+      // print(Status.successTxt);
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pushReplacementNamed(context, RouteSTR.otherBankList);
+
+      });
+    } else {
+      // print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
+
 }

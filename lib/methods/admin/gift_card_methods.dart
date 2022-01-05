@@ -24,4 +24,21 @@ class GiftCardMethods {
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
+
+  static void edit(BuildContext context, Map<String, String> body) async {
+    final response = await http.post(
+      AdminAPI.updateGiftCard,
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == Status.created) {
+      // print(Status.successTxt);
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+      Navigator.pop(context);
+    } else {
+      // print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
 }

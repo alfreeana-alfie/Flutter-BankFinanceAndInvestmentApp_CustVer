@@ -398,6 +398,9 @@ class RouteSTR {
 
 class Field {
   // Variable Names
+  static List<String> statusList = ['NOT ACTIVE', 'ACTIVE'];
+  static List<String> approvelList = ['Pending', 'Approved', 'Rejected'];
+
   static String emptyString = '-';
   static String emptyAmount = '0.00';
   static String empty = '0';

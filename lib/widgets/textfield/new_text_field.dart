@@ -13,7 +13,8 @@ class NewField extends StatefulWidget {
       this.maxLines,
       this.labelText,
       this.mandatory,
-      this.controller});
+      this.controller, 
+      this.readOnly});
 
   final String hintText;
   final FormFieldSetter<String> onSaved;
@@ -25,6 +26,7 @@ class NewField extends StatefulWidget {
   final String? labelText;
   final bool? mandatory;
   final TextEditingController? controller;
+  final bool? readOnly;
 
   @override
   _NewFieldState createState() => _NewFieldState();
@@ -63,6 +65,7 @@ class _NewFieldState extends State<NewField> {
           ],
         ),
         TextFormField(
+          readOnly: widget.readOnly ?? false,
           controller: widget.controller,
           maxLines: widget.maxLines,
           obscureText: widget.obsecure ?? false,

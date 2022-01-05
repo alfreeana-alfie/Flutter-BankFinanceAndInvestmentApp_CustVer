@@ -137,7 +137,7 @@ class _CurrencyListState extends State<CurrencyList> {
                   ),
                 ),
                     for (Currency currency in currList)
-                      CardCurrency(currency: currency),
+                      CardCurrency(currency: currency, currencyList: currList,),
                   ],
                 ),
               ),

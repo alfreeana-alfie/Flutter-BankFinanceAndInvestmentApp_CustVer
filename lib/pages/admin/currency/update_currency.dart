@@ -1,0 +1,160 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_banking_app/methods/admin/currency_methods.dart';
+import 'package:flutter_banking_app/models/currency.dart';
+import 'package:flutter_banking_app/utils/string.dart';
+import 'package:flutter_banking_app/utils/size_config.dart';
+import 'package:flutter_banking_app/utils/styles.dart';
+import 'package:flutter_banking_app/widgets/buttons.dart';
+import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
+import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
+import 'package:gap/gap.dart';
+import 'package:oktoast/oktoast.dart';
+import 'package:toggle_switch/toggle_switch.dart';
+
+class UpdateCurrency extends StatefulWidget {
+  const UpdateCurrency({Key? key, required this.currency}) : super(key: key);
+
+  final Currency currency;
+
+  @override
+  _UpdateCurrencyState createState() => _UpdateCurrencyState();
+}
+
+class _UpdateCurrencyState extends State<UpdateCurrency> {
+  final ScrollController _scrollController = ScrollController();
+
+  String? name, exchangeRate, baseCurrency;
+  int? status;
+
+  @override
+  void initState() {
+    _scrollController.addListener(() {
+      print(_scrollController.offset);
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
+
+    setState(() {
+      name = widget.currency.name;
+      exchangeRate = widget.currency.exchangeRate;
+      baseCurrency = widget.currency.baseCurrency.toString();
+      status = widget.currency.status;
+    });
+    return OKToast(
+      child: Scaffold(
+        backgroundColor: Styles.primaryColor,
+        appBar: myAppBar(
+            title: Str.createCurrencyTxt, implyLeading: true, context: context),
+        body: ListView(
+          padding: const EdgeInsets.all(15),
+          children: [
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Styles.cardColor,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 1.0), //(x,y)
+                    blurRadius: 6.0,
+                  ),
+                ],
+              ),
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    NewField(
+                        readOnly: true,
+                        initialValue: name,
+                        onSaved: (val) => name = val,
+                        hintText: Str.nameTxt),
+                    const Gap(20.0),
+                    NewField(
+                        readOnly: true,
+                        initialValue: exchangeRate,
+                        onSaved: (val) => exchangeRate = val,
+                        hintText: Str.exchangeRateTxt),
+                    const Gap(20),
+                    NewField(
+                        readOnly: true,
+                        initialValue: baseCurrency,
+                        onSaved: (val) => baseCurrency = val,
+                        hintText: Str.baseCurrencyTxt),
+                    const Gap(20),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child:
+                              Text(Str.statusTxt, style: Styles.primaryTitle),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(
+                            '*',
+                            style: TextStyle(color: Styles.dangerColor),
+                          ),
+                        ),
+                      ],
+                    ),
+                    ToggleSwitch(
+                      initialLabelIndex: status,
+                      minWidth: 120,
+                      cornerRadius: 7.0,
+                      activeBgColors: const [
+                        [Styles.dangerColor],
+                        [Styles.successColor]
+                      ],
+                      activeFgColor: Colors.white,
+                      inactiveBgColor: Colors.black12.withOpacity(0.05),
+                      inactiveFgColor: Styles.textColor,
+                      totalSwitches: 2,
+                      labels: Field.statusList,
+                      onToggle: (index) {
+                        // print('switched to: $index');
+                        status = index;
+                      },
+                    ),
+                    const Gap(20),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 10),
+                      child: elevatedButton(
+                        color: Styles.secondaryColor,
+                        context: context,
+                        callback: () {
+                          Map<String, String> body = {
+                            // Field.name: name ?? Field.emptyString,
+                            // Field.exchangeRate:
+                            //     exchangeRate ?? Field.exchangeRate,
+                            // Field.baseCurrency:
+                            //     baseCurrency ?? Field.emptyAmount,
+                            Field.status: status.toString(),
+                          };
+
+                          CurrencyMethods.editStatus(context, body, widget.currency.id.toString());
+                        },
+                        text: Str.submitTxt.toUpperCase(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -1,6 +1,8 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/models/branch.dart';
 import 'package:flutter_banking_app/models/currency.dart';
+import 'package:flutter_banking_app/pages/admin/currency/update_currency.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -10,9 +12,12 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CardCurrency extends StatelessWidget {
-  const CardCurrency({Key? key, required this.currency}) : super(key: key);
+  const CardCurrency(
+      {Key? key, required this.currency, required this.currencyList})
+      : super(key: key);
 
   final Currency currency;
+  final List<Currency> currencyList;
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +125,17 @@ class CardCurrency extends StatelessWidget {
   }
 
   buildExpanded1(BuildContext context) {
+    String? status;
+    switch (currency.status) {
+      case 0:
+        status = 'NOT ACTIVE';
+        break;
+      case 1:
+        status = 'ACTIVE';
+        break;
+      default:
+        status = 'Default';
+    }
     return Container(
       color: Styles.accentColor,
       padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
@@ -127,11 +143,16 @@ class CardCurrency extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DetailRow(labelTitle: Str.nameTxt, labelDetails: currency.name ?? Field.emptyString),
             DetailRow(
-                labelTitle: Str.exchangeRateTxt, labelDetails: currency.exchangeRate ?? Field.emptyString),
-            DetailRow(labelTitle: Str.baseCurrencyTxt, labelDetails: currency.baseCurrency.toString()),
-            DetailRow(labelTitle: Str.statusTxt, labelDetails: currency.status.toString()),
+                labelTitle: Str.nameTxt,
+                labelDetails: currency.name ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.exchangeRateTxt,
+                labelDetails: currency.exchangeRate ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.baseCurrencyTxt,
+                labelDetails: currency.baseCurrency.toString()),
+            DetailRow(labelTitle: Str.statusTxt, labelDetails: status),
             _buildButtonRow(context),
           ],
         ),
@@ -145,13 +166,13 @@ class CardCurrency extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => EditUserPage(
-              //       user: users,
-              //     ),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdateCurrency(
+                    currency: currency,
+                  ),
+                ),
+              );
             },
             child: Text(
               Str.editTxt.toUpperCase(),
@@ -205,7 +226,8 @@ class CardCurrency extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                // currencyList.remove(currency);
+                // Navigator.of(context).pop();
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),
