@@ -25,7 +25,8 @@ class API {
   // static Uri listOfSendMoney = Uri.parse('$android/list_of_send_money');
   static Uri userSendMoneyList = Uri.parse('$android/user_send_money_list/');
 
-  static Uri userTransactionHistoryList = Uri.parse('$android/user_payment_history/');
+  static Uri userTransactionHistoryList =
+      Uri.parse('$android/user_payment_history/');
 
   // Exchange Money
   static Uri exchangeMoney = Uri.parse('$android/exchange_money');
@@ -84,7 +85,7 @@ class AdminAPI {
   static Uri listOfUserRole = Uri.parse('$android/list_of_user_roles');
   static Uri updateUserRole = Uri.parse('$android/update_user_role/');
   static Uri deleteUserRole = Uri.parse('$android/delete_user_role/');
-  
+
   static Uri createPermission = Uri.parse('$android/access_permission');
   static Uri listOfPermission = Uri.parse('$android/list_of_access_permission');
   static Uri updatePermission = Uri.parse('$android/update_access_permission/');
@@ -98,46 +99,61 @@ class AdminAPI {
   // Loan Product
   static Uri listOfLoanProduct = Uri.parse('$android/list_of_loan_product');
   static Uri createLoanProduct = Uri.parse('$android/loan_product');
-  static Uri updateLoanProductStatus =
-      Uri.parse('$android/user_loan_request_list/');
+  static Uri updateLoanProductStatus = Uri.parse('$android/update_status/');
+  static Uri updateLoanProduct = Uri.parse('$android/update_loan_product/');
+  static Uri deleteLoanProduct = Uri.parse('$android/delete_loan_product/');
 
   // FDR Packages
   static Uri listOfFdrPackage = Uri.parse('$android/list_of_fdr_plans');
   static Uri createFdrPackage = Uri.parse('$android/fdr_plan');
   static Uri updateFdrPackageStatus = Uri.parse('$android/fdr_update_status/');
+  static Uri updateFdrPackage = Uri.parse('$android/fdr_update/');
+  static Uri deleteFdrPackage = Uri.parse('$android/delete_fdr/');
 
   // Branch
   static Uri listOfBranch = Uri.parse('$android/list_of_branches');
   static Uri createBranch = Uri.parse('$android/branch');
+  static Uri updateBranch = Uri.parse('$android/update_branch');
+  static Uri deleteBranch = Uri.parse('$android/delete_branch');
 
   // Other Banks
   static Uri listOfOtherBank = Uri.parse('$android/list_of_other_banks');
   static Uri createOtherBank = Uri.parse('$android/other_bank');
-  static Uri updateOtherBankStatus = Uri.parse('$android/update_other_bank/');
+  static Uri updateOtherBankStatus = Uri.parse('$android/update_other_bank_status/');
+  static Uri updateOtherBank = Uri.parse('$android/update_other_bank/');
+  static Uri deleteOtherBank = Uri.parse('$android/delete_other_bank/');
 
   // Currency
   static Uri listOfCurrency = Uri.parse('$android/list_of_currency');
   static Uri createCurrency = Uri.parse('$android/currency');
-  static Uri updateCurrencyStatus =
-      Uri.parse('$android/update_currency_status/');
+  static Uri updateCurrencyStatus = Uri.parse('$android/update_currency_status/');
+  static Uri deleteCurrency = Uri.parse('$android/delete_currency/');
 
   // Service
   static Uri listOfService = Uri.parse('$android/list_of_currency');
-  static Uri createService = Uri.parse('$android/list_of_currency');
+  static Uri createService = Uri.parse('$android/create_service');
+  static Uri updateService = Uri.parse('$android/update_service');
+  static Uri deleteService = Uri.parse('$android/delete_service');
 
   // FAQ
   static Uri listOfFaq = Uri.parse('$android/list_of_faqs');
   static Uri createFaq = Uri.parse('$android/create_faq');
   static Uri updateFaqStatus = Uri.parse('$android/update_faq_status/');
+  static Uri updateFaq = Uri.parse('$android/update_faq/');
+  static Uri deleteFaq = Uri.parse('$android/delete_faq/');
 
   // Testimonials
-  static Uri listOfTestimonial        = Uri.parse('$android/list_of_testimonials');
-  static Uri createTestimonial        = Uri.parse('$android/create_testimonial');
-  static Uri updateTestimonialStatus  = Uri.parse('$android/update_testimonial_status/');
+  static Uri listOfTestimonial = Uri.parse('$android/list_of_testimonials');
+  static Uri createTestimonial = Uri.parse('$android/create_testimonial');
+  static Uri updateTestimonialStatus = Uri.parse('$android/update_testimonial_status/');
+  static Uri updateTestimonial = Uri.parse('$android/update_testimonial/');
+  static Uri deleteTestimonial = Uri.parse('$android/delete_testimonial/');
 
   // Teams
   static Uri listOfTeam = Uri.parse('$android/list_of_teams');
   static Uri createTeam = Uri.parse('$android/create_team');
+  static Uri updateTeam = Uri.parse('$android/update_team/');
+  static Uri deleteTeam = Uri.parse('$android/delete_team/');
 
   // Gift Card
   static Uri createGiftCard = Uri.parse('$android/gift_card');
@@ -147,11 +163,11 @@ class AdminAPI {
 
   static Uri listOfUsedGiftCard = Uri.parse('$android/list_of_used_gift_cards');
   static Uri updateUsedGiftCard = Uri.parse('$android/update_used_time/');
-
+  static Uri updateUsedGiftCardCode = Uri.parse('$android/update_code/');
 
   // Transaction
-  static Uri listOfExchangeMoney  = Uri.parse('$android/list_of_exchange_money');
-  static Uri listOfSendMoney      = Uri.parse('$android/list_of_send_money');
+  static Uri listOfExchangeMoney = Uri.parse('$android/list_of_exchange_money');
+  static Uri listOfSendMoney = Uri.parse('$android/list_of_send_money');
 
   // Navigation
   static Uri createNavigation = Uri.parse('$android/navigation');

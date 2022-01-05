@@ -75,23 +75,12 @@ class _CurrencyListState extends State<CurrencyList> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return ExpandableTheme(
-              data: const ExpandableThemeData(
-                iconColor: Colors.blue,
-                useInkWell: true,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
+            return Column(
               children: [
                 SafeArea(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Row(
-                      // crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         InkWell(
@@ -113,13 +102,15 @@ class _CurrencyListState extends State<CurrencyList> {
                           child: Text(
                             Str.currencyListTxt,
                             style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                                color: Styles.textColor, fontSize: 19),
+                                fontWeight: FontWeight.w500,
+                                color: Styles.textColor,
+                                fontSize: 19),
                           ),
                         ),
                         const Gap(10),
                         InkWell(
-                          onTap: () => Navigator.pushNamed(context, RouteSTR.createCurrency),
+                          onTap: () => Navigator.pushNamed(
+                              context, RouteSTR.createCurrency),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: const BoxDecoration(
@@ -136,28 +127,23 @@ class _CurrencyListState extends State<CurrencyList> {
                     ),
                   ),
                 ),
-                    for (Currency currency in currList)
-                      CardCurrency(currency: currency, currencyList: currList,),
-                  ],
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return CardCurrency(currency: currList[index], currencyList: currList, index: index,);
+                    },
+                    itemCount: currList.length,
+                  ),
                 ),
-              ),
+                // for (Currency currency in currList)
+                //   CardCurrency(
+                //     currency: currency,
+                //     currencyList: currList,
+                //   ),
+              ],
             );
-            // return ExpandableTheme(
-            //   data: const ExpandableThemeData(
-            //     iconColor: Colors.blue,
-            //     useInkWell: true,
-            //   ),
-            //   child: Padding(
-            //     padding: const EdgeInsets.only(top: 10.0),
-            //     child: ListView(
-            //       physics: const BouncingScrollPhysics(),
-            //       children: [
-            //         for (Currency currency in currList)
-            //           CardCurrency(currency: currency),
-            //       ],
-            //     ),
-            //   ),
-            // );
           }
         }
       },

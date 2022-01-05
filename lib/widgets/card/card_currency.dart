@@ -1,5 +1,7 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/admin/currency_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/branch.dart';
 import 'package:flutter_banking_app/models/currency.dart';
 import 'package:flutter_banking_app/pages/admin/currency/update_currency.dart';
@@ -11,14 +13,23 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CardCurrency extends StatelessWidget {
+class CardCurrency extends StatefulWidget {
   const CardCurrency(
-      {Key? key, required this.currency, required this.currencyList})
+      {Key? key,
+      required this.currency,
+      required this.currencyList,
+      required this.index})
       : super(key: key);
 
   final Currency currency;
   final List<Currency> currencyList;
+  final int index;
 
+  @override
+  _CardCurrencyState createState() => _CardCurrencyState();
+}
+
+class _CardCurrencyState extends State<CardCurrency> {
   @override
   Widget build(BuildContext context) {
     return ExpandableNotifier(
@@ -57,7 +68,7 @@ class CardCurrency extends StatelessWidget {
                               color: Styles.accentColor,
                             ),
                             const Gap(20),
-                            Text(currency.name ?? Field.emptyString,
+                            Text(widget.currency.name ?? Field.emptyString,
                                 style: Theme.of(context).textTheme.headline6),
                           ],
                         )),
@@ -126,7 +137,7 @@ class CardCurrency extends StatelessWidget {
 
   buildExpanded1(BuildContext context) {
     String? status;
-    switch (currency.status) {
+    switch (widget.currency.status) {
       case 0:
         status = 'NOT ACTIVE';
         break;
@@ -145,13 +156,14 @@ class CardCurrency extends StatelessWidget {
           children: [
             DetailRow(
                 labelTitle: Str.nameTxt,
-                labelDetails: currency.name ?? Field.emptyString),
+                labelDetails: widget.currency.name ?? Field.emptyString),
             DetailRow(
                 labelTitle: Str.exchangeRateTxt,
-                labelDetails: currency.exchangeRate ?? Field.emptyString),
+                labelDetails:
+                    widget.currency.exchangeRate ?? Field.emptyString),
             DetailRow(
                 labelTitle: Str.baseCurrencyTxt,
-                labelDetails: currency.baseCurrency.toString()),
+                labelDetails: widget.currency.baseCurrency.toString()),
             DetailRow(labelTitle: Str.statusTxt, labelDetails: status),
             _buildButtonRow(context),
           ],
@@ -169,7 +181,7 @@ class CardCurrency extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => UpdateCurrency(
-                    currency: currency,
+                    currency: widget.currency,
                   ),
                 ),
               );
@@ -226,8 +238,16 @@ class CardCurrency extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                // currencyList.remove(currency);
+                widget.currencyList.removeAt(widget.index);
+                
+                CustomToast.showMsg('Deleting...', Styles.dangerColor);
                 // Navigator.of(context).pop();
+
+                Future.delayed(const Duration(milliseconds: 1000), () {
+                  CurrencyMethods.delete(
+                      context, widget.currency.id.toString());
+                  Navigator.popAndPushNamed(context, RouteSTR.currencyList);
+                });
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

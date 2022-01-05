@@ -52,4 +52,26 @@ class CurrencyMethods {
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
+
+  static void delete(BuildContext context, String id) async {
+    Uri url =
+        Uri.parse(AdminAPI.deleteCurrency.toString() + id);
+
+    final response = await http.delete(
+      url,
+      headers: headers
+    );
+
+    if (response.statusCode == Status.ok) {
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+      // Future.delayed(const Duration(milliseconds: 2000), () {
+
+      //   Navigator.pushReplacementNamed(context, RouteSTR.currencyList);
+
+      // });
+    } else {
+      print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
 }

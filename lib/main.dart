@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_banking_app/pages/admin/gift_card/create_gift_card.dart';
 import 'package:flutter_banking_app/pages/admin/navigation/navigation_list.dart';
 import 'package:flutter_banking_app/pages/admin/ticket/create_ticket.dart';
 import 'package:flutter_banking_app/pages/admin/ticket/ticket_list.dart';
@@ -10,7 +9,6 @@ import 'package:flutter_banking_app/pages/admin/transaction/send_money/send_mone
 import 'package:flutter_banking_app/pages/admin/users/create_permission.dart';
 import 'package:flutter_banking_app/pages/admin/users/user_role_list.dart';
 import 'package:flutter_banking_app/pages/auth/sign_out.dart';
-import 'package:flutter_banking_app/pages/member/dashboard.dart';
 import 'package:flutter_banking_app/pages/member/exchange_money/exchange_money_list.dart';
 import 'package:flutter_banking_app/pages/member/send_money/send_money_list.dart';
 import 'package:flutter_banking_app/pages/member/stats.dart';
@@ -86,7 +84,7 @@ Future<void> main() async {
     MaterialApp(
       // home: const AdminDashboard(),
       home: SplashScreenView(
-        navigateRoute: const WireTransferList(),
+        navigateRoute: const CurrencyList(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,
