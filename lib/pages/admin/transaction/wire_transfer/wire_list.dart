@@ -2,12 +2,15 @@ import 'dart:convert';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/config.dart';
+import 'package:flutter_banking_app/models/deposit.dart';
 import 'package:flutter_banking_app/models/transaction.dart';
 import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
+import 'package:flutter_banking_app/widgets/card/card_deposit.dart';
 import 'package:flutter_banking_app/widgets/card/card_transaction.dart';
+import 'package:flutter_banking_app/widgets/card/card_wire_transfer.dart';
 import 'package:flutter_banking_app/widgets/left_menu.dart';
 import 'package:flutter_banking_app/widgets/left_menu_member.dart';
 import 'package:gap/gap.dart';
@@ -25,7 +28,7 @@ class _WireTransferListState extends State<WireTransferList> {
   SharedPref sharedPref = SharedPref();
   User userLoad = User();
   late Map<String, dynamic> requestMap;
-  List<Transaction> transactionList = [];
+  List<Deposit> transactionList = [];
 
   Future view() async {
     final response =
@@ -34,7 +37,7 @@ class _WireTransferListState extends State<WireTransferList> {
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
       for (var req in jsonBody[Field.data]) {
-        final data = Transaction.fromMap(req);
+        final data = Deposit.fromMap(req);
         if (mounted) {
           transactionList.add(data);
         }
@@ -127,6 +130,20 @@ class _WireTransferListState extends State<WireTransferList> {
                         ),
                       ],
                     ),
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return CardWireTransfer(
+                        deposit: transactionList[index],
+                        depositList: transactionList,
+                        index: index,
+                      );
+                    },
+                    itemCount: transactionList.length,
                   ),
                 ),
                 // for (Transaction transaction in transactionList)

@@ -223,7 +223,7 @@ class CardTeam extends StatelessWidget {
                 Future.delayed(const Duration(milliseconds: 1000), () {
                   TeamMethods.delete(
                       context, team.id.toString());
-                  Navigator.popAndPushNamed(context, RouteSTR.branchList);
+                  Navigator.popAndPushNamed(context, RouteSTR.teamList);
                 });
               },
               child: Text(

@@ -12,9 +12,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class CardTransaction extends StatelessWidget {
-  const CardTransaction({Key? key, required this.transaction}) : super(key: key);
+  const CardTransaction(
+      {Key? key,
+      required this.transaction,
+      required this.transactionList,
+      required this.index})
+      : super(key: key);
 
   final Transaction transaction;
+  final List<Transaction> transactionList;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +129,6 @@ class CardTransaction extends StatelessWidget {
   }
 
   buildExpanded1(BuildContext context) {
-    
     // Status
     String? status;
     switch (transaction.status) {
@@ -149,27 +155,53 @@ class CardTransaction extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DetailRow(labelTitle: Str.userNameTxt, labelDetails: transaction.userId.toString()),
             DetailRow(
-                labelTitle: Str.currencyTxt, labelDetails: transaction.currencyId.toString()),
-            DetailRow(labelTitle: Str.amountTxt, labelDetails: transaction.amount ?? Field.emptyString),
+                labelTitle: Str.userNameTxt,
+                labelDetails: transaction.userId.toString()),
             DetailRow(
-                labelTitle: Str.feeTxt, labelDetails: transaction.fee ?? Field.emptyString),
+                labelTitle: Str.currencyTxt,
+                labelDetails: transaction.currencyId.toString()),
             DetailRow(
-                labelTitle: Str.drCrTxt, labelDetails: transaction.drCr ?? Field.emptyString),
-            DetailRow(labelTitle: Str.typeTxt, labelDetails: transaction.type ?? Field.emptyString),
+                labelTitle: Str.amountTxt,
+                labelDetails: transaction.amount ?? Field.emptyString),
             DetailRow(
-                labelTitle: Str.methodTxt, labelDetails: transaction.method ?? Field.emptyString),
+                labelTitle: Str.feeTxt,
+                labelDetails: transaction.fee ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.drCrTxt,
+                labelDetails: transaction.drCr ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.typeTxt,
+                labelDetails: transaction.type ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.methodTxt,
+                labelDetails: transaction.method ?? Field.emptyString),
             DetailRow(labelTitle: Str.statusTxt, labelDetails: status),
-            DetailRow(labelTitle: Str.noteTxt, labelDetails: transaction.note ?? Field.emptyString),
-
-            DetailRow(labelTitle: Str.loanTxt, labelDetails: transaction.loanId.toString()),
-            DetailRow(labelTitle: Str.refTxt, labelDetails: transaction.refId.toString()),
-            DetailRow(labelTitle: Str.parentIdTxt, labelDetails: transaction.parentId.toString()),
-            DetailRow(labelTitle: Str.otherBankTxt, labelDetails: transaction.otherBankId.toString()),
-            DetailRow(labelTitle: Str.gatewayTxt, labelDetails: transaction.gatewayId.toString()),
-            DetailRow(labelTitle: Str.branchTxt, labelDetails: transaction.branchId.toString()),
-            DetailRow(labelTitle: Str.transactionDetailsTxt, labelDetails: transaction.transactionsDetails ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.noteTxt,
+                labelDetails: transaction.note ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.loanTxt,
+                labelDetails: transaction.loanId.toString()),
+            DetailRow(
+                labelTitle: Str.refTxt,
+                labelDetails: transaction.refId.toString()),
+            DetailRow(
+                labelTitle: Str.parentIdTxt,
+                labelDetails: transaction.parentId.toString()),
+            DetailRow(
+                labelTitle: Str.otherBankTxt,
+                labelDetails: transaction.otherBankId.toString()),
+            DetailRow(
+                labelTitle: Str.gatewayTxt,
+                labelDetails: transaction.gatewayId.toString()),
+            DetailRow(
+                labelTitle: Str.branchTxt,
+                labelDetails: transaction.branchId.toString()),
+            DetailRow(
+                labelTitle: Str.transactionDetailsTxt,
+                labelDetails:
+                    transaction.transactionsDetails ?? Field.emptyString),
             DetailRow(labelTitle: Str.createdTxt, labelDetails: createdAt),
             _buildButtonRow(context),
           ],
@@ -199,25 +231,25 @@ class CardTransaction extends StatelessWidget {
                 elevation: 0.0, primary: Styles.successColor),
           ),
         ),
-        const Gap(20),
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {
-              _showMyDialog(context);
-            },
-            child: Text(
-              Str.deleteTxt.toUpperCase(),
-              style: GoogleFonts.nunitoSans(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Styles.primaryColor,
-                letterSpacing: 0.5,
-              ),
-            ),
-            style: ElevatedButton.styleFrom(
-                elevation: 0.0, primary: Styles.dangerColor),
-          ),
-        ),
+        // const Gap(20),
+        // Expanded(
+        //   child: ElevatedButton(
+        //     onPressed: () {
+        //       _showMyDialog(context);
+        //     },
+        //     child: Text(
+        //       Str.deleteTxt.toUpperCase(),
+        //       style: GoogleFonts.nunitoSans(
+        //         fontSize: 14,
+        //         fontWeight: FontWeight.bold,
+        //         color: Styles.primaryColor,
+        //         letterSpacing: 0.5,
+        //       ),
+        //     ),
+        //     style: ElevatedButton.styleFrom(
+        //         elevation: 0.0, primary: Styles.dangerColor),
+        //   ),
+        // ),
       ],
     );
   }

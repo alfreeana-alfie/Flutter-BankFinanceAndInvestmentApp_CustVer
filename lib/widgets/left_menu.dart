@@ -40,7 +40,6 @@ class SideDrawer extends StatelessWidget {
               ],
             ),
           ),
-          
           ListTile(
             leading: const Icon(Icons.dashboard),
             title: Text(Str.dashboardTxt,
@@ -200,6 +199,55 @@ class SideDrawer extends StatelessWidget {
                 onNavigate: TapGestureRecognizer()
                   ..onTap = () {
                     Navigator.pushNamed(context, RouteSTR.exchangeMoneyList);
+                  },
+              ),
+            ],
+          ),
+          ExpansionTile(
+            expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            leading: const Icon(Icons.money),
+            title: Text(Str.giftCardTxt),
+            children: [
+              DrawerChild(
+                title: Str.giftCardListTxt,
+                onNavigate: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.giftCardList);
+                  },
+              ),
+              DrawerChild(
+                title: Str.usedGiftCardListTxt,
+                onNavigate: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.usedGiftCardList);
+                  },
+              ),
+              DrawerChild(
+                title: Str.createGiftCardTxt,
+                onNavigate: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.createGiftCard);
+                  },
+              ),
+            ],
+          ),
+          ExpansionTile(
+            expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+            leading: const Icon(Icons.money),
+            title: Text(Str.supportTicketTxt),
+            children: [
+              DrawerChild(
+                title: Str.supportTicketListTxt,
+                onNavigate: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.ticketList);
+                  },
+              ),
+              DrawerChild(
+                title: Str.createTicket,
+                onNavigate: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.createTicket);
                   },
               ),
             ],

@@ -7,6 +7,7 @@ import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
+import 'package:flutter_banking_app/widgets/card/card_send_exchange_money.dart';
 import 'package:flutter_banking_app/widgets/card/card_transaction.dart';
 import 'package:flutter_banking_app/widgets/left_menu.dart';
 import 'package:flutter_banking_app/widgets/left_menu_member.dart';
@@ -138,7 +139,7 @@ class _SendMoneyListState extends State<SendMoneyList> {
                     ),
                   ),
                 ),
-                for (Transaction transaction in transactionList) CardTransaction(transaction: transaction),
+                for (Transaction transaction in transactionList) CardSendExchangeMoney(transaction: transaction),
               ],
             ),
           ),

@@ -155,13 +155,13 @@ class CardTicketAdmin extends StatelessWidget {
     // Priority
     String? priority;
     switch (ticket.priority) {
-      case 1:
+      case 0:
         priority = 'Low';
         break;
-      case 2:
+      case 1:
         priority = 'Moderate';
         break;
-      case 3:
+      case 2:
         priority = 'High';
         break;
       default:

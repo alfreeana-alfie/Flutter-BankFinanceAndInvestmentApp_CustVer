@@ -40,7 +40,7 @@ class SupportTicketMethods {
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
       Future.delayed(const Duration(milliseconds: 2000), () {
 
-        Navigator.pushReplacementNamed(context, RouteSTR.supportTicketListM);
+        Navigator.pushReplacementNamed(context, RouteSTR.ticketList);
 
       });
     } else {
@@ -64,7 +64,7 @@ class SupportTicketMethods {
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
       Future.delayed(const Duration(milliseconds: 2000), () {
 
-        Navigator.pushReplacementNamed(context, RouteSTR.supportTicketListM);
+        Navigator.pushReplacementNamed(context, RouteSTR.ticketList);
 
       });
     } else {
@@ -88,7 +88,7 @@ class SupportTicketMethods {
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
       Future.delayed(const Duration(milliseconds: 2000), () {
 
-        Navigator.pushReplacementNamed(context, RouteSTR.supportTicketListM);
+        Navigator.pushReplacementNamed(context, RouteSTR.ticketList);
 
       });
     } else {
@@ -112,7 +112,7 @@ class SupportTicketMethods {
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
       Future.delayed(const Duration(milliseconds: 2000), () {
 
-        Navigator.pushReplacementNamed(context, RouteSTR.supportTicketListM);
+        Navigator.pushReplacementNamed(context, RouteSTR.ticketList);
 
       });
     } else {

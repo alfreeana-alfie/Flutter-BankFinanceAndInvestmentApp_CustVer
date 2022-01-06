@@ -18,7 +18,7 @@ class TeamMethods {
       ..fields.addAll(body)
       ..headers.addAll(headersMultiPart)
       ..files.add(await http.MultipartFile.fromPath(
-          Field.attachment, filename));
+          Field.image, filename));
 
     var response = await request.send();
 

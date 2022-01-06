@@ -1,9 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_banking_app/methods/admin/gift_card_methods.dart';
+import 'package:flutter_banking_app/methods/admin/deposit_methods.dart';
 import 'package:flutter_banking_app/methods/config.dart';
-import 'package:flutter_banking_app/models/gift_card.dart';
-import 'package:flutter_banking_app/pages/admin/gift_card/update_gift_card.dart';
+import 'package:flutter_banking_app/models/deposit.dart';
+import 'package:flutter_banking_app/pages/admin/deposit/update_deposit.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -12,16 +12,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CardGiftCard extends StatelessWidget {
-  const CardGiftCard(
-      {Key? key,
-      required this.giftCard,
-      required this.giftCardList,
-      required this.index})
-      : super(key: key);
+class CardWireTransfer extends StatelessWidget {
+  const CardWireTransfer({Key? key, required this.deposit, required this.depositList, required this.index}) : super(key: key);
 
-  final GiftCard giftCard;
-  final List<GiftCard> giftCardList;
+  final Deposit deposit;
+  final List<Deposit> depositList;
   final int index;
 
   @override
@@ -62,7 +57,7 @@ class CardGiftCard extends StatelessWidget {
                               color: Styles.accentColor,
                             ),
                             const Gap(20),
-                            Text(giftCard.name ?? Field.emptyString,
+                            Text(deposit.userName ?? Field.emptyString,
                                 style: Theme.of(context).textTheme.headline6),
                           ],
                         )),
@@ -130,16 +125,17 @@ class CardGiftCard extends StatelessWidget {
   }
 
   buildExpanded1(BuildContext context) {
-
-    
     // Status
     String? status;
-    switch (giftCard.status) {
-      case 0:
-        status = 'NOT ACTIVE';
-        break;
+    switch (deposit.status) {
       case 1:
-        status = 'ACTIVE';
+        status = 'Pending';
+        break;
+      case 2:
+        status = 'Approved';
+        break;
+      case 3:
+        status = 'Rejected/Canceled';
         break;
       default:
         status = 'Default';
@@ -152,28 +148,20 @@ class CardGiftCard extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            DetailRow(labelTitle: Str.userNameTxt, labelDetails: deposit.userName ?? Field.emptyString),
             DetailRow(
-                labelTitle: Str.nameTxt,
-                labelDetails: giftCard.name ?? Field.emptyString),
+                labelTitle: Str.nameTxt, labelDetails: deposit.name ?? Field.emptyString),
+            DetailRow(labelTitle: Str.amountTxt, labelDetails: deposit.amount ?? Field.emptyString),
             DetailRow(
-                labelTitle: Str.codeTxt,
-                labelDetails: giftCard.code ?? Field.emptyString),
+                labelTitle: Str.feeTxt, labelDetails: deposit.fee ?? Field.emptyString),
             DetailRow(
-                labelTitle: Str.amountTxt,
-                labelDetails: giftCard.amount ?? Field.emptyString),
+                labelTitle: Str.drCrTxt, labelDetails: deposit.drCr ?? Field.emptyString),
+            DetailRow(labelTitle: Str.typeTxt, labelDetails: deposit.type ?? Field.emptyString),
             DetailRow(
-                labelTitle: Str.statusTxt,
-                labelDetails: status),
-            DetailRow(
-                labelTitle: Str.userTxt,
-                labelDetails: giftCard.userId.toString()),
-            DetailRow(
-                labelTitle: Str.branchTxt,
-                labelDetails: giftCard.branchId.toString()),
-            DetailRow(
-                labelTitle: Str.usedAtTxt,
-                labelDetails: giftCard.usedAt ?? Field.emptyString),
-            _buildButtonRow(context),
+                labelTitle: Str.methodTxt, labelDetails: deposit.method ?? Field.emptyString),
+            DetailRow(labelTitle: Str.statusTxt, labelDetails: status),
+            DetailRow(labelTitle: Str.noteTxt, labelDetails: deposit.note ?? Field.emptyString),
+            // _buildButtonRow(context),
           ],
         ),
       ]),
@@ -183,25 +171,26 @@ class CardGiftCard extends StatelessWidget {
   _buildButtonRow(BuildContext context) {
     return Row(
       children: [
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => UpdateGiftCard(
-                    giftCard: giftCard,
-                  ),
-                ),
-              );
-            },
-            child: Text(
-              Str.editTxt.toUpperCase(),
-            ),
-            style: ElevatedButton.styleFrom(
-                elevation: 0.0, primary: Styles.successColor),
-          ),
-        ),
-        const Gap(20),
+        // Expanded(
+        //   child: ElevatedButton(
+        //     onPressed: () {
+        //       // Navigator.of(context).push(
+        //       //   MaterialPageRoute(
+        //       //     builder: (context) => UpdateDeposit(
+        //       //       deposit: ,
+        //       //       notUsed: deposit,
+        //       //     ),
+        //       //   ),
+        //       // );
+        //     },
+        //     child: Text(
+        //       Str.editTxt.toUpperCase(),
+        //     ),
+        //     style: ElevatedButton.styleFrom(
+        //         elevation: 0.0, primary: Styles.successColor),
+        //   ),
+        // ),
+        // const Gap(20),
         Expanded(
           child: ElevatedButton(
             onPressed: () {
@@ -247,19 +236,19 @@ class CardGiftCard extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Navigator.of(context).pop();
-                giftCardList.removeAt(index);
+                depositList.removeAt(index);
                 
                 CustomToast.showMsg('Deleting...', Styles.dangerColor);
 
                 Future.delayed(const Duration(milliseconds: 1000), () {
-                  GiftCardMethods.delete(
-                      context, giftCard.id.toString());
-                  Navigator.popAndPushNamed(context, RouteSTR.giftCardList);
+                  DepositMethods.delete(
+                      context, deposit.id.toString());
+                  Navigator.popAndPushNamed(context, RouteSTR.depositList);
                 });
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),
-                style: Theme.of(context).textTheme.button,
+                style: Theme.of(context).textTheme.bodyText1,
               ),
               style: ElevatedButton.styleFrom(
                   elevation: 0.0, primary: Styles.dangerColor),

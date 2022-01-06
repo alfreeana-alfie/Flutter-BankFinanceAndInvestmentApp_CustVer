@@ -1,9 +1,7 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_banking_app/methods/admin/gift_card_methods.dart';
-import 'package:flutter_banking_app/methods/config.dart';
-import 'package:flutter_banking_app/models/gift_card.dart';
-import 'package:flutter_banking_app/pages/admin/gift_card/update_gift_card.dart';
+import 'package:flutter_banking_app/models/transaction.dart';
+import 'package:flutter_banking_app/pages/admin/transaction/wire_transfer/update_wire_transfer.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -11,18 +9,12 @@ import 'package:flutter_banking_app/widgets/detail.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
-class CardGiftCard extends StatelessWidget {
-  const CardGiftCard(
-      {Key? key,
-      required this.giftCard,
-      required this.giftCardList,
-      required this.index})
-      : super(key: key);
+class CardSendExchangeMoney extends StatelessWidget {
+  const CardSendExchangeMoney({Key? key, required this.transaction}) : super(key: key);
 
-  final GiftCard giftCard;
-  final List<GiftCard> giftCardList;
-  final int index;
+  final Transaction transaction;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +54,7 @@ class CardGiftCard extends StatelessWidget {
                               color: Styles.accentColor,
                             ),
                             const Gap(20),
-                            Text(giftCard.name ?? Field.emptyString,
+                            Text(transaction.id.toString(),
                                 style: Theme.of(context).textTheme.headline6),
                           ],
                         )),
@@ -130,20 +122,25 @@ class CardGiftCard extends StatelessWidget {
   }
 
   buildExpanded1(BuildContext context) {
-
     
     // Status
     String? status;
-    switch (giftCard.status) {
-      case 0:
-        status = 'NOT ACTIVE';
-        break;
+    switch (transaction.status) {
       case 1:
-        status = 'ACTIVE';
+        status = 'Pending';
+        break;
+      case 2:
+        status = 'Approved';
+        break;
+      case 3:
+        status = 'Rejected/Canceled';
         break;
       default:
         status = 'Default';
     }
+
+    DateTime tempDate = DateTime.parse(transaction.createdAt ?? '2021-01-01');
+    String createdAt = DateFormat(Styles.formatDate).format(tempDate);
 
     return Container(
       color: Styles.accentColor,
@@ -152,28 +149,29 @@ class CardGiftCard extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            DetailRow(labelTitle: Str.userNameTxt, labelDetails: transaction.userId.toString()),
             DetailRow(
-                labelTitle: Str.nameTxt,
-                labelDetails: giftCard.name ?? Field.emptyString),
+                labelTitle: Str.currencyTxt, labelDetails: transaction.currencyId.toString()),
+            DetailRow(labelTitle: Str.amountTxt, labelDetails: transaction.amount ?? Field.emptyString),
             DetailRow(
-                labelTitle: Str.codeTxt,
-                labelDetails: giftCard.code ?? Field.emptyString),
+                labelTitle: Str.feeTxt, labelDetails: transaction.fee ?? Field.emptyString),
             DetailRow(
-                labelTitle: Str.amountTxt,
-                labelDetails: giftCard.amount ?? Field.emptyString),
+                labelTitle: Str.drCrTxt, labelDetails: transaction.drCr ?? Field.emptyString),
+            DetailRow(labelTitle: Str.typeTxt, labelDetails: transaction.type ?? Field.emptyString),
             DetailRow(
-                labelTitle: Str.statusTxt,
-                labelDetails: status),
-            DetailRow(
-                labelTitle: Str.userTxt,
-                labelDetails: giftCard.userId.toString()),
-            DetailRow(
-                labelTitle: Str.branchTxt,
-                labelDetails: giftCard.branchId.toString()),
-            DetailRow(
-                labelTitle: Str.usedAtTxt,
-                labelDetails: giftCard.usedAt ?? Field.emptyString),
-            _buildButtonRow(context),
+                labelTitle: Str.methodTxt, labelDetails: transaction.method ?? Field.emptyString),
+            DetailRow(labelTitle: Str.statusTxt, labelDetails: status),
+            DetailRow(labelTitle: Str.noteTxt, labelDetails: transaction.note ?? Field.emptyString),
+
+            DetailRow(labelTitle: Str.loanTxt, labelDetails: transaction.loanId.toString()),
+            DetailRow(labelTitle: Str.refTxt, labelDetails: transaction.refId.toString()),
+            DetailRow(labelTitle: Str.parentIdTxt, labelDetails: transaction.parentId.toString()),
+            DetailRow(labelTitle: Str.otherBankTxt, labelDetails: transaction.otherBankId.toString()),
+            DetailRow(labelTitle: Str.gatewayTxt, labelDetails: transaction.gatewayId.toString()),
+            DetailRow(labelTitle: Str.branchTxt, labelDetails: transaction.branchId.toString()),
+            DetailRow(labelTitle: Str.transactionDetailsTxt, labelDetails: transaction.transactionsDetails ?? Field.emptyString),
+            DetailRow(labelTitle: Str.createdTxt, labelDetails: createdAt),
+            // _buildButtonRow(context),
           ],
         ),
       ]),
@@ -188,8 +186,8 @@ class CardGiftCard extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => UpdateGiftCard(
-                    giftCard: giftCard,
+                  builder: (context) => UpdateWireTransfer(
+                    transaction: transaction,
                   ),
                 ),
               );
@@ -247,15 +245,6 @@ class CardGiftCard extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Navigator.of(context).pop();
-                giftCardList.removeAt(index);
-                
-                CustomToast.showMsg('Deleting...', Styles.dangerColor);
-
-                Future.delayed(const Duration(milliseconds: 1000), () {
-                  GiftCardMethods.delete(
-                      context, giftCard.id.toString());
-                  Navigator.popAndPushNamed(context, RouteSTR.giftCardList);
-                });
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

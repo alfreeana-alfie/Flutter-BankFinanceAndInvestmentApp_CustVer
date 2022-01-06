@@ -125,9 +125,9 @@ class _CreateGiftCardState extends State<CreateGiftCard> {
                             Field.currencyId: currency ?? Field.emptyString,
                             Field.amount: amount ?? Field.emptyAmount,
                             Field.status: Status.pending.toString(),
-                            Field.userId: Field.emptyString,
-                            Field.branchId: Field.emptyString,
-                            Field.usedAt: Field.emptyString,
+                            Field.userId: Field.empty,
+                            Field.branchId: Field.empty,
+                            Field.usedAt: '',
                           };
 
                           GiftCardMethods.add(context, body);

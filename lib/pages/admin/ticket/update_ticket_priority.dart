@@ -122,17 +122,18 @@ class _UpdateSupportTicketPriorityState
                     ),
                     ToggleSwitch(
                       initialLabelIndex: widget.ticket.priority,
-                      minWidth: 120,
+                      minWidth: 70,
                       cornerRadius: 7.0,
                       activeBgColors: const [
-                        [Styles.dangerColor],
-                        [Styles.successColor]
+                        [Styles.successColor],
+                        [Styles.warningColor],
+                        [Styles.dangerColor]
                       ],
                       activeFgColor: Colors.white,
                       inactiveBgColor: Colors.black12.withOpacity(0.05),
                       inactiveFgColor: Styles.textColor,
-                      totalSwitches: 2,
-                      labels: Field.statusList,
+                      totalSwitches: 3,
+                      labels: Field.priorityList,
                       onToggle: (index) {
                         // print('switched to: $index');
                         priority = index;

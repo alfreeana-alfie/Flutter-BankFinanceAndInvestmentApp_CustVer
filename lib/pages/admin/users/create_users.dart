@@ -1,4 +1,5 @@
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -40,6 +41,12 @@ class _CreateUsersState extends State<CreateUsers> {
       providerId,
       countryCode;
 
+  
+  FilePickerResult? result;
+  PlatformFile? file;
+  String fileType = 'All';
+
+
   @override
   void initState() {
     _scrollController.addListener(() {
@@ -51,6 +58,61 @@ class _CreateUsersState extends State<CreateUsers> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+
+    
+    Widget fileDetails(PlatformFile file) {
+      final kb = file.size / 1024;
+      final mb = kb / 1024;
+      final szize = (mb >= 1)
+          ? '${mb.toStringAsFixed(2)} MB'
+          : '${kb.toStringAsFixed(2)} KB';
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('File Name: ${file.name}'),
+            // Text('File Size: $size'),
+            // Text('File Extension: ${file.extension}'),
+            // Text('File Path: ${file.path}'),
+          ],
+        ),
+      );
+    }
+    
+  void pickFiles(String? filetype) async {
+    switch (filetype) {
+      case 'Image':
+        result = await FilePicker.platform.pickFiles(type: FileType.image);
+        if (result == null) return;
+        file = result!.files.first;
+        setState(() {});
+        break;
+      case 'Video':
+        result = await FilePicker.platform.pickFiles(type: FileType.video);
+        if (result == null) return;
+        file = result!.files.first;
+        setState(() {});
+        break;
+      case 'Audio':
+        result = await FilePicker.platform.pickFiles(type: FileType.audio);
+        if (result == null) return;
+        file = result!.files.first;
+        setState(() {});
+        break;
+      case 'All':
+        result = await FilePicker.platform.pickFiles();
+        if (result == null) return;
+        file = result!.files.first;
+        setState(() {});
+        break;
+      case 'MultipleFile':
+        result = await FilePicker.platform.pickFiles(allowMultiple: true);
+        if (result == null) return;
+        break;
+    }
+  } 
+
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
@@ -102,12 +164,12 @@ class _CreateUsersState extends State<CreateUsers> {
                       hintText: Str.userTypeTxt,
                     ),
                     const Gap(20.0),
-                    NewField(
-                      mandatory: true,
-                      onSaved: (val) => profilePicture = val,
-                      hintText: Str.profilePictureTxt,
-                    ),
-                    const Gap(20.0),
+                    // NewField(
+                    //   mandatory: true,
+                    //   onSaved: (val) => profilePicture = val,
+                    //   hintText: Str.profilePictureTxt,
+                    // ),
+                    // const Gap(20.0),
                     NewField(
                       mandatory: true,
                       onSaved: (val) => password = val,
@@ -181,6 +243,38 @@ class _CreateUsersState extends State<CreateUsers> {
                         ),
                       ],
                     ),
+                    const Gap(20),
+                    Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.vertical(
+                          bottom: Radius.circular(15),
+                        ),
+                        color: Styles.cardColor,
+                      ),
+                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                            child: Text(Str.profilePictureTxt,
+                                style: Styles.primaryTitle),
+                          ),
+                          ElevatedButton(
+                            onPressed: () async {
+                              pickFiles(fileType);
+                            },
+                            child: Text(Str.browseTxt),
+                            style: ElevatedButton.styleFrom(
+                              elevation: 0.0,
+                              primary: Styles.accentColor,
+                            ),
+                          ),
+                          if (file != null) fileDetails(file!),
+                        ],
+                      ),
+                    ),
                     const Gap(10),
                     Container(
                       decoration: const BoxDecoration(
@@ -197,24 +291,23 @@ class _CreateUsersState extends State<CreateUsers> {
                         context: context,
                         callback: () {
                           Map<String, String> body = {
-                            Field.name: name!,
+                            Field.name: name ?? Field.emptyString,
                             Field.email: email ?? Field.emptyString,
                             Field.phone: phone ?? Field.emptyString,
                             Field.userType: userType ?? Field.emptyString,
-                            Field.roleId: roleId ?? Field.emptyString,
-                            Field.branchId: branchId ?? Field.emptyString,
+                            Field.roleId: roleId ?? Field.empty,
+                            Field.branchId: branchId ?? Field.empty,
                             Field.status: Status.pending.toString(),
-                            Field.profilePicture:
-                                profilePicture ?? Field.emptyString,
+                            Field.profilePicture: file!.name,
                             Field.password: password ?? Field.emptyString,
                             Field.provider: provider ?? Field.emptyString,
                             Field.providerId:
-                                providerId ?? Field.emptyString,
+                                providerId ?? Field.empty,
                             Field.countryCode:
                                 countryCode ?? Field.emptyString,
                           };
 
-                          UserMethods.add(context, body);
+                          UserMethods.add(context, body, file!.path ?? file!.name);
                         },
                         text: Str.submitTxt.toUpperCase(),
                       ),

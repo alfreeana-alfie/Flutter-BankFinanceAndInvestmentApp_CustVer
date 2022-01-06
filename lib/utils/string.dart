@@ -253,6 +253,7 @@ class Str {
   static String createTeamTxt = 'Create Team';
 
   static String branchListTxt = 'Branch(es) List';
+  static String supportTicketListTxt = 'Support Ticket List';
   static String depositListTxt = 'Deposit List';
   static String faqListTxt = 'FAQ List';
   static String fdrPlanListTxt = 'FDR Plan List';
@@ -418,6 +419,7 @@ class Field {
   // Variable Names
   static List<String> statusList = ['NOT ACTIVE', 'ACTIVE'];
   static List<String> approvelList = ['Pending', 'Approved', 'Rejected'];
+  static List<String> priorityList = ['LOW', 'MODERATE', 'HIGH'];
 
   static String emptyString = '-';
   static String emptyAmount = '0.00';

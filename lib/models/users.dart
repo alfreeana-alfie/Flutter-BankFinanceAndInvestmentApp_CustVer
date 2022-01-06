@@ -15,6 +15,7 @@ class Users {
       provider,
       providerId,
       countryCode,
+      password,
       createdAt;
 
   Users(
@@ -33,6 +34,7 @@ class Users {
       this.provider,
       this.providerId,
       this.countryCode,
+      this.password,
       this.createdAt});
 
   factory Users.fromMap(Map<String, dynamic> map) {
@@ -50,6 +52,7 @@ class Users {
       emailVerifiedAt: map[Field.emailVerified] as String?,
       smsVerifiedAt: map[Field.smsVerified] as String?,
       provider: map[Field.provider] as String?,
+      password: map[Field.password] as String?,
       providerId: map[Field.providerId] as String?,
       countryCode: map[Field.countryCode] as String?,
       createdAt: map[Field.createdAt] as String?,

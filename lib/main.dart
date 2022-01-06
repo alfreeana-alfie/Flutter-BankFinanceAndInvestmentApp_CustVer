@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/pages/admin/gift_card/create_gift_card.dart';
+import 'package:flutter_banking_app/pages/admin/gift_card/gift_card_list.dart';
+import 'package:flutter_banking_app/pages/admin/gift_card/used_gift_card_list.dart';
 import 'package:flutter_banking_app/pages/admin/navigation/navigation_list.dart';
 import 'package:flutter_banking_app/pages/admin/ticket/create_ticket.dart';
 import 'package:flutter_banking_app/pages/admin/ticket/ticket_list.dart';
@@ -198,6 +201,10 @@ Future<void> main() async {
 
         RouteSTR.ticketList: (context) => const SupportTicketList(),
         RouteSTR.createTicket: (context) => const CreateSupportTicket(),
+        
+        RouteSTR.giftCardList: (context) => const GiftCardList(),
+        RouteSTR.usedGiftCardList: (context) => const UsedGiftCardList(),
+        RouteSTR.createGiftCard: (context) => const CreateGiftCard(),
       },
     ),
   );
