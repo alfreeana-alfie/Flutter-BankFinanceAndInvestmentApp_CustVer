@@ -68,6 +68,27 @@ class _MCreateLoanState extends State<MCreateLoan> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    
+    Widget fileDetails(PlatformFile file) {
+      final kb = file.size / 1024;
+      final mb = kb / 1024;
+      final szize = (mb >= 1)
+          ? '${mb.toStringAsFixed(2)} MB'
+          : '${kb.toStringAsFixed(2)} KB';
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('File Name: ${file.name}'),
+            // Text('File Size: $size'),
+            // Text('File Extension: ${file.extension}'),
+            // Text('File Path: ${file.path}'),
+          ],
+        ),
+      );
+    }
+
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
@@ -215,6 +236,7 @@ class _MCreateLoanState extends State<MCreateLoan> {
                             primary: Styles.accentColor,
                           ),
                         ),
+                        if (file != null) fileDetails(file!),
                       ],
                     ),
                   ),

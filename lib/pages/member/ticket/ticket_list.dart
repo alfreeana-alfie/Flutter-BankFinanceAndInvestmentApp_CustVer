@@ -126,7 +126,7 @@ class _MSupportTicketListState extends State<MSupportTicketList> {
                         ),
                         const Gap(10),
                         InkWell(
-                          onTap: () => Navigator.pushNamed(context, RouteSTR.addLoanM),
+                          onTap: () => Navigator.pushNamed(context, RouteSTR.addSupportTicketM),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: const BoxDecoration(

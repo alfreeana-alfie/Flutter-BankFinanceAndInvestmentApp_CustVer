@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/config.dart';
+import 'package:flutter_banking_app/models/deposit.dart';
 import 'package:flutter_banking_app/models/transaction.dart';
 import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/api.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/appbar/app_bar_add.dart';
 import 'package:flutter_banking_app/widgets/card/card_send_exchange_money.dart';
+import 'package:flutter_banking_app/widgets/card/card_send_money.dart';
 import 'package:flutter_banking_app/widgets/card/card_transaction.dart';
 import 'package:flutter_banking_app/widgets/left_menu_member.dart';
 import 'package:gap/gap.dart';
@@ -26,7 +28,7 @@ class _MExchangeMoneyListState extends State<MExchangeMoneyList> {
   SharedPref sharedPref = SharedPref();
   User userLoad = User();
   late Map<String, dynamic> requestMap;
-  List<Transaction> transactionList = [];
+  List<Deposit> transactionList = [];
 
   Future view() async {
     User user = User.fromJSON(await sharedPref.read(Pref.userData));
@@ -39,10 +41,10 @@ class _MExchangeMoneyListState extends State<MExchangeMoneyList> {
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
       for (var req in jsonBody[Field.data]) {
-        final data = Transaction.fromMap(req);
-        setState(() {
+        final data = Deposit.fromMap(req);
+        if(mounted) {
           transactionList.add(data);
-        });
+        }
       }
     } else {
       print(Status.failedTxt);
@@ -126,7 +128,7 @@ class _MExchangeMoneyListState extends State<MExchangeMoneyList> {
                         ),
                         const Gap(10),
                         InkWell(
-                          onTap: () => Navigator.pushNamed(context, RouteSTR.addLoanM),
+                          onTap: () => Navigator.pushNamed(context, RouteSTR.exchangeMoneyM),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: const BoxDecoration(
@@ -143,7 +145,7 @@ class _MExchangeMoneyListState extends State<MExchangeMoneyList> {
                     ),
                   ),
                 ),
-                for (Transaction transaction in transactionList) CardSendExchangeMoney(transaction: transaction),
+                for (Deposit transaction in transactionList) CardSendMoney(deposit: transaction),
               ],
             ),
           ),

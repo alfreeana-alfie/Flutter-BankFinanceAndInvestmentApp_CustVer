@@ -38,9 +38,9 @@ class _MWireTransferListState extends State<MWireTransferList> {
       var jsonBody = jsonDecode(response.body);
       for (var req in jsonBody[Field.data]) {
         final data = Transaction.fromMap(req);
-        setState(() {
+        if(mounted) {
           transactionList.add(data);
-        });
+        }
       }
     } else {
       print(Status.failedTxt);
@@ -124,7 +124,7 @@ class _MWireTransferListState extends State<MWireTransferList> {
                         ),
                         const Gap(10),
                         InkWell(
-                          onTap: () => Navigator.pushNamed(context, RouteSTR.addLoanM),
+                          onTap: () => Navigator.pushNamed(context, RouteSTR.wireTransferM),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: const BoxDecoration(

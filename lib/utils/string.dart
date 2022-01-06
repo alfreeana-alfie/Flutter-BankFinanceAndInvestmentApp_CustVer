@@ -339,10 +339,10 @@ class RouteSTR {
   static String dashboardAdmin = '/dashboard-admin';
 
   static String sendMoneyM = '/send-money';
-  static String sendMoneyListM = '/wire-transfer-list';
+  static String sendMoneyListM = '/send-money-list';
 
   static String exchangeMoneyM = '/exchange-money';
-  static String exchangeMoneyListM = '/wire-transfer-list';
+  static String exchangeMoneyListM = '/exchange-money-list';
 
   static String wireTransferM = '/wire-transfer';
   static String wireTransferListM = '/wire-transfer-list';

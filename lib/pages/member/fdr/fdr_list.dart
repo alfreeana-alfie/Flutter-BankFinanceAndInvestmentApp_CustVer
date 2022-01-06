@@ -127,7 +127,7 @@ class _MFdrListState extends State<MFdrList> {
                         ),
                         const Gap(10),
                         InkWell(
-                          onTap: () => Navigator.pushNamed(context, RouteSTR.addLoanM),
+                          onTap: () => Navigator.pushNamed(context, RouteSTR.addFdrM),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: const BoxDecoration(

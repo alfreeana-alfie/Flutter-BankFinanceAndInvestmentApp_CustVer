@@ -125,7 +125,7 @@ class _MPaymentRequestListtState extends State<MPaymentRequestList> {
                         ),
                         const Gap(10),
                         InkWell(
-                          onTap: () => Navigator.pushNamed(context, RouteSTR.addLoanM),
+                          onTap: () => Navigator.pushNamed(context, RouteSTR.addPaymentRequestM),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: const BoxDecoration(
