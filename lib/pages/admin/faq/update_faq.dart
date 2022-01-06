@@ -101,7 +101,7 @@ class _UpdateFaqState extends State<UpdateFaq> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: widget.faq.status,
+                      initialLabelIndex: int.parse(widget.faq.status!),
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [
@@ -133,6 +133,7 @@ class _UpdateFaqState extends State<UpdateFaq> {
                         color: Styles.secondaryColor,
                         context: context,
                         callback: () {
+                          status ??= int.parse(widget.faq.status!);
                           Map<String, String> body = {
                             Field.question: question ?? widget.faq.question ?? Field.emptyString,
                             Field.answer: answer ?? widget.faq.answer ?? Field.emptyString,

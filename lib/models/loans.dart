@@ -1,8 +1,8 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class Loan {
-  int? borrowerId, approvedUserId, createdUserId, branchId, status, id;
-  String? loanId,
+  int?  id;
+  String? borrowerId, approvedUserId, createdUserId, branchId, status,loanId,
       loanProductId,
       firstPaymentDate,
       releaseDate,
@@ -41,8 +41,9 @@ class Loan {
 
   factory Loan.fromMap(Map<String, dynamic> map) {
     return Loan(
+      // id: map[Field.id] as int?,
       loanId: map[Field.loanId] as String?,
-      borrowerId: map[Field.borrowerId] as int?,
+      borrowerId: map[Field.borrowerId] as String?,
       firstPaymentDate: map[Field.firstPaymentDate] as String?,
       releaseDate: map[Field.releaseDate] as String?,
       appliedAmount: map[Field.appliedAmount] as String?,
@@ -52,10 +53,10 @@ class Loan {
       attachment: map[Field.attachment] as String?,
       description: map[Field.description] as String?,
       remarks: map[Field.remarks] as String?,
-      status: map[Field.status] as int?,
-      approvedUserId: map[Field.approvedUserId] as int?,
-      createdUserId: map[Field.createdUserId] as int?,
-      branchId: map[Field.branchId] as int?,
+      status: map[Field.status] as String?,
+      approvedUserId: map[Field.approvedUserId] as String?,
+      createdUserId: map[Field.createdUserId] as String?,
+      branchId: map[Field.branchId] as String?,
       createdAt: map[Field.createdAt] as String?,
     );
   }

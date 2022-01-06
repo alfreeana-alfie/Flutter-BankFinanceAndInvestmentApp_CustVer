@@ -1,13 +1,13 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class PlanFDR {
-  int? id, duration, status;
+  int? id;
   String? name,
       minimumAmount,
       maximumAmount,
       interestRate,
       durationType,
-      description;
+      description, duration, status;
   
   PlanFDR(
       {this.id,
@@ -27,9 +27,9 @@ class PlanFDR {
       minimumAmount: map[Field.minimumAmount] as String?,
       maximumAmount: map[Field.maximumAmount] as String?,
       interestRate: map[Field.interestRate] as String?,
-      duration: map[Field.duration] as int?,
+      duration: map[Field.duration] as String?,
       durationType: map[Field.durationType] as String?,
-      status: map[Field.status] as int?
+      status: map[Field.status] as String?
     );
   }
 }

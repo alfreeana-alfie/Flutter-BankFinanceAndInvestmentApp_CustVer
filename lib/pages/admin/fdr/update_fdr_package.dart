@@ -148,7 +148,7 @@ class _UpdateFdrPackageState extends State<UpdateFdrPackage> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: widget.fdrPlan.status,
+                      initialLabelIndex: int.parse(widget.fdrPlan.status!),
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [
@@ -180,6 +180,7 @@ class _UpdateFdrPackageState extends State<UpdateFdrPackage> {
                         color: Styles.secondaryColor,
                         context: context,
                         callback: () {
+                          status ??= int.parse(widget.fdrPlan.status!);
                           Map<String, String> body = {
                             Field.name: name ?? widget.fdrPlan.name ?? Field.emptyString,
                             Field.minimumAmount: minAmt ?? widget.fdrPlan.minimumAmount ?? Field.emptyString,

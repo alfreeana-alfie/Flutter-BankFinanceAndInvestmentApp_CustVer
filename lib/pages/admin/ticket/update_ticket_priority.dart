@@ -121,7 +121,7 @@ class _UpdateSupportTicketPriorityState
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: widget.ticket.priority,
+                      initialLabelIndex: int.parse(widget.ticket.priority!),
                       minWidth: 70,
                       cornerRadius: 7.0,
                       activeBgColors: const [
@@ -147,6 +147,7 @@ class _UpdateSupportTicketPriorityState
                         color: Styles.secondaryColor,
                         context: context,
                         callback: () {
+                          priority ??= int.parse(widget.ticket.priority!);
                           Map<String, String> body = {
                             // Field.supportTicketId: '#${getRandomString(12)}',
                             // Field.subject: subject ?? Field.emptyString,

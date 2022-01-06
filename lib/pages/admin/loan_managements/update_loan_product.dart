@@ -160,7 +160,7 @@ class _UpdateLoanProductState extends State<UpdateLoanProduct> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: widget.loanProduct.status,
+                      initialLabelIndex: int.parse(widget.loanProduct.status!),
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [
@@ -192,17 +192,31 @@ class _UpdateLoanProductState extends State<UpdateLoanProduct> {
                         color: Styles.secondaryColor,
                         context: context,
                         callback: () {
+                          status ??= int.parse(widget.loanProduct.status!);
                           Map<String, String> body = {
-                            Field.name: name ?? widget.loanProduct.name ?? Field.emptyString,
-                            Field.minimumAmount: minAmt ?? widget.loanProduct.minAmt ?? Field.emptyString,
-                            Field.maximumAmount: maxAmt ?? widget.loanProduct.maxAmt ?? Field.emptyString,
-                            Field.description: description ?? widget.loanProduct.description ?? Field.emptyString,
-                            Field.interestRate:
-                                interestRate ?? widget.loanProduct.interestRate ?? Field.emptyString,
-                            Field.interestType:
-                                interestType ?? widget.loanProduct.interestType ?? Field.emptyString,
-                            Field.term: term ?? widget.loanProduct.term.toString(),
-                            Field.termPeriod: termPeriod ?? widget.loanProduct.termPeriod ?? Field.emptyString,
+                            Field.name: name ??
+                                widget.loanProduct.name ??
+                                Field.emptyString,
+                            Field.minimumAmount: minAmt ??
+                                widget.loanProduct.minAmt ??
+                                Field.emptyString,
+                            Field.maximumAmount: maxAmt ??
+                                widget.loanProduct.maxAmt ??
+                                Field.emptyString,
+                            Field.description: description ??
+                                widget.loanProduct.description ??
+                                Field.emptyString,
+                            Field.interestRate: interestRate ??
+                                widget.loanProduct.interestRate ??
+                                Field.emptyString,
+                            Field.interestType: interestType ??
+                                widget.loanProduct.interestType ??
+                                Field.emptyString,
+                            Field.term:
+                                term ?? widget.loanProduct.term.toString(),
+                            Field.termPeriod: termPeriod ??
+                                widget.loanProduct.termPeriod ??
+                                Field.emptyString,
                             Field.status: status.toString(),
                           };
 

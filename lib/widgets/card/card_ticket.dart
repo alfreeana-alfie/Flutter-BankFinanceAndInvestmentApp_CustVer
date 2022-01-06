@@ -130,13 +130,13 @@ class CardTicket extends StatelessWidget {
     // Status
     String? status;
     switch (ticket.status) {
-      case 1:
+      case '1':
         status = 'Pending';
         break;
-      case 2:
+      case '2':
         status = 'Approved';
         break;
-      case 3:
+      case '3':
         status = 'Rejected/Canceled';
         break;
       default:
@@ -146,13 +146,13 @@ class CardTicket extends StatelessWidget {
     // Priority
     String? priority;
     switch (ticket.priority) {
-      case 1:
+      case '0':
         priority = 'Low';
         break;
-      case 2:
+      case '1':
         priority = 'Moderate';
         break;
-      case 3:
+      case '2':
         priority = 'High';
         break;
       default:

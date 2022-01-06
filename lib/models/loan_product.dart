@@ -1,7 +1,7 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class LoanProduct {
-  int? id, term, status;
+  int? id;
   String? name,
       minAmt,
       maxAmt,
@@ -9,7 +9,7 @@ class LoanProduct {
       interestType,
       interestRate,
       termPeriod,
-      createdAt;
+      createdAt, term, status;
 
   LoanProduct(
       {this.id,
@@ -33,9 +33,9 @@ class LoanProduct {
       description: map[Field.description] as String?,
       interestRate: map[Field.interestRate] as String?,
       interestType: map[Field.interestType] as String?,
-      term: map[Field.term] as int?,
+      term: map[Field.term] as String?,
       termPeriod: map[Field.termPeriod] as String?,
-      status: map[Field.status] as int?,
+      status: map[Field.status] as String?,
       createdAt: map[Field.createdAt] as String?,
     );
   }

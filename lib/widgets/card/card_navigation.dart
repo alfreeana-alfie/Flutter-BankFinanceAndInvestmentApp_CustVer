@@ -136,10 +136,10 @@ class CardNavigation extends StatelessWidget {
     // Status
     String? status;
     switch (navigation.status) {
-      case 0:
+      case '0':
         status = 'NOT ACTIVE';
         break;
-      case 1:
+      case '1':
         status = 'ACTIVE';
         break;
       default:

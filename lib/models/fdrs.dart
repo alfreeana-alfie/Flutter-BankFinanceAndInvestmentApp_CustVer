@@ -1,7 +1,7 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class FixedDeposit {
-  int? status,
+  String? status,
       fdrPlanId,
       transactionId,
       approvedUserId,
@@ -36,20 +36,20 @@ class FixedDeposit {
 
   factory FixedDeposit.fromMap(Map<String, dynamic> map) {
     return FixedDeposit(
-      fdrPlanId: map[Field.fdrPlanId] as int?,
-      userId: map[Field.userId] as int?,
+      fdrPlanId: map[Field.fdrPlanId] as String?,
+      userId: map[Field.userId] as String?,
       depositAmount: map[Field.depositAmount] as String?,
       returnAmount: map[Field.returnAmount] as String?,
       attachment: map[Field.attachment] as String?,
       remarks: map[Field.remarks] as String?,
-      status: map[Field.status] as int?,
+      status: map[Field.status] as String?,
       approvedDate: map[Field.approvedDate] as String?,
       matureDate: map[Field.matureDate] as String?,
-      transactionId: map[Field.transactionId] as int?,
-      approvedUserId: map[Field.approvedUserId] as int?,
-      createdUserId: map[Field.createdUserId] as int?,
-      updatedUserId: map[Field.updatedUserId] as int?,
-      branchId: map[Field.branchId] as int?,
+      transactionId: map[Field.transactionId] as String?,
+      approvedUserId: map[Field.approvedUserId] as String?,
+      createdUserId: map[Field.createdUserId] as String?,
+      updatedUserId: map[Field.updatedUserId] as String?,
+      branchId: map[Field.branchId] as String?,
       createdAt: map[Field.createdAt] as String?,
     );
   }

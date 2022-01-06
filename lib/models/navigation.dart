@@ -1,8 +1,8 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class Navigation {
-  int? id, status;
-  String? name, createdAt;
+  int? id;
+  String? name, createdAt, status;
 
    Navigation(
       {this.id,
@@ -14,7 +14,7 @@ class Navigation {
     return Navigation(
       id: map[Field.id] as int?,
       name: map[Field.name] as String?,
-      status: map[Field.status] as int?,
+      status: map[Field.status] as String?,
       createdAt: map[Field.createdAt] as String?,
     );
   }

@@ -77,21 +77,18 @@ class _UpdateTestimonialState extends State<UpdateTestimonial> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     NewField(
-                        
                         mandatory: true,
                         initialValue: widget.testimonial.name,
                         onSaved: (val) => name = val,
                         hintText: Str.nameTxt),
                     const Gap(20.0),
                     NewField(
-                        
                         mandatory: true,
                         initialValue: widget.testimonial.locale,
                         onSaved: (val) => locale = val,
                         hintText: Str.localeTxt),
                     const Gap(20.0),
                     NewField(
-                        
                         mandatory: true,
                         initialValue: widget.testimonial.testimonials,
                         onSaved: (val) => testimonial = val,
@@ -114,7 +111,7 @@ class _UpdateTestimonialState extends State<UpdateTestimonial> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: widget.testimonial.status,
+                      initialLabelIndex: int.parse(widget.testimonial.status!),
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [
@@ -146,11 +143,17 @@ class _UpdateTestimonialState extends State<UpdateTestimonial> {
                         color: Styles.secondaryColor,
                         context: context,
                         callback: () {
-                          status ??= widget.testimonial.status;
+                          int.parse(widget.testimonial.status!);
                           Map<String, String> body = {
-                            Field.name: name ?? widget.testimonial.name ?? Field.emptyString,
-                            Field.locale: locale ?? widget.testimonial.locale ?? Field.emptyAmount,
-                            Field.testimonials: testimonial ?? widget.testimonial.testimonials ?? Field.emptyString,
+                            Field.name: name ??
+                                widget.testimonial.name ??
+                                Field.emptyString,
+                            Field.locale: locale ??
+                                widget.testimonial.locale ??
+                                Field.emptyAmount,
+                            Field.testimonials: testimonial ??
+                                widget.testimonial.testimonials ??
+                                Field.emptyString,
                             Field.status: status.toString()
                           };
 

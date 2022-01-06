@@ -1,14 +1,14 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class Ticket {
-  int? id,
+  int? id;
+
+  String? supportTicketId, subject, message,  createdAt,
       senderId,
       status,
       operatorId,
       priority,
       closedUserId;
-
-  String? supportTicketId, subject, message,  createdAt;
 
    Ticket(
       {this.id,
@@ -28,11 +28,11 @@ class Ticket {
       supportTicketId: map[Field.supportTicketId] as String?,
       subject: map[Field.subject] as String?,
       message: map[Field.message] as String?,
-      senderId: map[Field.senderId] as int?,
-      status: map[Field.status] as int?,
-      priority: map[Field.priority] as int?,
-      operatorId: map[Field.operatorId] as int?,
-      closedUserId: map[Field.closedUserId] as int?,
+      senderId: map[Field.senderId] as String?,
+      status: map[Field.status] as String?,
+      priority: map[Field.priority] as String?,
+      operatorId: map[Field.operatorId] as String?,
+      closedUserId: map[Field.closedUserId] as String?,
       createdAt: map[Field.createdAt] as String?,
     );
   }

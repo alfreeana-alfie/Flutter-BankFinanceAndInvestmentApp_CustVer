@@ -142,10 +142,10 @@ class CardTicketAdmin extends StatelessWidget {
     // Status
     String? status;
     switch (ticket.status) {
-      case 0:
+      case '0':
         status = 'NOT ACTIVE';
         break;
-      case 1:
+      case '1':
         status = 'ACTIVE';
         break;
       default:
@@ -155,13 +155,13 @@ class CardTicketAdmin extends StatelessWidget {
     // Priority
     String? priority;
     switch (ticket.priority) {
-      case 0:
+      case '0':
         priority = 'Low';
         break;
-      case 1:
+      case '1':
         priority = 'Moderate';
         break;
-      case 2:
+      case '2':
         priority = 'High';
         break;
       default:

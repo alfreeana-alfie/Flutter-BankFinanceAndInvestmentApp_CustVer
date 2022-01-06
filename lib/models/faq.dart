@@ -1,8 +1,8 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class Question {
-  int? id, status;
-  String? locale, question, answer, createdAt;
+  int? id;
+  String? locale, question, answer, createdAt, status;
 
   Question(
       {this.id,
@@ -18,7 +18,7 @@ class Question {
         locale: map[Field.locale] as String?,
         question: map[Field.question] as String?,
         answer: map[Field.answer] as String?,
-        status: map[Field.status] as int?,
+        status: map[Field.status] as String?,
         createdAt: map[Field.createdAt] as String?);
   }
 }

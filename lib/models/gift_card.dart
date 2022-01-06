@@ -1,8 +1,8 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class GiftCard {
-  int? id,userId, branchId, status, currencyId;
-  String? name, code, amount, usedAt;
+  int? id;
+  String? name, code, amount, usedAt,userId, branchId, status, currencyId;
 
   GiftCard(
       {this.id, 
@@ -21,10 +21,10 @@ class GiftCard {
       name: map[Field.name] as String?,
       code: map[Field.code] as String?,
       amount: map[Field.amount] as String?,
-      currencyId: map[Field.currencyId] as int?,
-      status: map[Field.status] as int?,
-      userId: map[Field.userId] as int?,
-      branchId: map[Field.branchId] as int?,
+      currencyId: map[Field.currencyId] as String?,
+      status: map[Field.status] as String?,
+      userId: map[Field.userId] as String?,
+      branchId: map[Field.branchId] as String?,
       usedAt: map[Field.usedAt] as String?
     );
   }

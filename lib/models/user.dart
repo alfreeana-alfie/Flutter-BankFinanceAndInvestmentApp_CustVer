@@ -1,8 +1,8 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class User {
-  int? id, status, roleId;
-  String? name,
+  int? id;
+  String? roleId, status,name,
       email,
       phone,
       userType,

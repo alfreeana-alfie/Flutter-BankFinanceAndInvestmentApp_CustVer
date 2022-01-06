@@ -123,13 +123,13 @@ class CardFDR extends StatelessWidget {
     // Status
     String? status;
     switch (fdrPlan.status) {
-      case 1:
+      case '1':
         status = 'Pending';
         break;
-      case 2:
+      case '2':
         status = 'Approved';
         break;
-      case 3:
+      case '3':
         status = 'Rejected/Canceled';
         break;
       default:

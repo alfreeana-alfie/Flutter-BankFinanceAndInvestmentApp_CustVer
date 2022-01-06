@@ -99,7 +99,7 @@ class _UpdateNavigationState extends State<UpdateNavigation> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: widget.navigation.status,
+                      initialLabelIndex: int.parse(widget.navigation.status!),
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [
@@ -131,6 +131,7 @@ class _UpdateNavigationState extends State<UpdateNavigation> {
                         color: Styles.secondaryColor,
                         context: context,
                         callback: () {
+                          status ??= int.parse(widget.navigation.status!);
                           Map<String, String> body = {
                             Field.name: name ?? widget.navigation.name ?? Field.emptyString,
                             Field.status: status.toString()

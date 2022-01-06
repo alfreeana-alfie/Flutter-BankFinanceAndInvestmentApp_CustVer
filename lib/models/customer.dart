@@ -1,7 +1,7 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class Customer {
-  int? id, status, roleId;
+  int? id;
   String? name,
       email,
       phone,
@@ -13,7 +13,7 @@ class Customer {
       smsVerifiedAt,
       provider,
       providerId,
-      countryCode;
+      countryCode, status, roleId;
 
   Customer(
       {this.id,
@@ -38,7 +38,7 @@ class Customer {
         email: map[Field.email] as String?,
         phone: map[Field.phone] as String?,
         userType: map[Field.userType] as String?,
-        roleId: map[Field.roleId] as int?,
+        roleId: map[Field.roleId] as String?,
         roleType: map[Field.roleType] as String?,
         branchId: map[Field.branchId] as String?,
         profilePicture: map[Field.profilePicture] as String?,

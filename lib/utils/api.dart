@@ -8,7 +8,8 @@ const Map<String, String> headersMultiPart = {
   'Content-Type': 'multipart/form-data'
 };
 
-String android = 'http://10.0.2.2:8000/api';
+String android = 'https://thegreen.studio/FVIS/fvis-bank/public/api';
+// String android = 'http://10.0.2.2:8000/api';
 String device = 'http://192.168.0.1:8000/api';
 String ios = 'http://127.0.0.1:8000/api/';
 

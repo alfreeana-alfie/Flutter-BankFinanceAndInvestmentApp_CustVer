@@ -1,7 +1,7 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class PaymentRequest {
-  int? senderId, status, transactionId, branchId;
+  String? senderId, status, transactionId, branchId;
   String? currencyName,
       amount,
       description,
@@ -25,13 +25,13 @@ class PaymentRequest {
     return PaymentRequest(
         currencyName: map[Field.currencyName] as String?,
         amount: map[Field.amount] as String?,
-        status: map[Field.status] as int?,
+        status: map[Field.status] as String?,
         description: map[Field.description] as String?,
-        senderId: map[Field.senderId] as int?,
+        senderId: map[Field.senderId] as String?,
         senderName: map[Field.senderName] as String?,
         receiverName: map[Field.receiverName] as String?,
-        transactionId: map[Field.transactionId] as int?,
-        branchId: map[Field.branchId] as int?,
+        transactionId: map[Field.transactionId] as String?,
+        branchId: map[Field.branchId] as String?,
         createdAt: map[Field.createdAt] as String?);
   }
 }

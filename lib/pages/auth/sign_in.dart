@@ -11,6 +11,7 @@ import 'package:flutter_banking_app/widgets/header_1.dart';
 import 'package:flutter_banking_app/widgets/textfield/text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:oktoast/oktoast.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -44,13 +45,13 @@ class _SignInPageState extends State<SignInPage> {
       print(expires);
 
       if (expiredAt.isNotEmpty) {
-        if (expires.compareTo(now) < 0) {
+        // if (expires.compareTo(now) < 0) {
           if (user.userType == Field.customerTxt) {
             Navigator.pushNamed(context, RouteSTR.dashboardMember);
           } else {
             Navigator.pushNamed(context, RouteSTR.dashboardAdmin);
           }
-        }
+        // }
       } else {
         Navigator.pushNamed(context, RouteSTR.signIn);
       }
@@ -61,15 +62,17 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(Values.loginBgPath),
-            fit: BoxFit.cover,
+    return OKToast(
+      child: Scaffold(
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(Values.loginBgPath),
+              fit: BoxFit.cover,
+            ),
           ),
+          child: _innerContainer(),
         ),
-        child: _innerContainer(),
       ),
     );
   }

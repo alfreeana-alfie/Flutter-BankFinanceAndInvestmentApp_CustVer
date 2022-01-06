@@ -1,8 +1,9 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class TransactionOverview {
-  int? userId,status,id;
+  int? id;
   String? 
+  userId,status,
       currencyId,
       amount,
       fee,
@@ -48,7 +49,7 @@ class TransactionOverview {
   factory TransactionOverview.fromMap(Map<String, dynamic> map) {
     return TransactionOverview(
       id: map[Field.id] as int?,
-      userId: map[Field.userId] as int?,
+      userId: map[Field.userId] as String?,
       currencyId: map[Field.currencyId] as String?,
       name: map[Field.name] as String?,
       amount: map[Field.amount] as String?,
@@ -56,7 +57,7 @@ class TransactionOverview {
       drCr: map[Field.drCr] as String?,
       type: map[Field.type] as String?,
       method: map[Field.method] as String?,
-      status: map[Field.status] as int?,
+      status: map[Field.status] as String?,
       note: map[Field.note] as String?,
       loanId: map[Field.loanId] as String?,
       refId: map[Field.refId] as String?,

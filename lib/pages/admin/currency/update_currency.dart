@@ -106,7 +106,7 @@ class _UpdateCurrencyState extends State<UpdateCurrency> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: widget.currency.status,
+                      initialLabelIndex:int.parse(widget.currency.status!),
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [

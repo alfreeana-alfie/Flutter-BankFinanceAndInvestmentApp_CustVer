@@ -1,8 +1,8 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class Deposit {
-  int? id, status;
-  String? userName, name, amount, fee, drCr, type, method, note;
+  int? id;
+  String? userName, name, amount, fee, drCr, type, method, note, status;
 
   Deposit(
       {required this.id,
@@ -26,7 +26,7 @@ class Deposit {
       drCr: map[Field.drCr] as String?,
       type: map[Field.type] as String?,
       method: map[Field.method] as String?,
-      status: map[Field.status] as int?,
+      status: map[Field.status] as String?,
       note: map[Field.note] as String?,
     );
   }

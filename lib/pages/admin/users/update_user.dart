@@ -204,7 +204,7 @@ class _UpdateUserState extends State<UpdateUser> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: widget.user.status,
+                      initialLabelIndex: int.parse(widget.user.status!),
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [
@@ -236,7 +236,7 @@ class _UpdateUserState extends State<UpdateUser> {
                         color: Styles.secondaryColor,
                         context: context,
                         callback: () {
-                            status ??= widget.user.status;
+                            status ??= int.parse(widget.user.status!);
                           Map<String, String> body = {
                             Field.name: name ?? widget.user.name ?? Field.emptyString,
                             Field.email: email ?? widget.user.email ?? Field.emptyString,

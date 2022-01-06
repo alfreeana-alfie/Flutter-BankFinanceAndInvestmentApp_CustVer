@@ -165,7 +165,7 @@ class _UpdateOtherBankState extends State<UpdateOtherBank> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: widget.bank.status,
+                      initialLabelIndex: int.parse(widget.bank.status!),
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [
@@ -197,6 +197,7 @@ class _UpdateOtherBankState extends State<UpdateOtherBank> {
                         color: Styles.secondaryColor,
                         context: context,
                         callback: () {
+                          status ??= int.parse(widget.bank.status!);
                           Map<String, String> body = {
                             Field.name: name ?? widget.bank.name ?? Field.emptyString,
                             Field.swiftCode: swiftCode ?? widget.bank.swiftCode ?? Field.emptyAmount,

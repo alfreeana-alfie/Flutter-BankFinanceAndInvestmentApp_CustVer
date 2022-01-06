@@ -119,7 +119,7 @@ class _UpdateSupportTicketStatusState extends State<UpdateSupportTicketStatus> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: widget.ticket.status,
+                      initialLabelIndex: int.parse(widget.ticket.status!),
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [
@@ -144,6 +144,7 @@ class _UpdateSupportTicketStatusState extends State<UpdateSupportTicketStatus> {
                         color: Styles.secondaryColor,
                         context: context,
                         callback: () {
+                          status ??= int.parse(widget.ticket.status!);
                           Map<String, String> body = {
                             // Field.supportTicketId: '#${getRandomString(12)}',
                             // Field.subject: subject ?? Field.emptyString,
