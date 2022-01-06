@@ -49,14 +49,14 @@ class SideDrawerMember extends StatelessWidget {
             onTap: () =>
                 {Navigator.pushNamed(context, RouteSTR.dashboardMember)},
           ),
-          ListTile(
-            leading: const Icon(IconlyBold.Activity),
-            title: Text(Str.statsTxt,
-                style: GoogleFonts.nunitoSans(
-                    color: Styles.textColor.withOpacity(1))),
-            onTap: () =>
-                {Navigator.pushNamed(context, RouteSTR.statsM)},
-          ),
+          // ListTile(
+          //   leading: const Icon(IconlyBold.Activity),
+          //   title: Text(Str.statsTxt,
+          //       style: GoogleFonts.nunitoSans(
+          //           color: Styles.textColor.withOpacity(1))),
+          //   onTap: () =>
+          //       {Navigator.pushNamed(context, RouteSTR.statsM)},
+          // ),
           ExpansionTile(
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
             leading: const Icon(Icons.send_rounded),

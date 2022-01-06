@@ -44,17 +44,17 @@ class _SignInPageState extends State<SignInPage> {
 
       print(expires);
 
-      if (expiredAt.isNotEmpty) {
-        // if (expires.compareTo(now) < 0) {
-          if (user.userType == Field.customerTxt) {
-            Navigator.pushNamed(context, RouteSTR.dashboardMember);
-          } else {
-            Navigator.pushNamed(context, RouteSTR.dashboardAdmin);
-          }
-        // }
-      } else {
-        Navigator.pushNamed(context, RouteSTR.signIn);
-      }
+      // if (expiredAt.isNotEmpty) {
+      //   // if (expires.compareTo(now) < 0) {
+      //     if (user.userType == Field.customerTxt) {
+      //       Navigator.pushNamed(context, RouteSTR.dashboardMember);
+      //     } else {
+      //       Navigator.pushNamed(context, RouteSTR.dashboardAdmin);
+      //     }
+      //   // }
+      // } else {
+      //   Navigator.pushNamed(context, RouteSTR.signIn);
+      // }
     } catch (e) {
       print(e);
     }

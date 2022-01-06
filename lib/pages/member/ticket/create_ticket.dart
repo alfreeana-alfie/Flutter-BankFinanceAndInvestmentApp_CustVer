@@ -59,7 +59,7 @@ class _MCreateSupportTicketState extends State<MCreateSupportTicket> {
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.sendMoneyTxt, implyLeading: true, context: context),
+            title: Str.createSupportTicketTxt, implyLeading: true, context: context),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [

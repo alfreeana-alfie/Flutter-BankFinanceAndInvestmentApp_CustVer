@@ -56,7 +56,7 @@ class _StatsState extends State<Stats> {
                               ),
                               child: const Icon(
                                 Icons.menu,
-                                color: Styles.accentColor,
+                                color: Styles.primaryColor,
                               ),
                             ),
                           ),
