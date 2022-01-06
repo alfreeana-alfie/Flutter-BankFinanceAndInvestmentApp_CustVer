@@ -1,5 +1,7 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/admin/branch_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/branch.dart';
 import 'package:flutter_banking_app/pages/admin/branches/update_branch.dart';
 import 'package:flutter_banking_app/utils/string.dart';
@@ -11,9 +13,11 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CardBranch extends StatelessWidget {
-  const CardBranch({Key? key, required this.branch}) : super(key: key);
+  const CardBranch({Key? key, required this.branch, required this.branchList, required this.index}) : super(key: key);
 
   final Branch branch;
+  final List<Branch> branchList;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -206,7 +210,15 @@ class CardBranch extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                // Navigator.of(context).pop();
+                branchList.removeAt(index);
+                
+                CustomToast.showMsg('Deleting...', Styles.dangerColor);
+
+                Future.delayed(const Duration(milliseconds: 1000), () {
+                  BranchMethods.delete(
+                      context, branch.id.toString());
+                  Navigator.popAndPushNamed(context, RouteSTR.branchList);
+                });
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

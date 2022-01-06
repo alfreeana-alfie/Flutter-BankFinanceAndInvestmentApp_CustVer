@@ -153,8 +153,9 @@ class _NavigationItemListState extends State<NavigationItemList> {
                         ),
                       ),
                     ),
-                    for (NavigationItem navigation in navigationList)
-                      CardNavigationItem(navigationItem: navigation),
+                    
+                    // for (NavigationItem navigation in navigationList)
+                    //   CardNavigationItem(navigationItem: navigation),
                   ],
                 ),
               ),

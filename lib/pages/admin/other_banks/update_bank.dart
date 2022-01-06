@@ -48,17 +48,17 @@ class _UpdateOtherBankState extends State<UpdateOtherBank> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    setState(() {
-      name = widget.bank.name;
-      swiftCode = widget.bank.swiftCode;
-      bankCountry = widget.bank.bankCountry;
-      bankCurrency = widget.bank.bankCurrency.toString();
-      minTransferAmt = widget.bank.minTransferAmt;
-      maxTransferAmt = widget.bank.maxTransferAmt;
-      fixedCharge = widget.bank.fixedCharge;
-      chargeInPercentage = widget.bank.chargeInPercentage;
-      descriptions = widget.bank.descriptions;
-    });
+    // setState(() {
+    //   name = widget.bank.name;
+    //   swiftCode = widget.bank.swiftCode;
+    //   bankCountry = widget.bank.bankCountry;
+    //   bankCurrency = widget.bank.bankCurrency.toString();
+    //   minTransferAmt = widget.bank.minTransferAmt;
+    //   maxTransferAmt = widget.bank.maxTransferAmt;
+    //   fixedCharge = widget.bank.fixedCharge;
+    //   chargeInPercentage = widget.bank.chargeInPercentage;
+    //   descriptions = widget.bank.descriptions;
+    // });
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
@@ -90,31 +90,31 @@ class _UpdateOtherBankState extends State<UpdateOtherBank> {
                   children: [
                     NewField(
                         mandatory: true,
-                        initialValue: name,
+                        initialValue: widget.bank.name,
                         onSaved: (val) => name = val,
                         hintText: Str.nameTxt),
                     const Gap(20.0),
                     NewField(
                         mandatory: true,
-                        initialValue: swiftCode,
+                        initialValue:  widget.bank.swiftCode,
                         onSaved: (val) => swiftCode = val,
                         hintText: Str.swiftCodeTxt),
                     const Gap(20.0),
                     NewField(
                         mandatory: true,
-                        initialValue: bankCountry,
+                        initialValue: widget.bank.bankCountry,
                         onSaved: (val) => bankCountry = val,
                         hintText: Str.bankCountryTxt),
                     const Gap(20.0),
                     NewField(
                         mandatory: true,
-                        initialValue: bankCurrency,
+                        initialValue: widget.bank.bankCurrency.toString(),
                         onSaved: (val) => bankCurrency = val,
                         hintText: Str.bankCurrencyTxt),
                     const Gap(20.0),
                     NewField(
                       mandatory: true,
-                      initialValue: minTransferAmt,
+                      initialValue: widget.bank.minTransferAmt,
                       onSaved: (val) => minTransferAmt = val,
                       hintText: Str.minTransferAmtTxt,
                       labelText: Str.amountNumTxt,
@@ -122,7 +122,7 @@ class _UpdateOtherBankState extends State<UpdateOtherBank> {
                     const Gap(20.0),
                     NewField(
                       mandatory: true,
-                      initialValue: maxTransferAmt,
+                      initialValue: widget.bank.maxTransferAmt,
                       onSaved: (val) => maxTransferAmt = val,
                       hintText: Str.maxTransferAmtTxt,
                       labelText: Str.amountNumTxt,
@@ -130,19 +130,19 @@ class _UpdateOtherBankState extends State<UpdateOtherBank> {
                     const Gap(20.0),
                     NewField(
                         mandatory: true,
-                        initialValue: fixedCharge,
+                        initialValue: widget.bank.fixedCharge,
                         onSaved: (val) => fixedCharge = val,
                         hintText: Str.fixedChargeTxt),
                     const Gap(20.0),
                     NewField(
                         mandatory: true,
-                        initialValue: chargeInPercentage,
+                        initialValue: widget.bank.chargeInPercentage,
                         onSaved: (val) => chargeInPercentage = val,
                         hintText: Str.chargeInPercentageTxt),
                     const Gap(20.0),
                     NewField(
                       mandatory: true,
-                      initialValue: descriptions,
+                      initialValue: widget.bank.descriptions,
                       onSaved: (val) => descriptions = val,
                       hintText: Str.descriptionsTxt,
                       maxLines: 5,
@@ -165,7 +165,7 @@ class _UpdateOtherBankState extends State<UpdateOtherBank> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: status,
+                      initialLabelIndex: widget.bank.status,
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [
@@ -198,20 +198,20 @@ class _UpdateOtherBankState extends State<UpdateOtherBank> {
                         context: context,
                         callback: () {
                           Map<String, String> body = {
-                            // Field.name: name!,
-                            // Field.swiftCode: swiftCode ?? Field.emptyAmount,
-                            // Field.bankCountry: bankCountry ?? Field.emptyString,
-                            // Field.bankCurrency:
-                            //     bankCurrency ?? Field.emptyAmount,
-                            // Field.minTransferAmt:
-                            //     minTransferAmt ?? Field.emptyAmount,
-                            // Field.maxTransferAmt:
-                            //     maxTransferAmt ?? Field.emptyAmount,
-                            // Field.fixedCharge: fixedCharge ?? Field.emptyAmount,
-                            // Field.chargeInPercentage:
-                            //     chargeInPercentage ?? Field.emptyAmount,
-                            // Field.descriptions:
-                            //     descriptions ?? Field.emptyString,
+                            Field.name: name ?? widget.bank.name ?? Field.emptyString,
+                            Field.swiftCode: swiftCode ?? widget.bank.swiftCode ?? Field.emptyAmount,
+                            Field.bankCountry: bankCountry ?? widget.bank.bankCountry ?? Field.emptyString,
+                            Field.bankCurrency:
+                                bankCurrency ?? widget.bank.bankCurrency.toString(),
+                            Field.minTransferAmt:
+                                minTransferAmt ?? widget.bank.minTransferAmt ?? Field.emptyAmount,
+                            Field.maxTransferAmt:
+                                maxTransferAmt ?? widget.bank.maxTransferAmt ?? Field.emptyAmount,
+                            Field.fixedCharge: fixedCharge ?? widget.bank.fixedCharge ?? Field.emptyAmount,
+                            Field.chargeInPercentage:
+                                chargeInPercentage ?? widget.bank.chargeInPercentage ?? Field.emptyAmount,
+                            Field.descriptions:
+                                descriptions ?? widget.bank.descriptions ?? Field.emptyString,
                             Field.status: status.toString()
                           };
 

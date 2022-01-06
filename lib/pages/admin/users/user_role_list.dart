@@ -75,17 +75,7 @@ class _UserRoleListState extends State<UserRoleList> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return ExpandableTheme(
-              data: const ExpandableThemeData(
-                iconColor: Colors.blue,
-                useInkWell: true,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
+            return ListView(
               children: [
                 SafeArea(
                   child: Padding(
@@ -113,13 +103,15 @@ class _UserRoleListState extends State<UserRoleList> {
                           child: Text(
                             Str.userRoleListTxt,
                             style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                                color: Styles.textColor, fontSize: 19),
+                                fontWeight: FontWeight.w500,
+                                color: Styles.textColor,
+                                fontSize: 19),
                           ),
                         ),
                         const Gap(10),
                         InkWell(
-                          onTap: () => Navigator.pushNamed(context, RouteSTR.createUserRole),
+                          onTap: () => Navigator.pushNamed(
+                              context, RouteSTR.createUserRole),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: const BoxDecoration(
@@ -136,26 +128,23 @@ class _UserRoleListState extends State<UserRoleList> {
                     ),
                   ),
                 ),
-                    for (UserRole role in roleList) CardUserRole(role: role),
-                  ],
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return CardUserRole(
+                        role: roleList[index],
+                        roleList: roleList,
+                        index: index,
+                      );
+                    },
+                    itemCount: roleList.length,
+                  ),
                 ),
-              ),
+                // for (UserRole role in roleList) CardUserRole(role: role),
+              ],
             );
-            // return ExpandableTheme(
-            //   data: const ExpandableThemeData(
-            //     iconColor: Colors.blue,
-            //     useInkWell: true,
-            //   ),
-            //   child: Padding(
-            //     padding: const EdgeInsets.only(top: 10.0),
-            //     child: ListView(
-            //       physics: const BouncingScrollPhysics(),
-            //       children: [
-            //         for (UserRole role in roleList) CardUserRole(role: role),
-            //       ],
-            //     ),
-            //   ),
-            // );
           }
         }
       },

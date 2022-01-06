@@ -1,6 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/admin/navigation_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/navigation.dart';
+import 'package:flutter_banking_app/pages/admin/navigation/update_navigation.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -11,9 +14,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class CardNavigation extends StatelessWidget {
-  const CardNavigation({Key? key, required this.navigation}) : super(key: key);
+  const CardNavigation({Key? key, required this.navigation, required this.navigationList, required this.index}) : super(key: key);
 
   final Navigation navigation;
+  final List<Navigation> navigationList;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -170,13 +175,13 @@ class CardNavigation extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => EditUserPage(
-              //       user: users,
-              //     ),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdateNavigation(
+                    navigation: navigation,
+                  ),
+                ),
+              );
             },
             child: Text(
               Str.editTxt.toUpperCase(),
@@ -230,7 +235,15 @@ class CardNavigation extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                navigationList.removeAt(index);
+                
+                CustomToast.showMsg('Deleting...', Styles.dangerColor);
+
+                Future.delayed(const Duration(milliseconds: 1000), () {
+                  NavigationMethods.delete(
+                      context, navigation.id.toString());
+                  Navigator.popAndPushNamed(context, RouteSTR.navigationList);
+                });
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

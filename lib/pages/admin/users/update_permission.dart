@@ -40,9 +40,9 @@ class _CreateUserPermissionState extends State<CreateUserPermission> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    setState(() {
-      permission = widget.permission.permission;
-    });
+    // setState(() {
+    //   permission = widget.permission.permission;
+    // });
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,

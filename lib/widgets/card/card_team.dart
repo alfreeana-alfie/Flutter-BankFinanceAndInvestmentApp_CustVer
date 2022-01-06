@@ -1,7 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_banking_app/models/currency.dart';
+import 'package:flutter_banking_app/methods/admin/team_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/team.dart';
+import 'package:flutter_banking_app/pages/admin/team/update_team.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -12,9 +14,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class CardTeam extends StatelessWidget {
-  const CardTeam({Key? key, required this.team}) : super(key: key);
+  const CardTeam({Key? key, required this.team, required this.teamList, required this.index}) : super(key: key);
 
   final Team team;
+  final List<Team> teamList;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -152,13 +156,13 @@ class CardTeam extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => EditUserPage(
-              //       user: users,
-              //     ),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdateTeam(
+                    team: team,
+                  ),
+                ),
+              );
             },
             child: Text(
               Str.editTxt.toUpperCase(),
@@ -212,7 +216,15 @@ class CardTeam extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                teamList.removeAt(index);
+                
+                CustomToast.showMsg('Deleting...', Styles.dangerColor);
+
+                Future.delayed(const Duration(milliseconds: 1000), () {
+                  TeamMethods.delete(
+                      context, team.id.toString());
+                  Navigator.popAndPushNamed(context, RouteSTR.branchList);
+                });
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

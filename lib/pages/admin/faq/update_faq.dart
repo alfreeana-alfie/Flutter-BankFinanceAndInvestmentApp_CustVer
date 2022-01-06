@@ -40,11 +40,11 @@ class _UpdateFaqState extends State<UpdateFaq> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    setState(() {
-      answer = widget.faq.answer;
-      question = widget.faq.question;
-      status = widget.faq.status;
-    });
+    // setState(() {
+    //   answer = widget.faq.answer;
+    //   question = widget.faq.question;
+    //   status = widget.faq.status;
+    // });
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
@@ -74,15 +74,13 @@ class _UpdateFaqState extends State<UpdateFaq> {
                   children: [
                     NewField(
                         mandatory: true,
-                        readOnly: true, 
-                        initialValue: question, 
+                        initialValue: widget.faq.question, 
                         onSaved: (val) => question = val,
                         hintText: Str.questionTxt),
                     const Gap(20),
                     NewField(
                         mandatory: true,
-                        readOnly: true,
-                        initialValue: answer,
+                        initialValue: widget.faq.answer,
                         onSaved: (val) => answer = val,
                         hintText: Str.answerTxt),
                     const Gap(20),
@@ -103,7 +101,7 @@ class _UpdateFaqState extends State<UpdateFaq> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: status,
+                      initialLabelIndex: widget.faq.status,
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [
@@ -136,13 +134,13 @@ class _UpdateFaqState extends State<UpdateFaq> {
                         context: context,
                         callback: () {
                           Map<String, String> body = {
-                            Field.question: question ?? Field.emptyString,
-                            Field.answer: answer ?? Field.emptyString,
-                            Field.locale: Status.english,
+                            Field.question: question ?? widget.faq.question ?? Field.emptyString,
+                            Field.answer: answer ?? widget.faq.answer ?? Field.emptyString,
+                            Field.locale: widget.faq.locale ?? Field.emptyString,
                             Field.status: status.toString()
                           };
 
-                          FaqMethods.editStatus(context, body, widget.faq.id.toString());
+                          FaqMethods.edit(context, body, widget.faq.id.toString());
                         },
                         text: Str.submitTxt.toUpperCase(),
                       ),

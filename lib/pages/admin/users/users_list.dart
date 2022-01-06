@@ -87,57 +87,69 @@ class _UsersListState extends State<UsersList> {
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
-              children: [
-                SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Row(
-                      // crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        InkWell(
-                          onTap: () => Scaffold.of(context).openDrawer(),
-                          child: Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Styles.transparentColor,
+                  children: [
+                    SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Row(
+                          // crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            InkWell(
+                              onTap: () => Scaffold.of(context).openDrawer(),
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Styles.transparentColor,
+                                ),
+                                child: const Icon(
+                                  Icons.menu,
+                                  color: Styles.accentColor,
+                                ),
+                              ),
                             ),
-                            child: const Icon(
-                              Icons.menu,
-                              color: Styles.accentColor,
+                            const Gap(10),
+                            Center(
+                              child: Text(
+                                Str.usersListTxt,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: Styles.textColor,
+                                    fontSize: 19),
+                              ),
                             ),
-                          ),
+                            const Gap(10),
+                            InkWell(
+                              onTap: () => Navigator.pushNamed(
+                                  context, RouteSTR.createUsers),
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Styles.transparentColor,
+                                ),
+                                child: const Icon(
+                                  Icons.add,
+                                  color: Styles.accentColor,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        const Gap(10),
-                        Center(
-                          child: Text(
-                            Str.usersListTxt,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                                color: Styles.textColor, fontSize: 19),
-                          ),
-                        ),
-                        const Gap(10),
-                        InkWell(
-                          onTap: () => Navigator.pushNamed(context, RouteSTR.createUsers),
-                          child: Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Styles.transparentColor,
-                            ),
-                            child: const Icon(
-                              Icons.add,
-                              color: Styles.accentColor,
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
+                    Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return CardUser(users: userList[index], userList: userList, index: index,);
+                    },
+                    itemCount: userList.length,
                   ),
                 ),
-                    for (Users user in userList) CardUser(users: user),
+                    // for (Users user in userList) CardUser(users: user),
                   ],
                 ),
               ),

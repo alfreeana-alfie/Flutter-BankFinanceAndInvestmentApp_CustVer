@@ -41,10 +41,10 @@ class _UpdateNavigationState extends State<UpdateNavigation> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    setState(() {
-      name = widget.navigation.name;
-      status = widget.navigation.id;
-    });
+    // setState(() {
+    //   name = widget.navigation.name;
+    //   status = widget.navigation.id;
+    // });
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
@@ -76,7 +76,7 @@ class _UpdateNavigationState extends State<UpdateNavigation> {
                   children: [
                     NewField(
                       mandatory: true,
-                      initialValue: name,
+                      initialValue: widget.navigation.name,
                       onSaved: (val) => name = val,
                       hintText: Str.nameTxt,
                       labelText: Str.nameTxt,
@@ -132,7 +132,7 @@ class _UpdateNavigationState extends State<UpdateNavigation> {
                         context: context,
                         callback: () {
                           Map<String, String> body = {
-                            Field.name: name!,
+                            Field.name: name ?? widget.navigation.name ?? Field.emptyString,
                             Field.status: status.toString()
                           };
 

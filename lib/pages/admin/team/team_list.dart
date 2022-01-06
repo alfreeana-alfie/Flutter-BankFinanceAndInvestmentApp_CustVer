@@ -76,17 +76,7 @@ class _TeamListState extends State<TeamList> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return ExpandableTheme(
-              data: const ExpandableThemeData(
-                iconColor: Colors.blue,
-                useInkWell: true,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
+            return Column(
               children: [
                 SafeArea(
                   child: Padding(
@@ -114,13 +104,15 @@ class _TeamListState extends State<TeamList> {
                           child: Text(
                             Str.teamListTxt,
                             style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                                color: Styles.textColor, fontSize: 19),
+                                fontWeight: FontWeight.w500,
+                                color: Styles.textColor,
+                                fontSize: 19),
                           ),
                         ),
                         const Gap(10),
                         InkWell(
-                          onTap: () => Navigator.pushNamed(context, RouteSTR.createTeam),
+                          onTap: () => Navigator.pushNamed(
+                              context, RouteSTR.createTeam),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: const BoxDecoration(
@@ -137,26 +129,19 @@ class _TeamListState extends State<TeamList> {
                     ),
                   ),
                 ),
-                    for (Team team in teamList) CardTeam(team: team),
-                  ],
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return CardTeam(team: teamList[index], teamList: teamList, index: index,);
+                    },
+                    itemCount: teamList.length,
+                  ),
                 ),
-              ),
+                // for (Team team in teamList) CardTeam(team: team),
+              ],
             );
-            // return ExpandableTheme(
-            //   data: const ExpandableThemeData(
-            //     iconColor: Colors.blue,
-            //     useInkWell: true,
-            //   ),
-            //   child: Padding(
-            //     padding: const EdgeInsets.only(top: 10.0),
-            //     child: ListView(
-            //       physics: const BouncingScrollPhysics(),
-            //       children: [
-            //         for (Team team in teamList) CardTeam(team: team),
-            //       ],
-            //     ),
-            //   ),
-            // );
           }
         }
       },

@@ -1,6 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/admin/other_bank_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/bank.dart';
+import 'package:flutter_banking_app/pages/admin/other_banks/update_bank.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -11,9 +14,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class CardBank extends StatelessWidget {
-  const CardBank({Key? key, required this.bank}) : super(key: key);
+  const CardBank({Key? key, required this.bank, required this.bankList, required this.index}) : super(key: key);
 
   final Bank bank;
+  final List<Bank> bankList;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -157,13 +162,13 @@ class CardBank extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => EditUserPage(
-              //       user: users,
-              //     ),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdateOtherBank(
+                    bank: bank,
+                  ),
+                ),
+              );
             },
             child: Text(
               Str.editTxt.toUpperCase(),
@@ -218,6 +223,15 @@ class CardBank extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Navigator.of(context).pop();
+                bankList.removeAt(index);
+                
+                CustomToast.showMsg('Deleting...', Styles.dangerColor);
+
+                Future.delayed(const Duration(milliseconds: 1000), () {
+                  OtherBankMethods.delete(
+                      context, bank.id.toString());
+                  Navigator.popAndPushNamed(context, RouteSTR.otherBankList);
+                });
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

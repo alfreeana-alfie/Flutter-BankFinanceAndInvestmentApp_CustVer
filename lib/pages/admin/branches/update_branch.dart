@@ -38,18 +38,12 @@ class _UpdateBranchState extends State<UpdateBranch> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    setState(() {
-      name = widget.branch.name;
-      contactEmail = widget.branch.contactEmail;
-      contactPhone = widget.branch.contactPhone;
-      address = widget.branch.address;
-      descriptions = widget.branch.descriptions;
-    });
+
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.createBranchTxt, implyLeading: true, context: context),
+            title: Str.updateBranchTxt, implyLeading: true, context: context),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -73,34 +67,33 @@ class _UpdateBranchState extends State<UpdateBranch> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     NewField(
-                      initialValue: name,
-                      onSaved: (val) => name = val, 
-                      hintText: Str.nameTxt
-                    ),
+                        initialValue: widget.branch.name,
+                        onSaved: (val) => name = val,
+                        hintText: Str.nameTxt),
                     const Gap(20.0),
                     NewField(
-                      initialValue: contactEmail,
+                      initialValue: widget.branch.contactEmail,
                       onSaved: (val) => contactEmail = val,
                       hintText: Str.contactEmailTxt,
                       // maxLines: 10,
                     ),
                     const Gap(20.0),
                     NewField(
-                      initialValue: contactPhone,
+                      initialValue: widget.branch.contactPhone,
                       onSaved: (val) => contactPhone = val,
                       hintText: Str.contactPhoneTxt,
                       // maxLines: 10,
                     ),
                     const Gap(20.0),
                     NewField(
-                      initialValue: address,
+                      initialValue: widget.branch.address,
                       onSaved: (val) => address = val,
                       hintText: Str.addressTxt,
                       // maxLines: 10,
                     ),
                     const Gap(20.0),
                     NewField(
-                      initialValue: descriptions,
+                      initialValue: widget.branch.descriptions,
                       onSaved: (val) => descriptions = val,
                       hintText: Str.descriptionsTxt,
                       maxLines: 5,
@@ -114,17 +107,17 @@ class _UpdateBranchState extends State<UpdateBranch> {
                         context: context,
                         callback: () {
                           Map<String, String> body = {
-                            Field.name: name ?? Field.emptyString,
+                            Field.name: name ?? widget.branch.name ?? Field.emptyString,
                             Field.contactEmail:
-                                contactEmail ?? Field.emptyString,
+                                contactEmail ?? widget.branch.contactEmail ?? Field.emptyString,
                             Field.contactPhone:
-                                contactPhone ?? Field.emptyAmount,
-                            Field.address: address ?? Field.emptyString,
+                                contactPhone ?? widget.branch.contactPhone ?? Field.emptyString,
+                            Field.address: address ?? widget.branch.address ?? Field.emptyString,
                             Field.descriptions:
-                                descriptions ?? Field.emptyString,
+                                descriptions ?? widget.branch.descriptions ?? Field.emptyString,
                           };
-
-                          // BranchMethods.update(context, body);
+                          BranchMethods.edit(
+                              context, body, widget.branch.id.toString());
                         },
                         text: Str.submitTxt.toUpperCase(),
                       ),

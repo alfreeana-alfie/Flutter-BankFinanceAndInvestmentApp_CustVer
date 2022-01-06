@@ -76,90 +76,73 @@ class _FaqListState extends State<FaqList> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return ExpandableTheme(
-              data: const ExpandableThemeData(
-                iconColor: Colors.blue,
-                useInkWell: true,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
-                  children: [
-                    SafeArea(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Row(
-                          // crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            InkWell(
-                              onTap: () => Scaffold.of(context).openDrawer(),
-                              child: Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Styles.transparentColor,
-                                ),
-                                child: const Icon(
-                                  Icons.menu,
-                                  color: Styles.accentColor,
-                                ),
-                              ),
+            return Column(
+              children: [
+                SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      // crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        InkWell(
+                          onTap: () => Scaffold.of(context).openDrawer(),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Styles.transparentColor,
                             ),
-                            const Gap(10),
-                            Center(
-                              child: Text(
-                                Str.faqListTxt,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    color: Styles.textColor,
-                                    fontSize: 19),
-                              ),
+                            child: const Icon(
+                              Icons.menu,
+                              color: Styles.accentColor,
                             ),
-                            const Gap(10),
-                            InkWell(
-                              onTap: () => Navigator.pushNamed(
-                                  context, RouteSTR.createFaq),
-                              child: Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Styles.transparentColor,
-                                ),
-                                child: const Icon(
-                                  Icons.add,
-                                  color: Styles.accentColor,
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
+                        const Gap(10),
+                        Center(
+                          child: Text(
+                            Str.faqListTxt,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Styles.textColor,
+                                fontSize: 19),
+                          ),
+                        ),
+                        const Gap(10),
+                        InkWell(
+                          onTap: () => Navigator.pushNamed(
+                              context, RouteSTR.createFaq),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Styles.transparentColor,
+                            ),
+                            child: const Icon(
+                              Icons.add,
+                              color: Styles.accentColor,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    for (Question question in questionList)
-                      CardFaq(question: question),
-                  ],
+                  ),
                 ),
-              ),
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return CardFaq(question: questionList[index], questionList: questionList, index: index,);
+                    },
+                    itemCount: questionList.length,
+                  ),
+                ),
+                // for (Question question in questionList)
+                //   CardFaq(question: question),
+              ],
             );
-            //     return ExpandableTheme(
-            //   data: const ExpandableThemeData(
-            //     iconColor: Colors.blue,
-            //     useInkWell: true,
-            //   ),
-            //   child: Padding(
-            //     padding: const EdgeInsets.only(top: 10.0),
-            //     child: ListView(
-            //       physics: const BouncingScrollPhysics(),
-            //       children: [
-            //         for (Question question in questionList) CardFaq(question: question),
-            //       ],
-            //     ),
-            //   ),
-            // );
           }
         }
       },

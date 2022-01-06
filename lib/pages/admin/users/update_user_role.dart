@@ -38,10 +38,10 @@ class _UpdateUserRoleState extends State<UpdateUserRole> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    setState(() {
-      name = widget.role.name;
-      description = widget.role.description;
-    });
+    // setState(() {
+    //   name = widget.role.name;
+    //   description = widget.role.description;
+    // });
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
@@ -71,14 +71,14 @@ class _UpdateUserRoleState extends State<UpdateUserRole> {
                   children: [
                     NewField(
                       mandatory: true,
-                      initialValue: name,
+                      initialValue: widget.role.name,
                       onSaved: (val) => name = val,
                       hintText: Str.nameTxt,
                     ),
                     const Gap(20),
                     NewField(
                       mandatory: true,
-                      initialValue: description,
+                      initialValue: widget.role.description,
                       onSaved: (val) => description = val,
                       hintText: Str.descriptionTxt,
                     ),
@@ -98,8 +98,8 @@ class _UpdateUserRoleState extends State<UpdateUserRole> {
                         context: context,
                         callback: () {
                           Map<String, String> body = {
-                            Field.name: name ?? Field.emptyString,
-                            Field.description: description ?? Field.emptyString
+                            Field.name: name ?? widget.role.name ?? Field.emptyString,
+                            Field.description: description ?? widget.role.description ?? Field.emptyString
                           };
 
                           UserMethods.editUserRole(context, body, widget.role.id.toString());

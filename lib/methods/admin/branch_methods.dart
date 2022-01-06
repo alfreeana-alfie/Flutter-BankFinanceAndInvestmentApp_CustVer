@@ -36,7 +36,7 @@ class BranchMethods {
       body: body,
     );
 
-    if (response.statusCode == Status.created) {
+    if (response.statusCode == Status.ok) {
       // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
       Future.delayed(const Duration(milliseconds: 2000), () {

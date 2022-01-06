@@ -1,7 +1,10 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/admin/testimonial_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/currency.dart';
 import 'package:flutter_banking_app/models/testimonial.dart';
+import 'package:flutter_banking_app/pages/admin/testimonial/update_testimonial.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -12,9 +15,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class CardTestimonial extends StatelessWidget {
-  const CardTestimonial({Key? key, required this.testimonial}) : super(key: key);
+  const CardTestimonial(
+      {Key? key,
+      required this.testimonial,
+      required this.testimonialList,
+      required this.index})
+      : super(key: key);
 
   final Testimonial testimonial;
+  final List<Testimonial> testimonialList;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -122,10 +132,9 @@ class CardTestimonial extends StatelessWidget {
   }
 
   buildExpanded1(BuildContext context) {
-    
     DateTime tempDate = DateTime.parse(testimonial.createdAt ?? '-');
     String createdAt = DateFormat('yyyy-MM-dd hh:mm:ss').format(tempDate);
-    
+
     return Container(
       color: Styles.accentColor,
       padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
@@ -133,12 +142,16 @@ class CardTestimonial extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DetailRow(labelTitle: Str.localeTxt, labelDetails: testimonial.locale ?? Field.emptyString),
             DetailRow(
-                labelTitle: Str.testimonialsTxt, labelDetails: testimonial.testimonials ?? Field.emptyString),
-            DetailRow(labelTitle: Str.statusTxt, labelDetails: testimonial.status.toString()),
+                labelTitle: Str.localeTxt,
+                labelDetails: testimonial.locale ?? Field.emptyString),
             DetailRow(
-                labelTitle: Str.createdTxt, labelDetails: createdAt),
+                labelTitle: Str.testimonialsTxt,
+                labelDetails: testimonial.testimonials ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.statusTxt,
+                labelDetails: testimonial.status.toString()),
+            DetailRow(labelTitle: Str.createdTxt, labelDetails: createdAt),
             _buildButtonRow(context),
           ],
         ),
@@ -152,13 +165,13 @@ class CardTestimonial extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => EditUserPage(
-              //       user: users,
-              //     ),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdateTestimonial(
+                    testimonial: testimonial,
+                  ),
+                ),
+              );
             },
             child: Text(
               Str.editTxt.toUpperCase(),
@@ -212,7 +225,15 @@ class CardTestimonial extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                testimonialList.removeAt(index);
+                
+                CustomToast.showMsg('Deleting...', Styles.dangerColor);
+
+                Future.delayed(const Duration(milliseconds: 1000), () {
+                  TestimonialMethods.delete(
+                      context, testimonial.id.toString());
+                  Navigator.popAndPushNamed(context, RouteSTR.branchList);
+                });
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

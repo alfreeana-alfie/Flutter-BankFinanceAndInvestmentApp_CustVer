@@ -1,7 +1,10 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/admin/service_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/currency.dart';
 import 'package:flutter_banking_app/models/service.dart';
+import 'package:flutter_banking_app/pages/admin/service/update_service.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -12,9 +15,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class CardService extends StatelessWidget {
-  const CardService({Key? key, required this.service}) : super(key: key);
+  const CardService({Key? key, required this.service, required this.serviceList, required this.index}) : super(key: key);
 
   final Service service;
+  final List<Service> serviceList;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -148,13 +153,13 @@ class CardService extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => EditUserPage(
-              //       user: users,
-              //     ),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdateService(
+                    service: service,
+                  ),
+                ),
+              );
             },
             child: Text(
               Str.editTxt.toUpperCase(),
@@ -208,7 +213,15 @@ class CardService extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                serviceList.removeAt(index);
+                
+                CustomToast.showMsg('Deleting...', Styles.dangerColor);
+
+                Future.delayed(const Duration(milliseconds: 1000), () {
+                  ServiceMethods.delete(
+                      context, service.id.toString());
+                  Navigator.popAndPushNamed(context, RouteSTR.branchList);
+                });
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

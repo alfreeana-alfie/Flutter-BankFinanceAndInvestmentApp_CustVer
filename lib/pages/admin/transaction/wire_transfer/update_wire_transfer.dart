@@ -82,12 +82,12 @@ class _UpdateWireTransferState extends State<UpdateWireTransfer> {
   Widget build(BuildContext context) {
     SizeConfig.init(context);
 
-    setState(() {
-      otherBankId = widget.transaction.otherBankId;
-      amount = widget.transaction.amount;
-      currency = widget.transaction.currencyId;
-      note = widget.transaction.note;
-    });
+    // setState(() {
+    //   otherBankId = widget.transaction.otherBankId;
+    //   amount = widget.transaction.amount;
+    //   currency = widget.transaction.currencyId;
+    //   note = widget.transaction.note;
+    // });
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
@@ -327,7 +327,7 @@ class _UpdateWireTransferState extends State<UpdateWireTransfer> {
                             // Field.transactionsDetails: transactionsDetails
                           };
 
-                          WireTransferMethods.edit(context, body, widget.transaction.id.toString());
+                          WireTransferMethods.editStatus(context, body, widget.transaction.id.toString());
                         },
                         text: Str.wireTransferTxt.toUpperCase(),
                       ),

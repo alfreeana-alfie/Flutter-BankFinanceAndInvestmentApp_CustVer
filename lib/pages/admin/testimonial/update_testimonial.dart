@@ -41,12 +41,12 @@ class _UpdateTestimonialState extends State<UpdateTestimonial> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    setState(() {
-      name = widget.testimonial.name;
-      locale = widget.testimonial.locale;
-      testimonial = widget.testimonial.testimonials;
-      status = widget.testimonial.status;
-    });
+    // setState(() {
+    //   name = widget.testimonial.name;
+    //   locale = widget.testimonial.locale;
+    //   testimonial = widget.testimonial.testimonials;
+    //   status = widget.testimonial.status;
+    // });
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
@@ -79,21 +79,21 @@ class _UpdateTestimonialState extends State<UpdateTestimonial> {
                     NewField(
                         readOnly: true,
                         mandatory: true,
-                        initialValue: name,
+                        initialValue: widget.testimonial.name,
                         onSaved: (val) => name = val,
                         hintText: Str.nameTxt),
                     const Gap(20.0),
                     NewField(
                         readOnly: true,
                         mandatory: true,
-                        initialValue: locale,
+                        initialValue: widget.testimonial.locale,
                         onSaved: (val) => locale = val,
                         hintText: Str.localeTxt),
                     const Gap(20.0),
                     NewField(
                         readOnly: true,
                         mandatory: true,
-                        initialValue: testimonial,
+                        initialValue: widget.testimonial.testimonials,
                         onSaved: (val) => testimonial = val,
                         hintText: Str.testimonialTxt),
                     const Gap(20),
@@ -114,7 +114,7 @@ class _UpdateTestimonialState extends State<UpdateTestimonial> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: status,
+                      initialLabelIndex: widget.testimonial.status,
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [
@@ -147,10 +147,9 @@ class _UpdateTestimonialState extends State<UpdateTestimonial> {
                         context: context,
                         callback: () {
                           Map<String, String> body = {
-                            Field.name: name!,
-                            Field.locale: locale ?? Field.emptyAmount,
-                            Field.testimonials:
-                                testimonial ?? Field.emptyString,
+                            Field.name: name ?? widget.testimonial.name ?? Field.emptyString,
+                            Field.locale: locale ?? widget.testimonial.locale ?? Field.emptyAmount,
+                            Field.testimonials: testimonial ?? widget.testimonial.testimonials ?? Field.emptyString,
                             Field.status: status.toString()
                           };
 

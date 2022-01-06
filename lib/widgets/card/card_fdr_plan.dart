@@ -1,6 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/admin/fdr_plan_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/fdr_plan.dart';
+import 'package:flutter_banking_app/pages/admin/fdr/update_fdr_package.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -10,9 +13,16 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CardPlanFDR extends StatelessWidget {
-  const CardPlanFDR({Key? key, required this.plan}) : super(key: key);
+  const CardPlanFDR(
+      {Key? key,
+      required this.plan,
+      required this.fdrList,
+      required this.index})
+      : super(key: key);
 
   final PlanFDR plan;
+  final List<PlanFDR> fdrList;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -127,13 +137,27 @@ class CardPlanFDR extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DetailRow(labelTitle: Str.minAmtTxt, labelDetails: plan.minimumAmount ?? Field.emptyString),
-            DetailRow(labelTitle: Str.maxAmtTxt, labelDetails: plan.maximumAmount ?? Field.emptyString),
-            DetailRow(labelTitle: Str.interestRateTxt, labelDetails: plan.interestRate ?? Field.emptyString),
-            DetailRow(labelTitle: Str.durationTxt, labelDetails: plan.duration.toString()),
-            DetailRow(labelTitle: Str.durationTypeTxt, labelDetails: plan.durationType ?? Field.durationType),
-            DetailRow(labelTitle: Str.statusTxt, labelDetails: plan.status.toString()),
-            DetailRow(labelTitle: Str.descriptionTxt, labelDetails: plan.description ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.minAmtTxt,
+                labelDetails: plan.minimumAmount ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.maxAmtTxt,
+                labelDetails: plan.maximumAmount ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.interestRateTxt,
+                labelDetails: plan.interestRate ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.durationTxt,
+                labelDetails: plan.duration.toString()),
+            DetailRow(
+                labelTitle: Str.durationTypeTxt,
+                labelDetails: plan.durationType ?? Field.durationType),
+            DetailRow(
+                labelTitle: Str.statusTxt,
+                labelDetails: plan.status.toString()),
+            DetailRow(
+                labelTitle: Str.descriptionTxt,
+                labelDetails: plan.description ?? Field.emptyString),
             _buildButtonRow(context),
           ],
         ),
@@ -147,13 +171,13 @@ class CardPlanFDR extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => EditUserPage(
-              //       user: users,
-              //     ),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdateFdrPackage(
+                    fdrPlan: plan,
+                  ),
+                ),
+              );
             },
             child: Text(
               Str.editTxt.toUpperCase(),
@@ -208,6 +232,14 @@ class CardPlanFDR extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Navigator.of(context).pop();
+                fdrList.removeAt(index);
+
+                CustomToast.showMsg('Deleting...', Styles.dangerColor);
+
+                Future.delayed(const Duration(milliseconds: 1000), () {
+                  FdrPlanMethods.delete(context, plan.id.toString());
+                  Navigator.popAndPushNamed(context, RouteSTR.fdrPlanList);
+                });
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

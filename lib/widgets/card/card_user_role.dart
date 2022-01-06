@@ -1,6 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/admin/users_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/role.dart';
+import 'package:flutter_banking_app/pages/admin/users/update_user_role.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -11,9 +14,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class CardUserRole extends StatelessWidget {
-  const CardUserRole({Key? key, required this.role}) : super(key: key);
+  const CardUserRole({Key? key, required this.role, required this.roleList, required this.index}) : super(key: key);
 
   final UserRole role;
+  final List<UserRole> roleList;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -154,13 +159,13 @@ class CardUserRole extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => EditUserPage(
-              //       user: users,
-              //     ),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdateUserRole(
+                    role: role,
+                  ),
+                ),
+              );
             },
             child: Text(
               Str.editTxt.toUpperCase(),
@@ -214,7 +219,15 @@ class CardUserRole extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                roleList.removeAt(index);
+                
+                CustomToast.showMsg('Deleting...', Styles.dangerColor);
+
+                Future.delayed(const Duration(milliseconds: 1000), () {
+                  UserMethods.deleteUserRole(
+                      context, role.id.toString());
+                  Navigator.popAndPushNamed(context, RouteSTR.userRoleList);
+                });
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

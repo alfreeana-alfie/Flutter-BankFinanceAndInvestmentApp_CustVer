@@ -1,6 +1,4 @@
-import 'dart:convert';
 
-import 'package:avatars/avatars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -9,8 +7,6 @@ import 'package:flutter_banking_app/methods/admin/deposit_methods.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/customer.dart';
 import 'package:flutter_banking_app/models/user.dart';
-import 'package:flutter_banking_app/utils/api.dart';
-import 'package:flutter_banking_app/utils/layouts.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -20,7 +16,6 @@ import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdrown_user.dart';
 import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
-import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
 class CreateDeposit extends StatefulWidget {

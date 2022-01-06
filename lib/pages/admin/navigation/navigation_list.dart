@@ -77,17 +77,7 @@ class _NavigationListState extends State<NavigationList> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return ExpandableTheme(
-              data: const ExpandableThemeData(
-                iconColor: Colors.blue,
-                useInkWell: true,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
+            return ListView(
               children: [
                 SafeArea(
                   child: Padding(
@@ -115,13 +105,15 @@ class _NavigationListState extends State<NavigationList> {
                           child: Text(
                             Str.navigationListTxt,
                             style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                                color: Styles.textColor, fontSize: 19),
+                                fontWeight: FontWeight.w500,
+                                color: Styles.textColor,
+                                fontSize: 19),
                           ),
                         ),
                         const Gap(10),
                         InkWell(
-                          onTap: () => Navigator.pushNamed(context, RouteSTR.createNavigation),
+                          onTap: () => Navigator.pushNamed(
+                              context, RouteSTR.createNavigation),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: const BoxDecoration(
@@ -138,11 +130,23 @@ class _NavigationListState extends State<NavigationList> {
                     ),
                   ),
                 ),
-                    for (Navigation navigation in navigationList)
-                      CardNavigation(navigation: navigation),
-                  ],
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return CardNavigation(
+                        navigation: navigationList[index],
+                        navigationList: navigationList,
+                        index: index,
+                      );
+                    },
+                    itemCount: navigationList.length,
+                  ),
                 ),
-              ),
+                // for (Navigation navigation in navigationList)
+                //   CardNavigation(navigation: navigation),
+              ],
             );
           }
         }

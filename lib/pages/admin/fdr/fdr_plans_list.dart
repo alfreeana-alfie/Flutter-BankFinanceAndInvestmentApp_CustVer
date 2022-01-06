@@ -77,17 +77,7 @@ class _FdrPlanListState extends State<FdrPlanList> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return ExpandableTheme(
-              data: const ExpandableThemeData(
-                iconColor: Colors.blue,
-                useInkWell: true,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
+            return ListView(
               children: [
                 SafeArea(
                   child: Padding(
@@ -115,13 +105,15 @@ class _FdrPlanListState extends State<FdrPlanList> {
                           child: Text(
                             Str.fdrPlanListTxt,
                             style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                                color: Styles.textColor, fontSize: 19),
+                                fontWeight: FontWeight.w500,
+                                color: Styles.textColor,
+                                fontSize: 19),
                           ),
                         ),
                         const Gap(10),
                         InkWell(
-                          onTap: () => Navigator.pushNamed(context, RouteSTR.createPlanFDR),
+                          onTap: () => Navigator.pushNamed(
+                              context, RouteSTR.createPlanFDR),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: const BoxDecoration(
@@ -138,26 +130,23 @@ class _FdrPlanListState extends State<FdrPlanList> {
                     ),
                   ),
                 ),
-                    for (PlanFDR plan in fdrList) CardPlanFDR(plan: plan),
-                  ],
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return CardPlanFDR(
+                        plan: fdrList[index],
+                        fdrList: fdrList,
+                        index: index,
+                      );
+                    },
+                    itemCount: fdrList.length,
+                  ),
                 ),
-              ),
+                // for (PlanFDR plan in fdrList) CardPlanFDR(plan: plan),
+              ],
             );
-            // return ExpandableTheme(
-            //   data: const ExpandableThemeData(
-            //     iconColor: Colors.blue,
-            //     useInkWell: true,
-            //   ),
-            //   child: Padding(
-            //     padding: const EdgeInsets.only(top: 10.0),
-            //     child: ListView(
-            //       physics: const BouncingScrollPhysics(),
-            //       children: [
-            //         for (PlanFDR plan in fdrList) CardPlanFDR(plan: plan),
-            //       ],
-            //     ),
-            //   ),
-            // );
           }
         }
       },

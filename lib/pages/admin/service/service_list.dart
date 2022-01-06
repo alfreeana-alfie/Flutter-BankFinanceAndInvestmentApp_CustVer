@@ -76,17 +76,7 @@ class _ServiceListState extends State<ServiceList> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return ExpandableTheme(
-              data: const ExpandableThemeData(
-                iconColor: Colors.blue,
-                useInkWell: true,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
+            return Column(
               children: [
                 SafeArea(
                   child: Padding(
@@ -114,13 +104,15 @@ class _ServiceListState extends State<ServiceList> {
                           child: Text(
                             Str.serviceListTxt,
                             style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                                color: Styles.textColor, fontSize: 19),
+                                fontWeight: FontWeight.w500,
+                                color: Styles.textColor,
+                                fontSize: 19),
                           ),
                         ),
                         const Gap(10),
                         InkWell(
-                          onTap: () => Navigator.pushNamed(context, RouteSTR.createService),
+                          onTap: () => Navigator.pushNamed(
+                              context, RouteSTR.createService),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: const BoxDecoration(
@@ -137,28 +129,23 @@ class _ServiceListState extends State<ServiceList> {
                     ),
                   ),
                 ),
-                    for (Service service in serviceList)
-                      CardService(service: service),
-                  ],
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return CardService(
+                          service: serviceList[index],
+                          serviceList: serviceList,
+                          index: index);
+                    },
+                    itemCount: serviceList.length,
+                  ),
                 ),
-              ),
+                // for (Service service in serviceList)
+                //   CardService(service: service),
+              ],
             );
-            // return ExpandableTheme(
-            //   data: const ExpandableThemeData(
-            //     iconColor: Colors.blue,
-            //     useInkWell: true,
-            //   ),
-            //   child: Padding(
-            //     padding: const EdgeInsets.only(top: 10.0),
-            //     child: ListView(
-            //       physics: const BouncingScrollPhysics(),
-            //       children: [
-            //         for (Service service in serviceList)
-            //           CardService(service: service),
-            //       ],
-            //     ),
-            //   ),
-            // );
           }
         }
       },

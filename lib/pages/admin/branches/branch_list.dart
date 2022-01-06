@@ -75,74 +75,71 @@ class _BranchListState extends State<BranchList> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return ExpandableTheme(
-              data: const ExpandableThemeData(
-                iconColor: Colors.blue,
-                useInkWell: true,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
-                  children: [
-                    SafeArea(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Row(
-                          // crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            InkWell(
-                              onTap: () => Scaffold.of(context).openDrawer(),
-                              child: Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Styles.transparentColor,
-                                ),
-                                child: const Icon(
-                                  Icons.menu,
-                                  color: Styles.accentColor,
-                                ),
-                              ),
+            return Column(
+              children: [
+                SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        InkWell(
+                          onTap: () => Scaffold.of(context).openDrawer(),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Styles.transparentColor,
                             ),
-                            const Gap(10),
-                            Center(
-                              child: Text(
-                                Str.branchListTxt,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    color: Styles.textColor,
-                                    fontSize: 19),
-                              ),
+                            child: const Icon(
+                              Icons.menu,
+                              color: Styles.accentColor,
                             ),
-                            const Gap(10),
-                            InkWell(
-                              onTap: () => Navigator.pushNamed(
-                                  context, RouteSTR.createBranch),
-                              child: Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Styles.transparentColor,
-                                ),
-                                child: const Icon(
-                                  Icons.add,
-                                  color: Styles.accentColor,
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
+                        const Gap(10),
+                        Center(
+                          child: Text(
+                            Str.branchListTxt,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Styles.textColor,
+                                fontSize: 19),
+                          ),
+                        ),
+                        const Gap(10),
+                        InkWell(
+                          onTap: () => Navigator.pushNamed(
+                              context, RouteSTR.createBranch),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Styles.transparentColor,
+                            ),
+                            child: const Icon(
+                              Icons.add,
+                              color: Styles.accentColor,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    for (Branch branch in branchList)
-                      CardBranch(branch: branch),
-                  ],
+                  ),
                 ),
-              ),
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return CardBranch(branch: branchList[index], branchList: branchList, index: index,);
+                    },
+                    itemCount: branchList.length,
+                  ),
+                ),
+                // for (Branch branch in branchList)
+                //   CardBranch(branch: branch),
+              ],
             );
           }
         }

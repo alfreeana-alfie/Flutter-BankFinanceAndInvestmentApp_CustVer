@@ -1,6 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/admin/users_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/users.dart';
+import 'package:flutter_banking_app/pages/admin/users/update_user.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -10,9 +13,11 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CardUser extends StatelessWidget {
-  const CardUser({Key? key, required this.users}) : super(key: key);
+  const CardUser({Key? key, required this.users, required this.userList, required this.index}) : super(key: key);
 
   final Users users;
+  final List<Users> userList;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -152,13 +157,13 @@ class CardUser extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => EditUserPage(
-              //       user: users,
-              //     ),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdateUser(
+                    user: users
+                  ),
+                ),
+              );
             },
             child: Text(
               Str.editTxt.toUpperCase(),
@@ -213,6 +218,15 @@ class CardUser extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Navigator.of(context).pop();
+                userList.removeAt(index);
+                
+                CustomToast.showMsg('Deleting...', Styles.dangerColor);
+
+                Future.delayed(const Duration(milliseconds: 1000), () {
+                  UserMethods.delete(
+                      context, users.id.toString());
+                  Navigator.popAndPushNamed(context, RouteSTR.usersList);
+                });
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

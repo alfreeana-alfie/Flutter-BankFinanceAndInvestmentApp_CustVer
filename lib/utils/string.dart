@@ -268,6 +268,14 @@ class Str {
   static String permissionListTxt = 'Permission List';
   static String userRoleListTxt = 'User Role List';
   static String usersListTxt = 'User List';
+
+  static String updateBranchTxt = 'Update Branch';
+  static String updateCurrencyTxt = 'Update Currency';
+  static String updateDepositTxt = 'Update Deposit';
+  static String updateFaqTxt = 'Update FAQ';
+  static String updateFdrTxt = 'Update FDR';
+  static String updateFdrPlanTxt = 'Update FDR Plan';
+
 }
 
 class Status {
@@ -483,7 +491,7 @@ class Field {
   static String descriptions = 'descriptions';
   static String contactEmail = 'contact_email';
   static String contactPhone = 'contact_phone';
-  static String address = 'addresss';
+  static String address = 'address';
   static String interestType = 'interest_type';
   static String term = 'term';
   static String termPeriod = 'term_period';

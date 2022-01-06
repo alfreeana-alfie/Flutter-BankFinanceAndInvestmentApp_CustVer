@@ -1,6 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/admin/loan_product_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/loan_product.dart';
+import 'package:flutter_banking_app/pages/admin/loan_managements/update_loan_product.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -10,9 +13,16 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CardLoanProduct extends StatelessWidget {
-  const CardLoanProduct({Key? key, required this.product}) : super(key: key);
+  const CardLoanProduct(
+      {Key? key,
+      required this.product,
+      required this.productList,
+      required this.index})
+      : super(key: key);
 
   final LoanProduct product;
+  final List<LoanProduct> productList;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -127,15 +137,32 @@ class CardLoanProduct extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DetailRow(labelTitle: Str.nameTxt, labelDetails: product.name ?? Field.emptyString),
-            DetailRow(labelTitle: Str.minAmtTxt, labelDetails: product.minAmt ?? Field.emptyString),
-            DetailRow(labelTitle: Str.maxAmtTxt, labelDetails: product.maxAmt ?? Field.emptyString),
-            DetailRow(labelTitle: Str.descriptionTxt, labelDetails: product.description ?? Field.emptyString),
-            DetailRow(labelTitle: Str.interestRateTxt, labelDetails: product.interestRate ?? Field.emptyString),
-            DetailRow(labelTitle: Str.interestTypeTxt, labelDetails: product.interestType ?? Field.emptyString),
-            DetailRow(labelTitle: Str.termTxt, labelDetails: product.term.toString()),
-            DetailRow(labelTitle: Str.termPeriodTxt, labelDetails: product.termPeriod ?? Field.emptyString),
-            DetailRow(labelTitle: Str.statusTxt, labelDetails: product.status.toString()),
+            DetailRow(
+                labelTitle: Str.nameTxt,
+                labelDetails: product.name ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.minAmtTxt,
+                labelDetails: product.minAmt ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.maxAmtTxt,
+                labelDetails: product.maxAmt ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.descriptionTxt,
+                labelDetails: product.description ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.interestRateTxt,
+                labelDetails: product.interestRate ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.interestTypeTxt,
+                labelDetails: product.interestType ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.termTxt, labelDetails: product.term.toString()),
+            DetailRow(
+                labelTitle: Str.termPeriodTxt,
+                labelDetails: product.termPeriod ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.statusTxt,
+                labelDetails: product.status.toString()),
             _buildButtonRow(context),
           ],
         ),
@@ -149,13 +176,13 @@ class CardLoanProduct extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => EditUserPage(
-              //       user: users,
-              //     ),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdateLoanProduct(
+                    loanProduct: product,
+                  ),
+                ),
+              );
             },
             child: Text(
               Str.editTxt.toUpperCase(),
@@ -210,6 +237,14 @@ class CardLoanProduct extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Navigator.of(context).pop();
+                productList.removeAt(index);
+
+                CustomToast.showMsg('Deleting...', Styles.dangerColor);
+
+                Future.delayed(const Duration(milliseconds: 1000), () {
+                  LoanProductMethods.delete(context, product.id.toString());
+                  Navigator.popAndPushNamed(context, RouteSTR.loanProductList);
+                });
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

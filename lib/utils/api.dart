@@ -115,8 +115,8 @@ class AdminAPI {
   // Branch
   static Uri listOfBranch = Uri.parse('$android/list_of_branches');
   static Uri createBranch = Uri.parse('$android/branch');
-  static Uri updateBranch = Uri.parse('$android/update_branch');
-  static Uri deleteBranch = Uri.parse('$android/delete_branch');
+  static Uri updateBranch = Uri.parse('$android/update_branch/');
+  static Uri deleteBranch = Uri.parse('$android/delete_branch/');
 
   // Other Banks
   static Uri listOfOtherBank = Uri.parse('$android/list_of_other_banks');
@@ -129,13 +129,14 @@ class AdminAPI {
   static Uri listOfCurrency = Uri.parse('$android/list_of_currency');
   static Uri createCurrency = Uri.parse('$android/currency');
   static Uri updateCurrencyStatus = Uri.parse('$android/update_currency_status/');
+  static Uri updateCurrency = Uri.parse('$android/update_currency/');
   static Uri deleteCurrency = Uri.parse('$android/delete_currency/');
 
   // Service
   static Uri listOfService = Uri.parse('$android/list_of_currency');
   static Uri createService = Uri.parse('$android/create_service');
-  static Uri updateService = Uri.parse('$android/update_service');
-  static Uri deleteService = Uri.parse('$android/delete_service');
+  static Uri updateService = Uri.parse('$android/update_service/');
+  static Uri deleteService = Uri.parse('$android/delete_service/');
 
   // FAQ
   static Uri listOfFaq = Uri.parse('$android/list_of_faqs');

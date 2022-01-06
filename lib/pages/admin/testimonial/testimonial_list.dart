@@ -77,23 +77,12 @@ class _TestimonialListState extends State<TestimonialList> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return ExpandableTheme(
-              data: const ExpandableThemeData(
-                iconColor: Colors.blue,
-                useInkWell: true,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
+            return Column(
               children: [
                 SafeArea(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Row(
-                      // crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         InkWell(
@@ -115,13 +104,15 @@ class _TestimonialListState extends State<TestimonialList> {
                           child: Text(
                             Str.testimonialListTxt,
                             style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                                color: Styles.textColor, fontSize: 19),
+                                fontWeight: FontWeight.w500,
+                                color: Styles.textColor,
+                                fontSize: 19),
                           ),
                         ),
                         const Gap(10),
                         InkWell(
-                          onTap: () => Navigator.pushNamed(context, RouteSTR.createTestimonial),
+                          onTap: () => Navigator.pushNamed(
+                              context, RouteSTR.createTestimonial),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: const BoxDecoration(
@@ -138,28 +129,24 @@ class _TestimonialListState extends State<TestimonialList> {
                     ),
                   ),
                 ),
-                    for (Testimonial testimonial in testimonialList)
-                      CardTestimonial(testimonial: testimonial),
-                  ],
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return CardTestimonial(
+                        testimonial: testimonialList[index],
+                        testimonialList: testimonialList,
+                        index: index,
+                      );
+                    },
+                    itemCount: testimonialList.length,
+                  ),
                 ),
-              ),
+                // for (Testimonial testimonial in testimonialList)
+                //   CardTestimonial(testimonial: testimonial),
+              ],
             );
-            // return ExpandableTheme(
-            //   data: const ExpandableThemeData(
-            //     iconColor: Colors.blue,
-            //     useInkWell: true,
-            //   ),
-            //   child: Padding(
-            //     padding: const EdgeInsets.only(top: 10.0),
-            //     child: ListView(
-            //       physics: const BouncingScrollPhysics(),
-            //       children: [
-            //         for (Testimonial testimonial in testimonialList)
-            //           CardTestimonial(testimonial: testimonial),
-            //       ],
-            //     ),
-            //   ),
-            // );
           }
         }
       },

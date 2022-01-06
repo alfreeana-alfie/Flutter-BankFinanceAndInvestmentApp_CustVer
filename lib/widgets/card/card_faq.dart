@@ -1,6 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/admin/faq_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/faq.dart';
+import 'package:flutter_banking_app/pages/admin/faq/update_faq.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -11,9 +14,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class CardFaq extends StatelessWidget {
-  const CardFaq({Key? key, required this.question}) : super(key: key);
+  const CardFaq({Key? key, required this.question, required this.questionList, required this.index}) : super(key: key);
 
   final Question question;
+  final List<Question> questionList;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -152,13 +157,13 @@ class CardFaq extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => EditUserPage(
-              //       user: users,
-              //     ),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdateFaq(
+                    faq: question,
+                  ),
+                ),
+              );
             },
             child: Text(
               Str.editTxt.toUpperCase(),
@@ -212,7 +217,15 @@ class CardFaq extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                questionList.removeAt(index);
+                
+                CustomToast.showMsg('Deleting...', Styles.dangerColor);
+
+                Future.delayed(const Duration(milliseconds: 1000), () {
+                  FaqMethods.delete(
+                      context, question.id.toString());
+                  Navigator.popAndPushNamed(context, RouteSTR.faqList);
+                });
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

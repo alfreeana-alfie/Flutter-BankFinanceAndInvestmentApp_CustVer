@@ -41,17 +41,17 @@ class _UpdateCurrencyState extends State<UpdateCurrency> {
   Widget build(BuildContext context) {
     SizeConfig.init(context);
 
-    setState(() {
-      name = widget.currency.name;
-      exchangeRate = widget.currency.exchangeRate;
-      baseCurrency = widget.currency.baseCurrency.toString();
-      status = widget.currency.status;
-    });
+    // setState(() {
+    //   name = widget.currency.name;
+    //   exchangeRate = widget.currency.exchangeRate;
+    //   baseCurrency = widget.currency.baseCurrency.toString();
+    //   status = widget.currency.status;
+    // });
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.createCurrencyTxt, implyLeading: true, context: context),
+            title: Str.updateCurrencyTxt, implyLeading: true, context: context),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -75,20 +75,17 @@ class _UpdateCurrencyState extends State<UpdateCurrency> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     NewField(
-                        readOnly: true,
-                        initialValue: name,
+                        initialValue: widget.currency.name,
                         onSaved: (val) => name = val,
                         hintText: Str.nameTxt),
                     const Gap(20.0),
                     NewField(
-                        readOnly: true,
-                        initialValue: exchangeRate,
+                        initialValue: widget.currency.exchangeRate,
                         onSaved: (val) => exchangeRate = val,
                         hintText: Str.exchangeRateTxt),
                     const Gap(20),
                     NewField(
-                        readOnly: true,
-                        initialValue: baseCurrency,
+                        initialValue: widget.currency.baseCurrency.toString(),
                         onSaved: (val) => baseCurrency = val,
                         hintText: Str.baseCurrencyTxt),
                     const Gap(20),
@@ -109,7 +106,7 @@ class _UpdateCurrencyState extends State<UpdateCurrency> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: status,
+                      initialLabelIndex: widget.currency.status,
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [
@@ -135,15 +132,13 @@ class _UpdateCurrencyState extends State<UpdateCurrency> {
                         context: context,
                         callback: () {
                           Map<String, String> body = {
-                            // Field.name: name ?? Field.emptyString,
-                            // Field.exchangeRate:
-                            //     exchangeRate ?? Field.exchangeRate,
-                            // Field.baseCurrency:
-                            //     baseCurrency ?? Field.emptyAmount,
+                            Field.name: name ?? widget.currency.name ?? Field.emptyString,
+                            Field.exchangeRate: exchangeRate ?? widget.currency.exchangeRate ?? Field.exchangeRate,
+                            Field.baseCurrency: baseCurrency ?? widget.currency.baseCurrency.toString(),
                             Field.status: status.toString(),
                           };
 
-                          CurrencyMethods.editStatus(context, body, widget.currency.id.toString());
+                          CurrencyMethods.edit(context, body, widget.currency.id.toString());
                         },
                         text: Str.submitTxt.toUpperCase(),
                       ),

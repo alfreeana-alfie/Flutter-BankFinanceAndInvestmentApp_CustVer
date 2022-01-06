@@ -30,7 +30,7 @@ class OtherBankMethods {
 
   static void edit(BuildContext context, Map<String, String> body, String id) async {
     Uri url =
-        Uri.parse(AdminAPI.updateOtherBankStatus.toString() + id);
+        Uri.parse(AdminAPI.updateOtherBank.toString() + id);
 
     final response = await http.put(
       url,

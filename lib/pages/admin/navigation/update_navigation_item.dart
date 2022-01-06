@@ -15,10 +15,16 @@ import 'package:oktoast/oktoast.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class UpdateNavigationItem extends StatefulWidget {
-  const UpdateNavigationItem({Key? key, required this.navigationItem})
+  const UpdateNavigationItem(
+      {Key? key,
+      required this.navigationItem,
+      required this.navigationItemList,
+      required this.index})
       : super(key: key);
 
   final NavigationItem navigationItem;
+  final List<NavigationItem> navigationItemList;
+  final int index;
 
   @override
   _UpdateNavigationItemState createState() => _UpdateNavigationItemState();
@@ -41,12 +47,12 @@ class _UpdateNavigationItemState extends State<UpdateNavigationItem> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    setState(() {
-      type = widget.navigationItem.type;
-      url = widget.navigationItem.url;
-      target = widget.navigationItem.target;
-      status = widget.navigationItem.status;
-    });
+    // setState(() {
+    //   type = widget.navigationItem.type;
+    //   url = widget.navigationItem.url;
+    //   target = widget.navigationItem.target;
+    //   status = widget.navigationItem.status;
+    // });
 
     return OKToast(
       child: Scaffold(
@@ -109,19 +115,19 @@ class _UpdateNavigationItemState extends State<UpdateNavigationItem> {
                     const Gap(20),
                     NewField(
                         mandatory: true,
-                        initialValue: type,
+                        initialValue: widget.navigationItem.type,
                         onSaved: (val) => type = val,
                         hintText: Str.typeTxt),
                     const Gap(20),
                     NewField(
                         mandatory: true,
-                        initialValue: url,
+                        initialValue: widget.navigationItem.url,
                         onSaved: (val) => url = val,
                         hintText: Str.urlTxt),
                     const Gap(20),
                     NewField(
                         mandatory: true,
-                        initialValue: target,
+                        initialValue: widget.navigationItem.target,
                         onSaved: (val) => target = val,
                         hintText: Str.targetTxt),
                     const Gap(20),
@@ -142,7 +148,7 @@ class _UpdateNavigationItemState extends State<UpdateNavigationItem> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: status,
+                      initialLabelIndex: widget.navigationItem.status,
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [
@@ -190,7 +196,8 @@ class _UpdateNavigationItemState extends State<UpdateNavigationItem> {
                             Field.cssId: widget.navigationItem.cssId!,
                           };
 
-                          NavigationMethods.editItem(context, body, widget.navigationItem.id.toString());
+                          NavigationMethods.editItem(context, body,
+                              widget.navigationItem.id.toString());
                         },
                         text: Str.submitTxt.toUpperCase(),
                       ),
