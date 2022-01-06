@@ -13,6 +13,7 @@ import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
 import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class UpdateGiftCard extends StatefulWidget {
   const UpdateGiftCard({Key? key, required this.giftCard}) : super(key: key);
@@ -27,6 +28,7 @@ class _UpdateGiftCardState extends State<UpdateGiftCard> {
   final ScrollController _scrollController = ScrollController();
 
   String? code, currency, currencyName, amount, userId, branchId;
+  int? status;
 
   @override
   void initState() {
@@ -39,10 +41,6 @@ class _UpdateGiftCardState extends State<UpdateGiftCard> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-
-    setState(() {
-      // currency = widget.giftCard.id;
-    });
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
@@ -72,12 +70,14 @@ class _UpdateGiftCardState extends State<UpdateGiftCard> {
                   children: [
                     NewField(
                       mandatory: true,
+                      initialValue: widget.giftCard.code,
                       onSaved: (val) => code = val,
                       hintText: Str.codeTxt,
                     ),
                     const Gap(20.0),
                     NewField(
                       mandatory: true,
+                      initialValue: widget.giftCard.amount,
                       onSaved: (val) => amount = val,
                       hintText: Str.amountTxt,
                     ),
@@ -112,6 +112,41 @@ class _UpdateGiftCardState extends State<UpdateGiftCard> {
                         },
                       ),
                     ),
+                    const Gap(20),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child:
+                              Text(Str.statusTxt, style: Styles.primaryTitle),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(
+                            '*',
+                            style: TextStyle(color: Styles.dangerColor),
+                          ),
+                        ),
+                      ],
+                    ),
+                    ToggleSwitch(
+                      initialLabelIndex: widget.giftCard.status,
+                      minWidth: 120,
+                      cornerRadius: 7.0,
+                      activeBgColors: const [
+                        [Styles.dangerColor],
+                        [Styles.successColor]
+                      ],
+                      activeFgColor: Colors.white,
+                      inactiveBgColor: Colors.black12.withOpacity(0.05),
+                      inactiveFgColor: Styles.textColor,
+                      totalSwitches: 2,
+                      labels: Field.statusList,
+                      onToggle: (index) {
+                        // print('switched to: $index');
+                        status = index;
+                      },
+                    ),
                     const Gap(10),
                     Container(
                       decoration: const BoxDecoration(
@@ -128,16 +163,21 @@ class _UpdateGiftCardState extends State<UpdateGiftCard> {
                         context: context,
                         callback: () {
                           Map<String, String> body = {
-                            Field.code: code ?? Field.emptyString,
-                            Field.currencyId: currency ?? Field.emptyString,
-                            Field.amount: amount ?? Field.emptyAmount,
-                            Field.status: Status.pending.toString(),
-                            Field.userId: Field.emptyString,
-                            Field.branchId: Field.emptyString,
-                            Field.usedAt: Field.emptyString,
+                            Field.code: code ??
+                                widget.giftCard.code ??
+                                Field.emptyString,
+                            Field.currencyId: currency ??
+                                widget.giftCard.currencyId.toString(),
+                            Field.amount: amount ??
+                                widget.giftCard.amount ??
+                                Field.emptyAmount,
+                            Field.status: status.toString(),
+                            Field.userId: userId ?? widget.giftCard.userId.toString(),
+                            Field.branchId: branchId ?? widget.giftCard.userId.toString(),
+                            // Field.usedAt: user,
                           };
 
-                          GiftCardMethods.add(context, body);
+                          GiftCardMethods.edit(context, body, widget.giftCard.id.toString());
                         },
                         text: Str.submitTxt,
                       ),

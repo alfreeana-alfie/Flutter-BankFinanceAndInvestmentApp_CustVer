@@ -77,17 +77,7 @@ class _UsedGiftCardListState extends State<UsedGiftCardList> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return ExpandableTheme(
-              data: const ExpandableThemeData(
-                iconColor: Colors.blue,
-                useInkWell: true,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
+            return Column(
               children: [
                 SafeArea(
                   child: Padding(
@@ -115,13 +105,15 @@ class _UsedGiftCardListState extends State<UsedGiftCardList> {
                           child: Text(
                             Str.usedGiftCardListTxt,
                             style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                                color: Styles.textColor, fontSize: 19),
+                                fontWeight: FontWeight.w500,
+                                color: Styles.textColor,
+                                fontSize: 19),
                           ),
                         ),
                         const Gap(10),
                         InkWell(
-                          onTap: () => Navigator.pushNamed(context, RouteSTR.createGiftCard),
+                          onTap: () => Navigator.pushNamed(
+                              context, RouteSTR.createGiftCard),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: const BoxDecoration(
@@ -138,28 +130,24 @@ class _UsedGiftCardListState extends State<UsedGiftCardList> {
                     ),
                   ),
                 ),
-                    for (GiftCard giftCard in giftCardList)
-                      CardGiftCard(giftCard: giftCard),
-                  ],
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return CardGiftCard(
+                        giftCard: giftCardList[index],
+                        giftCardList: giftCardList,
+                        index: index,
+                      );
+                    },
+                    itemCount: giftCardList.length,
+                  ),
                 ),
-              ),
+                // for (GiftCard giftCard in giftCardList)
+                //   CardGiftCard(giftCard: giftCard),
+              ],
             );
-            // return ExpandableTheme(
-            //   data: const ExpandableThemeData(
-            //     iconColor: Colors.blue,
-            //     useInkWell: true,
-            //   ),
-            //   child: Padding(
-            //     padding: const EdgeInsets.only(top: 10.0),
-            //     child: ListView(
-            //       physics: const BouncingScrollPhysics(),
-            //       children: [
-            //         for (GiftCard giftCard in giftCardList)
-            //           CardGiftCard(giftCard: giftCard),
-            //       ],
-            //     ),
-            //   ),
-            // );
           }
         }
       },

@@ -1,6 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/admin/navigation_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/navigation_item.dart';
+import 'package:flutter_banking_app/pages/admin/navigation/update_navigation_item.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -10,9 +13,11 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CardNavigationItem extends StatelessWidget {
-  const CardNavigationItem({Key? key, required this.navigationItem}) : super(key: key);
+  const CardNavigationItem({Key? key, required this.navigationItem, required this.navigationList, required this.index}) : super(key: key);
 
   final NavigationItem navigationItem;
+  final List<NavigationItem> navigationList;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +168,7 @@ class CardNavigationItem extends StatelessWidget {
                 labelDetails: navigationItem.target ?? Field.emptyString),
             DetailRow(
                 labelTitle: Str.parentIdTxt,
-                labelDetails: navigationItem.parentId ?? Field.emptyString),
+                labelDetails: navigationItem.parentId.toString()),
             DetailRow(
                 labelTitle: Str.positionTxt,
                 labelDetails: navigationItem.position.toString()),
@@ -190,13 +195,13 @@ class CardNavigationItem extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => EditUserPage(
-              //       user: users,
-              //     ),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdateNavigationItem(
+                    navigationItem: navigationItem,
+                  ),
+                ),
+              );
             },
             child: Text(
               Str.editTxt.toUpperCase(),
@@ -250,7 +255,15 @@ class CardNavigationItem extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                navigationList.removeAt(index);
+                
+                CustomToast.showMsg('Deleting...', Styles.dangerColor);
+
+                Future.delayed(const Duration(milliseconds: 1000), () {
+                  NavigationMethods.deleteItem(
+                      context, navigationItem.id.toString());
+                  Navigator.popAndPushNamed(context, RouteSTR.branchList);
+                });
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

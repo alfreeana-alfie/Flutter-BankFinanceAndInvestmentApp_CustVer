@@ -14,17 +14,17 @@ import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
 
-class CreateUserPermission extends StatefulWidget {
-  const CreateUserPermission({Key? key, required this.permission})
+class UpdateUserPermission extends StatefulWidget {
+  const UpdateUserPermission({Key? key, required this.permission})
       : super(key: key);
 
   final Permission permission;
 
   @override
-  _CreateUserPermissionState createState() => _CreateUserPermissionState();
+  _UpdateUserPermissionState createState() => _UpdateUserPermissionState();
 }
 
-class _CreateUserPermissionState extends State<CreateUserPermission> {
+class _UpdateUserPermissionState extends State<UpdateUserPermission> {
   final ScrollController _scrollController = ScrollController();
 
   String? roleId, roleName, permission;
@@ -123,11 +123,11 @@ class _CreateUserPermissionState extends State<CreateUserPermission> {
                         context: context,
                         callback: () {
                           Map<String, String> body = {
-                            Field.roleId: roleId ?? Field.emptyString,
-                            Field.permission: permission ?? Field.emptyString
+                            Field.roleId: roleId ?? widget.permission.roleId.toString(),
+                            Field.permission: permission ?? widget.permission.permission ?? Field.emptyString
                           };
 
-                          UserMethods.addPermission(context, body);
+                          UserMethods.editPermission(context, body, widget.permission.id.toString());
                         },
                         text: Str.submitTxt,
                       ),

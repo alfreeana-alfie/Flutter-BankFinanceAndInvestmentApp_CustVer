@@ -9,22 +9,17 @@ import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
+import 'package:flutter_banking_app/widgets/dropdown/dropdown_navigation.dart';
 import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class UpdateNavigationItem extends StatefulWidget {
-  const UpdateNavigationItem(
-      {Key? key,
-      required this.navigationItem,
-      required this.navigationItemList,
-      required this.index})
+  const UpdateNavigationItem({Key? key, required this.navigationItem})
       : super(key: key);
 
   final NavigationItem navigationItem;
-  final List<NavigationItem> navigationItemList;
-  final int index;
 
   @override
   _UpdateNavigationItemState createState() => _UpdateNavigationItemState();
@@ -47,12 +42,10 @@ class _UpdateNavigationItemState extends State<UpdateNavigationItem> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // setState(() {
-    //   type = widget.navigationItem.type;
-    //   url = widget.navigationItem.url;
-    //   target = widget.navigationItem.target;
-    //   status = widget.navigationItem.status;
-    // });
+    setState(() {
+      navigation = widget.navigationItem.navigationId.toString();
+    });
+    navigationName = widget.navigationItem.name;
 
     return OKToast(
       child: Scaffold(
@@ -82,36 +75,37 @@ class _UpdateNavigationItemState extends State<UpdateNavigationItem> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Row(
-                    //   children: [
-                    //     Padding(
-                    //       padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
-                    //       child: Text(Str.navigationTxt,
-                    //           style: Styles.primaryTitle),
-                    //     ),
-                    //     const Padding(
-                    //       padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
-                    //       child: Text(
-                    //         '*',
-                    //         style: TextStyle(color: Styles.dangerColor),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    // SizedBox(
-                    //   child: DropDowNavigation(
-                    //     navigation: navigation,
-                    //     navigationName: navigationName,
-                    //     onChanged: (val) {
-                    //       setState(
-                    //         () {
-                    //           navigation = val!.id.toString();
-                    //           navigationName = val.name;
-                    //         },
-                    //       );
-                    //     },
-                    //   ),
-                    // ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(Str.navigationTxt,
+                              style: Styles.primaryTitle),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(
+                            '*',
+                            style: TextStyle(color: Styles.dangerColor),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      child: DropDowNavigation(
+                        // currentValue: widget.navigationItem.id,
+                        navigation: navigation,
+                        navigationName: navigationName,
+                        onChanged: (val) {
+                          setState(
+                            () {
+                              navigation = val!.id.toString();
+                              navigationName = val.name;
+                            },
+                          );
+                        },
+                      ),
+                    ),
                     const Gap(20),
                     NewField(
                         mandatory: true,
@@ -181,19 +175,29 @@ class _UpdateNavigationItemState extends State<UpdateNavigationItem> {
                         context: context,
                         callback: () {
                           Map<String, String> body = {
-                            Field.navigationId: navigation ?? Field.empty,
-                            Field.type: type ?? Field.empty,
+                            Field.navigationId: navigation ??
+                                widget.navigationItem.navigationId.toString(),
+                            Field.type: type ??
+                                widget.navigationItem.type ??
+                                Field.empty,
                             Field.pageId:
                                 widget.navigationItem.pageId.toString(),
-                            Field.url: url ?? Field.empty,
-                            Field.icon: widget.navigationItem.icon!,
-                            Field.target: target ?? Field.empty,
-                            Field.parentId: widget.navigationItem.parentId!,
+                            Field.url:
+                                url ?? widget.navigationItem.url ?? Field.empty,
+                            Field.icon:
+                                widget.navigationItem.icon ?? Field.emptyString,
+                            Field.target: target ??
+                                widget.navigationItem.target ??
+                                Field.empty,
+                            Field.parentId:
+                                widget.navigationItem.parentId.toString(),
                             Field.position:
                                 widget.navigationItem.position.toString(),
                             Field.status: status.toString(),
-                            Field.cssClass: widget.navigationItem.cssClass!,
-                            Field.cssId: widget.navigationItem.cssId!,
+                            Field.cssClass: widget.navigationItem.cssClass ??
+                                Field.emptyString,
+                            Field.cssId: widget.navigationItem.cssId ??
+                                Field.emptyString,
                           };
 
                           NavigationMethods.editItem(context, body,

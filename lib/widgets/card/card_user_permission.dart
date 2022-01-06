@@ -1,6 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/admin/users_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/permission.dart';
+import 'package:flutter_banking_app/pages/admin/users/update_permission.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -11,9 +14,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class CardPermission extends StatelessWidget {
-  const CardPermission({Key? key, required this.permission}) : super(key: key);
+  const CardPermission(
+      {Key? key,
+      required this.permission,
+      required this.permissionList,
+      required this.index})
+      : super(key: key);
 
   final Permission permission;
+  final List<Permission> permissionList;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +64,13 @@ class CardPermission extends StatelessWidget {
                             ),
                             const Gap(20),
                             Container(
-                              constraints: const BoxConstraints(minWidth: 100, maxWidth: 220),
-                              child: Text(permission.name ?? Field.emptyString,
-                                  style: Theme.of(context).textTheme.headline6, overflow: TextOverflow.ellipsis,),
+                              constraints: const BoxConstraints(
+                                  minWidth: 100, maxWidth: 220),
+                              child: Text(
+                                permission.name ?? Field.emptyString,
+                                style: Theme.of(context).textTheme.headline6,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ],
                         )),
@@ -147,13 +161,13 @@ class CardPermission extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => EditUserPage(
-              //       user: users,
-              //     ),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdateUserPermission(
+                    permission: permission,
+                  ),
+                ),
+              );
             },
             child: Text(
               Str.editTxt.toUpperCase(),
@@ -207,7 +221,15 @@ class CardPermission extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                permissionList.removeAt(index);
+                
+                CustomToast.showMsg('Deleting...', Styles.dangerColor);
+
+                Future.delayed(const Duration(milliseconds: 1000), () {
+                  UserMethods.deletePermission(
+                      context, permission.id.toString());
+                  Navigator.popAndPushNamed(context, RouteSTR.permissionList);
+                });
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

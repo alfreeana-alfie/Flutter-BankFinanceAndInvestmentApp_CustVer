@@ -84,7 +84,7 @@ Future<void> main() async {
     MaterialApp(
       // home: const AdminDashboard(),
       home: SplashScreenView(
-        navigateRoute: const BranchList(),
+        navigateRoute: const NavigationItemList(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,

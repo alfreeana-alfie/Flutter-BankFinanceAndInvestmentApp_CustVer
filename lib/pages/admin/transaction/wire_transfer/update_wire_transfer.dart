@@ -45,18 +45,18 @@ class _UpdateWireTransferState extends State<UpdateWireTransfer> {
       accountHolder,
       accountHolderName;
 
-  String fee = '1',
-      drCr = '1',
-      type = '1',
-      method = 'wire_transfer',
-      loanId = '1',
-      refId = '1',
-      parentId = '1',
-      gatewayId = '1',
-      createdUserId = '1',
-      updatedUserId = '1',
-      branchId = '1',
-      transactionsDetails = 'wire_transfer';
+  String? fee,
+      drCr,
+      type,
+      method,
+      loanId,
+      refId,
+      parentId,
+      gatewayId,
+      createdUserId,
+      updatedUserId,
+      branchId,
+      transactionsDetails;
 
   loadSharedPrefs() async {
     try {
@@ -130,35 +130,35 @@ class _UpdateWireTransferState extends State<UpdateWireTransfer> {
                       onSaved: (val) => widget.transaction.otherBankId = val,
                       hintText: Str.otherBankTxt,
                     ),
-                    // Row(
-                    //   children: [
-                    //     Padding(
-                    //       padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
-                    //       child: Text(Str.bankTxt, style: Styles.primaryTitle),
-                    //     ),
-                    //     const Padding(
-                    //       padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
-                    //       child: Text(
-                    //         '*',
-                    //         style: TextStyle(color: Styles.dangerColor),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    // SizedBox(
-                    //   child: DropDownBank(
-                    //     bank: otherBankId,
-                    //     bankName: otherBankName,
-                    //     onChanged: (val) {
-                    //       setState(
-                    //         () {
-                    //           otherBankId = val!.id.toString();
-                    //           otherBankName = val.name;
-                    //         },
-                    //       );
-                    //     },
-                    //   ),
-                    // ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(Str.bankTxt, style: Styles.primaryTitle),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(
+                            '*',
+                            style: TextStyle(color: Styles.dangerColor),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      child: DropDownBank(
+                        bank: otherBankId,
+                        bankName: otherBankName,
+                        onChanged: (val) {
+                          setState(
+                            () {
+                              otherBankId = val!.id.toString();
+                              otherBankName = val.name;
+                            },
+                          );
+                        },
+                      ),
+                    ),
                     const Gap(20.0),
                     NewField(
                       readOnly: true,
@@ -184,36 +184,36 @@ class _UpdateWireTransferState extends State<UpdateWireTransfer> {
                       onSaved: (val) => currency = val,
                       hintText: Str.currencyTxt,
                     ),
-                    // Row(
-                    //   children: [
-                    //     Padding(
-                    //       padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
-                    //       child:
-                    //           Text(Str.currencyTxt, style: Styles.primaryTitle),
-                    //     ),
-                    //     const Padding(
-                    //       padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
-                    //       child: Text(
-                    //         '*',
-                    //         style: TextStyle(color: Styles.dangerColor),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    // SizedBox(
-                    //   child: DropDownCurrency(
-                    //     currency: currency,
-                    //     currencyName: currencyName,
-                    //     onChanged: (val) {
-                    //       setState(
-                    //         () {
-                    //           currency = val!.id.toString();
-                    //           currencyName = val.name;
-                    //         },
-                    //       );
-                    //     },
-                    //   ),
-                    // ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child:
+                              Text(Str.currencyTxt, style: Styles.primaryTitle),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(
+                            '*',
+                            style: TextStyle(color: Styles.dangerColor),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      child: DropDownCurrency(
+                        currency: currency,
+                        currencyName: currencyName,
+                        onChanged: (val) {
+                          setState(
+                            () {
+                              currency = val!.id.toString();
+                              currencyName = val.name;
+                            },
+                          );
+                        },
+                      ),
+                    ),
                     const Gap(20.0),
                     NewField(
                       readOnly: true,
@@ -221,26 +221,7 @@ class _UpdateWireTransferState extends State<UpdateWireTransfer> {
                       initialValue: accountHolder,
                       onSaved: (val) => accountHolder = val,
                       hintText: Str.accountHolderTxt,
-                    ),
-                    // const Gap(20.0),
-                    // TextFormField(
-                    //   onChanged: (val) {},
-                    //   style: Styles.subtitleStyle,
-                    //   textInputAction: TextInputAction.done,
-                    //   keyboardType: TextInputType.text,
-                    //   maxLines: 1,
-                    //   decoration: InputDecoration(
-                    //     labelText: Str.accountHolderNameTxt,
-                    //     labelStyle: Styles.subtitleStyle,
-                    //     hintText: Str.accountHolderNameTxt,
-                    //     hintStyle: Styles.subtitleStyle03,
-                    //     border: const OutlineInputBorder(
-                    //       borderSide: BorderSide.none,
-                    //       gapPadding: 0.0,
-                    //     ),
-                    //   ),
-                    // ),
-                    const Gap(20.0),
+                    ),const Gap(20.0),
                     NewField(
                       readOnly: true,
                       mandatory: true,
@@ -307,24 +288,24 @@ class _UpdateWireTransferState extends State<UpdateWireTransfer> {
                         context: context,
                         callback: () {
                           Map<String, String> body = {
-                            // Field.userId: userId ?? Field.empty,
-                            // Field.currencyId: currency ?? Field.empty,
-                            // Field.amount: amount ?? Field.emptyAmount,
-                            // Field.fee: fee,
-                            // Field.drCr: drCr,
-                            // Field.type: type,
-                            // Field.method: method,
+                            // Field.userId: userId ?? widget.transaction.userId.toString(),
+                            // Field.currencyId: currency ?? widget.transaction.currencyId ?? Field.empty,
+                            // Field.amount: amount ?? widget.transaction.amount ?? Field.emptyAmount,
+                            // Field.fee: fee ?? widget.transaction.fee ?? Field.emptyAmount,
+                            // Field.drCr: drCr  ?? widget.transaction.drCr ?? Field.emptyString,
+                            // Field.type: type  ?? widget.transaction.type ?? Field.emptyAmount,
+                            // Field.method: method ?? widget.transaction.method ?? Field.emptyAmount ,
                             Field.status: status.toString(),
-                            // Field.note: note ?? Field.emptyString,
-                            // Field.loanId: loanId,
-                            // Field.refId: refId,
-                            // Field.parentId: parentId,
-                            // Field.otherBankId: otherBankId ?? Field.empty,
-                            // Field.gatewayId: gatewayId,
-                            // Field.createdUserId: userId ?? Field.empty,
-                            // Field.updatedUserId: userId ?? Field.empty,
-                            // Field.branchId: branchId,
-                            // Field.transactionsDetails: transactionsDetails
+                            // Field.note: note ?? widget.transaction.note ?? Field.emptyAmount,
+                            // Field.loanId: loanId ?? widget.transaction.loanId ?? Field.emptyAmount,
+                            // Field.refId: refId  ?? widget.transaction.refId ?? Field.emptyAmount,
+                            // Field.parentId: parentId ?? widget.transaction.parentId ?? Field.emptyAmount,
+                            // Field.otherBankId: otherBankId ?? widget.transaction.otherBankId ?? Field.emptyAmount,
+                            // Field.gatewayId: gatewayId ?? widget.transaction.gatewayId ?? Field.emptyAmount,
+                            // Field.createdUserId: userId ?? widget.transaction.userId.toString(),
+                            // Field.updatedUserId: userId ?? widget.transaction.userId.toString(),
+                            // Field.branchId: branchId ?? widget.transaction.branchId ?? Field.emptyAmount,
+                            // Field.transactionsDetails: transactionsDetails ?? widget.transaction.transactionsDetails ?? Field.emptyAmount
                           };
 
                           WireTransferMethods.editStatus(context, body, widget.transaction.id.toString());

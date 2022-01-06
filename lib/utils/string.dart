@@ -268,6 +268,7 @@ class Str {
   static String permissionListTxt = 'Permission List';
   static String userRoleListTxt = 'User Role List';
   static String usersListTxt = 'User List';
+  static String redeemGiftCodeTxt = 'Redeem Gift Card';
 
   static String updateBranchTxt = 'Update Branch';
   static String updateCurrencyTxt = 'Update Currency';

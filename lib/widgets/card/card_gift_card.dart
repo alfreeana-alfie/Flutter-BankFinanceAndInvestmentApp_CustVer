@@ -1,6 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/admin/gift_card_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/gift_card.dart';
+import 'package:flutter_banking_app/pages/admin/gift_card/update_gift_card.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -10,9 +13,16 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CardGiftCard extends StatelessWidget {
-  const CardGiftCard({Key? key, required this.giftCard}) : super(key: key);
+  const CardGiftCard(
+      {Key? key,
+      required this.giftCard,
+      required this.giftCardList,
+      required this.index})
+      : super(key: key);
 
   final GiftCard giftCard;
+  final List<GiftCard> giftCardList;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -127,14 +137,27 @@ class CardGiftCard extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DetailRow(labelTitle: Str.nameTxt, labelDetails: giftCard.name ?? Field.emptyString),
             DetailRow(
-                labelTitle: Str.codeTxt, labelDetails: giftCard.code ?? Field.emptyString),
-            DetailRow(labelTitle: Str.amountTxt, labelDetails: giftCard.amount ?? Field.emptyString),
-            DetailRow(labelTitle: Str.statusTxt, labelDetails: giftCard.status.toString()),
-            DetailRow(labelTitle: Str.userTxt, labelDetails: giftCard.userId.toString()),
-            DetailRow(labelTitle: Str.branchTxt, labelDetails: giftCard.branchId.toString()),
-            DetailRow(labelTitle: Str.usedAtTxt, labelDetails: giftCard.usedAt ?? Field.emptyString),
+                labelTitle: Str.nameTxt,
+                labelDetails: giftCard.name ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.codeTxt,
+                labelDetails: giftCard.code ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.amountTxt,
+                labelDetails: giftCard.amount ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.statusTxt,
+                labelDetails: giftCard.status.toString()),
+            DetailRow(
+                labelTitle: Str.userTxt,
+                labelDetails: giftCard.userId.toString()),
+            DetailRow(
+                labelTitle: Str.branchTxt,
+                labelDetails: giftCard.branchId.toString()),
+            DetailRow(
+                labelTitle: Str.usedAtTxt,
+                labelDetails: giftCard.usedAt ?? Field.emptyString),
             _buildButtonRow(context),
           ],
         ),
@@ -148,13 +171,13 @@ class CardGiftCard extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => EditUserPage(
-              //       user: users,
-              //     ),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdateGiftCard(
+                    giftCard: giftCard,
+                  ),
+                ),
+              );
             },
             child: Text(
               Str.editTxt.toUpperCase(),
@@ -208,7 +231,16 @@ class CardGiftCard extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                // Navigator.of(context).pop();
+                giftCardList.removeAt(index);
+                
+                CustomToast.showMsg('Deleting...', Styles.dangerColor);
+
+                Future.delayed(const Duration(milliseconds: 1000), () {
+                  GiftCardMethods.delete(
+                      context, giftCard.id.toString());
+                  Navigator.popAndPushNamed(context, RouteSTR.giftCardList);
+                });
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

@@ -40,7 +40,7 @@ class _RedeemGiftCardState extends State<RedeemGiftCard> {
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.createGiftCardTxt, implyLeading: true, context: context),
+            title: Str.redeemGiftCodeTxt, implyLeading: true, context: context),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -68,43 +68,43 @@ class _RedeemGiftCardState extends State<RedeemGiftCard> {
                       onSaved: (val) => code = val,
                       hintText: Str.codeTxt,
                     ),
-                    const Gap(20.0),
-                    NewField(
-                      mandatory: true,
-                      onSaved: (val) => amount = val,
-                      hintText: Str.amountTxt,
-                    ),
-                    const Gap(20),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
-                          child:
-                              Text(Str.currencyTxt, style: Styles.primaryTitle),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
-                          child: Text(
-                            '*',
-                            style: TextStyle(color: Styles.dangerColor),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      child: DropDownCurrency(
-                        currency: currency,
-                        currencyName: currencyName,
-                        onChanged: (val) {
-                          setState(
-                            () {
-                              currency = val!.id.toString();
-                              currencyName = val.name;
-                            },
-                          );
-                        },
-                      ),
-                    ),
+                    // const Gap(20.0),
+                    // NewField(
+                    //   mandatory: true,
+                    //   onSaved: (val) => amount = val,
+                    //   hintText: Str.amountTxt,
+                    // ),
+                    // const Gap(20),
+                    // Row(
+                    //   children: [
+                    //     Padding(
+                    //       padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                    //       child:
+                    //           Text(Str.currencyTxt, style: Styles.primaryTitle),
+                    //     ),
+                    //     const Padding(
+                    //       padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                    //       child: Text(
+                    //         '*',
+                    //         style: TextStyle(color: Styles.dangerColor),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    // SizedBox(
+                    //   child: DropDownCurrency(
+                    //     currency: currency,
+                    //     currencyName: currencyName,
+                    //     onChanged: (val) {
+                    //       setState(
+                    //         () {
+                    //           currency = val!.id.toString();
+                    //           currencyName = val.name;
+                    //         },
+                    //       );
+                    //     },
+                    //   ),
+                    // ),
                     const Gap(10),
                     Container(
                       decoration: const BoxDecoration(
@@ -122,15 +122,15 @@ class _RedeemGiftCardState extends State<RedeemGiftCard> {
                         callback: () {
                           Map<String, String> body = {
                             Field.code: code ?? Field.emptyString,
-                            Field.currencyId: currency ?? Field.emptyString,
-                            Field.amount: amount ?? Field.emptyAmount,
-                            Field.status: Status.pending.toString(),
-                            Field.userId: Field.emptyString,
-                            Field.branchId: Field.emptyString,
-                            Field.usedAt: Field.emptyString,
+                            // Field.currencyId: currency ?? Field.emptyString,
+                            // Field.amount: amount ?? Field.emptyAmount,
+                            // Field.status: Status.pending.toString(),
+                            // Field.userId: Field.emptyString,
+                            // Field.branchId: Field.emptyString,
+                            // Field.usedAt: Field.emptyString,
                           };
 
-                          GiftCardMethods.add(context, body);
+                          GiftCardMethods.editUsedAt(context, body, code!);
                         },
                         text: Str.submitTxt,
                       ),

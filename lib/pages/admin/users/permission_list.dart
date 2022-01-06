@@ -7,7 +7,6 @@ import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
-import 'package:flutter_banking_app/widgets/appbar/app_bar_add.dart';
 import 'package:flutter_banking_app/widgets/card/card_user_permission.dart';
 import 'package:flutter_banking_app/widgets/left_menu.dart';
 import 'package:gap/gap.dart';
@@ -76,17 +75,7 @@ class _PermissionListState extends State<PermissionList> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return ExpandableTheme(
-              data: const ExpandableThemeData(
-                iconColor: Colors.blue,
-                useInkWell: true,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
+            return Column(
               children: [
                 SafeArea(
                   child: Padding(
@@ -114,13 +103,15 @@ class _PermissionListState extends State<PermissionList> {
                           child: Text(
                             Str.permissionListTxt,
                             style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                                color: Styles.textColor, fontSize: 19),
+                                fontWeight: FontWeight.w500,
+                                color: Styles.textColor,
+                                fontSize: 19),
                           ),
                         ),
                         const Gap(10),
                         InkWell(
-                          onTap: () => Navigator.pushNamed(context, RouteSTR.createPermission),
+                          onTap: () => Navigator.pushNamed(
+                              context, RouteSTR.createPermission),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: const BoxDecoration(
@@ -137,11 +128,23 @@ class _PermissionListState extends State<PermissionList> {
                     ),
                   ),
                 ),
-                    for (Permission permission in permissionList)
-                      CardPermission(permission: permission),
-                  ],
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return CardPermission(
+                        permission: permissionList[index],
+                        permissionList: permissionList,
+                        index: index,
+                      );
+                    },
+                    itemCount: permissionList.length,
+                  ),
                 ),
-              ),
+                // for (Permission permission in permissionList)
+                //   CardPermission(permission: permission),
+              ],
             );
             // return ExpandableTheme(
             //   data: const ExpandableThemeData(
