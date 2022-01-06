@@ -27,4 +27,25 @@ class WireTransferMethods {
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
+
+  static void addAdmin(BuildContext context, Map<String, String> body) async {
+    final response = await http.post(
+      API.wireTransfer,
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == Status.created) {
+      // print(Status.successTxt);
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pushReplacementNamed(context, RouteSTR.wireTransferList);
+
+      });
+    } else {
+      print(response.body);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
 }

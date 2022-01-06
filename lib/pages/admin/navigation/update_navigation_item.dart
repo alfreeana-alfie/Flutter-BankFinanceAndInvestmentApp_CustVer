@@ -42,16 +42,16 @@ class _UpdateNavigationItemState extends State<UpdateNavigationItem> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    setState(() {
-      navigation = widget.navigationItem.navigationId.toString();
-    });
-    navigationName = widget.navigationItem.name;
+    // setState(() {
+    //   navigation = widget.navigationItem.navigationId.toString();
+    // });
+    // navigationName = widget.navigationItem.name;
 
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.createNavigationTxt,
+            title: Str.updateNavigationItemTxt,
             implyLeading: true,
             context: context),
         body: ListView(
@@ -180,8 +180,7 @@ class _UpdateNavigationItemState extends State<UpdateNavigationItem> {
                             Field.type: type ??
                                 widget.navigationItem.type ??
                                 Field.empty,
-                            Field.pageId:
-                                widget.navigationItem.pageId.toString(),
+                            Field.pageId: '1',
                             Field.url:
                                 url ?? widget.navigationItem.url ?? Field.empty,
                             Field.icon:
@@ -189,10 +188,8 @@ class _UpdateNavigationItemState extends State<UpdateNavigationItem> {
                             Field.target: target ??
                                 widget.navigationItem.target ??
                                 Field.empty,
-                            Field.parentId:
-                                widget.navigationItem.parentId.toString(),
-                            Field.position:
-                                widget.navigationItem.position.toString(),
+                            Field.parentId:'1',
+                            Field.position:'1',
                             Field.status: status.toString(),
                             Field.cssClass: widget.navigationItem.cssClass ??
                                 Field.emptyString,

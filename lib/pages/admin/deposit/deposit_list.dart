@@ -77,17 +77,7 @@ class _DepositListState extends State<DepositList> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return ExpandableTheme(
-              data: const ExpandableThemeData(
-                iconColor: Colors.blue,
-                useInkWell: true,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
+            return Column(
               children: [
                 SafeArea(
                   child: Padding(
@@ -115,13 +105,15 @@ class _DepositListState extends State<DepositList> {
                           child: Text(
                             Str.depositListTxt,
                             style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                                color: Styles.textColor, fontSize: 19),
+                                fontWeight: FontWeight.w500,
+                                color: Styles.textColor,
+                                fontSize: 19),
                           ),
                         ),
                         const Gap(10),
                         InkWell(
-                          onTap: () => Navigator.pushNamed(context, RouteSTR.createDeposit),
+                          onTap: () => Navigator.pushNamed(
+                              context, RouteSTR.createDeposit),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: const BoxDecoration(
@@ -138,11 +130,23 @@ class _DepositListState extends State<DepositList> {
                     ),
                   ),
                 ),
-                    for (Deposit deposit in depositList)
-                      CardDeposit(deposit: deposit),
-                  ],
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return CardDeposit(
+                        deposit: depositList[index],
+                        depositList: depositList,
+                        index: index,
+                      );
+                    },
+                    itemCount: depositList.length,
+                  ),
                 ),
-              ),
+                // for (Deposit deposit in depositList)
+                //   CardDeposit(deposit: deposit),
+              ],
             );
             // return ExpandableTheme(
             //   data: const ExpandableThemeData(

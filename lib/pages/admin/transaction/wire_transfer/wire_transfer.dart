@@ -264,7 +264,7 @@ class _CreateWireTransferState extends State<CreateWireTransfer> {
                             Field.transactionsDetails: transactionsDetails
                           };
 
-                          WireTransferMethods.add(context, body);
+                          WireTransferMethods.addAdmin(context, body);
                         },
                         text: Str.wireTransferTxt.toUpperCase(),
                       ),

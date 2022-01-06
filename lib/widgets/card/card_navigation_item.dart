@@ -131,14 +131,11 @@ class CardNavigationItem extends StatelessWidget {
     // Status
     String? status;
     switch (navigationItem.status) {
+      case 0:
+        status = 'NOT ACTIVE';
+        break;
       case 1:
-        status = 'Pending';
-        break;
-      case 2:
-        status = 'Approved';
-        break;
-      case 3:
-        status = 'Rejected/Canceled';
+        status = 'ACTIVE';
         break;
       default:
         status = 'Default';
@@ -262,7 +259,7 @@ class CardNavigationItem extends StatelessWidget {
                 Future.delayed(const Duration(milliseconds: 1000), () {
                   NavigationMethods.deleteItem(
                       context, navigationItem.id.toString());
-                  Navigator.popAndPushNamed(context, RouteSTR.branchList);
+                  Navigator.popAndPushNamed(context, RouteSTR.navigationItemList);
                 });
               },
               child: Text(

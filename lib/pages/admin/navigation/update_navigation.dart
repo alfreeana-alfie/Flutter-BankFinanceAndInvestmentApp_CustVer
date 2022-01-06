@@ -49,7 +49,7 @@ class _UpdateNavigationState extends State<UpdateNavigation> {
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.createNavigationTxt,
+            title: Str.updateNavigationTxt,
             implyLeading: true,
             context: context),
         body: ListView(
@@ -99,7 +99,7 @@ class _UpdateNavigationState extends State<UpdateNavigation> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: status,
+                      initialLabelIndex: widget.navigation.status,
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [

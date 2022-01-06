@@ -61,8 +61,11 @@ class API {
 
   // Support Ticket
   static Uri createSupportTicket = Uri.parse('$android/support_ticket');
-  static Uri listOfSupportTicket =
-      Uri.parse('$android/list_of_support_tickets');
+  static Uri updateSupportTicketStatus = Uri.parse('$android/update_support_ticket_status/');
+  static Uri updateSupportTicketPriority = Uri.parse('$android/assign_priority/');
+  static Uri updateSupportTicketOperator = Uri.parse('$android/assign_operator_id/');
+  static Uri updateSupportTicketClosed = Uri.parse('$android/assign_closed_user_id/');
+  static Uri listOfSupportTicket = Uri.parse('$android/list_of_support_tickets');
 
   // Drop Down List(s)
   static Uri listOfCurrency = Uri.parse('$android/list_of_currency');
@@ -133,7 +136,7 @@ class AdminAPI {
   static Uri deleteCurrency = Uri.parse('$android/delete_currency/');
 
   // Service
-  static Uri listOfService = Uri.parse('$android/list_of_currency');
+  static Uri listOfService = Uri.parse('$android/list_of_services');
   static Uri createService = Uri.parse('$android/create_service');
   static Uri updateService = Uri.parse('$android/update_service/');
   static Uri deleteService = Uri.parse('$android/delete_service/');

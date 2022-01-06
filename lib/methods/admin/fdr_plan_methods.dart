@@ -65,7 +65,7 @@ class FdrPlanMethods {
         Navigator.pushReplacementNamed(context, RouteSTR.fdrPlanList);
       });
     } else {
-      // print(Status.failedTxt);
+      print(response.body);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }

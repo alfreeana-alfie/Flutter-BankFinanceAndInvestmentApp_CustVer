@@ -46,20 +46,20 @@ class _UpdateFdrPackageState extends State<UpdateFdrPackage> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    setState(() {
-      name = widget.fdrPlan.name;
-      minAmt = widget.fdrPlan.minimumAmount;
-      maxAmt = widget.fdrPlan.maximumAmount;
-      interestRate = widget.fdrPlan.interestRate;
-      duration = widget.fdrPlan.duration.toString();
-      durationType = widget.fdrPlan.durationType;
-      description = widget.fdrPlan.description;
-    });
+    // setState(() {
+    //   name = widget.fdrPlan.name;
+    //   minAmt = widget.fdrPlan.minimumAmount;
+    //   maxAmt = widget.fdrPlan.maximumAmount;
+    //   interestRate = widget.fdrPlan.interestRate;
+    //   duration = widget.fdrPlan.duration.toString();
+    //   durationType = widget.fdrPlan.durationType;
+    //   description = widget.fdrPlan.description;
+    // });
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.createFdrPlanTxt, implyLeading: true, context: context),
+            title: Str.updateFdrPlanTxt, implyLeading: true, context: context),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -82,51 +82,51 @@ class _UpdateFdrPackageState extends State<UpdateFdrPackage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    NewField( readOnly: true,
+                    NewField(
                       mandatory: true,
-                      initialValue: name,
+                      initialValue: widget.fdrPlan.name,
                       onSaved: (val) => name = val,
                       hintText: Str.nameTxt,
                     ),
                     const Gap(20.0),
-                    NewField( readOnly: true,
+                    NewField(
                       mandatory: true,
-                      initialValue: minAmt,
+                      initialValue: widget.fdrPlan.minimumAmount,
                       onSaved: (val) => minAmt = val,
                       hintText: Str.minAmtTxt,
                     ),
                     const Gap(20.0),
-                    NewField( readOnly: true,
+                    NewField(
                       mandatory: true,
-                      initialValue: maxAmt,
+                      initialValue: widget.fdrPlan.maximumAmount,
                       onSaved: (val) => maxAmt = val,
                       hintText: Str.maxAmtTxt,
                     ),
                     const Gap(20.0),
-                    NewField( readOnly: true,
+                    NewField(
                       mandatory: true,
-                      initialValue: interestRate,
+                      initialValue: widget.fdrPlan.interestRate,
                       onSaved: (val) => interestRate = val,
                       hintText: Str.interestRateTxt,
                     ),
                     const Gap(20.0),
-                    NewField( readOnly: true,
+                    NewField(
                       mandatory: true,
-                      initialValue: duration,
+                      initialValue: widget.fdrPlan.duration.toString(),
                       onSaved: (val) => duration = val,
                       hintText: Str.durationTxt,
                     ),
                     const Gap(20.0),
-                    NewField( readOnly: true,
+                    NewField(
                       mandatory: true,
-                      initialValue: durationType,
+                      initialValue: widget.fdrPlan.durationType,
                       onSaved: (val) => durationType = val,
                       hintText: Str.durationTypeTxt,
                     ),
                     const Gap(20.0),
-                    NewField( readOnly: true,
+                    NewField(
                       mandatory: true,
-                      initialValue: description,
+                      initialValue: widget.fdrPlan.description,
                       onSaved: (val) => description = val,
                       hintText: Str.descriptionTxt,
                     ),
@@ -148,7 +148,7 @@ class _UpdateFdrPackageState extends State<UpdateFdrPackage> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: status,
+                      initialLabelIndex: widget.fdrPlan.status,
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [
@@ -181,15 +181,15 @@ class _UpdateFdrPackageState extends State<UpdateFdrPackage> {
                         context: context,
                         callback: () {
                           Map<String, String> body = {
-                            // Field.name: name!,
-                            // Field.minimumAmount: minAmt ?? Field.emptyString,
-                            // Field.maximumAmount: maxAmt ?? Field.emptyString,
-                            // Field.interestRate:
-                            //     interestRate ?? Field.emptyString,
-                            // Field.duration: duration ?? Field.emptyString,
-                            // Field.durationType:
-                            //     durationType ?? Field.emptyString,
-                            // Field.description: description ?? Field.emptyString,
+                            Field.name: name ?? widget.fdrPlan.name ?? Field.emptyString,
+                            Field.minimumAmount: minAmt ?? widget.fdrPlan.minimumAmount ?? Field.emptyString,
+                            Field.maximumAmount: maxAmt ?? widget.fdrPlan.maximumAmount ?? Field.emptyString,
+                            Field.interestRate:
+                                interestRate ?? widget.fdrPlan.interestRate ?? Field.emptyString,
+                            Field.duration: duration ?? widget.fdrPlan.duration.toString(),
+                            Field.durationType:
+                                durationType ?? widget.fdrPlan.durationType ?? Field.emptyString,
+                            Field.description: description ?? widget.fdrPlan.description ?? Field.emptyString,
                             Field.status: status.toString(),
                           };
                           FdrPlanMethods.edit(context, body, widget.fdrPlan.id.toString());

@@ -79,7 +79,7 @@ class _UpdateServiceState extends State<UpdateService> {
                         context: context,
                         callback: () {
                           Map<String, String> body = {
-                            Field.icon: icon ?? widget.service.icon ?? Field.emptyString,
+                            'icon': icon ?? widget.service.icon ?? Field.emptyString,
                           };
 
                           ServiceMethods.edit(context, body, widget.service.id.toString());

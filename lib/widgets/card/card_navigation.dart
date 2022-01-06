@@ -136,14 +136,11 @@ class CardNavigation extends StatelessWidget {
     // Status
     String? status;
     switch (navigation.status) {
+      case 0:
+        status = 'NOT ACTIVE';
+        break;
       case 1:
-        status = 'Pending';
-        break;
-      case 2:
-        status = 'Approved';
-        break;
-      case 3:
-        status = 'Rejected/Canceled';
+        status = 'ACTIVE';
         break;
       default:
         status = 'Default';

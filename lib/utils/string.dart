@@ -276,6 +276,15 @@ class Str {
   static String updateFaqTxt = 'Update FAQ';
   static String updateFdrTxt = 'Update FDR';
   static String updateFdrPlanTxt = 'Update FDR Plan';
+  static String updateSupportTicketStatusTxt = 'Update Status';
+  static String updateSupportTicketPriorityTxt = 'Update Priority';
+  static String updateSupportTicketOperatorTxt = 'Update Operator';
+  static String updateSupportTicketClosedTxt = 'Close Ticket';
+  static String updatePermissionTxt = 'Update Permission';
+  static String updateLoanProductTxt = 'Update Loan Product';
+  static String updateOtherBankTxt = 'Update Bank';
+  static String updateNavigationTxt = 'Update Navigation';
+  static String updateNavigationItemTxt = 'Update Navigation Item';
 
 }
 
@@ -503,7 +512,7 @@ class Field {
   static String question = 'question';
   static String locale = 'locale';
 
-  static String testimonials = 'testimonials';
+  static String testimonials = 'testimonial';
 
   static String image = 'image';
   static String role = 'role';

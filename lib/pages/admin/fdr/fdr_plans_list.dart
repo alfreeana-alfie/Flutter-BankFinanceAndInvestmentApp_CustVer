@@ -77,7 +77,7 @@ class _FdrPlanListState extends State<FdrPlanList> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return ListView(
+            return Column(
               children: [
                 SafeArea(
                   child: Padding(

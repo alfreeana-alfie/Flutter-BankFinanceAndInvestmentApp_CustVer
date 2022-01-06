@@ -8,6 +8,7 @@ import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/card/card_ticket.dart';
+import 'package:flutter_banking_app/widgets/card/card_ticket_admin.dart';
 import 'package:flutter_banking_app/widgets/left_menu.dart';
 import 'package:flutter_banking_app/widgets/left_menu_member.dart';
 import 'package:gap/gap.dart';
@@ -31,13 +32,14 @@ class _SupportTicketListState extends State<SupportTicketList> {
     // User user = User.fromJSON(await sharedPref.read(Pref.userData));
     // String userId = user.id.toString();
 
-    final response = await http.get(AdminAPI.listOfTestimonial, headers: headers);
+    final response =
+        await http.get(API.listOfSupportTicket, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
       for (var req in jsonBody[Field.data]) {
         final data = Ticket.fromMap(req);
-        if(mounted) {
+        if (mounted) {
           ticketList.add(data);
         }
       }
@@ -80,17 +82,7 @@ class _SupportTicketListState extends State<SupportTicketList> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return ExpandableTheme(
-              data: const ExpandableThemeData(
-                iconColor: Colors.blue,
-                useInkWell: true,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
+            return Column(
               children: [
                 SafeArea(
                   child: Padding(
@@ -118,13 +110,15 @@ class _SupportTicketListState extends State<SupportTicketList> {
                           child: Text(
                             Str.supportTicketTxt,
                             style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                                color: Styles.textColor, fontSize: 19),
+                                fontWeight: FontWeight.w500,
+                                color: Styles.textColor,
+                                fontSize: 19),
                           ),
                         ),
                         const Gap(10),
                         InkWell(
-                          onTap: () => Navigator.pushNamed(context, RouteSTR.createTicket),
+                          onTap: () => Navigator.pushNamed(
+                              context, RouteSTR.createTicket),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: const BoxDecoration(
@@ -141,10 +135,18 @@ class _SupportTicketListState extends State<SupportTicketList> {
                     ),
                   ),
                 ),
-                    for (Ticket ticket in ticketList) CardTicket(ticket: ticket),
-                  ],
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return CardTicketAdmin(ticket: ticketList[index], ticketList: ticketList, index: index,);
+                    },
+                    itemCount: ticketList.length,
+                  ),
                 ),
-              ),
+                // for (Ticket ticket in ticketList) CardTicket(ticket: ticket),
+              ],
             );
           }
         }

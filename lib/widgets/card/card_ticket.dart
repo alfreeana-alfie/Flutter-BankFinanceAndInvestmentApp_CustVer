@@ -14,6 +14,8 @@ class CardTicket extends StatelessWidget {
   const CardTicket({Key? key, required this.ticket}) : super(key: key);
 
   final Ticket ticket;
+  // final List<Ticket> ticketList;
+  // final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -198,7 +200,7 @@ class CardTicket extends StatelessWidget {
             onPressed: () {
               // Navigator.of(context).push(
               //   MaterialPageRoute(
-              //     builder: (context) => EditUserPage(
+              //     builder: (context) => UpdateSupportTicketStatus(
               //       user: users,
               //     ),
               //   ),

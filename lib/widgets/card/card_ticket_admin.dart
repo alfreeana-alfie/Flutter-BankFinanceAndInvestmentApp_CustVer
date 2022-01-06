@@ -1,10 +1,10 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_banking_app/methods/admin/testimonial_methods.dart';
-import 'package:flutter_banking_app/methods/config.dart';
-import 'package:flutter_banking_app/models/currency.dart';
-import 'package:flutter_banking_app/models/testimonial.dart';
-import 'package:flutter_banking_app/pages/admin/testimonial/update_testimonial.dart';
+import 'package:flutter_banking_app/models/ticket.dart';
+import 'package:flutter_banking_app/pages/admin/ticket/update_ticket_closed.dart';
+import 'package:flutter_banking_app/pages/admin/ticket/update_ticket_operator.dart';
+import 'package:flutter_banking_app/pages/admin/ticket/update_ticket_priority.dart';
+import 'package:flutter_banking_app/pages/admin/ticket/update_ticket_status.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -14,16 +14,16 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-class CardTestimonial extends StatelessWidget {
-  const CardTestimonial(
+class CardTicketAdmin extends StatelessWidget {
+  const CardTicketAdmin(
       {Key? key,
-      required this.testimonial,
-      required this.testimonialList,
+      required this.ticket,
+      required this.ticketList,
       required this.index})
       : super(key: key);
 
-  final Testimonial testimonial;
-  final List<Testimonial> testimonialList;
+  final Ticket ticket;
+  final List<Ticket> ticketList;
   final int index;
 
   @override
@@ -64,8 +64,15 @@ class CardTestimonial extends StatelessWidget {
                               color: Styles.accentColor,
                             ),
                             const Gap(20),
-                            Text(testimonial.name ?? Field.emptyString,
-                                style: Theme.of(context).textTheme.headline6),
+                            Container(
+                              constraints: const BoxConstraints(
+                                  minWidth: 100, maxWidth: 220),
+                              child: Text(
+                                ticket.supportTicketId.toString(),
+                                style: Theme.of(context).textTheme.headline6,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
                           ],
                         )),
                     collapsed: const Text(
@@ -132,12 +139,9 @@ class CardTestimonial extends StatelessWidget {
   }
 
   buildExpanded1(BuildContext context) {
-    DateTime tempDate = DateTime.parse(testimonial.createdAt ?? '-');
-    String createdAt = DateFormat('yyyy-MM-dd hh:mm:ss').format(tempDate);
-
     // Status
     String? status;
-    switch (testimonial.status) {
+    switch (ticket.status) {
       case 0:
         status = 'NOT ACTIVE';
         break;
@@ -148,40 +152,137 @@ class CardTestimonial extends StatelessWidget {
         status = 'Default';
     }
 
+    // Priority
+    String? priority;
+    switch (ticket.priority) {
+      case 1:
+        priority = 'Low';
+        break;
+      case 2:
+        priority = 'Moderate';
+        break;
+      case 3:
+        priority = 'High';
+        break;
+      default:
+        priority = 'Default';
+    }
+
+    DateTime tempDate = DateTime.parse(ticket.createdAt ?? '-');
+    String createdAt = DateFormat('yyyy-MM-dd hh:mm:ss').format(tempDate);
+
     return Container(
       color: Styles.accentColor,
       padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            DetailRow(
-                labelTitle: Str.localeTxt,
-                labelDetails: testimonial.locale ?? Field.emptyString),
-            DetailRow(
-                labelTitle: Str.testimonialsTxt,
-                labelDetails: testimonial.testimonials ?? Field.emptyString),
-            DetailRow(
-                labelTitle: Str.statusTxt,
-                labelDetails: status),
-            DetailRow(labelTitle: Str.createdTxt, labelDetails: createdAt),
-            _buildButtonRow(context),
-          ],
-        ),
-      ]),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          DetailRow(
+              labelTitle: Str.subjectTxt,
+              labelDetails: ticket.subject ?? Field.emptyString),
+          DetailRow(
+              labelTitle: Str.messageTxt,
+              labelDetails: ticket.message ?? Field.emptyString),
+          DetailRow(labelTitle: Str.statusTxt, labelDetails: status),
+          DetailRow(labelTitle: Str.priorityTxt, labelDetails: priority),
+          DetailRow(labelTitle: Str.createdTxt, labelDetails: createdAt),
+          // _buildButtonRow(context),
+          const Gap(20),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdateSupportTicketStatus(
+                    ticket: ticket,
+                  ),
+                ),
+              );
+            },
+            child: Text(
+              Str.updateSupportTicketStatusTxt.toUpperCase(),
+            ),
+            style: ElevatedButton.styleFrom(
+                elevation: 0.0, primary: Styles.successColor),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdateSupportTicketPriority(
+                    ticket: ticket,
+                  ),
+                ),
+              );
+            },
+            child: Text(
+              Str.updateSupportTicketPriorityTxt.toUpperCase(),
+            ),
+            style: ElevatedButton.styleFrom(
+                elevation: 0.0, primary: Styles.successColor),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdateSupportTicketOperator(
+                    ticket: ticket,
+                  ),
+                ),
+              );
+            },
+            child: Text(
+              Str.updateSupportTicketOperatorTxt.toUpperCase(),
+            ),
+            style: ElevatedButton.styleFrom(
+                elevation: 0.0, primary: Styles.successColor),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdateSupportTicketClosed(
+                    ticket: ticket,
+                  ),
+                ),
+              );
+            },
+            child: Text(
+              Str.updateSupportTicketClosedTxt.toUpperCase(),
+            ),
+            style: ElevatedButton.styleFrom(
+                elevation: 0.0, primary: Styles.successColor),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _showMyDialog(context);
+            },
+            child: Text(
+              Str.deleteTxt.toUpperCase(),
+              style: GoogleFonts.nunitoSans(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Styles.primaryColor,
+                letterSpacing: 0.5,
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+                elevation: 0.0, primary: Styles.dangerColor),
+          ),
+        ],
+      ),
     );
   }
 
   _buildButtonRow(BuildContext context) {
-    return Row(
+    return ListView(
       children: [
         Expanded(
           child: ElevatedButton(
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => UpdateTestimonial(
-                    testimonial: testimonial,
+                  builder: (context) => UpdateSupportTicketStatus(
+                    ticket: ticket,
                   ),
                 ),
               );
@@ -238,15 +339,7 @@ class CardTestimonial extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                testimonialList.removeAt(index);
-                
-                CustomToast.showMsg('Deleting...', Styles.dangerColor);
-
-                Future.delayed(const Duration(milliseconds: 1000), () {
-                  TestimonialMethods.delete(
-                      context, testimonial.id.toString());
-                  Navigator.popAndPushNamed(context, RouteSTR.testimonialList);
-                });
+                Navigator.of(context).pop();
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

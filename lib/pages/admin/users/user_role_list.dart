@@ -34,9 +34,9 @@ class _UserRoleListState extends State<UserRoleList> {
       var jsonBody = jsonDecode(response.body);
       for (var req in jsonBody[Field.data]) {
         final data = UserRole.fromMap(req);
-        setState(() {
+        if (mounted) {
           roleList.add(data);
-        });
+        }
       }
     } else {
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
@@ -75,7 +75,7 @@ class _UserRoleListState extends State<UserRoleList> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return ListView(
+            return Column(
               children: [
                 SafeArea(
                   child: Padding(

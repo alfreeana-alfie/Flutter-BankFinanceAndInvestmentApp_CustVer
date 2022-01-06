@@ -1,6 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/admin/deposit_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/deposit.dart';
+import 'package:flutter_banking_app/pages/admin/deposit/update_deposit.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -10,9 +13,11 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CardDeposit extends StatelessWidget {
-  const CardDeposit({Key? key, required this.deposit}) : super(key: key);
+  const CardDeposit({Key? key, required this.deposit, required this.depositList, required this.index}) : super(key: key);
 
   final Deposit deposit;
+  final List<Deposit> depositList;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +125,22 @@ class CardDeposit extends StatelessWidget {
   }
 
   buildExpanded1(BuildContext context) {
+    // Status
+    String? status;
+    switch (deposit.status) {
+      case 1:
+        status = 'Pending';
+        break;
+      case 2:
+        status = 'Approved';
+        break;
+      case 3:
+        status = 'Rejected/Canceled';
+        break;
+      default:
+        status = 'Default';
+    }
+
     return Container(
       color: Styles.accentColor,
       padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
@@ -138,7 +159,7 @@ class CardDeposit extends StatelessWidget {
             DetailRow(labelTitle: Str.typeTxt, labelDetails: deposit.type ?? Field.emptyString),
             DetailRow(
                 labelTitle: Str.methodTxt, labelDetails: deposit.method ?? Field.emptyString),
-            DetailRow(labelTitle: Str.statusTxt, labelDetails: deposit.status.toString()),
+            DetailRow(labelTitle: Str.statusTxt, labelDetails: status),
             DetailRow(labelTitle: Str.noteTxt, labelDetails: deposit.note ?? Field.emptyString),
             _buildButtonRow(context),
           ],
@@ -150,25 +171,26 @@ class CardDeposit extends StatelessWidget {
   _buildButtonRow(BuildContext context) {
     return Row(
       children: [
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => EditUserPage(
-              //       user: users,
-              //     ),
-              //   ),
-              // );
-            },
-            child: Text(
-              Str.editTxt.toUpperCase(),
-            ),
-            style: ElevatedButton.styleFrom(
-                elevation: 0.0, primary: Styles.successColor),
-          ),
-        ),
-        const Gap(20),
+        // Expanded(
+        //   child: ElevatedButton(
+        //     onPressed: () {
+        //       // Navigator.of(context).push(
+        //       //   MaterialPageRoute(
+        //       //     builder: (context) => UpdateDeposit(
+        //       //       deposit: ,
+        //       //       notUsed: deposit,
+        //       //     ),
+        //       //   ),
+        //       // );
+        //     },
+        //     child: Text(
+        //       Str.editTxt.toUpperCase(),
+        //     ),
+        //     style: ElevatedButton.styleFrom(
+        //         elevation: 0.0, primary: Styles.successColor),
+        //   ),
+        // ),
+        // const Gap(20),
         Expanded(
           child: ElevatedButton(
             onPressed: () {
@@ -214,6 +236,15 @@ class CardDeposit extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Navigator.of(context).pop();
+                depositList.removeAt(index);
+                
+                CustomToast.showMsg('Deleting...', Styles.dangerColor);
+
+                Future.delayed(const Duration(milliseconds: 1000), () {
+                  DepositMethods.delete(
+                      context, deposit.id.toString());
+                  Navigator.popAndPushNamed(context, RouteSTR.depositList);
+                });
               },
               child: Text(
                 Str.deleteTxt.toUpperCase(),

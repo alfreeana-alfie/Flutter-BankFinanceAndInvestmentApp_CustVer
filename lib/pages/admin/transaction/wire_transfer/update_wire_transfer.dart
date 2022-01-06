@@ -126,8 +126,8 @@ class _UpdateWireTransferState extends State<UpdateWireTransfer> {
                     NewField(
                       readOnly: true,
                       mandatory: true,
-                      initialValue: widget.transaction.otherBankId,
-                      onSaved: (val) => widget.transaction.otherBankId = val,
+                      initialValue: widget.transaction.otherBankId.toString(),
+                      onSaved: (val) => otherBankId = val,
                       hintText: Str.otherBankTxt,
                     ),
                     Row(

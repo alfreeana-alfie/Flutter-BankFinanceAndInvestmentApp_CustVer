@@ -23,7 +23,7 @@ class OtherBankMethods {
 
       });
     } else {
-      // print(Status.failedTxt);
+      print(response.body);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
@@ -56,7 +56,7 @@ class OtherBankMethods {
     Uri url =
         Uri.parse(AdminAPI.deleteOtherBank.toString() + id);
 
-    final response = await http.delete(
+    final response = await http.put(
       url,
       headers: headers
     );

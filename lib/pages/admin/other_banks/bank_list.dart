@@ -76,7 +76,7 @@ class _OtherBankListState extends State<OtherBankList> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return ListView(
+            return Column(
               children: [
                 SafeArea(
                   child: Padding(

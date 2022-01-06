@@ -133,7 +133,7 @@ class SideDrawer extends StatelessWidget {
                   },
               ),
               DrawerChild(
-                title: Str.loanListTxt,
+                title: Str.loanProductListTxt,
                 onNavigate: TapGestureRecognizer()
                   ..onTap = () {
                     Navigator.pushNamed(context, RouteSTR.loanProductList);

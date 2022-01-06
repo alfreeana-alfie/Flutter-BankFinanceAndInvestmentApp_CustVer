@@ -17,9 +17,14 @@ class TestimonialMethods {
     if (response.statusCode == Status.created) {
       // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
-      Navigator.pop(context);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pushReplacementNamed(context, RouteSTR.testimonialList);
+
+      });
     } else {
-      // print(Status.failedTxt);
+      print(Status.failedTxt);
+      print(response.body);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
@@ -67,7 +72,8 @@ class TestimonialMethods {
 
       });
     } else {
-      // print(Status.failedTxt);
+      print(Status.failedTxt);
+      print(response.body);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }

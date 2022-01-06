@@ -66,7 +66,7 @@ class _CreateTeamState extends State<CreateTeam> {
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.createServiceTxt, implyLeading: true, context: context),
+            title: Str.createTeamTxt, implyLeading: true, context: context),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [

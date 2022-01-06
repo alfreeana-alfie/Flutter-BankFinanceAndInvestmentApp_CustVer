@@ -1,9 +1,15 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class Transaction {
-  int? userId,status,id;
+  int? userId,status,currencyId,loanId,refId,
+      parentId,
+      otherBankId,
+      gatewayId,
+      createdUserId,
+      updatedUserId,
+      branchId,id;
   String? 
-      currencyId,
+      
       amount,
       fee,
       drCr,
@@ -11,14 +17,8 @@ class Transaction {
       method,
       
       note,
-      loanId,
-      refId,
-      parentId,
-      otherBankId,
-      gatewayId,
-      createdUserId,
-      updatedUserId,
-      branchId,
+      
+      
       transactionsDetails,
       createdAt;
 
@@ -48,7 +48,7 @@ class Transaction {
     return Transaction(
       id: map[Field.id] as int?,
       userId: map[Field.userId] as int?,
-      currencyId: map[Field.currencyId] as String?,
+      currencyId: map[Field.currencyId] as int?,
       amount: map[Field.amount] as String?,
       fee: map[Field.fee] as String?,
       drCr: map[Field.drCr] as String?,
@@ -56,14 +56,14 @@ class Transaction {
       method: map[Field.method] as String?,
       status: map[Field.status] as int?,
       note: map[Field.note] as String?,
-      loanId: map[Field.loanId] as String?,
-      refId: map[Field.refId] as String?,
-      parentId: map[Field.parentId] as String?,
-      otherBankId: map[Field.otherBankId] as String?,
-      gatewayId: map[Field.gatewayId] as String?,
-      createdUserId: map[Field.createdUserId] as String?,
-      updatedUserId: map[Field.updatedUserId] as String?,
-      branchId: map[Field.branchId] as String?,
+      loanId: map[Field.loanId] as int?,
+      refId: map[Field.refId] as int?,
+      parentId: map[Field.parentId] as int?,
+      otherBankId: map[Field.otherBankId] as int?,
+      gatewayId: map[Field.gatewayId] as int?,
+      createdUserId: map[Field.createdUserId] as int?,
+      updatedUserId: map[Field.updatedUserId] as int?,
+      branchId: map[Field.branchId] as int?,
       transactionsDetails: map[Field.transactionsDetails] as String?,
       createdAt: map[Field.createdAt] as String?,
     );

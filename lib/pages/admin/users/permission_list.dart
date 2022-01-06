@@ -34,9 +34,9 @@ class _PermissionListState extends State<PermissionList> {
       var jsonBody = jsonDecode(response.body);
       for (var req in jsonBody[Field.data]) {
         final data = Permission.fromMap(req);
-        setState(() {
+        if (mounted)  {
           permissionList.add(data);
-        });
+        }
       }
     } else {
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);

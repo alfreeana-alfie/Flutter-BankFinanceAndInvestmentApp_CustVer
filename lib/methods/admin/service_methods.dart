@@ -37,7 +37,7 @@ class ServiceMethods {
       headers: headers
     );
 
-    if (response.statusCode == Status.created) {
+    if (response.statusCode == Status.ok) {
       // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
       Future.delayed(const Duration(milliseconds: 2000), () {
@@ -46,7 +46,9 @@ class ServiceMethods {
 
       });
     } else {
-      // print(Status.failedTxt);
+      print(Status.failedTxt);
+      print(response.body);
+
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }

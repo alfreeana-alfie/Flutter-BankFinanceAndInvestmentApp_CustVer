@@ -48,21 +48,21 @@ class _UpdateLoanProductState extends State<UpdateLoanProduct> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    setState(() {
-      name = widget.loanProduct.name;
-      minAmt = widget.loanProduct.minAmt;
-      maxAmt = widget.loanProduct.maxAmt;
-      description = widget.loanProduct.description;
-      interestRate = widget.loanProduct.interestRate;
-      interestType = widget.loanProduct.interestType;
-      term = widget.loanProduct.term.toString();
-      termPeriod = widget.loanProduct.termPeriod;
-    });
+    // setState(() {
+    //   name = widget.loanProduct.name;
+    //   minAmt = widget.loanProduct.minAmt;
+    //   maxAmt = widget.loanProduct.maxAmt;
+    //   description = widget.loanProduct.description;
+    //   interestRate = widget.loanProduct.interestRate;
+    //   interestType = widget.loanProduct.interestType;
+    //   term = widget.loanProduct.term.toString();
+    //   termPeriod = widget.loanProduct.termPeriod;
+    // });
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.createLoanProductTxt,
+            title: Str.updateLoanProductTxt,
             implyLeading: true,
             context: context),
         body: ListView(
@@ -88,65 +88,57 @@ class _UpdateLoanProductState extends State<UpdateLoanProduct> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     NewField(
-                      readOnly: true,
                       mandatory: true,
-                      initialValue: name,
+                      initialValue: widget.loanProduct.name,
                       onSaved: (val) => name = val,
                       hintText: Str.nameTxt,
                     ),
                     const Gap(20.0),
                     NewField(
-                      readOnly: true,
                       mandatory: true,
-                      initialValue: minAmt,
+                      initialValue: widget.loanProduct.minAmt,
                       onSaved: (val) => minAmt = val,
                       hintText: Str.minAmtTxt,
                     ),
                     const Gap(20.0),
                     NewField(
-                      readOnly: true,
                       mandatory: true,
-                      initialValue: maxAmt,
+                      initialValue: widget.loanProduct.maxAmt,
                       onSaved: (val) => maxAmt = val,
                       hintText: Str.maxAmtTxt,
                     ),
                     const Gap(20.0),
                     NewField(
-                      readOnly: true,
                       mandatory: true,
-                      initialValue: description,
+                      initialValue: widget.loanProduct.description,
                       onSaved: (val) => description = val,
                       hintText: Str.descriptionTxt,
                     ),
                     const Gap(20.0),
                     NewField(
-                      readOnly: true,
                       mandatory: true,
-                      initialValue: interestRate,
+                      initialValue: widget.loanProduct.interestRate,
                       onSaved: (val) => interestRate = val,
                       hintText: Str.interestRateTxt,
                     ),
                     const Gap(20.0),
                     NewField(
-                      readOnly: true,
                       mandatory: true,
-                      initialValue: interestType,
+                      initialValue: widget.loanProduct.interestType,
                       onSaved: (val) => interestType = val,
                       hintText: Str.interestTypeTxt,
                     ),
                     const Gap(20.0),
                     NewField(
-                      readOnly: true,
                       mandatory: true,
-                      initialValue: term,
+                      initialValue: widget.loanProduct.term.toString(),
                       onSaved: (val) => term = val,
                       hintText: Str.termPeriodTxt,
                     ),
                     const Gap(20.0),
                     NewField(
-                      readOnly: true,
                       mandatory: true,
-                      initialValue: termPeriod,
+                      initialValue: widget.loanProduct.termPeriod,
                       onSaved: (val) => termPeriod = val,
                       hintText: Str.termPeriodTxt,
                     ),
@@ -168,7 +160,7 @@ class _UpdateLoanProductState extends State<UpdateLoanProduct> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: status,
+                      initialLabelIndex: widget.loanProduct.status,
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [
@@ -201,16 +193,16 @@ class _UpdateLoanProductState extends State<UpdateLoanProduct> {
                         context: context,
                         callback: () {
                           Map<String, String> body = {
-                            // Field.name: name!,
-                            // Field.minimumAmount: minAmt ?? Field.emptyString,
-                            // Field.maximumAmount: maxAmt ?? Field.emptyString,
-                            // Field.description: description ?? Field.emptyString,
-                            // Field.interestRate:
-                            //     interestRate ?? Field.emptyString,
-                            // Field.interestType:
-                            //     interestType ?? Field.emptyString,
-                            // Field.term: term ?? Field.emptyString,
-                            // Field.termPeriod: termPeriod ?? Field.emptyString,
+                            Field.name: name ?? widget.loanProduct.name ?? Field.emptyString,
+                            Field.minimumAmount: minAmt ?? widget.loanProduct.minAmt ?? Field.emptyString,
+                            Field.maximumAmount: maxAmt ?? widget.loanProduct.maxAmt ?? Field.emptyString,
+                            Field.description: description ?? widget.loanProduct.description ?? Field.emptyString,
+                            Field.interestRate:
+                                interestRate ?? widget.loanProduct.interestRate ?? Field.emptyString,
+                            Field.interestType:
+                                interestType ?? widget.loanProduct.interestType ?? Field.emptyString,
+                            Field.term: term ?? widget.loanProduct.term.toString(),
+                            Field.termPeriod: termPeriod ?? widget.loanProduct.termPeriod ?? Field.emptyString,
                             Field.status: status.toString(),
                           };
 

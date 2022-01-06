@@ -1,11 +1,12 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class Deposit {
-  int? status;
+  int? id, status;
   String? userName, name, amount, fee, drCr, type, method, note;
 
   Deposit(
-      {required this.userName,
+      {required this.id,
+        required this.userName,
       required this.name,
       required this.amount,
       required this.fee,
@@ -17,6 +18,7 @@ class Deposit {
 
   factory Deposit.fromMap(Map<String, dynamic> map) {
     return Deposit(
+      id: map[Field.id] as int?,
       userName: map[Field.userName] as String?,
       name: map[Field.name] as String?,
       amount: map[Field.amount] as String?,

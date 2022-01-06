@@ -151,7 +151,7 @@ class CardTransaction extends StatelessWidget {
           children: [
             DetailRow(labelTitle: Str.userNameTxt, labelDetails: transaction.userId.toString()),
             DetailRow(
-                labelTitle: Str.currencyTxt, labelDetails: transaction.currencyId ?? Field.emptyString),
+                labelTitle: Str.currencyTxt, labelDetails: transaction.currencyId.toString()),
             DetailRow(labelTitle: Str.amountTxt, labelDetails: transaction.amount ?? Field.emptyString),
             DetailRow(
                 labelTitle: Str.feeTxt, labelDetails: transaction.fee ?? Field.emptyString),
@@ -163,12 +163,12 @@ class CardTransaction extends StatelessWidget {
             DetailRow(labelTitle: Str.statusTxt, labelDetails: status),
             DetailRow(labelTitle: Str.noteTxt, labelDetails: transaction.note ?? Field.emptyString),
 
-            DetailRow(labelTitle: Str.loanTxt, labelDetails: transaction.loanId ?? Field.emptyString),
-            DetailRow(labelTitle: Str.refTxt, labelDetails: transaction.refId ?? Field.emptyString),
-            DetailRow(labelTitle: Str.parentIdTxt, labelDetails: transaction.parentId ?? Field.emptyString),
-            DetailRow(labelTitle: Str.otherBankTxt, labelDetails: transaction.otherBankId ?? Field.emptyString),
-            DetailRow(labelTitle: Str.gatewayTxt, labelDetails: transaction.gatewayId ?? Field.emptyString),
-            DetailRow(labelTitle: Str.branchTxt, labelDetails: transaction.branchId ?? Field.emptyString),
+            DetailRow(labelTitle: Str.loanTxt, labelDetails: transaction.loanId.toString()),
+            DetailRow(labelTitle: Str.refTxt, labelDetails: transaction.refId.toString()),
+            DetailRow(labelTitle: Str.parentIdTxt, labelDetails: transaction.parentId.toString()),
+            DetailRow(labelTitle: Str.otherBankTxt, labelDetails: transaction.otherBankId.toString()),
+            DetailRow(labelTitle: Str.gatewayTxt, labelDetails: transaction.gatewayId.toString()),
+            DetailRow(labelTitle: Str.branchTxt, labelDetails: transaction.branchId.toString()),
             DetailRow(labelTitle: Str.transactionDetailsTxt, labelDetails: transaction.transactionsDetails ?? Field.emptyString),
             DetailRow(labelTitle: Str.createdTxt, labelDetails: createdAt),
             _buildButtonRow(context),

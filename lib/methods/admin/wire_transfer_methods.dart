@@ -17,7 +17,11 @@ class WireTransferMethods {
     if (response.statusCode == Status.created) {
       // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
-      Navigator.pop(context);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pushReplacementNamed(context, RouteSTR.wireTransferList);
+
+      });
     } else {
       // print(Status.failedTxt);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
@@ -40,7 +44,7 @@ class WireTransferMethods {
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
       Future.delayed(const Duration(milliseconds: 2000), () {
 
-        Navigator.pushReplacementNamed(context, RouteSTR.currencyList);
+        Navigator.pushReplacementNamed(context, RouteSTR.wireTransferList);
 
       });
     } else {

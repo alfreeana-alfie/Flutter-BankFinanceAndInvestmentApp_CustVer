@@ -84,7 +84,7 @@ Future<void> main() async {
     MaterialApp(
       // home: const AdminDashboard(),
       home: SplashScreenView(
-        navigateRoute: const NavigationItemList(),
+        navigateRoute: const AdminDashboard(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,
@@ -185,7 +185,7 @@ Future<void> main() async {
         RouteSTR.createFaq: (context) => const CreateFaq(),
 
         RouteSTR.teamList: (context) => const TeamList(),
-        RouteSTR.createTicket: (context) => const CreateTeam(),
+        RouteSTR.createTeam: (context) => const CreateTeam(),
 
         RouteSTR.testimonialList: (context) => const TestimonialList(),
         RouteSTR.createTestimonial: (context) => const CreateTestimonial(),

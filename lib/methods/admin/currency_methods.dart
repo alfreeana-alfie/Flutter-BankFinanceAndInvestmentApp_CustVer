@@ -24,7 +24,7 @@ class CurrencyMethods {
 
       });
     } else {
-      // print(Status.failedTxt);
+      print(response.body);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }

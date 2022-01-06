@@ -2,32 +2,51 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_banking_app/methods/admin/users_methods.dart';
-import 'package:flutter_banking_app/models/permission.dart';
+import 'package:flutter_banking_app/methods/config.dart';
+import 'package:flutter_banking_app/methods/member/support_ticket_methods.dart';
+import 'package:flutter_banking_app/models/ticket.dart';
+import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
-import 'package:flutter_banking_app/widgets/dropdown/dropdown_roles.dart';
+import 'package:flutter_banking_app/widgets/dropdown/dropdrown_user.dart';
 import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
 
-class UpdateUserPermission extends StatefulWidget {
-  const UpdateUserPermission({Key? key, required this.permission})
+class UpdateSupportTicketOperator extends StatefulWidget {
+const UpdateSupportTicketOperator({Key? key, required this.ticket})
       : super(key: key);
 
-  final Permission permission;
+  final Ticket ticket;
 
   @override
-  _UpdateUserPermissionState createState() => _UpdateUserPermissionState();
+  _UpdateSupportTicketOperatorState createState() => _UpdateSupportTicketOperatorState();
 }
 
-class _UpdateUserPermissionState extends State<UpdateUserPermission> {
+class _UpdateSupportTicketOperatorState extends State<UpdateSupportTicketOperator> {
   final ScrollController _scrollController = ScrollController();
 
-  String? roleId, roleName, permission;
+  var controller = ScrollController();
+  SharedPref sharedPref = SharedPref();
+  User userLoad = User();
+
+  String? subject, message, supportTicketId, userId, operatorId, operatorName;
+
+  loadSharedPrefs() async {
+    try {
+      User user = User.fromJSON(await sharedPref.read(Pref.userData));
+      setState(() {
+        userLoad = user;
+
+        userId = user.id.toString();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   void initState() {
@@ -35,21 +54,17 @@ class _UpdateUserPermissionState extends State<UpdateUserPermission> {
       print(_scrollController.offset);
     });
     super.initState();
+    loadSharedPrefs();
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // setState(() {
-    //   permission = widget.permission.permission;
-    // });
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.updatePermissionTxt,
-            implyLeading: true,
-            context: context),
+            title: Str.sendMoneyTxt, implyLeading: true, context: context),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -72,11 +87,26 @@ class _UpdateUserPermissionState extends State<UpdateUserPermission> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    NewField(
+                      readOnly: true,
+                      initialValue: widget.ticket.subject,
+                        onSaved: (val) => subject = val,
+                        hintText: Str.subjectTxt),
+                    const Gap(20.0),
+                    NewField(
+                      readOnly: true,
+                      initialValue: widget.ticket.message,
+                      onSaved: (val) => message = val,
+                      hintText: Str.messageTxt,
+                      maxLines: 10,
+                    ),
+                    const Gap(20),
                     Row(
                       children: [
                         Padding(
                           padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
-                          child: Text(Str.bankTxt, style: Styles.primaryTitle),
+                          child: Text(Str.userAccountTxt,
+                              style: Styles.primaryTitle),
                         ),
                         const Padding(
                           padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
@@ -88,34 +118,21 @@ class _UpdateUserPermissionState extends State<UpdateUserPermission> {
                       ],
                     ),
                     SizedBox(
-                      child: DropDownUserRoles(
-                        role: roleId,
-                        roleName: roleName,
+                      child: DropDownUser(
+                        users: operatorId,
+                        usersName: operatorName,
                         onChanged: (val) {
                           setState(
                             () {
-                              roleId = val!.id.toString();
-                              roleName = val.name;
+                              operatorId = val!.id.toString();
+                              operatorName = val.name;
                             },
                           );
                         },
                       ),
                     ),
                     const Gap(20),
-                    NewField(
-                      mandatory: true,
-                      onSaved: (val) => permission = val,
-                      hintText: Str.permissionTxt,
-                    ),
-                    const Gap(10),
                     Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(15),
-                            bottomRight: Radius.circular(15)),
-                        color: Styles.primaryColor,
-                      ),
-                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 0, vertical: 10),
                       child: elevatedButton(
@@ -123,13 +140,19 @@ class _UpdateUserPermissionState extends State<UpdateUserPermission> {
                         context: context,
                         callback: () {
                           Map<String, String> body = {
-                            Field.roleId: roleId ?? widget.permission.roleId.toString(),
-                            Field.permission: permission ?? widget.permission.permission ?? Field.emptyString
+                            // Field.supportTicketId: '#${getRandomString(12)}',
+                            // Field.subject: subject ?? Field.emptyString,
+                            // Field.message: message ?? Field.emptyAmount,
+                            // Field.senderId: userId ?? Field.emptyString,
+                            // Field.status: Status.pending.toString(),
+                            // Field.priority: Status.pending.toString(),
+                            Field.operatorId: operatorId ?? widget.ticket.operatorId.toString(),
+                            // Field.closedUserId: '0',
                           };
 
-                          UserMethods.editPermission(context, body, widget.permission.id.toString());
+                          SupportTicketMethods.editOperator(context, body, widget.ticket.id.toString());
                         },
-                        text: Str.submitTxt,
+                        text: Str.submitTxt.toUpperCase(),
                       ),
                     ),
                   ],

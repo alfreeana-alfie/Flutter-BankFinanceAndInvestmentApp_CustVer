@@ -94,6 +94,7 @@ class NavigationMethods {
       });
     } else {
       print(Status.failedTxt);
+      print(response.body);
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
@@ -116,6 +117,7 @@ class NavigationMethods {
       // });
     } else {
       print(Status.failedTxt);
+      
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }

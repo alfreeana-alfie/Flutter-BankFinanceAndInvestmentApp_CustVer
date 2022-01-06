@@ -63,7 +63,7 @@ class _UpdateOtherBankState extends State<UpdateOtherBank> {
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.createOtherBankTxt,
+            title: Str.updateOtherBankTxt,
             implyLeading: true,
             context: context),
         body: ListView(

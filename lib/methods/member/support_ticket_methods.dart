@@ -25,4 +25,100 @@ class SupportTicketMethods {
     }
   }
 
+  static void editStatus(BuildContext context, Map<String, String> body, String id) async {
+    Uri url =
+        Uri.parse(API.updateSupportTicketStatus.toString() + id);
+
+    final response = await http.put(
+      url,
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == Status.ok) {
+      // print(Status.successTxt);
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pushReplacementNamed(context, RouteSTR.supportTicketListM);
+
+      });
+    } else {
+      print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
+
+  static void editPriority(BuildContext context, Map<String, String> body, String id) async {
+    Uri url =
+        Uri.parse(API.updateSupportTicketPriority.toString() + id);
+
+    final response = await http.put(
+      url,
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == Status.ok) {
+      // print(Status.successTxt);
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pushReplacementNamed(context, RouteSTR.supportTicketListM);
+
+      });
+    } else {
+      print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
+
+  static void editOperator(BuildContext context, Map<String, String> body, String id) async {
+    Uri url =
+        Uri.parse(API.updateSupportTicketOperator.toString() + id);
+
+    final response = await http.put(
+      url,
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == Status.ok) {
+      // print(Status.successTxt);
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pushReplacementNamed(context, RouteSTR.supportTicketListM);
+
+      });
+    } else {
+      print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
+
+  static void editClosed(BuildContext context, Map<String, String> body, String id) async {
+    Uri url =
+        Uri.parse(API.updateSupportTicketClosed.toString() + id);
+
+    final response = await http.put(
+      url,
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == Status.ok) {
+      // print(Status.successTxt);
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pushReplacementNamed(context, RouteSTR.supportTicketListM);
+
+      });
+    } else {
+      print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
+
 }

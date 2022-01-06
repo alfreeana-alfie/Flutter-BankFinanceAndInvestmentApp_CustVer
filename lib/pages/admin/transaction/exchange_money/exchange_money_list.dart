@@ -34,9 +34,9 @@ class _ExchangeMoneyListState extends State<ExchangeMoneyList> {
       var jsonBody = jsonDecode(response.body);
       for (var req in jsonBody[Field.data]) {
         final data = Transaction.fromMap(req);
-        setState(() {
+        if(mounted) {
           transactionList.add(data);
-        });
+        }
       }
     } else {
       print(Status.failedTxt);

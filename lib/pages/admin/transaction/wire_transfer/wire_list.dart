@@ -28,15 +28,16 @@ class _WireTransferListState extends State<WireTransferList> {
   List<Transaction> transactionList = [];
 
   Future view() async {
-    final response = await http.get(AdminAPI.listOfWireTransfer, headers: headers);
+    final response =
+        await http.get(AdminAPI.listOfWireTransfer, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
       for (var req in jsonBody[Field.data]) {
         final data = Transaction.fromMap(req);
-        setState(() {
+        if (mounted) {
           transactionList.add(data);
-        });
+        }
       }
     } else {
       print(Status.failedTxt);
@@ -76,17 +77,7 @@ class _WireTransferListState extends State<WireTransferList> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return ExpandableTheme(
-              data: const ExpandableThemeData(
-                iconColor: Colors.blue,
-                useInkWell: true,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
+            return Column(
               children: [
                 SafeArea(
                   child: Padding(
@@ -114,8 +105,9 @@ class _WireTransferListState extends State<WireTransferList> {
                           child: Text(
                             Str.wireTransferListTxt,
                             style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                                color: Styles.textColor, fontSize: 19),
+                                fontWeight: FontWeight.w500,
+                                color: Styles.textColor,
+                                fontSize: 19),
                           ),
                         ),
                         const Gap(10),
@@ -137,11 +129,9 @@ class _WireTransferListState extends State<WireTransferList> {
                     ),
                   ),
                 ),
-                    for (Transaction transaction in transactionList)
-                      CardTransaction(transaction: transaction),
-                  ],
-                ),
-              ),
+                // for (Transaction transaction in transactionList)
+                //   CardTransaction(transaction: transaction),
+              ],
             );
           }
         }

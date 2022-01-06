@@ -150,24 +150,24 @@ class CardService extends StatelessWidget {
   _buildButtonRow(BuildContext context) {
     return Row(
       children: [
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => UpdateService(
-                    service: service,
-                  ),
-                ),
-              );
-            },
-            child: Text(
-              Str.editTxt.toUpperCase(),
-            ),
-            style: ElevatedButton.styleFrom(
-                elevation: 0.0, primary: Styles.successColor),
-          ),
-        ),
+        // Expanded(
+        //   child: ElevatedButton(
+        //     onPressed: () {
+        //       Navigator.of(context).push(
+        //         MaterialPageRoute(
+        //           builder: (context) => UpdateService(
+        //             service: service,
+        //           ),
+        //         ),
+        //       );
+        //     },
+        //     child: Text(
+        //       Str.editTxt.toUpperCase(),
+        //     ),
+        //     style: ElevatedButton.styleFrom(
+        //         elevation: 0.0, primary: Styles.successColor),
+        //   ),
+        // ),
         const Gap(20),
         Expanded(
           child: ElevatedButton(
@@ -220,7 +220,7 @@ class CardService extends StatelessWidget {
                 Future.delayed(const Duration(milliseconds: 1000), () {
                   ServiceMethods.delete(
                       context, service.id.toString());
-                  Navigator.popAndPushNamed(context, RouteSTR.branchList);
+                  Navigator.popAndPushNamed(context, RouteSTR.serviceList);
                 });
               },
               child: Text(

@@ -130,6 +130,20 @@ class CardLoanProduct extends StatelessWidget {
   }
 
   buildExpanded1(BuildContext context) {
+    
+    // Status
+    String? status;
+    switch (product.status) {
+      case 0:
+        status = 'NOT ACTIVE';
+        break;
+      case 1:
+        status = 'ACTIVE';
+        break;
+      default:
+        status = 'Default';
+    }
+
     return Container(
       color: Styles.accentColor,
       padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
@@ -162,7 +176,7 @@ class CardLoanProduct extends StatelessWidget {
                 labelDetails: product.termPeriod ?? Field.emptyString),
             DetailRow(
                 labelTitle: Str.statusTxt,
-                labelDetails: product.status.toString()),
+                labelDetails: status),
             _buildButtonRow(context),
           ],
         ),

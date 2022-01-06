@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_banking_app/methods/admin/testimonial_methods.dart';
-import 'package:flutter_banking_app/models/testimonial.dart';
+import 'package:flutter_banking_app/methods/config.dart';
+import 'package:flutter_banking_app/methods/member/support_ticket_methods.dart';
+import 'package:flutter_banking_app/models/ticket.dart';
+import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -14,21 +16,38 @@ import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
-class UpdateTestimonial extends StatefulWidget {
-  const UpdateTestimonial({Key? key, required this.testimonial})
+class UpdateSupportTicketStatus extends StatefulWidget {
+  const UpdateSupportTicketStatus({Key? key, required this.ticket})
       : super(key: key);
 
-  final Testimonial testimonial;
-
+  final Ticket ticket;
   @override
-  _UpdateTestimonialState createState() => _UpdateTestimonialState();
+  _UpdateSupportTicketStatusState createState() =>
+      _UpdateSupportTicketStatusState();
 }
 
-class _UpdateTestimonialState extends State<UpdateTestimonial> {
+class _UpdateSupportTicketStatusState extends State<UpdateSupportTicketStatus> {
   final ScrollController _scrollController = ScrollController();
 
-  String? name, locale, testimonial;
+  var controller = ScrollController();
+  SharedPref sharedPref = SharedPref();
+  User userLoad = User();
+
+  String? subject, message, supportTicketId, userId;
   int? status;
+
+  loadSharedPrefs() async {
+    try {
+      User user = User.fromJSON(await sharedPref.read(Pref.userData));
+      setState(() {
+        userLoad = user;
+
+        userId = user.id.toString();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   void initState() {
@@ -36,24 +55,17 @@ class _UpdateTestimonialState extends State<UpdateTestimonial> {
       print(_scrollController.offset);
     });
     super.initState();
+    loadSharedPrefs();
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // setState(() {
-    //   name = widget.testimonial.name;
-    //   locale = widget.testimonial.locale;
-    //   testimonial = widget.testimonial.testimonials;
-    //   status = widget.testimonial.status;
-    // });
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
         appBar: myAppBar(
-            title: Str.createTestimonialTxt,
-            implyLeading: true,
-            context: context),
+            title: Str.sendMoneyTxt, implyLeading: true, context: context),
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
@@ -77,25 +89,18 @@ class _UpdateTestimonialState extends State<UpdateTestimonial> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     NewField(
-                        
-                        mandatory: true,
-                        initialValue: widget.testimonial.name,
-                        onSaved: (val) => name = val,
-                        hintText: Str.nameTxt),
+                      readOnly: true,
+                      initialValue: widget.ticket.subject,
+                        onSaved: (val) => subject = val,
+                        hintText: Str.subjectTxt),
                     const Gap(20.0),
                     NewField(
-                        
-                        mandatory: true,
-                        initialValue: widget.testimonial.locale,
-                        onSaved: (val) => locale = val,
-                        hintText: Str.localeTxt),
-                    const Gap(20.0),
-                    NewField(
-                        
-                        mandatory: true,
-                        initialValue: widget.testimonial.testimonials,
-                        onSaved: (val) => testimonial = val,
-                        hintText: Str.testimonialTxt),
+                      readOnly: true,
+                      initialValue: widget.ticket.message,
+                      onSaved: (val) => message = val,
+                      hintText: Str.messageTxt,
+                      maxLines: 10,
+                    ),
                     const Gap(20),
                     Row(
                       children: [
@@ -114,7 +119,7 @@ class _UpdateTestimonialState extends State<UpdateTestimonial> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: widget.testimonial.status,
+                      initialLabelIndex: widget.ticket.status,
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [
@@ -133,29 +138,24 @@ class _UpdateTestimonialState extends State<UpdateTestimonial> {
                     ),
                     const Gap(20),
                     Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(15),
-                            bottomRight: Radius.circular(15)),
-                        color: Styles.primaryColor,
-                      ),
-                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 0, vertical: 10),
                       child: elevatedButton(
                         color: Styles.secondaryColor,
                         context: context,
                         callback: () {
-                          status ??= widget.testimonial.status;
                           Map<String, String> body = {
-                            Field.name: name ?? widget.testimonial.name ?? Field.emptyString,
-                            Field.locale: locale ?? widget.testimonial.locale ?? Field.emptyAmount,
-                            Field.testimonials: testimonial ?? widget.testimonial.testimonials ?? Field.emptyString,
-                            Field.status: status.toString()
+                            // Field.supportTicketId: '#${getRandomString(12)}',
+                            // Field.subject: subject ?? Field.emptyString,
+                            // Field.message: message ?? Field.emptyAmount,
+                            // Field.senderId: userId ?? Field.emptyString,
+                            Field.status: status.toString(),
+                            // Field.priority: Status.pending.toString(),
+                            // Field.operatorId: '0',
+                            // Field.closedUserId: '0',
                           };
 
-                          TestimonialMethods.edit(
-                              context, body, widget.testimonial.id.toString());
+                          SupportTicketMethods.editStatus(context, body, widget.ticket.id.toString());
                         },
                         text: Str.submitTxt.toUpperCase(),
                       ),

@@ -103,6 +103,12 @@ class _CreateLoanProductState extends State<CreateLoanProduct> {
                     const Gap(20.0),
                     NewField(
                       mandatory: true,
+                      onSaved: (val) => interestType = val,
+                      hintText: Str.interestTypeTxt,
+                    ),
+                    const Gap(20.0),
+                    NewField(
+                      mandatory: true,
                       onSaved: (val) => maxAmt = val,
                       hintText: Str.maxAmtTxt,
                     ),
@@ -110,7 +116,7 @@ class _CreateLoanProductState extends State<CreateLoanProduct> {
                     NewField(
                       mandatory: true,
                       onSaved: (val) => term = val,
-                      hintText: Str.termPeriodTxt,
+                      hintText: Str.termTxt,
                     ),
                     const Gap(20.0),
                     NewField(

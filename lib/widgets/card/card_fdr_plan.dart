@@ -130,6 +130,20 @@ class CardPlanFDR extends StatelessWidget {
   }
 
   buildExpanded1(BuildContext context) {
+
+    
+    // Status
+    String? status;
+    switch (plan.status) {
+      case 0:
+        status = 'NOT ACTIVE';
+        break;
+      case 1:
+        status = 'ACTIVE';
+        break;
+      default:
+        status = 'Default';
+    }
     return Container(
       color: Styles.accentColor,
       padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
@@ -154,7 +168,7 @@ class CardPlanFDR extends StatelessWidget {
                 labelDetails: plan.durationType ?? Field.durationType),
             DetailRow(
                 labelTitle: Str.statusTxt,
-                labelDetails: plan.status.toString()),
+                labelDetails: status),
             DetailRow(
                 labelTitle: Str.descriptionTxt,
                 labelDetails: plan.description ?? Field.emptyString),

@@ -130,8 +130,22 @@ class CardBank extends StatelessWidget {
     DateTime tempDate = DateTime.parse(bank.createdAt ?? '-');
     String createdAt = DateFormat('yyyy-MM-dd hh:mm:ss').format(tempDate);
 
+    
+    // Status
+    String? status;
+    switch (bank.status) {
+      case 0:
+        status = 'NOT ACTIVE';
+        break;
+      case 1:
+        status = 'ACTIVE';
+        break;
+      default:
+        status = 'Default';
+    }
 
     return Container(
+      
       color: Styles.accentColor,
       padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -147,7 +161,7 @@ class CardBank extends StatelessWidget {
             DetailRow(labelTitle: Str.fixedChargeTxt, labelDetails: bank.fixedCharge ?? Field.emptyString),
             DetailRow(labelTitle: Str.chargeInPercentageTxt, labelDetails: bank.chargeInPercentage ?? Field.emptyString),
             DetailRow(labelTitle: Str.descriptionsTxt, labelDetails: bank.descriptions ?? Field.emptyString),
-            DetailRow(labelTitle: Str.statusTxt, labelDetails: bank.status.toString()),
+            DetailRow(labelTitle: Str.statusTxt, labelDetails: status),
             DetailRow(labelTitle: Str.createdTxt, labelDetails: createdAt),
             _buildButtonRow(context),
           ],

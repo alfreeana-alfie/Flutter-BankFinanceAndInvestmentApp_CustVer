@@ -30,7 +30,7 @@ class LoanProductMethods {
 
   static void edit(BuildContext context, Map<String, String> body, String id) async {
     Uri url =
-        Uri.parse(AdminAPI.updateLoanProductStatus.toString() + id);
+        Uri.parse(AdminAPI.updateLoanProduct.toString() + id);
 
     final response = await http.put(
       url,
