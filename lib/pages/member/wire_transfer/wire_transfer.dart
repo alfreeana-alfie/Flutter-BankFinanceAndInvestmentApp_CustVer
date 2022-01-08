@@ -8,6 +8,7 @@ import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
+import 'package:flutter_banking_app/utils/values.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdown_bank.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdrown_currency.dart';
@@ -15,6 +16,7 @@ import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
 import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class MCreateWireTransfer extends StatefulWidget {
   const MCreateWireTransfer({Key? key}) : super(key: key);
@@ -26,6 +28,8 @@ class MCreateWireTransfer extends StatefulWidget {
 class _MCreateWireTransferState extends State<MCreateWireTransfer> {
   final ScrollController _scrollController = ScrollController();
   SharedPref sharedPref = SharedPref();
+  final RoundedLoadingButtonController _btnController =
+      RoundedLoadingButtonController();
 
   String? currency,
       currencyName,
@@ -52,6 +56,8 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
       branchId = '1',
       transactionsDetails = 'wire_transfer';
 
+  String? transactionCode;
+
   loadSharedPrefs() async {
     try {
       User user = User.fromJSON(await sharedPref.read(Pref.userData));
@@ -75,6 +81,10 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    setState(() {
+      transactionCode = Field.transactionCodeInitials + getRandomCode(6);
+    });
+
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
@@ -102,6 +112,13 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    NewField(
+                        mandatory: true,
+                        readOnly: true,
+                        initialValue: transactionCode,
+                        onSaved: (val) => transactionCode = val,
+                        hintText: Str.transactionCodeTxt),
+                    const Gap(20),
                     Row(
                       children: [
                         Padding(
@@ -174,48 +191,12 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                         },
                       ),
                     ),
-                    // const Gap(20.0),
-                    // TextFormField(
-                    //   onChanged: (val) {},
-                    //   style: Styles.subtitleStyle,
-                    //   textInputAction: TextInputAction.done,
-                    //   keyboardType: TextInputType.text,
-                    //   maxLines: 1,
-                    //   decoration: InputDecoration(
-                    //     labelText: Str.accountHolderTxt,
-                    //     labelStyle: Styles.subtitleStyle,
-                    //     hintText: Str.accountHolderTxt,
-                    //     hintStyle: Styles.subtitleStyle03,
-                    //     border: const OutlineInputBorder(
-                    //       borderSide: BorderSide.none,
-                    //       gapPadding: 0.0,
-                    //     ),
-                    //   ),
-                    // ),
                     const Gap(20.0),
                     NewField(
                       mandatory: true,
                       onSaved: (val) => accountHolder = val,
                       hintText: Str.accountHolderTxt,
                     ),
-                    // const Gap(20.0),
-                    // TextFormField(
-                    //   onChanged: (val) {},
-                    //   style: Styles.subtitleStyle,
-                    //   textInputAction: TextInputAction.done,
-                    //   keyboardType: TextInputType.text,
-                    //   maxLines: 1,
-                    //   decoration: InputDecoration(
-                    //     labelText: Str.accountHolderNameTxt,
-                    //     labelStyle: Styles.subtitleStyle,
-                    //     hintText: Str.accountHolderNameTxt,
-                    //     hintStyle: Styles.subtitleStyle03,
-                    //     border: const OutlineInputBorder(
-                    //       borderSide: BorderSide.none,
-                    //       gapPadding: 0.0,
-                    //     ),
-                    //   ),
-                    // ),
                     const Gap(20.0),
                     NewField(
                       mandatory: true,
@@ -228,100 +209,40 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                       hintText: Str.descriptionTxt,
                     ),
                     const Gap(20),
-                    Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(15),
-                            bottomRight: Radius.circular(15)),
-                        color: Styles.primaryColor,
-                      ),
-                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 0, vertical: 10),
-                      child: elevatedButton(
-                        color: Styles.secondaryColor,
-                        context: context,
-                        callback: () {
-                          Map<String, String> body = {
-                            Field.userId: userId ?? Field.empty,
-                            Field.currencyId: currency ?? Field.empty,
-                            Field.amount: amount ?? Field.emptyAmount,
-                            Field.fee: fee,
-                            Field.drCr: drCr,
-                            Field.type: type,
-                            Field.method: method,
-                            Field.status: status,
-                            Field.note: note ?? Field.emptyString,
-                            Field.loanId: loanId,
-                            Field.refId: refId,
-                            Field.parentId: parentId,
-                            Field.otherBankId: otherBankId ?? Field.empty,
-                            Field.gatewayId: gatewayId,
-                            Field.createdUserId: userId ?? Field.empty,
-                            Field.updatedUserId: userId ?? Field.empty,
-                            Field.branchId: branchId,
-                            Field.transactionsDetails: transactionsDetails
-                          };
+                    loadingButton(
+                      context: context, 
+                      callback: () {
+                              Map<String, String> body = {
+                                Field.userId: userId ?? Field.empty,
+                                Field.currencyId: currency ?? Field.empty,
+                                Field.amount: amount ?? Field.emptyAmount,
+                                Field.fee: fee,
+                                Field.drCr: drCr,
+                                Field.type: type,
+                                Field.method: method,
+                                Field.status: status,
+                                Field.note: note ?? Field.emptyString,
+                                Field.loanId: loanId,
+                                Field.refId: refId,
+                                Field.parentId: parentId,
+                                Field.otherBankId: otherBankId ?? Field.empty,
+                                Field.gatewayId: gatewayId,
+                                Field.createdUserId: userId ?? Field.empty,
+                                Field.updatedUserId: userId ?? Field.empty,
+                                Field.branchId: branchId,
+                                Field.transactionsDetails: transactionsDetails
+                              };
 
-                          WireTransferMethods.add(context, body);
-                        },
-                        text: Str.wireTransferTxt.toUpperCase(),
-                      ),
-                    ),
+                              WireTransferMethods.add(context, body);
+                      }, 
+                    text: Str.wireTransferTxt.toUpperCase())
                   ],
                 ),
               ),
-              // Divider(color: Styles.primaryColor, thickness: 2),
-              // Container(
-              //   decoration: const BoxDecoration(
-              //     borderRadius:
-              //         BorderRadius.vertical(bottom: Radius.circular(15)),
-              //     color: Styles.thirdColor,
-              //   ),
-              //   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-              //   child: TextFormField(
-              //     onChanged: (val) {
-              //       note = val;
-              //     },
-              //     style: Styles.subtitleStyleDark,
-              //     textInputAction: TextInputAction.done,
-              //     keyboardType: TextInputType.text,
-              //     maxLines: 1,
-              //     decoration: InputDecoration(
-              //       labelText: Str.descriptionTxt,
-              //       labelStyle: Styles.subtitleStyleDark02,
-              //       hintText: Str.descriptionTxt,
-              //       hintStyle: Styles.subtitleStyleDark03,
-              //       border: const OutlineInputBorder(
-              //         borderSide: BorderSide.none,
-              //         gapPadding: 0.0,
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // const Gap(10),
-
-              //   ],
-              // ),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget customColumn({required String title, required String subtitle}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title.toUpperCase(),
-            style:
-                TextStyle(fontSize: 11, color: Colors.white.withOpacity(0.5))),
-        const Gap(2),
-        Text(subtitle,
-            style:
-                TextStyle(fontSize: 16, color: Colors.white.withOpacity(0.8))),
-      ],
     );
   }
 }

@@ -7,7 +7,9 @@ import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
+import 'package:flutter_banking_app/utils/values.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
+import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 
@@ -36,6 +38,8 @@ class _ProfileOverviewState extends State<ProfileOverview> {
     }
   }
 
+  String? membershipId;
+
   // @override
   // void initState() {
   //   _scrollController.addListener(() {
@@ -48,6 +52,11 @@ class _ProfileOverviewState extends State<ProfileOverview> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+
+    setState(() {
+      membershipId = Field.membershipIdInitials + getRandomCode(5);
+    });
+
     return Scaffold(
       backgroundColor: Styles.primaryColor,
       appBar: myAppBar(
@@ -73,8 +82,8 @@ class _ProfileOverviewState extends State<ProfileOverview> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            DateTime emailtempDate =
-                DateTime.parse(userLoad.emailVerifiedAt ?? '-');
+            DateTime emailtempDate = DateTime.parse(
+                userLoad.emailVerifiedAt ?? '2019-08-29 21:19:28');
             String emailVerifiedAt =
                 DateFormat('yyyy-MM-dd hh:mm:ss').format(emailtempDate);
 
@@ -90,7 +99,14 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Styles.accentColor,
+                    color: Styles.cardColor,
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(0.0, 1.0), //(x,y)
+                        blurRadius: 6.0,
+                      ),
+                    ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,136 +117,57 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            // const Gap(20.0),
-                            TextFormField(
-                              initialValue: userLoad.name,
-                              onChanged: (val) {
-                                name = val;
-                              },
-                              style: Styles.subtitleStyle,
-                              textInputAction: TextInputAction.done,
-                              keyboardType: TextInputType.text,
-                              maxLines: 1,
-                              decoration: InputDecoration(
-                                labelText: Str.nameTxt,
-                                labelStyle: Styles.subtitleStyle,
-                                hintText: Str.nameTxt,
-                                hintStyle: Styles.subtitleStyle03,
-                                border: const OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  gapPadding: 0.0,
-                                ),
+                            Container(
+                              width: 100,
+                              height: 100,
+                              constraints: const BoxConstraints(
+                                  minWidth: 20, maxWidth:100),
+                              child: CircleAvatar(
+                                backgroundImage: NetworkImage(Values.userDefaultImage),
+                                // backgroundImage: AssetImage(Values.userPath),
+                                minRadius: 10,
+                                maxRadius: 50,
                               ),
                             ),
+                            const Gap(20),
+                            NewField(
+                                initialValue: membershipId,
+                                onSaved: (val) => membershipId = val,
+                                hintText: Str.membershipIdTxt),
                             const Gap(20.0),
-                            TextFormField(
-                              initialValue: userLoad.email,
-                              onChanged: (val) {
-                                email = val;
-                              },
-                              style: Styles.subtitleStyle,
-                              textInputAction: TextInputAction.done,
-                              keyboardType: TextInputType.emailAddress,
-                              maxLines: 1,
-                              decoration: InputDecoration(
-                                labelText: Str.emailTxt,
-                                labelStyle: Styles.subtitleStyle,
-                                hintText: Str.emailTxt,
-                                hintStyle: Styles.subtitleStyle03,
-                                border: const OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  gapPadding: 0.0,
-                                ),
-                              ),
-                            ),
+                            NewField(
+                                initialValue: userLoad.name,
+                                onSaved: (val) => name = val,
+                                hintText: Str.nameTxt),
                             const Gap(20.0),
-                            TextFormField(
-                              initialValue: userLoad.phone,
-                              onChanged: (val) {
-                                phone = val;
-                              },
-                              style: Styles.subtitleStyle,
-                              textInputAction: TextInputAction.done,
-                              keyboardType: TextInputType.phone,
-                              maxLines: 1,
-                              decoration: InputDecoration(
-                                labelText: Str.phoneNumberTxt,
-                                labelStyle: Styles.subtitleStyle,
-                                hintText: Str.phoneNumberTxt,
-                                hintStyle: Styles.subtitleStyle03,
-                                border: const OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  gapPadding: 0.0,
-                                ),
-                              ),
-                            ),
+                            NewField(
+                                initialValue: userLoad.email,
+                                onSaved: (val) => email = val,
+                                hintText: Str.emailTxt),
                             const Gap(20.0),
-
-                            TextFormField(
-                              initialValue: userLoad.branchId ?? 'Default',
-                              onChanged: (val) {
-                                branchId = val;
-                              },
-                              style: Styles.subtitleStyle,
-                              textInputAction: TextInputAction.done,
-                              keyboardType: TextInputType.text,
-                              maxLines: 1,
-                              decoration: InputDecoration(
-                                labelText: Str.branchTxt,
-                                labelStyle: Styles.subtitleStyle,
-                                hintText: Str.branchTxt,
-                                hintStyle: Styles.subtitleStyle03,
-                                border: const OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  gapPadding: 0.0,
-                                ),
-                              ),
-                            ),
+                            NewField(
+                                initialValue:
+                                    '${userLoad.countryCode}-${userLoad.phone}',
+                                onSaved: (val) => phone = val,
+                                hintText: Str.phoneNumberTxt),
                             const Gap(20.0),
-                            TextFormField(
-                              readOnly: true,
-                              initialValue: emailVerifiedAt,
-                              onChanged: (val) {
-                                emailVerifiedAt = val;
-                              },
-                              style: Styles.subtitleStyle,
-                              textInputAction: TextInputAction.done,
-                              keyboardType: TextInputType.text,
-                              maxLines: 1,
-                              decoration: InputDecoration(
-                                labelText: Str.emailVerifiedAtTxt,
-                                labelStyle: Styles.subtitleStyle,
-                                hintText: Str.emailVerifiedAtTxt,
-                                hintStyle: Styles.subtitleStyle03,
-                                border: const OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  gapPadding: 0.0,
-                                ),
-                              ),
-                            ),
+                            NewField(
+                                initialValue: userLoad.branchId ?? 'Default',
+                                onSaved: (val) => branchId = val,
+                                hintText: Str.branchTxt),
                             const Gap(20.0),
-                            TextFormField(
-                              readOnly: true,
-                              initialValue: userLoad.smsVerifiedAt ?? 'NO',
-                              onChanged: (val) {
-                                smsVerifiedAt = val;
-                              },
-                              style: Styles.subtitleStyle,
-                              textInputAction: TextInputAction.done,
-                              keyboardType: TextInputType.text,
-                              maxLines: 1,
-                              decoration: InputDecoration(
-                                labelText: Str.smsVerifiedAtTxt,
-                                labelStyle: Styles.subtitleStyle,
-                                hintText: Str.smsVerifiedAtTxt,
-                                hintStyle: Styles.subtitleStyle03,
-                                border: const OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  gapPadding: 0.0,
-                                ),
-                              ),
-                            ),
-                            // const Gap(20),
+                            NewField(
+                                initialValue: emailVerifiedAt,
+                                onSaved: (val) =>
+                                    emailVerifiedAt = val ?? Field.emptyString,
+                                hintText: Str.emailVerifiedAtTxt),
+                            const Gap(20.0),
+                            NewField(
+                                initialValue: userLoad.smsVerifiedAt ?? 'NO',
+                                onSaved: (val) =>
+                                    smsVerifiedAt = val ?? Field.emptyString,
+                                hintText: Str.smsVerifiedAtTxt),
+                            const Gap(20),
                           ],
                         ),
                       ),

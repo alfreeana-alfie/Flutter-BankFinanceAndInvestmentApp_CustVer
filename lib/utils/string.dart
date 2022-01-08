@@ -287,6 +287,8 @@ class Str {
   static String updateNavigationTxt = 'Update Navigation';
   static String updateNavigationItemTxt = 'Update Navigation Item';
 
+  static String transactionCodeTxt = 'Transaction Code';
+  static String membershipIdTxt = 'Membership ID';
 }
 
 class Status {
@@ -420,6 +422,9 @@ class Field {
   static List<String> statusList = ['NOT ACTIVE', 'ACTIVE'];
   static List<String> approvelList = ['Pending', 'Approved', 'Rejected'];
   static List<String> priorityList = ['LOW', 'MODERATE', 'HIGH'];
+
+  static String membershipIdInitials = 'FVIS-';
+  static String transactionCodeInitials = 'FVIS-MY-';
 
   static String emptyString = '-';
   static String emptyAmount = '0.00';

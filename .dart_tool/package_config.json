@@ -320,6 +320,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "rounded_loading_button",
+      "rootUri": "file:///C:/Users/User-PC/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/rounded_loading_button-2.0.9",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "rxdart",
       "rootUri": "file:///C:/Users/User-PC/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.3",
       "packageUri": "lib/",
@@ -506,7 +512,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-01-04T14:58:43.011051Z",
+  "generated": "2022-01-08T15:25:58.440968Z",
   "generator": "pub",
   "generatorVersion": "2.14.3"
 }
