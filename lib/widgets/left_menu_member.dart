@@ -49,14 +49,6 @@ class SideDrawerMember extends StatelessWidget {
             onTap: () =>
                 {Navigator.pushNamed(context, RouteSTR.dashboardMember)},
           ),
-          // ListTile(
-          //   leading: const Icon(IconlyBold.Activity),
-          //   title: Text(Str.statsTxt,
-          //       style: GoogleFonts.nunitoSans(
-          //           color: Styles.textColor.withOpacity(1))),
-          //   onTap: () =>
-          //       {Navigator.pushNamed(context, RouteSTR.statsM)},
-          // ),
           ExpansionTile(
             expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
             leading: const Icon(Icons.send_rounded),
@@ -209,6 +201,14 @@ class SideDrawerMember extends StatelessWidget {
                     color: Styles.textColor.withOpacity(1))),
             onTap: () =>
                 {Navigator.pushNamed(context, RouteSTR.profileOverview)},
+          ),
+          ListTile(
+            leading: const Icon(Icons.upgrade),
+            title: Text(Str.upgradeTxt,
+                style: GoogleFonts.nunitoSans(
+                    color: Styles.textColor.withOpacity(1))),
+            onTap: () =>
+                {Navigator.pushNamed(context, RouteSTR.upgradeMembershipM)},
           ),
           ListTile(
             leading: const Icon(Icons.logout_rounded),

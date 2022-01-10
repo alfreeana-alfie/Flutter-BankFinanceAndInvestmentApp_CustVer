@@ -24,7 +24,7 @@ class Str {
   static String cancelTxt = 'Cancel';
   static String profilePictureTxt = 'Profile Picture';
   static String signOutTxt = 'Sign Out';
-
+  static String currentMembershipTxt = 'Current Membership Plan';
   static String deleteConfirmationTxt = 'Delete Confirmation';
   static String areYouSureTxt = 'Are You Sure?';
 
@@ -109,6 +109,9 @@ class Str {
   static String contactEmailTxt = 'Contact Email';
   static String contactPhoneTxt = 'Contact Phone';
   static String addressTxt = 'Address';
+  static String paymentMethodTxt = 'Payment Method';
+  static String cashDepositTxt = 'Cash Deposit';
+  static String payWithPaystackTxt = 'Pay with';
 
   static String minAmtTxt = 'Minimum Amount';
   static String maxAmtTxt = 'Maximum Amount';
@@ -286,9 +289,11 @@ class Str {
   static String updateOtherBankTxt = 'Update Bank';
   static String updateNavigationTxt = 'Update Navigation';
   static String updateNavigationItemTxt = 'Update Navigation Item';
+  static String upgradeTxt = 'Upgrade Plan';
 
   static String transactionCodeTxt = 'Transaction Code';
   static String membershipIdTxt = 'Membership ID';
+  static String membershipPlanTxt = 'Membership Plan';
 }
 
 class Status {
@@ -354,6 +359,10 @@ class RouteSTR {
 
   static String supportTicketListM = '/support-ticket-list';
   static String addSupportTicketM = '/add-support-ticket-list';
+
+  static String upgradeMembershipM = '/upgrade-membership-plan';
+  static String membershipPlanListM = '/membership-plan-list';
+  static String paymentMethodM = '/payment-method';
 
   // Admin Route(s)
   static String depositList = '/deposit-list-a';
@@ -514,19 +523,15 @@ class Field {
   static String termPeriod = 'term_period';
   static String password = 'password';
   static String userName = 'user_name';
-
+  static String transactionCode = 'transaction_code';
   static String answer = 'answer';
   static String question = 'question';
   static String locale = 'locale';
-
   static String testimonials = 'testimonial';
-
   static String image = 'image';
   static String role = 'role';
-
   static String usedAt = 'used_at';
   static String code = 'code';
-
   static String navigationId = 'navigation_id';
   static String pageId = 'page_id';
   static String url = 'url';
@@ -534,13 +539,24 @@ class Field {
   static String position = 'position';
   static String cssClass = 'css_class';
   static String cssId = 'css_id';
-
   static String supportTicketId = 'support_ticket_id';
   static String subject = 'subject';
   static String message = 'message';
   static String priority = 'priority';
   static String operatorId = 'operator_id';
   static String closedUserId = 'closed_user_id';
-
   static String permission = 'permission';
+  static String planName = 'plan_name';
+  static String planFee = 'plan_fee';
+  static String membershipTime = 'membership_time';
+  static String monthlyFixIncome = 'monthly_fix_income';
+  static String paymentRequestForm = 'payment_request_form';
+  static String membershipPlanStatus = 'membership_plan_status';
+  static String monthlyFixIncomeStatus = 'monthly_fix_income_status';
+  static String annualMembershipFee = 'annual_membership_fee';
+  static String investment = 'investment';
+  static String investmentDuration = 'investment_duration';
+  static String investmentStatus = 'investment_status';
+  static String membershipId = 'membership_id';
+  static String membershipPlanId = 'membership_plan_id';
 }

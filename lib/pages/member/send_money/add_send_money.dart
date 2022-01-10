@@ -205,7 +205,8 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                             Field.createdUserId: toUserId ?? '-',
                             Field.updatedUserId: updatedUserId,
                             Field.branchId: branchId,
-                            Field.transactionsDetails: transactionsDetails
+                            Field.transactionsDetails: transactionsDetails,
+                            Field.transactionCode: Field.transactionCodeInitials + getRandomCode(6)
                           };
                           SendMoneyMethods.add(context, body);
                         },

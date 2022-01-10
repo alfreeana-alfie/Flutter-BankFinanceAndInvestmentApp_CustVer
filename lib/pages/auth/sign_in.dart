@@ -12,6 +12,7 @@ import 'package:flutter_banking_app/widgets/textfield/text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -22,6 +23,8 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
+  final RoundedLoadingButtonController _btnController =
+    RoundedLoadingButtonController();
 
   String email = '';
   String password = '';
@@ -137,7 +140,8 @@ class _SignInPageState extends State<SignInPage> {
               margin: const EdgeInsets.symmetric(
                   horizontal: Values.horizontalValue * 2,
                   vertical: Values.verticalValue),
-              child: ElevatedButton(
+              child: RoundedLoadingButton(
+                controller: _btnController,
                 onPressed: () {
                   // Navigator.pushNamed(context, RouteSTR.dashboardAdmin);
                   Map<String, String> body = {
@@ -148,10 +152,9 @@ class _SignInPageState extends State<SignInPage> {
                   signIn(context, body);
                 },
                 child: Text(Str.signInTxt.toUpperCase()),
-                style: ElevatedButton.styleFrom(
-                  primary: Styles.secondaryColor,
-                  elevation: 0.0,
-                ),
+                color: Styles.secondaryColor,
+                elevation: 0.0,
+                borderRadius: 7
               ),
             ),
             // Button Sign Up

@@ -15,7 +15,8 @@ class Loan {
       description,
       remarks,
       approvedDate,
-      createdAt;
+      createdAt,
+      transactionCode;
 
   Loan(
       {this.id,
@@ -37,7 +38,8 @@ class Loan {
       this.approvedUserId,
       this.createdUserId,
       this.branchId,
-      this.createdAt});
+      this.createdAt,
+      this.transactionCode});
 
   factory Loan.fromMap(Map<String, dynamic> map) {
     return Loan(
@@ -58,6 +60,7 @@ class Loan {
       createdUserId: map[Field.createdUserId] as String?,
       branchId: map[Field.branchId] as String?,
       createdAt: map[Field.createdAt] as String?,
+      transactionCode: map[Field.transactionCode] as String?,
     );
   }
 }

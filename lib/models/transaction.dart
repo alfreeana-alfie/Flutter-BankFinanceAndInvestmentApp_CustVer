@@ -13,7 +13,7 @@ class Transaction {
       gatewayId,
       createdUserId,
       updatedUserId,
-      branchId,amount, fee, drCr, type, method, note, transactionsDetails, createdAt;
+      branchId,amount, fee, drCr, type, method, note, transactionsDetails,transactionCode, createdAt;
 
   Transaction(
       {this.id,
@@ -35,7 +35,8 @@ class Transaction {
       this.updatedUserId,
       this.branchId,
       this.transactionsDetails,
-      this.createdAt});
+      this.createdAt,
+      this.transactionCode});
 
   factory Transaction.fromMap(Map<String, dynamic> map) {
     return Transaction(
@@ -59,6 +60,7 @@ class Transaction {
       branchId: map[Field.branchId] as String?,
       transactionsDetails: map[Field.transactionsDetails] as String?,
       createdAt: map[Field.createdAt] as String?,
+      transactionCode: map[Field.transactionCode] as String?,
     );
   }
 }

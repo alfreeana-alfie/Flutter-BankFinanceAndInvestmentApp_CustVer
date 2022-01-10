@@ -275,6 +275,7 @@ class _MCreateLoanState extends State<MCreateLoan> {
                           'approved_user_Id': '',
                           'created_user_Id': userId ?? Field.empty,
                           'branch_Id': '2',
+                          Field.transactionCode: Field.transactionCodeInitials + getRandomCode(6)
                         };
 
                         LoanRequestMethods.add(context, body, file!.path ?? file!.name);

@@ -8,7 +8,6 @@ import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
-import 'package:flutter_banking_app/utils/values.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdown_bank.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdrown_currency.dart';
@@ -230,7 +229,8 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                                 Field.createdUserId: userId ?? Field.empty,
                                 Field.updatedUserId: userId ?? Field.empty,
                                 Field.branchId: branchId,
-                                Field.transactionsDetails: transactionsDetails
+                                Field.transactionsDetails: transactionsDetails,
+                                Field.transactionCode: Field.transactionCodeInitials + getRandomCode(6)
                               };
 
                               WireTransferMethods.add(context, body);

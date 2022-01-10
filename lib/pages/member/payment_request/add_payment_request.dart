@@ -202,7 +202,8 @@ class _MCreatePaymentRequestState extends State<MCreatePaymentRequest> {
                           Field.senderId: userId ?? Field.empty,
                           Field.receiverId: receiverId ?? Field.emptyString,
                           Field.transactionId: '1',
-                          Field.branchId: '1'
+                          Field.branchId: '1',
+                          Field.transactionCode: Field.transactionCodeInitials + getRandomCode(6)
                         };
 
                         PaymentRequestMethods.add(context, body);

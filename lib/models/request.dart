@@ -1,13 +1,14 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class PaymentRequest {
-  String? senderId, status, transactionId, branchId;
+  String? senderId, status, branchId;
   String? currencyName,
       amount,
       description,
       senderName,
       receiverName,
-      createdAt;
+      createdAt,
+      transactionCode;
 
   PaymentRequest(
       {this.currencyName,
@@ -17,9 +18,9 @@ class PaymentRequest {
       this.senderId,
       this.senderName,
       this.receiverName,
-      this.transactionId,
       this.branchId,
-      this.createdAt});
+      this.createdAt,
+      this.transactionCode});
 
   factory PaymentRequest.fromMap(Map<String, dynamic> map) {
     return PaymentRequest(
@@ -30,8 +31,9 @@ class PaymentRequest {
         senderId: map[Field.senderId] as String?,
         senderName: map[Field.senderName] as String?,
         receiverName: map[Field.receiverName] as String?,
-        transactionId: map[Field.transactionId] as String?,
         branchId: map[Field.branchId] as String?,
-        createdAt: map[Field.createdAt] as String?);
+        createdAt: map[Field.createdAt] as String?,
+        transactionCode: map[Field.transactionCode] as String?,
+        );
   }
 }

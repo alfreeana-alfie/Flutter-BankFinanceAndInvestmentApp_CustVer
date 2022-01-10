@@ -15,7 +15,8 @@ class FixedDeposit {
       remarks,
       approvedDate,
       matureDate,
-      createdAt;
+      createdAt,
+      transactionCode;
 
   FixedDeposit(
       {this.fdrPlanId,
@@ -32,7 +33,8 @@ class FixedDeposit {
       this.createdUserId,
       this.updatedUserId,
       this.branchId,
-      this.createdAt});
+      this.createdAt,
+      this.transactionCode});
 
   factory FixedDeposit.fromMap(Map<String, dynamic> map) {
     return FixedDeposit(
@@ -51,6 +53,7 @@ class FixedDeposit {
       updatedUserId: map[Field.updatedUserId] as String?,
       branchId: map[Field.branchId] as String?,
       createdAt: map[Field.createdAt] as String?,
+      transactionCode: map[Field.transactionCode] as String?,
     );
   }
 }

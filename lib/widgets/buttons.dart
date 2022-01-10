@@ -29,6 +29,25 @@ Widget elevatedButton(
   );
 }
 
+Widget elevatedButtonWithGraphic(
+    {required BuildContext context,
+    required void Function()? callback,
+    required Widget child,
+    Color? color}) {
+  return SizedBox(
+    width: double.infinity,
+    //padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+    child: RoundedLoadingButton(
+        controller: _btnController,
+        child: child,
+        color: Styles.secondaryColor,
+        width: getProportionateScreenWidth(300),
+        borderRadius: 7,
+        elevation: 0.0,
+        onPressed: callback),
+  );
+}
+
 Widget outlinedButton(
     {required BuildContext context,
     required VoidCallback callback,
@@ -58,14 +77,17 @@ Widget loadingButton(
     required String text,
     Color? color}) {
   return Container(
-      margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
-      child: RoundedLoadingButton(
-        color: Styles.secondaryColor,
-        width: getProportionateScreenWidth(300),
-        borderRadius: 10,
-        child: Text(text),
-        controller: _btnController,
-        onPressed: callback,
-      ));
+    margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+    padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+    child: RoundedLoadingButton(
+      color: Styles.secondaryColor,
+      width: getProportionateScreenWidth(300),
+      borderRadius: 10,
+      child: Text(text),
+      controller: _btnController,
+      onPressed: callback,
+    ),
+  );
 }
+
+

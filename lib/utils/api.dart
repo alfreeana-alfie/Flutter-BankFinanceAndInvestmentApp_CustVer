@@ -8,9 +8,7 @@ const Map<String, String> headersMultiPart = {
   'Content-Type': 'multipart/form-data'
 };
 
-
-
-String android = 'https://thegreen.studio/FVIS/fvis-bank/public/api';
+String android = 'https://thegreen.studio/FVIS/fvis-bank-two/public/api';
 // String android = 'http://10.0.2.2:8000/api';
 String device = 'http://192.168.0.1:8000/api';
 String ios = 'http://127.0.0.1:8000/api/';
@@ -64,16 +62,26 @@ class API {
 
   // Support Ticket
   static Uri createSupportTicket = Uri.parse('$android/support_ticket');
-  static Uri updateSupportTicketStatus = Uri.parse('$android/update_support_ticket_status/');
-  static Uri updateSupportTicketPriority = Uri.parse('$android/assign_priority/');
-  static Uri updateSupportTicketOperator = Uri.parse('$android/assign_operator_id/');
-  static Uri updateSupportTicketClosed = Uri.parse('$android/assign_closed_user_id/');
-  static Uri listOfSupportTicket = Uri.parse('$android/list_of_support_tickets');
+  static Uri updateSupportTicketStatus =
+      Uri.parse('$android/update_support_ticket_status/');
+  static Uri updateSupportTicketPriority =
+      Uri.parse('$android/assign_priority/');
+  static Uri updateSupportTicketOperator =
+      Uri.parse('$android/assign_operator_id/');
+  static Uri updateSupportTicketClosed =
+      Uri.parse('$android/assign_closed_user_id/');
+  static Uri listOfSupportTicket =
+      Uri.parse('$android/list_of_support_tickets');
 
   // Drop Down List(s)
   static Uri listOfCurrency = Uri.parse('$android/list_of_currency');
   static Uri listofFdrPlans = Uri.parse('$android/list_of_fdr_plans');
   static Uri listofUsers = Uri.parse('$android/users');
+
+  // Membership
+  static Uri upgradeMembership = Uri.parse('$android/upgrade');
+  static Uri membershipPlanList = Uri.parse('$android/list_of_membership_plan');
+  static Uri userMembershipPlan = Uri.parse('$android/user_membership_plan/');
 }
 
 class AdminAPI {
@@ -127,14 +135,16 @@ class AdminAPI {
   // Other Banks
   static Uri listOfOtherBank = Uri.parse('$android/list_of_other_banks');
   static Uri createOtherBank = Uri.parse('$android/other_bank');
-  static Uri updateOtherBankStatus = Uri.parse('$android/update_other_bank_status/');
+  static Uri updateOtherBankStatus =
+      Uri.parse('$android/update_other_bank_status/');
   static Uri updateOtherBank = Uri.parse('$android/update_other_bank/');
   static Uri deleteOtherBank = Uri.parse('$android/delete_other_bank/');
 
   // Currency
   static Uri listOfCurrency = Uri.parse('$android/list_of_currency');
   static Uri createCurrency = Uri.parse('$android/currency');
-  static Uri updateCurrencyStatus = Uri.parse('$android/update_currency_status/');
+  static Uri updateCurrencyStatus =
+      Uri.parse('$android/update_currency_status/');
   static Uri updateCurrency = Uri.parse('$android/update_currency/');
   static Uri deleteCurrency = Uri.parse('$android/delete_currency/');
 
@@ -154,7 +164,8 @@ class AdminAPI {
   // Testimonials
   static Uri listOfTestimonial = Uri.parse('$android/list_of_testimonials');
   static Uri createTestimonial = Uri.parse('$android/create_testimonial');
-  static Uri updateTestimonialStatus = Uri.parse('$android/update_testimonial_status/');
+  static Uri updateTestimonialStatus =
+      Uri.parse('$android/update_testimonial_status/');
   static Uri updateTestimonial = Uri.parse('$android/update_testimonial/');
   static Uri deleteTestimonial = Uri.parse('$android/delete_testimonial/');
 
@@ -185,7 +196,10 @@ class AdminAPI {
   static Uri deleteNavigation = Uri.parse('$android/delete_navigation/');
 
   static Uri createNavigationItem = Uri.parse('$android/navigation_item');
-  static Uri listOfNavigationItem = Uri.parse('$android/list_of_navigation_items');
-  static Uri updateNavigationItem = Uri.parse('$android/update_navigation_item/');
-  static Uri deleteNavigationItem = Uri.parse('$android/delete_navigation_item/');
+  static Uri listOfNavigationItem =
+      Uri.parse('$android/list_of_navigation_items');
+  static Uri updateNavigationItem =
+      Uri.parse('$android/update_navigation_item/');
+  static Uri deleteNavigationItem =
+      Uri.parse('$android/delete_navigation_item/');
 }

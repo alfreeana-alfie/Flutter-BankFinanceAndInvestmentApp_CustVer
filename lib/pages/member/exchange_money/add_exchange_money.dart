@@ -197,7 +197,8 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
                           Field.createdUserId: userId ?? Field.emptyString,
                           Field.updatedUserId: userId ?? Field.emptyString,
                           Field.branchId: branchId,
-                          Field.transactionsDetails: note ?? '-'
+                          Field.transactionsDetails: note ?? '-',
+                          Field.transactionCode: Field.transactionCodeInitials + getRandomCode(6)
                         };
                         ExchangeMoneyMethods.add(context, body);
                       },

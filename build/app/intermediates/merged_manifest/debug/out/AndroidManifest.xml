@@ -68,6 +68,10 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+        <activity
+            android:name="co.paystack.flutterpaystack.AuthActivity"
+            android:theme="@style/Paystack.Dialog" />
     </application>
 
 </manifest>

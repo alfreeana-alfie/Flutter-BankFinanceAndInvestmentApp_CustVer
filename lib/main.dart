@@ -15,6 +15,7 @@ import 'package:flutter_banking_app/pages/auth/sign_out.dart';
 import 'package:flutter_banking_app/pages/member/exchange_money/exchange_money_list.dart';
 import 'package:flutter_banking_app/pages/member/send_money/send_money_list.dart';
 import 'package:flutter_banking_app/pages/member/stats.dart';
+import 'package:flutter_banking_app/pages/member/membership/upgrade_plan.dart';
 import 'package:flutter_banking_app/pages/member/wire_transfer/wire_transfer_list.dart';
 import 'pages/admin/branches/branch_list.dart';
 import 'pages/admin/navigation/create_navigation.dart';
@@ -22,7 +23,9 @@ import 'pages/admin/navigation/create_navigation_item.dart';
 import 'pages/admin/navigation/navigation_item_list.dart';
 import 'pages/admin/users/create_user_role.dart';
 import 'pages/admin/users/permission_list.dart';
+import 'pages/member/checkout/checkout_selectable.dart';
 import 'pages/member/loans/loan_cal.dart';
+import 'pages/member/membership/proceed_payment.dart';
 import 'pages/member/ticket/create_ticket.dart';
 import 'pages/member/ticket/ticket_list.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
@@ -87,7 +90,7 @@ Future<void> main() async {
     MaterialApp(
       // home: const AdminDashboard(),
       home: SplashScreenView(
-        navigateRoute: const MCreateWireTransfer(),
+        navigateRoute: const MUpgradeMembershipPlan(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,
@@ -144,6 +147,8 @@ Future<void> main() async {
         RouteSTR.addSupportTicketM: (context) => const MCreateSupportTicket(),
 
         RouteSTR.statsM: (context) => const Stats(),
+
+        RouteSTR.upgradeMembershipM: (context) => const MUpgradeMembershipPlan(),
 
         // ADMIN ROUTE(S)
         RouteSTR.dashboardAdmin: (context) => const AdminDashboard(),

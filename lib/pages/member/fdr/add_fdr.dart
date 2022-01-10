@@ -273,6 +273,7 @@ class _MCreateFDRState extends State<MCreateFDR> {
                       'created_user_Id': userLoad.id.toString(),
                       'updated_user_Id': userLoad.id.toString(),
                       'branch_Id': '2',
+                      Field.transactionCode: Field.transactionCodeInitials + getRandomCode(6)
                     };
 
                     FixedDepositMethods.add(context, body, file!.path ?? file!.name);

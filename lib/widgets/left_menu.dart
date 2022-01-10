@@ -27,7 +27,8 @@ class SideDrawer extends StatelessWidget {
                   height: 100,
                   constraints: const BoxConstraints(minWidth: 20, maxWidth: 70),
                   child: CircleAvatar(
-                    backgroundImage: AssetImage(Values.userPath),
+                    // backgroundImage: AssetImage(Values.userPath),
+                    backgroundImage: NetworkImage(Values.userDefaultImage),
                     minRadius: 10,
                     maxRadius: 40,
                   ),
@@ -446,6 +447,14 @@ class SideDrawer extends StatelessWidget {
                     color: Styles.textColor.withOpacity(1))),
             onTap: () =>
                 {Navigator.pushReplacementNamed(context, RouteSTR.signOut)},
+          ),
+          ListTile(
+            leading: const Icon(Icons.logout_rounded),
+            title: Text(Str.signOutTxt,
+                style: GoogleFonts.nunitoSans(
+                    color: Styles.textColor.withOpacity(1))),
+            // onTap: () =>
+            //     {Navigator.pushReplacementNamed(context, RouteSTR.signOut)},
           ),
         ],
       ),

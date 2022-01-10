@@ -140,6 +140,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_paystack",
+      "rootUri": "file:///C:/Users/User-PC/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_paystack-1.0.5+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_plugin_android_lifecycle",
       "rootUri": "file:///C:/Users/User-PC/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.5",
       "packageUri": "lib/",
@@ -512,7 +518,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-01-08T15:25:58.440968Z",
+  "generated": "2022-01-10T14:50:32.018833Z",
   "generator": "pub",
   "generatorVersion": "2.14.3"
 }

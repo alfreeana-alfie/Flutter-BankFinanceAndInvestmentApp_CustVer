@@ -5,6 +5,7 @@ class Values {
   static String loginBgPath = 'assets/images/login.jpg';
   static String userPath = 'assets/images/user.png';
   static String paymentRequestPath = 'assets/icons/payment_request.svg';
+  static String paystackLogoPath = 'assets/images/Paystack_Logo.png';
 
   static String userDefaultImage =
       'https://thegreen.studio/FVIS/user_default.jpg';
