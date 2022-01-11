@@ -92,7 +92,7 @@ Future<void> main() async {
     MaterialApp(
       // home: const AdminDashboard(),
       home: SplashScreenView(
-        navigateRoute: const PaymentMethodsMenu(),
+        navigateRoute: const MUpgradeMembershipPlan(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,

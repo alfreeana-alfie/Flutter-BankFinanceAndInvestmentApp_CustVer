@@ -28,4 +28,29 @@ class MembershipMethods {
       CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
     }
   }
+
+  static void edit(BuildContext context, Map<String, String> body, String id) async {
+    Uri url =
+        Uri.parse(API.upgradeCurrentMembership.toString() + id);
+
+    final response = await http.put(
+      url,
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == Status.created) {
+      // print(Status.successTxt);
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+      Future.delayed(const Duration(milliseconds: 2000), () {
+
+        Navigator.pushReplacementNamed(context, RouteSTR.upgradeMembershipM);
+
+      });
+      
+    } else {
+      // print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
 }

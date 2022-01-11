@@ -9,10 +9,10 @@ import 'package:http/http.dart' as http;
 
 class DropDownMembershipPlan extends StatefulWidget {
   const DropDownMembershipPlan(
-      {Key? key, this.membershipPlan, this.membershipName, required this.onChanged})
+      {Key? key, this.membershipPlan, this.membershipName, this.membershipFee, required this.onChanged})
       : super(key: key);
 
-  final String? membershipPlan, membershipName;
+  final String? membershipPlan, membershipName, membershipFee;
   final void Function(Membership?) onChanged;
 
   @override

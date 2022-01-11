@@ -4,8 +4,8 @@ import 'package:flutter_banking_app/utils/styles.dart';
 
 class NewField extends StatefulWidget {
   NewField(
-      {required this.onSaved,
-      required this.hintText,
+      {this.onSaved,
+      this.hintText,
       this.textInputType,
       this.textInputAction,
       this.initialValue,
@@ -16,8 +16,8 @@ class NewField extends StatefulWidget {
       this.controller, 
       this.readOnly});
 
-  final String hintText;
-  final FormFieldSetter<String> onSaved;
+  final String? hintText;
+  final FormFieldSetter<String>? onSaved;
   final TextInputType? textInputType;
   final TextInputAction? textInputAction;
   final String? initialValue;
@@ -43,7 +43,7 @@ class _NewFieldState extends State<NewField> {
             Padding(
               padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
               child: Text(
-                widget.hintText,
+                widget.hintText ?? '',
                 style: Styles.primaryTitle,
               ),
             ),

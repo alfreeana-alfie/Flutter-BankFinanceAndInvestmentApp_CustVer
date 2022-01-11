@@ -8,7 +8,8 @@ const Map<String, String> headersMultiPart = {
   'Content-Type': 'multipart/form-data'
 };
 
-String android = 'https://thegreen.studio/FVIS/fvis-bank-two/public/api';
+String android = 'https://villasearch.de/fvis-bank/public/api';
+// String android = 'https://thegreen.studio/FVIS/fvis-bank-two/public/api';
 // String android = 'http://10.0.2.2:8000/api';
 String device = 'http://192.168.0.1:8000/api';
 String ios = 'http://127.0.0.1:8000/api/';
@@ -80,6 +81,7 @@ class API {
 
   // Membership
   static Uri upgradeMembership = Uri.parse('$android/upgrade');
+  static Uri upgradeCurrentMembership = Uri.parse('$android/upgrade_current/');
   static Uri membershipPlanList = Uri.parse('$android/list_of_membership_plan');
   static Uri userMembershipPlan = Uri.parse('$android/user_membership_plan/');
 }

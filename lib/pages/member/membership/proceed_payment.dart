@@ -24,9 +24,20 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class PaymentMethodsMenu extends StatefulWidget {
-  const PaymentMethodsMenu({Key? key, this.membershipPlanId}) : super(key: key);
+  const PaymentMethodsMenu(
+      {Key? key,
+      this.id,
+      this.currentMembershipId,
+      this.membershipPlanId,
+      this.membershipPlanName,
+      this.fee})
+      : super(key: key);
 
-  final String? membershipPlanId;
+  final String? id,
+      currentMembershipId,
+      membershipPlanId,
+      membershipPlanName,
+      fee;
   @override
   _PaymentMethodsMenuState createState() => _PaymentMethodsMenuState();
 }
@@ -47,20 +58,6 @@ class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
   String? membershipId, membershipName;
 
   String? amount, note, currency, currencyName, toUserId, toUserName, userId;
-  String fee = '12.50',
-      drCr = 'Y',
-      type = 'send_money',
-      method = 'send_money',
-      status = '1',
-      loanId = '1',
-      refId = '1',
-      parentId = '1',
-      otherBankId = '1',
-      gatewayId = '1',
-      createdUserId = '1',
-      updatedUserId = '1',
-      branchId = '1',
-      transactionsDetails = '1';
 
   loadSharedPrefs() async {
     try {
@@ -85,6 +82,7 @@ class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
     super.initState();
     loadSharedPrefs();
     // getView();
+    print(widget.currentMembershipId);
   }
 
   @override
@@ -142,7 +140,11 @@ class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
                             'payment_method': 'Cash',
                             Field.status: Status.pending.toString(),
                           };
-                          MembershipMethods.add(context, body);
+                          if (widget.currentMembershipId == null) {
+                            MembershipMethods.add(context, body);
+                          } else {
+                            MembershipMethods.edit(context, body, widget.id!);
+                          }
                         },
                         text: Str.cashDepositTxt,
                       ),
@@ -346,14 +348,16 @@ class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
     });
 
     Map accessCode = await createAccessCode(
-        'sk_test_faa379125c75547ae5db0b99b5f167ee052da92b');
+        'sk_test_faa379125c75547ae5db0b99b5f167ee052da92b',
+        widget.fee,
+        'gmriyal@gmail.com');
 
     setState(() {
       isGeneratingCode = !isGeneratingCode;
     });
 
     Charge charge = Charge()
-      ..amount = 10000
+      ..amount = int.parse(widget.fee ?? '10000') * 100
       ..accessCode = accessCode['data']['access_code']
       ..email = 'customer@email.com';
     CheckoutResponse response = await plugin.checkout(
@@ -370,7 +374,11 @@ class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
         'payment_method': 'Paystack',
         Field.status: Status.pending.toString(),
       };
-      MembershipMethods.add(context, body);
+      if (widget.currentMembershipId == null) {
+        MembershipMethods.add(context, body);
+      } else {
+        MembershipMethods.edit(context, body, widget.id!);
+      }
       _showDialog();
     } else {
       _showErrorDialog();
@@ -384,7 +392,7 @@ class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
     });
 
     try {
-      paymentIntentData = await createPaymentIntent('20', 'USD');
+      paymentIntentData = await createPaymentIntent(widget.fee ?? '10000', 'NGN');
       await Stripe.instance.initPaymentSheet(
         paymentSheetParameters: SetupPaymentSheetParameters(
           paymentIntentClientSecret: paymentIntentData!['client_secret'],
@@ -407,7 +415,7 @@ class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
   createPaymentIntent(String amount, String currency) async {
     try {
       Map<String, dynamic> body = {
-        'amount': calculateAmount('20'),
+        'amount': calculateAmount(amount),
         'currency': currency,
         'payment_method_types[]': 'card'
       };
@@ -445,16 +453,24 @@ class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
         paymentIntentData = null;
       });
 
+      Map<String, String> body = {
+        Field.userId: userId ?? '0',
+        Field.membershipPlanId: widget.membershipPlanId ?? '2',
+        Field.transactionCode: Field.transactionCodeInitials + getRandomCode(6),
+        'payment_method': 'Stripe',
+        Field.status: Status.pending.toString(),
+      };
+      if (widget.currentMembershipId == null) {
+        MembershipMethods.add(context, body);
+      } else {
+        MembershipMethods.edit(context, body, widget.id?? '');
+      }
+
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Paid Successfully!')));
+          .showSnackBar(const SnackBar(content: Text('Paid Successfully!')));
     } on StripeException catch (e) {
       print(e.toString());
-
-      showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-                content: Text('Cancelled!'),
-              ));
+      _showErrorDialog();
     }
   }
 }

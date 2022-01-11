@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -41,10 +42,11 @@ class _MUpgradeMembershipPlanState extends State<MUpgradeMembershipPlan> {
   var controller = ScrollController();
   SharedPref sharedPref = SharedPref();
   User userLoad = User();
+  UserMembership userMembership = UserMembership();
   List<UserMembership> planListNew = [];
 
-  String? membershipId, membershipName;
-  
+  String? membershipId, membershipName, membershipFee, id;
+
   String? currentMembershipId, currentMembershipName;
 
   String? amount, note, currency, currencyName, toUserId, toUserName, userId;
@@ -76,38 +78,37 @@ class _MUpgradeMembershipPlanState extends State<MUpgradeMembershipPlan> {
     }
   }
 
-  void getView() async {
-
+  Future getView() async {
     User user = User.fromJSON(await sharedPref.read(Pref.userData));
     String userId = user.id.toString();
-    
-    Uri viewSingleUser = Uri.parse(API.userMembershipPlan.toString() + userId);
+
+    Uri viewSingleUser = Uri.parse(API.userMembershipPlan.toString() + '4');
     final response = await http.get(viewSingleUser, headers: headers);
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
-      for (var plan in jsonBody[Field.data]) {
-        final plans = UserMembership.fromMap(plan);
-        setState(() {
-          planListNew.add(plans);
-          currentMembershipId = plans.id.toString();
-          currentMembershipName = plans.planName;
-        });
+      for (var req in jsonBody[Field.data]) {
+        if (mounted) {
+          final requests = UserMembership.fromJSON(req);
+          id = requests.id.toString();
+
+          currentMembershipId = requests.membershipPlanId;
+          currentMembershipName = requests.planName;
+        }
       }
     } else {
       print(Status.failedTxt);
     }
   }
 
-  @override
-  void initState() {
-    _scrollController.addListener(() {
-      print(_scrollController.offset);
-    });
-    plugin.initialize(publicKey: publicKey);
-    super.initState();
-    getView();
-    loadSharedPrefs();
-  }
+  // @override
+  // void initState() {
+  //   _scrollController.addListener(() {
+  //     print(_scrollController.offset);
+  //   });
+  //   plugin.initialize(publicKey: publicKey);
+  //   super.initState();
+  //   loadSharedPrefs();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -120,15 +121,53 @@ class _MUpgradeMembershipPlanState extends State<MUpgradeMembershipPlan> {
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: NewField(
-                readOnly: true,
-                initialValue: currentMembershipName ?? 'Default',
-                onSaved: (val) => currentMembershipName = val,
-                hintText: Str.currentMembershipTxt,
-                // labelText: Str.amountNumTxt,
-              ),
+            FutureBuilder(
+              future: getView(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Styles.accentColor,
+                    ),
+                  );
+                } else {
+                  if (snapshot.hasError) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: NewField(
+                        readOnly: true,
+                        initialValue: 'Not yet Subcribe any Membership Plan!',
+                        onSaved: (val) => currentMembershipName = val,
+                        hintText: Str.currentMembershipTxt,
+                        // labelText: Str.amountNumTxt,
+                      ),
+                    );
+                  } else {
+                    if (currentMembershipName == null) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: NewField(
+                          readOnly: true,
+                          initialValue: 'No Membership Plan subcribed yet!',
+                          onSaved: (val) => currentMembershipName = val,
+                          hintText: Str.currentMembershipTxt,
+                          // labelText: Str.amountNumTxt,
+                        ),
+                      );
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: NewField(
+                        readOnly: true,
+                        initialValue: currentMembershipName,
+                        onSaved: (val) => membershipId = val,
+                        hintText: Str.currentMembershipTxt,
+                        // labelText: Str.amountNumTxt,
+                      ),
+                    );
+                  }
+                }
+              },
             ),
             const Gap(20),
             Container(
@@ -175,6 +214,7 @@ class _MUpgradeMembershipPlanState extends State<MUpgradeMembershipPlan> {
                             () {
                               membershipId = val!.id.toString();
                               membershipName = val.planName;
+                              membershipFee = val.planFee;
                             },
                           );
                         },
@@ -195,11 +235,14 @@ class _MUpgradeMembershipPlanState extends State<MUpgradeMembershipPlan> {
                         color: Styles.secondaryColor,
                         context: context,
                         callback: () {
-                          print(membershipId);
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => PaymentMethodsMenu(
-                                membershipPlanId: membershipId ?? '2',
+                                id: id,
+                                currentMembershipId: currentMembershipId,
+                                membershipPlanId: membershipId ?? '',
+                                membershipPlanName: membershipName,
+                                fee: membershipFee,
                               ),
                             ),
                           );
