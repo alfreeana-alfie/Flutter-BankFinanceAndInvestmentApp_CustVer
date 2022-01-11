@@ -32,13 +32,14 @@ Widget elevatedButton(
 Widget elevatedButtonWithGraphic(
     {required BuildContext context,
     required void Function()? callback,
+    required RoundedLoadingButtonController controller,
     required Widget child,
     Color? color}) {
   return SizedBox(
     width: double.infinity,
     //padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
     child: RoundedLoadingButton(
-        controller: _btnController,
+        controller: controller,
         child: child,
         color: Styles.secondaryColor,
         width: getProportionateScreenWidth(300),

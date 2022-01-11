@@ -1,3 +1,7 @@
+// ignore_for_file: deprecated_member_use
+//APP_URL=https://fvis.com.my/
+
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -5,7 +9,6 @@ import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/methods/member/membership_methods.dart';
 import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/models/user_membership.dart';
-import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/initialize_paystack.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/string.dart';
@@ -13,24 +16,27 @@ import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
-import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class PaymentMethodsMenu extends StatefulWidget {
-  const PaymentMethodsMenu({Key? key, required this.membershipPlanId})
-      : super(key: key);
+  const PaymentMethodsMenu({Key? key, this.membershipPlanId}) : super(key: key);
 
-  final String membershipPlanId;
+  final String? membershipPlanId;
   @override
   _PaymentMethodsMenuState createState() => _PaymentMethodsMenuState();
 }
 
 class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
   final ScrollController _scrollController = ScrollController();
+  final RoundedLoadingButtonController _btnController =
+      RoundedLoadingButtonController();
   final plugin = PaystackPlugin();
+  Map<String, dynamic>? paymentIntentData;
 
   var controller = ScrollController();
   SharedPref sharedPref = SharedPref();
@@ -39,7 +45,6 @@ class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
   List<UserMembership> planListNew = [];
 
   String? membershipId, membershipName;
-
 
   String? amount, note, currency, currencyName, toUserId, toUserName, userId;
   String fee = '12.50',
@@ -70,8 +75,6 @@ class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
     }
   }
 
-  
-
   @override
   void initState() {
     _scrollController.addListener(() {
@@ -95,7 +98,6 @@ class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
         body: ListView(
           padding: const EdgeInsets.all(15),
           children: [
-            
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
@@ -132,8 +134,11 @@ class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
                         callback: () {
                           Map<String, String> body = {
                             Field.userId: userId ?? '0',
-                            Field.membershipPlanId: widget.membershipPlanId,
-                            Field.transactionCode: Field.transactionCodeInitials + getRandomCode(6),
+                            Field.membershipPlanId:
+                                widget.membershipPlanId ?? '2',
+                            Field.transactionCode:
+                                Field.transactionCodeInitials +
+                                    getRandomCode(6),
                             'payment_method': 'Cash',
                             Field.status: Status.pending.toString(),
                           };
@@ -155,9 +160,15 @@ class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 0, vertical: 10),
                       child: elevatedButtonWithGraphic(
+                        controller: _btnController,
                         color: Styles.secondaryColor,
                         context: context,
-                        callback: () => chargeCard(),
+                        callback: () {
+                          Timer(const Duration(seconds: 3), () {
+                            _btnController.reset();
+                          });
+                          chargeCard();
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -167,6 +178,43 @@ class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
                                 constraints: const BoxConstraints(
                                     minWidth: 10, maxWidth: 100),
                                 child: Image.asset(Values.paystackLogoPath))
+                          ],
+                        ),
+                      ),
+                    ),
+                    const Gap(10),
+                    //** Stripe
+                    Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(15),
+                            bottomRight: Radius.circular(15)),
+                        color: Styles.primaryColor,
+                      ),
+                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 10),
+                      child: elevatedButtonWithGraphic(
+                        controller: _btnController,
+                        color: Styles.secondaryColor,
+                        context: context,
+                        callback: () async {
+                          await makePayment();
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(Str.payWithPaystackTxt),
+                            const Gap(10),
+                            Container(
+                                // margin: const EdgeInsets.all(8),
+                                // color: Styles.primaryColor,
+                                constraints: const BoxConstraints(
+                                    minWidth: 10, maxWidth: 100),
+                                child: Image.asset(
+                                  Values.stripeLogoPath,
+                                  color: Styles.primaryColor,
+                                ))
                           ],
                         ),
                       ),
@@ -289,6 +337,10 @@ class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
   }
 
   chargeCard() async {
+    Timer(const Duration(seconds: 3), () {
+      _btnController.reset();
+    });
+
     setState(() {
       isGeneratingCode = !isGeneratingCode;
     });
@@ -313,7 +365,7 @@ class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
     if (response.status == true) {
       Map<String, String> body = {
         Field.userId: userId ?? '0',
-        Field.membershipPlanId: widget.membershipPlanId,
+        Field.membershipPlanId: widget.membershipPlanId ?? '2',
         Field.transactionCode: Field.transactionCodeInitials + getRandomCode(6),
         'payment_method': 'Paystack',
         Field.status: Status.pending.toString(),
@@ -322,6 +374,87 @@ class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
       _showDialog();
     } else {
       _showErrorDialog();
+    }
+  }
+
+  //?? Stripe SETUP
+  Future<void> makePayment() async {
+    Timer(const Duration(seconds: 3), () {
+      _btnController.reset();
+    });
+
+    try {
+      paymentIntentData = await createPaymentIntent('20', 'USD');
+      await Stripe.instance.initPaymentSheet(
+        paymentSheetParameters: SetupPaymentSheetParameters(
+          paymentIntentClientSecret: paymentIntentData!['client_secret'],
+          applePay: true,
+          googlePay: true,
+          style: ThemeMode.light,
+          merchantCountryCode: 'US',
+          merchantDisplayName: 'ANNIE',
+        ),
+      );
+
+      // now finally display payment sheet
+      displayPaymentSheet();
+    } catch (e, s) {
+      print('exception:$e$s');
+    }
+  }
+
+  //  Future<Map<String, dynamic>>
+  createPaymentIntent(String amount, String currency) async {
+    try {
+      Map<String, dynamic> body = {
+        'amount': calculateAmount('20'),
+        'currency': currency,
+        'payment_method_types[]': 'card'
+      };
+
+      // print(body);
+      var response = await http.post(
+          Uri.parse('https://api.stripe.com/v1/payment_intents'),
+          body: body,
+          headers: {
+            'Authorization':
+                'Bearer sk_test_51KGRXdIxzlmpkVE9UV5zuCGJL9IzW7RmmyHgKHggepe7GsV2KaXP0vjntjNzoFHz1Cjl1aRzAuR3rerkvXIWVqLM00RiJonwrQ',
+            'Content-Type': 'application/x-www-form-urlencoded'
+          });
+      // print('Create Intent reponse ===> ${response.body.toString()}');
+      return jsonDecode(response.body);
+    } catch (err) {
+      print('err charging user: ${err.toString()}');
+    }
+  }
+
+  calculateAmount(String amount) {
+    final price = (int.parse(amount)) * 100;
+    return price.toString();
+  }
+
+  displayPaymentSheet() async {
+    try {
+      await Stripe.instance.presentPaymentSheet(
+        parameters: PresentPaymentSheetParameters(
+          clientSecret: paymentIntentData!['client_secret'],
+          confirmPayment: true,
+        ),
+      );
+      setState(() {
+        paymentIntentData = null;
+      });
+
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Paid Successfully!')));
+    } on StripeException catch (e) {
+      print(e.toString());
+
+      showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+                content: Text('Cancelled!'),
+              ));
     }
   }
 }

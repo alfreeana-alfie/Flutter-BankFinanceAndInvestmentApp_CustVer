@@ -17,6 +17,7 @@ import 'package:flutter_banking_app/pages/member/send_money/send_money_list.dart
 import 'package:flutter_banking_app/pages/member/stats.dart';
 import 'package:flutter_banking_app/pages/member/membership/upgrade_plan.dart';
 import 'package:flutter_banking_app/pages/member/wire_transfer/wire_transfer_list.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'pages/admin/branches/branch_list.dart';
 import 'pages/admin/navigation/create_navigation.dart';
 import 'pages/admin/navigation/create_navigation_item.dart';
@@ -85,12 +86,13 @@ class MyHttpOverrides extends HttpOverrides {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  Stripe.publishableKey = 'pk_test_51KGRXdIxzlmpkVE9Kaq0XxbZyt5k0XKltesUqyquUB4sPmWMuVXpFOmdrJIKs0Q6VnQW3yfytRoIwuqnEkID0VZ100aow4FDWK';
+  
   runApp(
     MaterialApp(
       // home: const AdminDashboard(),
       home: SplashScreenView(
-        navigateRoute: const MUpgradeMembershipPlan(),
+        navigateRoute: const PaymentMethodsMenu(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,

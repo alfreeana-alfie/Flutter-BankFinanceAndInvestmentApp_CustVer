@@ -46,6 +46,7 @@
     <attr format="color" name="colorSurface"/>
     <attr format="reference" name="constraintSet"/>
     <attr format="string" name="constraint_referenced_ids"/>
+    <attr format="string" name="constraint_referenced_tags"/>
     <attr format="reference" name="content"/>
     <attr format="reference" name="coordinatorLayoutStyle"/>
     <attr format="enum" name="curveFit">
@@ -91,7 +92,7 @@
         <enum name="spread_inside" value="1"/>
         <enum name="packed" value="2"/>
     </attr>
-    <attr format="float" name="flow_horizontalAlign">
+    <attr format="enum" name="flow_horizontalAlign">
         <enum name="start" value="0"/>
         <enum name="end" value="1"/>
         <enum name="center" value="2"/>
@@ -252,7 +253,7 @@
     <attr format="dimension" name="layout_goneMarginTop"/>
     <attr name="layout_optimizationLevel">
         <flag name="none" value="0"/>
-        <flag name="standard" value="7"/> <!-- direct, barriers, chains -->
+        <flag name="standard" value="257"/> <!-- direct, measure caches -->
         <flag name="direct" value="1"/>
         <flag name="barrier" value="2"/>
         <flag name="chains" value="4"/>
@@ -261,6 +262,9 @@
         <flag name="groups" value="32"/>
         <flag name="graph" value="64"/>
         <flag name="graph_wrap" value="128"/>
+        <flag name="cache_measures" value="256"/>
+        <flag name="dependency_ordering" value="512"/>
+        <flag name="grouping" value="1024"/>
     </attr>
     <attr format="reference" name="linearProgressIndicatorStyle"/>
     <attr format="reference" name="materialButtonOutlinedStyle"/>
@@ -308,6 +312,7 @@
     <attr format="reference|string" name="motionTarget"/>
     <attr format="reference" name="navigationRailStyle"/>
     <attr format="reference" name="navigationViewStyle"/>
+    <attr format="reference" name="nestedScrollViewStyle"/>
     <attr format="enum" name="pathMotionArc">
         <enum name="none" value="0"/>
         <enum name="startVertical" value="1"/>
@@ -399,8 +404,8 @@
         <enum name="path" value="1"/>
     </attr>
     <bool name="abc_action_bar_embed_tabs">true</bool>
-    <bool name="abc_allow_stacked_button_bar">false</bool>
     <bool name="abc_config_actionMenuItemAllCaps">true</bool>
+    <bool name="isTablet">false</bool>
     <bool name="mtrl_btn_textappearance_all_caps">true</bool>
     <color name="abc_decor_view_status_guard">#ff000000</color>
     <color name="abc_decor_view_status_guard_light">#ffffffff</color>
@@ -421,12 +426,24 @@
     <color name="bright_foreground_inverse_material_light">@color/bright_foreground_material_dark</color>
     <color name="bright_foreground_material_dark">@android:color/white</color>
     <color name="bright_foreground_material_light">@android:color/black</color>
+    <color name="browser_actions_bg_grey">#F5F5F5</color>
+    <color name="browser_actions_divider_color">#1E000000</color>
+    <color name="browser_actions_text_color">#DE000000</color>
+    <color name="browser_actions_title_color">#646464</color>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
     <color name="cardview_dark_background">#FF424242</color>
     <color name="cardview_light_background">#FFFFFFFF</color>
     <color name="cardview_shadow_end_color">#03000000</color>
     <color name="cardview_shadow_start_color">#37000000</color>
+    <color name="common_google_signin_btn_text_dark_default">@android:color/white</color>
+    <color name="common_google_signin_btn_text_dark_disabled">#1F000000</color>
+    <color name="common_google_signin_btn_text_dark_focused">@android:color/black</color>
+    <color name="common_google_signin_btn_text_dark_pressed">@android:color/white</color>
+    <color name="common_google_signin_btn_text_light_default">#90000000</color>
+    <color name="common_google_signin_btn_text_light_disabled">#1F000000</color>
+    <color name="common_google_signin_btn_text_light_focused">#90000000</color>
+    <color name="common_google_signin_btn_text_light_pressed">#DE000000</color>
     <color name="design_bottom_navigation_shadow_color">#14000000</color>
     <color name="design_dark_default_color_background">#121212</color>
     <color name="design_dark_default_color_error">#CF6679</color>
@@ -494,6 +511,7 @@
     <color name="mtrl_textinput_hovered_box_stroke_color">#DE000000</color>
     <color name="notification_action_color_filter">#ffffffff</color>
     <color name="notification_icon_bg_color">#ff9e9e9e</color>
+    <color name="notification_material_background_media_default_color">#ff424242</color>
     <color name="primary_dark_material_dark">@android:color/black</color>
     <color name="primary_dark_material_light">@color/material_grey_600</color>
     <color name="primary_material_dark">@color/material_grey_900</color>
@@ -508,12 +526,93 @@
     <color name="secondary_text_default_material_light">#8a000000</color>
     <color name="secondary_text_disabled_material_dark">#36ffffff</color>
     <color name="secondary_text_disabled_material_light">#24000000</color>
+    <color name="stripe_3ds2_accent">@color/stripe_3ds2_primary</color>
+    <color name="stripe_3ds2_background">@android:color/white</color>
+    <color name="stripe_3ds2_chevron">#80000000</color>
+    <color name="stripe_3ds2_control_activated">@color/stripe_3ds2_primary</color>
+    <color name="stripe_3ds2_divider">#1E000000</color>
+    <color name="stripe_3ds2_primary">#6C00F8</color>
+    <color name="stripe_3ds2_primary_dark">#5500DE</color>
+    <color name="stripe_3ds2_text_color">@android:color/black</color>
+    <color name="stripe_3ds2_text_color_primary">@android:color/white</color>
+    <color name="stripe_3ds2_text_edit">@color/stripe_3ds2_text_color</color>
+    <color name="stripe_3ds2_text_info_toggled">@color/stripe_3ds2_primary</color>
+    <color name="stripe_3ds2_text_input_fill">#FAFAFA</color>
+    <color name="stripe_3ds2_text_input_hint">#99000000</color>
+    <color name="stripe_accent_color_default">#ff2296f3</color>
+    <color name="stripe_add_payment_method_pressed">#3332325d</color>
+    <color name="stripe_card_form_view_background_default">@android:color/transparent</color>
+    <color name="stripe_card_form_view_background_disabled">#f8f8f8</color>
+    <color name="stripe_card_form_view_form_border">#33787880</color>
+    <color name="stripe_card_form_view_form_error">#cf6679</color>
+    <color name="stripe_card_form_view_textinput_color">#e61a1a1a</color>
+    <color name="stripe_card_form_view_textinput_disabled_color">#61000000</color>
+    <color name="stripe_card_multiline_textinput_hint_color">#4D000000</color>
+    <color name="stripe_card_widget_progress_background">#4F566B</color>
+    <color name="stripe_card_widget_progress_foreground">#ffffffcc</color>
+    <color name="stripe_color_text_secondary_default">#ff32325d</color>
+    <color name="stripe_color_text_unselected_primary_default">#ff000000</color>
+    <color name="stripe_color_text_unselected_secondary_default">#80323232</color>
+    <color name="stripe_control_normal_color_default">#ff90A4AE</color>
+    <color name="stripe_error_text_dark_theme">#ffe85746</color>
+    <color name="stripe_error_text_light_theme">#ffeb1c26</color>
+    <color name="stripe_paymentsheet_add_payment_method_form_stroke">@android:color/transparent
+    </color>
+    <color name="stripe_paymentsheet_add_pm_card_selected_stroke">#343434</color>
+    <color name="stripe_paymentsheet_add_pm_card_unselected_stroke">#E7E7E7</color>
+    <color name="stripe_paymentsheet_background">#ffffff</color>
+    <color name="stripe_paymentsheet_country_chevron_color">#000000</color>
+    <color name="stripe_paymentsheet_elements_background_default">
+        @color/stripe_paymentsheet_background
+    </color>
+    <color name="stripe_paymentsheet_elements_background_disabled">#F8F8F8</color>
+    <color name="stripe_paymentsheet_error_text">#DC2727</color>
+    <color name="stripe_paymentsheet_form">#757575</color>
+    <color name="stripe_paymentsheet_form_border">#33787880</color>
+    <color name="stripe_paymentsheet_form_error">#CF6679</color>
+    <color name="stripe_paymentsheet_googlepay_divider_background">@android:color/white</color>
+    <color name="stripe_paymentsheet_googlepay_divider_line">#1F000000</color>
+    <color name="stripe_paymentsheet_googlepay_divider_text">#99000000</color>
+    <color name="stripe_paymentsheet_header_text">#565656</color>
+    <color name="stripe_paymentsheet_payment_method_label_text">#DE000000</color>
+    <color name="stripe_paymentsheet_payment_method_label_text_disabled">#61000000</color>
+    <color name="stripe_paymentsheet_payment_option_selected_stroke">#1EA672</color>
+    <color name="stripe_paymentsheet_payment_option_unselected_stroke">@android:color/transparent
+    </color>
+    <color name="stripe_paymentsheet_primary_button_confirming_progress">#ffffff</color>
+    <color name="stripe_paymentsheet_primary_button_default_background">#0074D4</color>
+    <color name="stripe_paymentsheet_primary_button_success_background">#24B47E</color>
+    <color name="stripe_paymentsheet_primary_button_text">@android:color/white</color>
+    <color name="stripe_paymentsheet_save_checkbox_color">#000000</color>
+    <color name="stripe_paymentsheet_testmode_background">#FFDE94</color>
+    <color name="stripe_paymentsheet_testmode_text">#8E5710</color>
+    <color name="stripe_paymentsheet_textinput_color">#E61A1A1A</color>
+    <color name="stripe_paymentsheet_textinputlayout_hint">#661A1A1A</color>
+    <color name="stripe_paymentsheet_title_text">#303030</color>
+    <color name="stripe_paymentsheet_toolbar_items_color">#000000</color>
+    <color name="stripe_swipe_start_payment_method">#DFDEDF</color>
+    <color name="stripe_swipe_threshold_payment_method">#D5473F</color>
+    <color name="stripe_text_color_secondary">@android:color/secondary_text_light</color>
+    <color name="stripe_title_text_color">@android:color/white</color>
+    <color name="stripe_toolbar_color_default">#ff3f51b5</color>
+    <color name="stripe_toolbar_color_default_dark">#ff324090</color>
     <color name="switch_thumb_disabled_material_dark">#ff616161</color>
     <color name="switch_thumb_disabled_material_light">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
     <color name="tooltip_background_dark">#e6616161</color>
     <color name="tooltip_background_light">#e6FFFFFF</color>
+    <color name="wallet_bright_foreground_disabled_holo_light">#ffb2b2b2</color>
+    <color name="wallet_bright_foreground_holo_dark">#fff3f3f3</color>
+    <color name="wallet_bright_foreground_holo_light">#ff000000</color>
+    <color name="wallet_dim_foreground_disabled_holo_dark">#80bebebe</color>
+    <color name="wallet_dim_foreground_holo_dark">#bebebe</color>
+    <color name="wallet_highlighted_text_holo_dark">#6633b5e5</color>
+    <color name="wallet_highlighted_text_holo_light">#6633b5e5</color>
+    <color name="wallet_hint_foreground_holo_dark">#808080</color>
+    <color name="wallet_hint_foreground_holo_light">#808080</color>
+    <color name="wallet_holo_blue_light">#ff33b5e5</color>
+    <color name="wallet_link_text_light">#0000ee</color>
     <dimen name="abc_action_bar_content_inset_material">16dp</dimen>
     <dimen name="abc_action_bar_content_inset_with_nav">72dp</dimen>
     <dimen name="abc_action_bar_default_height_material">56dp</dimen>
@@ -573,6 +672,9 @@
     <dimen name="abc_seekbar_track_background_height_material">2dp</dimen>
     <dimen name="abc_seekbar_track_progress_height_material">2dp</dimen>
     <dimen name="abc_select_dialog_padding_start_material">20dp</dimen>
+    <dimen name="abc_star_big">48dp</dimen>
+    <dimen name="abc_star_medium">36dp</dimen>
+    <dimen name="abc_star_small">16dp</dimen>
     <dimen name="abc_switch_padding">3dp</dimen>
     <dimen name="abc_text_size_body_1_material">14sp</dimen>
     <dimen name="abc_text_size_body_2_material">14sp</dimen>
@@ -594,9 +696,19 @@
     <dimen name="abc_text_size_title_material_toolbar">20dp</dimen>
     <dimen name="action_bar_size">16dp</dimen>
     <dimen name="appcompat_dialog_background_inset">16dp</dimen>
+    <dimen name="browser_actions_context_menu_max_width">500dp</dimen>
+    <dimen name="browser_actions_context_menu_min_padding">20dp</dimen>
+    <dimen name="card_brand_spinner_dropdown_drawable_padding">5dp</dimen>
+    <dimen name="card_brand_spinner_dropdown_padding">20dp</dimen>
+    <dimen name="card_brand_spinner_dropdown_width">200dp</dimen>
+    <dimen name="card_brand_spinner_image_height">21dp</dimen>
+    <dimen name="card_brand_spinner_image_width">32dp</dimen>
+    <dimen name="card_brand_view_height">21dp</dimen>
+    <dimen name="card_brand_view_width">32dp</dimen>
     <dimen name="cardview_compat_inset_shadow">1dp</dimen>
     <dimen name="cardview_default_elevation">2dp</dimen>
     <dimen name="cardview_default_radius">2dp</dimen>
+    <dimen name="ciw_stripe_edit_text_size">18sp</dimen>
     <dimen name="clock_face_margin_start">64dp</dimen>
     <dimen name="compat_button_inset_horizontal_material">4dp</dimen>
     <dimen name="compat_button_inset_vertical_material">6dp</dimen>
@@ -668,6 +780,7 @@
     <dimen name="item_touch_helper_max_drag_scroll_per_frame">20dp</dimen>
     <dimen name="item_touch_helper_swipe_escape_max_velocity">800dp</dimen>
     <dimen name="item_touch_helper_swipe_escape_velocity">120dp</dimen>
+    <dimen name="material_bottom_sheet_max_width">640dp</dimen>
     <dimen name="material_clock_display_padding">24dp</dimen>
     <dimen name="material_clock_face_margin_top">44dp</dimen>
     <dimen name="material_clock_hand_center_dot_radius">4dp</dimen>
@@ -696,6 +809,9 @@
     <dimen name="material_input_text_to_prefix_suffix_padding">2dp</dimen>
     <dimen name="material_text_view_test_line_height">200px</dimen>
     <dimen name="material_text_view_test_line_height_override">100px</dimen>
+    <dimen name="material_textinput_default_width">245dp</dimen>
+    <dimen name="material_textinput_max_width">488dp</dimen>
+    <dimen name="material_textinput_min_width">56dp</dimen>
     <dimen name="material_time_picker_minimum_screen_height">560dp</dimen>
     <dimen name="material_time_picker_minimum_screen_width">340dp</dimen>
     <dimen name="material_timepicker_dialog_buttons_margin_top">24dp</dimen>
@@ -729,6 +845,7 @@
     <dimen name="mtrl_btn_icon_padding">8dp</dimen>
     <dimen name="mtrl_btn_inset">6dp</dimen>
     <item format="float" name="mtrl_btn_letter_spacing" type="dimen">0.07</item>
+    <dimen name="mtrl_btn_max_width">320dp</dimen>
     <dimen name="mtrl_btn_padding_bottom">4dp</dimen>
     <dimen name="mtrl_btn_padding_left">16dp</dimen>
     <dimen name="mtrl_btn_padding_right">16dp</dimen>
@@ -909,6 +1026,90 @@
     <dimen name="notification_top_pad">10dp</dimen>
     <dimen name="notification_top_pad_large_text">5dp</dimen>
     <dimen name="paystack__view__margin">5dp</dimen>
+    <dimen name="stripe_3ds2_brand_zone_horizontal_margin">16dp</dimen>
+    <dimen name="stripe_3ds2_brand_zone_max_height">100dp</dimen>
+    <dimen name="stripe_3ds2_challenge_activity_padding">28dp</dimen>
+    <dimen name="stripe_3ds2_challenge_zone_select_button_label_padding">14dp</dimen>
+    <dimen name="stripe_3ds2_challenge_zone_select_button_min_height">48dp</dimen>
+    <dimen name="stripe_3ds2_challenge_zone_select_button_offset_margin">-5dp</dimen>
+    <dimen name="stripe_3ds2_challenge_zone_select_button_vertical_margin">15dp</dimen>
+    <dimen name="stripe_3ds2_challenge_zone_text_indicator_padding">14dp</dimen>
+    <dimen name="stripe_3ds2_challenge_zone_vertical_padding">8dp</dimen>
+    <dimen name="stripe_3ds2_divider">1dp</dimen>
+    <dimen name="stripe_3ds2_information_zone_label_padding">10dp</dimen>
+    <dimen name="stripe_3ds2_information_zone_vertical_padding">30dp</dimen>
+    <dimen name="stripe_activity_total_margin">8dp</dimen>
+    <dimen name="stripe_add_address_vertical_margin">16dp</dimen>
+    <dimen name="stripe_add_card_element_vertical_margin">12dp</dimen>
+    <dimen name="stripe_add_card_expiry_middle_margin">8dp</dimen>
+    <dimen name="stripe_add_card_total_margin">16dp</dimen>
+    <dimen name="stripe_add_payment_method_vertical_padding">8dp</dimen>
+    <dimen name="stripe_becs_debit_widget_edit_text_size">14sp</dimen>
+    <dimen name="stripe_becs_debit_widget_mandate_acceptance_padding_top">12dp</dimen>
+    <dimen name="stripe_card_cvc_initial_margin">1000dp</dimen>
+    <dimen name="stripe_card_expiry_initial_margin">200dp</dimen>
+    <dimen name="stripe_card_form_view_card_elevation">1dp</dimen>
+    <dimen name="stripe_card_form_view_error_text_margin_horizontal">17dp</dimen>
+    <dimen name="stripe_card_form_view_error_textsize">13sp</dimen>
+    <dimen name="stripe_card_form_view_text_input_layout_padding_horizontal">12dp</dimen>
+    <dimen name="stripe_card_form_view_text_input_layout_padding_vertical">4dp</dimen>
+    <dimen name="stripe_card_form_view_text_margin_horizontal">12dp</dimen>
+    <dimen name="stripe_card_form_view_text_margin_vertical">4dp</dimen>
+    <dimen name="stripe_card_form_view_text_minheight">48dp</dimen>
+    <dimen name="stripe_card_form_view_textsize">14sp</dimen>
+    <dimen name="stripe_card_icon_multiline_padding">8dp</dimen>
+    <dimen name="stripe_card_icon_padding">12dp</dimen>
+    <dimen name="stripe_card_number_text_input_layout_progress_end_margin">14dp</dimen>
+    <dimen name="stripe_card_number_text_input_layout_progress_top_margin">10dp</dimen>
+    <dimen name="stripe_card_widget_min_width">360dp</dimen>
+    <dimen name="stripe_card_widget_progress_size">12dp</dimen>
+    <dimen name="stripe_cmw_edit_text_minheight">50dp</dimen>
+    <dimen name="stripe_list_row_end_padding">8dp</dimen>
+    <dimen name="stripe_list_row_height">48dp</dimen>
+    <dimen name="stripe_list_row_start_padding">20dp</dimen>
+    <dimen name="stripe_list_top_margin">8dp</dimen>
+    <dimen name="stripe_masked_card_icon_height">21dp</dimen>
+    <dimen name="stripe_masked_card_icon_width">32dp</dimen>
+    <dimen name="stripe_paymentsheet_add_payment_method_form_stroke_width">0dp</dimen>
+    <dimen name="stripe_paymentsheet_add_pm_card_elevation">0dp</dimen>
+    <dimen name="stripe_paymentsheet_add_pm_card_elevation_selected">1.5dp</dimen>
+    <dimen name="stripe_paymentsheet_add_pm_card_height">60dp</dimen>
+    <dimen name="stripe_paymentsheet_add_pm_card_stroke_width">1.5dp</dimen>
+    <dimen name="stripe_paymentsheet_add_pm_card_stroke_width_selected">2dp</dimen>
+    <dimen name="stripe_paymentsheet_add_pm_card_width">112dp</dimen>
+    <dimen name="stripe_paymentsheet_button_container_spacing">10dp</dimen>
+    <dimen name="stripe_paymentsheet_button_container_spacing_bottom">34dp</dimen>
+    <dimen name="stripe_paymentsheet_card_elevation">2dp</dimen>
+    <dimen name="stripe_paymentsheet_card_stroke_width">1dp</dimen>
+    <dimen name="stripe_paymentsheet_card_stroke_width_selected">2dp</dimen>
+    <dimen name="stripe_paymentsheet_cardwidget_margin_horizontal">12dp</dimen>
+    <dimen name="stripe_paymentsheet_cardwidget_margin_vertical">4dp</dimen>
+    <dimen name="stripe_paymentsheet_error_textsize">13sp</dimen>
+    <dimen name="stripe_paymentsheet_form_textsize">14sp</dimen>
+    <dimen name="stripe_paymentsheet_minimum_tap_size">48dp</dimen>
+    <dimen name="stripe_paymentsheet_outer_spacing_horizontal">20dp</dimen>
+    <dimen name="stripe_paymentsheet_outer_spacing_top">10dp</dimen>
+    <dimen name="stripe_paymentsheet_paymentmethod_icon_height">64dp</dimen>
+    <dimen name="stripe_paymentsheet_paymentmethod_icon_width">100dp</dimen>
+    <dimen name="stripe_paymentsheet_paymentoption_card_height">25dp</dimen>
+    <dimen name="stripe_paymentsheet_paymentoption_card_width">35dp</dimen>
+    <dimen name="stripe_paymentsheet_paymentoptions_margin_bottom">26dp</dimen>
+    <dimen name="stripe_paymentsheet_paymentoptions_margin_top">10dp</dimen>
+    <dimen name="stripe_paymentsheet_primary_button_corner_radius">6dp</dimen>
+    <dimen name="stripe_paymentsheet_primary_button_height">48sp</dimen>
+    <dimen name="stripe_paymentsheet_primary_button_icon_padding">8dp</dimen>
+    <dimen name="stripe_paymentsheet_primary_button_icon_size">20dp</dimen>
+    <dimen name="stripe_paymentsheet_primary_button_margin">3dp</dimen>
+    <dimen name="stripe_paymentsheet_toolbar_elevation">4dp</dimen>
+    <dimen name="stripe_shipping_check_icon_width">24dp</dimen>
+    <dimen name="stripe_shipping_widget_horizontal_margin">16dp</dimen>
+    <dimen name="stripe_shipping_widget_outer_margin">12dp</dimen>
+    <dimen name="stripe_shipping_widget_vertical_margin">4dp</dimen>
+    <dimen name="stripe_toolbar_elevation">4dp</dimen>
+    <dimen name="subtitle_corner_radius">2dp</dimen>
+    <dimen name="subtitle_outline_width">2dp</dimen>
+    <dimen name="subtitle_shadow_offset">2dp</dimen>
+    <dimen name="subtitle_shadow_radius">2dp</dimen>
     <dimen name="test_mtrl_calendar_day_cornerSize">52dp</dimen>
     <dimen name="test_navigation_bar_active_item_max_width">168dp</dimen>
     <dimen name="test_navigation_bar_active_item_min_width">96dp</dimen>
@@ -970,9 +1171,14 @@
     <item name="action_bar_spinner" type="id"/>
     <item name="action_menu_divider" type="id"/>
     <item name="action_menu_presenter" type="id"/>
+    <item name="androidx_compose_ui_view_composition_context" type="id"/>
+    <item name="compose_view_saveable_id_tag" type="id"/>
+    <item name="fragment_container_view_tag" type="id"/>
     <item name="ghost_view" type="id"/>
     <item name="ghost_view_holder" type="id"/>
+    <item name="hide_in_inspector_tag" type="id"/>
     <item name="home" type="id"/>
+    <item name="inspection_slot_table_set" type="id"/>
     <item name="item_touch_helper_previous_elevation" type="id"/>
     <item name="line1" type="id"/>
     <item name="line3" type="id"/>
@@ -998,15 +1204,29 @@
     <item name="selection_type" type="id"/>
     <item name="snackbar_action" type="id"/>
     <item name="snackbar_text" type="id"/>
+    <item name="special_effects_controller_view_tag" type="id"/>
     <item name="split_action_bar" type="id"/>
+    <item name="stripe_3ds2_default_challenge_zone_select_view_id" type="id"/>
+    <item name="stripe_add_payment_method_footer" type="id"/>
+    <item name="stripe_add_payment_method_form" type="id"/>
+    <item name="stripe_default_reader_id" type="id"/>
+    <item name="stripe_payment_methods_add_card" type="id"/>
+    <item name="stripe_payment_methods_add_fpx" type="id"/>
+    <item name="stripe_payment_methods_add_netbanking" type="id"/>
+    <item name="stripe_payment_methods_footer" type="id"/>
     <item name="tag_accessibility_actions" type="id"/>
     <item name="tag_accessibility_clickable_spans" type="id"/>
     <item name="tag_accessibility_heading" type="id"/>
     <item name="tag_accessibility_pane_title" type="id"/>
+    <item name="tag_on_apply_window_listener" type="id"/>
+    <item name="tag_on_receive_content_listener" type="id"/>
+    <item name="tag_on_receive_content_mime_types" type="id"/>
     <item name="tag_screen_reader_focusable" type="id"/>
+    <item name="tag_state_description" type="id"/>
     <item name="tag_transition_group" type="id"/>
     <item name="tag_unhandled_key_event_manager" type="id"/>
     <item name="tag_unhandled_key_listeners" type="id"/>
+    <item name="tag_window_insets_animation_callback" type="id"/>
     <item name="text" type="id"/>
     <item name="text2" type="id"/>
     <item name="text_input_error_icon" type="id"/>
@@ -1024,6 +1244,11 @@
     <item name="transition_transform" type="id"/>
     <item name="up" type="id"/>
     <item name="view_offset_helper" type="id"/>
+    <id name="view_tree_lifecycle_owner"/>
+    <id name="view_tree_saved_state_registry_owner"/>
+    <id name="view_tree_view_model_store_owner"/>
+    <item name="visible_removing_fragment_view_tag" type="id"/>
+    <item name="wrapped_composition_tag" type="id"/>
     <integer name="abc_config_activityDefaultDur">220</integer>
     <integer name="abc_config_activityShortDur">150</integer>
     <integer name="app_bar_elevation_anim_duration">150</integer>
@@ -1032,6 +1257,7 @@
     <integer name="config_tooltipAnimTime">150</integer>
     <integer name="design_snackbar_text_max_lines">2</integer>
     <integer name="design_tab_indicator_anim_duration_ms">300</integer>
+    <integer name="google_play_services_version">12451000</integer>
     <integer name="hide_password_duration">320</integer>
     <integer name="material_motion_duration_long_1">300</integer>
     <integer name="material_motion_duration_long_2">350</integer>
@@ -1052,6 +1278,10 @@
     <integer name="mtrl_tab_indicator_anim_duration_ms">250</integer>
     <integer name="show_password_duration">200</integer>
     <integer name="status_bar_notification_info_maxnum">999</integer>
+    <integer name="stripe_card_widget_progress_fade_in_duration">600</integer>
+    <integer name="stripe_card_widget_progress_fade_out_duration">300</integer>
+    <integer name="stripe_date_digits_length">4</integer>
+    <integer name="stripe_light_text_alpha_hex">204</integer>
     <plurals description="Plural form content description for number of new notifications [CHAR_LIMIT=NONE]" name="mtrl_badge_content_description">
     <item quantity="one"><ns2:g id="count">%d</ns2:g> new notification</item>
     <item quantity="other"><ns2:g id="count">%d</ns2:g> new notifications</item>
@@ -1083,21 +1313,169 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with <ns2:g example="Mail" id="application_name">%s</ns2:g></string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
+    <string name="acc_label_card_number">Card number</string>
+    <string name="acc_label_card_number_node">%s, Card number</string>
+    <string name="acc_label_cvc_node">%s, CVC</string>
+    <string name="acc_label_expiry_date">Expiration date</string>
+    <string name="acc_label_expiry_date_node">%s, Expiration date</string>
+    <string name="acc_label_zip">ZIP Code</string>
+    <string name="acc_label_zip_short">ZIP</string>
+    <string name="add_new_payment_method">Add a new payment method</string>
+    <string name="added">Added %s</string>
+    <string name="address_city_required">Please enter your city</string>
+    <string name="address_country_invalid">Your country is invalid</string>
+    <string name="address_county_required">Please enter your county</string>
+    <string name="address_label_address">Address</string>
+    <string name="address_label_address_line1">Address line 1</string>
+    <string name="address_label_address_line1_optional">Address line 1 (optional)</string>
+    <string name="address_label_address_line2">Address line 2</string>
+    <string name="address_label_address_line2_optional">Address line 2 (optional)</string>
+    <string name="address_label_address_optional">Address (optional) </string>
+    <string name="address_label_ae_emirate">Emirate</string>
+    <string name="address_label_apt_optional">Apt. (optional)</string>
+    <string name="address_label_au_suburb_or_city">Suburb or city</string>
+    <string name="address_label_bb_jm_parish">Parish</string>
+    <string name="address_label_cedex">Cedex</string>
+    <string name="address_label_city">City</string>
+    <string name="address_label_city_optional">City (optional)</string>
+    <string name="address_label_country">Country</string>
+    <string name="address_label_county">County</string>
+    <string name="address_label_county_optional">County (optional)</string>
+    <string name="address_label_department">Department</string>
+    <string name="address_label_district">District</string>
+    <string name="address_label_hk_area">Area</string>
+    <string name="address_label_ie_eircode">Eircode</string>
+    <string name="address_label_ie_townland">Townland</string>
+    <string name="address_label_in_pin">Pin</string>
+    <string name="address_label_island">Island</string>
+    <string name="address_label_jp_prefecture">Prefecture</string>
+    <string name="address_label_kr_do_si">Do Si</string>
+    <string name="address_label_name">Name</string>
+    <string name="address_label_neighborhood">Neighborhood</string>
+    <string name="address_label_oblast">Oblast</string>
+    <string name="address_label_phone_number">Phone number</string>
+    <string name="address_label_phone_number_optional">Phone number (optional)</string>
+    <string name="address_label_post_town">Post or Town</string>
+    <string name="address_label_postal_code">Postal code</string>
+    <string name="address_label_postal_code_optional">Postal code (optional)</string>
+    <string name="address_label_postcode">Postcode</string>
+    <string name="address_label_postcode_optional">Postcode (optional)</string>
+    <string name="address_label_province">Province</string>
+    <string name="address_label_province_optional">Province (optional)</string>
+    <string name="address_label_region_generic">State / Province / Region</string>
+    <string name="address_label_region_generic_optional">State / Province / Region (optional)</string>
+    <string name="address_label_state">State</string>
+    <string name="address_label_state_optional">State (optional)</string>
+    <string name="address_label_suburb">Suburb</string>
+    <string name="address_label_village_township">Village or Township</string>
+    <string name="address_label_zip_code">ZIP Code</string>
+    <string name="address_label_zip_code_optional">ZIP code (optional)</string>
+    <string name="address_label_zip_postal_code">ZIP/Postal code</string>
+    <string name="address_label_zip_postal_code_optional">ZIP / Postal code (optional)</string>
+    <string name="address_name_required">Please enter your name</string>
+    <string name="address_phone_number_required">Please enter your phone number</string>
+    <string name="address_postal_code_invalid">Your postal code is invalid.</string>
+    <string name="address_postcode_invalid">Your postcode is invalid</string>
+    <string name="address_province_required">Please enter your province</string>
+    <string name="address_region_generic_required">Please enter your State/Province/Region</string>
+    <string name="address_required">Please enter your address</string>
+    <string name="address_state_required">Please enter your state</string>
+    <string name="address_zip_invalid">Your ZIP code is invalid.</string>
+    <string name="address_zip_postal_invalid">Your ZIP/Postal code is invalid</string>
+    <string name="androidx_startup" translatable="false">androidx.startup</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
     <string name="auth_text">Please conclude challenge from your bank to authorize payment</string>
+    <string name="bank_account_ending_in">Remove bank account ending in %s</string>
+    <string name="becs_mandate_acceptance">\n    By providing your bank account details and confirming this payment, you agree to this\n    Direct Debit Request and the Direct Debit Request service agreement, and authorise\n    Stripe Payments Australia Pty Ltd ACN 160 180 343 Direct Debit User ID number 507156\n    (“Stripe”) to debit your account through the Bulk Electronic Clearing System (BECS) on\n    behalf of %1$s (the \"Merchant\") for any amounts separately communicated to you\n    by the Merchant. You certify that you are either an account holder or an authorised\n    signatory on the account listed above.\n    </string>
+    <string name="becs_widget_account_number">Account number</string>
+    <string name="becs_widget_account_number_incomplete">Your account number is incomplete.</string>
+    <string name="becs_widget_account_number_required">Your account number is required.</string>
+    <string name="becs_widget_bsb">BSB</string>
+    <string name="becs_widget_bsb_incomplete">The BSB you entered is incomplete.</string>
+    <string name="becs_widget_bsb_invalid">The BSB you entered is invalid.</string>
+    <string name="becs_widget_email">Email Address</string>
+    <string name="becs_widget_email_invalid">Your email address is invalid.</string>
+    <string name="becs_widget_email_required">Your email address is required.</string>
+    <string name="becs_widget_name">Name</string>
+    <string name="becs_widget_name_required">Your name is required.</string>
+    <string name="billing_details">Billing address</string>
+    <string name="blank_and_required">This field cannot be blank.</string>
+    <string name="book_with_googlepay_button_content_description">Book With Google Pay</string>
     <string name="bottom_sheet_behavior" translatable="false">com.google.android.material.bottomsheet.BottomSheetBehavior</string>
     <string description="A description of an action that a user of an accessibility service can perform to expand a bottomsheet halfway to its full height. [CHAR LIMIT=25]" name="bottomsheet_action_expand_halfway">Expand halfway</string>
+    <string name="buy_with_googlepay_button_content_description">Buy with Google Pay</string>
+    <string name="cancel">Cancel</string>
+    <string name="card_ending_in">%1$s ending in %2$s</string>
+    <string name="card_number_hint" translatable="false">1234 1234 1234 1234</string>
+    <string name="change">Change</string>
     <string name="character_counter_content_description">Characters entered %1$d of %2$d</string>
     <string name="character_counter_overflowed_content_description">Character limit exceeded %1$d of %2$d</string>
     <string name="character_counter_pattern" translatable="false">%1$d/%2$d</string>
+    <string name="checkout_with_googlepay_button_content_description">Checkout With Google Pay</string>
     <string name="chip_text">Chip text</string>
     <string name="clear_text_end_icon_content_description">Clear text</string>
+    <string name="close">Close</string>
+    <string name="close_drawer">"Close navigation menu"</string>
+    <string name="close_sheet">"Close sheet"</string>
+    <string msgid="2523291102206661146" name="common_google_play_services_enable_button">Enable</string>
+    <string msgid="227660514972886228" name="common_google_play_services_enable_text"><ns2:g id="app_name">%1$s</ns2:g> won\'t work unless you enable Google Play services.</string>
+    <string msgid="5122002158466380389" name="common_google_play_services_enable_title">Enable Google Play services</string>
+    <string msgid="7153882981874058840" name="common_google_play_services_install_button">Install</string>
+    <string name="common_google_play_services_install_text"><ns2:g id="app_name">%1$s</ns2:g> won\'t run without Google Play services, which are missing from your device.</string>
+    <string msgid="7215213145546190223" name="common_google_play_services_install_title">Get Google Play services</string>
+    <string name="common_google_play_services_notification_channel_name">Google Play services availability</string>
+    <string name="common_google_play_services_notification_ticker">Google Play services error</string>
+    <string name="common_google_play_services_unknown_issue"><ns2:g id="app_name">%1$s</ns2:g> is having trouble with Google Play services. Please try again.</string>
+    <string name="common_google_play_services_unsupported_text"><ns2:g id="app_name">%1$s</ns2:g> won\'t run without Google Play services, which are not supported by your device.</string>
+    <string msgid="6556509956452265614" name="common_google_play_services_update_button">Update</string>
+    <string msgid="9053896323427875356" name="common_google_play_services_update_text"><ns2:g id="app_name">%1$s</ns2:g> won\'t run unless you update Google Play services.</string>
+    <string msgid="6006316683626838685" name="common_google_play_services_update_title">Update Google Play services</string>
+    <string name="common_google_play_services_updating_text"><ns2:g id="app_name">%1$s</ns2:g> won\'t run without Google Play services, which are currently updating.</string>
+    <string name="common_google_play_services_wear_update_text">New version of Google Play services needed. It will update itself shortly.</string>
+    <string name="common_open_on_phone">Open on phone</string>
+    <string name="common_signin_button_text">Sign in</string>
+    <string name="common_signin_button_text_long">Sign in with Google</string>
+    <string name="copy_toast_msg">Link copied to clipboard</string>
+    <string name="cvc_amex_hint" translatable="false">CVV</string>
+    <string name="cvc_multiline_helper" translatable="false">123</string>
+    <string name="cvc_multiline_helper_amex" translatable="false">1234</string>
+    <string name="cvc_number_hint" translatable="false">CVC</string>
+    <string name="default_error_message">"Invalid input"</string>
+    <string name="delete_payment_method">Delete Payment Method</string>
+    <string name="delete_payment_method_prompt_title">Delete payment method?</string>
+    <string name="donate_with_googlepay_button_content_description">Donate With Google Pay</string>
+    <string name="done">Done</string>
+    <string name="edit">Edit</string>
+    <string name="email">Email</string>
+    <string name="email_is_invalid">Your email is invalid.</string>
     <string name="error_icon_content_description">Error</string>
+    <string name="expiry_date_hint">MM/YY</string>
+    <string name="expiry_label_short">Expiry</string>
     <string name="exposed_dropdown_menu_content_description">Show dropdown menu</string>
     <string name="fab_transformation_scrim_behavior" translatable="false">com.google.android.material.transformation.FabTransformationScrimBehavior</string>
     <string name="fab_transformation_sheet_behavior" translatable="false">com.google.android.material.transformation.FabTransformationSheetBehavior</string>
+    <string name="fallback_menu_item_copy_link">Copy link</string>
+    <string name="fallback_menu_item_open_in_browser">Open in browser</string>
+    <string name="fallback_menu_item_share_link">Share link</string>
+    <string name="fpx_bank_offline">%s - Offline</string>
+    <string name="google_pay" translatable="false">Google Pay</string>
+    <string name="googlepay_button_content_description">Google Pay</string>
     <string name="hide_bottom_view_on_scroll_behavior" translatable="false">com.google.android.material.behavior.HideBottomViewOnScrollBehavior</string>
+    <string name="iban">IBAN</string>
+    <string name="iban_incomplete">The IBAN you entered is incomplete.</string>
+    <string name="iban_invalid">The IBAN you entered is invalid.</string>
+    <string name="iban_invalid_country">The IBAN you entered is invalid, \"%s\" is not a supported country code.</string>
+    <string name="iban_invalid_start">Your IBAN should start with a two-letter country code.</string>
     <string description="Content description for an icon that appears in the title area of a dialog" name="icon_content_description">Dialog Icon</string>
+    <string name="in_progress">In progress</string>
+    <string name="incomplete_expiry_date">Your card\'s expiration date is incomplete.</string>
+    <string name="indeterminate">Neither checked nor unchecked</string>
+    <string name="invalid_card_number">Your card\'s number is invalid.</string>
+    <string name="invalid_cvc">Your card\'s security code is invalid.</string>
+    <string name="invalid_expiry_month">Your card\'s expiration month is invalid.</string>
+    <string name="invalid_expiry_year">Your card\'s expiration year is invalid.</string>
+    <string name="invalid_shipping_information">Invalid Shipping Address</string>
+    <string name="invalid_zip">Your postal code is incomplete.</string>
     <string name="item_view_role_description">Tab</string>
     <string name="material_clock_display_divider" translatable="false">:</string>
     <string description="Description for the toggle to choose between AM and PM [CHAR_LIMIT=NONE] " name="material_clock_toggle_content_description">Select AM or PM</string>
@@ -1154,15 +1532,95 @@
     <string description="a11y string to indicate this button switches the user to choosing a day [CHAR_LIMIT=NONE]" name="mtrl_picker_toggle_to_day_selection">Tap to switch to selecting a day</string>
     <string description="a11y string to indicate this button changes the input mode to a text field [CHAR_LIMIT=NONE]" name="mtrl_picker_toggle_to_text_input_mode">Switch to text input mode</string>
     <string description="a11y string to indicate this button switches the user to choosing a year [CHAR_LIMIT=NONE]" name="mtrl_picker_toggle_to_year_selection">Tap to switch to selecting a year</string>
+    <string name="navigation_menu">"Navigation menu"</string>
+    <string name="not_selected">Not selected</string>
+    <string name="off">Off</string>
+    <string name="on">On</string>
+    <string name="order_with_googlepay_button_content_description">Order With Google Pay</string>
     <string name="password_toggle_content_description">Show password</string>
     <string name="path_password_eye" translatable="false">M12,4.5C7,4.5 2.73,7.61 1,12c1.73,4.39 6,7.5 11,7.5s9.27,-3.11 11,-7.5c-1.73,-4.39 -6,-7.5 -11,-7.5zM12,17c-2.76,0 -5,-2.24 -5,-5s2.24,-5 5,-5 5,2.24 5,5 -2.24,5 -5,5zM12,9c-1.66,0 -3,1.34 -3,3s1.34,3 3,3 3,-1.34 3,-3 -1.34,-3 -3,-3z</string>
     <string name="path_password_eye_mask_strike_through" translatable="false">M2,4.27 L19.73,22 L22.27,19.46 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_eye_mask_visible" translatable="false">M2,4.27 L2,4.27 L4.54,1.73 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_strike_through" translatable="false">M3.27,4.27 L19.74,20.74</string>
+    <string name="pay_with_googlepay_button_content_description">Pay With Google Pay</string>
+    <string name="payment_method_add_new_card">Add new card…</string>
+    <string name="payment_method_add_new_fpx">Select Bank Account (FPX)…</string>
+    <string name="paymentsheet_payment_method_item_card_number">····%1$s</string>
+    <string name="price_free">Free</string>
+    <string name="remove">Remove</string>
+    <string name="removed">Removed %s</string>
     <string name="search_menu_title">Search</string>
+    <string name="secure_checkout">Secure Checkout</string>
+    <string name="selected">Selected</string>
     <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="stripe_3ds2_brand_amex" translatable="false">American Express</string>
+    <string name="stripe_3ds2_brand_cartesbancaires" translatable="false">Cartes Bancaires</string>
+    <string name="stripe_3ds2_brand_discover" translatable="false">Discover</string>
+    <string name="stripe_3ds2_brand_mastercard" translatable="false">Mastercard</string>
+    <string name="stripe_3ds2_brand_unionpay" translatable="false">UnionPay</string>
+    <string name="stripe_3ds2_brand_visa" translatable="false">Visa</string>
+    <string name="stripe_3ds2_bzv_issuer_image_description">Issuer Image</string>
+    <string name="stripe_3ds2_bzv_payment_system_image_description">Payment System Image</string>
+    <string name="stripe_3ds2_czv_whitelist_no_label">No</string>
+    <string name="stripe_3ds2_czv_whitelist_yes_label">Yes</string>
+    <string name="stripe_3ds2_hzv_cancel_label">Cancel</string>
+    <string name="stripe_3ds2_hzv_header_label">Secure Checkout</string>
+    <string name="stripe_3ds2_processing">Processing\u2026</string>
+    <string name="stripe_expiration_date_allowlist" translatable="false">0123456789/</string>
+    <string name="stripe_failure_connection_error">We are experiencing issues connecting to our payments provider. Please check your internet connection and try again.</string>
+    <string name="stripe_failure_reason_authentication">We are unable to authenticate your payment method. Please choose a different payment method and try again.</string>
+    <string name="stripe_failure_reason_timed_out">Timed out authenticating your payment method -- try again</string>
+    <string name="stripe_google_pay_error_internal">An internal error occurred.</string>
+    <string name="stripe_paymentsheet_add_payment_method_button_label">+ Add</string>
+    <string name="stripe_paymentsheet_add_payment_method_card_information">Card information</string>
+    <string name="stripe_paymentsheet_add_payment_method_country_or_region">Country or region</string>
+    <string name="stripe_paymentsheet_add_payment_method_title">Add your payment information</string>
+    <string name="stripe_paymentsheet_afterpay_clearpay_message">Pay in 4 interest-free payments of %s with</string>
+    <string name="stripe_paymentsheet_back">Back</string>
+    <string name="stripe_paymentsheet_close">Close</string>
+    <string name="stripe_paymentsheet_continue_button_label">Continue</string>
+    <string name="stripe_paymentsheet_eps_bank">EPS Bank</string>
+    <string name="stripe_paymentsheet_expiration_date_hint">MM / YY</string>
+    <string name="stripe_paymentsheet_form_label_optional">%s (optional)</string>
+    <string name="stripe_paymentsheet_ideal_bank">iDEAL Bank</string>
+    <string name="stripe_paymentsheet_or_pay_using">Or pay using</string>
+    <string name="stripe_paymentsheet_or_pay_with_card">Or pay with a card</string>
+    <string name="stripe_paymentsheet_p24_bank">Przelewy24 Bank</string>
+    <string name="stripe_paymentsheet_pay_button_amount">Pay %s</string>
+    <string name="stripe_paymentsheet_pay_button_label">Pay</string>
+    <string name="stripe_paymentsheet_payment_method_afterpay_clearpay">Afterpay</string>
+    <string name="stripe_paymentsheet_payment_method_bancontact">Bancontact</string>
+    <string name="stripe_paymentsheet_payment_method_card">Card</string>
+    <string name="stripe_paymentsheet_payment_method_eps">EPS</string>
+    <string name="stripe_paymentsheet_payment_method_giropay">Giropay</string>
+    <string name="stripe_paymentsheet_payment_method_ideal">iDEAL</string>
+    <string name="stripe_paymentsheet_payment_method_p24">Przelewy24</string>
+    <string name="stripe_paymentsheet_payment_method_sepa_debit">SEPA Debit</string>
+    <string name="stripe_paymentsheet_payment_method_sofort">Sofort</string>
+    <string name="stripe_paymentsheet_primary_button_processing">Processing…</string>
+    <string name="stripe_paymentsheet_remove_pm">Remove %s</string>
+    <string name="stripe_paymentsheet_save_for_future_payments">Save for future payments</string>
+    <string name="stripe_paymentsheet_save_this_card_with_merchant_name">Save this card for future %s payments</string>
+    <string name="stripe_paymentsheet_select_payment_method">Select your payment method</string>
+    <string name="stripe_paymentsheet_sepa_mandate">By providing your payment information and confirming this payment, you authorise (A) %s and Stripe, our payment service provider, to send instructions to your bank to debit your account and (B) your bank to debit your account in accordance with those instructions. As part of your rights, you are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited. Your rights are explained in a statement that you can obtain from your bank. You agree to receive notifications for future debits up to 2 days before they occur.</string>
+    <string name="stripe_paymentsheet_setup_button_label">Set up</string>
+    <string name="stripe_paymentsheet_test_mode_indicator">TEST MODE</string>
+    <string name="stripe_paymentsheet_total_amount">Total: %s</string>
+    <string name="stripe_postalcode_placeholder" translatable="false">12345</string>
+    <string name="stripe_verify_your_payment">Verify your payment</string>
+    <string name="subscribe_with_googlepay_button_content_description">Subscribe With Google Pay</string>
+    <string name="tab">Tab</string>
+    <string name="template_percent"><ns2:g id="percentage">%1$d</ns2:g> percent.</string>
+    <string name="title_add_a_card">Add a Card</string>
+    <string name="title_add_an_address">Set Address</string>
+    <string name="title_bank_account">Bank Account</string>
+    <string name="title_payment_method">Payment Method</string>
+    <string name="title_select_shipping_method">Select Shipping Method</string>
+    <string name="view_in_googlepay_button_content_description">View In Google Pay</string>
+    <string name="wallet_buy_button_place_holder">Buy with Google</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
+    <style name="AlertDialogStyle" parent="Theme.AppCompat.DayNight.Dialog"/>
     <style name="AndroidThemeColorAccentYellow" ns1:ignore="NewApi">
     <item name="android:colorAccent">#FFFFFF00</item>
   </style>
@@ -1473,6 +1931,7 @@
         <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="actionBarWidgetTheme">@null</item>
         <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="actionModeTheme">?attr/actionBarTheme</item>
 
         <!-- Panel attributes -->
         <item name="listChoiceBackgroundIndicator">@drawable/abc_list_selector_holo_dark</item>
@@ -2220,6 +2679,7 @@
     <item name="paddingBottomSystemWindowInsets">true</item>
     <item name="paddingLeftSystemWindowInsets">true</item>
     <item name="paddingRightSystemWindowInsets">true</item>
+    <item name="paddingTopSystemWindowInsets">true</item>
   </style>
     <style name="Base.V14.ThemeOverlay.MaterialComponents.Dialog" parent="ThemeOverlay.AppCompat.Dialog">
     <!-- Widget styles -->
@@ -2282,9 +2742,11 @@
         <item name="actionDropDownStyle">@style/Widget.AppCompat.Spinner.DropDown.ActionBar</item>
 
         <!-- Action Mode -->
+        <item name="actionModeTheme">?attr/actionBarTheme</item>
         <item name="actionModeStyle">@style/Widget.AppCompat.ActionMode</item>
         <item name="actionModeBackground">@drawable/abc_cab_background_top_material</item>
         <item name="actionModeSplitBackground">?attr/colorPrimaryDark</item>
+        <item name="actionModeCloseContentDescription">@string/abc_action_mode_done</item>
         <item name="actionModeCloseDrawable">@drawable/abc_ic_ab_back_material</item>
         <item name="actionModeCloseButtonStyle">@style/Widget.AppCompat.ActionButton.CloseMode</item>
 
@@ -2475,9 +2937,11 @@
         <item name="actionMenuTextColor">?android:attr/textColorPrimaryDisableOnly</item>
 
         <!-- Action Mode -->
+        <item name="actionModeTheme">?attr/actionBarTheme</item>
         <item name="actionModeStyle">@style/Widget.AppCompat.ActionMode</item>
         <item name="actionModeBackground">@drawable/abc_cab_background_top_material</item>
         <item name="actionModeSplitBackground">?attr/colorPrimaryDark</item>
+        <item name="actionModeCloseContentDescription">@string/abc_action_mode_done</item>
         <item name="actionModeCloseDrawable">@drawable/abc_ic_ab_back_material</item>
         <item name="actionModeCloseButtonStyle">@style/Widget.AppCompat.ActionButton.CloseMode</item>
 
@@ -2690,7 +3154,9 @@
         <item name="contentInsetStart">16dp</item>
         <item name="contentInsetStartWithNavigation">@dimen/abc_action_bar_content_inset_with_nav</item>
         <item name="android:paddingLeft">@dimen/abc_action_bar_default_padding_start_material</item>
+        <item name="android:paddingStart">@dimen/abc_action_bar_default_padding_start_material</item>
         <item name="android:paddingRight">@dimen/abc_action_bar_default_padding_end_material</item>
+        <item name="android:paddingEnd">@dimen/abc_action_bar_default_padding_end_material</item>
     </style>
     <style name="Base.Widget.AppCompat.ActionBar" parent="">
         <item name="displayOptions">showTitle</item>
@@ -2770,6 +3236,17 @@
         <item name="titleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionMode.Title</item>
         <item name="subtitleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle</item>
         <item name="closeItemLayout">@layout/abc_action_mode_close_item_material</item>
+
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="titleMargin">4dp</item>
+        <item name="maxButtonHeight">@dimen/abc_action_bar_default_height_material</item>
+        <item name="buttonGravity">top</item>
+        <item name="contentInsetStart">16dp</item>
+        <item name="contentInsetStartWithNavigation">@dimen/abc_action_bar_content_inset_with_nav</item>
+        <item name="android:paddingLeft">@dimen/abc_action_bar_default_padding_start_material</item>
+        <item name="android:paddingStart">@dimen/abc_action_bar_default_padding_start_material</item>
+        <item name="android:paddingRight">@dimen/abc_action_bar_default_padding_end_material</item>
+        <item name="android:paddingEnd">@dimen/abc_action_bar_default_padding_end_material</item>
     </style>
     <style name="Base.Widget.AppCompat.ActivityChooserView" parent="">
         <item name="android:gravity">center</item>
@@ -3121,6 +3598,8 @@
     <item name="enforceMaterialTheme">true</item>
     <item name="enforceTextAppearance">true</item>
 
+    <item name="android:minWidth">@dimen/material_textinput_min_width</item>
+    <item name="android:maxWidth">@dimen/material_textinput_max_width</item>
     <item name="boxBackgroundMode">outline</item>
     <item name="boxBackgroundColor">@null</item>
     <item name="errorIconDrawable">@drawable/mtrl_ic_error</item>
@@ -3158,6 +3637,31 @@
     <item name="shapeAppearanceOverlay">@null</item>
   </style>
     <style name="Base.Widget.MaterialComponents.TextView" parent="Widget.AppCompat.TextView"/>
+    <style name="BaseStripe3DS2EditText" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox"/>
+    <style name="BaseStripe3DS2TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox"/>
+    <style name="BaseStripe3DS2Theme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="actionBarTheme">@style/Stripe3DS2Theme</item>
+        <item name="actionBarStyle">@style/Stripe3DS2ActionBar</item>
+        <item name="android:colorBackground">@color/stripe_3ds2_background</item>
+        <item name="colorPrimary">@color/stripe_3ds2_primary</item>
+        <item name="colorPrimaryDark">@color/stripe_3ds2_primary_dark</item>
+        <item name="colorAccent">@color/stripe_3ds2_accent</item>
+        <item name="colorControlActivated">?attr/colorAccent</item>
+        <item name="android:textColor">@color/stripe_3ds2_text_color</item>
+        <item name="android:textColorPrimary">@color/stripe_3ds2_text_color_primary</item>
+        <item name="android:editTextColor">@color/stripe_3ds2_text_edit</item>
+        <item name="editTextColor">@color/stripe_3ds2_text_edit</item>
+        <item name="textInputStyle">@style/Stripe3DS2TextInputLayout</item>
+    </style>
+    <style name="BaseStripe3ds2ProgressTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:colorBackground">@color/stripe_3ds2_background</item>
+        <item name="colorPrimary">@color/stripe_3ds2_primary</item>
+        <item name="colorPrimaryDark">@color/stripe_3ds2_primary_dark</item>
+        <item name="colorAccent">@color/stripe_3ds2_accent</item>
+        <item name="colorControlActivated">?attr/colorAccent</item>
+        <item name="android:textColor">@color/stripe_3ds2_text_color</item>
+        <item name="android:textColorPrimary">@color/stripe_3ds2_text_color_primary</item>
+    </style>
     <style name="CardView" parent="Base.CardView">
     </style>
     <style name="CardView.Dark">
@@ -3166,8 +3670,12 @@
     <style name="CardView.Light">
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
     </style>
+    <style name="DialogWindowTheme">
+        <item name="android:windowClipToOutline">false</item>
+    </style>
     <style name="EmptyTheme"/>
-    <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
+    <style name="LaunchTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar"> -->
         <!-- Show a splash screen on the activity. Automatically removed when
              Flutter draws its first frame -->
         <item name="android:windowBackground">@drawable/launch_background</item>
@@ -3220,8 +3728,20 @@
     <item name="android:layout_gravity">center</item>
     <item name="android:textAlignment" ns1:ignore="NewApi">center</item>
   </style>
-    <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
+    <style name="NormalTheme" parent="Theme.MaterialComponents">
+    <!-- <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar"> -->
         <item name="android:windowBackground">?android:colorBackground</item>
+    </style>
+    <style name="PayLauncherDefaultTheme" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="colorSurface">@color/stripe_paymentsheet_background</item>
+        <item name="actionMenuTextColor">@color/stripe_paymentsheet_toolbar_items_color</item>
     </style>
     <style name="Paystack.Dialog" parent="Theme.AppCompat">
         <item name="android:windowNoTitle">true</item>
@@ -3295,9 +3815,9 @@
         <item name="android:actionModePasteDrawable">?actionModePasteDrawable</item>
         <item name="android:actionModeSelectAllDrawable">?actionModeSelectAllDrawable</item>
 
-        <item name="android:textSelectHandle">@drawable/abc_text_select_handle_middle_mtrl_dark</item>
-        <item name="android:textSelectHandleLeft">@drawable/abc_text_select_handle_left_mtrl_dark</item>
-        <item name="android:textSelectHandleRight">@drawable/abc_text_select_handle_right_mtrl_dark</item>
+        <item name="android:textSelectHandle">@drawable/abc_text_select_handle_middle_mtrl</item>
+        <item name="android:textSelectHandleLeft">@drawable/abc_text_select_handle_left_mtrl</item>
+        <item name="android:textSelectHandleRight">@drawable/abc_text_select_handle_right_mtrl</item>
     </style>
     <style name="Platform.AppCompat.Light" parent="android:Theme.Holo.Light">
         <item name="android:windowNoTitle">true</item>
@@ -3365,9 +3885,9 @@
         <item name="android:actionModePasteDrawable">?actionModePasteDrawable</item>
         <item name="android:actionModeSelectAllDrawable">?actionModeSelectAllDrawable</item>
 
-        <item name="android:textSelectHandle">@drawable/abc_text_select_handle_middle_mtrl_light</item>
-        <item name="android:textSelectHandleLeft">@drawable/abc_text_select_handle_left_mtrl_light</item>
-        <item name="android:textSelectHandleRight">@drawable/abc_text_select_handle_right_mtrl_light</item>
+        <item name="android:textSelectHandle">@drawable/abc_text_select_handle_middle_mtrl</item>
+        <item name="android:textSelectHandleLeft">@drawable/abc_text_select_handle_left_mtrl</item>
+        <item name="android:textSelectHandleRight">@drawable/abc_text_select_handle_right_mtrl</item>
     </style>
     <style name="Platform.MaterialComponents" parent="Theme.AppCompat"/>
     <style name="Platform.MaterialComponents.Dialog" parent="Theme.AppCompat.Dialog"/>
@@ -3514,6 +4034,349 @@
     <style name="ShapeAppearanceOverlay.TopRightDifferentCornerSize">
     <item name="cornerSizeTopRight">20px</item>
   </style>
+    <style name="Stripe.Base.BecsDebitWidget.EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">@dimen/stripe_becs_debit_widget_edit_text_size</item>
+    </style>
+    <style name="Stripe.Base.BecsDebitWidget.MandateAcceptanceTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:paddingTop">
+            @dimen/stripe_becs_debit_widget_mandate_acceptance_padding_top
+        </item>
+    </style>
+    <style name="Stripe.Base.CardInputWidget.EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">@dimen/ciw_stripe_edit_text_size</item>
+    </style>
+    <style name="Stripe.Base.CardInputWidget.TextInputLayout" parent="Widget.Design.TextInputLayout"/>
+    <style name="Stripe.Base.CardMultilineWidget.TextInputLayout" parent="Widget.Design.TextInputLayout"/>
+    <style name="Stripe.BecsDebitWidget.EditText" parent="Stripe.Base.BecsDebitWidget.EditText"/>
+    <style name="Stripe.BecsDebitWidget.MandateAcceptanceTextView" parent="Stripe.Base.BecsDebitWidget.MandateAcceptanceTextView"/>
+    <style name="Stripe.CardInputWidget.EditText" parent="Stripe.Base.CardInputWidget.EditText"/>
+    <style name="Stripe.CardInputWidget.TextInputLayout" parent="Stripe.Base.CardInputWidget.TextInputLayout"/>
+    <style name="Stripe.CardMultilineWidget.TextInputLayout" parent="Stripe.Base.CardMultilineWidget.TextInputLayout">
+        <item name="android:textColorHint">@color/stripe_card_multiline_textinput_hint_color</item>
+    </style>
+    <style name="Stripe3DS2ActionBar" parent="Widget.AppCompat.ActionBar.Solid">
+        <item name="contentInsetStart">@dimen/stripe_3ds2_challenge_activity_padding</item>
+        <item name="background">?attr/colorPrimary</item>
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
+    <style name="Stripe3DS2ActionBarButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:minWidth">0dp</item>
+    </style>
+    <style name="Stripe3DS2Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="Stripe3DS2Divider">
+        <item name="android:background">@color/stripe_3ds2_divider</item>
+        <item name="android:layout_height">@dimen/stripe_3ds2_divider</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+    <style name="Stripe3DS2Divider.Vertical">
+        <item name="android:layout_width">@dimen/stripe_3ds2_divider</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+    <style name="Stripe3DS2EditText" parent="BaseStripe3DS2EditText"/>
+    <style name="Stripe3DS2FooterChevron">
+        <item name="tint">@color/stripe_3ds2_chevron</item>
+    </style>
+    <style name="Stripe3DS2FooterHeader">
+        <item name="android:textColor">@color/info_zone_header_text</item>
+    </style>
+    <style name="Stripe3DS2FooterText"/>
+    <style name="Stripe3DS2FullScreenDialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+    </style>
+    <style name="Stripe3DS2HeaderTextViewStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Stripe3DS2TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="Stripe3DS2TextInputLayout" parent="BaseStripe3DS2TextInputLayout"/>
+    <style name="Stripe3DS2TextViewStyle">
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="Stripe3DS2Theme" parent="BaseStripe3DS2Theme"/>
+    <style name="Stripe3ds2ProgressTheme" parent="BaseStripe3ds2ProgressTheme"/>
+    <style name="StripeActionButtonStyle" parent="Widget.AppCompat.ActionButton">
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+    </style>
+    <style name="StripeAddPaymentMethodItemCard">
+        <item name="android:layout_width">@dimen/stripe_paymentsheet_add_pm_card_width</item>
+        <item name="android:layout_height">@dimen/stripe_paymentsheet_add_pm_card_height</item>
+        <item name="android:layout_marginStart">7dp</item>
+        <item name="android:layout_marginEnd">7dp</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="rippleColor">@android:color/transparent</item>
+        <item name="cardElevation">@dimen/stripe_paymentsheet_add_pm_card_elevation</item>
+        <item name="strokeWidth">@dimen/stripe_paymentsheet_add_pm_card_stroke_width</item>
+        <item name="strokeColor">@color/stripe_paymentsheet_add_pm_card_stroke</item>
+        <item name="cardBackgroundColor">@color/stripe_paymentsheet_elements_background_states
+        </item>
+        <item name="cardForegroundColor">@android:color/transparent</item>
+        <item name="cardCornerRadius">6dp</item>
+    </style>
+    <style name="StripeBaseTheme" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorAccent">@color/stripe_accent_color_default</item>
+        <item name="colorControlNormal">@color/stripe_control_normal_color_default</item>
+        <item name="colorPrimary">@color/stripe_toolbar_color_default</item>
+        <item name="colorPrimaryDark">@color/stripe_toolbar_color_default_dark</item>
+        <item name="titleTextColor">@color/stripe_title_text_color</item>
+        <item name="android:textColorSecondary">@color/stripe_text_color_secondary</item>
+    </style>
+    <style name="StripeCardErrorTextView">
+        <item name="android:imeOptions">actionDone</item>
+        <item name="android:textColor">@color/stripe_card_form_view_form_error</item>
+        <item name="android:textSize">@dimen/stripe_card_form_view_error_textsize</item>
+        <item name="android:lineSpacingExtra">5dp</item>
+        <item name="android:layout_marginStart">
+            @dimen/stripe_card_form_view_error_text_margin_horizontal
+        </item>
+        <item name="android:layout_marginEnd">
+            @dimen/stripe_card_form_view_error_text_margin_horizontal
+        </item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
+    </style>
+    <style name="StripeCardFormCountryItem">
+        <item name="android:inputType">none</item>
+        <item name="android:editable">false</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/stripe_card_form_view_textsize</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">@color/stripe_card_form_view_text_color</item>
+        <item name="android:paddingTop">13dp</item>
+        <item name="android:paddingBottom">13dp</item>
+    </style>
+    <style name="StripeCardFormCountryTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@android:color/transparent</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="android:paddingStart">
+            @dimen/stripe_card_form_view_text_input_layout_padding_horizontal
+        </item>
+        <item name="android:paddingEnd">
+            @dimen/stripe_card_form_view_text_input_layout_padding_horizontal
+        </item>
+        <item name="android:paddingTop">
+            @dimen/stripe_card_form_view_text_input_layout_padding_vertical
+        </item>
+        <item name="android:paddingBottom">
+            @dimen/stripe_card_form_view_text_input_layout_padding_vertical
+        </item>
+        <item name="android:background">
+            @drawable/stripe_card_form_view_text_input_layout_background
+        </item>
+    </style>
+    <style name="StripeCardFormEditText">
+        <item name="android:imeOptions">actionDone</item>
+        <item name="android:textColor">@color/stripe_card_form_view_text_color</item>
+        <item name="android:textSize">@dimen/stripe_card_form_view_textsize</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:minHeight">@dimen/stripe_card_form_view_text_minheight</item>
+    </style>
+    <style name="StripeCardFormTextInputLayout" parent="Widget.Design.TextInputLayout">
+        <item name="android:paddingStart">
+            @dimen/stripe_card_form_view_text_input_layout_padding_horizontal
+        </item>
+        <item name="android:paddingEnd">
+            @dimen/stripe_card_form_view_text_input_layout_padding_horizontal
+        </item>
+        <item name="android:paddingTop">
+            @dimen/stripe_card_form_view_text_input_layout_padding_vertical
+        </item>
+        <item name="android:paddingBottom">
+            @dimen/stripe_card_form_view_text_input_layout_padding_vertical
+        </item>
+        <item name="android:background">
+            @drawable/stripe_card_form_view_text_input_layout_background
+        </item>
+    </style>
+    <style name="StripeCardFormView">
+        <item name="cardFormStyle">standard</item>
+    </style>
+    <style name="StripeCardFormView.Borderless">
+        <item name="cardFormStyle">borderless</item>
+    </style>
+    <style name="StripeDefault3DS2Theme" parent="BaseStripe3DS2Theme"/>
+    <style name="StripeDefaultTheme" parent="StripeBaseTheme"/>
+    <style name="StripeGooglePayDefaultTheme" parent="StripePaymentSheetBaseTheme"/>
+    <style name="StripePaymentAddPaymentMethodMaterialCard">
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:checkable">false</item>
+        <item name="cardElevation">1dp</item>
+        <item name="strokeColor">@color/stripe_paymentsheet_add_payment_method_form_stroke</item>
+        <item name="strokeWidth">@dimen/stripe_paymentsheet_add_payment_method_form_stroke_width
+        </item>
+    </style>
+    <style name="StripePaymentOptionItemCard">
+        <item name="android:layout_width">@dimen/stripe_paymentsheet_paymentmethod_icon_width</item>
+        <item name="android:layout_height">@dimen/stripe_paymentsheet_paymentmethod_icon_height
+        </item>
+        <item name="android:layout_marginStart">7dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginEnd">7dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="rippleColor">@android:color/transparent</item>
+        <item name="cardElevation">@dimen/stripe_paymentsheet_card_elevation</item>
+        <item name="strokeWidth">@dimen/stripe_paymentsheet_card_stroke_width</item>
+        <item name="strokeColor">@color/stripe_paymentsheet_card_stroke</item>
+        <item name="cardBackgroundColor">@color/stripe_paymentsheet_elements_background_states
+        </item>
+        <item name="cardForegroundColor">@android:color/transparent</item>
+        <item name="cardCornerRadius">6dp</item>
+    </style>
+    <style name="StripePaymentOptionItemCardImage">
+        <item name="android:layout_width">56dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+    <style name="StripePaymentOptionItemCheckIcon">
+        <item name="android:visibility">gone</item>
+        <item name="android:src">@drawable/stripe_ic_check_circle</item>
+        <!-- modify the bottom and end layout to correctly position the check -->
+        <item name="android:layout_marginBottom">11dp</item>
+        <item name="android:paddingEnd">-2dp</item>
+    </style>
+    <style name="StripePaymentOptionItemContainer">
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+    </style>
+    <style name="StripePaymentOptionItemDeleteIcon">
+        <item name="android:visibility">gone</item>
+        <item name="android:src">@drawable/stripe_ic_delete_symbol</item>
+        <!-- modify the bottom and end layout to correctly position the icon -->
+        <item name="android:paddingBottom">24dp</item>
+        <item name="android:paddingEnd">-24dp</item>
+        <item name="android:scaleType">center</item>
+    </style>
+    <style name="StripePaymentSheetAddPaymentMethodTheme">
+        <item name="colorOnSurface">@color/stripe_paymentsheet_form</item>
+        <item name="colorPrimary">@color/stripe_paymentsheet_form</item>
+        <item name="colorAccent">@color/stripe_paymentsheet_form</item>
+    </style>
+    <style name="StripePaymentSheetAutocompleteTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@android:color/transparent</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:backgroundTint">@color/stripe_paymentsheet_elements_background_states</item>
+    </style>
+    <style name="StripePaymentSheetBaseTheme" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="colorSurface">@color/stripe_paymentsheet_background</item>
+        <item name="actionMenuTextColor">@color/stripe_paymentsheet_toolbar_items_color</item>
+    </style>
+    <style name="StripePaymentSheetCountryItem">
+        <item name="android:inputType">none</item>
+        <item name="android:editable">false</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">@color/stripe_paymentsheet_textinput_color</item>
+        <item name="android:paddingTop">13dp</item>
+        <item name="android:paddingBottom">13dp</item>
+        <item name="android:paddingStart">13dp</item>
+        <item name="android:paddingEnd">13dp</item>
+    </style>
+    <style name="StripePaymentSheetDefaultTheme" parent="StripePaymentSheetBaseTheme"/>
+    <style name="StripePaymentSheetErrorMessage">
+        <item name="android:textColor">@color/stripe_paymentsheet_error_text</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+    </style>
+    <style name="StripePaymentSheetFormDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/stripe_paymentsheet_form_border</item>
+    </style>
+    <style name="StripePaymentSheetLabel">
+        <item name="android:textSize">13sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">@color/stripe_paymentsheet_header_text</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginStart">1dp</item>
+        <item name="android:layout_marginEnd">1dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+    <style name="StripePaymentSheetPaymentMethodsLabel">
+        <item name="android:textColor">@color/stripe_paymentsheet_payment_method_label_text_states
+        </item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">1sp</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:layout_marginEnd">4dp</item>
+    </style>
+    <style name="StripePaymentSheetTextInputEditText">
+        <item name="android:inputType">text</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">@color/stripe_paymentsheet_textinput_color</item>
+    </style>
+    <style name="StripePaymentSheetTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@android:color/transparent</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:backgroundTint">@color/stripe_paymentsheet_elements_background_states</item>
+        <item name="android:textColorHint">@color/stripe_paymentsheet_textinputlayout_hint</item>
+    </style>
+    <style name="StripePaymentSheetTitle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/stripe_paymentsheet_title_text</item>
+        <item name="android:lineSpacingExtra">9sp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="StripePaymentSheetTotalLabel">
+        <item name="android:textSize">13sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">@color/stripe_paymentsheet_header_text</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="StripeToolBarStyle" parent="@style/ThemeOverlay.AppCompat">
+        <item name="colorControlNormal">?attr/titleTextColor</item>
+        <item name="actionMenuTextColor">?attr/titleTextColor</item>
+        <item name="android:actionButtonStyle">@style/StripeActionButtonStyle</item>
+    </style>
+    <style name="StripeTransparentTheme" parent="Theme.AppCompat">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    <style name="StripeVerticalDivider">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/stripe_paymentsheet_form_border</item>
+    </style>
     <style name="Test.ShapeAppearanceOverlay.MaterialComponents.MaterialCalendar.Day" parent="">
     <item name="cornerFamily">rounded</item>
     <item name="cornerSize">@dimen/test_mtrl_calendar_day_cornerSize</item>
@@ -3626,12 +4489,17 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
+    <style name="TextAppearance.Compat.Notification.Info.Media"/>
     <style name="TextAppearance.Compat.Notification.Line2" parent="TextAppearance.Compat.Notification.Info"/>
+    <style name="TextAppearance.Compat.Notification.Line2.Media" parent="TextAppearance.Compat.Notification.Info.Media"/>
+    <style name="TextAppearance.Compat.Notification.Media"/>
     <style name="TextAppearance.Compat.Notification.Time">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
+    <style name="TextAppearance.Compat.Notification.Time.Media"/>
     <style name="TextAppearance.Compat.Notification.Title" parent="@android:style/TextAppearance.StatusBar.EventContent.Title"/>
+    <style name="TextAppearance.Compat.Notification.Title.Media"/>
     <style name="TextAppearance.Design.CollapsingToolbar.Expanded" parent="TextAppearance.AppCompat.Display1">
     <item name="android:textColor">?android:attr/textColorPrimary</item>
   </style>
@@ -4071,6 +4939,38 @@
     <style name="ThemeOverlayColorAccentRed" ns1:ignore="NewApi">
     <item name="android:colorAccent">#FFFF0000</item>
   </style>
+    <style name="WalletFragmentDefaultButtonTextAppearance">
+<item name="android:textColor">@color/wallet_primary_text_holo_light</item>
+<item name="android:textColorHighlight">@color/wallet_highlighted_text_holo_light</item>
+<item name="android:textColorHint">@color/wallet_hint_foreground_holo_light</item>
+<item name="android:textColorLink">@color/wallet_link_text_light</item>
+<item name="android:textSize">18sp</item>
+<item name="android:textStyle">normal</item>
+</style>
+    <style name="WalletFragmentDefaultDetailsHeaderTextAppearance" parent="WalletFragmentDefaultDetailsTextAppearance">
+<item name="android:textStyle">bold</item>
+</style>
+    <style name="WalletFragmentDefaultDetailsTextAppearance">
+<item name="android:textColor">@color/wallet_secondary_text_holo_dark</item>
+<item name="android:textColorHighlight">@color/wallet_highlighted_text_holo_dark</item>
+<item name="android:textColorHint">@color/wallet_hint_foreground_holo_dark</item>
+<item name="android:textColorLink">@color/wallet_holo_blue_light</item>
+<item name="android:textSize">14sp</item>
+<item name="android:textStyle">normal</item>
+</style>
+    <style name="WalletFragmentDefaultStyle">
+<item name="buyButtonHeight">48dp</item>
+<item name="buyButtonWidth">match_parent</item>
+<item name="buyButtonText">buy_with</item>
+<item name="buyButtonAppearance">android_pay_dark</item>
+<item name="maskedWalletDetailsTextAppearance">@style/WalletFragmentDefaultDetailsTextAppearance</item>
+<item name="maskedWalletDetailsHeaderTextAppearance">@style/WalletFragmentDefaultDetailsHeaderTextAppearance</item>
+<item name="maskedWalletDetailsBackground">@color/wallet_bright_foreground_holo_light</item>
+<item name="maskedWalletDetailsButtonBackground">@android:drawable/btn_default</item>
+<item name="maskedWalletDetailsButtonTextAppearance">@style/WalletFragmentDefaultButtonTextAppearance</item>
+<item name="maskedWalletDetailsLogoTextColor">@color/wallet_bright_foreground_holo_dark</item>
+<item name="maskedWalletDetailsLogoImageType">android_pay</item>
+</style>
     <style name="Widget.AppCompat.ActionBar" parent="Base.Widget.AppCompat.ActionBar">
     </style>
     <style name="Widget.AppCompat.ActionBar.Solid" parent="Base.Widget.AppCompat.ActionBar.Solid">
@@ -4370,12 +5270,14 @@
     <style name="Widget.MaterialComponents.BottomSheet" parent="Widget.Design.BottomSheet.Modal">
     <item name="enforceMaterialTheme">true</item>
     <item name="android:background">@null</item>
+    <item name="android:layout_gravity">center_horizontal</item>
     <item name="shapeAppearance">?attr/shapeAppearanceLargeComponent</item>
     <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialComponents.BottomSheet</item>
     <item name="backgroundTint">?attr/colorSurface</item>
     <item name="android:elevation" ns1:ignore="NewApi">
       @dimen/design_bottom_sheet_elevation
     </item>
+    <item name="android:maxWidth">@dimen/material_bottom_sheet_max_width</item>
   </style>
     <style name="Widget.MaterialComponents.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet">
     <item name="android:elevation" ns1:ignore="NewApi">
@@ -4396,6 +5298,7 @@
     <item name="android:insetRight">0dp</item>
     <item name="android:insetTop">@dimen/mtrl_btn_inset</item>
     <item name="android:insetBottom">@dimen/mtrl_btn_inset</item>
+    <item name="android:maxWidth">@dimen/mtrl_btn_max_width</item>
     <item name="android:stateListAnimator" ns1:ignore="NewApi">@animator/mtrl_btn_state_list_anim</item>
     <item name="cornerRadius">@null</item>
     <item name="elevation">@dimen/mtrl_btn_elevation</item>
@@ -5474,6 +6377,10 @@
              action bar. This will be inherited by any widget inflated
              into the action bar. -->
         <attr format="reference" name="actionBarTheme"/>
+        <!-- Reference to a theme that should be used to inflate the
+             action bar in action mode. This will be inherited by any widget inflated
+             into the action bar. -->
+        <attr format="reference" name="actionModeTheme"/>
         <!-- Reference to a theme that should be used to inflate widgets
              and layouts destined for the action bar. Most of the time
              this will be a reference to the current theme, but when
@@ -5526,9 +6433,11 @@
         <!-- Drawable to use for the Web Search action button in WebView selection action modes -->
         <attr format="reference" name="actionModeWebSearchDrawable"/>
 
+        <!-- Content description to use for the close action mode button -->
+        <attr format="string" name="actionModeCloseContentDescription"/>
+
         <!-- PopupWindow style to use for action modes when showing as a window overlay. -->
         <attr format="reference" name="actionModePopupWindowStyle"/>
-
 
         <!-- =================== -->
         <!-- Text styles -->
@@ -5787,9 +6696,9 @@
         <eat-comment/>
 
         <!-- Animated Drawable to use for single choice indicators. -->
-        <attr format="reference" name="listChoiceIndicatorMultipleAnimated"/>
-        <!-- Animated Drawable to use for multiple choice indicators. -->
         <attr format="reference" name="listChoiceIndicatorSingleAnimated"/>
+        <!-- Animated Drawable to use for multiple choice indicators. -->
+        <attr format="reference" name="listChoiceIndicatorMultipleAnimated"/>
 
     </declare-styleable>
     <declare-styleable name="Badge">
@@ -5877,6 +6786,7 @@
     -->
     <attr format="integer" name="minHideDelay"/>
   </declare-styleable>
+    <declare-styleable name="BecsDebitWidget"><attr format="string" name="companyName"/></declare-styleable>
     <declare-styleable name="BottomAppBar">
     <!-- Background for the BottomAppBar. -->
     <attr name="backgroundTint"/>
@@ -5972,7 +6882,9 @@
     <attr name="paddingBottomSystemWindowInsets"/>
     <attr name="paddingLeftSystemWindowInsets"/>
     <attr name="paddingRightSystemWindowInsets"/>
+    <attr name="paddingTopSystemWindowInsets"/>
     <attr name="android:elevation"/>
+    <attr name="android:maxWidth"/>
 
   </declare-styleable>
     <declare-styleable name="ButtonBarLayout">
@@ -5980,6 +6892,15 @@
              enough space to lay them out side-by-side. -->
         <attr format="boolean" name="allowStacking"/>
     </declare-styleable>
+    <declare-styleable name="Capability">
+        <!-- Resource reference to the string array of query patterns for a custom capability. -->
+        <attr format="reference" name="queryPatterns"/>
+        <!-- Indicates whether a parameter in a capability template can only contain a matched
+             shortcut id and not an arbitrary string. -->
+        <attr format="boolean" name="shortcutMatchRequired"/>
+    </declare-styleable>
+    <declare-styleable name="CardElement"><attr format="boolean" name="shouldShowPostalCode"/><attr format="boolean" name="shouldRequirePostalCode"/><attr format="boolean" name="shouldRequireUsZipCode"/></declare-styleable>
+    <declare-styleable name="CardInputView"><attr format="string" name="cardHintText"/><attr format="color" name="cardTint"/><attr format="color" name="cardTextErrorColor"/><attr name="android:focusedByDefault"/></declare-styleable>
     <declare-styleable name="CardView">
         <!-- Background color for CardView. -->
         <attr format="color" name="cardBackgroundColor"/>
@@ -6279,12 +7200,25 @@
       <flag name="end" value="0x00800005"/>
     </attr>
 
-    <!-- Whether the CollapsingToolbarLayout should draw its own shrinking/growing title. -->
+    <!-- Whether the CollapsingToolbarLayout should draw its own collapsing title. -->
     <attr format="boolean" name="titleEnabled"/>
     <!-- The title to show when titleEnabled is set to true. -->
     <attr name="title"/>
+    <!-- Mode to specify the effect used to collapse and expand the title text. -->
+    <attr name="titleCollapseMode">
+      <!-- The expanded title will continuously scale and translate to its final collapsed position. -->
+      <enum name="scale" value="0"/>
+      <!-- The expanded title will fade out and translate, and the collapsed title will fade in. -->
+      <enum name="fade" value="1"/>
+    </attr>
     <!-- The maximum number of lines to display in the expanded state. Experimental Feature. -->
     <attr format="integer" name="maxLines"/>
+    <!-- Whether the system window inset top should be applied regardless of
+         what the layout_height is set to. Experimental Feature. -->
+    <attr format="boolean" name="forceApplySystemWindowInsetTop"/>
+    <!-- Whether extra height should be added when the title text spans across
+         multiple lines. Experimental Feature. -->
+    <attr format="boolean" name="extraMultilineHeightEnabled"/>
   </declare-styleable>
     <declare-styleable name="CollapsingToolbarLayout_Layout">
     <attr name="layout_collapseMode">
@@ -6336,10 +7270,10 @@
             <enum name="add" value="16"/>
         </attr>
     </declare-styleable>
-    <declare-styleable name="Constraint"><attr name="android:orientation"/><attr name="android:id"/><attr name="android:visibility"/><attr name="visibilityMode"/><attr name="android:alpha"/><attr name="android:elevation"/><attr name="android:rotation"/><attr name="android:rotationX"/><attr name="android:rotationY"/><attr name="android:scaleX"/><attr name="android:scaleY"/><attr name="pivotAnchor"/><attr name="android:transformPivotX"/><attr name="android:transformPivotY"/><attr name="android:translationX"/><attr name="android:translationY"/><attr name="android:translationZ"/><attr name="android:layout_width"/><attr name="android:layout_height"/><attr name="android:layout_marginStart"/><attr name="android:layout_marginBottom"/><attr name="android:layout_marginTop"/><attr name="android:layout_marginEnd"/><attr name="android:layout_marginLeft"/><attr name="android:layout_marginRight"/><attr name="layout_constraintCircle"/><attr name="layout_constraintCircleRadius"/><attr name="layout_constraintCircleAngle"/><attr name="layout_constraintGuide_begin"/><attr name="layout_constraintGuide_end"/><attr name="layout_constraintGuide_percent"/><attr name="layout_constraintLeft_toLeftOf"/><attr name="layout_constraintLeft_toRightOf"/><attr name="layout_constraintRight_toLeftOf"/><attr name="layout_constraintRight_toRightOf"/><attr name="layout_constraintTop_toTopOf"/><attr name="layout_constraintTop_toBottomOf"/><attr name="layout_constraintBottom_toTopOf"/><attr name="layout_constraintBottom_toBottomOf"/><attr name="layout_constraintBaseline_toBaselineOf"/><attr name="layout_constraintStart_toEndOf"/><attr name="layout_constraintStart_toStartOf"/><attr name="layout_constraintEnd_toStartOf"/><attr name="layout_constraintEnd_toEndOf"/><attr name="layout_goneMarginLeft"/><attr name="layout_goneMarginTop"/><attr name="layout_goneMarginRight"/><attr name="layout_goneMarginBottom"/><attr name="layout_goneMarginStart"/><attr name="layout_goneMarginEnd"/><attr name="layout_constrainedWidth"/><attr name="layout_constrainedHeight"/><attr name="layout_constraintHorizontal_bias"/><attr name="layout_constraintVertical_bias"/><attr name="layout_constraintWidth_default"/><attr name="layout_constraintHeight_default"/><attr name="layout_constraintWidth_min"/><attr name="layout_constraintWidth_max"/><attr name="layout_constraintWidth_percent"/><attr name="layout_constraintHeight_min"/><attr name="layout_constraintHeight_max"/><attr name="layout_constraintHeight_percent"/><attr name="layout_constraintLeft_creator"/><attr name="layout_constraintTop_creator"/><attr name="layout_constraintRight_creator"/><attr name="layout_constraintBottom_creator"/><attr name="layout_constraintBaseline_creator"/><attr name="layout_constraintDimensionRatio"/><attr name="layout_constraintHorizontal_weight"/><attr name="layout_constraintVertical_weight"/><attr name="layout_constraintHorizontal_chainStyle"/><attr name="layout_constraintVertical_chainStyle"/><attr name="layout_editor_absoluteX"/><attr name="layout_editor_absoluteY"/><attr name="barrierDirection"/><attr name="barrierMargin"/><attr name="constraint_referenced_ids"/><attr name="android:maxHeight"/><attr name="android:maxWidth"/><attr name="android:minHeight"/><attr name="android:minWidth"/><attr name="barrierAllowsGoneWidgets"/><attr name="chainUseRtl"/><attr name="flow_horizontalStyle"/><attr name="flow_verticalStyle"/><attr name="flow_verticalAlign"/><attr name="flow_horizontalAlign"/><attr name="flow_verticalBias"/><attr name="flow_horizontalBias"/><attr name="flow_wrapMode"/><attr name="flow_maxElementsWrap"/><attr name="flow_horizontalGap"/><attr name="flow_verticalGap"/><attr name="flow_firstHorizontalStyle"/><attr name="flow_firstVerticalStyle"/><attr name="flow_firstHorizontalBias"/><attr name="flow_firstVerticalBias"/><attr name="flow_lastHorizontalStyle"/><attr name="flow_lastVerticalStyle"/><attr name="flow_lastHorizontalBias"/><attr name="flow_lastVerticalBias"/><attr name="animate_relativeTo"/><attr name="transitionEasing"/><attr name="pathMotionArc"/><attr name="transitionPathRotate"/><attr name="drawPath"/><attr name="motionProgress"/><attr name="layout_constraintTag"/><attr name="motionStagger"/></declare-styleable>
-    <declare-styleable name="ConstraintLayout_Layout"><attr name="android:orientation"/><attr name="android:minWidth"/><attr name="android:minHeight"/><attr name="android:maxWidth"/><attr name="android:maxHeight"/><attr name="android:visibility"/><attr name="android:elevation"/><attr name="layout_optimizationLevel"/><attr name="layoutDescription"/><attr name="constraintSet"/><attr name="barrierDirection"/><attr name="barrierAllowsGoneWidgets"/><attr name="barrierMargin"/><attr name="constraint_referenced_ids"/><attr name="chainUseRtl"/><attr name="flow_horizontalStyle"/><attr name="flow_verticalStyle"/><attr name="flow_wrapMode"/><attr name="flow_maxElementsWrap"/><attr name="flow_horizontalGap"/><attr name="flow_verticalGap"/><attr name="android:padding"/><attr name="android:paddingTop"/><attr name="android:paddingBottom"/><attr name="android:paddingLeft"/><attr name="android:paddingRight"/><attr name="android:paddingStart"/><attr name="android:paddingEnd"/><attr name="flow_verticalAlign"/><attr name="flow_horizontalAlign"/><attr name="flow_verticalBias"/><attr name="flow_horizontalBias"/><attr name="flow_firstHorizontalStyle"/><attr name="flow_firstVerticalStyle"/><attr name="flow_firstHorizontalBias"/><attr name="flow_firstVerticalBias"/><attr name="flow_lastHorizontalStyle"/><attr name="flow_lastVerticalStyle"/><attr name="flow_lastHorizontalBias"/><attr name="flow_lastVerticalBias"/><attr name="layout_constraintCircle"/><attr name="layout_constraintCircleRadius"/><attr name="layout_constraintCircleAngle"/><attr name="layout_constraintGuide_begin"/><attr name="layout_constraintGuide_end"/><attr name="layout_constraintGuide_percent"/><attr name="layout_constraintLeft_toLeftOf"/><attr name="layout_constraintLeft_toRightOf"/><attr name="layout_constraintRight_toLeftOf"/><attr name="layout_constraintRight_toRightOf"/><attr name="layout_constraintTop_toTopOf"/><attr name="layout_constraintTop_toBottomOf"/><attr name="layout_constraintBottom_toTopOf"/><attr name="layout_constraintBottom_toBottomOf"/><attr name="layout_constraintBaseline_toBaselineOf"/><attr name="layout_constraintStart_toEndOf"/><attr name="layout_constraintStart_toStartOf"/><attr name="layout_constraintEnd_toStartOf"/><attr name="layout_constraintEnd_toEndOf"/><attr name="layout_goneMarginLeft"/><attr name="layout_goneMarginTop"/><attr name="layout_goneMarginRight"/><attr name="layout_goneMarginBottom"/><attr name="layout_goneMarginStart"/><attr name="layout_goneMarginEnd"/><attr name="layout_constrainedWidth"/><attr name="layout_constrainedHeight"/><attr name="layout_constraintHorizontal_bias"/><attr name="layout_constraintVertical_bias"/><attr name="layout_constraintWidth_default"/><attr name="layout_constraintHeight_default"/><attr name="layout_constraintWidth_min"/><attr name="layout_constraintWidth_max"/><attr name="layout_constraintWidth_percent"/><attr name="layout_constraintHeight_min"/><attr name="layout_constraintHeight_max"/><attr name="layout_constraintHeight_percent"/><attr name="layout_constraintLeft_creator"/><attr name="layout_constraintTop_creator"/><attr name="layout_constraintRight_creator"/><attr name="layout_constraintBottom_creator"/><attr name="layout_constraintBaseline_creator"/><attr name="layout_constraintDimensionRatio"/><attr name="layout_constraintHorizontal_weight"/><attr name="layout_constraintVertical_weight"/><attr name="layout_constraintHorizontal_chainStyle"/><attr name="layout_constraintVertical_chainStyle"/><attr name="layout_editor_absoluteX"/><attr name="layout_editor_absoluteY"/><attr name="layout_constraintTag"/></declare-styleable>
+    <declare-styleable name="Constraint"><attr name="android:orientation"/><attr name="android:id"/><attr name="android:visibility"/><attr name="visibilityMode"/><attr name="android:alpha"/><attr name="android:elevation"/><attr name="android:rotation"/><attr name="android:rotationX"/><attr name="android:rotationY"/><attr name="android:scaleX"/><attr name="android:scaleY"/><attr name="pivotAnchor"/><attr name="android:transformPivotX"/><attr name="android:transformPivotY"/><attr name="android:translationX"/><attr name="android:translationY"/><attr name="android:translationZ"/><attr name="android:layout_width"/><attr name="android:layout_height"/><attr name="android:layout_marginStart"/><attr name="android:layout_marginBottom"/><attr name="android:layout_marginTop"/><attr name="android:layout_marginEnd"/><attr name="android:layout_marginLeft"/><attr name="android:layout_marginRight"/><attr name="layout_constraintCircle"/><attr name="layout_constraintCircleRadius"/><attr name="layout_constraintCircleAngle"/><attr name="layout_constraintGuide_begin"/><attr name="layout_constraintGuide_end"/><attr name="layout_constraintGuide_percent"/><attr name="layout_constraintLeft_toLeftOf"/><attr name="layout_constraintLeft_toRightOf"/><attr name="layout_constraintRight_toLeftOf"/><attr name="layout_constraintRight_toRightOf"/><attr name="layout_constraintTop_toTopOf"/><attr name="layout_constraintTop_toBottomOf"/><attr name="layout_constraintBottom_toTopOf"/><attr name="layout_constraintBottom_toBottomOf"/><attr name="layout_constraintBaseline_toBaselineOf"/><attr name="layout_constraintStart_toEndOf"/><attr name="layout_constraintStart_toStartOf"/><attr name="layout_constraintEnd_toStartOf"/><attr name="layout_constraintEnd_toEndOf"/><attr name="layout_goneMarginLeft"/><attr name="layout_goneMarginTop"/><attr name="layout_goneMarginRight"/><attr name="layout_goneMarginBottom"/><attr name="layout_goneMarginStart"/><attr name="layout_goneMarginEnd"/><attr name="layout_constrainedWidth"/><attr name="layout_constrainedHeight"/><attr name="layout_constraintHorizontal_bias"/><attr name="layout_constraintVertical_bias"/><attr name="layout_constraintWidth_default"/><attr name="layout_constraintHeight_default"/><attr name="layout_constraintWidth_min"/><attr name="layout_constraintWidth_max"/><attr name="layout_constraintWidth_percent"/><attr name="layout_constraintHeight_min"/><attr name="layout_constraintHeight_max"/><attr name="layout_constraintHeight_percent"/><attr name="layout_constraintLeft_creator"/><attr name="layout_constraintTop_creator"/><attr name="layout_constraintRight_creator"/><attr name="layout_constraintBottom_creator"/><attr name="layout_constraintBaseline_creator"/><attr name="layout_constraintDimensionRatio"/><attr name="layout_constraintHorizontal_weight"/><attr name="layout_constraintVertical_weight"/><attr name="layout_constraintHorizontal_chainStyle"/><attr name="layout_constraintVertical_chainStyle"/><attr name="layout_editor_absoluteX"/><attr name="layout_editor_absoluteY"/><attr name="barrierDirection"/><attr name="barrierMargin"/><attr name="constraint_referenced_ids"/><attr name="constraint_referenced_tags"/><attr name="android:maxHeight"/><attr name="android:maxWidth"/><attr name="android:minHeight"/><attr name="android:minWidth"/><attr name="barrierAllowsGoneWidgets"/><attr name="chainUseRtl"/><attr name="flow_horizontalStyle"/><attr name="flow_verticalStyle"/><attr name="flow_verticalAlign"/><attr name="flow_horizontalAlign"/><attr name="flow_verticalBias"/><attr name="flow_horizontalBias"/><attr name="flow_wrapMode"/><attr name="flow_maxElementsWrap"/><attr name="flow_horizontalGap"/><attr name="flow_verticalGap"/><attr name="flow_firstHorizontalStyle"/><attr name="flow_firstVerticalStyle"/><attr name="flow_firstHorizontalBias"/><attr name="flow_firstVerticalBias"/><attr name="flow_lastHorizontalStyle"/><attr name="flow_lastVerticalStyle"/><attr name="flow_lastHorizontalBias"/><attr name="flow_lastVerticalBias"/><attr name="animate_relativeTo"/><attr name="transitionEasing"/><attr name="pathMotionArc"/><attr name="transitionPathRotate"/><attr name="drawPath"/><attr name="motionProgress"/><attr name="layout_constraintTag"/><attr name="motionStagger"/></declare-styleable>
+    <declare-styleable name="ConstraintLayout_Layout"><attr name="android:orientation"/><attr name="android:minWidth"/><attr name="android:minHeight"/><attr name="android:maxWidth"/><attr name="android:maxHeight"/><attr name="android:visibility"/><attr name="android:elevation"/><attr name="layout_optimizationLevel"/><attr name="layoutDescription"/><attr name="constraintSet"/><attr name="barrierDirection"/><attr name="barrierAllowsGoneWidgets"/><attr name="barrierMargin"/><attr name="constraint_referenced_ids"/><attr name="constraint_referenced_tags"/><attr name="chainUseRtl"/><attr name="flow_horizontalStyle"/><attr name="flow_verticalStyle"/><attr name="flow_wrapMode"/><attr name="flow_maxElementsWrap"/><attr name="flow_horizontalGap"/><attr name="flow_verticalGap"/><attr name="android:padding"/><attr name="android:paddingTop"/><attr name="android:paddingBottom"/><attr name="android:paddingLeft"/><attr name="android:paddingRight"/><attr name="android:paddingStart"/><attr name="android:paddingEnd"/><attr name="flow_verticalAlign"/><attr name="flow_horizontalAlign"/><attr name="flow_verticalBias"/><attr name="flow_horizontalBias"/><attr name="flow_firstHorizontalStyle"/><attr name="flow_firstVerticalStyle"/><attr name="flow_firstHorizontalBias"/><attr name="flow_firstVerticalBias"/><attr name="flow_lastHorizontalStyle"/><attr name="flow_lastVerticalStyle"/><attr name="flow_lastHorizontalBias"/><attr name="flow_lastVerticalBias"/><attr name="layout_constraintCircle"/><attr name="layout_constraintCircleRadius"/><attr name="layout_constraintCircleAngle"/><attr name="layout_constraintGuide_begin"/><attr name="layout_constraintGuide_end"/><attr name="layout_constraintGuide_percent"/><attr name="layout_constraintLeft_toLeftOf"/><attr name="layout_constraintLeft_toRightOf"/><attr name="layout_constraintRight_toLeftOf"/><attr name="layout_constraintRight_toRightOf"/><attr name="layout_constraintTop_toTopOf"/><attr name="layout_constraintTop_toBottomOf"/><attr name="layout_constraintBottom_toTopOf"/><attr name="layout_constraintBottom_toBottomOf"/><attr name="layout_constraintBaseline_toBaselineOf"/><attr name="layout_constraintStart_toEndOf"/><attr name="layout_constraintStart_toStartOf"/><attr name="layout_constraintEnd_toStartOf"/><attr name="layout_constraintEnd_toEndOf"/><attr name="layout_goneMarginLeft"/><attr name="layout_goneMarginTop"/><attr name="layout_goneMarginRight"/><attr name="layout_goneMarginBottom"/><attr name="layout_goneMarginStart"/><attr name="layout_goneMarginEnd"/><attr name="layout_constrainedWidth"/><attr name="layout_constrainedHeight"/><attr name="layout_constraintHorizontal_bias"/><attr name="layout_constraintVertical_bias"/><attr name="layout_constraintWidth_default"/><attr name="layout_constraintHeight_default"/><attr name="layout_constraintWidth_min"/><attr name="layout_constraintWidth_max"/><attr name="layout_constraintWidth_percent"/><attr name="layout_constraintHeight_min"/><attr name="layout_constraintHeight_max"/><attr name="layout_constraintHeight_percent"/><attr name="layout_constraintLeft_creator"/><attr name="layout_constraintTop_creator"/><attr name="layout_constraintRight_creator"/><attr name="layout_constraintBottom_creator"/><attr name="layout_constraintBaseline_creator"/><attr name="layout_constraintDimensionRatio"/><attr name="layout_constraintHorizontal_weight"/><attr name="layout_constraintVertical_weight"/><attr name="layout_constraintHorizontal_chainStyle"/><attr name="layout_constraintVertical_chainStyle"/><attr name="layout_editor_absoluteX"/><attr name="layout_editor_absoluteY"/><attr name="layout_constraintTag"/></declare-styleable>
     <declare-styleable name="ConstraintLayout_placeholder"><attr name="placeholder_emptyVisibility"/><attr name="content"/></declare-styleable>
-    <declare-styleable name="ConstraintSet"><attr format="reference" name="deriveConstraintsFrom"/><attr name="android:orientation"/><attr name="android:id"/><attr name="android:visibility"/><attr name="android:alpha"/><attr name="android:elevation"/><attr name="android:rotation"/><attr name="android:rotationX"/><attr name="android:rotationY"/><attr name="android:scaleX"/><attr name="android:scaleY"/><attr name="pivotAnchor"/><attr name="android:pivotX"/><attr name="android:pivotY"/><attr name="android:transformPivotX"/><attr name="android:transformPivotY"/><attr name="android:translationX"/><attr name="android:translationY"/><attr name="android:translationZ"/><attr name="android:layout_width"/><attr name="android:layout_height"/><attr name="android:layout_marginStart"/><attr name="android:layout_marginBottom"/><attr name="android:layout_marginTop"/><attr name="android:layout_marginEnd"/><attr name="android:layout_marginLeft"/><attr name="android:layout_marginRight"/><attr name="layout_constraintCircle"/><attr name="layout_constraintCircleRadius"/><attr name="layout_constraintCircleAngle"/><attr name="layout_constraintGuide_begin"/><attr name="layout_constraintGuide_end"/><attr name="layout_constraintGuide_percent"/><attr name="layout_constraintLeft_toLeftOf"/><attr name="layout_constraintLeft_toRightOf"/><attr name="layout_constraintRight_toLeftOf"/><attr name="layout_constraintRight_toRightOf"/><attr name="layout_constraintTop_toTopOf"/><attr name="layout_constraintTop_toBottomOf"/><attr name="layout_constraintBottom_toTopOf"/><attr name="layout_constraintBottom_toBottomOf"/><attr name="layout_constraintBaseline_toBaselineOf"/><attr name="layout_constraintStart_toEndOf"/><attr name="layout_constraintStart_toStartOf"/><attr name="layout_constraintEnd_toStartOf"/><attr name="layout_constraintEnd_toEndOf"/><attr name="layout_goneMarginLeft"/><attr name="layout_goneMarginTop"/><attr name="layout_goneMarginRight"/><attr name="layout_goneMarginBottom"/><attr name="layout_goneMarginStart"/><attr name="layout_goneMarginEnd"/><attr name="layout_constrainedWidth"/><attr name="layout_constrainedHeight"/><attr name="layout_constraintHorizontal_bias"/><attr name="layout_constraintVertical_bias"/><attr name="layout_constraintWidth_default"/><attr name="layout_constraintHeight_default"/><attr name="layout_constraintWidth_min"/><attr name="layout_constraintWidth_max"/><attr name="layout_constraintWidth_percent"/><attr name="layout_constraintHeight_min"/><attr name="layout_constraintHeight_max"/><attr name="layout_constraintHeight_percent"/><attr name="layout_constraintLeft_creator"/><attr name="layout_constraintTop_creator"/><attr name="layout_constraintRight_creator"/><attr name="layout_constraintBottom_creator"/><attr name="layout_constraintBaseline_creator"/><attr name="layout_constraintDimensionRatio"/><attr name="layout_constraintHorizontal_weight"/><attr name="layout_constraintVertical_weight"/><attr name="layout_constraintHorizontal_chainStyle"/><attr name="layout_constraintVertical_chainStyle"/><attr name="layout_editor_absoluteX"/><attr name="layout_editor_absoluteY"/><attr name="barrierDirection"/><attr name="constraint_referenced_ids"/><attr name="barrierMargin"/><attr name="android:maxHeight"/><attr name="android:maxWidth"/><attr name="android:minHeight"/><attr name="android:minWidth"/><attr name="barrierAllowsGoneWidgets"/><attr name="chainUseRtl"/><attr name="flow_horizontalStyle"/><attr name="flow_verticalStyle"/><attr name="flow_verticalAlign"/><attr name="flow_horizontalAlign"/><attr name="flow_verticalBias"/><attr name="flow_horizontalBias"/><attr name="flow_wrapMode"/><attr name="flow_maxElementsWrap"/><attr name="flow_horizontalGap"/><attr name="flow_verticalGap"/><attr name="flow_firstHorizontalStyle"/><attr name="flow_firstVerticalStyle"/><attr name="flow_firstHorizontalBias"/><attr name="flow_firstVerticalBias"/><attr name="flow_lastHorizontalStyle"/><attr name="flow_lastVerticalStyle"/><attr name="flow_lastHorizontalBias"/><attr name="flow_lastVerticalBias"/><attr name="animate_relativeTo"/><attr name="transitionEasing"/><attr name="pathMotionArc"/><attr name="transitionPathRotate"/><attr name="motionStagger"/><attr name="drawPath"/><attr name="motionProgress"/><attr name="layout_constraintTag"/></declare-styleable>
+    <declare-styleable name="ConstraintSet"><attr format="reference" name="deriveConstraintsFrom"/><attr name="android:orientation"/><attr name="android:id"/><attr name="android:visibility"/><attr name="android:alpha"/><attr name="android:elevation"/><attr name="android:rotation"/><attr name="android:rotationX"/><attr name="android:rotationY"/><attr name="android:scaleX"/><attr name="android:scaleY"/><attr name="pivotAnchor"/><attr name="android:pivotX"/><attr name="android:pivotY"/><attr name="android:transformPivotX"/><attr name="android:transformPivotY"/><attr name="android:translationX"/><attr name="android:translationY"/><attr name="android:translationZ"/><attr name="android:layout_width"/><attr name="android:layout_height"/><attr name="android:layout_marginStart"/><attr name="android:layout_marginBottom"/><attr name="android:layout_marginTop"/><attr name="android:layout_marginEnd"/><attr name="android:layout_marginLeft"/><attr name="android:layout_marginRight"/><attr name="layout_constraintCircle"/><attr name="layout_constraintCircleRadius"/><attr name="layout_constraintCircleAngle"/><attr name="layout_constraintGuide_begin"/><attr name="layout_constraintGuide_end"/><attr name="layout_constraintGuide_percent"/><attr name="layout_constraintLeft_toLeftOf"/><attr name="layout_constraintLeft_toRightOf"/><attr name="layout_constraintRight_toLeftOf"/><attr name="layout_constraintRight_toRightOf"/><attr name="layout_constraintTop_toTopOf"/><attr name="layout_constraintTop_toBottomOf"/><attr name="layout_constraintBottom_toTopOf"/><attr name="layout_constraintBottom_toBottomOf"/><attr name="layout_constraintBaseline_toBaselineOf"/><attr name="layout_constraintStart_toEndOf"/><attr name="layout_constraintStart_toStartOf"/><attr name="layout_constraintEnd_toStartOf"/><attr name="layout_constraintEnd_toEndOf"/><attr name="layout_goneMarginLeft"/><attr name="layout_goneMarginTop"/><attr name="layout_goneMarginRight"/><attr name="layout_goneMarginBottom"/><attr name="layout_goneMarginStart"/><attr name="layout_goneMarginEnd"/><attr name="layout_constrainedWidth"/><attr name="layout_constrainedHeight"/><attr name="layout_constraintHorizontal_bias"/><attr name="layout_constraintVertical_bias"/><attr name="layout_constraintWidth_default"/><attr name="layout_constraintHeight_default"/><attr name="layout_constraintWidth_min"/><attr name="layout_constraintWidth_max"/><attr name="layout_constraintWidth_percent"/><attr name="layout_constraintHeight_min"/><attr name="layout_constraintHeight_max"/><attr name="layout_constraintHeight_percent"/><attr name="layout_constraintLeft_creator"/><attr name="layout_constraintTop_creator"/><attr name="layout_constraintRight_creator"/><attr name="layout_constraintBottom_creator"/><attr name="layout_constraintBaseline_creator"/><attr name="layout_constraintDimensionRatio"/><attr name="layout_constraintHorizontal_weight"/><attr name="layout_constraintVertical_weight"/><attr name="layout_constraintHorizontal_chainStyle"/><attr name="layout_constraintVertical_chainStyle"/><attr name="layout_editor_absoluteX"/><attr name="layout_editor_absoluteY"/><attr name="barrierDirection"/><attr name="constraint_referenced_ids"/><attr name="constraint_referenced_tags"/><attr name="barrierMargin"/><attr name="android:maxHeight"/><attr name="android:maxWidth"/><attr name="android:minHeight"/><attr name="android:minWidth"/><attr name="barrierAllowsGoneWidgets"/><attr name="chainUseRtl"/><attr name="flow_horizontalStyle"/><attr name="flow_verticalStyle"/><attr name="flow_verticalAlign"/><attr name="flow_horizontalAlign"/><attr name="flow_verticalBias"/><attr name="flow_horizontalBias"/><attr name="flow_wrapMode"/><attr name="flow_maxElementsWrap"/><attr name="flow_horizontalGap"/><attr name="flow_verticalGap"/><attr name="flow_firstHorizontalStyle"/><attr name="flow_firstVerticalStyle"/><attr name="flow_firstHorizontalBias"/><attr name="flow_firstVerticalBias"/><attr name="flow_lastHorizontalStyle"/><attr name="flow_lastVerticalStyle"/><attr name="flow_lastHorizontalBias"/><attr name="flow_lastVerticalBias"/><attr name="animate_relativeTo"/><attr name="transitionEasing"/><attr name="pathMotionArc"/><attr name="transitionPathRotate"/><attr name="motionStagger"/><attr name="drawPath"/><attr name="motionProgress"/><attr name="layout_constraintTag"/></declare-styleable>
     <declare-styleable name="CoordinatorLayout">
         <!-- A reference to an array of integers representing the
              locations of horizontal keylines in dp from the starting edge.
@@ -6440,6 +7374,25 @@
         </attr>
     </declare-styleable>
     <declare-styleable name="CustomAttribute"><attr format="string" name="attributeName"/><attr format="color" name="customColorValue"/><attr format="color" name="customColorDrawableValue"/><attr format="integer" name="customIntegerValue"/><attr format="float" name="customFloatValue"/><attr format="string" name="customStringValue"/><attr format="dimension" name="customDimension"/><attr format="dimension" name="customPixelDimension"/><attr format="boolean" name="customBoolean"/></declare-styleable>
+    <declare-styleable name="CustomWalletTheme"><attr name="windowTransitionStyle">
+<enum name="slide" value="1"/>
+
+<enum name="none" value="2"/>
+
+</attr>
+<attr name="toolbarTextColorStyle">
+<enum name="light" value="1"/>
+
+<enum name="dark" value="2"/>
+
+</attr>
+<attr name="customThemeStyle">
+<enum name="material" value="1"/>
+
+<enum name="googleMaterial2" value="2"/>
+
+</attr>
+</declare-styleable>
     <declare-styleable name="DrawerArrowToggle">
         <!-- The drawing color for the bars -->
         <attr format="color" name="color"/>
@@ -6576,6 +7529,11 @@
               timeout and wait until a reply is received from the font provider. -->
             <enum name="forever" value="-1"/>
         </attr>
+        <!-- Provides the system font family name to check before downloading the font. For
+        example if the fontProviderQuery asked for "Sans Serif", it is possible to define
+        fontProviderSystemFontFamily as "sans-serif" to tell the system to use "sans-serif" font
+        family if it exists on the system. -->
+        <attr format="string" name="fontProviderSystemFontFamily"/>
     </declare-styleable>
     <declare-styleable name="FontFamilyFont">
         <!-- The style of the given font file. This will be used when the font is being loaded into
@@ -6615,6 +7573,15 @@
     <!-- Do not expose publicly, used by ForegroundLinearLayout but never set by any style.  -->
     <attr format="boolean" name="foregroundInsidePadding"/>
   </declare-styleable>
+    <declare-styleable name="Fragment">
+        <attr name="android:name"/>
+        <attr name="android:id"/>
+        <attr name="android:tag"/>
+    </declare-styleable>
+    <declare-styleable name="FragmentContainerView">
+        <attr name="android:name"/>
+        <attr name="android:tag"/>
+    </declare-styleable>
     <declare-styleable name="GradientColor">
         <!-- Start color of the gradient. -->
         <attr name="android:startColor"/>
@@ -6666,6 +7633,7 @@
     <attr format="boolean" name="paddingBottomSystemWindowInsets"/>
     <attr format="boolean" name="paddingLeftSystemWindowInsets"/>
     <attr format="boolean" name="paddingRightSystemWindowInsets"/>
+    <attr format="boolean" name="paddingTopSystemWindowInsets"/>
   </declare-styleable>
     <declare-styleable name="KeyAttribute"><attr name="framePosition"/><attr name="motionTarget"/><attr name="transitionEasing"/><attr name="curveFit"/><attr name="motionProgress"/><attr name="android:alpha"/><attr name="android:elevation"/><attr name="android:rotation"/><attr name="android:rotationX"/><attr name="android:rotationY"/><attr name="android:transformPivotX"/><attr name="android:transformPivotY"/><attr name="transitionPathRotate"/><attr name="android:scaleX"/><attr name="android:scaleY"/><attr name="android:translationX"/><attr name="android:translationY"/><attr name="android:translationZ"/></declare-styleable>
     <declare-styleable name="KeyCycle"><attr name="motionTarget"/><attr name="curveFit"/><attr name="framePosition"/><attr name="transitionEasing"/><attr name="motionProgress"/><attr name="waveShape"/><attr name="wavePeriod"/><attr name="waveOffset"/><attr name="waveVariesBy"/><attr name="transitionPathRotate"/><attr name="android:alpha"/><attr name="android:elevation"/><attr name="android:rotation"/><attr name="android:rotationX"/><attr name="android:rotationY"/><attr name="android:scaleX"/><attr name="android:scaleY"/><attr name="android:translationX"/><attr name="android:translationY"/><attr name="android:translationZ"/></declare-styleable>
@@ -6679,7 +7647,7 @@
         </attr><attr format="float" name="percentX"/><attr format="float" name="percentY"/><attr format="float" name="percentWidth"/><attr format="float" name="percentHeight"/><attr name="framePosition"/><attr name="motionTarget"/><attr name="transitionEasing"/><attr name="pathMotionArc"/><attr name="curveFit"/><attr name="drawPath"/><attr name="sizePercent"/></declare-styleable>
     <declare-styleable name="KeyTimeCycle"><attr name="framePosition"/><attr name="motionTarget"/><attr name="transitionEasing"/><attr name="curveFit"/><attr name="waveShape"/><attr name="wavePeriod"/><attr name="motionProgress"/><attr name="waveOffset"/><attr name="waveDecay"/><attr name="android:alpha"/><attr name="android:elevation"/><attr name="android:rotation"/><attr name="android:rotationX"/><attr name="android:rotationY"/><attr name="transitionPathRotate"/><attr name="android:scaleX"/><attr name="android:scaleY"/><attr name="android:translationX"/><attr name="android:translationY"/><attr name="android:translationZ"/></declare-styleable>
     <declare-styleable name="KeyTrigger"><attr name="framePosition"/><attr name="motionTarget"/><attr format="reference" name="triggerReceiver"/><attr format="string" name="onNegativeCross"/><attr format="string" name="onPositiveCross"/><attr format="string" name="onCross"/><attr format="float" name="triggerSlack"/><attr format="reference" name="triggerId"/><attr format="boolean" name="motion_postLayoutCollision"/><attr format="reference" name="motion_triggerOnCollision"/></declare-styleable>
-    <declare-styleable name="Layout"><attr name="android:layout_width"/><attr name="android:layout_height"/><attr name="android:layout_marginStart"/><attr name="android:layout_marginBottom"/><attr name="android:layout_marginTop"/><attr name="android:layout_marginEnd"/><attr name="android:layout_marginLeft"/><attr name="android:layout_marginRight"/><attr name="layout_constraintCircle"/><attr name="layout_constraintCircleRadius"/><attr name="layout_constraintCircleAngle"/><attr name="layout_constraintGuide_begin"/><attr name="layout_constraintGuide_end"/><attr name="layout_constraintGuide_percent"/><attr name="layout_constraintLeft_toLeftOf"/><attr name="layout_constraintLeft_toRightOf"/><attr name="layout_constraintRight_toLeftOf"/><attr name="layout_constraintRight_toRightOf"/><attr name="layout_constraintTop_toTopOf"/><attr name="layout_constraintTop_toBottomOf"/><attr name="layout_constraintBottom_toTopOf"/><attr name="layout_constraintBottom_toBottomOf"/><attr name="layout_constraintBaseline_toBaselineOf"/><attr name="layout_constraintStart_toEndOf"/><attr name="layout_constraintStart_toStartOf"/><attr name="layout_constraintEnd_toStartOf"/><attr name="layout_constraintEnd_toEndOf"/><attr name="layout_goneMarginLeft"/><attr name="layout_goneMarginTop"/><attr name="layout_goneMarginRight"/><attr name="layout_goneMarginBottom"/><attr name="layout_goneMarginStart"/><attr name="layout_goneMarginEnd"/><attr name="layout_constrainedWidth"/><attr name="layout_constrainedHeight"/><attr name="layout_constraintHorizontal_bias"/><attr name="layout_constraintVertical_bias"/><attr name="layout_constraintWidth_default"/><attr name="layout_constraintHeight_default"/><attr name="layout_constraintWidth_min"/><attr name="layout_constraintWidth_max"/><attr name="android:orientation"/><attr name="layout_constraintWidth_percent"/><attr name="layout_constraintHeight_min"/><attr name="layout_constraintHeight_max"/><attr name="layout_constraintHeight_percent"/><attr name="layout_constraintLeft_creator"/><attr name="layout_constraintTop_creator"/><attr name="layout_constraintRight_creator"/><attr name="layout_constraintBottom_creator"/><attr name="layout_constraintBaseline_creator"/><attr name="layout_constraintDimensionRatio"/><attr name="layout_constraintHorizontal_weight"/><attr name="layout_constraintVertical_weight"/><attr name="layout_constraintHorizontal_chainStyle"/><attr name="layout_constraintVertical_chainStyle"/><attr name="layout_editor_absoluteX"/><attr name="layout_editor_absoluteY"/><attr name="barrierDirection"/><attr name="barrierMargin"/><attr name="constraint_referenced_ids"/><attr format="dimension" name="maxHeight"/><attr format="dimension" name="maxWidth"/><attr format="dimension" name="minHeight"/><attr format="dimension" name="minWidth"/><attr name="barrierAllowsGoneWidgets"/><attr name="chainUseRtl"/></declare-styleable>
+    <declare-styleable name="Layout"><attr name="android:layout_width"/><attr name="android:layout_height"/><attr name="android:layout_marginStart"/><attr name="android:layout_marginBottom"/><attr name="android:layout_marginTop"/><attr name="android:layout_marginEnd"/><attr name="android:layout_marginLeft"/><attr name="android:layout_marginRight"/><attr name="layout_constraintCircle"/><attr name="layout_constraintCircleRadius"/><attr name="layout_constraintCircleAngle"/><attr name="layout_constraintGuide_begin"/><attr name="layout_constraintGuide_end"/><attr name="layout_constraintGuide_percent"/><attr name="layout_constraintLeft_toLeftOf"/><attr name="layout_constraintLeft_toRightOf"/><attr name="layout_constraintRight_toLeftOf"/><attr name="layout_constraintRight_toRightOf"/><attr name="layout_constraintTop_toTopOf"/><attr name="layout_constraintTop_toBottomOf"/><attr name="layout_constraintBottom_toTopOf"/><attr name="layout_constraintBottom_toBottomOf"/><attr name="layout_constraintBaseline_toBaselineOf"/><attr name="layout_constraintStart_toEndOf"/><attr name="layout_constraintStart_toStartOf"/><attr name="layout_constraintEnd_toStartOf"/><attr name="layout_constraintEnd_toEndOf"/><attr name="layout_goneMarginLeft"/><attr name="layout_goneMarginTop"/><attr name="layout_goneMarginRight"/><attr name="layout_goneMarginBottom"/><attr name="layout_goneMarginStart"/><attr name="layout_goneMarginEnd"/><attr name="layout_constrainedWidth"/><attr name="layout_constrainedHeight"/><attr name="layout_constraintHorizontal_bias"/><attr name="layout_constraintVertical_bias"/><attr name="layout_constraintWidth_default"/><attr name="layout_constraintHeight_default"/><attr name="layout_constraintWidth_min"/><attr name="layout_constraintWidth_max"/><attr name="android:orientation"/><attr name="layout_constraintWidth_percent"/><attr name="layout_constraintHeight_min"/><attr name="layout_constraintHeight_max"/><attr name="layout_constraintHeight_percent"/><attr name="layout_constraintLeft_creator"/><attr name="layout_constraintTop_creator"/><attr name="layout_constraintRight_creator"/><attr name="layout_constraintBottom_creator"/><attr name="layout_constraintBaseline_creator"/><attr name="layout_constraintDimensionRatio"/><attr name="layout_constraintHorizontal_weight"/><attr name="layout_constraintVertical_weight"/><attr name="layout_constraintHorizontal_chainStyle"/><attr name="layout_constraintVertical_chainStyle"/><attr name="layout_editor_absoluteX"/><attr name="layout_editor_absoluteY"/><attr name="barrierDirection"/><attr name="barrierMargin"/><attr name="constraint_referenced_ids"/><attr name="constraint_referenced_tags"/><attr format="dimension" name="maxHeight"/><attr format="dimension" name="maxWidth"/><attr format="dimension" name="minHeight"/><attr format="dimension" name="minWidth"/><attr name="barrierAllowsGoneWidgets"/><attr name="chainUseRtl"/></declare-styleable>
     <declare-styleable name="LinearLayoutCompat">
         <!-- Should the layout be a column or a row?  Use "horizontal"
              for a row, "vertical" for a column.  The default is
@@ -6763,6 +7731,78 @@
         <!-- Amount of pixels by which the drop down should be offset horizontally. -->
         <attr name="android:dropDownHorizontalOffset"/>
     </declare-styleable>
+    <declare-styleable name="LoadingImageView"><attr name="imageAspectRatioAdjust">
+<enum name="none" value="0"/>
+
+<enum name="adjust_width" value="1"/>
+
+<enum name="adjust_height" value="2"/>
+
+</attr>
+
+<attr format="float" name="imageAspectRatio"/>
+
+<attr format="boolean" name="circleCrop"/>
+</declare-styleable>
+    <declare-styleable name="MapAttrs"><attr name="mapType">
+<enum name="none" value="0"/>
+
+<enum name="normal" value="1"/>
+
+<enum name="satellite" value="2"/>
+
+<enum name="terrain" value="3"/>
+
+<enum name="hybrid" value="4"/>
+
+</attr>
+
+<attr format="float" name="cameraBearing"/>
+
+<attr format="float" name="cameraTargetLat"/>
+
+<attr format="float" name="cameraTargetLng"/>
+
+<attr format="float" name="cameraTilt"/>
+
+<attr format="float" name="cameraZoom"/>
+
+<attr format="boolean" name="liteMode"/>
+
+<attr format="boolean" name="uiCompass"/>
+
+<attr format="boolean" name="uiRotateGestures"/>
+
+<attr format="boolean" name="uiScrollGestures"/>
+
+<attr format="boolean" name="uiScrollGesturesDuringRotateOrZoom"/>
+
+<attr format="boolean" name="uiTiltGestures"/>
+
+<attr format="boolean" name="uiZoomControls"/>
+
+<attr format="boolean" name="uiZoomGestures"/>
+
+<attr format="boolean" name="useViewLifecycle"/>
+
+<attr format="boolean" name="zOrderOnTop"/>
+
+<attr format="boolean" name="uiMapToolbar"/>
+
+<attr format="boolean" name="ambientEnabled"/>
+
+<attr format="float" name="cameraMinZoomPreference"/>
+
+<attr format="float" name="cameraMaxZoomPreference"/>
+
+<attr format="float" name="latLngBoundsSouthWestLatitude"/>
+
+<attr format="float" name="latLngBoundsSouthWestLongitude"/>
+
+<attr format="float" name="latLngBoundsNorthEastLatitude"/>
+
+<attr format="float" name="latLngBoundsNorthEastLongitude"/>
+</declare-styleable>
     <declare-styleable name="MaterialAlertDialog">
     <attr format="dimension" name="backgroundInsetStart"/>
     <attr format="dimension" name="backgroundInsetTop"/>
@@ -6954,7 +7994,17 @@
 
   </declare-styleable>
     <declare-styleable name="MaterialToolbar">
+    <!-- The tint color for the navigation button icon drawable corresponding to
+         the "app:navigationIcon" attribute. -->
     <attr format="color" name="navigationIconTint"/>
+    <!-- Whether the title text corresponding to the "app:title" attribute
+         should be centered horizontally within the toolbar. Default is false.
+    -->
+    <attr format="boolean" name="titleCentered"/>
+    <!-- Whether the subtitle text corresponding to the "app:subtitle" attribute
+         should be centered horizontally within the toolbar. Default is false.
+    -->
+    <attr format="boolean" name="subtitleCentered"/>
   </declare-styleable>
     <declare-styleable name="MenuGroup">
 
@@ -7458,6 +8508,25 @@
     <attr format="dimension" name="contentPaddingStart"/>
     <attr name="contentPaddingTop"/>
   </declare-styleable>
+    <declare-styleable name="SignInButton"><attr format="reference" name="buttonSize">
+<enum name="standard" value="0"/>
+
+<enum name="wide" value="1"/>
+
+<enum name="icon_only" value="2"/>
+
+</attr>
+<attr format="reference" name="colorScheme">
+<enum name="dark" value="0"/>
+
+<enum name="light" value="1"/>
+
+<enum name="auto" value="2"/>
+
+</attr>
+
+<attr format="reference|string" name="scopeUris"/>
+</declare-styleable>
     <declare-styleable name="Slider">
     <attr name="android:value"/>
     <attr name="android:valueFrom"/>
@@ -7586,6 +8655,11 @@
         <attr name="android:drawable"/>
     </declare-styleable>
     <declare-styleable name="StateSet"><attr format="reference" name="defaultState"/></declare-styleable>
+    <declare-styleable name="StripeCardFormView"><attr format="enum" name="cardFormStyle">
+            <enum name="standard" value="0"/>
+            <enum name="borderless" value="1"/>
+        </attr><attr format="reference" name="backgroundColorStateList"/></declare-styleable>
+    <declare-styleable name="StripeCountryAutoCompleteTextInputLayout"><attr format="reference" name="countryAutoCompleteStyle"/><attr format="reference" name="countryItemLayout"/></declare-styleable>
     <declare-styleable name="SwitchCompat">
         <!-- Drawable to use as the "thumb" that switches back and forth. -->
         <attr name="android:thumb"/>
@@ -7801,6 +8875,12 @@
     <!-- The text color for the hint when the text field is not activated (such
          as for the resting and disabled states). -->
     <attr name="android:textColorHint"/>
+    <!-- Makes the text field be at least this dimension wide if its width is
+         set to wrap_content. -->
+    <attr name="android:minWidth"/>
+    <!-- Makes the text field be at most this dimension wide if its width is set
+         to wrap_content.  -->
+    <attr name="android:maxWidth"/>
 
     <!-- Whether the layout's floating label functionality is enabled. -->
     <attr format="boolean" name="hintEnabled"/>
@@ -8206,4 +9286,102 @@
         <attr name="android:inflatedId"/>
         <attr name="android:id"/>
     </declare-styleable>
+    <declare-styleable name="WalletFragmentOptions"><attr name="appTheme">
+<enum name="holo_dark" value="0"/>
+
+<enum name="holo_light" value="1"/>
+
+</attr>
+<attr name="environment">
+<enum name="production" value="1"/>
+
+<enum name="test" value="3"/>
+
+<enum name="sandbox" value="0"/>
+
+<enum name="strict_sandbox" value="2"/>
+
+</attr>
+
+<attr format="reference" name="fragmentStyle"/>
+<attr name="fragmentMode">
+<enum name="buyButton" value="1"/>
+
+<enum name="selectionDetails" value="2"/>
+
+</attr>
+</declare-styleable>
+    <declare-styleable name="WalletFragmentStyle"><attr format="dimension" name="buyButtonHeight">
+<enum name="match_parent" value="-1"/>
+
+<enum name="wrap_content" value="-2"/>
+
+</attr>
+<attr format="dimension" name="buyButtonWidth">
+<enum name="match_parent" value="-1"/>
+
+<enum name="wrap_content" value="-2"/>
+
+</attr>
+<attr name="buyButtonText">
+<enum name="buy_with" value="5"/>
+
+<enum name="logo_only" value="6"/>
+
+<enum name="donate_with" value="7"/>
+
+<enum name="buy_with_google" value="1"/>
+
+<enum name="buy_now" value="2"/>
+
+<enum name="book_now" value="3"/>
+
+<enum name="donate_with_google" value="4"/>
+
+</attr>
+<attr name="buyButtonAppearance">
+<enum name="google_wallet_classic" value="1"/>
+
+<enum name="google_wallet_grayscale" value="2"/>
+
+<enum name="google_wallet_monochrome" value="3"/>
+
+<enum name="android_pay_dark" value="4"/>
+
+<enum name="android_pay_light" value="5"/>
+
+<enum name="android_pay_light_with_border" value="6"/>
+
+<enum name="classic" value="1"/>
+
+<enum name="grayscale" value="2"/>
+
+<enum name="monochrome" value="3"/>
+
+</attr>
+
+<attr format="reference" name="maskedWalletDetailsTextAppearance"/>
+
+<attr format="reference" name="maskedWalletDetailsHeaderTextAppearance"/>
+
+<attr format="color|reference" name="maskedWalletDetailsBackground"/>
+
+<attr format="reference" name="maskedWalletDetailsButtonTextAppearance"/>
+
+<attr format="color|reference" name="maskedWalletDetailsButtonBackground"/>
+
+<attr format="color" name="maskedWalletDetailsLogoTextColor"/>
+<attr name="maskedWalletDetailsLogoImageType">
+<enum name="google_wallet_classic" value="1"/>
+
+<enum name="google_wallet_monochrome" value="2"/>
+
+<enum name="android_pay" value="3"/>
+
+<enum name="classic" value="1"/>
+
+<enum name="monochrome" value="2"/>
+
+</attr>
+</declare-styleable>
 </resources>
