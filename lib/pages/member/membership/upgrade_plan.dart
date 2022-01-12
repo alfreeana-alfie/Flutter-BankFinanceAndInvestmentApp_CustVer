@@ -82,7 +82,7 @@ class _MUpgradeMembershipPlanState extends State<MUpgradeMembershipPlan> {
     User user = User.fromJSON(await sharedPref.read(Pref.userData));
     String userId = user.id.toString();
 
-    Uri viewSingleUser = Uri.parse(API.userMembershipPlan.toString() + '4');
+    Uri viewSingleUser = Uri.parse(API.userMembershipPlan.toString() + '3');
     final response = await http.get(viewSingleUser, headers: headers);
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
@@ -193,16 +193,16 @@ class _MUpgradeMembershipPlanState extends State<MUpgradeMembershipPlan> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
-                          child: Text(Str.membershipPlanTxt,
+                          child: Text(Str.upgradeYourPlanTxt,
                               style: Styles.primaryTitle),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
-                          child: Text(
-                            '*',
-                            style: TextStyle(color: Styles.dangerColor),
-                          ),
-                        ),
+                        // const Padding(
+                        //   padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                        //   child: Text(
+                        //     '*',
+                        //     style: TextStyle(color: Styles.dangerColor),
+                        //   ),
+                        // ),
                       ],
                     ),
                     SizedBox(

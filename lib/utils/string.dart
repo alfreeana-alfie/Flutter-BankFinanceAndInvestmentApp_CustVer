@@ -294,6 +294,7 @@ class Str {
   static String transactionCodeTxt = 'Transaction Code';
   static String membershipIdTxt = 'Membership ID';
   static String membershipPlanTxt = 'Membership Plan';
+  static String upgradeYourPlanTxt = 'Upgrade Your Membership Now';
 }
 
 class Status {
@@ -559,4 +560,5 @@ class Field {
   static String investmentStatus = 'investment_status';
   static String membershipId = 'membership_id';
   static String membershipPlanId = 'membership_plan_id';
+  static String updatedBy = 'updated_by';
 }

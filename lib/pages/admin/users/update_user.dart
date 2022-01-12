@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_banking_app/methods/admin/users_methods.dart';
+import 'package:flutter_banking_app/methods/config.dart';
+import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/models/users.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
@@ -27,7 +29,8 @@ class UpdateUser extends StatefulWidget {
 }
 
 class _UpdateUserState extends State<UpdateUser> {
-  final ScrollController _scrollController = ScrollController();
+  SharedPref sharedPref = SharedPref();
+  User userLoad = User();
 
   String? name,
       email,
@@ -41,12 +44,21 @@ class _UpdateUserState extends State<UpdateUser> {
       providerId,
       countryCode;
   int? status;
+
+  loadSharedPrefs() async {
+    try {
+      User user = User.fromJSON(await sharedPref.read(Pref.userData));
+      setState(() {
+        userLoad = user;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
   
   @override
   void initState() {
-    _scrollController.addListener(() {
-      print(_scrollController.offset);
-    });
+    loadSharedPrefs();
     super.initState();
   }
 
@@ -251,6 +263,7 @@ class _UpdateUserState extends State<UpdateUser> {
                             Field.provider: provider ?? widget.user.provider ?? Field.emptyString,
                             Field.providerId: providerId ?? widget.user.providerId ?? Field.emptyString,
                             Field.countryCode: countryCode ?? widget.user.countryCode ?? Field.emptyString,
+                            Field.updatedBy: userLoad.id.toString(),
                           };
 
                           UserMethods.edit(context, body, widget.user.id.toString());
