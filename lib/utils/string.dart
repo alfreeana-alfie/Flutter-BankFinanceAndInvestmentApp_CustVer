@@ -295,6 +295,8 @@ class Str {
   static String membershipIdTxt = 'Membership ID';
   static String membershipPlanTxt = 'Membership Plan';
   static String upgradeYourPlanTxt = 'Upgrade Your Membership Now';
+
+  static String accountTypeTxt = 'Account Type';
 }
 
 class Status {
@@ -561,4 +563,9 @@ class Field {
   static String membershipId = 'membership_id';
   static String membershipPlanId = 'membership_plan_id';
   static String updatedBy = 'updated_by';
+  static String createdBy = 'createdBy';
+  static String accountName = 'account_name';
+  static String accountId = 'account_id';
+  static String creditDebit = 'credit_debit';
+
 }

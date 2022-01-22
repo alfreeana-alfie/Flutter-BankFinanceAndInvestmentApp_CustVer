@@ -9,6 +9,7 @@ import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
+import 'package:flutter_banking_app/widgets/dropdown/dropdown_account.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdown_bank.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
@@ -39,7 +40,9 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
       note,
       swiftCode,
       accountHolder,
-      accountHolderName;
+      accountHolderName,
+      account,
+      accountName;
 
   String fee = '1',
       drCr = '1',
@@ -111,6 +114,37 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(Str.accountTypeTxt,
+                              style: Styles.primaryTitle),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(
+                            '*',
+                            style: TextStyle(color: Styles.dangerColor),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      child: DropDownAccount(
+                        account: account,
+                        accountName: accountName,
+                        onChanged: (val) {
+                          setState(
+                            () {
+                              account = val!.id.toString();
+                              accountName = val.description ?? 'DEFAULT';
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    const Gap(20),
                     NewField(
                         mandatory: true,
                         readOnly: true,

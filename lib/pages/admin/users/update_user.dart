@@ -216,7 +216,7 @@ class _UpdateUserState extends State<UpdateUser> {
                       ],
                     ),
                     ToggleSwitch(
-                      initialLabelIndex: int.parse(widget.user.status!),
+                      initialLabelIndex: int.parse(widget.user.status.toString()),
                       minWidth: 120,
                       cornerRadius: 7.0,
                       activeBgColors: const [
@@ -248,7 +248,7 @@ class _UpdateUserState extends State<UpdateUser> {
                         color: Styles.secondaryColor,
                         context: context,
                         callback: () {
-                            status ??= int.parse(widget.user.status!);
+                            status ??= int.parse(widget.user.status.toString());
                           Map<String, String> body = {
                             Field.name: name ?? widget.user.name ?? Field.emptyString,
                             Field.email: email ?? widget.user.email ?? Field.emptyString,
@@ -263,7 +263,7 @@ class _UpdateUserState extends State<UpdateUser> {
                             Field.provider: provider ?? widget.user.provider ?? Field.emptyString,
                             Field.providerId: providerId ?? widget.user.providerId ?? Field.emptyString,
                             Field.countryCode: countryCode ?? widget.user.countryCode ?? Field.emptyString,
-                            Field.updatedBy: userLoad.id.toString(),
+                            Field.updatedBy: '1',
                           };
 
                           UserMethods.edit(context, body, widget.user.id.toString());

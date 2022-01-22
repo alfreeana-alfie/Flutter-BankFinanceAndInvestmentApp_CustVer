@@ -3,7 +3,9 @@ import 'package:flutter_banking_app/utils/layouts.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 
 class BalanceBox extends StatelessWidget {
-  const BalanceBox({Key? key}) : super(key: key);
+  const BalanceBox({Key? key, this.accountName}) : super(key: key);
+
+  final String? accountName;
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +20,16 @@ class BalanceBox extends StatelessWidget {
             Container(
               width: size.width * 0.77,
               padding: const EdgeInsets.fromLTRB(16, 10, 0, 20),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius:
-                    const BorderRadius.horizontal(left: Radius.circular(15)),
+                    BorderRadius.horizontal(left: Radius.circular(15)),
                 color: Styles.accentColor,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const[
-                  Text('USD',
-                      style: TextStyle(
+                children: [
+                  Text('ACCOUNT',
+                      style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontStyle: FontStyle.italic,
                           fontSize: 32,

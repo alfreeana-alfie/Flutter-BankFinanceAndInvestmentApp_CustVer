@@ -15,6 +15,7 @@ import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
+import 'package:flutter_banking_app/widgets/dropdown/dropdown_account.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdrown_currency.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdrown_user.dart';
@@ -37,7 +38,15 @@ class _SendMoneyState extends State<MCreateSendMoney> {
   SharedPref sharedPref = SharedPref();
   User userLoad = User();
 
-  String? amount, note, currency, currencyName, toUserId, toUserName, userId;
+  String? amount,
+      note,
+      currency,
+      currencyName,
+      toUserId,
+      toUserName,
+      userId,
+      account,
+      accountName;
   String fee = '12.50',
       drCr = 'Y',
       type = 'send_money',
@@ -109,6 +118,37 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(Str.accountTypeTxt,
+                              style: Styles.primaryTitle),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                          child: Text(
+                            '*',
+                            style: TextStyle(color: Styles.dangerColor),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      child: DropDownAccount(
+                        account: account,
+                        accountName: accountName,
+                        onChanged: (val) {
+                          setState(
+                            () {
+                              account = val!.id.toString();
+                              accountName = val.description ?? 'DEFAULT';
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    const Gap(20),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
                           child: Text(Str.userAccountTxt,
                               style: Styles.primaryTitle),
                         ),
@@ -168,9 +208,9 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                     ),
                     const Gap(20.0),
                     NewField(
-                        onSaved: (val) => amount = val,
-                        hintText: Str.amountTxt,
-                        labelText: Str.amountNumTxt,
+                      onSaved: (val) => amount = val,
+                      hintText: Str.amountTxt,
+                      labelText: Str.amountNumTxt,
                     ),
                     const Gap(10),
                     Container(
@@ -206,7 +246,8 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                             Field.updatedUserId: updatedUserId,
                             Field.branchId: branchId,
                             Field.transactionsDetails: transactionsDetails,
-                            Field.transactionCode: Field.transactionCodeInitials + getRandomCode(6)
+                            Field.transactionCode:
+                                Field.transactionCodeInitials + getRandomCode(6)
                           };
                           SendMoneyMethods.add(context, body);
                         },
