@@ -1,16 +1,11 @@
-import 'dart:convert';
-
-import 'package:avatars/avatars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/methods/member/send_money_methods.dart';
-import 'package:flutter_banking_app/models/customer.dart';
 import 'package:flutter_banking_app/models/user.dart';
-import 'package:flutter_banking_app/utils/api.dart';
-import 'package:flutter_banking_app/utils/layouts.dart';
+import 'package:flutter_banking_app/pages/member/checkout/payment_method_send.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -21,7 +16,6 @@ import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdrown_user.dart';
 import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
-import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
 class MCreateSendMoney extends StatefulWidget {
@@ -45,8 +39,12 @@ class _SendMoneyState extends State<MCreateSendMoney> {
       toUserId,
       toUserName,
       userId,
+      userPhone,
+      userName,
       account,
-      accountName;
+      accountName,
+      accountBalance,
+      walletId;
   String fee = '12.50',
       drCr = 'Y',
       type = 'send_money',
@@ -69,6 +67,8 @@ class _SendMoneyState extends State<MCreateSendMoney> {
         userLoad = user;
 
         userId = user.id.toString();
+        userPhone = user.phone;
+        userName = user.name;
       });
     } catch (e) {
       print(e);
@@ -132,13 +132,18 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                     ),
                     SizedBox(
                       child: DropDownAccount(
+                        userId: '3',
+                        walletId: walletId,
                         account: account,
                         accountName: accountName,
+                        accountBalance: accountBalance,
                         onChanged: (val) {
                           setState(
                             () {
-                              account = val!.id.toString();
+                              walletId = val!.id.toString();
+                              account = val.accountId.toString();
                               accountName = val.description ?? 'DEFAULT';
+                              accountBalance = val.amount ?? '0.00';
                             },
                           );
                         },
@@ -250,6 +255,25 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                                 Field.transactionCodeInitials + getRandomCode(6)
                           };
                           SendMoneyMethods.add(context, body);
+
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => PaymentMethodWalletMenu(
+                                  toUserId: toUserId,
+                                  walletId: walletId,
+                                  amount: amount ?? '0.00',
+                                  accountId: account ?? '0',
+                                  method: 'send_money',
+                                  creditDebit: 'credit',
+                                  walletBalance: accountBalance,
+                                  routePath: RouteSTR.sendMoneyListM,
+                                  userPhone: userPhone,
+                                  messageTo:
+                                      'Send Money You have just received $amount from $userName. FVIS Investment ',
+                                  message:
+                                      'Send Money You have just send $amount to $toUserName. FVIS Investment '),
+                            ),
+                          );
                         },
                         text: Str.sendMoneyTxt,
                       ),

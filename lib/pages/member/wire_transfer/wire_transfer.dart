@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/methods/member/wire_transfer_methods.dart';
 import 'package:flutter_banking_app/models/user.dart';
+import 'package:flutter_banking_app/pages/member/checkout/payment_method_send.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -34,6 +35,7 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
   String? currency,
       currencyName,
       userId,
+      userPhone,
       otherBankId,
       otherBankName,
       amount,
@@ -42,7 +44,9 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
       accountHolder,
       accountHolderName,
       account,
-      accountName;
+      accountName,
+      accountBalance,
+      walletId;
 
   String fee = '1',
       drCr = '1',
@@ -65,6 +69,7 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
       User user = User.fromJSON(await sharedPref.read(Pref.userData));
       setState(() {
         userId = user.id.toString();
+        userPhone = user.phone;
       });
     } catch (e) {
       print(e);
@@ -132,13 +137,18 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                     ),
                     SizedBox(
                       child: DropDownAccount(
+                        userId: '3',
+                        walletId: walletId,
                         account: account,
                         accountName: accountName,
+                        accountBalance: accountBalance,
                         onChanged: (val) {
                           setState(
                             () {
-                              account = val!.id.toString();
+                              walletId = val!.id.toString();
+                              account = val.accountId.toString();
                               accountName = val.description ?? 'DEFAULT';
+                              accountBalance = val.amount ?? '0.00';
                             },
                           );
                         },
@@ -243,33 +253,51 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                     ),
                     const Gap(20),
                     loadingButton(
-                      context: context, 
-                      callback: () {
-                              Map<String, String> body = {
-                                Field.userId: userId ?? Field.empty,
-                                Field.currencyId: currency ?? Field.empty,
-                                Field.amount: amount ?? Field.emptyAmount,
-                                Field.fee: fee,
-                                Field.drCr: drCr,
-                                Field.type: type,
-                                Field.method: method,
-                                Field.status: status,
-                                Field.note: note ?? Field.emptyString,
-                                Field.loanId: loanId,
-                                Field.refId: refId,
-                                Field.parentId: parentId,
-                                Field.otherBankId: otherBankId ?? Field.empty,
-                                Field.gatewayId: gatewayId,
-                                Field.createdUserId: userId ?? Field.empty,
-                                Field.updatedUserId: userId ?? Field.empty,
-                                Field.branchId: branchId,
-                                Field.transactionsDetails: transactionsDetails,
-                                Field.transactionCode: Field.transactionCodeInitials + getRandomCode(6)
-                              };
+                        context: context,
+                        callback: () {
+                          Map<String, String> body = {
+                            Field.userId: userId ?? Field.empty,
+                            Field.currencyId: currency ?? Field.empty,
+                            Field.amount: amount ?? Field.emptyAmount,
+                            Field.fee: fee,
+                            Field.drCr: drCr,
+                            Field.type: type,
+                            Field.method: method,
+                            Field.status: status,
+                            Field.note: note ?? Field.emptyString,
+                            Field.loanId: loanId,
+                            Field.refId: refId,
+                            Field.parentId: parentId,
+                            Field.otherBankId: otherBankId ?? Field.empty,
+                            Field.gatewayId: gatewayId,
+                            Field.createdUserId: userId ?? Field.empty,
+                            Field.updatedUserId: userId ?? Field.empty,
+                            Field.branchId: branchId,
+                            Field.transactionsDetails: transactionsDetails,
+                            Field.transactionCode:
+                                Field.transactionCodeInitials + getRandomCode(6)
+                          };
 
-                              WireTransferMethods.add(context, body);
-                      }, 
-                    text: Str.wireTransferTxt.toUpperCase())
+                          WireTransferMethods.add(context, body);
+
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => PaymentMethodWalletMenu(
+                                  // toUserId: toUserId,
+                                  walletId: walletId,
+                                  amount: amount ?? '0.00',
+                                  accountId: account ?? '0',
+                                  method: 'wire_transfer',
+                                  creditDebit: 'credit',
+                                  walletBalance: accountBalance,
+                                  routePath: RouteSTR.wireTransferListM,
+                                  userPhone: userPhone,
+                                  message:
+                                      'Wire Transfer You have just transferred $amount into your account. FVIS Investment '),
+                            ),
+                          );
+                        },
+                        text: Str.wireTransferTxt.toUpperCase())
                   ],
                 ),
               ),

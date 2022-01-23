@@ -8,6 +8,7 @@ import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/methods/member/exchange_money_methods.dart';
 import 'package:flutter_banking_app/models/currency.dart';
 import 'package:flutter_banking_app/models/user.dart';
+import 'package:flutter_banking_app/pages/member/checkout/payment_method_send.dart';
 import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
@@ -41,8 +42,11 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
       amount,
       note,
       userId,
+      userPhone,
       account,
-      accountName;
+      accountName,
+      accountBalance,
+      walletId;
 
   String currencyId = '1',
       fee = '1',
@@ -69,6 +73,7 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
         userLoad = user;
 
         userId = user.id.toString();
+        userPhone = user.phone;
       });
     } catch (e) {
       print(e);
@@ -108,12 +113,12 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
           child: ListView(
             children: [
               Container(
-                    padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
+                padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
                       children: [
                         Padding(
                           padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
@@ -131,113 +136,135 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
                     ),
                     SizedBox(
                       child: DropDownAccount(
+                        userId: '3',
+                        walletId: walletId,
                         account: account,
                         accountName: accountName,
+                        accountBalance: accountBalance,
                         onChanged: (val) {
                           setState(
                             () {
-                              account = val!.id.toString();
+                              walletId = val!.id.toString();
+                              account = val.accountId.toString();
                               accountName = val.description ?? 'DEFAULT';
+                              accountBalance = val.amount ?? '0.00';
                             },
                           );
                         },
                       ),
                     ),
                     const Gap(20),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: DropDownCurrency(
-                                currency: exchangeFrom,
-                                currencyName: exchangeFromName,
-                                onChanged: (val) {
-                                  setState(
-                                    () {
-                                      exchangeFrom = val!.id.toString();
-                                      exchangeFromName = val.name;
-                                    },
-                                  );
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: DropDownCurrency(
+                            currency: exchangeFrom,
+                            currencyName: exchangeFromName,
+                            onChanged: (val) {
+                              setState(
+                                () {
+                                  exchangeFrom = val!.id.toString();
+                                  exchangeFromName = val.name;
                                 },
-                              ),
-                            ),
-                            const Expanded(
-                              flex: 1,
-                              child: Center(
-                                child: Text('TO', style: Styles.primaryTitle),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: DropDownCurrency(
-                                currency: exchangeTo,
-                                currencyName: exchangeToName,
-                                onChanged: (val) {
-                                  setState(
-                                    () {
-                                      exchangeTo = val!.id.toString();
-                                      exchangeToName = val.name;
-                                    },
-                                  );
+                              );
+                            },
+                          ),
+                        ),
+                        const Expanded(
+                          flex: 1,
+                          child: Center(
+                            child: Text('TO', style: Styles.primaryTitle),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: DropDownCurrency(
+                            currency: exchangeTo,
+                            currencyName: exchangeToName,
+                            onChanged: (val) {
+                              setState(
+                                () {
+                                  exchangeTo = val!.id.toString();
+                                  exchangeToName = val.name;
                                 },
-                              ),
-                            ),
-                          ],
+                              );
+                            },
+                          ),
                         ),
-                        const Gap(20.0),
-                        NewField(
-                          onSaved: (val) => amount = val,
-                          hintText: Str.amountTxt,
-                          labelText: Str.amountNumTxt,
-                        ),
-                        NewField(
-                            onSaved: (val) => note = val,
-                            hintText: Str.noteTxt),
                       ],
                     ),
-                  ),
-                  Container(
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(15),
-                          bottomRight: Radius.circular(15)),
-                      color: Styles.primaryColor,
+                    const Gap(20.0),
+                    NewField(
+                      onSaved: (val) => amount = val,
+                      hintText: Str.amountTxt,
+                      labelText: Str.amountNumTxt,
                     ),
-                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
-                    child: elevatedButton(
-                      color: Styles.secondaryColor,
-                      context: context,
-                      callback: () {
-                        Map<String, String> body = {
-                          Field.userId: userId ?? '0',
-                          Field.currencyId: exchangeTo ?? Field.emptyString,
-                          Field.amount: amount ?? '0.00',
-                          Field.fee: fee,
-                          Field.drCr: drCr,
-                          Field.type: type,
-                          Field.method: method,
-                          Field.status: Status.pending.toString(),
-                          Field.note: note ?? '-',
-                          Field.loanId: loanId,
-                          Field.refId: refId,
-                          Field.parentId: parentId,
-                          Field.otherBankId: otherBankId,
-                          Field.gatewayId: gatewayId,
-                          Field.createdUserId: userId ?? Field.emptyString,
-                          Field.updatedUserId: userId ?? Field.emptyString,
-                          Field.branchId: branchId,
-                          Field.transactionsDetails: note ?? '-',
-                          Field.transactionCode: Field.transactionCodeInitials + getRandomCode(6)
-                        };
-                        ExchangeMoneyMethods.add(context, body);
-                      },
-                      text: Str.exchangeMoneyTxt.toUpperCase(),
-                    ),
-                  ),
+                    NewField(
+                        onSaved: (val) => note = val, hintText: Str.noteTxt),
+                  ],
+                ),
+              ),
+              Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15)),
+                  color: Styles.primaryColor,
+                ),
+                margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: elevatedButton(
+                  color: Styles.secondaryColor,
+                  context: context,
+                  callback: () {
+                    Map<String, String> body = {
+                      Field.userId: userId ?? '0',
+                      Field.currencyId: exchangeTo ?? Field.emptyString,
+                      Field.amount: amount ?? '0.00',
+                      Field.fee: fee,
+                      Field.drCr: drCr,
+                      Field.type: type,
+                      Field.method: method,
+                      Field.status: Status.pending.toString(),
+                      Field.note: note ?? '-',
+                      Field.loanId: loanId,
+                      Field.refId: refId,
+                      Field.parentId: parentId,
+                      Field.otherBankId: otherBankId,
+                      Field.gatewayId: gatewayId,
+                      Field.createdUserId: userId ?? Field.emptyString,
+                      Field.updatedUserId: userId ?? Field.emptyString,
+                      Field.branchId: branchId,
+                      Field.transactionsDetails: note ?? '-',
+                      Field.transactionCode:
+                          Field.transactionCodeInitials + getRandomCode(6)
+                    };
+                    ExchangeMoneyMethods.add(context, body);
+
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PaymentMethodWalletMenu(
+                            // toUserId: toUserId,
+                            walletId: walletId,
+                            amount: amount ?? '0.00',
+                            accountId: account ?? '0',
+                            method: 'exchange_money',
+                            creditDebit: 'credit',
+                            walletBalance: accountBalance,
+                            routePath: RouteSTR.exchangeMoneyListM,
+                            userPhone: userPhone,
+                            message:
+                                'Exchange Money You have just exchange $amount from your account. FVIS Investment '),
+                      ),
+                    );
+                  },
+                  text: Str.exchangeMoneyTxt.toUpperCase(),
+                ),
+              ),
               //   ],
               // ),
             ],

@@ -14,6 +14,8 @@ String android = 'http://10.0.2.2:8000/api';
 String device = 'http://192.168.0.1:8000/api';
 String ios = 'http://127.0.0.1:8000/api/';
 
+Uri smsApi = Uri.parse('https://www.bulksmsnigeria.com/api/v1/sms/create');
+
 // API SETUP(S)
 class API {
   // User authorizations
@@ -74,11 +76,13 @@ class API {
   static Uri listOfSupportTicket =
       Uri.parse('$android/list_of_support_tickets');
 
+  static Uri listOfWallet =
+      Uri.parse('$android/user_wallet_list/');
   static Uri createWallet = Uri.parse('$android/wallet');
   static Uri updateWallet = Uri.parse('$android/update_wallet/');
   
-  static Uri createWalletTransaction = Uri.parse('$android/wallet');
-  static Uri updateWalletTransaction = Uri.parse('$android/update_wallet');
+  static Uri createWalletTransaction = Uri.parse('$android/wallet_transaction');
+  static Uri updateWalletTransaction = Uri.parse('$android/update_wallet_transaction/');
   
 
   // Drop Down List(s)

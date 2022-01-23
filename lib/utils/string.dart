@@ -297,6 +297,10 @@ class Str {
   static String upgradeYourPlanTxt = 'Upgrade Your Membership Now';
 
   static String accountTypeTxt = 'Account Type';
+  static String myWalletTxt = 'My Wallet(s)';
+  static String topUpWalletTxt = 'Top-Up Wallet';
+
+  static String smsSampleTxt = 'Transaction Alerts You have transferred US400 to Ahmed Ghazli. Your balance is now US80945.94. ';
 }
 
 class Status {
@@ -336,6 +340,10 @@ class RouteSTR {
   static String signOut = '/sign-out';
   static String profileOverview = '/profile-overview';
   static String statsM = '/stats';
+
+  // Wallet
+  static String topUpWallet = '/top-up';
+  static String walletListM = '/wallet-list';
 
   static String bottomNav = '/bottom_nav';
   // static String newRequest = '/new-request';
@@ -566,6 +574,8 @@ class Field {
   static String createdBy = 'createdBy';
   static String accountName = 'account_name';
   static String accountId = 'account_id';
+  static String walletId = 'wallet_id';
+  static String paymentMethod = 'payment_method';
+  
   static String creditDebit = 'credit_debit';
-
 }

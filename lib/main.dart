@@ -16,6 +16,7 @@ import 'package:flutter_banking_app/pages/member/exchange_money/exchange_money_l
 import 'package:flutter_banking_app/pages/member/send_money/send_money_list.dart';
 import 'package:flutter_banking_app/pages/member/stats.dart';
 import 'package:flutter_banking_app/pages/member/membership/upgrade_plan.dart';
+import 'package:flutter_banking_app/pages/member/wallet/add_card.dart';
 import 'package:flutter_banking_app/pages/member/wallet/wallet.dart';
 import 'package:flutter_banking_app/pages/member/wire_transfer/wire_transfer_list.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -127,6 +128,9 @@ Future<void> main() async {
         // MEMBER ROUTE(S)
         RouteSTR.dashboardMember: (context) => const BottomNav(),
         RouteSTR.bottomNav: (context) => const BottomNav(),
+
+
+        RouteSTR.topUpWallet: (context) => const MTopUpWallet(),
 
         RouteSTR.paymentRequestM: (context) => const MPaymentRequestList(),
         RouteSTR.addPaymentRequestM: (context) => const MCreatePaymentRequest(),

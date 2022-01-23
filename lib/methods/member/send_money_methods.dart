@@ -16,11 +16,11 @@ class SendMoneyMethods {
     if (response.statusCode == Status.created) {
       // print(Status.successTxt);
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
-      Future.delayed(const Duration(milliseconds: 2000), () {
+      // Future.delayed(const Duration(milliseconds: 2000), () {
 
-        Navigator.pushReplacementNamed(context, RouteSTR.sendMoneyListM);
+      //   Navigator.pushReplacementNamed(context, RouteSTR.sendMoneyListM);
 
-      });
+      // });
       
     } else {
       // print(Status.failedTxt);

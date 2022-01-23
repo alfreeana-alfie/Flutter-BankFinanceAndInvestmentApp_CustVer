@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/models/account.dart';
+import 'package:flutter_banking_app/models/wallet.dart';
 import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -9,27 +10,28 @@ import 'package:http/http.dart' as http;
 
 class DropDownAccount extends StatefulWidget {
   const DropDownAccount(
-      {Key? key, this.account, this.accountName, required this.onChanged})
+      {Key? key, this.account, this.accountName, this.userId, this.accountBalance, this.walletId, required this.onChanged})
       : super(key: key);
 
-  final String? account, accountName;
-  final void Function(Account?) onChanged;
+  final String? userId, account, accountName, accountBalance, walletId;
+  final void Function(Wallet?) onChanged;
 
   @override
   _DropDownAccountState createState() => _DropDownAccountState();
 }
 
 class _DropDownAccountState extends State<DropDownAccount> {
-  List<Account> planListNew = [];
+  List<Wallet> planListNew = [];
 
   void getList() async {
-    final response = await http.get(AdminAPI.listOfAccount, headers: headers);
+    Uri viewSingleUser = Uri.parse(API.listOfWallet.toString() + '3');
+    final response = await http.get(viewSingleUser, headers: headers);
 
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
 
       for (var plan in jsonBody[Field.data]) {
-        final plans = Account.fromMap(plan);
+        final plans = Wallet.fromMap(plan);
         
         setState(() {
           planListNew.add(plans);
@@ -67,7 +69,7 @@ class _DropDownAccountState extends State<DropDownAccount> {
           hint: widget.accountName == null
               ? Text(Str.accountTypeTxt, style: Styles.primaryTitle)
               : Text(
-                  widget.accountName!,
+                  '${widget.accountName} - ${widget.accountBalance}',
                   style: Styles.primaryTitle,
                 ),
           isExpanded: true,
@@ -75,9 +77,9 @@ class _DropDownAccountState extends State<DropDownAccount> {
           style: Styles.primaryTitle,
           items: planListNew.map(
             (val) {
-              return DropdownMenuItem<Account>(
+              return DropdownMenuItem<Wallet>(
                 value: val,
-                child: Text(val.description ?? '-'),
+                child: Text('${val.description} - \$${val.amount}'),
               );
             },
           ).toList(),

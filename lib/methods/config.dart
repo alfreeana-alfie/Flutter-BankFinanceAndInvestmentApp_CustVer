@@ -2,8 +2,12 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/utils/api.dart';
+import 'package:flutter_banking_app/utils/string.dart';
+import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class SharedPref {
   save(String key, value) async {
@@ -37,6 +41,31 @@ class CustomToast {
       textPadding: const EdgeInsets.fromLTRB(60, 10, 60, 10),
       radius: 60,
     );
+  }
+}
+
+class SMSNigeriaAPI {
+  static void send(
+      BuildContext context, String to, String body) async {
+    var apiToken =
+        'apYsrAtoGSjgkicEXuDyXDaIZfFQXjl3gQZ5AYVilVuqZq7TkWT6hSPfsaXD';
+    var from = '2349021113979';
+
+    Uri url = Uri.parse(smsApi.toString() +
+        '?api_token=$apiToken&from=$from&to=$to&body=$body');
+
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == Status.created) {
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+    } else {
+      print(response.body);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
   }
 }
 

@@ -28,20 +28,19 @@ class WalletMethods {
     }
   }
 
-  static void update(BuildContext context, Map<String, String> body) async {
-    final response = await http.post(
-      API.updateWallet,
+  static void update(BuildContext context, Map<String, String> body, String id) async {
+    Uri url =
+        Uri.parse(API.updateWallet.toString() + id);
+
+    final response = await http.put(
+      url,
       headers: headers,
       body: body,
     );
 
     if (response.statusCode == Status.ok) {
       CustomToast.showMsg(Status.successTxt, Styles.successColor);
-      // Future.delayed(const Duration(milliseconds: 2000), () {
-
-      //   Navigator.pushReplacementNamed(context, RouteSTR.exchangeMoneyListM);
-
-      // });
+      
     } else {
       print(response.body);
       // print(Status.failedTxt);
