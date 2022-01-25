@@ -171,18 +171,14 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
 
                           // Calculation - Rate
                           double rateCharge = double.parse(widget.amount);
-
                           setState(() => rateCharge *=
                               (double.parse(widget.currentRate!) / 100));
 
                           // Calculation - Amount
                           double updatedAmount = double.parse(widget.amount);
-
                           setState(() => updatedAmount -= rateCharge);
 
-                          setState(() => rateCharge *=
-                              (double.parse(widget.amount) / 100));
-
+                          // Calculation - Wallet substract Updated Amount
                           double updatedBalance =
                               double.parse(widget.walletBalance!);
                           setState(() => updatedBalance -= updatedAmount);
@@ -475,16 +471,13 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
 
       // Calculation - Rate
       double rateCharge = double.parse(widget.amount);
-
       setState(() => rateCharge *= (double.parse(widget.currentRate!) / 100));
 
       // Calculation - Amount
       double updatedAmount = double.parse(widget.amount);
-
       setState(() => updatedAmount -= rateCharge);
 
-      setState(() => rateCharge *= (double.parse(widget.amount) / 100));
-
+      // Calculation - Wallet substract Updated Amount
       double updatedBalance = double.parse(widget.walletBalance!);
       setState(() => updatedBalance -= updatedAmount);
 
@@ -616,16 +609,13 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
 
       // Calculation - Rate
       double rateCharge = double.parse(widget.amount);
-
       setState(() => rateCharge *= (double.parse(widget.currentRate!) / 100));
 
       // Calculation - Amount
       double updatedAmount = double.parse(widget.amount);
-
       setState(() => updatedAmount -= rateCharge);
 
-      setState(() => rateCharge *= (double.parse(widget.amount) / 100));
-
+      // Calculation - Wallet substract Updated Amount
       double updatedBalance = double.parse(widget.walletBalance!);
       setState(() => updatedBalance -= updatedAmount);
 
