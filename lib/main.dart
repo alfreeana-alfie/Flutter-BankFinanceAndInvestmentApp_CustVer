@@ -94,7 +94,7 @@ Future<void> main() async {
     MaterialApp(
       // home: const AdminDashboard(),
       home: SplashScreenView(
-        navigateRoute: const MCreateSendMoney(),
+        navigateRoute: const WalletPage(),
         duration: 4000,
         imageSize: 200,
         imageSrc: Values.logoPath,

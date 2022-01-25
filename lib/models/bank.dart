@@ -1,8 +1,8 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class Bank {
-  int? id;
-  String? status,bankCurrency,name,
+  int? status,id,bankCurrency;
+  String? name,
       swiftCode,
       bankCountry,
       minTransferAmt,
@@ -33,13 +33,13 @@ class Bank {
       name: map[Field.name] as String?,
       swiftCode: map[Field.swiftCode] as String?,
       bankCountry: map[Field.bankCountry] as String?,
-      bankCurrency: map[Field.bankCurrency] as String?,
+      bankCurrency: map[Field.bankCurrency] as int?,
       minTransferAmt: map[Field.minTransferAmt] as String?,
       maxTransferAmt: map[Field.maxTransferAmt] as String?,
       fixedCharge: map[Field.fixedCharge] as String?,
       chargeInPercentage: map[Field.chargeInPercentage] as String?,
       descriptions: map[Field.descriptions] as String?,
-      status: map[Field.status] as String?,
+      status: map[Field.status] as int?,
       createdAt: map[Field.createdAt] as String?,
     );
   }
