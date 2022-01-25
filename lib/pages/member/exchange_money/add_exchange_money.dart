@@ -66,6 +66,23 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
 
   List<Currency> currencyListNew = [];
 
+  int? currentRate;
+
+  Future getCurrentRate() async {
+    Uri viewSingleUser =
+        Uri.parse(API.getCurrentRateByFunctionName.toString() + method);
+    final response = await http.get(viewSingleUser, headers: headers);
+
+    if (response.statusCode == Status.ok) {
+      setState(() {
+        currentRate = jsonDecode(response.body);
+      });
+    } else {
+      print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
+
   loadSharedPrefs() async {
     try {
       User user = User.fromJSON(await sharedPref.read(Pref.userData));
@@ -87,6 +104,7 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
     });
     super.initState();
     loadSharedPrefs();
+    getCurrentRate();
   }
 
   @override
@@ -249,6 +267,7 @@ class _ExchangeMoneyState extends State<MCreateExchangeMoney> {
                       MaterialPageRoute(
                         builder: (context) => PaymentMethodWalletMenu(
                             // toUserId: toUserId,
+                            currentRate: currentRate.toString(),
                             walletId: walletId,
                             amount: amount ?? '0.00',
                             accountId: account ?? '0',

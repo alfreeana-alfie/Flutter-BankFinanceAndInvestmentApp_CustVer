@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/methods/member/send_money_methods.dart';
 import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/pages/member/checkout/payment_method_send.dart';
+import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -17,6 +20,7 @@ import 'package:flutter_banking_app/widgets/dropdown/dropdrown_user.dart';
 import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:http/http.dart' as http;
 
 class MCreateSendMoney extends StatefulWidget {
   const MCreateSendMoney({Key? key}) : super(key: key);
@@ -60,6 +64,23 @@ class _SendMoneyState extends State<MCreateSendMoney> {
       branchId = '1',
       transactionsDetails = '1';
 
+  int? currentRate;
+
+  Future getCurrentRate() async {
+    Uri viewSingleUser =
+        Uri.parse(API.getCurrentRateByFunctionName.toString() + method);
+    final response = await http.get(viewSingleUser, headers: headers);
+
+    if (response.statusCode == Status.ok) {
+      setState(() {
+        currentRate = jsonDecode(response.body);
+      });
+    } else {
+      print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
+
   loadSharedPrefs() async {
     try {
       User user = User.fromJSON(await sharedPref.read(Pref.userData));
@@ -82,6 +103,7 @@ class _SendMoneyState extends State<MCreateSendMoney> {
     });
     super.initState();
     loadSharedPrefs();
+    getCurrentRate();
   }
 
   @override
@@ -259,6 +281,7 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => PaymentMethodWalletMenu(
+                                currentRate: currentRate.toString(),
                                   toUserId: toUserId,
                                   walletId: walletId,
                                   amount: amount ?? '0.00',

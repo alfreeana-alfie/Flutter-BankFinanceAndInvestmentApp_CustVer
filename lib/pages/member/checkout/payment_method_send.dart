@@ -37,7 +37,8 @@ class PaymentMethodWalletMenu extends StatefulWidget {
       this.userPhone,
       this.toUserName,
       this.message,
-      this.messageTo})
+      this.messageTo,
+      this.currentRate})
       : super(key: key);
 
   final String? method,
@@ -50,7 +51,8 @@ class PaymentMethodWalletMenu extends StatefulWidget {
       routePath,
       userPhone,
       message,
-      messageTo;
+      messageTo,
+      currentRate;
   final String amount;
   @override
   _PaymentMethodWalletMenuState createState() =>
@@ -167,10 +169,23 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
                             Field.updatedBy: widget.toUserId ?? '0',
                           };
 
+                          // Calculation - Rate
+                          double rateCharge = double.parse(widget.amount);
+
+                          setState(() => rateCharge *=
+                              (double.parse(widget.currentRate!) / 100));
+
+                          // Calculation - Amount
+                          double updatedAmount = double.parse(widget.amount);
+
+                          setState(() => updatedAmount -= rateCharge);
+
+                          setState(() => rateCharge *=
+                              (double.parse(widget.amount) / 100));
+
                           double updatedBalance =
                               double.parse(widget.walletBalance!);
-                          setState(() =>
-                              updatedBalance -= double.parse(widget.amount));
+                          setState(() => updatedBalance -= updatedAmount);
 
                           Map<String, String> updateWalletBody = {
                             Field.userId: userId ?? '3',
@@ -458,8 +473,20 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
         Field.updatedBy: widget.toUserId ?? '0',
       };
 
+      // Calculation - Rate
+      double rateCharge = double.parse(widget.amount);
+
+      setState(() => rateCharge *= (double.parse(widget.currentRate!) / 100));
+
+      // Calculation - Amount
+      double updatedAmount = double.parse(widget.amount);
+
+      setState(() => updatedAmount -= rateCharge);
+
+      setState(() => rateCharge *= (double.parse(widget.amount) / 100));
+
       double updatedBalance = double.parse(widget.walletBalance!);
-      setState(() => updatedBalance -= double.parse(widget.amount));
+      setState(() => updatedBalance -= updatedAmount);
 
       Map<String, String> updateWalletBody = {
         Field.userId: userId ?? '3',
@@ -470,6 +497,7 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
 
       WalletMethods.addTransaction(context, body);
       WalletMethods.update(context, updateWalletBody, userId ?? '3');
+
       if (widget.toUserId != null) {
         SMSNigeriaAPI.send(
             context, widget.userPhone ?? '000', widget.message ?? 'default');
@@ -586,8 +614,20 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
         Field.updatedBy: widget.toUserId ?? '0',
       };
 
+      // Calculation - Rate
+      double rateCharge = double.parse(widget.amount);
+
+      setState(() => rateCharge *= (double.parse(widget.currentRate!) / 100));
+
+      // Calculation - Amount
+      double updatedAmount = double.parse(widget.amount);
+
+      setState(() => updatedAmount -= rateCharge);
+
+      setState(() => rateCharge *= (double.parse(widget.amount) / 100));
+
       double updatedBalance = double.parse(widget.walletBalance!);
-      setState(() => updatedBalance -= double.parse(widget.amount));
+      setState(() => updatedBalance -= updatedAmount);
 
       Map<String, String> updateWalletBody = {
         Field.userId: userId ?? '3',
@@ -598,6 +638,7 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
 
       WalletMethods.addTransaction(context, body);
       WalletMethods.update(context, updateWalletBody, userId ?? '3');
+
       if (widget.toUserId != null) {
         SMSNigeriaAPI.send(
             context, widget.userPhone ?? '000', widget.message ?? 'default');

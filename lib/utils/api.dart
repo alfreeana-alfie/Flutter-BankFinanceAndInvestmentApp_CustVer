@@ -29,6 +29,8 @@ class API {
   // static Uri listOfSendMoney = Uri.parse('$android/list_of_send_money');
   static Uri userSendMoneyList = Uri.parse('$android/user_send_money_list/');
 
+  static Uri getCurrentRateByFunctionName = Uri.parse('$android/get_current_rate/');
+
   static Uri userTransactionHistoryList =
       Uri.parse('$android/user_payment_history/');
 

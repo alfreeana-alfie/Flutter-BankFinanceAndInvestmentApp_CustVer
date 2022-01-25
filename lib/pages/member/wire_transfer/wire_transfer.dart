@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/methods/member/wire_transfer_methods.dart';
 import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/pages/member/checkout/payment_method_send.dart';
+import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -17,7 +20,7 @@ import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
 import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:rounded_loading_button/rounded_loading_button.dart';
+import 'package:http/http.dart' as http;
 
 class MCreateWireTransfer extends StatefulWidget {
   const MCreateWireTransfer({Key? key}) : super(key: key);
@@ -29,8 +32,6 @@ class MCreateWireTransfer extends StatefulWidget {
 class _MCreateWireTransferState extends State<MCreateWireTransfer> {
   final ScrollController _scrollController = ScrollController();
   SharedPref sharedPref = SharedPref();
-  final RoundedLoadingButtonController _btnController =
-      RoundedLoadingButtonController();
 
   String? currency,
       currencyName,
@@ -76,6 +77,23 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
     }
   }
 
+  int? currentRate;
+
+  Future getCurrentRate() async {
+    Uri viewSingleUser =
+        Uri.parse(API.getCurrentRateByFunctionName.toString() + method);
+    final response = await http.get(viewSingleUser, headers: headers);
+
+    if (response.statusCode == Status.ok) {
+      setState(() {
+        currentRate = jsonDecode(response.body);
+      });
+    } else {
+      print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
+
   @override
   void initState() {
     _scrollController.addListener(() {
@@ -83,6 +101,7 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
     });
     super.initState();
     loadSharedPrefs();
+    getCurrentRate();
   }
 
   @override
@@ -284,6 +303,7 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                             MaterialPageRoute(
                               builder: (context) => PaymentMethodWalletMenu(
                                   // toUserId: toUserId,
+                                  currentRate: currentRate.toString(),
                                   walletId: walletId,
                                   amount: amount ?? '0.00',
                                   accountId: account ?? '0',
