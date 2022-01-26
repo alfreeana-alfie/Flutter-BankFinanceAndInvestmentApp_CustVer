@@ -47,7 +47,8 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
       account,
       accountName,
       accountBalance,
-      walletId;
+      walletId,
+      exchangeRate;
 
   String fee = '1',
       drCr = '1',
@@ -243,11 +244,13 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                       child: DropDownCurrency(
                         currency: currency,
                         currencyName: currencyName,
+                        currencyExchangeRate: exchangeRate,
                         onChanged: (val) {
                           setState(
                             () {
                               currency = val!.id.toString();
                               currencyName = val.name;
+                              exchangeRate = val.exchangeRate;
                             },
                           );
                         },
@@ -303,6 +306,7 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                             MaterialPageRoute(
                               builder: (context) => PaymentMethodWalletMenu(
                                   // toUserId: toUserId,
+                                  exchangeRate: exchangeRate,
                                   currentRate: currentRate.toString(),
                                   walletId: walletId,
                                   amount: amount ?? '0.00',

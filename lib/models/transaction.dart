@@ -1,8 +1,7 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class Transaction {
-  int? 
-      id;
+  int? id;
   String? userId,
       status,
       currencyId,
@@ -13,7 +12,16 @@ class Transaction {
       gatewayId,
       createdUserId,
       updatedUserId,
-      branchId,amount, fee, drCr, type, method, note, transactionsDetails,transactionCode, createdAt;
+      branchId,
+      amount,
+      fee,
+      drCr,
+      type,
+      method,
+      note,
+      transactionsDetails,
+      transactionCode,
+      createdAt;
 
   Transaction(
       {this.id,

@@ -13,11 +13,12 @@ class DropDownCurrency extends StatefulWidget {
       {Key? key,
       this.currency,
       this.currencyName,
+      this.currencyExchangeRate,
       // required this.currencyList,
       required this.onChanged})
       : super(key: key);
 
-  final String? currency, currencyName;
+  final String? currency, currencyName, currencyExchangeRate;
   final void Function(Currency?) onChanged;
   // final List<Currency> currencyList;
 

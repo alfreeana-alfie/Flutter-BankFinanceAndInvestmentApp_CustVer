@@ -94,7 +94,7 @@ class _SignInPageState extends State<SignInPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Logo
-            Container(
+            SizedBox(
               width: 150,
               height: 150,
               child: Image.asset(Values.logoPath),
@@ -149,7 +149,7 @@ class _SignInPageState extends State<SignInPage> {
                     Field.password: password,
                   };
 
-                  signIn(context, body);
+                  signIn(context, body, _btnController);
                 },
                 child: Text(Str.signInTxt.toUpperCase()),
                 color: Styles.secondaryColor,

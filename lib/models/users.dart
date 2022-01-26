@@ -1,14 +1,14 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class Users {
-  int? status,id,roleId,branchId;
+  int? id;
   String? 
       name,
       email,
       phone,
       userType,
       roleType,
-      
+      status,
       profilePicture,
       emailVerifiedAt,
       smsVerifiedAt,
@@ -16,7 +16,7 @@ class Users {
       providerId,
       countryCode,
       password,
-      createdAt;
+      createdAt,roleId,branchId;
 
   Users(
       {this.id,
@@ -44,10 +44,10 @@ class Users {
       email: map[Field.email] as String?,
       phone: map[Field.phone] as String?,
       userType: map[Field.userType] as String?,
-      roleId: map[Field.roleId] as int?,
+      roleId: map[Field.roleId] as String?,
       roleType: map[Field.roleType] as String?,
-      branchId: map[Field.branchId] as int?,
-      status: map[Field.status] as int?,
+      branchId: map[Field.branchId] as String?,
+      status: map[Field.status] as String?,
       profilePicture: map[Field.profilePicture] as String?,
       emailVerifiedAt: map[Field.emailVerified] as String?,
       smsVerifiedAt: map[Field.smsVerified] as String?,

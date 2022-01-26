@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/models/wallet.dart';
 import 'package:flutter_banking_app/pages/member/dashboard.dart';
 import 'package:flutter_banking_app/pages/member/fdr/fdr_list.dart';
 import 'package:flutter_banking_app/pages/member/loans/loan_list.dart';
@@ -19,6 +20,7 @@ class _BottomNavState extends State<BottomNav> {
   int _selectedIndex = 0;
   static final List<Widget> widgetOptions = [
     const MemberDasboard(),
+    const WalletPage(),
     const Stats(),
     const Profile(),
   ];
@@ -52,13 +54,13 @@ class _BottomNavState extends State<BottomNav> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.account_balance_wallet),
+            label: 'Wallet',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(IconlyBold.Activity),
             label: 'Report',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.monetization_on_rounded),
-          //   label: 'Fixed Deposit',
-          // ),
           BottomNavigationBarItem(
             icon: Icon(IconlyBold.Profile),
             label: 'Profile',

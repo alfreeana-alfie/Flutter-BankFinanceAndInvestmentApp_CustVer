@@ -26,11 +26,12 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 class PaymentMethodWalletMenu extends StatefulWidget {
   const PaymentMethodWalletMenu(
       {Key? key,
+      required this.amount,
       this.method,
       this.creditDebit,
       this.toUserId,
+      this.toUserEmail,
       this.walletId,
-      required this.amount,
       this.accountId,
       this.walletBalance,
       this.routePath,
@@ -38,13 +39,16 @@ class PaymentMethodWalletMenu extends StatefulWidget {
       this.toUserName,
       this.message,
       this.messageTo,
-      this.currentRate})
+      this.currentRate,
+      this.user,
+      this.exchangeRate})
       : super(key: key);
 
   final String? method,
       creditDebit,
       toUserId,
       toUserName,
+      toUserEmail,
       walletId,
       accountId,
       walletBalance,
@@ -52,7 +56,10 @@ class PaymentMethodWalletMenu extends StatefulWidget {
       userPhone,
       message,
       messageTo,
-      currentRate;
+      currentRate,
+      exchangeRate;
+
+  final User? user;
   final String amount;
   @override
   _PaymentMethodWalletMenuState createState() =>
@@ -60,7 +67,6 @@ class PaymentMethodWalletMenu extends StatefulWidget {
 }
 
 class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
-  final ScrollController _scrollController = ScrollController();
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
   final plugin = PaystackPlugin();
@@ -74,7 +80,17 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
 
   String? membershipId, membershipName;
 
-  String? amount, userId, userName;
+  String? amount,
+      userId,
+      userName,
+      emailMessage,
+      emailMessage01,
+      emailMessage02,
+      emailMessage03,
+      emailMessageTo,
+      emailMessageTo01,
+      emailMessageTo02,
+      emailMessageTo03;
 
   loadSharedPrefs() async {
     try {
@@ -90,21 +106,218 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
     }
   }
 
+  void sendData(
+      amount,
+      currentRate,
+      method,
+      walletBalance,
+      walletId,
+      accountId,
+      toUserId,
+      toUserName,
+      toUserEmail,
+      userPhone,
+      message,
+      messageTo,
+      routePath,
+      exchangeRate) {
+    double rateCharge = double.parse(amount);
+    setState(() => rateCharge *= (double.parse(currentRate) / 100));
+
+    // Calculation - Amount
+    double updatedAmount = double.parse(amount);
+    setState(() => updatedAmount -= rateCharge);
+
+    // Calculation - Wallet substract Updated Amount
+    double updatedBalance = double.parse(walletBalance!);
+    setState(() => updatedBalance -= updatedAmount);
+
+    // Calculation - Rate
+    if (exchangeRate != null) {
+      double newAmount = double.parse(amount);
+      setState(() => newAmount *= double.parse(exchangeRate));
+
+      double rateCharge = newAmount;
+      setState(() => rateCharge *= (double.parse(currentRate) / 100));
+
+      // Calculation - Amount
+      double updatedAmount = newAmount;
+      setState(() => updatedAmount -= rateCharge);
+
+      // Calculation - Wallet substract Updated Amount
+      double updatedBalance = double.parse(walletBalance!);
+      setState(() => updatedBalance -= updatedAmount);
+    }
+
+    switch (method) {
+      case 'send_money':
+        emailMessage =
+            'Send Money You have just send ${double.parse(amount).toStringAsFixed(2)} to $toUserName.';
+        emailMessage01 =
+            'Amount: NGN ${double.parse(amount).toStringAsFixed(2)} ';
+        emailMessage02 =
+            'Current Rate Charge: NGN ${rateCharge.toStringAsFixed(2)} ';
+        emailMessage03 =
+            'Total Amount: NGN ${updatedAmount.toStringAsFixed(2)}';
+        emailMessageTo =
+            'Send Money You have just received ${double.parse(amount).toStringAsFixed(2)} from $userName.';
+        emailMessageTo01 =
+            'Amount: NGN ${double.parse(amount).toStringAsFixed(2)} ';
+        emailMessageTo02 =
+            'Current Rate Charge: NGN ${rateCharge.toStringAsFixed(2)} ';
+        emailMessageTo03 =
+            'Total Amount: NGN ${updatedAmount.toStringAsFixed(2)}';
+        break;
+      case 'exchange_money':
+        emailMessage =
+            'Exchange Money You have just exchanged ${double.parse(amount).toStringAsFixed(2)} from your account.';
+        emailMessage01 =
+            'Amount: NGN ${double.parse(amount).toStringAsFixed(2)} ';
+        emailMessage02 =
+            'Current Rate Charge: NGN ${rateCharge.toStringAsFixed(2)} ';
+        emailMessage03 =
+            'Total Amount: NGN ${updatedAmount.toStringAsFixed(2)}';
+        emailMessageTo = '';
+        emailMessageTo01 =
+            'Amount: NGN ${double.parse(amount).toStringAsFixed(2)} ';
+        emailMessageTo02 =
+            'Current Rate Charge: NGN ${rateCharge.toStringAsFixed(2)} ';
+        emailMessageTo03 =
+            'Total Amount: NGN ${updatedAmount.toStringAsFixed(2)}';
+        break;
+      case 'wire_transfer':
+        emailMessage =
+            'Wire Transfer You have just transferred ${double.parse(amount).toStringAsFixed(2)} into your account.';
+        emailMessage01 =
+            'Amount: NGN ${double.parse(amount).toStringAsFixed(2)} ';
+        emailMessage02 =
+            'Current Rate Charge: NGN ${rateCharge.toStringAsFixed(2)} ';
+        emailMessage03 =
+            'Total Amount: NGN ${updatedAmount.toStringAsFixed(2)}';
+        emailMessageTo = '';
+        emailMessageTo01 =
+            'Amount: NGN ${double.parse(amount).toStringAsFixed(2)} ';
+        emailMessageTo02 =
+            'Current Rate Charge: NGN ${rateCharge.toStringAsFixed(2)} ';
+        emailMessageTo03 =
+            'Total Amount: NGN ${updatedAmount.toStringAsFixed(2)}';
+        break;
+      case 'top_up':
+        emailMessage =
+            'Top-Up Wallet You have just top-up ${double.parse(amount).toStringAsFixed(2)} into your account.';
+        emailMessage01 =
+            'Amount: NGN ${double.parse(amount).toStringAsFixed(2)} ';
+        emailMessage02 =
+            'Current Rate Charge: NGN ${rateCharge.toStringAsFixed(2)} ';
+        emailMessage03 =
+            'Total Amount: NGN ${updatedAmount.toStringAsFixed(2)}';
+        emailMessageTo = '';
+        emailMessageTo01 =
+            'Amount: NGN ${double.parse(amount).toStringAsFixed(2)} ';
+        emailMessageTo02 =
+            'Current Rate Charge: NGN ${rateCharge.toStringAsFixed(2)} ';
+        emailMessageTo03 =
+            'Total Amount: NGN ${updatedAmount.toStringAsFixed(2)}';
+        break;
+      default:
+    }
+
+    Map<String, String> body = {
+      Field.userId: userId ?? '0',
+      Field.walletId: walletId ?? '0',
+      Field.accountId: accountId ?? '0',
+      Field.method: method ?? 'defaut',
+      Field.creditDebit: method ?? 'defaut',
+      Field.amount: amount,
+      Field.paymentMethod: 'Cash',
+      Field.updatedBy: userId ?? '0',
+    };
+
+    Map<String, String> toUserBody = {
+      Field.userId: toUserId ?? '0',
+      Field.walletId: walletId ?? '0',
+      Field.accountId: accountId ?? '0',
+      Field.method: method ?? 'defaut',
+      Field.creditDebit: method ?? 'defaut',
+      Field.amount: amount,
+      Field.paymentMethod: 'Cash',
+      Field.updatedBy: toUserId ?? '0',
+    };
+
+    Map<String, String> updateWalletBody = {
+      // Field.userId: userId ?? '3',
+      // Field.accountId: accountId ?? '1',
+      Field.amount: updatedBalance.toString(),
+      Field.updatedBy: userId ?? '3',
+    };
+
+    WalletMethods.addTransaction(context, body);
+    WalletMethods.update(context, updateWalletBody, userId ?? '3');
+
+    if (toUserId != null) {
+      if (userLoad.emailVerifiedAt != null) {
+        EmailJS.send(
+            context,
+            userLoad.email ?? 'customer@gmail.com',
+            userLoad.name ?? 'user',
+            'FVIS Investment',
+            emailMessage ?? 'Default',
+            emailMessage01 ?? 'Default',
+            emailMessage02 ?? 'Default',
+            emailMessage03 ?? 'Default');
+        EmailJS.send(
+            context,
+            toUserEmail ?? 'customer@gmail.com',
+            toUserName ?? 'user',
+            'FVIS Investment',
+            emailMessage ?? 'Default',
+            emailMessageTo01 ?? 'Default',
+            emailMessageTo02 ?? 'Default',
+            emailMessageTo03 ?? 'Default');
+      } else if (userLoad.smsVerifiedAt != null) {
+        SMSNigeriaAPI.send(context, userPhone ?? '000', message ?? 'default');
+        SMSNigeriaAPI.send(context, toUserId ?? '000', messageTo ?? 'default');
+      }
+
+      WalletMethods.addTransaction(context, toUserBody);
+      WalletMethods.update(context, updateWalletBody, widget.walletId ?? '2');
+
+      Future.delayed(const Duration(milliseconds: 2000), () {
+        Navigator.pushReplacementNamed(context, routePath!);
+      });
+    } else {
+      if (userLoad.emailVerifiedAt != null) {
+        EmailJS.send(
+            context,
+            // 'alfreeanaalfie@gmail.com',
+            userLoad.email ?? 'customer@gmail.com',
+            userLoad.name ?? 'user',
+            'FVIS Investment',
+            emailMessage ?? 'Default',
+            emailMessage01 ?? 'Default',
+            emailMessage02 ?? 'Default',
+            emailMessage03 ?? 'Default');
+      } else if (userLoad.smsVerifiedAt != null) {
+        SMSNigeriaAPI.send(context, userPhone ?? '000', message ?? 'default');
+      }
+      Future.delayed(const Duration(milliseconds: 2000), () {
+        Navigator.pushReplacementNamed(context, routePath!);
+      });
+    }
+  }
+
   @override
   void initState() {
-    _scrollController.addListener(() {
-      print(_scrollController.offset);
-    });
+    loadSharedPrefs();
     plugin.initialize(
         publicKey: 'pk_test_7577b1531016880743e16f17ba818cd14a08f1d2');
     super.initState();
-    loadSharedPrefs();
-    // getView();
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+
     return OKToast(
       child: Scaffold(
         backgroundColor: Styles.primaryColor,
@@ -140,96 +353,32 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
                             bottomRight: Radius.circular(15)),
                         color: Styles.primaryColor,
                       ),
-                      // margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 0, vertical: 10),
                       child: elevatedButton(
                         color: Styles.secondaryColor,
                         context: context,
                         callback: () {
-                          Map<String, String> body = {
-                            Field.userId: userId ?? '0',
-                            Field.walletId: widget.walletId ?? '0',
-                            Field.accountId: widget.accountId ?? '0',
-                            Field.method: widget.method ?? 'defaut',
-                            Field.creditDebit: widget.method ?? 'defaut',
-                            Field.amount: widget.amount,
-                            Field.paymentMethod: 'Cash',
-                            Field.updatedBy: userId ?? '0',
-                          };
-
-                          Map<String, String> toUserBody = {
-                            Field.userId: widget.toUserId ?? '0',
-                            Field.walletId: widget.walletId ?? '0',
-                            Field.accountId: widget.accountId ?? '0',
-                            Field.method: widget.method ?? 'defaut',
-                            Field.creditDebit: widget.method ?? 'defaut',
-                            Field.amount: widget.amount,
-                            Field.paymentMethod: 'Cash',
-                            Field.updatedBy: widget.toUserId ?? '0',
-                          };
-
-                          // Calculation - Rate
-                          double rateCharge = double.parse(widget.amount);
-                          setState(() => rateCharge *=
-                              (double.parse(widget.currentRate!) / 100));
-
-                          // Calculation - Amount
-                          double updatedAmount = double.parse(widget.amount);
-                          setState(() => updatedAmount -= rateCharge);
-
-                          // Calculation - Wallet substract Updated Amount
-                          double updatedBalance =
-                              double.parse(widget.walletBalance!);
-                          setState(() => updatedBalance -= updatedAmount);
-
-                          Map<String, String> updateWalletBody = {
-                            Field.userId: userId ?? '3',
-                            Field.accountId: widget.accountId ?? '1',
-                            Field.amount: updatedBalance.toString(),
-                            Field.updatedBy: userId ?? '3',
-                          };
-
-                          WalletMethods.addTransaction(context, body);
-                          WalletMethods.update(
-                              context, updateWalletBody, userId ?? '3');
-
-                          if (widget.toUserId != null) {
-                            SMSNigeriaAPI.send(
-                                context,
-                                widget.userPhone ?? '000',
-                                widget.message ?? 'default');
-                            SMSNigeriaAPI.send(
-                                context,
-                                widget.toUserId ?? '000',
-                                widget.messageTo ?? 'default');
-
-                            WalletMethods.addTransaction(context, toUserBody);
-                            WalletMethods.update(context, updateWalletBody,
-                                widget.toUserId ?? '2');
-
-                            Future.delayed(const Duration(milliseconds: 2000),
-                                () {
-                              Navigator.pushReplacementNamed(
-                                  context, widget.routePath!);
-                            });
-                          } else {
-                            SMSNigeriaAPI.send(
-                                context,
-                                widget.userPhone ?? '000',
-                                widget.message ?? 'default');
-
-                            Future.delayed(const Duration(milliseconds: 2000),
-                                () {
-                              Navigator.pushReplacementNamed(
-                                  context, widget.routePath!);
-                            });
-                          }
+                          sendData(
+                              widget.amount,
+                              widget.currentRate,
+                              widget.method,
+                              widget.walletBalance,
+                              widget.walletId,
+                              widget.accountId,
+                              widget.toUserId,
+                              widget.toUserName,
+                              widget.toUserEmail,
+                              widget.userPhone,
+                              widget.message,
+                              widget.messageTo,
+                              widget.routePath,
+                              widget.exchangeRate);
                         },
                         text: Str.cashDepositTxt,
                       ),
                     ),
-                    const Gap(10),
+                    const Gap(5),
                     //** PayStack
                     Container(
                       decoration: const BoxDecoration(
@@ -238,7 +387,6 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
                             bottomRight: Radius.circular(15)),
                         color: Styles.primaryColor,
                       ),
-                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 0, vertical: 10),
                       child: elevatedButtonWithGraphic(
@@ -247,7 +395,7 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
                         context: context,
                         callback: () {
                           Timer(const Duration(seconds: 3), () {
-                            _btnController.reset();
+                            _btnController.stop();
                           });
                           chargeCard();
                         },
@@ -264,7 +412,7 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
                         ),
                       ),
                     ),
-                    const Gap(10),
+                    const Gap(5),
                     //** Stripe
                     Container(
                       decoration: const BoxDecoration(
@@ -273,7 +421,6 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
                             bottomRight: Radius.circular(15)),
                         color: Styles.primaryColor,
                       ),
-                      // margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 0, vertical: 10),
                       child: elevatedButtonWithGraphic(
@@ -289,8 +436,6 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
                             Text(Str.payWithPaystackTxt),
                             const Gap(10),
                             Container(
-                                // margin: const EdgeInsets.all(8),
-                                // color: Styles.primaryColor,
                                 constraints: const BoxConstraints(
                                     minWidth: 10, maxWidth: 100),
                                 child: Image.asset(
@@ -420,7 +565,7 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
 
   chargeCard() async {
     Timer(const Duration(seconds: 3), () {
-      _btnController.reset();
+      _btnController.stop();
     });
 
     setState(() {
@@ -430,7 +575,7 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
     Map accessCode = await createAccessCode(
         'sk_test_faa379125c75547ae5db0b99b5f167ee052da92b',
         widget.amount,
-        'gmriyal@gmail.com');
+        userLoad.email);
 
     setState(() {
       isGeneratingCode = !isGeneratingCode;
@@ -439,7 +584,7 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
     Charge charge = Charge()
       ..amount = int.parse(widget.amount) * 100
       ..accessCode = accessCode['data']['access_code']
-      ..email = 'customer@email.com';
+      ..email = userLoad.email;
     CheckoutResponse response = await plugin.checkout(
       context,
       method:
@@ -447,70 +592,21 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
       charge: charge,
     );
     if (response.status == true) {
-      Map<String, String> body = {
-        Field.userId: userId ?? '0',
-        Field.walletId: widget.walletId ?? '0',
-        Field.accountId: widget.accountId ?? '0',
-        Field.method: widget.method ?? 'defaut',
-        Field.creditDebit: widget.method ?? 'defaut',
-        Field.amount: widget.amount,
-        Field.paymentMethod: 'Cash',
-        Field.updatedBy: userId ?? '0',
-      };
-
-      Map<String, String> toUserBody = {
-        Field.userId: widget.toUserId ?? '0',
-        Field.walletId: widget.walletId ?? '0',
-        Field.accountId: widget.accountId ?? '0',
-        Field.method: widget.method ?? 'defaut',
-        Field.creditDebit: widget.method ?? 'defaut',
-        Field.amount: widget.amount,
-        Field.paymentMethod: 'Cash',
-        Field.updatedBy: widget.toUserId ?? '0',
-      };
-
-      // Calculation - Rate
-      double rateCharge = double.parse(widget.amount);
-      setState(() => rateCharge *= (double.parse(widget.currentRate!) / 100));
-
-      // Calculation - Amount
-      double updatedAmount = double.parse(widget.amount);
-      setState(() => updatedAmount -= rateCharge);
-
-      // Calculation - Wallet substract Updated Amount
-      double updatedBalance = double.parse(widget.walletBalance!);
-      setState(() => updatedBalance -= updatedAmount);
-
-      Map<String, String> updateWalletBody = {
-        Field.userId: userId ?? '3',
-        Field.accountId: widget.accountId ?? '1',
-        Field.amount: updatedBalance.toString(),
-        Field.updatedBy: userId ?? '3',
-      };
-
-      WalletMethods.addTransaction(context, body);
-      WalletMethods.update(context, updateWalletBody, userId ?? '3');
-
-      if (widget.toUserId != null) {
-        SMSNigeriaAPI.send(
-            context, widget.userPhone ?? '000', widget.message ?? 'default');
-        SMSNigeriaAPI.send(
-            context, widget.toUserId ?? '000', widget.messageTo ?? 'default');
-
-        WalletMethods.addTransaction(context, toUserBody);
-        WalletMethods.update(context, updateWalletBody, widget.toUserId ?? '2');
-
-        Future.delayed(const Duration(milliseconds: 2000), () {
-          Navigator.pushReplacementNamed(context, widget.routePath!);
-        });
-      } else {
-        SMSNigeriaAPI.send(
-            context, widget.userPhone ?? '000', widget.message ?? 'default');
-
-        Future.delayed(const Duration(milliseconds: 2000), () {
-          Navigator.pushReplacementNamed(context, widget.routePath!);
-        });
-      }
+      sendData(
+          widget.amount,
+          widget.currentRate,
+          widget.method,
+          widget.walletBalance,
+          widget.walletId,
+          widget.accountId,
+          widget.toUserId,
+          widget.toUserName,
+          widget.toUserEmail,
+          widget.userPhone,
+          widget.message,
+          widget.messageTo,
+          widget.routePath,
+          widget.exchangeRate);
       _showDialog();
     } else {
       _showErrorDialog();
@@ -585,70 +681,21 @@ class _PaymentMethodWalletMenuState extends State<PaymentMethodWalletMenu> {
         paymentIntentData = null;
       });
 
-      Map<String, String> body = {
-        Field.userId: userId ?? '0',
-        Field.walletId: widget.walletId ?? '0',
-        Field.accountId: widget.accountId ?? '0',
-        Field.method: widget.method ?? 'defaut',
-        Field.creditDebit: widget.method ?? 'defaut',
-        Field.amount: widget.amount,
-        Field.paymentMethod: 'Cash',
-        Field.updatedBy: userId ?? '0',
-      };
-
-      Map<String, String> toUserBody = {
-        Field.userId: widget.toUserId ?? '0',
-        Field.walletId: widget.walletId ?? '0',
-        Field.accountId: widget.accountId ?? '0',
-        Field.method: widget.method ?? 'defaut',
-        Field.creditDebit: widget.method ?? 'defaut',
-        Field.amount: widget.amount,
-        Field.paymentMethod: 'Cash',
-        Field.updatedBy: widget.toUserId ?? '0',
-      };
-
-      // Calculation - Rate
-      double rateCharge = double.parse(widget.amount);
-      setState(() => rateCharge *= (double.parse(widget.currentRate!) / 100));
-
-      // Calculation - Amount
-      double updatedAmount = double.parse(widget.amount);
-      setState(() => updatedAmount -= rateCharge);
-
-      // Calculation - Wallet substract Updated Amount
-      double updatedBalance = double.parse(widget.walletBalance!);
-      setState(() => updatedBalance -= updatedAmount);
-
-      Map<String, String> updateWalletBody = {
-        Field.userId: userId ?? '3',
-        Field.accountId: widget.accountId ?? '1',
-        Field.amount: updatedBalance.toString(),
-        Field.updatedBy: userId ?? '3',
-      };
-
-      WalletMethods.addTransaction(context, body);
-      WalletMethods.update(context, updateWalletBody, userId ?? '3');
-
-      if (widget.toUserId != null) {
-        SMSNigeriaAPI.send(
-            context, widget.userPhone ?? '000', widget.message ?? 'default');
-        SMSNigeriaAPI.send(
-            context, widget.toUserId ?? '000', widget.messageTo ?? 'default');
-
-        WalletMethods.addTransaction(context, toUserBody);
-        WalletMethods.update(context, updateWalletBody, widget.toUserId ?? '2');
-
-        Future.delayed(const Duration(milliseconds: 2000), () {
-          Navigator.pushReplacementNamed(context, widget.routePath!);
-        });
-      } else {
-        SMSNigeriaAPI.send(
-            context, widget.userPhone ?? '000', widget.message ?? 'default');
-
-        Future.delayed(const Duration(milliseconds: 2000), () {
-          Navigator.pushReplacementNamed(context, widget.routePath!);
-        });
-      }
+      sendData(
+          widget.amount,
+          widget.currentRate,
+          widget.method,
+          widget.walletBalance,
+          widget.walletId,
+          widget.accountId,
+          widget.toUserId,
+          widget.toUserName,
+          widget.toUserEmail,
+          widget.userPhone,
+          widget.message,
+          widget.messageTo,
+          widget.routePath,
+          widget.exchangeRate);
 
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('Paid Successfully!')));

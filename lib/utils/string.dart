@@ -43,7 +43,7 @@ class Str {
   static String descriptionTxt = 'Description';
   static String writeDescriptionTxt = 'Write Description';
   static String amountTxt = 'Amount';
-  static String amountNumTxt = '\$0.00';
+  static String amountNumTxt = 'NGN 0.00';
   static String currencyTxt = 'Currency';
   static String selectBankTxt = 'Select Bank';
   static String wireTransferTxt = 'Wire Transfer';

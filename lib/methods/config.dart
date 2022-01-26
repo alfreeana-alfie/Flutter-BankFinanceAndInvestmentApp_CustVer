@@ -2,12 +2,15 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+
+import 'auth_methods.dart';
 
 class SharedPref {
   save(String key, value) async {
@@ -31,6 +34,12 @@ class SharedPref {
   }
 }
 
+User userData(User userData) {
+  User user = User.fromJSON(sharedPref.read(Pref.userData));
+  userData = user;
+  return userData;
+}
+
 class CustomToast {
   static showMsg(String text, Color color) {
     showToast(
@@ -45,8 +54,7 @@ class CustomToast {
 }
 
 class SMSNigeriaAPI {
-  static void send(
-      BuildContext context, String to, String body) async {
+  static void send(BuildContext context, String to, String body) async {
     var apiToken =
         'apYsrAtoGSjgkicEXuDyXDaIZfFQXjl3gQZ5AYVilVuqZq7TkWT6hSPfsaXD';
     var from = '2349021113979';
@@ -58,6 +66,48 @@ class SMSNigeriaAPI {
       url,
       headers: headers,
       body: body,
+    );
+
+    if (response.statusCode == Status.created) {
+      CustomToast.showMsg(Status.successTxt, Styles.successColor);
+    } else {
+      print(response.body);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
+}
+
+class EmailJS {
+  static void send(BuildContext context, String toEmail, String toName,
+      String fromName, String userMessage, String userMessage01, String userMessage02, String userMessage03) async {
+    var serviceId = 'service_xsly86j';
+    var templateId = 'template_6cmmlbk';
+    var userId = 'user_eKHAYrEKc8tQPCDXxJzut';
+
+    Uri url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+
+    final response = await http.post(
+      url,
+      headers: {
+        'origin': 'http://localhost',
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({
+        'service_id': serviceId,
+        'template_id': templateId,
+        'user_id': userId,
+        'template_params': {
+          'user_subject': 'FVIS Investment',
+          'to_email': toEmail,
+          'user_email': 'fvisng@gmail.com',
+          'to_name': toName,
+          'from_name': fromName,
+          'user_message': userMessage,
+          'user_message01': userMessage01,
+          'user_message02': userMessage02,
+          'user_message03': userMessage03,
+        }
+      }),
     );
 
     if (response.statusCode == Status.created) {

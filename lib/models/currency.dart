@@ -1,8 +1,8 @@
 import 'package:flutter_banking_app/utils/string.dart';
 
 class Currency {
-  int? status, baseCurrency, id;
-  String? name, exchangeRate;
+  int?  id;
+  String? status, baseCurrency,name, exchangeRate;
 
   Currency(
       {this.id,
@@ -16,8 +16,8 @@ class Currency {
       id: map[Field.id] as int?,
       name: map[Field.name] as String?,
       exchangeRate: map[Field.exchangeRate] as String?,
-      baseCurrency: map[Field.baseCurrency] as int?,
-      status: map[Field.status] as int?,
+      baseCurrency: map[Field.baseCurrency] as String?,
+      status: map[Field.status] as String?,
     );
   }
 }

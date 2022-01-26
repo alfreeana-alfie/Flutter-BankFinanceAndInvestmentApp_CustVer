@@ -30,7 +30,6 @@ class MCreateSendMoney extends StatefulWidget {
 }
 
 class _SendMoneyState extends State<MCreateSendMoney> {
-  final ScrollController _scrollController = ScrollController();
 
   var controller = ScrollController();
   SharedPref sharedPref = SharedPref();
@@ -40,6 +39,7 @@ class _SendMoneyState extends State<MCreateSendMoney> {
       note,
       currency,
       currencyName,
+      exchangeRate,
       toUserId,
       toUserName,
       userId,
@@ -98,12 +98,9 @@ class _SendMoneyState extends State<MCreateSendMoney> {
 
   @override
   void initState() {
-    _scrollController.addListener(() {
-      print(_scrollController.offset);
-    });
-    super.initState();
     loadSharedPrefs();
     getCurrentRate();
+    super.initState();
   }
 
   @override
@@ -223,11 +220,13 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                       child: DropDownCurrency(
                         currency: currency,
                         currencyName: currencyName,
+                        currencyExchangeRate: exchangeRate,
                         onChanged: (val) {
                           setState(
                             () {
                               currency = val!.id.toString();
                               currencyName = val.name;
+                              exchangeRate = val.exchangeRate;
                             },
                           );
                         },
@@ -281,7 +280,8 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => PaymentMethodWalletMenu(
-                                currentRate: currentRate.toString(),
+                                exchangeRate: exchangeRate,
+                                  currentRate: currentRate.toString(),
                                   toUserId: toUserId,
                                   walletId: walletId,
                                   amount: amount ?? '0.00',

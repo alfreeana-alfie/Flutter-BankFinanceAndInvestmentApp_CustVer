@@ -127,8 +127,6 @@ class _WalletPageState extends State<WalletPage> {
                             ),
                             const Gap(10),
                             InkWell(
-                              onTap: () => Navigator.pushNamed(
-                                  context, RouteSTR.wireTransferM),
                               child: Container(
                                 padding: const EdgeInsets.all(10),
                                 decoration: const BoxDecoration(
@@ -137,7 +135,7 @@ class _WalletPageState extends State<WalletPage> {
                                 ),
                                 child: const Icon(
                                   Icons.add,
-                                  color: Styles.accentColor,
+                                  color: Styles.whiteColor,
                                 ),
                               ),
                             ),

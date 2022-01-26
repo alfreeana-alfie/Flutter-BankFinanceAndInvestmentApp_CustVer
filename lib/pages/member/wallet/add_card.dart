@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/models/user_membership.dart';
 import 'package:flutter_banking_app/pages/member/checkout/payment_method_send.dart';
+import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -15,6 +18,7 @@ import 'package:flutter_banking_app/widgets/textfield/new_text_field.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:gap/gap.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:http/http.dart' as http;
 
 // TODO: pk_test_7577b1531016880743e16f17ba818cd14a08f1d2 - PUBLIC KEY
 // TODO: sk_test_faa379125c75547ae5db0b99b5f167ee052da92b - SECRET KEY
@@ -67,6 +71,23 @@ class _MTopUpWalletState extends State<MTopUpWallet> {
       branchId = '1',
       transactionsDetails = '1';
 
+  int? currentRate;
+
+  Future getCurrentRate() async {
+    Uri viewSingleUser =
+        Uri.parse(API.getCurrentRateByFunctionName.toString() + method);
+    final response = await http.get(viewSingleUser, headers: headers);
+
+    if (response.statusCode == Status.ok) {
+      setState(() {
+        currentRate = jsonDecode(response.body);
+      });
+    } else {
+      print(Status.failedTxt);
+      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
+    }
+  }
+
   loadSharedPrefs() async {
     try {
       User user = User.fromJSON(await sharedPref.read(Pref.userData));
@@ -74,11 +95,18 @@ class _MTopUpWalletState extends State<MTopUpWallet> {
         userLoad = user;
 
         userId = user.id.toString();
-        userPhone = '${user.phone}';
+        userPhone = user.phone;
       });
     } catch (e) {
       print(e);
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadSharedPrefs();
+    getCurrentRate();
   }
 
   @override
@@ -109,6 +137,7 @@ class _MTopUpWalletState extends State<MTopUpWallet> {
                   MaterialPageRoute(
                     builder: (context) => PaymentMethodWalletMenu(
                         // toUserId: toUserId,
+                        currentRate: currentRate.toString(),
                         walletId: widget.walletId,
                         amount: amount ?? '0.00',
                         accountId: widget.accountId ?? '0',
@@ -117,6 +146,7 @@ class _MTopUpWalletState extends State<MTopUpWallet> {
                         walletBalance: widget.walletBalance,
                         routePath: RouteSTR.walletListM,
                         userPhone: userPhone,
+                        user: userLoad, 
                         message:
                             'Top-Up Wallet You have just top-up $amount into your account. FVIS Investment '),
                   ),

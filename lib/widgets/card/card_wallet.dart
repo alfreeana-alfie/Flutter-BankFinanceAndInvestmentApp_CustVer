@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/models/wallet.dart';
 import 'package:flutter_banking_app/pages/member/wallet/add_card.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_banking_app/utils/layouts.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 
 class CardWallet extends StatelessWidget {
   const CardWallet({Key? key, required this.userWallet}) : super(key: key);
@@ -13,6 +16,8 @@ class CardWallet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = Layouts.getSize(context);
+
+    var currency = NumberFormat.simpleCurrency(locale: Platform.localeName, name: 'NGN');
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
@@ -40,7 +45,7 @@ class CardWallet extends StatelessWidget {
                             fontSize: 22,
                             color: Colors.white)),
                     const Gap(5),
-                    Text('\$${userWallet.amount}',
+                    Text('NGN ${userWallet.amount}',
                         style: const TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 20,

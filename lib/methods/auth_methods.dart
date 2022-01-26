@@ -7,24 +7,14 @@ import 'package:flutter_banking_app/models/token.dart';
 import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:http/http.dart' as http;
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 import 'config.dart';
 
 SharedPref sharedPref = SharedPref();
 
-void signIn(BuildContext context, Map<String, String> body) async {
-  // try {
-  //   User user = User.fromJSON(await sharedPref.read(Pref.userData));
-
-  // if(user.id.toString().isNotEmpty){
-  //   sharedPref.remove(Pref.accessToken);
-  //   sharedPref.remove(Pref.expiredAt);
-  //   sharedPref.remove(Pref.userData);
-  // }
-  // } catch (e) {
-  //   print(e);
-  // }
-
+void signIn(BuildContext context, Map<String, String> body,
+    RoundedLoadingButtonController controller) async {
   final response = await http.post(
     API.login,
     headers: headers,
@@ -37,8 +27,11 @@ void signIn(BuildContext context, Map<String, String> body) async {
     sharedPref.save(Pref.accessToken, jsonBody.token);
     sharedPref.save(Pref.expiredAt, jsonBody.expiredAt);
 
+    controller.stop();
+
     getUserDetails(context);
   } else {
+    controller.stop();
     // print(AuthSTR.failedAuthTxt);
     CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
   }
@@ -98,22 +91,20 @@ void signOut(BuildContext context) async {
 }
 
 void signUp(BuildContext context, Map<String, String> body) async {
-    final response = await http.post(
-      API.signUp,
-      headers: headers,
-      body: body,
-    );
+  final response = await http.post(
+    API.signUp,
+    headers: headers,
+    body: body,
+  );
 
-    if (response.statusCode == Status.created) {
-      CustomToast.showMsg(Status.successTxt, Styles.successColor);
-      Future.delayed(const Duration(milliseconds: 2000), () {
-
-        Navigator.pushReplacementNamed(context, RouteSTR.signIn);
-
-      });
-    } else {
-      print(response.body);
-      // print(Status.failedTxt);
-      CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
-    }
+  if (response.statusCode == Status.created) {
+    CustomToast.showMsg(Status.successTxt, Styles.successColor);
+    Future.delayed(const Duration(milliseconds: 2000), () {
+      Navigator.pushReplacementNamed(context, RouteSTR.signIn);
+    });
+  } else {
+    print(response.body);
+    // print(Status.failedTxt);
+    CustomToast.showMsg(Status.failedTxt, Styles.dangerColor);
   }
+}

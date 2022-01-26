@@ -22,8 +22,9 @@ class MemberDasboard extends StatefulWidget {
 }
 
 class _MemberDasboardState extends State<MemberDasboard> {
-  final GlobalKey<ScaffoldState> _key = GlobalKey();
+  // final GlobalKey<ScaffoldState> _key = GlobalKey();
   SharedPref sharedPref = SharedPref();
+  User userLoad = User();
 
   String? userName;
 
@@ -31,6 +32,7 @@ class _MemberDasboardState extends State<MemberDasboard> {
     try {
       User user = User.fromJSON(await sharedPref.read(Pref.userData));
       if (mounted) {
+        userLoad = user;
         userName = user.name;
       }
     } catch (e) {
@@ -129,8 +131,8 @@ class _MemberDasboardState extends State<MemberDasboard> {
                     )
                   ],
                 ),
-                const Gap(25),
-                const BalanceBox(),
+                // const Gap(25),
+                // const BalanceBox(),
                 const Gap(20),
                 Container(
                   height: 75.0,
