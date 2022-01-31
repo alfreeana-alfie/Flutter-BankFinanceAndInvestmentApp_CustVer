@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.stripe:paymentsheet:18.1.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dabe984fe71d6d1749dfeb78f61f0732/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dabe984fe71d6d1749dfeb78f61f0732/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dabe984fe71d6d1749dfeb78f61f0732/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.stripe/paymentsheet/18.1.0/6724f252954b1bc1fb60673f825a5db7729c1916/paymentsheet-18.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

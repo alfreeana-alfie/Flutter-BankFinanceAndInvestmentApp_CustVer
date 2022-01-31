@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.stripe:payments-core:18.1.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e0c6fd2eb32f7df70acec1d7f12741af/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e0c6fd2eb32f7df70acec1d7f12741af/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e0c6fd2eb32f7df70acec1d7f12741af/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.stripe/payments-core/18.1.0/ec917d519d7985b07e7d0ef57f1808b2b42c4a2a/payments-core-18.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
