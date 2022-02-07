@@ -20,8 +20,6 @@ class ForgotPasswordPage extends StatefulWidget {
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final _formKey = GlobalKey<FormState>();
-  final RoundedLoadingButtonController _btnController =
-      RoundedLoadingButtonController();
 
   String email = '';
 
@@ -114,12 +112,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   width: double.infinity,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // Map<String, String> body = {
-                      //   Field.email: email,
-                      //   Field.password: password,
-                      // };
-                      // signIn(context, body, _btnController);
-                    }
+                    //   Map<String, String> body = {
+                    //     Field.email: email,
+                    //     Field.password: password,
+                    //   };
+                    //   signIn(context, body, _btnController);
+                    // }
                     _btnController.stop();
                   },
                   child: Text(Str.signInTxt.toUpperCase()),

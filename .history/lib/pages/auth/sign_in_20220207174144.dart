@@ -1,6 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/config.dart';
+import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/string.dart';
+import 'package:flutter_banking_app/methods/auth_methods.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
 import 'package:flutter_banking_app/widgets/clickable_text.dart';
@@ -11,19 +14,22 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:regexpattern/src/regex_extension.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
-class ForgotPasswordPage extends StatefulWidget {
-  const ForgotPasswordPage({ Key? key }) : super(key: key);
+class SignInPage extends StatefulWidget {
+  const SignInPage({Key? key}) : super(key: key);
 
   @override
-  _ForgotPasswordPageState createState() => _ForgotPasswordPageState();
+  _SignInPageState createState() => _SignInPageState();
 }
 
-class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+class _SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
 
   String email = '';
+  String password = '';
+
+  SharedPref sharedPref = SharedPref();
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +41,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Center(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                _buildForm(),
-              ],
-            ),
-          ),
-        ),
+        child: _innerContainer(),
       ),
     );
   }
@@ -64,7 +60,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Logo
-            const Gap(15),
+            const Gap(20),
             SizedBox(
               width: 80,
               height: 80,
@@ -74,7 +70,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             Padding(
               padding: const EdgeInsets.only(bottom: 10.0),
               child: Header1(
-                title: Str.forgotPasswordTxt,
+                title: Str.loginToYourAccountTxt,
                 textStyle: GoogleFonts.nunitoSans(
                   fontSize: 24,
                   color: Styles.darkBlueColor,
@@ -86,7 +82,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             ),
             // Email address
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: Values.horizontalValue*2, vertical: Values.verticalValue),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: Values.horizontalValue * 2,
+                  vertical: Values.verticalValue),
               child: TextFieldCustom(
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -103,7 +101,27 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 hintText: Str.emailTxt,
               ),
             ),
-            // Button Forgot Password
+            // Password
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: Values.horizontalValue * 2),
+              child: TextFieldCustom(
+                obsecure: true,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Empty Password';
+                  }
+                  if (value.trim().length < 8) {
+                    return 'Password must be at least 8 characters in length';
+                  }
+                  return null;
+                },
+                textInputType: TextInputType.visiblePassword,
+                textInputAction: TextInputAction.next,
+                onSaved: (value) => password = value!,
+                hintText: Str.passwordTxt,
+              ),
+            ),
             Container(
               height: 50,
               margin: const EdgeInsets.symmetric(
@@ -114,11 +132,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   width: double.infinity,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // Map<String, String> body = {
-                      //   Field.email: email,
-                      //   Field.password: password,
-                      // };
-                      // signIn(context, body, _btnController);
+                      Map<String, String> body = {
+                        Field.email: email,
+                        Field.password: password,
+                      };
+                      signIn(context, body, _btnController);
                     }
                     _btnController.stop();
                   },
@@ -127,17 +145,30 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   elevation: 0.0,
                   borderRadius: 7),
             ),
+            ClickableText(
+              text: Str.createAccountTxt,
+              selectedTextColor: Styles.textColor,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              tapGestureRecognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  Navigator.pushNamed(context, RouteSTR.signUp);
+                },
+              margin: const EdgeInsets.symmetric(
+                  horizontal: Values.horizontalValue, vertical: 5),
+              alignment: Alignment.center,
+            ),
             // Forgot Password
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(30.0),
               child: ClickableText(
-                text: Str.goBackTxt,
+                text: Str.forgotPasswordTxt,
                 selectedTextColor: Styles.secondaryColor,
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.w400,
                 tapGestureRecognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    Navigator.pushNamed(context, RouteSTR.signIn);
+                    Navigator.pushNamed(context, RouteSTR.forgotPassword);
                   },
                 margin: const EdgeInsets.symmetric(
                     horizontal: Values.horizontalValue, vertical: 5),
@@ -147,6 +178,20 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             const SizedBox(
               height: 10,
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _innerContainer() {
+    return Center(
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            _buildForm(),
           ],
         ),
       ),

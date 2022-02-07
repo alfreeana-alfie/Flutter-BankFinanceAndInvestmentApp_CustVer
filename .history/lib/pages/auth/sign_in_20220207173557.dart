@@ -11,7 +11,6 @@ import 'package:flutter_banking_app/widgets/header_1.dart';
 import 'package:flutter_banking_app/widgets/textfield/text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:regexpattern/src/regex_extension.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class SignInPage extends StatefulWidget {
@@ -24,7 +23,7 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
   final RoundedLoadingButtonController _btnController =
-      RoundedLoadingButtonController();
+    RoundedLoadingButtonController();
 
   String email = '';
   String password = '';
@@ -59,14 +58,14 @@ class _SignInPageState extends State<SignInPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // ** Logo
+            // Logo
             const Gap(20),
             SizedBox(
               width: 80,
               height: 80,
               child: Image.asset(Values.logoPath),
             ),
-            // ** Title
+            // Title
             Padding(
               padding: const EdgeInsets.only(bottom: 10.0),
               child: Header1(
@@ -80,73 +79,46 @@ class _SignInPageState extends State<SignInPage> {
                 margin: const EdgeInsets.all(5.0),
               ),
             ),
-            // ** Email address
+            // Email address
             Padding(
               padding: const EdgeInsets.symmetric(
                   horizontal: Values.horizontalValue * 2,
                   vertical: Values.verticalValue),
               child: TextFieldCustom(
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Empty Email Address';
-                  }
-                  if (!value.isEmail()) {
-                    return 'Please enter a valid email address';
-                  }
-                  return null;
-                },
-                textInputType: TextInputType.emailAddress,
-                textInputAction: TextInputAction.next,
                 onSaved: (value) => email = value!,
                 hintText: Str.emailTxt,
               ),
             ),
-            // ** Password
+            // Password
             Padding(
               padding: const EdgeInsets.symmetric(
                   horizontal: Values.horizontalValue * 2),
               child: TextFieldCustom(
                 obsecure: true,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Empty Password';
-                  }
-                  if (value.trim().length < 8) {
-                    return 'Password must be at least 8 characters in length';
-                  }
-                  return null;
-                },
-                textInputType: TextInputType.visiblePassword,
-                textInputAction: TextInputAction.next,
                 onSaved: (value) => password = value!,
                 hintText: Str.passwordTxt,
               ),
             ),
-            // ** Button SIGN IN
             Container(
               height: 50,
               margin: const EdgeInsets.symmetric(
                   horizontal: Values.horizontalValue * 2,
                   vertical: Values.verticalValue),
               child: RoundedLoadingButton(
-                  controller: _btnController,
-                  width: double.infinity,
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      Map<String, String> body = {
-                        Field.email: email,
-                        Field.password: password,
-                      };
-                      signIn(context, body, _btnController);
-                    }
-                    _btnController.stop();
-                  },
-                  child: Text(Str.signInTxt.toUpperCase()),
-                  color: Styles.secondaryColor,
-                  elevation: 0.0,
-                  borderRadius: 7),
+                controller: _btnController,
+                onPressed: () {
+                  Map<String, String> body = {
+                    Field.email: email,
+                    Field.password: password,
+                  };
+                  signIn(context, body, _btnController);
+                },
+                child: Text(Str.signInTxt.toUpperCase()),
+                color: Styles.secondaryColor,
+                elevation: 0.0,
+                borderRadius: 7
+              ),
             ),
-            // ** SIGN UP
             ClickableText(
               text: Str.createAccountTxt,
               selectedTextColor: Styles.textColor,
@@ -160,7 +132,7 @@ class _SignInPageState extends State<SignInPage> {
                   horizontal: Values.horizontalValue, vertical: 5),
               alignment: Alignment.center,
             ),
-            // ** Forgot Password
+            // Forgot Password
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: ClickableText(
@@ -187,16 +159,33 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   _innerContainer() {
-    return Center(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            _buildForm(),
-          ],
-        ),
-      ),
+    return FutureBuilder(
+      future: check(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Styles.accentColor,
+            ),
+          );
+        } else {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return Center(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    _buildForm(),
+                  ],
+                ),
+              ),
+            );
+          }
+        }
+      },
     );
   }
 }

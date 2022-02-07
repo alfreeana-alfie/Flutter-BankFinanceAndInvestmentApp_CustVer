@@ -20,8 +20,6 @@ class ForgotPasswordPage extends StatefulWidget {
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final _formKey = GlobalKey<FormState>();
-  final RoundedLoadingButtonController _btnController =
-      RoundedLoadingButtonController();
 
   String email = '';
 

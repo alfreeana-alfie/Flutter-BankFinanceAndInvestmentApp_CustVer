@@ -257,7 +257,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   horizontal: Values.horizontalValue * 2,
                   vertical: Values.verticalValue),
               child: RoundedLoadingButton(
-                  width: double.infinity,
+                width: double.infinity,
                   controller: _btnController,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {

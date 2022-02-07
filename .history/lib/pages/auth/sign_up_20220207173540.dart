@@ -67,7 +67,7 @@ class _SignUpPageState extends State<SignUpPage> {
       margin: const EdgeInsets.all(15),
       child: Form(
         key: _formKey,
-        // autovalidateMode: AutovalidateMode.always,
+        autovalidateMode: AutovalidateMode.always,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -257,7 +257,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   horizontal: Values.horizontalValue * 2,
                   vertical: Values.verticalValue),
               child: RoundedLoadingButton(
-                  width: double.infinity,
                   controller: _btnController,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {

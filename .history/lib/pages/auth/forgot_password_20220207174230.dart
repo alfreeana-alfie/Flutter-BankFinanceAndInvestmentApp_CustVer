@@ -8,8 +8,6 @@ import 'package:flutter_banking_app/widgets/header_1.dart';
 import 'package:flutter_banking_app/widgets/textfield/text_field.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:regexpattern/src/regex_extension.dart';
-import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({ Key? key }) : super(key: key);
@@ -20,8 +18,6 @@ class ForgotPasswordPage extends StatefulWidget {
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final _formKey = GlobalKey<FormState>();
-  final RoundedLoadingButtonController _btnController =
-      RoundedLoadingButtonController();
 
   String email = '';
 
@@ -103,29 +99,20 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 hintText: Str.emailTxt,
               ),
             ),
-            // Button Forgot Password
+            // Button Sign In
             Container(
               height: 50,
               margin: const EdgeInsets.symmetric(
                   horizontal: Values.horizontalValue * 2,
                   vertical: Values.verticalValue),
-              child: RoundedLoadingButton(
-                  controller: _btnController,
-                  width: double.infinity,
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      // Map<String, String> body = {
-                      //   Field.email: email,
-                      //   Field.password: password,
-                      // };
-                      // signIn(context, body, _btnController);
-                    }
-                    _btnController.stop();
-                  },
-                  child: Text(Str.signInTxt.toUpperCase()),
-                  color: Styles.secondaryColor,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text(Str.sendPasswordTxt),
+                style: ElevatedButton.styleFrom(
+                  primary: Styles.secondaryColor,
                   elevation: 0.0,
-                  borderRadius: 7),
+                ),
+              ),
             ),
             // Forgot Password
             Padding(
