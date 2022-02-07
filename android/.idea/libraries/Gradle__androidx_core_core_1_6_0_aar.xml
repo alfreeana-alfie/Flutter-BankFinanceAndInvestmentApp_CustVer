@@ -9,8 +9,6 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dfafbe39ad2eb551b215dd0bd7435ba0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.core/core/1.6.0/7e14a47159a1cd7e5744d0fe465fbc97843d984a/core-1.6.0-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>
