@@ -130,7 +130,7 @@ class _SignInPageState extends State<SignInPage> {
                   vertical: Values.verticalValue),
               child: RoundedLoadingButton(
                   controller: _btnController,
-                  width: double.maxFinite,
+                  width: double.,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       Map<String, String> body = {

@@ -1,9 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_banking_app/methods/config.dart';
-import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/string.dart';
-import 'package:flutter_banking_app/methods/auth_methods.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
 import 'package:flutter_banking_app/widgets/clickable_text.dart';
@@ -14,22 +11,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:regexpattern/src/regex_extension.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({Key? key}) : super(key: key);
+class ForgotPasswordPage extends StatefulWidget {
+  const ForgotPasswordPage({ Key? key }) : super(key: key);
 
   @override
-  _SignInPageState createState() => _SignInPageState();
+  _ForgotPasswordPageState createState() => _ForgotPasswordPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final _formKey = GlobalKey<FormState>();
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
 
   String email = '';
-  String password = '';
-
-  SharedPref sharedPref = SharedPref();
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +35,17 @@ class _SignInPageState extends State<SignInPage> {
             fit: BoxFit.cover,
           ),
         ),
-        child: _innerContainer(),
+        child: Center(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                _buildForm(),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -59,18 +63,18 @@ class _SignInPageState extends State<SignInPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // ** Logo
-            const Gap(20),
+            // Logo
+            const Gap(15),
             SizedBox(
               width: 80,
               height: 80,
               child: Image.asset(Values.logoPath),
             ),
-            // ** Title
+            // Title
             Padding(
               padding: const EdgeInsets.only(bottom: 10.0),
               child: Header1(
-                title: Str.loginToYourAccountTxt,
+                title: Str.forgotPasswordTxt,
                 textStyle: GoogleFonts.nunitoSans(
                   fontSize: 24,
                   color: Styles.darkBlueColor,
@@ -80,11 +84,9 @@ class _SignInPageState extends State<SignInPage> {
                 margin: const EdgeInsets.all(5.0),
               ),
             ),
-            // ** Email address
+            // Email address
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: Values.horizontalValue * 2,
-                  vertical: Values.verticalValue),
+              padding: const EdgeInsets.symmetric(horizontal: Values.horizontalValue*2, vertical: Values.verticalValue),
               child: TextFieldCustom(
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -101,28 +103,7 @@ class _SignInPageState extends State<SignInPage> {
                 hintText: Str.emailTxt,
               ),
             ),
-            // ** Password
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: Values.horizontalValue * 2),
-              child: TextFieldCustom(
-                obsecure: true,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Empty Password';
-                  }
-                  if (value.trim().length < 8) {
-                    return 'Password must be at least 8 characters in length';
-                  }
-                  return null;
-                },
-                textInputType: TextInputType.visiblePassword,
-                textInputAction: TextInputAction.next,
-                onSaved: (value) => password = value!,
-                hintText: Str.passwordTxt,
-              ),
-            ),
-            // ** Button SIGN IN
+            // Button Forgot Password
             Container(
               height: 50,
               margin: const EdgeInsets.symmetric(
@@ -130,14 +111,14 @@ class _SignInPageState extends State<SignInPage> {
                   vertical: Values.verticalValue),
               child: RoundedLoadingButton(
                   controller: _btnController,
-                  width: double.maxFinite,
+                  width: double.,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      Map<String, String> body = {
-                        Field.email: email,
-                        Field.password: password,
-                      };
-                      signIn(context, body, _btnController);
+                      // Map<String, String> body = {
+                      //   Field.email: email,
+                      //   Field.password: password,
+                      // };
+                      // signIn(context, body, _btnController);
                     }
                     _btnController.stop();
                   },
@@ -146,31 +127,17 @@ class _SignInPageState extends State<SignInPage> {
                   elevation: 0.0,
                   borderRadius: 7),
             ),
-            // ** SIGN UP
-            ClickableText(
-              text: Str.createAccountTxt,
-              selectedTextColor: Styles.textColor,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              tapGestureRecognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.signUp);
-                },
-              margin: const EdgeInsets.symmetric(
-                  horizontal: Values.horizontalValue, vertical: 5),
-              alignment: Alignment.center,
-            ),
-            // ** Forgot Password
+            // Forgot Password
             Padding(
-              padding: const EdgeInsets.all(30.0),
+              padding: const EdgeInsets.all(20.0),
               child: ClickableText(
-                text: Str.forgotPasswordTxt,
+                text: Str.goBackTxt,
                 selectedTextColor: Styles.secondaryColor,
-                fontSize: 14,
+                fontSize: 16,
                 fontWeight: FontWeight.w400,
                 tapGestureRecognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    Navigator.pushNamed(context, RouteSTR.forgotPassword);
+                    Navigator.pushNamed(context, RouteSTR.signIn);
                   },
                 margin: const EdgeInsets.symmetric(
                     horizontal: Values.horizontalValue, vertical: 5),
@@ -180,20 +147,6 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(
               height: 10,
             ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  _innerContainer() {
-    return Center(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            _buildForm(),
           ],
         ),
       ),
