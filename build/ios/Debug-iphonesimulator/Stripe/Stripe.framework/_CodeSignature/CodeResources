@@ -406,19 +406,19 @@
 		</data>
 		<key>Modules/Stripe.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		3IgI/MUfXVbYBU/lYzVPNPyb3O4=
+		a7UL8VRkleU3fywUb/cLbj2UoG8=
 		</data>
 		<key>Modules/Stripe.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<data>
-		3IgI/MUfXVbYBU/lYzVPNPyb3O4=
+		a7UL8VRkleU3fywUb/cLbj2UoG8=
 		</data>
 		<key>Modules/Stripe.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		eBnD2EcRXXDjrIirnH2xFDefVLQ=
+		vI9ATMs74H9HqdAfPwITl8bTylY=
 		</data>
 		<key>Modules/Stripe.swiftmodule/Project/x86_64.swiftsourceinfo</key>
 		<data>
-		eBnD2EcRXXDjrIirnH2xFDefVLQ=
+		vI9ATMs74H9HqdAfPwITl8bTylY=
 		</data>
 		<key>Modules/Stripe.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -2444,28 +2444,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			eqtVO2ULRNSC1r7GYiRTY+Dw1Five8Ionk56yYWYk+A=
+			clS/5SIOrGxF1ELeyK/kXpsyqEPCVsx+bxBCyW26bp0=
 			</data>
 		</dict>
 		<key>Modules/Stripe.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			eqtVO2ULRNSC1r7GYiRTY+Dw1Five8Ionk56yYWYk+A=
+			clS/5SIOrGxF1ELeyK/kXpsyqEPCVsx+bxBCyW26bp0=
 			</data>
 		</dict>
 		<key>Modules/Stripe.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			+pcizhJ8PIMNlcsNa6f73GBA4UpM3FVBtgUKwx9jrZk=
+			zs1MwTBEDryVMqzXhkdWdV0dVD62Z8e8LqaG2LxZqnQ=
 			</data>
 		</dict>
 		<key>Modules/Stripe.swiftmodule/Project/x86_64.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			+pcizhJ8PIMNlcsNa6f73GBA4UpM3FVBtgUKwx9jrZk=
+			zs1MwTBEDryVMqzXhkdWdV0dVD62Z8e8LqaG2LxZqnQ=
 			</data>
 		</dict>
 		<key>Modules/Stripe.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
