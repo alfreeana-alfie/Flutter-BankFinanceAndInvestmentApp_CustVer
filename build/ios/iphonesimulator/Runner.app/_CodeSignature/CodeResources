@@ -110,7 +110,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		mfNUnqRn05af+Pe6Dgn5B5YPto8=
+		v1L8Otho1DFK8NFbLp56eV6zyI0=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -118,7 +118,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		swhFjGhjDBMIHYCPEMbTh+ixwLU=
+		Nwbug5BC+zNpAYZvj+tp7Y3AopA=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<data>
@@ -366,7 +366,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		RSnVkXiqd6aEaLBBo+Lfj36aZ7w=
+		JmYMjjYVeun4HdJBO+n2HjXQz7Y=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/country_code_picker/flags/ad.png</key>
 		<data>
@@ -1730,7 +1730,7 @@
 		</data>
 		<key>Frameworks/DKImagePickerController.framework/DKImagePickerController</key>
 		<data>
-		AfKq3AYQ+ccQ8sQ8anX7s1jFsLo=
+		cNQhBsOemEmpENRFerbfB2e7iM8=
 		</data>
 		<key>Frameworks/DKImagePickerController.framework/DKImagePickerController.bundle/Assets.car</key>
 		<data>
@@ -1950,7 +1950,7 @@
 		</data>
 		<key>Frameworks/DKPhotoGallery.framework/DKPhotoGallery</key>
 		<data>
-		twCpY99oFi9zRXsf29XwhXbmChY=
+		igONn4PpQ7I+kSPEFEy7qSnyP2E=
 		</data>
 		<key>Frameworks/DKPhotoGallery.framework/DKPhotoGallery.bundle/Assets.car</key>
 		<data>
@@ -2017,7 +2017,7 @@
 		</data>
 		<key>Frameworks/FMDB.framework/FMDB</key>
 		<data>
-		2Uwq/wa4ebuaz9Jvz+oyLUUvgao=
+		w5gIj848j2csJzZSUQtKi3S9SqQ=
 		</data>
 		<key>Frameworks/FMDB.framework/Info.plist</key>
 		<data>
@@ -2117,7 +2117,7 @@
 		</data>
 		<key>Frameworks/SDWebImage.framework/SDWebImage</key>
 		<data>
-		Jb3s2Q1o0kd58dL8M1UNO1YYSKY=
+		6FANWDokCHCzLAGOujpuS4kEToM=
 		</data>
 		<key>Frameworks/SDWebImage.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -2129,7 +2129,7 @@
 		</data>
 		<key>Frameworks/Stripe.framework/Stripe</key>
 		<data>
-		phwQTAvujSxn05uCY3yBbCgpBQU=
+		CURfubyeC9DupptnYMB9riqquAM=
 		</data>
 		<key>Frameworks/Stripe.framework/Stripe.bundle/Info.plist</key>
 		<data>
@@ -3429,7 +3429,7 @@
 		</data>
 		<key>Frameworks/StripeCore.framework/StripeCore</key>
 		<data>
-		RppCCtZrYaX4hG/knEECgJaPqb4=
+		Dug+qz6tw0UdJ1iXbSIzAGznmH0=
 		</data>
 		<key>Frameworks/StripeCore.framework/StripeCore.bundle/Info.plist</key>
 		<data>
@@ -3843,7 +3843,7 @@
 		</data>
 		<key>Frameworks/StripeUICore.framework/StripeUICore</key>
 		<data>
-		JRl0Zm3ctYPee3VBKCf8b4LSNvc=
+		kMNLZN+HcJnHLkZBzyqoHaYVCRw=
 		</data>
 		<key>Frameworks/StripeUICore.framework/StripeUICore.bundle/Info.plist</key>
 		<data>
@@ -4256,7 +4256,7 @@
 		</data>
 		<key>Frameworks/SwiftyGif.framework/SwiftyGif</key>
 		<data>
-		Y+mPpP681qZ70lZ9phxbh3m5fCo=
+		cRRqoZuzEcaLP1qr/B9uamilID8=
 		</data>
 		<key>Frameworks/SwiftyGif.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -4272,7 +4272,7 @@
 		</data>
 		<key>Frameworks/file_picker.framework/file_picker</key>
 		<data>
-		QX24vzArvf0Txjbjlms2Hqi1dbo=
+		q/xwN/rKMrRQeONihe6S427iipo=
 		</data>
 		<key>Frameworks/flutter_paystack.framework/Info.plist</key>
 		<data>
@@ -4284,7 +4284,7 @@
 		</data>
 		<key>Frameworks/flutter_paystack.framework/flutter_paystack</key>
 		<data>
-		PK+toGJ8H/bb1yAr9P3jX42kU7M=
+		QlVHrdHHipo4Gv4GmWaImZAwCF4=
 		</data>
 		<key>Frameworks/path_provider_ios.framework/Info.plist</key>
 		<data>
@@ -4296,7 +4296,7 @@
 		</data>
 		<key>Frameworks/path_provider_ios.framework/path_provider_ios</key>
 		<data>
-		WkH8Op2oZ1KagjKcAi4Yw7DRCso=
+		r1JU8GLLFZii0a9DGw/fjnNRYUs=
 		</data>
 		<key>Frameworks/shared_preferences_ios.framework/Info.plist</key>
 		<data>
@@ -4308,7 +4308,7 @@
 		</data>
 		<key>Frameworks/shared_preferences_ios.framework/shared_preferences_ios</key>
 		<data>
-		MKRFekO7jjSWZ4ZrI/nRYbfGFJQ=
+		zxOWj//I3Rt9iCo5fsN4gyZV4QU=
 		</data>
 		<key>Frameworks/sqflite.framework/Info.plist</key>
 		<data>
@@ -4320,7 +4320,7 @@
 		</data>
 		<key>Frameworks/sqflite.framework/sqflite</key>
 		<data>
-		rZY2tHGp+UkJopBcYBFbZeQcG/c=
+		uIjnpVA6SnmFqK5OBjGtf8vMSos=
 		</data>
 		<key>Frameworks/stripe_ios.framework/Info.plist</key>
 		<data>
@@ -4332,11 +4332,11 @@
 		</data>
 		<key>Frameworks/stripe_ios.framework/stripe_ios</key>
 		<data>
-		9vvKBgMXuO4aputsLoHsMaP6CgI=
+		I7C9N/5PkW7pyTSuRHXUX+PimJY=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		fLKxLvzEgzOni8/S8xJcj98OCqA=
+		HCq3U4ZWunb+ib+csrIjPlXyGw8=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -4531,7 +4531,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			mzAZgLWJnZlNjNbuPofbEcAz/EP/ToNgGybryqMX9pg=
+			KuvoWwUxyqikXbv0TIuRTZSHfYLfERwi1He1HrFfNng=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -4545,7 +4545,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			SFZRs4xeUdVsas42XtCQ0jj4FU6lKJCguvSrJboufjg=
+			2YRfjgB8uITHmPd87UERjszApIdeGedkRGyw9opc1q0=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
@@ -4979,7 +4979,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			u9X8SPfbslICAldchGOoap1iG4FKsQKJB6JXZp0kCHQ=
+			uYgMbqFL5wdWDfDUKojoIKdgB4GKp/Zp3HmIDjykcw4=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/country_code_picker/flags/ad.png</key>
@@ -7366,7 +7366,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			xbIlHUIXiedg8iUw2UW3+rW+4z8pm7DjoM8eXbBvIcU=
+			ELc2y/Zm09YiRJqWZf7kp5pfApahr+AVNPo2YUmDsqI=
 			</data>
 		</dict>
 		<key>Frameworks/DKImagePickerController.framework/DKImagePickerController.bundle/Assets.car</key>
@@ -7616,7 +7616,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			kkZNDqF3yLqtwbUflMta8ZMvAIqa+Hl/ZmSuUYFUSR4=
+			j/RTz0QUKzvIcCstu4ufTfV07yv7ITGjgQHoWJhRt9U=
 			</data>
 		</dict>
 		<key>Frameworks/DKPhotoGallery.framework/DKPhotoGallery.bundle/Assets.car</key>
@@ -7713,7 +7713,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			+1pUjlUKnI5LVYd5W48yqB674Mg+7UQEnC2xIpRrTZo=
+			siQCTe5yIfXavuP7Gur2NsBYjJTGzdCIiizDCBmFdcc=
 			</data>
 		</dict>
 		<key>Frameworks/FMDB.framework/Info.plist</key>
@@ -7888,7 +7888,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0C8ngwlyA1jSu0zo7fTGpviSChbU6TPBhcs5GkDpRNM=
+			0FE2oPJp22NFtaiGDBNvEpIwiQEp3qvuQRpjJ1wQlHY=
 			</data>
 		</dict>
 		<key>Frameworks/SDWebImage.framework/_CodeSignature/CodeResources</key>
@@ -7909,7 +7909,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			cEhMqFGazzfKzcYhZL24aM4pzqBeUooMlbuo2MSW2EY=
+			lPdnbGS10atAYLFbo5hi5/eywZyTpMugZrI1dNxkxrI=
 			</data>
 		</dict>
 		<key>Frameworks/Stripe.framework/Stripe.bundle/Info.plist</key>
@@ -9617,7 +9617,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			fIo857c9sgEn8UF+nzFpjS7ve6Y9KbaMpck3CXt9/Yo=
+			oAx1B5X9EZJm4F/i+FDjyXP4DBTwREj26E6WAGgCaG4=
 			</data>
 		</dict>
 		<key>Frameworks/StripeCore.framework/StripeCore.bundle/Info.plist</key>
@@ -10058,7 +10058,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZCEY1Y/lNJLvax7oOC3ikShmMki+08ZhWaiOg6Pg4zk=
+			Dan1eFmSZObqgRZZ1Xc13Aa75r31j8yOGcWzy612jyE=
 			</data>
 		</dict>
 		<key>Frameworks/StripeUICore.framework/StripeUICore.bundle/Info.plist</key>
@@ -10504,7 +10504,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ser4yf7BOG9XAjbGC5hHgp7XFQIAmPrRElNHkjfE5pQ=
+			94vJtZurA195HaYWaIyerS2tOT10GN6RWs+Nhz9WP+w=
 			</data>
 		</dict>
 		<key>Frameworks/SwiftyGif.framework/_CodeSignature/CodeResources</key>
@@ -10532,7 +10532,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			djrK+v9Qgly9yJJ1RxJf4T0ndlu6D7s3fE4VYyxD5NA=
+			4GbEfNC7xdzhUV1DfqoeGy8dvaynPIByoSnkkAqqhRI=
 			</data>
 		</dict>
 		<key>Frameworks/flutter_paystack.framework/Info.plist</key>
@@ -10553,7 +10553,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			s61t+I/tcYFMP2wDBqEsTIGHoj4HHrgclPNtA2K4D/A=
+			VGMhQnMcGY3VPJ5hhnnxuTyYjGSqvwD4V7Mnp9k55Yw=
 			</data>
 		</dict>
 		<key>Frameworks/path_provider_ios.framework/Info.plist</key>
@@ -10574,7 +10574,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			wkgdysYUZiKICQWTsgvDaa+zIOLqNDj16F8q4dwcgz0=
+			NoynoeLal2FAXepXT8utBaYpTCDjX54CAXTf7tZaurM=
 			</data>
 		</dict>
 		<key>Frameworks/shared_preferences_ios.framework/Info.plist</key>
@@ -10595,7 +10595,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			rWfJuMORnyjSjIwvqHYysAnG1ztZr5TKmgSUn4OJMeY=
+			c6ICwsE0oxNzo0nLchDsjZT5qfOO9xWCdatMW1ROENs=
 			</data>
 		</dict>
 		<key>Frameworks/sqflite.framework/Info.plist</key>
@@ -10616,7 +10616,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0W+x4qciVvoPvwZyafhhOqlEdb7hkOYtZg42aP345e8=
+			Z45kgwmzv/hvEcaZr20hzOvFtdkZU7ACar9KkikCtrI=
 			</data>
 		</dict>
 		<key>Frameworks/stripe_ios.framework/Info.plist</key>
@@ -10637,7 +10637,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			/U7cwRWwUcAva35t9s+2cG6MhwpB0BJFXY5qzuuAoCU=
+			jtgMovGTAHGeu/vKuP5M5Ec6rzT9V3YmF3TkhAKbxg8=
 			</data>
 		</dict>
 	</dict>

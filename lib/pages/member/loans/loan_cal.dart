@@ -47,7 +47,7 @@ class _LoanCalculatorState extends State<LoanCalculator> {
     return Scaffold(
       backgroundColor: Styles.primaryColor,
       appBar: myAppBar(
-          title: Str.loanCalculatorTxt, implyLeading: true, context: context),
+          title: Str.loanCalculator, implyLeading: true, context: context),
       // bottomSheet: 
       // Container(
       //   color: Styles.primaryColor,
@@ -56,7 +56,7 @@ class _LoanCalculatorState extends State<LoanCalculator> {
       //     color: Styles.secondaryColor,
       //     context: context,
       //     callback: () {},
-      //     text: Str.applyLoanTxt.toUpperCase(),
+      //     text: Str.applyLoan.toUpperCase(),
       //   ),
       // ),
       body: ListView(
@@ -88,8 +88,8 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                       NewField(
                           mandatory: true,
                           onSaved: (val) => appliedAmt = val,
-                          hintText: Str.appliedAmountTxt,
-                          labelText: Str.amountNumTxt,
+                          hintText: Str.appliedAmount,
+                          labelText: Str.amountNum,
                         ),
                       // TextFormField(
                       //   onChanged: (val) {
@@ -100,9 +100,9 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                       //   keyboardType: TextInputType.number,
                       //   maxLines: 1,
                       //   decoration: InputDecoration(
-                      //     labelText: Str.appliedAmountTxt,
+                      //     labelText: Str.appliedAmount,
                       //     labelStyle: Styles.subtitleStyle,
-                      //     hintText: Str.appliedAmountTxt,
+                      //     hintText: Str.appliedAmount,
                       //     hintStyle: Styles.subtitleStyle03,
                       //     border: const OutlineInputBorder(
                       //       borderSide: BorderSide.none,
@@ -114,8 +114,8 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                       NewField(
                           mandatory: true,
                           onSaved: (val) => interestRatePerYear = val,
-                          hintText: Str.interestRatePerYearTxt,
-                          labelText: Str.interestRatePerYearTxt,
+                          hintText: Str.interestRatePerYear,
+                          labelText: Str.interestRatePerYear,
                         ),
                       // TextFormField(
                       //   onChanged: (val) {
@@ -126,9 +126,9 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                       //   keyboardType: TextInputType.number,
                       //   maxLines: 1,
                       //   decoration: InputDecoration(
-                      //     labelText: Str.interestRatePerYearTxt,
+                      //     labelText: Str.interestRatePerYear,
                       //     labelStyle: Styles.subtitleStyle,
-                      //     hintText: Str.interestRatePerYearTxt,
+                      //     hintText: Str.interestRatePerYear,
                       //     hintStyle: Styles.subtitleStyle03,
                       //     border: const OutlineInputBorder(
                       //       borderSide: BorderSide.none,
@@ -140,8 +140,8 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                       NewField(
                           mandatory: true,
                           onSaved: (val) => interestType = val,
-                          hintText: Str.interestRateTxt,
-                          labelText: Str.interestRateTxt,
+                          hintText: Str.interestRate,
+                          labelText: Str.interestRate,
                         ),
                       // TextFormField(
                       //   onChanged: (val) {
@@ -152,9 +152,9 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                       //   keyboardType: TextInputType.number,
                       //   maxLines: 1,
                       //   decoration: InputDecoration(
-                      //     labelText: Str.interestTypeTxt,
+                      //     labelText: Str.interestType,
                       //     labelStyle: Styles.subtitleStyle,
-                      //     hintText: Str.interestTypeTxt,
+                      //     hintText: Str.interestType,
                       //     hintStyle: Styles.subtitleStyle03,
                       //     border: const OutlineInputBorder(
                       //       borderSide: BorderSide.none,
@@ -166,8 +166,8 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                       NewField(
                           mandatory: true,
                           onSaved: (val) => term = val,
-                          hintText: Str.termTxt,
-                          labelText: Str.termTxt,
+                          hintText: Str.term,
+                          labelText: Str.term,
                         ),
                       // TextFormField(
                       //   onChanged: (val) {
@@ -178,9 +178,9 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                       //   keyboardType: TextInputType.number,
                       //   maxLines: 1,
                       //   decoration: InputDecoration(
-                      //     labelText: Str.termTxt,
+                      //     labelText: Str.term,
                       //     labelStyle: Styles.subtitleStyle,
-                      //     hintText: Str.termTxt,
+                      //     hintText: Str.term,
                       //     hintStyle: Styles.subtitleStyle03,
                       //     border: const OutlineInputBorder(
                       //       borderSide: BorderSide.none,
@@ -192,8 +192,8 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                       NewField(
                           mandatory: true,
                           onSaved: (val) => termPeriod = val,
-                          hintText: Str.termPeriodTxt,
-                          labelText: Str.termPeriodTxt,
+                          hintText: Str.termPeriod,
+                          labelText: Str.termPeriod,
                         ),
                       // TextFormField(
                       //   onChanged: (val) {
@@ -204,9 +204,9 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                       //   keyboardType: TextInputType.number,
                       //   maxLines: 1,
                       //   decoration: InputDecoration(
-                      //     labelText: Str.termPeriodTxt,
+                      //     labelText: Str.termPeriod,
                       //     labelStyle: Styles.subtitleStyle,
-                      //     hintText: Str.termPeriodTxt,
+                      //     hintText: Str.termPeriod,
                       //     hintStyle: Styles.subtitleStyle03,
                       //     border: const OutlineInputBorder(
                       //       borderSide: BorderSide.none,
@@ -219,7 +219,7 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                           mandatory: true,
                           controller: firstDate,
                           onSaved: (val) => firstPaymentDate = val,
-                          hintText: Str.firstPaymentDateTxt,
+                          hintText: Str.firstPaymentDate,
                           onTap: _showFirstDatePickerDialog,
                         ),
                       // TextFormField(
@@ -231,9 +231,9 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                       //   keyboardType: TextInputType.number,
                       //   maxLines: 1,
                       //   decoration: InputDecoration(
-                      //     labelText: Str.firstPaymentDateTxt,
+                      //     labelText: Str.firstPaymentDate,
                       //     labelStyle: Styles.subtitleStyle,
-                      //     hintText: Str.firstPaymentDateTxt,
+                      //     hintText: Str.firstPaymentDate,
                       //     hintStyle: Styles.subtitleStyle03,
                       //     border: const OutlineInputBorder(
                       //       borderSide: BorderSide.none,
@@ -246,7 +246,7 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                           mandatory: true,
                           controller: lateDate,
                           onSaved: (val) => latePaymentDate = val,
-                          hintText: Str.latePaymentDateTxt,
+                          hintText: Str.latePaymentDate,
                           onTap: _showLateDatePickerDialog,
                         ),
                       // TextFormField(
@@ -258,9 +258,9 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                       //   keyboardType: TextInputType.number,
                       //   maxLines: 1,
                       //   decoration: InputDecoration(
-                      //     labelText: Str.latePaymentDateTxt,
+                      //     labelText: Str.latePaymentDate,
                       //     labelStyle: Styles.subtitleStyle,
-                      //     hintText: Str.latePaymentDateTxt,
+                      //     hintText: Str.latePaymentDate,
                       //     hintStyle: Styles.subtitleStyle03,
                       //     border: const OutlineInputBorder(
                       //       borderSide: BorderSide.none,
@@ -273,7 +273,7 @@ class _LoanCalculatorState extends State<LoanCalculator> {
                         color: Styles.secondaryColor,
                         context: context,
                         callback: () {},
-                        text: Str.calculateTxt.toUpperCase(),
+                        text: Str.calculate.toUpperCase(),
                       ),
                     ],
                   ),
