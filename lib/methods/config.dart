@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/pages/admin/branches/branch_layout.dart';
 import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -118,8 +119,8 @@ class EmailJS {
     }
   }
 
-  static void verifyEmail(
-      BuildContext context, String toName, String toEmail, String verificationLink) async {
+  static void verifyEmail(BuildContext context, String toName, String toEmail,
+      String verificationLink) async {
     var serviceId = 'service_xsly86j';
     var templateId = 'template_ilga98i';
     var userId = 'user_eKHAYrEKc8tQPCDXxJzut';
@@ -153,13 +154,12 @@ class EmailJS {
   }
 
   static void welcomeMessage(
-      BuildContext context, 
-      // String toName, 
-      String toEmail, 
+      BuildContext context,
+      // String toName,
+      String toEmail,
       // String verificationLink,
-      String membershipId, 
-      String accountNo
-  ) async {
+      String membershipId,
+      String accountNo) async {
     var serviceId = 'service_xsly86j';
     var templateId = 'template_bdu1mff';
     var userId = 'user_eKHAYrEKc8tQPCDXxJzut';
@@ -203,13 +203,8 @@ class Method {
       String filename,
       Uri url,
       String type,
-      String addRoute,
+      Widget routePath,
       String pageName) async {
-    // final response = await http.post(
-    //   API.loanRequest,
-    //   headers: headers,
-    //   body: body,
-    // );
     final request = http.MultipartRequest(Field.postMethod, AdminAPI.createTeam)
       ..fields.addAll(body)
       ..headers.addAll(headersMultiPart)
@@ -225,8 +220,18 @@ class Method {
       // print(Status.success);
 
       CustomToast.showMsg(Status.success, Styles.successColor);
-      Future.delayed(const Duration(milliseconds: 2000), () {
-        Navigator.pushReplacementNamed(context, RouteSTR.teamList);
+      Future.delayed(const Duration(milliseconds: 1500), () {
+        controller.stop();
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => CardList(
+              type: type,
+              routePath: RouteSTR.createBranch,
+              path: routePath,
+              pageName: pageName,
+            ),
+          ),
+        );
       });
     } else {
       // print(response.body);
@@ -242,7 +247,7 @@ class Method {
       Map<String, String> body,
       Uri url,
       String type,
-      String addRoute,
+      Widget routePath,
       String pageName) async {
     final response = await http.post(
       url,
@@ -251,16 +256,15 @@ class Method {
     );
 
     if (response.statusCode == Status.created) {
-      // CustomToast.showMsg(Status.success, Styles.successColor);
       if (type != Type.nullable) {
         Future.delayed(const Duration(milliseconds: 1500), () {
           controller.stop();
-          // Navigator.pushReplacementNamed(context, routePath);
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => CardList(
                 type: type,
-                routePath: addRoute,
+                routePath: RouteSTR.createBranch,
+                path: routePath,
                 pageName: pageName,
               ),
             ),
@@ -280,8 +284,9 @@ class Method {
       Map<String, String> body,
       Uri url,
       String type,
-      String addRoute,
-      String pageName) async {
+      Widget path,
+      String pageName,
+      String routePath) async {
     final response = await http.put(
       url,
       headers: headers,
@@ -298,7 +303,8 @@ class Method {
             MaterialPageRoute(
               builder: (context) => CardList(
                 type: type,
-                routePath: addRoute,
+                routePath: routePath,
+                path: path,
                 pageName: pageName,
               ),
             ),
@@ -314,14 +320,28 @@ class Method {
   // ** DELETE FUNCTION
   static void delete(
       BuildContext context,
-      RoundedLoadingButtonController controller,
-      Map<String, String> body,
-      String url,
+      // RoundedLoadingButtonController controller,
+      // Map<String, String> body,
+      Uri url,
+      String type,
+      Widget path,
+      String pageName,
       String routePath) async {
-    final response = await http.delete(Uri.parse(url), headers: headers);
+    final response = await http.delete(url, headers: headers);
 
     if (response.statusCode == Status.ok) {
-      // CustomToast.showMsg(Status.success, Styles.successColor);
+      Future.delayed(const Duration(milliseconds: 1000), () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => CardList(
+              type: type,
+              routePath: routePath,
+              path: path,
+              pageName: pageName,
+            ),
+          ),
+        );
+      });
     } else {
       CustomToast.showMsg(Status.failed, Styles.dangerColor);
     }
