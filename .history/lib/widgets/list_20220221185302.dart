@@ -181,9 +181,9 @@ class _CardListState extends State<CardList> {
       case Type.accountant:
         url = AdminAPI.listOfAccountant;
         break;
-      // case Type.ambassador:
-      //   url = AdminAPI.listOfAmbassador;
-      //   break;
+      case Type.ambassador:
+        url = AdminAPI.listOfAmbassador;
+        break;
       case Type.accountManager:
         url = AdminAPI.listOfAccountManager;
         break;
@@ -374,14 +374,14 @@ class _CardListState extends State<CardList> {
             });
           }
           break;
-        // case Type.ambassador:
-        //   for (var req in jsonBody[Field.data]) {
-        //     final data = Users.fromMap(req);
-        //     setState(() {
-        //       userList.add(data);
-        //     });
-        //   }
-        //   break;
+        case Type.ambassador:
+          for (var req in jsonBody[Field.data]) {
+            final data = Users.fromMap(req);
+            setState(() {
+              userList.add(data);
+            });
+          }
+          break;
         case Type.accountManager:
           for (var req in jsonBody[Field.data]) {
             final data = Users.fromMap(req);
@@ -1080,36 +1080,36 @@ class _CardListState extends State<CardList> {
           _foundUserList = results;
         });
         break;
-      // case Type.ambassador:
-      //   List<Users> results = [];
-      //   if (enteredKeyword.isEmpty) {
-      //     results = userList;
-      //   } else {
-      //     results = userList
-      //         .where((data) => data.name!
-      //             .toLowerCase()
-      //             .contains(enteredKeyword.toLowerCase()))
-      //         .toList();
+      case Type.ambassador:
+        List<Users> results = [];
+        if (enteredKeyword.isEmpty) {
+          results = userList;
+        } else {
+          results = userList
+              .where((data) => data.name!
+                  .toLowerCase()
+                  .contains(enteredKeyword.toLowerCase()))
+              .toList();
 
-      //     if (results.isEmpty) {
-      //       results = userList
-      //           .where((data) => data.id
-      //               .toString()
-      //               .toLowerCase()
-      //               .contains(enteredKeyword.toLowerCase()))
-      //           .toList();
+          if (results.isEmpty) {
+            results = userList
+                .where((data) => data.id
+                    .toString()
+                    .toLowerCase()
+                    .contains(enteredKeyword.toLowerCase()))
+                .toList();
 
-      //       setState(() {
-      //         _foundUserList = results;
-      //       });
-      //     }
-      //   }
+            setState(() {
+              _foundUserList = results;
+            });
+          }
+        }
 
-      //   // Refresh the UI
-      //   setState(() {
-      //     _foundUserList = results;
-      //   });
-      //   break;
+        // Refresh the UI
+        setState(() {
+          _foundUserList = results;
+        });
+        break;
       case Type.admin:
         List<Users> results = [];
         if (enteredKeyword.isEmpty) {
@@ -2045,35 +2045,35 @@ class _CardListState extends State<CardList> {
                   },
                 ),
         );
-      // case Type.ambassador:
-      //   return Expanded(
-      //     child: _foundUserList.isNotEmpty
-      //         ? ListView.builder(
-      //             itemCount: _foundUserList.length,
-      //             itemBuilder: (context, index) => Card(
-      //                 key: ValueKey(_foundUserList[index].id),
-      //                 color: Styles.transparentColor,
-      //                 elevation: 0.0,
-      //                 margin: const EdgeInsets.symmetric(vertical: 10),
-      //                 child: CardUser(
-      //                   users: _foundUserList[index],
-      //                   userList: _foundUserList,
-      //                   index: index,
-      //                 )),
-      //           )
-      //         : ListView.builder(
-      //             scrollDirection: Axis.vertical,
-      //             shrinkWrap: true,
-      //             itemCount: userList.length,
-      //             itemBuilder: (context, index) {
-      //               return CardUser(
-      //                 users: userList[index],
-      //                 userList: userList,
-      //                 index: index,
-      //               );
-      //             },
-      //           ),
-      //   );
+      case Type.ambassador:
+        return Expanded(
+          child: _foundUserList.isNotEmpty
+              ? ListView.builder(
+                  itemCount: _foundUserList.length,
+                  itemBuilder: (context, index) => Card(
+                      key: ValueKey(_foundUserList[index].id),
+                      color: Styles.transparentColor,
+                      elevation: 0.0,
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      child: CardUser(
+                        users: _foundUserList[index],
+                        userList: _foundUserList,
+                        index: index,
+                      )),
+                )
+              : ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: userList.length,
+                  itemBuilder: (context, index) {
+                    return CardUser(
+                      users: userList[index],
+                      userList: userList,
+                      index: index,
+                    );
+                  },
+                ),
+        );
       case Type.admin:
         return Expanded(
           child: _foundUserList.isNotEmpty

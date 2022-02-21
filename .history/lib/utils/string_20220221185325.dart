@@ -77,7 +77,6 @@ class Str {
   static String created = 'Created';
   static String sender = 'Sender';
   static String receiver = 'Receiver';
-  static String registerNewClient = 'Register New Client';
 
   static String balance = 'Balance(s)';
   static String currentBalance = 'Current Balance';
@@ -673,7 +672,7 @@ class Type {
   static const String customer = 'customer';
   static const String withdraw = 'withdraw';
   static const String accountant = 'accountant';
-  // static const String ambassador = 'ambassador';
+  static const String ambassador = 'ambassador';
   static const String accountManager = 'account_manager';
   static const String admin = 'admin';
 

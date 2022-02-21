@@ -77,7 +77,7 @@ class Str {
   static String created = 'Created';
   static String sender = 'Sender';
   static String receiver = 'Receiver';
-  static String registerNewClient = 'Register New Client';
+  static String registerNewClient = 'Receiver';
 
   static String balance = 'Balance(s)';
   static String currentBalance = 'Current Balance';

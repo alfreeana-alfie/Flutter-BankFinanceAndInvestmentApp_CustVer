@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/pages/admin/branches/branch_layout.dart';
-import 'package:flutter_banking_app/pages/admin/users_layout.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -877,7 +876,7 @@ class _SideDrawerState extends State<SideDrawer> {
                 ..onTap = () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => UsersLayout(
+                      builder: (context) => UserLayout(
                         type: Field.create,
                       ),
                     ),
