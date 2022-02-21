@@ -51,6 +51,7 @@ class Str {
   static String updateUserRole = 'Update User Role';
   static String updateUser = 'Update User';
 
+  static String transactionHistory = 'Transaction History';
   static String payNow = 'Pay Now';
   static String viewDetails = 'View Detail(s)';
   static String newRequest = 'New Payment Request';

@@ -109,9 +109,9 @@ class _UpdateWalletState extends State<UpdateWallet> {
 
   @override
   void initState() {
-    super.initState();
     loadSharedPrefs();
     getCurrentRate();
+    super.initState();
   }
 
   @override
@@ -129,7 +129,6 @@ class _UpdateWalletState extends State<UpdateWallet> {
             child: NewField(
               readOnly: true,
               initialValue: 'NGN ${widget.walletBalance}',
-              // onSaved: (val) => amount = val,
               hintText: Str.currentBalance,
               labelText: Str.amountNum,
               textInputAction: TextInputAction.next,

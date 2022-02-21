@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/user.dart';
@@ -10,17 +9,17 @@ import 'package:flutter_banking_app/utils/values.dart';
 import 'package:flutter_banking_app/widgets/appbar/app_bar.dart';
 import 'package:flutter_banking_app/widgets/left_menu.dart';
 import 'package:flutter_banking_app/widgets/list.dart';
-import 'package:flutter_banking_app/widgets/transaction_today_admin.dart';
+import 'package:flutter_banking_app/widgets/transaction_today_accountant.dart';
 import 'package:gap/gap.dart';
 
-class AdminDashboard extends StatefulWidget {
-  const AdminDashboard({Key? key}) : super(key: key);
+class AccountManagementDashboard extends StatefulWidget {
+  const AccountManagementDashboard({Key? key}) : super(key: key);
 
   @override
-  _AdminDashboardState createState() => _AdminDashboardState();
+  _AccountManagementDashboardState createState() => _AccountManagementDashboardState();
 }
 
-class _AdminDashboardState extends State<AdminDashboard> {
+class _AccountManagementDashboardState extends State<AccountManagementDashboard> {
   SharedPref sharedPref = SharedPref();
   User userLoad = User();
   late Map<String, dynamic> requestMap;
@@ -49,18 +48,6 @@ class _AdminDashboardState extends State<AdminDashboard> {
       drawer: const SideDrawer(),
       backgroundColor: Styles.accentColor,
       body: Container(color: Styles.whiteColor, child: _innerContainer()),
-      // body: ExpandableTheme(
-      //   data: const ExpandableThemeData(
-      //     iconColor: Colors.blue,
-      //     useInkWell: true,
-      //   ),
-      //   child: ListView(
-      //     physics: const BouncingScrollPhysics(),
-      //     children: [
-      //       Card1(),
-      //     ],
-      //   ),
-      // ),
     );
   }
 
@@ -83,31 +70,31 @@ class _AdminDashboardState extends State<AdminDashboard> {
               padding: const EdgeInsets.symmetric(horizontal: 15),
               children: [
                 const Gap(20),
-                Container(
-                  height: 75.0,
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Styles.fourthColor,
-                  ),
-                  child: ListView(
-                    // This next line does the trick.
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      _horizontalSlider(
-                          Str.sendMoneyList, Type.sendMoney),
-                      const Gap(10),
-                      _horizontalSlider(
-                          Str.exchangeMoneyList, Type.exchangeMoney),
-                      const Gap(10),
-                      _horizontalSlider(
-                          Str.wireTransferList, Type.wireTransfer),
-                      // const Gap(10),
-                      // _horizontalSlider(Str.userList, Type.userList),
-                    ],
-                  ),
-                ),
-                const Gap(15),
+                // Container(
+                //   height: 75.0,
+                //   padding: const EdgeInsets.all(20),
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(15),
+                //     color: Styles.fourthColor,
+                //   ),
+                //   child: ListView(
+                //     // This next line does the trick.
+                //     scrollDirection: Axis.horizontal,
+                //     children: [
+                //       _horizontalSlider(
+                //           Str.userList, Type.userList),
+                //       const Gap(10),
+                //       _horizontalSlider(
+                //           Str.exchangeMoneyList, Type.exchangeMoney),
+                //       const Gap(10),
+                //       _horizontalSlider(
+                //           Str.wireTransferList, Type.wireTransfer),
+                //       // const Gap(10),
+                //       // _horizontalSlider(Str.userList, Type.userList),
+                //     ],
+                //   ),
+                // ),
+                // const Gap(15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
@@ -120,7 +107,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     ),
                   ],
                 ),
-                const TransactionTodayListAdmin()
+                const TransactionTodayListAccountant()
               ],
             );
           }

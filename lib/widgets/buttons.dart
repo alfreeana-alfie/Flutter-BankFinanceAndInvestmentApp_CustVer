@@ -10,13 +10,11 @@ Widget elevatedButton(
     Color? color}) {
   return SizedBox(
     width: double.infinity,
-    //padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
     child: ElevatedButton(
         child: Text(text),
         style: ElevatedButton.styleFrom(
             primary: color ?? Styles.primaryColor,
             elevation: 0,
-            //shadowColor: Colors.indigoAccent,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
             padding: const EdgeInsets.symmetric(vertical: 15),
@@ -37,7 +35,6 @@ Widget elevatedButtonWithGraphic(
     Color? color}) {
   return SizedBox(
     width: double.infinity,
-    //padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
     child: RoundedLoadingButton(
         controller: controller,
         child: child,

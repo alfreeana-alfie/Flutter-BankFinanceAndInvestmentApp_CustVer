@@ -70,36 +70,11 @@ class _AccountDashboardState extends State<AccountDashboard> {
               padding: const EdgeInsets.symmetric(horizontal: 15),
               children: [
                 const Gap(20),
-                // Container(
-                //   height: 75.0,
-                //   padding: const EdgeInsets.all(20),
-                //   decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.circular(15),
-                //     color: Styles.fourthColor,
-                //   ),
-                //   child: ListView(
-                //     // This next line does the trick.
-                //     scrollDirection: Axis.horizontal,
-                //     children: [
-                //       _horizontalSlider(
-                //           Str.userList, Type.userList),
-                //       const Gap(10),
-                //       _horizontalSlider(
-                //           Str.exchangeMoneyList, Type.exchangeMoney),
-                //       const Gap(10),
-                //       _horizontalSlider(
-                //           Str.wireTransferList, Type.wireTransfer),
-                //       // const Gap(10),
-                //       // _horizontalSlider(Str.userList, Type.userList),
-                //     ],
-                //   ),
-                // ),
-                // const Gap(15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
                     Text(
-                      'All Transactions',
+                      Str.transactionHistory,
                       style: TextStyle(
                           color: Styles.textColor,
                           fontSize: 18,

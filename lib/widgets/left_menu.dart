@@ -43,7 +43,7 @@ class _SideDrawerState extends State<SideDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        child: userLoad.userType == Field.admin ? _adminMenu() : _accountant());
+        child: userLoad.userType == Field.admin ? _adminMenu() : userLoad.userType == Field.accountant ? _accountantMenu() : _accountManagerMenu());
   }
 
   _adminMenu() {
@@ -811,7 +811,7 @@ class _SideDrawerState extends State<SideDrawer> {
     );
   }
 
-  _accountant() {
+  _accountantMenu() {
     return ListView(
       padding: EdgeInsets.zero,
       children: [
@@ -826,7 +826,141 @@ class _SideDrawerState extends State<SideDrawer> {
                 height: 100,
                 constraints: const BoxConstraints(minWidth: 20, maxWidth: 70),
                 child: CircleAvatar(
-                  // backgroundImage: AssetImage(Values.userPath),
+                  backgroundImage: NetworkImage(Values.userDefaultImage),
+                  minRadius: 10,
+                  maxRadius: 40,
+                ),
+              ),
+              Text(userLoad.name ?? 'User',
+                  style: GoogleFonts.nunito(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Styles.whiteColor)),
+            ],
+          ),
+        ),
+        ListTile(
+          leading: const Icon(Icons.dashboard),
+          title: Text(Str.dashboard,
+              style: GoogleFonts.nunitoSans(
+                  color: Styles.textColor.withOpacity(1))),
+          onTap: () => {
+            Navigator.pushReplacementNamed(
+                context, RouteSTR.dashboardAccountant)
+          },
+        ),
+        ExpansionTile(
+          expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+          leading: const Icon(Icons.transfer_within_a_station),
+          title: Text(Str.customer),
+          children: [
+            DrawerChild(
+              title: Str.customerList,
+              onNavigate: TapGestureRecognizer()
+                ..onTap = () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => CardList(
+                        type: Type.customer,
+                        routePath: Type.nullable,
+                        pageName: Str.customerList,
+                      ),
+                    ),
+                  );
+                },
+            ),
+            DrawerChild(
+              title: Str.registerNewClient,
+              onNavigate: TapGestureRecognizer()
+                ..onTap = () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => UsersLayout(
+                        type: Field.create,
+                      ),
+                    ),
+                  );
+                },
+            ),
+          ],
+        ),
+        // ExpansionTile(
+        //   expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+        //   leading: const Icon(Icons.list_alt),
+        //   title: Text(Str.allTransactions),
+        //   children: [
+        //     DrawerChild(
+        //       title: 'Wallet Transaction(s) List',
+        //       onNavigate: TapGestureRecognizer()
+        //         ..onTap = () {
+        //           // Navigator.pushNamed(
+        //           //     context, RouteSTR.walletTransactionList);
+        //           Navigator.of(context).push(
+        //             MaterialPageRoute(
+        //               builder: (context) => CardList(
+        //                 type: Type.walletTransaction,
+        //                 routePath: Type.nullable,
+        //                 pageName: Str.allTransactions,
+        //               ),
+        //             ),
+        //           );
+        //         },
+        //     ),
+        //   ],
+        // ),
+        const Divider(
+          indent: 10,
+          endIndent: 10,
+          height: 1,
+          thickness: 1,
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(
+              horizontal: Values.horizontalValue * 2,
+              vertical: Values.verticalValue),
+          child: Text(
+            Str.systemSettings,
+            style: GoogleFonts.nunitoSans(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Styles.textColor.withOpacity(0.5)),
+          ),
+        ),
+        // SYSTEM SETTINGS
+        ListTile(
+          leading: const Icon(Icons.manage_accounts),
+          title: Text(Str.profileOverview,
+              style: GoogleFonts.nunitoSans(
+                  color: Styles.textColor.withOpacity(1))),
+          onTap: () => {Navigator.pushNamed(context, RouteSTR.profileOverview)},
+        ),
+        ListTile(
+          leading: const Icon(Icons.logout_rounded),
+          title: Text(Str.signOut,
+              style: GoogleFonts.nunitoSans(
+                  color: Styles.textColor.withOpacity(1))),
+          onTap: () =>
+              {Navigator.pushReplacementNamed(context, RouteSTR.signOut)},
+        ),
+      ],
+    );
+  }
+
+  _accountManagerMenu() {
+    return ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        DrawerHeader(
+          decoration: const BoxDecoration(
+            color: Styles.accentColor,
+          ),
+          child: Column(
+            children: [
+              Container(
+                width: 100,
+                height: 100,
+                constraints: const BoxConstraints(minWidth: 20, maxWidth: 70),
+                child: CircleAvatar(
                   backgroundImage: NetworkImage(Values.userDefaultImage),
                   minRadius: 10,
                   maxRadius: 40,
