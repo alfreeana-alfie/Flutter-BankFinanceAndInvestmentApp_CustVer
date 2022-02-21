@@ -15,6 +15,7 @@ shared_preferences_linux=/Users/nana/development/flutter/.pub-cache/hosted/pub.d
 shared_preferences_macos=/Users/nana/development/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_macos-2.0.2/
 shared_preferences_web=/Users/nana/development/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_web-2.0.3/
 shared_preferences_windows=/Users/nana/development/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_windows-2.0.4/
+social_share=/Users/nana/development/flutter/.pub-cache/hosted/pub.dartlang.org/social_share-2.2.1/
 sqflite=/Users/nana/development/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.2/
 stripe_android=/Users/nana/development/flutter/.pub-cache/hosted/pub.dartlang.org/stripe_android-2.1.1/
 stripe_ios=/Users/nana/development/flutter/.pub-cache/hosted/pub.dartlang.org/stripe_ios-2.1.1/

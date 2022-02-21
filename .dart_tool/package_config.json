@@ -452,6 +452,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "social_share",
+      "rootUri": "file:///Users/nana/development/flutter/.pub-cache/hosted/pub.dartlang.org/social_share-2.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "source_span",
       "rootUri": "file:///Users/nana/development/flutter/.pub-cache/hosted/pub.dartlang.org/source_span-1.8.1",
       "packageUri": "lib/",
@@ -656,7 +662,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-02-13T17:19:15.669789Z",
+  "generated": "2022-02-20T08:29:11.532864Z",
   "generator": "pub",
   "generatorVersion": "2.15.1"
 }
