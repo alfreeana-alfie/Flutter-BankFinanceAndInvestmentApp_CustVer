@@ -1,0 +1,2 @@
+com/shekarmudaliyar/social_share/BuildConfig.java
+ com.shekarmudaliyar.social_share.BuildConfig

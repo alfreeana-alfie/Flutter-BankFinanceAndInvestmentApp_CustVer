@@ -1,0 +1,41 @@
+com/facebook/react/bridge/Callback.java
+ com.facebook.react.bridge.Callback
+com/facebook/react/bridge/ReactMethod.java
+ com.facebook.react.bridge.ReactMethod
+com/facebook/react/bridge/ReactContextBaseJavaModule.java
+ com.facebook.react.bridge.ReactContextBaseJavaModule
+com/facebook/react/bridge/WritableNativeArray.java
+ com.facebook.react.bridge.WritableNativeArray
+com/facebook/react/bridge/ActivityEventListener.java
+ com.facebook.react.bridge.ActivityEventListener
+com/facebook/react/bridge/ReactApplicationContext.java
+ com.facebook.react.bridge.ReactApplicationContext
+com/facebook/react/uimanager/events/Event.java
+ com.facebook.react.uimanager.events.Event
+com/facebook/react/bridge/WritableArray.java
+ com.facebook.react.bridge.WritableArray
+com/facebook/react/bridge/WritableMap.java
+ com.facebook.react.bridge.WritableMap
+com/facebook/react/uimanager/SimpleViewManager.java
+ com.facebook.react.uimanager.SimpleViewManager
+com/flutter/stripe/BuildConfig.java
+ com.flutter.stripe.BuildConfig
+com/facebook/react/bridge/Promise.java
+ com.facebook.react.bridge.Promise
+ com.facebook.react.bridge.Promise$1
+ com.facebook.react.bridge.Promise$2
+com/facebook/react/bridge/Arguments.java
+ com.facebook.react.bridge.Arguments
+com/facebook/react/bridge/ReadableMapKeySetIterator.java
+ com.facebook.react.bridge.ReadableMapKeySetIterator
+com/facebook/react/bridge/ReactComponentActivityWrapper.java
+ com.facebook.react.bridge.ReactComponentActivityWrapper
+com/facebook/react/bridge/ReadableMap.java
+ com.facebook.react.bridge.ReadableMap
+ com.facebook.react.bridge.ReadableMap$1
+com/facebook/react/bridge/ReadableType.java
+ com.facebook.react.bridge.ReadableType
+com/facebook/react/bridge/ReadableArray.java
+ com.facebook.react.bridge.ReadableArray
+com/facebook/react/bridge/WritableNativeMap.java
+ com.facebook.react.bridge.WritableNativeMap
