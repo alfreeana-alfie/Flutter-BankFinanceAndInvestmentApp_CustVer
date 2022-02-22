@@ -51,7 +51,10 @@ class Str {
   static String updateUserRole = 'Update User Role';
   static String updateUser = 'Update User';
 
-  static String transactionHistory = 'Transaction History';
+  static String transaction = 'Transaction';
+  static String fdrPlan = 'FDR Plan';
+  static String viewList = 'View List';
+  static const String transactionHistory = 'Transaction History';
   static String payNow = 'Pay Now';
   static String viewDetails = 'View Detail(s)';
   static String newRequest = 'New Payment Request';
@@ -260,9 +263,9 @@ class Str {
   static String createNavigation = 'Create New Navigation';
   static String createNavigationItem = 'Create Navigation Item';
 
-  static String sendMoneyList = 'Send Money List';
-  static String exchangeMoneyList = 'Exchange Money List';
-  static String wireTransferList = 'Wire Transfer List';
+  static String sendMoneyList = 'Send Money History';
+  static String exchangeMoneyList = 'Exchange Money History';
+  static String wireTransferList = 'Wire Transfer History';
   static String paymentRequest = 'Payment Request';
   static String allRequest = 'All Request(s)';
   static String testimonial = 'Testimonial';
@@ -390,6 +393,7 @@ class RouteSTR {
   static String dashboardMember = '/dashboard-member';
   static String dashboardAdmin = '/dashboard-admin';
   static String dashboardAccountant = '/dashboard-accountant';
+  static String dashboardAccountManager = '/dashboard-account-manager';
 
   static String sendMoneyM = '/send-money';
   static String sendMoneyListM = '/send-money-list';
@@ -677,6 +681,4 @@ class Type {
   // static const String ambassador = 'ambassador';
   static const String accountManager = 'account_manager';
   static const String admin = 'admin';
-
-
 }

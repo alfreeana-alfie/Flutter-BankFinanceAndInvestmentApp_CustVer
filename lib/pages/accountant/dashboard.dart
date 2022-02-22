@@ -90,34 +90,4 @@ class _AccountDashboardState extends State<AccountDashboard> {
       },
     );
   }
-
-  _horizontalSlider(String title, String routeName) {
-    return ElevatedButton(
-      onPressed: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => CardList(
-              type: routeName,
-              routePath: Type.nullable,
-              pageName: title,
-            ),
-          ),
-        );
-      },
-      child: Text(
-        title,
-        style: const TextStyle(
-            color: Styles.accentColor,
-            fontWeight: FontWeight.w700,
-            fontSize: 14,
-            letterSpacing: 0.5),
-      ),
-      style: ElevatedButton.styleFrom(
-          elevation: 0.0,
-          shape: RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.circular(getProportionateScreenWidth(10))),
-          primary: Styles.primaryColor),
-    );
-  }
 }

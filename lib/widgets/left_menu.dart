@@ -2,7 +2,19 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/user.dart';
+import 'package:flutter_banking_app/pages/admin/bank_layout.dart';
 import 'package:flutter_banking_app/pages/admin/branches/branch_layout.dart';
+import 'package:flutter_banking_app/pages/admin/currency_layout.dart';
+import 'package:flutter_banking_app/pages/admin/deposit_layout.dart';
+import 'package:flutter_banking_app/pages/admin/fdr_plan_layout.dart';
+import 'package:flutter_banking_app/pages/admin/gift_card_layout.dart';
+import 'package:flutter_banking_app/pages/admin/loan_product_layout.dart';
+import 'package:flutter_banking_app/pages/admin/navigation_item_layout.dart';
+import 'package:flutter_banking_app/pages/admin/navigation_layout.dart';
+import 'package:flutter_banking_app/pages/admin/service_layout.dart';
+import 'package:flutter_banking_app/pages/admin/team_layout.dart';
+import 'package:flutter_banking_app/pages/admin/testimonial_layout.dart';
+import 'package:flutter_banking_app/pages/admin/ticket_layout.dart';
 import 'package:flutter_banking_app/pages/admin/users_layout.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -10,6 +22,7 @@ import 'package:flutter_banking_app/utils/values.dart';
 import 'package:flutter_banking_app/widgets/list.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../pages/admin/faq_layout.dart';
 import 'drawer_child.dart';
 
 class SideDrawer extends StatefulWidget {
@@ -43,7 +56,11 @@ class _SideDrawerState extends State<SideDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        child: userLoad.userType == Field.admin ? _adminMenu() : userLoad.userType == Field.accountant ? _accountantMenu() : _accountManagerMenu());
+        child: userLoad.userType == Field.admin
+            ? _adminMenu()
+            : userLoad.userType == Field.accountant
+                ? _accountantMenu()
+                : _accountManagerMenu());
   }
 
   _adminMenu() {
@@ -89,7 +106,7 @@ class _SideDrawerState extends State<SideDrawer> {
           title: Text(Str.deposit),
           children: [
             DrawerChild(
-              title: Str.depositList,
+              title: Str.viewList,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
                   // Navigator.pushNamed(context, RouteSTR.depositList);
@@ -99,6 +116,7 @@ class _SideDrawerState extends State<SideDrawer> {
                         type: Type.deposit,
                         routePath: RouteSTR.createDeposit,
                         pageName: Str.depositList,
+                        path: const DepositLayout(),
                       ),
                     ),
                   );
@@ -108,7 +126,11 @@ class _SideDrawerState extends State<SideDrawer> {
               title: Str.createDeposit,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.createDeposit);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const DepositLayout(),
+                    ),
+                  );
                 },
             ),
           ],
@@ -119,7 +141,7 @@ class _SideDrawerState extends State<SideDrawer> {
           title: Text(Str.withdraw),
           children: [
             DrawerChild(
-              title: Str.withdrawList,
+              title: Str.viewList,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
                   // Navigator.pushNamed(context, RouteSTR.depositList);
@@ -279,55 +301,66 @@ class _SideDrawerState extends State<SideDrawer> {
         ExpansionTile(
           expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
           leading: const Icon(Icons.monetization_on),
-          title: Text(Str.loanManagement),
+          title: Text(Str.loanProduct),
           children: [
             DrawerChild(
-              title: Str.createLoanProduct,
+              title: Str.viewList,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.createLoanProduct);
-                },
-            ),
-            DrawerChild(
-              title: Str.loanProductList,
-              onNavigate: TapGestureRecognizer()
-                ..onTap = () {
-                  // Navigator.pushNamed(context, RouteSTR.loanProductList);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => CardList(
-                          type: Type.loanProduct,
-                          routePath: RouteSTR.createLoanProduct,
-                          pageName: Str.loanProductList),
+                        type: Type.loanProduct,
+                        routePath: RouteSTR.createLoanProduct,
+                        pageName: Str.loanProductList,
+                        path: LoanProductLayout(
+                          type: Field.create,
+                        ),
+                      ),
                     ),
                   );
                 },
             ),
             DrawerChild(
-              title: Str.loanCalculator,
+              title: Str.createLoanProduct,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.loanCalculator);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => LoanProductLayout(
+                        type: Field.create,
+                      ),
+                    ),
+                  );
                 },
             ),
+            // DrawerChild(
+            //   title: Str.loanCalculator,
+            //   onNavigate: TapGestureRecognizer()
+            //     ..onTap = () {
+            //       Navigator.pushNamed(context, RouteSTR.loanCalculator);
+            //     },
+            // ),
           ],
         ),
         ExpansionTile(
           expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
           leading: const Icon(Icons.money),
-          title: Text(Str.fixedDeposit),
+          title: Text(Str.fdrPlan),
           children: [
             DrawerChild(
-              title: Str.allFdr,
+              title: Str.viewList,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  // Navigator.pushNamed(context, RouteSTR.fdrPlanList);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => CardList(
                         type: Type.fdrPlan,
                         routePath: RouteSTR.createPlanFDR,
                         pageName: Str.fdrPlanList,
+                        path: FdrPlanLayout(
+                          type: Field.create,
+                        ),
                       ),
                     ),
                   );
@@ -337,7 +370,13 @@ class _SideDrawerState extends State<SideDrawer> {
               title: Str.createFdrPlan,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.createPlanFDR);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => FdrPlanLayout(
+                        type: Field.create,
+                      ),
+                    ),
+                  );
                 },
             ),
           ],
@@ -348,40 +387,36 @@ class _SideDrawerState extends State<SideDrawer> {
           title: Text(Str.allTransactions),
           children: [
             DrawerChild(
-              title: 'Wallet Transaction(s) List',
+              title: Str.transaction,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  // Navigator.pushNamed(
-                  //     context, RouteSTR.walletTransactionList);
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => CardList(
+                      builder: (context) => const CardList(
                         type: Type.walletTransaction,
                         routePath: Type.nullable,
-                        pageName: Str.allTransactions,
+                        pageName: Str.transactionHistory,
+                        // path: BranchLayout(
+                        //   type: Field.create,
+                        // ),
                       ),
                     ),
                   );
                 },
             ),
-            // DrawerChild(
-            //   title: Str.wireTransfer,
-            //   onNavigate: TapGestureRecognizer()
-            //     ..onTap = () {
-            //       Navigator.pushNamed(context, RouteSTR.createWireTransfer);
-            //     },
-            // ),
             DrawerChild(
               title: Str.wireTransferList,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  // Navigator.pushNamed(context, RouteSTR.wireTransferList);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => CardList(
                         type: Type.wireTransfer,
                         routePath: Type.nullable,
                         pageName: Str.wireTransferList,
+                        // path: BranchLayout(
+                        //   type: Field.create,
+                        // ),
                       ),
                     ),
                   );
@@ -391,13 +426,15 @@ class _SideDrawerState extends State<SideDrawer> {
               title: Str.sendMoneyList,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  // Navigator.pushNamed(context, RouteSTR.sendMoneyList);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => CardList(
                         type: Type.sendMoney,
                         routePath: Type.nullable,
                         pageName: Str.sendMoneyList,
+                        // path: BranchLayout(
+                        //   type: Field.create,
+                        // ),
                       ),
                     ),
                   );
@@ -407,13 +444,15 @@ class _SideDrawerState extends State<SideDrawer> {
               title: Str.exchangeMoneyList,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  // Navigator.pushNamed(context, RouteSTR.exchangeMoneyList);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => CardList(
                         type: Type.exchangeMoney,
                         routePath: Type.nullable,
                         pageName: Str.exchangeMoneyList,
+                        // path: BranchLayout(
+                        //   type: Field.create,
+                        // ),
                       ),
                     ),
                   );
@@ -430,13 +469,15 @@ class _SideDrawerState extends State<SideDrawer> {
               title: Str.giftCardList,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  // Navigator.pushNamed(context, RouteSTR.giftCardList);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => CardList(
                         type: Type.giftCard,
                         routePath: RouteSTR.createGiftCard,
                         pageName: Str.giftCardList,
+                        path: GiftCardLayout(
+                          type: Field.create,
+                        ),
                       ),
                     ),
                   );
@@ -446,13 +487,15 @@ class _SideDrawerState extends State<SideDrawer> {
               title: Str.usedGiftCardList,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  // Navigator.pushNamed(context, RouteSTR.usedGiftCardList);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => CardList(
                         type: Type.giftCardUsed,
                         routePath: Type.nullable,
                         pageName: Str.usedGiftCardList,
+                        // path: BranchLayout(
+                        //   type: Field.create,
+                        // ),
                       ),
                     ),
                   );
@@ -462,7 +505,13 @@ class _SideDrawerState extends State<SideDrawer> {
               title: Str.createGiftCard,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.createGiftCard);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => GiftCardLayout(
+                        type: Field.create,
+                      ),
+                    ),
+                  );
                 },
             ),
           ],
@@ -473,26 +522,35 @@ class _SideDrawerState extends State<SideDrawer> {
           title: Text(Str.supportTicket),
           children: [
             DrawerChild(
-              title: Str.supportTicketList,
+              title: Str.viewList,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  // Navigator.pushNamed(context, RouteSTR.ticketList);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => CardList(
                         type: Type.ticket,
                         routePath: RouteSTR.createTicket,
                         pageName: Str.supportTicketList,
+                        path: SupportTicketLayout(
+                          type: Field.create,
+                        ),
                       ),
                     ),
                   );
+                  ;
                 },
             ),
             DrawerChild(
               title: Str.createTicket,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.createTicket);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => GiftCardLayout(
+                        type: Field.create,
+                      ),
+                    ),
+                  );
                 },
             ),
           ],
@@ -563,13 +621,15 @@ class _SideDrawerState extends State<SideDrawer> {
               title: Str.rateList,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  // Navigator.pushNamed(context, RouteSTR.rateList);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => CardList(
                         type: Type.rate,
                         routePath: Type.nullable,
                         pageName: Str.rateList,
+                        // path: BranchLayout(
+                        //   type: Field.create,
+                        // ),
                       ),
                     ),
                   );
@@ -586,23 +646,32 @@ class _SideDrawerState extends State<SideDrawer> {
               title: Str.otherBankList,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  // Navigator.pushNamed(context, RouteSTR.otherBankList);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => CardList(
                         type: Type.otherBank,
                         routePath: RouteSTR.createBank,
                         pageName: Str.otherBankList,
+                        path: OtherBankLayout(
+                          type: Field.create,
+                        ),
                       ),
                     ),
                   );
+                  ;
                 },
             ),
             DrawerChild(
               title: Str.createOtherBank,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.createBank);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => OtherBankLayout(
+                        type: Field.create,
+                      ),
+                    ),
+                  );
                 },
             ),
           ],
@@ -616,13 +685,15 @@ class _SideDrawerState extends State<SideDrawer> {
               title: Str.currencyList,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  // Navigator.pushNamed(context, RouteSTR.currencyList);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => CardList(
                         type: Type.currency,
                         routePath: RouteSTR.createCurrency,
                         pageName: Str.currencyList,
+                        path: CurrencyLayout(
+                          type: Field.create,
+                        ),
                       ),
                     ),
                   );
@@ -632,7 +703,14 @@ class _SideDrawerState extends State<SideDrawer> {
               title: Str.createCurrency,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.createCurrency);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => CurrencyLayout(
+                        type: Field.create,
+                      ),
+                    ),
+                  );
+                  ;
                 },
             ),
           ],
@@ -653,6 +731,9 @@ class _SideDrawerState extends State<SideDrawer> {
                         type: Type.faq,
                         routePath: RouteSTR.createFaq,
                         pageName: Str.faqList,
+                        path: FaqLayout(
+                          type: Field.create,
+                        ),
                       ),
                     ),
                   );
@@ -662,7 +743,13 @@ class _SideDrawerState extends State<SideDrawer> {
               title: Str.createFaq,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.createFaq);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => FaqLayout(
+                        type: Field.create,
+                      ),
+                    ),
+                  );
                 },
             ),
             // Navigation
@@ -677,6 +764,9 @@ class _SideDrawerState extends State<SideDrawer> {
                         type: Type.navigation,
                         routePath: RouteSTR.createNavigation,
                         pageName: Str.navigationList,
+                        path: NavigationLayout(
+                          type: Field.create,
+                        ),
                       ),
                     ),
                   );
@@ -686,7 +776,13 @@ class _SideDrawerState extends State<SideDrawer> {
               title: Str.createNavigation,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.createNavigation);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => NavigationLayout(
+                        type: Field.create,
+                      ),
+                    ),
+                  );
                 },
             ),
             // Navigation Item
@@ -701,6 +797,9 @@ class _SideDrawerState extends State<SideDrawer> {
                         type: Type.navigationItem,
                         routePath: RouteSTR.createNavigationItem,
                         pageName: Str.navigationItemList,
+                        path: NavigationItemLayout(
+                          type: Field.create,
+                        ),
                       ),
                     ),
                   );
@@ -710,7 +809,13 @@ class _SideDrawerState extends State<SideDrawer> {
               title: Str.createNavigationItem,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.createNavigationItem);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => NavigationItemLayout(
+                        type: Field.create,
+                      ),
+                    ),
+                  );
                 },
             ),
             // Services
@@ -725,6 +830,9 @@ class _SideDrawerState extends State<SideDrawer> {
                         type: Type.service,
                         routePath: RouteSTR.createService,
                         pageName: Str.serviceList,
+                        path: ServiceLayout(
+                          type: Field.create,
+                        ),
                       ),
                     ),
                   );
@@ -734,7 +842,13 @@ class _SideDrawerState extends State<SideDrawer> {
               title: Str.createService,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.createService);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ServiceLayout(
+                        type: Field.create,
+                      ),
+                    ),
+                  );
                 },
             ),
             // Team
@@ -749,6 +863,9 @@ class _SideDrawerState extends State<SideDrawer> {
                         type: Type.team,
                         routePath: RouteSTR.createTeam,
                         pageName: Str.teamList,
+                        path: TeamLayout(
+                          type: Field.create,
+                        ),
                       ),
                     ),
                   );
@@ -758,7 +875,13 @@ class _SideDrawerState extends State<SideDrawer> {
               title: Str.createTeam,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.createTeam);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => TeamLayout(
+                        type: Field.create,
+                      ),
+                    ),
+                  );
                 },
             ),
             // Testimonial
@@ -773,6 +896,9 @@ class _SideDrawerState extends State<SideDrawer> {
                         type: Type.testimonial,
                         routePath: RouteSTR.createTestimonial,
                         pageName: Str.testimonialList,
+                        path: TestimonialLayout(
+                          type: Field.create,
+                        ),
                       ),
                     ),
                   );
@@ -782,12 +908,17 @@ class _SideDrawerState extends State<SideDrawer> {
               title: Str.createTestimonial,
               onNavigate: TapGestureRecognizer()
                 ..onTap = () {
-                  Navigator.pushNamed(context, RouteSTR.createTestimonial);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => TestimonialLayout(
+                        type: Field.create,
+                      ),
+                    ),
+                  );
                 },
             ),
           ],
         ),
-        // SYSTEM SETTINGS
         ListTile(
           leading: const Icon(Icons.manage_accounts),
           title: Text(Str.profileOverview,
@@ -851,7 +982,7 @@ class _SideDrawerState extends State<SideDrawer> {
         ),
         ExpansionTile(
           expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-          leading: const Icon(Icons.transfer_within_a_station),
+          leading: const Icon(Icons.people_alt),
           title: Text(Str.customer),
           children: [
             DrawerChild(
@@ -864,6 +995,9 @@ class _SideDrawerState extends State<SideDrawer> {
                         type: Type.customer,
                         routePath: Type.nullable,
                         pageName: Str.customerList,
+                        path: UsersLayout(
+                          type: Field.create,
+                        ),
                       ),
                     ),
                   );
@@ -981,7 +1115,7 @@ class _SideDrawerState extends State<SideDrawer> {
                   color: Styles.textColor.withOpacity(1))),
           onTap: () => {
             Navigator.pushReplacementNamed(
-                context, RouteSTR.dashboardAccountant)
+                context, RouteSTR.dashboardAccountManager)
           },
         ),
         ExpansionTile(
@@ -1000,6 +1134,9 @@ class _SideDrawerState extends State<SideDrawer> {
                         type: Type.customer,
                         routePath: Type.nullable,
                         pageName: Str.customerList,
+                        path: UsersLayout(
+                          type: Field.create,
+                        ),
                       ),
                     ),
                   );
@@ -1020,30 +1157,84 @@ class _SideDrawerState extends State<SideDrawer> {
             ),
           ],
         ),
-        // ExpansionTile(
-        //   expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-        //   leading: const Icon(Icons.list_alt),
-        //   title: Text(Str.allTransactions),
-        //   children: [
-        //     DrawerChild(
-        //       title: 'Wallet Transaction(s) List',
-        //       onNavigate: TapGestureRecognizer()
-        //         ..onTap = () {
-        //           // Navigator.pushNamed(
-        //           //     context, RouteSTR.walletTransactionList);
-        //           Navigator.of(context).push(
-        //             MaterialPageRoute(
-        //               builder: (context) => CardList(
-        //                 type: Type.walletTransaction,
-        //                 routePath: Type.nullable,
-        //                 pageName: Str.allTransactions,
-        //               ),
-        //             ),
-        //           );
-        //         },
-        //     ),
-        //   ],
-        // ),
+        ExpansionTile(
+          expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+          leading: const Icon(Icons.transfer_within_a_station),
+          title: Text(Str.deposit),
+          children: [
+            DrawerChild(
+              title: Str.deposit,
+              onNavigate: TapGestureRecognizer()
+                ..onTap = () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => CardList(
+                        type: Type.deposit,
+                        routePath: RouteSTR.createDeposit,
+                        pageName: Str.viewList,
+                        path: const DepositLayout(),
+                      ),
+                    ),
+                  );
+                },
+            ),
+            DrawerChild(
+              title: Str.createDeposit,
+              onNavigate: TapGestureRecognizer()
+                ..onTap = () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const DepositLayout(),
+                    ),
+                  );
+                },
+            ),
+          ],
+        ),
+        ExpansionTile(
+          expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+          leading: const Icon(Icons.list_alt),
+          title: Text(Str.transaction),
+          children: [
+            DrawerChild(
+              title: Str.transactionHistory,
+              onNavigate: TapGestureRecognizer()
+                ..onTap = () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const CardList(
+                        type: Type.walletTransaction,
+                        routePath: Type.nullable,
+                        pageName: Str.transactionHistory,
+                      ),
+                    ),
+                  );
+                },
+            ),
+          ],
+        ),
+        ExpansionTile(
+          expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+          leading: const Icon(Icons.monetization_on),
+          title: Text(Str.withdraw),
+          children: [
+            DrawerChild(
+              title: Str.withdrawList,
+              onNavigate: TapGestureRecognizer()
+                ..onTap = () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => CardList(
+                        type: Type.withdraw,
+                        routePath: Type.nullable,
+                        pageName: Str.withdrawList,
+                      ),
+                    ),
+                  );
+                },
+            ),
+          ],
+        ),
         const Divider(
           indent: 10,
           endIndent: 10,

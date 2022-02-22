@@ -94,8 +94,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     // This next line does the trick.
                     scrollDirection: Axis.horizontal,
                     children: [
-                      _horizontalSlider(
-                          Str.sendMoneyList, Type.sendMoney),
+                      _horizontalSlider(Str.sendMoneyList, Type.sendMoney),
                       const Gap(10),
                       _horizontalSlider(
                           Str.exchangeMoneyList, Type.exchangeMoney),

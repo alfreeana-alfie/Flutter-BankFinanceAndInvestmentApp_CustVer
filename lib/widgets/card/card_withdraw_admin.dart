@@ -2,6 +2,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/member/withdraw_methods.dart';
 import 'package:flutter_banking_app/models/withdraw.dart';
+import 'package:flutter_banking_app/pages/admin/team_layout.dart';
 import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -11,6 +12,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
+
+import '../../methods/config.dart';
 
 class CardWithdrawAdmin extends StatelessWidget {
   const CardWithdrawAdmin(
@@ -181,30 +185,40 @@ class CardWithdrawAdmin extends StatelessWidget {
   }
 
   _buildButtonRow(BuildContext context) {
+    final RoundedLoadingButtonController _btnController =
+        RoundedLoadingButtonController();
     return Row(
       children: [
         Expanded(
-          child: ElevatedButton(
+          child: RoundedLoadingButton(
+            controller: _btnController,
+            color: Styles.successColor,
             onPressed: () {
               Map<String, String> body = {'approved': 'approved'};
 
-              Uri url = Uri.parse(AdminAPI.updateWithdraw.toString() + withdraw.id.toString());
+              // Uri url = Uri.parse(
+              //     AdminAPI.updateWithdraw.toString() + withdraw.id.toString());
 
-              WithdrawMethods.update(context, body, url, Type.withdraw,
-                  RouteSTR.createWithdraw, Str.withdrawList);
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => UpdateWithdraw(
-              //       user: withdraw
-              //     ),
-              //   ),
-              // );
+              // WithdrawMethods.update(context, body, url, Type.withdraw,
+              //     RouteSTR.createWithdraw, Str.withdrawList);
+              Method.edit(
+                  context,
+                  _btnController,
+                  body,
+                  Uri.parse(AdminAPI.updateWithdraw.toString() +
+                      withdraw.id.toString()),
+                  Type.withdraw,
+                  TeamLayout(
+                    type: Field.create,
+                  ),
+                  Str.withdrawList,
+                  Type.nullable);
             },
             child: Text(
               Str.approved.toUpperCase(),
             ),
-            style: ElevatedButton.styleFrom(
-                elevation: 0.0, primary: Styles.successColor),
+            // style: ElevatedButton.styleFrom(
+            //     elevation: 0.0, primary: Styles.successColor),
           ),
         ),
         const Gap(20),
@@ -215,11 +229,23 @@ class CardWithdrawAdmin extends StatelessWidget {
               print(withdraw.id.toString());
               Map<String, String> body = {'approved': 'rejected'};
 
-              Uri url = Uri.parse(
-                  AdminAPI.updateWithdraw.toString() + withdraw.id.toString());
+              // Uri url = Uri.parse(
+              //     AdminAPI.updateWithdraw.toString() + withdraw.id.toString());
 
-              WithdrawMethods.update(context, body, url, Type.withdraw,
-                  RouteSTR.createWithdraw, Str.withdrawList);
+              // WithdrawMethods.update(context, body, url, Type.withdraw,
+              //     RouteSTR.createWithdraw, Str.withdrawList);
+              Method.edit(
+                  context,
+                  _btnController,
+                  body,
+                  Uri.parse(AdminAPI.updateWithdraw.toString() +
+                      withdraw.id.toString()),
+                  Type.withdraw,
+                  TeamLayout(
+                    type: Field.create,
+                  ),
+                  Str.withdrawList,
+                  Type.nullable);
             },
             child: Text(
               Str.reject.toUpperCase(),
@@ -237,50 +263,4 @@ class CardWithdrawAdmin extends StatelessWidget {
       ],
     );
   }
-
-  // Future<void> _showMyDialog(BuildContext context) async {
-  //   return showDialog<void>(
-  //     context: context,
-  //     barrierDismissible: true,
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         title: Text(Str.deleteConfirmation),
-  //         content: Text(Str.areYouSure),
-  //         actions: [
-  //           ElevatedButton(
-  //             onPressed: () {
-  //               Navigator.of(context).pop();
-  //             },
-  //             child: Text(
-  //               Str.cancel.toUpperCase(),
-  //               style: Theme.of(context).textTheme.bodyText1,
-  //             ),
-  //             style: ElevatedButton.styleFrom(
-  //                 elevation: 0.0, primary: Styles.primaryColor),
-  //           ),
-  //           ElevatedButton(
-  //             onPressed: () {
-  //               // Navigator.of(context).pop();
-  //               userList.removeAt(index);
-
-  //               CustomToast.showMsg('Deleting...', Styles.dangerColor);
-
-  //               Future.delayed(const Duration(milliseconds: 1000), () {
-  //                 UserMethods.delete(
-  //                     context, withdraw.id.toString());
-  //                 Navigator.popAndPushNamed(context, RouteSTR.withdrawList);
-  //               });
-  //             },
-  //             child: Text(
-  //               Str.delete.toUpperCase(),
-  //               style: Theme.of(context).textTheme.button,
-  //             ),
-  //             style: ElevatedButton.styleFrom(
-  //                 elevation: 0.0, primary: Styles.dangerColor),
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
 }
