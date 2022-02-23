@@ -205,7 +205,7 @@ class Method {
       String type,
       Widget routePath,
       String pageName) async {
-    final request = http.MultipartRequest(Field.postMethod, AdminAPI.createTeam)
+    final request = http.MultipartRequest(Field.postMethod, url)
       ..fields.addAll(body)
       ..headers.addAll(headersMultiPart)
       ..files.add(await http.MultipartFile.fromPath(Field.image, filename));
@@ -226,7 +226,7 @@ class Method {
           MaterialPageRoute(
             builder: (context) => CardList(
               type: type,
-              routePath: RouteSTR.createBranch,
+              routePath: '',
               path: routePath,
               pageName: pageName,
             ),
@@ -263,7 +263,7 @@ class Method {
             MaterialPageRoute(
               builder: (context) => CardList(
                 type: type,
-                routePath: RouteSTR.createBranch,
+                routePath: '',
                 path: routePath,
                 pageName: pageName,
               ),
@@ -294,7 +294,6 @@ class Method {
     );
 
     if (response.statusCode == Status.ok) {
-      // CustomToast.showMsg(Status.success, Styles.successColor);
       if (type != Type.nullable) {
         Future.delayed(const Duration(milliseconds: 1500), () {
           controller.stop();

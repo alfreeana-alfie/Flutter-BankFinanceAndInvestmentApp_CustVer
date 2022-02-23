@@ -86,20 +86,23 @@ class _ProfileState extends State<Profile> {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(vertical: 2),
       leading: InkWell(
-        child: Container(
-          width: 42,
-          height: 42,
-          padding: const EdgeInsets.all(8),
-          decoration: const BoxDecoration(
-            color: Styles.primaryWithOpacityColor,
-            shape: BoxShape.circle,
+          child: Container(
+            width: 42,
+            height: 42,
+            padding: const EdgeInsets.all(8),
+            decoration: const BoxDecoration(
+              color: Styles.primaryWithOpacityColor,
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(IconlyBold.Logout,
+                color: Color(0xFF229e76), size: 18),
           ),
-          child:
-              const Icon(IconlyBold.Logout, color: Color(0xFF229e76), size: 18),
-        ),
-        onTap: () => Navigator.pushNamed(context, RouteSTR.signIn),
-        // onTap: () => signOut(context),
-      ),
+          onTap: () {
+            sharedPref.remove(Pref.expiredAt);
+            sharedPref.remove(Pref.accessToken);
+            sharedPref.remove(Pref.userData);
+            Navigator.pushReplacementNamed(context, RouteSTR.signIn);
+          }),
       minLeadingWidth: 50,
       horizontalTitleGap: 13,
       title: const Text('Sign Out',
@@ -198,8 +201,8 @@ class _ProfileState extends State<Profile> {
                             child: CircleAvatar(
                               backgroundImage:
                                   NetworkImage(Values.userDefaultImage),
-                              minRadius: 10,
-                              maxRadius: 40,
+                              // minRadius: 10,
+                              // maxRadius: 40,
                             ),
                           ),
                         ),

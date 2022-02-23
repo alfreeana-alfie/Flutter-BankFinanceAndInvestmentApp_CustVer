@@ -139,7 +139,8 @@ class CardUserWallet extends StatelessWidget {
           children: [
             DetailRow(
               labelTitle: Str.id,
-              labelDetails: users.id.toString(),
+              labelDetails:
+                  '${Field.membershipIdInitials}${users.memberId.toString()}',
             ),
             DetailRow(
                 labelTitle: Str.name,
@@ -148,9 +149,11 @@ class CardUserWallet extends StatelessWidget {
                 labelTitle: Str.phoneNumber,
                 labelDetails: users.userPhone ?? Field.emptyString),
             DetailRow(
-                labelTitle: Str.amount,
-                labelDetails: users.amount ?? Field.emptyString),
-            userType == Field.accountManager ? const Gap(0) : _buildButtonRow(context),
+                labelTitle: Str.currentBalance,
+                labelDetails: 'NGN ${users.amount}'),
+            userType == Field.accountManager
+                ? const Gap(0)
+                : _buildButtonRow(context),
           ],
         ),
       ]),

@@ -35,8 +35,6 @@ class _ProfileOverviewState extends State<ProfileOverview> {
   List<Wallet> transactionList = [];
 
   Future view(userId) async {
-    // User user = User.fromJSON(await sharedPref.read(Pref.userData));
-    // String userId = user.id.toString();
     Uri viewSingleUser = Uri.parse(API.userSavingsAccount.toString() + userId);
     final response = await http.get(viewSingleUser, headers: headers);
 
@@ -184,50 +182,55 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                                     emailVerifiedAt = val ?? Field.emptyString,
                                 hintText: Str.emailVerifiedAt),
                             const Gap(20.0),
-                            userLoad.smsVerifiedAt != null ?
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Text(
-                                  Str.smsVerifiedAt,
-                                  style: Styles.textStyle,
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    print(wallet.id);
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            PaymentMethodWalletMenu(
-                                                // toUserId: toUserId,
-                                                exchangeRate: '1',
-                                                currentRate: '1',
-                                                walletId: wallet.id.toString(),
-                                                amount: '4156.60',
-                                                accountId: wallet.accountId,
-                                                method: 'sms_subcribed',
-                                                creditDebit: 'credit',
-                                                walletBalance: wallet.amount,
-                                                routePath:
-                                                    RouteSTR.profileOverview,
-                                                user: userLoad,
-                                                message:
-                                                    'Congratulations, You have subcribed to SMS Notification. FVIS Investment '),
+                            userLoad.smsVerifiedAt != null
+                                ? Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Text(
+                                        Str.smsVerifiedAt,
+                                        style: Styles.textStyle,
                                       ),
-                                    );
-                                  },
-                                  child: Text(Str.subcribeNow),
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Styles.secondaryColor,
-                                      elevation: 0.0),
-                                ),
-                              ],
-                            ) : 
-                            NewField(
-                                initialValue: userLoad.smsVerifiedAt ?? 'NO',
-                                onSaved: (val) =>
-                                    smsVerifiedAt = val ?? Field.emptyString,
-                                hintText: Str.smsVerifiedAt),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          print(wallet.id);
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PaymentMethodWalletMenu(
+                                                      // toUserId: toUserId,
+                                                      exchangeRate: '1',
+                                                      currentRate: '1',
+                                                      walletId:
+                                                          wallet.id.toString(),
+                                                      amount: '4156.60',
+                                                      accountId:
+                                                          wallet.accountId,
+                                                      method: 'sms_subcribed',
+                                                      creditDebit: 'credit',
+                                                      walletBalance:
+                                                          wallet.amount,
+                                                      routePath: RouteSTR
+                                                          .profileOverview,
+                                                      user: userLoad,
+                                                      message:
+                                                          'Congratulations, You have subcribed to SMS Notification. FVIS Investment '),
+                                            ),
+                                          );
+                                        },
+                                        child: Text(Str.subcribeNow),
+                                        style: ElevatedButton.styleFrom(
+                                            primary: Styles.secondaryColor,
+                                            elevation: 0.0),
+                                      ),
+                                    ],
+                                  )
+                                : NewField(
+                                    initialValue:
+                                        userLoad.smsVerifiedAt ?? 'NO',
+                                    onSaved: (val) => smsVerifiedAt =
+                                        val ?? Field.emptyString,
+                                    hintText: Str.smsVerifiedAt),
                             const Gap(20),
                           ],
                         ),
