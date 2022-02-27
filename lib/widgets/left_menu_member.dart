@@ -479,8 +479,13 @@ class _SideDrawerMemberState extends State<SideDrawerMember> {
             title: Text(Str.signOut,
                 style: GoogleFonts.nunitoSans(
                     color: Styles.textColor.withOpacity(1))),
-            onTap: () =>
-                {Navigator.pushReplacementNamed(context, RouteSTR.signOut)},
+            onTap: ()
+                {
+                  sharedPref.remove(Pref.expiredAt);
+                  sharedPref.remove(Pref.accessToken);
+                  sharedPref.remove(Pref.userData);
+                  Navigator.pushReplacementNamed(context, RouteSTR.signIn);
+                },
           ),
         ],
       ),
