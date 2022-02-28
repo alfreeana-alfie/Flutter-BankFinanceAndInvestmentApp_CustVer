@@ -65,4 +65,8 @@ class Users {
       memberId: map[Field.memberId] as String?,
     );
   }
+
+  static List<Users> fromJsonList(List list) {
+    return list.map((item) => Users.fromMap(item)).toList();
+  }
 }

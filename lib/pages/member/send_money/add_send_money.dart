@@ -26,6 +26,7 @@ class MCreateSendMoney extends StatefulWidget {
 }
 
 class _SendMoneyState extends State<MCreateSendMoney> {
+
   var controller = ScrollController();
   SharedPref sharedPref = SharedPref();
   User userLoad = User();
@@ -66,8 +67,8 @@ class _SendMoneyState extends State<MCreateSendMoney> {
     SizeConfig.init(context);
     return Scaffold(
       backgroundColor: Styles.primaryColor,
-      appBar:
-          myAppBar(title: Str.sendMoney, implyLeading: true, context: context),
+      appBar: myAppBar(
+          title: Str.sendMoney, implyLeading: true, context: context),
       body: ListView(
         padding: const EdgeInsets.all(15),
         children: [
@@ -94,8 +95,8 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
-                        child:
-                            Text(Str.accountType, style: Styles.primaryTitle),
+                        child: Text(Str.accountType,
+                            style: Styles.primaryTitle),
                       ),
                       const Padding(
                         padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
@@ -130,8 +131,8 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
-                        child:
-                            Text(Str.userAccount, style: Styles.primaryTitle),
+                        child: Text(Str.userAccount,
+                            style: Styles.primaryTitle),
                       ),
                       const Padding(
                         padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
@@ -161,7 +162,8 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
-                        child: Text(Str.currency, style: Styles.primaryTitle),
+                        child:
+                            Text(Str.currency, style: Styles.primaryTitle),
                       ),
                       const Padding(
                         padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
@@ -203,8 +205,8 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                       color: Styles.primaryColor,
                     ),
                     margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 0, vertical: 10),
                     child: elevatedButton(
                       color: Styles.secondaryColor,
                       context: context,
@@ -236,7 +238,7 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => PaymentMethodWalletMenu(
-                                exchangeRate: exchangeRate,
+                              exchangeRate: exchangeRate,
                                 currentRate: currentRate.toString(),
                                 toUserId: toUserId,
                                 walletId: walletId,
