@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/models/membership.dart';
 import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';

@@ -290,7 +290,6 @@ class Str {
   static String updateWallet                = 'Update Wallet';
   static String upgrade                     = 'Upgrade Plan';
   static String upgradeYourPlan             = 'Upgrade Your Membership Now';
-<<<<<<< HEAD
   static String url                         = 'URL';
   static String usedAt                      = 'Used At';
   static String usedGiftCard                = 'Used Cards';
@@ -316,19 +315,6 @@ class Str {
   static String withdrawMethods             = 'Withdraw Methods';
   static String withdrawRequest             = 'Withdraw Request';
   static String writeDescription            = 'Write Description';  
-=======
-
-  static String accountType                 = 'Account Type';
-  static String myWallet                    = 'My Wallet(s)';
-  static String topUpWallet                 = 'Top-Up Wallet';
-
-  static String subcribeNow                 = 'Subcribe Now';
-  static String currentRate                 = 'Current Rate';
-  static String search                      = 'Search';
-
-  static String accountNo                   = 'Account No';
-  static String accountHolderPhoneNo        = 'Account Holder Phone No';
->>>>>>> parent of ca1e8fb1 (add search function inside dropdown menu)
 }
 
 class Status {

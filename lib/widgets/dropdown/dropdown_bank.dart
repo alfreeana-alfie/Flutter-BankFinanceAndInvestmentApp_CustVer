@@ -49,7 +49,43 @@ class _DropDownBankState extends State<DropDownBank> {
 
   @override
   Widget build(BuildContext context) {
-    return _dropDownSearch();
+    return Container(
+      padding: const EdgeInsets.only(left: 15, right: 15, top: 8, bottom: 8),
+      decoration: BoxDecoration(
+        color: Colors.black12.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton(
+          dropdownColor: Styles.greyColor,
+          icon: const RotatedBox(
+              quarterTurns: 3,
+              child: Icon(
+                Icons.chevron_left,
+                size: 20,
+                color: Styles.textColor,
+              )),
+          hint: widget.bankName == null
+              ? Text(Str.bank, style: Styles.primaryTitle)
+              : Text(
+                  widget.bankName!,
+                  style: Styles.primaryTitle,
+                ),
+          isExpanded: true,
+          iconSize: 30.0,
+          style: Styles.primaryTitle,
+          items: planListNew.map(
+            (val) {
+              return DropdownMenuItem<Bank>(
+                value: val,
+                child: Text(val.name ?? '-'),
+              );
+            },
+          ).toList(),
+          onChanged: widget.onChanged,
+        ),
+      ),
+    );
   }
 
   _dropDownSearch() {

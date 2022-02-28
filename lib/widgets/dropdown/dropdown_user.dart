@@ -63,70 +63,18 @@ class _DropDownUserState extends State<DropDownUser> {
   @override
   Widget build(BuildContext context) {
     return _dropDownSearch();
-<<<<<<< HEAD
   }
 
   _dropDownSearch() {
     return DropdownSearch<Users>(
       showSearchBox: true,
       onChanged: widget.onChanged,
-=======
-    // Container(
-    //   padding: const EdgeInsets.only(left: 15, right: 15),
-    //   decoration: BoxDecoration(
-    //     color: Colors.black12.withOpacity(0.05),
-    //     borderRadius: BorderRadius.circular(7.0),
-    //   ),
-    //   child: DropdownButtonHideUnderline(
-    //     child: DropdownButton(
-    //       dropdownColor: Styles.greyColor,
-    //       icon: const RotatedBox(
-    //           quarterTurns: 3,
-    //           child: Icon(
-    //             Icons.chevron_left,
-    //             size: 20,
-    //             color: Styles.textColor,
-    //           )),
-    //       hint: widget.usersName == null
-    //           ? Text(Str.users, style: Styles.primaryTitle)
-    //           : Text(
-    //               widget.usersName!,
-    //               style: Styles.primaryTitle,
-    //             ),
-    //       isExpanded: true,
-    //       iconSize: 30.0,
-    //       style: Styles.primaryTitle,
-    //       items: userListNew.map(
-    //         (val) {
-    //           return DropdownMenuItem<Users>(
-    //             value: val,
-    //             child: Text(val.name ?? Field.emptyString),
-    //           );
-    //         },
-    //       ).toList(),
-    //       onChanged: widget.onChanged,
-    //     ),
-    //   ),
-    // );
-  }
-
-  _dropDownSearch() {
-    return DropdownSearch(
-      items: userListNew.map(
-        (val) {
-          return val.name!;
-        },
-      ).toList(),
-      maxHeight: 300,
->>>>>>> parent of ca1e8fb1 (add search function inside dropdown menu)
       onFind: (String? filter) => getData(filter),
       dropdownSearchDecoration: InputDecoration(
-        labelText: "choose a user",
+        labelText: Str.selectUser,
         contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
         border: OutlineInputBorder(),
       ),
-      onChanged: print,
-      showSearchBox: true,
     );
   }
 

@@ -56,7 +56,43 @@ class _DropDownCurrencyState extends State<DropDownCurrency> {
 
   @override
   Widget build(BuildContext context) {
-    return _dropDownSearch();
+    return Container(
+      padding: const EdgeInsets.only(left: 15, right: 15),
+      decoration: BoxDecoration(
+        color: Colors.black12.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(7.0),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton(
+          dropdownColor: Styles.greyColor,
+          icon: const RotatedBox(
+              quarterTurns: 3,
+              child: Icon(
+                Icons.chevron_left,
+                size: 20,
+                color: Styles.textColor,
+              )),
+          hint: widget.currencyName == null
+              ? Text(Str.currency, style: Styles.primaryTitle)
+              : Text(
+                  widget.currencyName!,
+                  style: Styles.primaryTitle,
+                ),
+          isExpanded: true,
+          iconSize: 30.0,
+          style: Styles.primaryTitle,
+          items: currencyListNew.map(
+            (val) {
+              return DropdownMenuItem<Currency>(
+                value: val,
+                child: Text(val.name ?? Field.emptyString),
+              );
+            },
+          ).toList(),
+          onChanged: widget.onChanged,
+        ),
+      ),
+    );
   }
 
   _dropDownSearch() {
