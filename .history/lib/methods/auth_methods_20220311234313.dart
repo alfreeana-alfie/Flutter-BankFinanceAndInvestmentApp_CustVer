@@ -232,7 +232,7 @@ void updateProfile(
     Uri url,
     String image,
     String method) async {
-  final request = http.MultipartRequest(Field.postMethod, API.updateProfile)
+  final request = http.MultipartRequest(Field.postMethod, API.loanRequest)
       ..fields.addAll(body)
       ..headers.addAll(headersMultiPart)
     ..files.add(await http.MultipartFile.fromPath(Field.profilePicture, filename),);

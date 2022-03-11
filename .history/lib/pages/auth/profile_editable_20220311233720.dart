@@ -280,7 +280,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                               file?.name == null) {
                             var split1 = widget.user.profilePicture!.split(
                                 'https://villasearch.de/fvis-bank-member-backend/storage/app/');
-                            // var fileName = split1[1];
+                            var fileName = split1[1];
 
                             print(split1);
 

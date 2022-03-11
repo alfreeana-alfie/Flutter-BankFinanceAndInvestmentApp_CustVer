@@ -232,9 +232,9 @@ void updateProfile(
     Uri url,
     String image,
     String method) async {
-  final request = http.MultipartRequest(Field.postMethod, API.updateProfile)
-      ..fields.addAll(body)
-      ..headers.addAll(headersMultiPart)
+  final request = http.MultipartRequest(Field.postMethod, url)
+    ..fields.addAll(body)
+    ..headers.addAll(headersMultiPart)
     ..files.add(await http.MultipartFile.fromPath(Field.profilePicture, filename),);
 
   var response = await request.send();
