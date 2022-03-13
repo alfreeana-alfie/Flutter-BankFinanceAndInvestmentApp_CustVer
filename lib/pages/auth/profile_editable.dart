@@ -213,11 +213,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
                           onSaved: (val) => name = val,
                           hintText: Str.name),
                       const Gap(20.0),
-                      NewField(
-                          initialValue: widget.user.email,
-                          onSaved: (val) => email = val,
-                          hintText: Str.email),
-                      const Gap(20.0),
+                      // NewField(
+                      //     initialValue: widget.user.email,
+                      //     onSaved: (val) => email = val,
+                      //     hintText: Str.email),
+                      // const Gap(20.0),
                       // NewField(
                       //     initialValue:
                       //         '${widget.user.countryCode}-${widget.user.phone}',
@@ -279,14 +279,14 @@ class _UpdateProfileState extends State<UpdateProfile> {
                           if (widget.user.profilePicture != null &&
                               file?.name == null) {
                             var split = widget.user.profilePicture!.split(
-                                'https://villasearch.de/fvis-bank-member-backend/storage/app/');
+                                'https://villasearch.de/fvis-bank-member-backend/storage/app/profile_picture/');
                             // var fileName = split1[1];
 
                             print(split);
 
                             Map<String, String> body = {
                               Field.name: name ?? Field.emptyString,
-                              Field.profilePicture: split[0],
+                              Field.profilePicture: split[1],
                               Field.countryCode:
                                   countryCode ?? Field.emptyString,
                               Field.phone: phone ?? Field.emptyString,
@@ -299,7 +299,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                 split[0],
                                 API.updateProfile,
                                 Field.profilePicture,
-                                Field.putMethod, userLoad.id.toString());
+                                Field.putMethod,
+                                userLoad.id.toString());
                           } else {
                             Map<String, String> body = {
                               Field.name: name ?? Field.emptyString,
@@ -317,7 +318,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                 file?.name ?? Values.userDefaultImage,
                                 API.updateProfile,
                                 Field.profilePicture,
-                                Field.putMethod, userLoad.id.toString());
+                                Field.putMethod,
+                                userLoad.id.toString());
                           }
                         },
                         child: Text(Str.save.toUpperCase()),

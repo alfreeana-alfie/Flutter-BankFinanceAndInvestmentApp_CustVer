@@ -51,7 +51,7 @@ Future<void> main() async {
     OKToast(
       child: MaterialApp(
         home: SplashScreenView(
-          navigateRoute: const SignInPage(),
+          navigateRoute: const BottomNav(),
           duration: 4000,
           imageSize: 200,
           imageSrc: Values.logoPath,
@@ -85,7 +85,8 @@ Future<void> main() async {
           // MEMBER ROUTE(S)
           RouteSTR.dashboardMember: (context) => const BottomNav(),
           RouteSTR.dashboardAccountant: (context) => const AccountDashboard(),
-          RouteSTR.dashboardAccountManager: (context) => const AccountManagementDashboard(),
+          RouteSTR.dashboardAccountManager: (context) =>
+              const AccountManagementDashboard(),
 
           RouteSTR.bottomNav: (context) => const BottomNav(),
 
