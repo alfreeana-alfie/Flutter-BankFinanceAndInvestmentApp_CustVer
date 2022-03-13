@@ -290,16 +290,17 @@ class _UpdateProfileState extends State<UpdateProfile> {
                               Field.countryCode:
                                   countryCode ?? Field.emptyString,
                               Field.phone: phone ?? Field.emptyString,
+                              'upload': 'not_uploaded'
                             };
 
-                            updateProfile(
+                            updateProfileTesting(
                                 context,
                                 _btnController,
                                 body,
-                                split[0],
-                                API.updateProfile,
+                                // split[1],
+                                // API.updateProfile,
                                 Field.profilePicture,
-                                Field.putMethod,
+                                // Field.putMethod,
                                 userLoad.id.toString());
                           } else {
                             Map<String, String> body = {
@@ -309,6 +310,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                               Field.countryCode:
                                   countryCode ?? Field.emptyString,
                               Field.phone: phone ?? Field.emptyString,
+                              'upload': 'upload'
                             };
 
                             updateProfile(
@@ -316,9 +318,9 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                 _btnController,
                                 body,
                                 file?.name ?? Values.userDefaultImage,
-                                API.updateProfile,
+                                // API.updateProfile,
                                 Field.profilePicture,
-                                Field.putMethod,
+                                // Field.putMethod,
                                 userLoad.id.toString());
                           }
                         },

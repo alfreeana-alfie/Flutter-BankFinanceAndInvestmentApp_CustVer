@@ -229,14 +229,15 @@ void updateProfile(
     RoundedLoadingButtonController controller,
     Map<String, String> body,
     String filename,
-    Uri url,
     String image,
-    String method, 
     String userId) async {
-  final request = http.MultipartRequest(Field.postMethod, Uri.parse(API.updateProfile.toString() + userId))
-      ..fields.addAll(body)
-      ..headers.addAll(headersMultiPart)
-    ..files.add(await http.MultipartFile.fromPath(Field.profilePicture, filename),);
+  final request = http.MultipartRequest(
+      Field.postMethod, Uri.parse(API.updateProfile.toString() + userId))
+    ..fields.addAll(body)
+    ..headers.addAll(headersMultiPart)
+    ..files.add(
+      await http.MultipartFile.fromPath(Field.profilePicture, filename),
+    );
 
   var response = await request.send();
 
@@ -255,8 +256,29 @@ void updateProfile(
         ),
       );
     });
-  }else{
+  } else {
     print(response.request);
+    CustomToast.showMsg(Status.failed, Styles.dangerColor);
+  }
+}
+
+void updateProfileTesting(
+    BuildContext context,
+    RoundedLoadingButtonController controller,
+    Map<String, String> body,
+    // String filename,
+    String image,
+    String userId) async {
+  final response = await http.post(
+    Uri.parse(API.updateProfile.toString() + userId),
+    headers: headers,
+    body: body,
+  );
+
+  if (response.statusCode == Status.ok) {
+    CustomToast.showMsg(Status.success, Styles.successColor);
+  } else {
+    // print(Status.failed);
     CustomToast.showMsg(Status.failed, Styles.dangerColor);
   }
 }
