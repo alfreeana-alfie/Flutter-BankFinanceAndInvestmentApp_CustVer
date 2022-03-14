@@ -189,6 +189,16 @@ class _CreateUsersState extends State<UsersLayout> {
                   NewField(
                     readOnly: true,
                     mandatory: true,
+                    initialValue: widget.userLoad!.id.toString(),
+                    // onSaved: (val) => memberId = val,
+                    hintText: Str.creatorId,
+                    // textInputAction: TextInputAction.next,
+                    // textInputType: TextInputType.text,
+                  ),
+                  const Gap(20),
+                  NewField(
+                    readOnly: true,
+                    mandatory: true,
                     initialValue: memberId,
                     onSaved: (val) => memberId = val,
                     hintText: Str.memberId,
@@ -421,7 +431,8 @@ class _CreateUsersState extends State<UsersLayout> {
                                         creatorType: widget.creatorType,
                                       ),
                                       Str.customerList,
-                                      Field.empty, widget.userType!)
+                                      Field.empty,
+                                      widget.userType!)
                                   : Method.addFile(
                                       context,
                                       _btnController,
@@ -435,7 +446,8 @@ class _CreateUsersState extends State<UsersLayout> {
                                         creatorType: widget.creatorType,
                                       ),
                                       Str.customerList,
-                                      Field.profilePicture, widget.userLoad!.userType!)
+                                      Field.profilePicture,
+                                      widget.userLoad!.userType!)
                               : widget.type == Field.update
                                   ? Method.edit(
                                       context,
@@ -450,7 +462,8 @@ class _CreateUsersState extends State<UsersLayout> {
                                         creatorType: widget.creatorType,
                                       ),
                                       Str.userList,
-                                      Field.empty, widget.userType!)
+                                      Field.empty,
+                                      widget.userType!)
                                   : Method.addFile(
                                       context,
                                       _btnController,
@@ -464,7 +477,8 @@ class _CreateUsersState extends State<UsersLayout> {
                                         creatorType: widget.creatorType,
                                       ),
                                       Str.userList,
-                                      Field.profilePicture, widget.userType!);
+                                      Field.profilePicture,
+                                      widget.userType!);
                         } else {
                           CustomToast.showMsg(
                               Str.invalidConfirmPassword, Styles.dangerColor);

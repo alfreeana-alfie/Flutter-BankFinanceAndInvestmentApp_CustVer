@@ -78,7 +78,8 @@ class _SideDrawerState extends State<SideDrawer> {
                 height: 100,
                 constraints: const BoxConstraints(minWidth: 20, maxWidth: 70),
                 child: CircleAvatar(
-                  backgroundImage: NetworkImage(userLoad.profilePicture ?? Values.userDefaultImage),
+                  backgroundImage: NetworkImage(
+                      userLoad.profilePicture ?? Values.userDefaultImage),
                   minRadius: 10,
                   maxRadius: 40,
                 ),
@@ -235,15 +236,14 @@ class _SideDrawerState extends State<SideDrawer> {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => CardList(
-                        type: Type.customerAdmin,
-                        routePath: Type.customerAdmin,
-                        pageName: Str.customerList,
-                        path: UsersLayout(
-                          type: Field.create,
-                          userLoad: userLoad,
-                        ),
-                        userType: userLoad.userType
-                      ),
+                          type: Type.customerAdmin,
+                          routePath: Type.customerAdmin,
+                          pageName: Str.customerList,
+                          path: UsersLayout(
+                            type: Field.create,
+                            userLoad: userLoad,
+                          ),
+                          userType: userLoad.userType),
                     ),
                   );
                 },
@@ -962,7 +962,8 @@ class _SideDrawerState extends State<SideDrawer> {
                 height: 100,
                 constraints: const BoxConstraints(minWidth: 20, maxWidth: 70),
                 child: CircleAvatar(
-                  backgroundImage: NetworkImage(userLoad.profilePicture ?? Values.userDefaultImage),
+                  backgroundImage: NetworkImage(
+                      userLoad.profilePicture ?? Values.userDefaultImage),
                   minRadius: 10,
                   maxRadius: 40,
                 ),
@@ -1129,7 +1130,8 @@ class _SideDrawerState extends State<SideDrawer> {
                 height: 100,
                 constraints: const BoxConstraints(minWidth: 20, maxWidth: 70),
                 child: CircleAvatar(
-                  backgroundImage: NetworkImage(userLoad.profilePicture ?? Values.userDefaultImage),
+                  backgroundImage: NetworkImage(
+                      userLoad.profilePicture ?? Values.userDefaultImage),
                   minRadius: 10,
                   maxRadius: 40,
                 ),
@@ -1165,15 +1167,14 @@ class _SideDrawerState extends State<SideDrawer> {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => CardList(
-                        type: Type.customer,
-                        routePath: Type.nullable,
-                        pageName: Str.customerList,
-                        path: UsersLayout(
-                          type: Field.create,
-                          userLoad: userLoad,
-                        ),
-                        userType: userLoad.userType
-                      ),
+                          type: Type.customer,
+                          routePath: Type.nullable,
+                          pageName: Str.customerList,
+                          path: UsersLayout(
+                            type: Field.create,
+                            userLoad: userLoad,
+                          ),
+                          userType: userLoad.userType),
                     ),
                   );
                 },
@@ -1185,11 +1186,10 @@ class _SideDrawerState extends State<SideDrawer> {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => UsersLayout(
-                        type: Field.create,
-                        userType: Field.customer,
-                        creatorType: userLoad.userType,
-                        userLoad: userLoad
-                      ),
+                          type: Field.create,
+                          userType: Field.customer,
+                          creatorType: userLoad.userType,
+                          userLoad: userLoad),
                     ),
                   );
                 },

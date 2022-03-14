@@ -18,14 +18,29 @@ import 'package:gap/gap.dart';
 import 'package:http/http.dart' as http;
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
-class MCreateWithdraw extends StatefulWidget {
-  const MCreateWithdraw({Key? key}) : super(key: key);
+class WithdrawLayout extends StatefulWidget {
+  const WithdrawLayout(
+      {Key? key,
+      this.customerId,
+      this.walletId,
+      this.accountId,
+      this.walletBalance,
+      this.currentRate,
+      this.exchangeRate})
+      : super(key: key);
+
+  final String? customerId,
+      walletId,
+      accountId,
+      walletBalance,
+      currentRate,
+      exchangeRate;
 
   @override
-  _MCreateWithdrawState createState() => _MCreateWithdrawState();
+  _WithdrawLayoutState createState() => _WithdrawLayoutState();
 }
 
-class _MCreateWithdrawState extends State<MCreateWithdraw> {
+class _WithdrawLayoutState extends State<WithdrawLayout> {
   SharedPref sharedPref = SharedPref();
   final TextEditingController controller = TextEditingController();
   final RoundedLoadingButtonController _btnController =
@@ -50,6 +65,8 @@ class _MCreateWithdrawState extends State<MCreateWithdraw> {
       branchId,
       branchName,
       exchangeRate;
+
+  String? bank, branch, purpose;
 
   String fee = '1',
       drCr = '1',
@@ -108,37 +125,48 @@ class _MCreateWithdrawState extends State<MCreateWithdraw> {
                   //     onSaved: (val) => transactionCode = val,
                   //     hintText: Str.transactionCode),
                   // const Gap(20),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
-                        child: Text(Str.bank, style: Styles.primaryTitle),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
-                        child: Text(
-                          '*',
-                          style: TextStyle(color: Styles.dangerColor),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    child: DropDownBank(
-                      bank: otherBankId,
-                      bankName: otherBankName,
-                      swiftCode: swiftCode,
-                      onChanged: (val) {
-                        setState(
-                          () {
-                            otherBankId = val!.id.toString();
-                            otherBankName = val.name;
-                            swiftCode = val.swiftCode;
-                          },
-                        );
-                      },
-                    ),
-                  ),
+                  // Row(
+                  //   children: [
+                  //     Padding(
+                  //       padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                  //       child: Text(Str.bank, style: Styles.primaryTitle),
+                  //     ),
+                  //     const Padding(
+                  //       padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                  //       child: Text(
+                  //         '*',
+                  //         style: TextStyle(color: Styles.dangerColor),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(
+                  //   child: DropDownBank(
+                  //     bank: otherBankId,
+                  //     bankName: otherBankName,
+                  //     swiftCode: swiftCode,
+                  //     onChanged: (val) {
+                  //       setState(
+                  //         () {
+                  //           otherBankId = val!.id.toString();
+                  //           otherBankName = val.name;
+                  //           swiftCode = val.swiftCode;
+                  //         },
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
+                  NewField(
+                      initialValue: bank,
+                      mandatory: true,
+                      onSaved: (val) => bank = val,
+                      hintText: Str.bank),
+                  const Gap(20.0),
+                  NewField(
+                      initialValue: branch,
+                      mandatory: true,
+                      onSaved: (val) => branch = val,
+                      hintText: Str.branch),
                   const Gap(20.0),
                   // NewField(
                   //   controller: controller,
@@ -146,45 +174,36 @@ class _MCreateWithdrawState extends State<MCreateWithdraw> {
                   //     mandatory: true,
                   //     onSaved: (val) => swiftCode = val,
                   //     hintText: Str.swiftCode),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
-                        child: Text(Str.branch, style: Styles.primaryTitle),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
-                        child: Text(
-                          '*',
-                          style: TextStyle(color: Styles.dangerColor),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    child: DropDownBranches(
-                      branch: branchId,
-                      branchName: branchName,
-                      onChanged: (val) {
-                        setState(
-                          () {
-                            branchId = val!.id.toString();
-                            branchName = val.name;
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                  const Gap(20.0),
-                  NewField(
-                    mandatory: true,
-                    onSaved: (val) => amount = val,
-                    hintText: Str.amount,
-                    labelText: Str.amountNum,
-                    textInputAction: TextInputAction.next,
-                    textInputType: TextInputType.number,
-                  ),
-                  const Gap(20.0),
+                  // Row(
+                  //   children: [
+                  //     Padding(
+                  //       padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                  //       child: Text(Str.branch, style: Styles.primaryTitle),
+                  //     ),
+                  //     const Padding(
+                  //       padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                  //       child: Text(
+                  //         '*',
+                  //         style: TextStyle(color: Styles.dangerColor),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(
+                  //   child: DropDownBranches(
+                  //     branch: branchId,
+                  //     branchName: branchName,
+                  //     onChanged: (val) {
+                  //       setState(
+                  //         () {
+                  //           branchId = val!.id.toString();
+                  //           branchName = val.name;
+                  //         },
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
+                  // const Gap(20.0),
                   Row(
                     children: [
                       Padding(
@@ -219,11 +238,20 @@ class _MCreateWithdrawState extends State<MCreateWithdraw> {
                   const Gap(20.0),
                   NewField(
                     mandatory: true,
-                    onSaved: (val) => accountHolderName = val,
-                    hintText: Str.accountHolderName,
+                    onSaved: (val) => amount = val,
+                    hintText: Str.amount,
+                    labelText: Str.amountNum,
                     textInputAction: TextInputAction.next,
-                    textInputType: TextInputType.text,
+                    textInputType: TextInputType.number,
                   ),
+                  // const Gap(20.0),
+                  // NewField(
+                  //   mandatory: true,
+                  //   onSaved: (val) => accountHolderName = val,
+                  //   hintText: Str.accountHolderName,
+                  //   textInputAction: TextInputAction.next,
+                  //   textInputType: TextInputType.text,
+                  // ),
                   const Gap(20.0),
                   NewField(
                     mandatory: true,
@@ -234,11 +262,10 @@ class _MCreateWithdrawState extends State<MCreateWithdraw> {
                   ),
                   const Gap(20.0),
                   NewField(
-                    onSaved: (val) => accountHolderPhoneNo = val,
-                    hintText: Str.accountHolderPhoneNo,
-                    textInputAction: TextInputAction.next,
-                    textInputType: TextInputType.phone,
-                  ),
+                      onSaved: (val) => purpose = val,
+                      hintText: Str.purpose,
+                      textInputAction: TextInputAction.next,
+                      textInputType: TextInputType.text),
                   const Gap(20),
                   RoundedLoadingButton(
                     elevation: 0.0,
@@ -248,24 +275,64 @@ class _MCreateWithdrawState extends State<MCreateWithdraw> {
                     controller: _btnController,
                     onPressed: () {
                       Map<String, String> body = {
-                        Field.userId: userId ?? Field.emptyInt,
-                        Field.bankName: otherBankName ?? Field.emptyInt,
-                        Field.branchName: branchName ?? Field.emptyString,
+                        Field.userId: widget.customerId ?? Field.emptyInt,
+                        Field.bankName: bank ?? Field.emptyInt,
+                        Field.branchName: branch ?? Field.emptyString,
                         Field.swiftCode: swiftCode ?? Field.emptyInt,
                         Field.accountHolderName:
                             accountHolderName ?? Field.emptyInt,
                         Field.accountNo: accountNo ?? Field.emptyInt,
-                        Field.currency:
-                            currencyName ?? Field.emptyInt,
+                        Field.currency: currency ?? Field.emptyInt,
                         Field.accountHolderPhoneNo:
                             accountHolderPhoneNo ?? Field.emptyInt,
-                        Field.amount:
-                            amount ?? Field.emptyAmount,
-                        Field.transactionCode:
-                              Field.transactionCodeInitials+ '$currencyName-' + getRandomCode(6)
+                        Field.amount: amount ?? Field.emptyAmount,
+                        Field.purpose: purpose ?? Field.emptyString,
+                        Field.transactionCode: Field.transactionCodeInitials +
+                            '$currencyName-' +
+                            getRandomCode(6)
                       };
 
                       WithdrawMethods.add(context, body);
+
+                      double rateCharge = double.parse(amount!);
+                      setState(() => rateCharge *=
+                          (double.parse(widget.currentRate!) / 100));
+
+                      // Calculation - Amount
+                      double updatedAmount = double.parse(amount!);
+                      setState(() => updatedAmount -= rateCharge);
+
+                      double updatedBalance =
+                          double.parse(widget.walletBalance!);
+                      if (method == Type.deposit || method == Type.topUp) {
+                        setState(() => updatedBalance += updatedAmount);
+                      } else {
+                        setState(() => updatedBalance -= updatedAmount);
+                      }
+
+                      // Calculation - Rate
+                      if (exchangeRate != null) {
+                        double newAmount = double.parse(amount!);
+                        setState(() =>
+                            newAmount *= double.parse(widget.exchangeRate!));
+
+                        double rateCharge = newAmount;
+                        setState(() => rateCharge *=
+                            (double.parse(widget.currentRate!) / 100));
+
+                        // Calculation - Amount
+                        double updatedAmount = newAmount;
+                        setState(() => updatedAmount -= rateCharge);
+
+                        // Calculation - Wallet subtract Updated Amount
+                        double updatedBalance =
+                            double.parse(widget.walletBalance!);
+                        if (method == Type.deposit || method == Type.topUp) {
+                          setState(() => updatedBalance += updatedAmount);
+                        } else {
+                          setState(() => updatedBalance -= updatedAmount);
+                        }
+                      }
 
                       // Navigator.of(context).push(
                       //   MaterialPageRoute(
@@ -294,9 +361,9 @@ class _MCreateWithdrawState extends State<MCreateWithdraw> {
                     ),
                   ),
                   Padding(
-                  padding: const EdgeInsets.fromLTRB(0,10,0,10),
-                  child: backButton(context),
-                ),
+                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                    child: backButton(context),
+                  ),
                 ],
               ),
             ),

@@ -22,13 +22,14 @@ class CardWithdrawAdmin extends StatelessWidget {
       required this.withdraw,
       required this.withdrawList,
       required this.index,
-      this.userType})
+      this.userType,
+      this.customerId})
       : super(key: key);
 
   final Withdraw withdraw;
   final List<Withdraw> withdrawList;
   final int index;
-  final String? userType;
+  final String? userType, customerId;
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +69,11 @@ class CardWithdrawAdmin extends StatelessWidget {
                               color: Styles.accentColor,
                             ),
                             const Gap(20),
-                            Text(withdraw.transactionCode ?? Field.emptyString,
-                                style: Theme.of(context).textTheme.headline6,
-                                overflow: TextOverflow.ellipsis,),
+                            Text(
+                              withdraw.transactionCode ?? Field.emptyString,
+                              style: Theme.of(context).textTheme.headline6,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ],
                         )),
                     collapsed: const Text(
@@ -174,7 +177,8 @@ class CardWithdrawAdmin extends StatelessWidget {
                 labelDetails: withdraw.currency ?? Field.emptyString),
             DetailRow(
                 labelTitle: Str.amount,
-                labelDetails: double.parse(withdraw.amount ?? Field.emptyAmount).toStringAsFixed(2)),
+                labelDetails: double.parse(withdraw.amount ?? Field.emptyAmount)
+                    .toStringAsFixed(2)),
             DetailRow(
                 labelTitle: Str.approved,
                 labelDetails: withdraw.approved ?? Field.emptyString),
@@ -212,7 +216,8 @@ class CardWithdrawAdmin extends StatelessWidget {
                     type: Field.create,
                   ),
                   Str.withdrawList,
-                  Type.nullable, '');
+                  Type.nullable,
+                  '');
             },
             child: Text(
               Str.approved.toUpperCase(),
@@ -239,7 +244,8 @@ class CardWithdrawAdmin extends StatelessWidget {
                     type: Field.create,
                   ),
                   Str.withdrawList,
-                  Type.nullable, '');
+                  Type.nullable,
+                  '');
             },
             child: Text(
               Str.reject.toUpperCase(),

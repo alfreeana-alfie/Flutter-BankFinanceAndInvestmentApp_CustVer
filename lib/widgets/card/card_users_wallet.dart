@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/user_wallet.dart';
 import 'package:flutter_banking_app/pages/accountant/update_wallet.dart';
+import 'package:flutter_banking_app/pages/admin/withdraw_layout.dart';
 import 'package:flutter_banking_app/pages/member/wallet/top_up.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -173,12 +174,12 @@ class CardUserWallet extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => UpdateWallet(
+                  builder: (context) => WithdrawLayout(
                     customerId: users.userId,
                     walletId: users.id.toString(),
                     accountId: '1',
                     walletBalance: users.amount,
-                    type: Type.withdraw,
+                    // type: Type.withdraw,
                   ),
                 ),
               );
