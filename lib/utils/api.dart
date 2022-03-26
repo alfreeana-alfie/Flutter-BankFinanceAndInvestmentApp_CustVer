@@ -96,6 +96,7 @@ class API {
   static Uri listofFdrPlans = Uri.parse('$android/list_of_fdr_plans');
   static Uri listofUsers = Uri.parse('$android/users');
   static Uri listofCustomer = Uri.parse('$android/customer/');
+  static Uri listofStaff = Uri.parse('$android/staff/');
 
   // Membership
   static Uri upgradeMembership = Uri.parse('$android/upgrade');
@@ -150,8 +151,11 @@ class AdminAPI {
 
     // Wire Transfer
   static Uri listOfWireTransfer                 = Uri.parse('$android/list_of_wire_transfer');
+  static Uri listOfAssignedWireTransfer         = Uri.parse('$android/list_of_assigned_wire_transfer/');
   static Uri createWireTransfer                 = Uri.parse('$android/wire_transfer');
   static Uri updateWireTransferStatus           = Uri.parse('$android/update_status/');
+  static Uri assignStaff                        = Uri.parse('$android/assign_staff/');
+  static Uri submitAttachment                   = Uri.parse('$android/submit_attachment/');
 
     // Loan Product
   static Uri listOfLoanProduct                  = Uri.parse('$android/list_of_loan_product');

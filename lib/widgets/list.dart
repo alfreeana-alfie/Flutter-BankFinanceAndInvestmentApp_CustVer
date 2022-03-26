@@ -57,7 +57,9 @@ import 'card/card_admin_loan.dart';
 import 'card/card_currency.dart';
 import 'card/card_send_exchange_money.dart';
 import 'card/card_send_money.dart';
+import 'card/card_staff_wire_transfer.dart';
 import 'card/card_users_wallet.dart';
+import 'card/card_admin_wire_transfer.dart';
 import 'left_menu.dart';
 
 class CardList extends StatefulWidget {
@@ -219,6 +221,11 @@ class _CardListState extends State<CardList> {
         break;
       case Type.wireTransfer:
         url = AdminAPI.listOfWireTransfer;
+        break;
+      case Type.staffWireTransfer:
+        User user = User.fromJSON(await sharedPref.read(Pref.userData));
+        url = Uri.parse(AdminAPI.listOfAssignedWireTransfer.toString() +
+            user.id.toString());
         break;
       case Type.customer:
         url = AdminAPI.showSavings;
@@ -455,6 +462,14 @@ class _CardListState extends State<CardList> {
           }
           break;
         case Type.wireTransfer:
+          for (var req in jsonBody[Field.data]) {
+            final data = Deposit.fromMap(req);
+            setState(() {
+              depositList.add(data);
+            });
+          }
+          break;
+        case Type.staffWireTransfer:
           for (var req in jsonBody[Field.data]) {
             final data = Deposit.fromMap(req);
             setState(() {
@@ -1308,6 +1323,36 @@ class _CardListState extends State<CardList> {
           _foundDepositList = results;
         });
         break;
+      case Type.staffWireTransfer:
+        List<Deposit> results = [];
+        if (enteredKeyword.isEmpty) {
+          results = depositList;
+        } else {
+          results = depositList
+              .where((data) => data.name!
+                  .toLowerCase()
+                  .contains(enteredKeyword.toLowerCase()))
+              .toList();
+
+          if (results.isEmpty) {
+            results = depositList
+                .where((data) => data.id
+                    .toString()
+                    .toLowerCase()
+                    .contains(enteredKeyword.toLowerCase()))
+                .toList();
+
+            setState(() {
+              _foundDepositList = results;
+            });
+          }
+        }
+
+        // Refresh the UI
+        setState(() {
+          _foundDepositList = results;
+        });
+        break;
       case Type.customer:
         List<UserWallet> results = [];
         if (enteredKeyword.isEmpty) {
@@ -1431,8 +1476,8 @@ class _CardListState extends State<CardList> {
 
   @override
   initState() {
-    getWithdraw();
     loadSharedPrefs();
+    getWithdraw();
     view();
 
     _foundBranchList = branchList;
@@ -2341,10 +2386,10 @@ class _CardListState extends State<CardList> {
                       color: Styles.transparentColor,
                       elevation: 0.0,
                       margin: const EdgeInsets.symmetric(vertical: 10),
-                      child: CardSendExchangeMoney(
+                      child: CardAdminWireTransfer(
                         deposit: _foundDepositList[index],
-                        // depositList: _foundDepositList,
-                        // index: index,
+                        depositList: _foundDepositList,
+                        index: index,
                       )),
                 )
               : ListView.builder(
@@ -2352,14 +2397,47 @@ class _CardListState extends State<CardList> {
                   shrinkWrap: true,
                   itemCount: depositList.length,
                   itemBuilder: (context, index) {
-                    return CardSendExchangeMoney(
+                    return CardAdminWireTransfer(
                       deposit: depositList[index],
-                      // depositList: depositList,
-                      // index: index,
+                      depositList: depositList,
+                      index: index,
                     );
                   },
                 ),
         );
+      case Type.staffWireTransfer:
+        if (depositList.isNotEmpty) {
+          return Expanded(
+            child: _foundDepositList.isNotEmpty
+                ? ListView.builder(
+                    itemCount: _foundDepositList.length,
+                    itemBuilder: (context, index) => Card(
+                        key: ValueKey(_foundDepositList[index].id),
+                        color: Styles.transparentColor,
+                        elevation: 0.0,
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        child: CardStaffWireTransfer(
+                          deposit: _foundDepositList[index],
+                          depositList: _foundDepositList,
+                          index: index,
+                        )),
+                  )
+                : ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: depositList.length,
+                    itemBuilder: (context, index) {
+                      return CardStaffWireTransfer(
+                        deposit: depositList[index],
+                        depositList: depositList,
+                        index: index,
+                      );
+                    },
+                  ),
+          );
+        }else{
+          return const Center(child: Text('No List')); 
+        }
       case Type.customer:
         return Expanded(
           child: _foundUserWalletList.isNotEmpty

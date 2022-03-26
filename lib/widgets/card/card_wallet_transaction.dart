@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_banking_app/methods/mobile.dart';
 import 'package:flutter_banking_app/models/transaction.dart';
 import 'package:flutter_banking_app/models/wallet_transaction.dart';
 import 'package:flutter_banking_app/utils/string.dart';
@@ -10,6 +13,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
+
+import 'package:http/http.dart' as http;
 
 class CardWalletTransaction extends StatelessWidget {
   const CardWalletTransaction(
@@ -61,9 +67,11 @@ class CardWalletTransaction extends StatelessWidget {
                               color: Styles.accentColor,
                             ),
                             const Gap(20),
-                            Text(transaction.transactionCode ?? 'ERROR',
-                                style: Theme.of(context).textTheme.headline6,
-                                overflow: TextOverflow.ellipsis,),
+                            Text(
+                              transaction.transactionCode ?? 'ERROR',
+                              style: Theme.of(context).textTheme.headline6,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ],
                         )),
                     collapsed: const Text(
@@ -170,7 +178,8 @@ class CardWalletTransaction extends StatelessWidget {
                 labelDetails: transaction.currency ?? 'NGN'),
             DetailRow(
                 labelTitle: Str.amount,
-                labelDetails: double.parse(transaction.amount!).toStringAsFixed(2)),
+                labelDetails:
+                    double.parse(transaction.amount!).toStringAsFixed(2)),
             DetailRow(
                 labelTitle: Str.rateAmount,
                 labelDetails: transaction.rateAmount ?? Field.emptyString),
@@ -180,13 +189,12 @@ class CardWalletTransaction extends StatelessWidget {
             DetailRow(
                 labelTitle: Str.paymentMethod,
                 labelDetails: transaction.paymentMethod ?? Field.emptyString),
-            
-            DetailRow(labelTitle: Str.method, labelDetails: method),
-            DetailRow(
-                labelTitle: Str.drCr,
-                labelDetails: transaction.creditDebit ?? Field.emptyString),
+            // DetailRow(labelTitle: Str.method, labelDetails: method),
+            // DetailRow(
+            //     labelTitle: Str.drCr,
+            //     labelDetails: transaction.creditDebit ?? Field.emptyString),
             DetailRow(labelTitle: Str.created, labelDetails: createdAt),
-            // _buildButtonRow(context),
+            _buildButtonRow(context),
           ],
         ),
       ]),
@@ -198,17 +206,171 @@ class CardWalletTransaction extends StatelessWidget {
       children: [
         Expanded(
           child: ElevatedButton(
-            onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => UpdateWireTransfer(
-              //       transaction: transaction,
-              //     ),
-              //   ),
-              // );
+            onPressed: () async {
+              //Create a new PDF document
+              PdfDocument document = PdfDocument();
+              //Create a PdfGrid class.
+              PdfGrid grid = PdfGrid();
+              grid.style = PdfGridStyle(
+                font: PdfStandardFont(PdfFontFamily.helvetica, 18),
+                cellPadding: PdfPaddings(left: 5, right: 5, top: 5, bottom: 5)
+              );
+
+              //Create the header with specific bounds
+              PdfPageTemplateElement header =
+                  PdfPageTemplateElement(Rect.fromLTWH(0, 0, 0, 90));
+
+              //Create the date and time field
+              PdfDateTimeField dateAndTimeField = PdfDateTimeField(
+                  font: PdfStandardFont(PdfFontFamily.helvetica, 19),
+                  brush: PdfSolidBrush(PdfColor(0, 0, 0)));
+              dateAndTimeField.date = DateTime(2020, 2, 10, 13, 13, 13, 13, 13);
+              dateAndTimeField.dateFormatString = 'E, MM.dd.yyyy';
+
+              var url =
+                  "https://villasearch.de/assets/assets/images/logoTransparent.png";
+              var response = await http.get(Uri.parse(url));
+              var data = response.bodyBytes;
+
+              //Create the composite field with date field
+              PdfCompositeField compositeField = PdfCompositeField(
+                  font: PdfStandardFont(PdfFontFamily.helvetica, 19,
+                      style: PdfFontStyle.bold),
+                  brush: PdfSolidBrush(PdfColor(0, 0, 0)),
+                  text: 'INVOICE FOR ${transaction.transactionCode}',
+                  fields: <PdfAutomaticField>[dateAndTimeField]);
+
+              //Add composite field in header
+              compositeField.draw(
+                  header.graphics,
+                  Offset(
+                      0,
+                      50 -
+                          PdfStandardFont(PdfFontFamily.helvetica, 19).height));
+
+              //Create a bitmap object.
+              PdfBitmap image = PdfBitmap(data);
+
+              //Add the header at top of the document
+              document.template.top = header;
+
+              //Add columns to the grid.
+              grid.columns.add(count: 2);
+
+              //Add a header to the grid.
+              grid.headers.add(1);
+
+              DateTime tempDate =
+                  DateTime.parse(transaction.createdAt ?? '2021-01-01');
+              String createdAt = DateFormat(Styles.formatDate).format(tempDate);
+
+              //Add rows to the grid.
+              PdfGridRow headerTable = grid.headers[0];
+              headerTable.cells[0].value = Str.name;
+              headerTable.cells[1].value = Str.description;
+              //Add rows to the grid.
+              PdfGridRow row = grid.rows.add();
+              row.cells[0].value = Str.name;
+              row.cells[1].value = transaction.userName;
+              row = grid.rows.add();
+              row.cells[0].value = Str.currency;
+              row.cells[1].value = transaction.currency;
+              row = grid.rows.add();
+              row.cells[0].value = Str.amount;
+              row.cells[1].value = transaction.amount;
+              row = grid.rows.add();
+              row.cells[0].value = Str.rateAmount;
+              row.cells[1].value = transaction.rateAmount;
+              row = grid.rows.add();
+              row.cells[0].value = Str.grandTotal;
+              row.cells[1].value = transaction.grandTotal;
+              row = grid.rows.add();
+              row.cells[0].value = Str.method;
+              row.cells[1].value = transaction.paymentMethod;
+              row = grid.rows.add();
+              row.cells[0].value = Str.created;
+              row.cells[1].value = createdAt;
+
+              PdfGridBuiltInStyleSettings tableStyleOption =
+                  PdfGridBuiltInStyleSettings();
+              tableStyleOption.applyStyleForBandedRows = true;
+              tableStyleOption.applyStyleForHeaderRow = true;
+              //Apply built-in table style.
+              grid.applyBuiltInStyle(PdfGridBuiltInStyle.gridTable1Light,
+                  settings: tableStyleOption);
+              //Draw the grid.
+              grid.draw(
+                  page: document.pages.add(),
+                  bounds: const Rect.fromLTWH(10, 10, 0, 0));
+
+              //Add a page to the document and get page graphics
+              PdfGraphics graphics = document.pages[0].graphics;
+
+              //Watermark image
+              PdfGraphicsState state = graphics.save();
+              graphics.setTransparency(0.25);
+              graphics.drawImage(image, const Rect.fromLTWH(0, 0, 512, 512));
+              graphics.restore(state);
+
+              //Create the footer with specific bounds
+              PdfPageTemplateElement footer =
+                  PdfPageTemplateElement(Rect.fromLTWH(0, 0, 0, 50));
+
+              //Create the page number field
+              PdfPageNumberField pageNumber = PdfPageNumberField(
+                  font: PdfStandardFont(PdfFontFamily.helvetica, 19),
+                  brush: PdfSolidBrush(PdfColor(0, 0, 0)));
+
+              //Sets the number style for page number
+              pageNumber.numberStyle = PdfNumberStyle.upperRoman;
+
+              //Create the page count field
+              PdfPageCountField count = PdfPageCountField(
+                  font: PdfStandardFont(PdfFontFamily.helvetica, 19),
+                  brush: PdfSolidBrush(PdfColor(0, 0, 0)));
+
+              //set the number style for page count
+              count.numberStyle = PdfNumberStyle.upperRoman;
+
+              //Create the date and time field
+              PdfDateTimeField dateTimeField = PdfDateTimeField(
+                  font: PdfStandardFont(PdfFontFamily.helvetica, 19),
+                  brush: PdfSolidBrush(PdfColor(0, 0, 0)));
+
+              //Sets the date and time
+              dateTimeField.date = DateTime(2020, 2, 10, 13, 13, 13, 13, 13);
+
+              //Sets the date and time format
+              dateTimeField.dateFormatString = 'hh\':\'mm\':\'ss';
+
+              //Create the composite field with page number page count
+              PdfCompositeField compositeField1 = PdfCompositeField(
+                  font: PdfStandardFont(PdfFontFamily.helvetica, 12),
+                  brush: PdfSolidBrush(PdfColor(0, 0, 0)),
+                  text: '{0} of {1}',
+                  fields: <PdfAutomaticField>[pageNumber, count]);
+              compositeField1.bounds = footer.bounds;
+
+              //Add the composite field in footer
+              compositeField1.draw(
+                  footer.graphics,
+                  Offset(
+                      0,
+                      50 -
+                          PdfStandardFont(PdfFontFamily.helvetica, 12).height));
+
+              //Add the footer at the bottom of the document
+              document.template.bottom = footer;
+
+              //Save the document.
+              List<int> bytes = document.save();
+              //Dispose the document.
+              document.dispose();
+
+              saveAndLaunchFile(bytes, '${transaction.transactionCode}.pdf');
             },
             child: Text(
-              Str.edit.toUpperCase(),
+              Str.print.toUpperCase(),
             ),
             style: ElevatedButton.styleFrom(
                 elevation: 0.0, primary: Styles.successColor),

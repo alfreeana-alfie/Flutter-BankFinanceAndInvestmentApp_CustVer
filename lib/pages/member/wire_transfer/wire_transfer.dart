@@ -258,28 +258,7 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                               Field.transactionCodeInitials +
                                   '$currencyName-' +
                                   getRandomCode(6);
-                          Map<String, String> body = {
-                            Field.userId: userId ?? Field.emptyInt,
-                            Field.currencyId: currency ?? Field.emptyInt,
-                            Field.amount: amount ?? Field.emptyAmount,
-                            Field.fee: fee,
-                            Field.drCr: drCr,
-                            Field.type: type,
-                            Field.method: method,
-                            Field.status: status,
-                            Field.note: note ?? Field.emptyString,
-                            Field.loanId: loanId,
-                            Field.refId: refId,
-                            Field.parentId: parentId,
-                            Field.otherBankId: bank ?? Field.emptyInt,
-                            Field.gatewayId: gatewayId,
-                            Field.createdUserId: userId ?? Field.emptyInt,
-                            Field.updatedUserId: userId ?? Field.emptyInt,
-                            Field.branchId: branchId,
-                            Field.transactionsDetails: transactionsDetails,
-                            Field.accountNo: accountNo ?? Field.emptyInt,
-                            Field.transactionCode: transactionCode
-                          };
+                          
 
                           double newAmount = double.parse(amount!);
                           setState(
@@ -296,6 +275,29 @@ class _MCreateWireTransferState extends State<MCreateWireTransfer> {
                           // Calculation - Wallet subtract Updated Amount
                           double updatedBalance = double.parse(accountBalance!);
                           setState(() => updatedBalance -= updatedAmount);
+
+                          Map<String, String> body = {
+                            Field.userId: userId ?? Field.emptyInt,
+                            Field.currencyId: currency ?? Field.emptyInt,
+                            Field.amount: amount ?? Field.emptyAmount,
+                            Field.fee: rateCharge.toStringAsFixed(2),
+                            Field.drCr: drCr,
+                            Field.type: type,
+                            Field.method: method,
+                            Field.status: status,
+                            Field.note: note ?? Field.emptyString,
+                            Field.loanId: loanId,
+                            Field.refId: refId,
+                            Field.parentId: parentId,
+                            Field.otherBankId: bank ?? Field.emptyInt,
+                            Field.gatewayId: gatewayId,
+                            Field.createdUserId: userId ?? Field.emptyInt,
+                            Field.updatedUserId: userId ?? Field.emptyInt,
+                            Field.branchId: userLoad.branchId!,
+                            Field.transactionsDetails: transactionsDetails,
+                            Field.accountNo: accountNo ?? Field.emptyInt,
+                            Field.transactionCode: transactionCode
+                          };
 
                           emailMessage =
                               'Wire Transfer You have just transferred ${double.parse(amount!).toStringAsFixed(2)} into your account.';

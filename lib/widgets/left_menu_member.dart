@@ -78,6 +78,13 @@ class _SideDrawerMemberState extends State<SideDrawerMember> {
                     Navigator.pushNamed(context, RouteSTR.sendMoneyListM);
                   },
               ),
+              DrawerChild(
+                title: Str.topUpWallet,
+                onNavigate: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pushNamed(context, RouteSTR.walletListM);
+                  },
+              ),
             ],
           ),
           ExpansionTile(

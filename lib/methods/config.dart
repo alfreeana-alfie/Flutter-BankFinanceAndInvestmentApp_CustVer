@@ -359,6 +359,53 @@ class Method {
     }
   }
 
+  static void editFile(
+      BuildContext context,
+      RoundedLoadingButtonController controller,
+      Uri url,
+      Map<String, String> body,
+      String image,
+      String filename,
+      String userType,
+      String type,
+      Widget routePath,
+      String pageName
+      ) async {
+    final request = http.MultipartRequest(Field.postMethod, url)
+      ..fields.addAll(body)
+      ..headers.addAll(headersMultiPart)
+      ..files.add(await http.MultipartFile.fromPath(image, filename));
+
+    var response = await request.send();
+
+    var responseData = await response.stream.toBytes();
+    var responseString = String.fromCharCodes(responseData);
+    print(responseString);
+
+    if (response.statusCode != Status.error) {
+      controller.stop();
+
+      CustomToast.showMsg(Status.success, Styles.successColor);
+      Future.delayed(const Duration(milliseconds: 1500), () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => CardList(
+              userType: userType,
+              type: type,
+              routePath: RouteSTR.createBranch,
+              path: routePath,
+              pageName: pageName,
+            ),
+          ),
+        );
+      });
+    } else {
+      controller.stop();
+      // print(response.body);
+      CustomToast.showMsg(Status.failed, Styles.dangerColor);
+    }
+  }
+
   // ** DELETE FUNCTION
   static void delete(
       BuildContext context,

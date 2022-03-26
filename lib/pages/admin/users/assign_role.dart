@@ -6,6 +6,7 @@ import 'package:flutter_banking_app/utils/size_config.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/widgets/appbar/my_app_bar.dart';
 import 'package:flutter_banking_app/widgets/buttons.dart';
+import 'package:flutter_banking_app/widgets/dropdown/dropdown_branches.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdown_roles.dart';
 import 'package:flutter_banking_app/widgets/dropdown/dropdown_user.dart';
 import 'package:gap/gap.dart';
@@ -24,7 +25,7 @@ class _AssignRoleState extends State<AssignRole> {
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
 
-  String? userType, roleId, userId, userName;
+  String? userType, roleId, userId, userName, branchId, branchName;
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +91,36 @@ class _AssignRoleState extends State<AssignRole> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                        child: Text(Str.branch, style: Styles.primaryTitle),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                        child: Text(
+                          '*',
+                          style: TextStyle(color: Styles.dangerColor),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    child: DropDownBranches(
+                      branch: branchId,
+                      branchName: branchName,
+                      onChanged: (val) {
+                        setState(
+                          () {
+                            branchId = val!.id.toString();
+                            branchName = val.name;
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                  const Gap(20),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
                         child: Text(Str.userRoles, style: Styles.primaryTitle),
                       ),
                       const Padding(
@@ -135,6 +166,8 @@ class _AssignRoleState extends State<AssignRole> {
                       onPressed: () {
                         Map<String, String> body = {
                           Field.userType: userType ?? Field.emptyString,
+                          Field.roleId: roleId ?? Field.empty,
+                          Field.branchId: branchId ?? Field.empty,
                           // Field.description: description ?? Field.emptyString
                         };
 
@@ -157,7 +190,8 @@ class _AssignRoleState extends State<AssignRole> {
                               type: Field.create,
                             ),
                             Str.userList,
-                                Field.empty, '');
+                            Field.empty,
+                            '');
                       },
                       child: Text(Str.submit.toUpperCase()),
                     ),

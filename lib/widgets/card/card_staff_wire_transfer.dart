@@ -1,7 +1,10 @@
 import 'package:expandable/expandable.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/deposit.dart';
+import 'package:flutter_banking_app/pages/admin/users/assign_wire_transfer.dart';
+import 'package:flutter_banking_app/pages/admin/users/submit_attachment.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:flutter_banking_app/utils/values.dart';
@@ -9,9 +12,16 @@ import 'package:flutter_banking_app/widgets/detail.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class CardWireTransfer extends StatelessWidget {
-  const CardWireTransfer({Key? key, required this.deposit, required this.depositList, required this.index}) : super(key: key);
+class CardStaffWireTransfer extends StatelessWidget {
+  const CardStaffWireTransfer(
+      {Key? key,
+      required this.deposit,
+      required this.depositList,
+      required this.index})
+      : super(key: key);
 
   final Deposit deposit;
   final List<Deposit> depositList;
@@ -55,9 +65,11 @@ class CardWireTransfer extends StatelessWidget {
                               color: Styles.accentColor,
                             ),
                             const Gap(20),
-                            Text(deposit.userName ?? Field.emptyString,
-                                style: Theme.of(context).textTheme.headline6,
-                                overflow: TextOverflow.ellipsis,),
+                            Text(
+                              deposit.userName ?? Field.emptyString,
+                              style: Theme.of(context).textTheme.headline6,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ],
                         )),
                     collapsed: const Text(
@@ -124,6 +136,12 @@ class CardWireTransfer extends StatelessWidget {
   }
 
   buildExpanded1(BuildContext context) {
+    DateTime tempDate = DateTime.parse(deposit.createdAt ?? '-');
+    String createdAt = DateFormat('yyyy-MM-dd hh:mm:ss').format(tempDate);
+
+    double rate = double.parse(deposit.fee!);
+    double amount = double.parse(deposit.amount!);
+    double grandTotal = amount - rate;
     // Status
     // String? status;
     // switch (deposit.status) {
@@ -147,20 +165,68 @@ class CardWireTransfer extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DetailRow(labelTitle: Str.userName, labelDetails: deposit.userName ?? Field.emptyString),
             DetailRow(
-                labelTitle: Str.name, labelDetails: deposit.name ?? Field.emptyString),
-            DetailRow(labelTitle: Str.amount, labelDetails: deposit.amount ?? Field.emptyString),
+                labelTitle: Str.name,
+                labelDetails: deposit.userName ?? Field.emptyString),
             DetailRow(
-                labelTitle: Str.fee, labelDetails: deposit.fee ?? Field.emptyString),
+                labelTitle: Str.currency,
+                labelDetails: deposit.name ?? Field.emptyString),
             DetailRow(
-                labelTitle: Str.drCr, labelDetails: deposit.drCr ?? Field.emptyString),
+                labelTitle: Str.amount,
+                labelDetails: deposit.amount ?? Field.emptyString),
+            DetailRow(
+                labelTitle: Str.fee,
+                labelDetails: deposit.fee ?? Field.emptyAmount),
+            DetailRow(
+                labelTitle: Str.grandTotal,
+                labelDetails: grandTotal.toStringAsFixed(2)),
+            DetailRow(labelTitle: Str.created, labelDetails: createdAt),
             // DetailRow(labelTitle: Str.type, labelDetails: deposit.type ?? Field.emptyString),
             // DetailRow(
             //     labelTitle: Str.method, labelDetails: deposit.method ?? Field.emptyString),
             // DetailRow(labelTitle: Str.status, labelDetails: status),
-            // DetailRow(labelTitle: Str.note, labelDetails: deposit.note ?? Field.emptyString),
-            // _buildButtonRow(context),
+            deposit.attachment == null
+                ? _buildButtonRow(context)
+                : Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Expanded(flex: 1, child: Text('Attachment(s)', style: Styles.cardTitle)),
+                // const Gap(7),
+                const Text(
+                  ':',
+                  style: Styles.cardTitle
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: '${deposit.transactionCode}.pdf',
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
+                                  if (await canLaunch(deposit.attachment!)) {
+                                    await launch(deposit.attachment!);
+                                  } else {
+                                    throw 'Could not launch Privacy Policy Link';
+                                  }
+                                },
+                            ),
+                          ],
+                        ),
+                      ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ]),
@@ -173,10 +239,16 @@ class CardWireTransfer extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () {
-              _showMyDialog(context);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => SubmitAttachment(
+                    transactionId: deposit.id.toString(),
+                  ),
+                ),
+              );
             },
             child: Text(
-              Str.delete.toUpperCase(),
+              Str.submitAttachment.toUpperCase(),
               style: GoogleFonts.nunitoSans(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
@@ -185,56 +257,10 @@ class CardWireTransfer extends StatelessWidget {
               ),
             ),
             style: ElevatedButton.styleFrom(
-                elevation: 0.0, primary: Styles.dangerColor),
+                elevation: 0.0, primary: Styles.infoColor),
           ),
         ),
       ],
-    );
-  }
-
-  Future<void> _showMyDialog(BuildContext context) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(Str.deleteConfirmation),
-          content: Text(Str.areYouSure),
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text(
-                Str.cancel.toUpperCase(),
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              style: ElevatedButton.styleFrom(
-                  elevation: 0.0, primary: Styles.primaryColor),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // Navigator.of(context).pop();
-                depositList.removeAt(index);
-                
-                CustomToast.showMsg('Deleting...', Styles.dangerColor);
-
-                // Future.delayed(const Duration(milliseconds: 1000), () {
-                //   DepositMethods.delete(
-                //       context, deposit.id.toString());
-                //   Navigator.popAndPushNamed(context, RouteSTR.depositList);
-                // });
-              },
-              child: Text(
-                Str.delete.toUpperCase(),
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              style: ElevatedButton.styleFrom(
-                  elevation: 0.0, primary: Styles.dangerColor),
-            ),
-          ],
-        );
-      },
     );
   }
 }

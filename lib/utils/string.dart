@@ -1,10 +1,15 @@
 class Str {
-
   static const String creatorId = 'Sale Person ID';
   static const String memberId = 'Member ID';
   static const String invalidConfirmPassword =
       'Invalid Confirm Password/Password!';
   static String back = 'Back';
+  static String from = 'From';
+  static String to = 'To';
+  static String print = 'Print';
+  static String assignedStaff = 'Assigned Staff';
+  static String submitAttachment = 'Submit Attachment';
+  static String assignStaff = 'Assign Staff';
   static String editProfile = 'Edit Profile';
   static String uploadPicture = 'Upload Picture';
   static const String transactionHistory = 'Transaction History';
@@ -443,6 +448,9 @@ class Field {
   // static String ambassador           = 'ambassador';
   static const String topUpAccountant = 'top_up_account';
   static const String update = 'update';
+  static const String assignTo = 'assign_to';
+  static const String fromAcc = 'from_acc';
+  static const String toAcc = 'to_acc';
   static const String walletBalance = 'wallet_balance';
   static const String customerId = 'customer_id';
   static const String loanProduct = 'loan_product';
@@ -643,6 +651,7 @@ class Type {
   static const String userRole = 'user_role';
   static const String walletTransaction = 'wallet_transaction';
   static const String wireTransfer = 'wire_transfer';
+  static const String staffWireTransfer = 'staff_wire_transfer';
   static const String withdraw = 'withdraw';
   static const String topUp = 'top_up';
 }

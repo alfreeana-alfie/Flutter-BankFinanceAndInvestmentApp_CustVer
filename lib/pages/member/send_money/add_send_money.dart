@@ -48,9 +48,10 @@ class _SendMoneyState extends State<MCreateSendMoney> {
       accountName,
       accountBalance,
       walletId;
+  String? toWalletId, toAccountId, toAccountBalance, toAccountName;
   String fee = '12.50',
       drCr = 'Y',
-      type = 'send_money',
+      type = 'Send Money',
       method = 'send_money',
       status = '1',
       loanId = '1',
@@ -105,12 +106,12 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // ** FROM WALLET
                   Row(
                     children: [
                       Padding(
                         padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
-                        child:
-                            Text(Str.accountType, style: Styles.primaryTitle),
+                        child: Text(Str.from, style: Styles.primaryTitle),
                       ),
                       const Padding(
                         padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
@@ -140,12 +141,12 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                     ),
                   ),
                   const Gap(20),
+                  // ** TO ANOTHER WALLET
                   Row(
                     children: [
                       Padding(
                         padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
-                        child:
-                            Text(Str.userAccount, style: Styles.primaryTitle),
+                        child: Text(Str.to, style: Styles.primaryTitle),
                       ),
                       const Padding(
                         padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
@@ -157,23 +158,59 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                     ],
                   ),
                   SizedBox(
-                    child: DropDownUser(
-                      users: toUserId,
-                      usersName: toUserName,
+                    child: DropDownAccount(
+                      walletId: toWalletId,
+                      account: toAccountId,
+                      accountName: accountName,
+                      accountBalance: toAccountBalance,
                       onChanged: (val) {
                         setState(
                           () {
-                            toUserId = val!.id.toString();
-                            toUserName = val.name;
-                            toUserEmail = val.email;
-                            toUserWalletId = val.walletId;
-                            toUserWalletAmount = val.walletBalance;
+                            toWalletId = val!.id.toString();
+                            toAccountId = val.accountId.toString();
+                            toAccountName = val.description ?? 'DEFAULT';
+                            toAccountBalance = val.amount ?? '0.00';
                           },
                         );
                       },
                     ),
                   ),
-                  const Gap(20.0),
+                  const Gap(20),
+                  // Row(
+                  //   children: [
+                  //     Padding(
+                  //       padding: const EdgeInsets.fromLTRB(7, 0, 0, 10),
+                  //       child:
+                  //           Text(Str.userAccount, style: Styles.primaryTitle),
+                  //     ),
+                  //     const Padding(
+                  //       padding: EdgeInsets.fromLTRB(7, 0, 0, 10),
+                  //       child: Text(
+                  //         '*',
+                  //         style: TextStyle(color: Styles.dangerColor),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(
+                  //   child: DropDownUser(
+                  //     users: toUserId,
+                  //     usersName: toUserName,
+                  //     onChanged: (val) {
+                  //       setState(
+                  //         () {
+                  //           toUserId = val!.id.toString();
+                  //           toUserName = val.name;
+                  //           toUserEmail = val.email;
+                  //           toUserWalletId = val.walletId;
+                  //           toUserWalletAmount = val.walletBalance;
+                  //         },
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
+                  // const Gap(20.0),
+                  // ** CURRENCY
                   Row(
                     children: [
                       Padding(
@@ -206,12 +243,14 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                     ),
                   ),
                   const Gap(20.0),
+                  // ** AMOUNT
                   NewField(
                     onSaved: (val) => amount = val,
                     hintText: Str.amount,
                     labelText: Str.amountNum,
                   ),
                   const Gap(10),
+                  // ** BUTTON SUBMIT
                   Container(
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
@@ -231,28 +270,7 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                               Field.transactionCodeInitials +
                                   '$currencyName-' +
                                   getRandomCode(6);
-                          Map<String, String> body = {
-                            Field.userId: userId ?? Field.emptyString,
-                            Field.currencyId: currency ?? '-',
-                            Field.amount: amount ?? '0.00',
-                            Field.fee: fee,
-                            Field.drCr: drCr,
-                            Field.type: type,
-                            Field.method: method,
-                            Field.status: status,
-                            Field.note: note ?? '-',
-                            Field.loanId: loanId,
-                            Field.refId: refId,
-                            Field.parentId: parentId,
-                            Field.otherBankId: otherBankId,
-                            Field.gatewayId: gatewayId,
-                            Field.createdUserId: toUserId ?? '-',
-                            Field.updatedUserId: updatedUserId,
-                            Field.branchId: branchId,
-                            Field.transactionsDetails: transactionsDetails,
-                            Field.transactionCode: transactionCode
-                          };
-
+                          
                           // Navigator.of(context).push(
                           //   MaterialPageRoute(
                           //     builder: (context) => PaymentMethodWalletMenu(
@@ -300,29 +318,52 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                               convertBalance /= double.parse(exchangeRate!));
 
                           double updatedBalanceReceiver =
-                              double.parse(toUserWalletAmount!);
+                              double.parse(toAccountBalance!);
                           setState(
                               () => updatedBalanceReceiver += convertBalance);
 
+                          Map<String, String> body = {
+                            Field.userId: userId ?? Field.emptyString,
+                            Field.currencyId: currency ?? '-',
+                            Field.amount: amount ?? '0.00',
+                            Field.fee: rateCharge.toStringAsFixed(2),
+                            Field.drCr: drCr,
+                            Field.type: type,
+                            Field.method: method,
+                            Field.status: status,
+                            Field.note: note ?? '-',
+                            Field.loanId: loanId,
+                            Field.refId: refId,
+                            Field.parentId: parentId,
+                            Field.otherBankId: otherBankId,
+                            Field.gatewayId: gatewayId,
+                            Field.createdUserId: userId ?? '-',
+                            Field.updatedUserId: updatedUserId,
+                            Field.branchId: userLoad.branchId!,
+                            Field.transactionsDetails: transactionsDetails,
+                            Field.transactionCode: transactionCode
+                          };
+
                           emailMessage =
-                              'Send Money You have just send ${double.parse(amount!).toStringAsFixed(2)} to $toUserName.';
+                              'Send Money You have just send $currencyName ${updatedAmount.toStringAsFixed(2)} to $toAccountName.';
                           emailMessage01 =
-                              'Amount: NGN ${double.parse(amount!).toStringAsFixed(2)} ';
+                              'Amount: $currencyName ${double.parse(amount!).toStringAsFixed(2)} ';
                           emailMessage02 =
                               'Current Rate Charge: NGN ${currentRate.toString()} ';
                           emailMessage03 =
-                              'Total Amount: NGN ${updatedAmount.toStringAsFixed(2)}';
+                              'Total Amount: $currencyName ${updatedAmount.toStringAsFixed(2)}';
                           emailMessageTo =
-                              'Send Money You have just received ${double.parse(amount!).toStringAsFixed(2)} from $userName.';
+                              'Send Money You have just received NGN ${convertBalance.toStringAsFixed(2)} from $accountName.';
                           emailMessageTo01 =
-                              'Amount: NGN ${double.parse(amount!).toStringAsFixed(2)} ';
+                              'Amount: $currencyName ${double.parse(amount!).toStringAsFixed(2)} ';
                           emailMessageTo02 =
                               'Current Rate Charge: NGN ${rateCharge.toStringAsFixed(2)} ';
                           emailMessageTo03 =
-                              'Total Amount: NGN ${updatedAmount.toStringAsFixed(2)}';
+                              'Total Amount: NGN ${convertBalance.toStringAsFixed(2)}';
 
                           Map<String, String> bodySender = {
                             Field.userId: userId ?? '0',
+                            Field.receiverId: toWalletId ?? '0',
                             Field.walletId: walletId ?? '0',
                             Field.accountId: account ?? '0',
                             Field.method: method,
@@ -339,20 +380,21 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                           };
 
                           Map<String, String> bodyReceiver = {
-                            Field.userId: toUserId ?? '0',
-                            Field.walletId: toUserWalletId ?? '0',
-                            Field.accountId: '1',
+                            Field.userId: userId ?? '0',
+                            Field.receiverId: walletId ?? '0',
+                            Field.walletId: toWalletId ?? '0',
+                            Field.accountId: toAccountId ?? '0',
                             Field.method: method,
-                            Field.creditDebit: 'debit',
+                            Field.creditDebit: 'credit',
                             Field.amount:
                                 double.parse(amount!).toStringAsFixed(2),
                             Field.rateAmount: rateCharge.toStringAsFixed(2),
                             Field.grandTotal: convertBalance.toStringAsFixed(2),
                             Field.paymentMethod: 'Send Money',
                             Field.currentRate: currentRate.toString(),
-                            Field.updatedBy: toUserId ?? '0',
+                            Field.updatedBy: userId ?? '0',
                             Field.currencyId: currency ?? '10',
-                            Field.transactionCode:transactionCode,
+                            Field.transactionCode: transactionCode,
                           };
 
                           Map<String, String> updateWalletBodySender = {
@@ -375,7 +417,7 @@ class _SendMoneyState extends State<MCreateSendMoney> {
 
                           WalletMethods.addTransaction(context, bodyReceiver);
                           WalletMethods.update(context,
-                              updateWalletBodyReceiver, toUserWalletId ?? '0');
+                              updateWalletBodyReceiver, toWalletId ?? '0');
 
                           // if (toUserId != null) {
                           if (userLoad.emailVerifiedAt != null) {
@@ -390,8 +432,8 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                                 emailMessage03 ?? 'Default');
                             EmailJS.send(
                                 context,
-                                toUserEmail ?? 'customer@gmail.com',
-                                toUserName ?? 'user',
+                                userLoad.email ?? 'customer@gmail.com',
+                                userLoad.name ?? 'user',
                                 'FVIS Investment',
                                 emailMessageTo ?? 'Default',
                                 emailMessageTo01 ?? 'Default',
@@ -399,9 +441,9 @@ class _SendMoneyState extends State<MCreateSendMoney> {
                                 emailMessageTo03 ?? 'Default');
                           } else if (userLoad.smsVerifiedAt != null) {
                             SMSNigeriaAPI.send(context, userPhone ?? '000',
-                                'Send Money You have just send $amount to $toUserName. FVIS Investment ');
-                            SMSNigeriaAPI.send(context, toUserId ?? '000',
-                                'Send Money You have just received $amount from $userName. FVIS Investment ');
+                                'Send Money You have just send $currencyName ${updatedAmount.toStringAsFixed(2)} to $toAccountName. FVIS Investment ');
+                            SMSNigeriaAPI.send(context, userPhone ?? '000',
+                                'Send Money You have just received NGN ${convertBalance.toStringAsFixed(2)} from $accountName. FVIS Investment ');
                           }
 
                           // WalletMethods.addTransaction(context, toUserBody);

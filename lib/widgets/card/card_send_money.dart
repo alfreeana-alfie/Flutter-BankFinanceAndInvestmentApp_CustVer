@@ -150,8 +150,9 @@ class CardSendMoney extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DetailRow(labelTitle: Str.sender, labelDetails: deposit.userName ?? Field.emptyString),
-            DetailRow(labelTitle: Str.receiver, labelDetails: deposit.receiverName ?? Field.emptyString),
+            DetailRow(labelTitle: Str.name, labelDetails: deposit.userName ?? Field.emptyString),
+            DetailRow(labelTitle: Str.from, labelDetails: deposit.fromAcc ?? Field.emptyString),
+            DetailRow(labelTitle: Str.to, labelDetails: deposit.toAcc ?? Field.emptyString),
             DetailRow(
                 labelTitle: Str.currency, labelDetails: deposit.name ?? Field.emptyString),
             DetailRow(labelTitle: Str.amount, labelDetails: deposit.amount ?? Field.emptyString),

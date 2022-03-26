@@ -1,52 +1,30 @@
 import 'dart:convert';
+
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/config.dart';
 import 'package:flutter_banking_app/models/deposit.dart';
-import 'package:flutter_banking_app/models/transaction.dart';
 import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/utils/api.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
-import 'package:flutter_banking_app/widgets/card/card_deposit.dart';
-import 'package:flutter_banking_app/widgets/card/card_transaction.dart';
-import 'package:flutter_banking_app/widgets/card/card_wire_transfer.dart';
-import 'package:flutter_banking_app/widgets/left_menu.dart';
+import 'package:flutter_banking_app/widgets/card/card_send_money.dart';
 import 'package:flutter_banking_app/widgets/left_menu_member.dart';
 import 'package:gap/gap.dart';
 import 'package:http/http.dart' as http;
-import 'package:oktoast/oktoast.dart';
 
-class WireTransferList extends StatefulWidget {
-  const WireTransferList({Key? key}) : super(key: key);
+class MSendMoneyList extends StatefulWidget {
+  const MSendMoneyList({Key? key}) : super(key: key);
 
   @override
-  _WireTransferListState createState() => _WireTransferListState();
+  _MSendMoneyListState createState() => _MSendMoneyListState();
 }
 
-class _WireTransferListState extends State<WireTransferList> {
+class _MSendMoneyListState extends State<MSendMoneyList> {
   SharedPref sharedPref = SharedPref();
   User userLoad = User();
   late Map<String, dynamic> requestMap;
   List<Deposit> transactionList = [];
-
-  Future view() async {
-    final response =
-        await http.get(AdminAPI.listOfWireTransfer, headers: headers);
-
-    if (response.statusCode == Status.ok) {
-      var jsonBody = jsonDecode(response.body);
-      for (var req in jsonBody[Field.data]) {
-        final data = Deposit.fromMap(req);
-        if (mounted) {
-          transactionList.add(data);
-        }
-      }
-    } else {
-      print(Status.failed);
-      CustomToast.showMsg(Status.failed, Styles.dangerColor);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +36,34 @@ class _WireTransferListState extends State<WireTransferList> {
       //   hasAction: true,
       //   path: RouteSTR.addFdrM,
       // ),
-      drawer: const SideDrawer(),
+      drawer: const SideDrawerMember(),
       backgroundColor: Styles.primaryColor,
       body: _innerContainer(),
     );
   }
 
+  Future view() async {
+    User user = User.fromJSON(await sharedPref.read(Pref.userData));
+    String userId = user.id.toString();
+    
+    Uri viewSingleUser = Uri.parse(API.userSendMoneyList.toString() + userId);
+    final response = await http.get(viewSingleUser, headers: headers);
+
+    if (response.statusCode == Status.ok) {
+      var jsonBody = jsonDecode(response.body);
+      for (var req in jsonBody[Field.data]) {
+        final data = Deposit.fromMap(req);
+        if(mounted) {
+          transactionList.add(data);
+        }
+      }
+    } else {
+      print(Status.failed);
+      CustomToast.showMsg(Status.failed, Styles.dangerColor);
+    }
+  }
+
+  
   _innerContainer() {
     return FutureBuilder(
       future: view(),
@@ -78,7 +78,17 @@ class _WireTransferListState extends State<WireTransferList> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return Column(
+            return ExpandableTheme(
+          data: const ExpandableThemeData(
+            iconColor: Colors.blue,
+            useInkWell: true,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: ListView(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
               children: [
                 SafeArea(
                   child: Padding(
@@ -104,16 +114,15 @@ class _WireTransferListState extends State<WireTransferList> {
                         const Gap(10),
                         Center(
                           child: Text(
-                            Str.wireTransferList,
+                            Str.sendMoneyList,
                             style: const TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Styles.textColor,
-                                fontSize: 19),
+                              fontWeight: FontWeight.w500,
+                                color: Styles.textColor, fontSize: 19),
                           ),
                         ),
                         const Gap(10),
                         InkWell(
-                          // onTap: () => Navigator.pushNamed(context, RouteSTR.addLoanM),
+                          onTap: () => Navigator.pushNamed(context, RouteSTR.sendMoneyM),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: const BoxDecoration(
@@ -122,7 +131,7 @@ class _WireTransferListState extends State<WireTransferList> {
                             ),
                             child: const Icon(
                               Icons.add,
-                              color: Styles.primaryColor,
+                              color: Styles.accentColor,
                             ),
                           ),
                         ),
@@ -130,24 +139,11 @@ class _WireTransferListState extends State<WireTransferList> {
                     ),
                   ),
                 ),
-                Expanded(
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return CardWireTransfer(
-                        deposit: transactionList[index],
-                        depositList: transactionList,
-                        index: index,
-                      );
-                    },
-                    itemCount: transactionList.length,
-                  ),
-                ),
-                // for (Transaction transaction in transactionList)
-                //   CardTransaction(transaction: transaction),
+                for (Deposit transaction in transactionList) CardSendMoney(deposit: transaction),
               ],
-            );
+            ),
+          ),
+        );
           }
         }
       },
