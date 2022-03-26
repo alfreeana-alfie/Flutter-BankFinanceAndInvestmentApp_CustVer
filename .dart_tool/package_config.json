@@ -537,7 +537,7 @@
     },
     {
       "name": "syncfusion_flutter_datepicker",
-      "rootUri": "file:///Users/nana/development/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_datepicker-19.4.47",
+      "rootUri": "file:///Users/nana/development/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_datepicker-19.4.56",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -680,7 +680,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-03-26T11:34:27.029103Z",
+  "generated": "2022-03-26T16:52:22.923830Z",
   "generator": "pub",
   "generatorVersion": "2.15.1"
 }
