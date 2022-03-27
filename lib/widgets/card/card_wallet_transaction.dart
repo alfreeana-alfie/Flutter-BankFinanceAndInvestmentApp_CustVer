@@ -1,9 +1,7 @@
-import 'dart:io';
 
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_banking_app/methods/mobile.dart';
-import 'package:flutter_banking_app/models/transaction.dart';
+import 'package:flutter_banking_app/methods/mobile.dart' if (dart.library.html) 'package:flutter_banking_app/methods/web.dart';
 import 'package:flutter_banking_app/models/wallet_transaction.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
@@ -11,7 +9,6 @@ import 'package:flutter_banking_app/utils/values.dart';
 import 'package:flutter_banking_app/widgets/detail.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 
