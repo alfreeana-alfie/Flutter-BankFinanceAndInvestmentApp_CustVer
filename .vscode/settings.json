@@ -2,9 +2,11 @@
     "git.ignoreLimitWarning": true,
     "cSpell.words": [
         "appbar",
+        "datepicker",
         "FVIS",
         "LTRB",
         "oktoast",
+        "paystack",
         "prefs",
         "syncfusion",
         "textfield"
