@@ -68,6 +68,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "cross_file",
+      "rootUri": "file:///Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/cross_file-0.3.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "crypto",
       "rootUri": "file:///Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-3.0.1",
       "packageUri": "lib/",
@@ -123,7 +129,7 @@
     },
     {
       "name": "file_picker",
-      "rootUri": "file:///Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/file_picker-4.3.3",
+      "rootUri": "file:///Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/file_picker-4.5.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -250,6 +256,24 @@
     {
       "name": "image",
       "rootUri": "file:///Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/image-3.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "image_picker",
+      "rootUri": "file:///Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.8.4+11",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "image_picker_for_web",
+      "rootUri": "file:///Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_for_web-2.1.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "image_picker_platform_interface",
+      "rootUri": "file:///Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_platform_interface-2.4.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -669,7 +693,7 @@
     },
     {
       "name": "win32",
-      "rootUri": "file:///Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/win32-2.3.8",
+      "rootUri": "file:///Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/win32-2.4.4",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
@@ -704,7 +728,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-03-27T06:13:36.029935Z",
+  "generated": "2022-03-27T16:00:13.489687Z",
   "generator": "pub",
   "generatorVersion": "2.15.1"
 }

@@ -1,7 +1,9 @@
 # This is a generated file; do not edit or check into version control.
-file_picker=/Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/file_picker-4.3.3/
+file_picker=/Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/file_picker-4.5.1/
 flutter_paystack=/Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_paystack-1.0.5+1/
 flutter_plugin_android_lifecycle=/Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.5/
+image_picker=/Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.8.4+11/
+image_picker_for_web=/Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_for_web-2.1.6/
 open_file=/Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/open_file-3.2.1/
 path_provider=/Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.8/
 path_provider_android=/Users/nana/Development/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.11/
