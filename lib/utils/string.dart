@@ -7,6 +7,8 @@ class Str {
   static String from = 'From';
   static String to = 'To';
   static String print = 'Print';
+  static String staffList = 'Staff List';
+  static String viewStaff = 'View Staff List';
   static String totalStaff = 'Total Staff';
   static String assignedStaff = 'Assigned Staff';
   static String submitAttachment = 'Submit Attachment';
@@ -625,6 +627,7 @@ class Type {
   static const String accountManager = 'account_manager';
   static const String admin = 'admin';
   static const String branch = 'branch';
+  static const String branchStaff = 'branch_staff';
   static const String currency = 'currency';
   static const String customer = 'customer';
   static const String customerAdmin = 'customer_admin';

@@ -19,13 +19,15 @@ class CardUser extends StatelessWidget {
       this.userLoad,
       required this.users,
       required this.userList,
-      required this.index})
+      required this.index,
+      this.type})
       : super(key: key);
 
   final Users users;
   final User? userLoad;
   final List<Users> userList;
   final int index;
+  final String? type;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +70,8 @@ class CardUser extends StatelessWidget {
                             ),
                             const Gap(20),
                             Container(
-                              constraints: const BoxConstraints(minWidth: 100, maxWidth: 220),
+                              constraints: const BoxConstraints(
+                                  minWidth: 100, maxWidth: 220),
                               child: Text(
                                 users.name ?? Field.emptyString,
                                 style: Theme.of(context).textTheme.headline6,
@@ -180,8 +183,8 @@ class CardUser extends StatelessWidget {
             // DetailRow(
             //     labelTitle: Str.provider,
             //     labelDetails: users.provider ?? Field.emptyString),
-            
-            _buildButtonRow(context),
+
+            if(type != Type.branchStaff) _buildButtonRow(context),
           ],
         ),
       ]),

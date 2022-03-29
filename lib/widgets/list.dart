@@ -71,13 +71,14 @@ class CardList extends StatefulWidget {
       this.path,
       this.userType,
       this.startDate,
-      this.endDate})
+      this.endDate,
+      this.branchId})
       : super(key: key);
 
   final String type, pageName;
   final String? routePath, userType;
   final Widget? path;
-  final String? startDate, endDate;
+  final String? startDate, endDate, branchId;
 
   @override
   _CardListState createState() => _CardListState();
@@ -143,6 +144,9 @@ class _CardListState extends State<CardList> {
     switch (widget.type) {
       case Type.branch:
         url = AdminAPI.listOfBranch;
+        break;
+      case Type.branchStaff:
+        url = Uri.parse(API.listofStaffByBranches.toString() + widget.branchId!);
         break;
       case Type.loan:
         url = AdminAPI.listOfLoanRequest;
@@ -256,7 +260,7 @@ class _CardListState extends State<CardList> {
     }
 
     final response = await http.get(url!, headers: headers);
-    
+
     if (response.statusCode == Status.ok) {
       var jsonBody = jsonDecode(response.body);
       switch (widget.type) {
@@ -265,6 +269,14 @@ class _CardListState extends State<CardList> {
             final data = Branch.fromMap(req);
             setState(() {
               branchList.add(data);
+            });
+          }
+          break;
+        case Type.branchStaff:
+          for (var req in jsonBody[Field.data]) {
+            final data = Users.fromMap(req);
+            setState(() {
+              userList.add(data);
             });
           }
           break;
@@ -564,6 +576,36 @@ class _CardListState extends State<CardList> {
         // Refresh the UI
         setState(() {
           _foundBranchList = results;
+        });
+        break;
+      case Type.branchStaff:
+        List<Users> results = [];
+        if (enteredKeyword.isEmpty) {
+          results = userList;
+        } else {
+          results = userList
+              .where((data) => data.name!
+                  .toLowerCase()
+                  .contains(enteredKeyword.toLowerCase()))
+              .toList();
+
+          if (results.isEmpty) {
+            results = userList
+                .where((data) => data.id
+                    .toString()
+                    .toLowerCase()
+                    .contains(enteredKeyword.toLowerCase()))
+                .toList();
+
+            setState(() {
+              _foundUserList = results;
+            });
+          }
+        }
+
+        // Refresh the UI
+        setState(() {
+          _foundUserList = results;
         });
         break;
       case Type.currency:
@@ -1745,6 +1787,37 @@ class _CardListState extends State<CardList> {
                   },
                 ),
         );
+      case Type.branchStaff:
+        return Expanded(
+          child: _foundUserList.isNotEmpty
+              ? ListView.builder(
+                  itemCount: _foundUserList.length,
+                  itemBuilder: (context, index) => Card(
+                      key: ValueKey(_foundUserList[index].id),
+                      color: Styles.transparentColor,
+                      elevation: 0.0,
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      child: CardUser(
+                        type: Type.branchStaff,
+                        users: _foundUserList[index],
+                        userList: _foundUserList,
+                        index: index,
+                      )),
+                )
+              : ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: userList.length,
+                  itemBuilder: (context, index) {
+                    return CardUser(
+                      type: Type.branchStaff,
+                      users: userList[index],
+                      userList: userList,
+                      index: index,
+                    );
+                  },
+                ),
+        );
       case Type.currency:
         return Expanded(
           child: _foundCurrencyList.isNotEmpty
@@ -2701,7 +2774,8 @@ class _CardListState extends State<CardList> {
                       routePath: Type.nullable,
                       pageName: Str.transactionHistory,
                       startDate: f.format(startDate!).toString(),
-                      endDate: endDate != null ? f.format(endDate!).toString() : '',
+                      endDate:
+                          endDate != null ? f.format(endDate!).toString() : '',
                       // path: BranchLayout(
                       //   type: Field.create,
                       // ),

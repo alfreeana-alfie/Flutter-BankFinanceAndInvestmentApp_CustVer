@@ -16,6 +16,8 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
+import '../list.dart';
+
 class CardBranchOld extends StatelessWidget {
   const CardBranchOld(
       {Key? key,
@@ -283,7 +285,6 @@ class CardBranch extends StatefulWidget {
 }
 
 class _CardBranchState extends State<CardBranch> {
-
   @override
   Widget build(BuildContext context) {
     return ExpandableNotifier(
@@ -415,9 +416,9 @@ class _CardBranchState extends State<CardBranch> {
             DetailRow(
                 labelTitle: Str.descriptions,
                 labelDetails: widget.branch.descriptions ?? Field.emptyString),
-            DetailRow(
-                labelTitle: Str.totalStaff,
-                labelDetails: widget.branchList.length.toString()),
+            // DetailRow(
+            //     labelTitle: Str.totalStaff,
+            //     labelDetails: widget.branchList.length.toString()),
             _buildButtonRow(context),
           ],
         ),
@@ -426,45 +427,70 @@ class _CardBranchState extends State<CardBranch> {
   }
 
   _buildButtonRow(BuildContext context) {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => BranchLayout(
-                    branch: widget.branch,
-                    type: Field.update,
-                  ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => CardList(
+                  branchId: widget.branch.id.toString(),
+                  type: Type.branchStaff,
+                  routePath: Type.nullable,
+                  pageName: Str.staffList,
                 ),
-              );
-            },
-            child: Text(
-              Str.edit.toUpperCase(),
-            ),
-            style: ElevatedButton.styleFrom(
-                elevation: 0.0, primary: Styles.successColor),
+              ),
+            );
+          },
+          child: Text(
+            Str.viewStaff.toUpperCase(),
           ),
+          style: ElevatedButton.styleFrom(
+              elevation: 0.0, primary: Styles.infoColor),
         ),
-        const Gap(20),
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {
-              _showMyDialog(context);
-            },
-            child: Text(
-              Str.delete.toUpperCase(),
-              style: GoogleFonts.nunitoSans(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Styles.primaryColor,
-                letterSpacing: 0.5,
+        const Gap(10),
+        Row(
+          children: [
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => BranchLayout(
+                        branch: widget.branch,
+                        type: Field.update,
+                      ),
+                    ),
+                  );
+                },
+                child: Text(
+                  Str.edit.toUpperCase(),
+                ),
+                style: ElevatedButton.styleFrom(
+                    elevation: 0.0, primary: Styles.successColor),
               ),
             ),
-            style: ElevatedButton.styleFrom(
-                elevation: 0.0, primary: Styles.dangerColor),
-          ),
+            const Gap(20),
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () {
+                  _showMyDialog(context);
+                },
+                child: Text(
+                  Str.delete.toUpperCase(),
+                  style: GoogleFonts.nunitoSans(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Styles.primaryColor,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                    elevation: 0.0, primary: Styles.dangerColor),
+              ),
+            ),
+          ],
         ),
       ],
     );
