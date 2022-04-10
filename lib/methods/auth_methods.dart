@@ -73,7 +73,7 @@ void getUserDetails(
       'Authorization': 'Bearer $accessToken',
     });
 
-    if (response.statusCode == Status.ok) {
+    if (response.statusCode != Status.error) {
       if (sharedPref.read(Pref.userData) != null) {
         // sharedPref.remove(Pref.expiredAt);
         // sharedPref.remove(Pref.accessToken);
@@ -116,7 +116,7 @@ void getUserDetails(
     }
   } catch (e) {
     print(e);
-    CustomToast.showMsg('Incorrect Email/Password', Styles.dangerColor);
+    // CustomToast.showMsg('Failed to Login', Styles.dangerColor);
   }
 }
 
@@ -284,8 +284,10 @@ void updateProfileBytes(
       Field.postMethod, Uri.parse(API.updateProfile.toString() + userId))
     ..fields.addAll(body)
     ..headers.addAll(headersMultiPart)
-    ..files.addAll(
-        {http.MultipartFile.fromBytes(Field.profilePicture, listData, filename: userId)});
+    ..files.addAll({
+      http.MultipartFile.fromBytes(Field.profilePicture, listData,
+          filename: userId)
+    });
 
   var response = await request.send();
 

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/models/wallet.dart';
 import 'package:flutter_banking_app/pages/member/wallet/top_up.dart';
@@ -7,7 +5,6 @@ import 'package:flutter_banking_app/utils/layouts.dart';
 import 'package:flutter_banking_app/utils/string.dart';
 import 'package:flutter_banking_app/utils/styles.dart';
 import 'package:gap/gap.dart';
-import 'package:intl/intl.dart';
 
 class CardWallet extends StatelessWidget {
   const CardWallet({Key? key, required this.userWallet}) : super(key: key);
@@ -17,8 +14,8 @@ class CardWallet extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = Layouts.getSize(context);
 
-    var currency =
-        NumberFormat.simpleCurrency(locale: Platform.localeName, name: 'NGN');
+    // var currency =
+    //     NumberFormat.simpleCurrency(locale: Platform.localeName, name: 'NGN');
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
@@ -46,7 +43,8 @@ class CardWallet extends StatelessWidget {
                             fontSize: 22,
                             color: Colors.white)),
                     const Gap(5),
-                    Text('NGN ${double.parse(userWallet.amount ?? Field.emptyAmount).toStringAsFixed(2)}',
+                    Text(
+                        'NGN ${double.parse(userWallet.amount ?? Field.emptyAmount).toStringAsFixed(2)}',
                         style: const TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 20,
