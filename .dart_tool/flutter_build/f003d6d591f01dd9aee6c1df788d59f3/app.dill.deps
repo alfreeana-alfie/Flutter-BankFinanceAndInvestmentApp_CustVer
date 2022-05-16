@@ -1907,8 +1907,9 @@ file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/auth/profile_editable.d
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/auth/profile_overview.dart
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/auth/sign_in.dart
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/auth/sign_up.dart
-file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/failed.dart
+file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/failed_web.dart
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/member/checkout/payment_method_send.dart
+file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/member/checkout/payment_method_send_web.dart
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/member/dashboard.dart
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/member/exchange_money/add_exchange_money.dart
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/member/exchange_money/exchange_money_list.dart
@@ -1917,7 +1918,7 @@ file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/member/fdr/fdr_list.dar
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/member/loans/add_loan.dart
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/member/loans/loan_cal.dart
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/member/loans/loan_list.dart
-file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/member/membership/proceed_payment.dart
+file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/member/membership/proceed_payment_web.dart
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/member/membership/upgrade_plan.dart
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/member/payment_request/add_payment_request.dart
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/member/payment_request/payment_request_list.dart
@@ -1933,7 +1934,7 @@ file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/member/wire_transfer/wi
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/member/wire_transfer/wire_transfer_list.dart
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/member/withdraw/create_withdraw.dart
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/member/withdraw/withdraw_list.dart
-file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/success.dart
+file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/success_web.dart
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/pages/webview.dart
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/utils/api.dart
 file:///Users/nana/Document/GitHub/bank-fvisng/lib/utils/iconly/iconly_bold.dart
