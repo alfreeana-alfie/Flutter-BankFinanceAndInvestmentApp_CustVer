@@ -152,6 +152,9 @@ class CardUser extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DetailRow(
+                labelTitle: Str.userId,
+                labelDetails: users.id.toString()),
+            DetailRow(
                 labelTitle: Str.name,
                 labelDetails: users.name ?? Field.emptyString),
             DetailRow(

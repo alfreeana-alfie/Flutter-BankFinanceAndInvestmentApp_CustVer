@@ -108,11 +108,14 @@
     <orderEntry type="library" name="Gradle: androidx.tracing:tracing:1.0.0@aar" level="project" />
     <orderEntry type="module" module-name="android.file_picker" />
     <orderEntry type="module" module-name="android.sqflite" />
-    <orderEntry type="module" module-name="android.stripe_android" />
     <orderEntry type="module" module-name="android.flutter_plugin_android_lifecycle" />
-    <orderEntry type="module" module-name="android.flutter_paystack" />
-    <orderEntry type="module" module-name="android.shared_preferences_android" />
-    <orderEntry type="module" module-name="android.path_provider_android" />
+    <orderEntry type="module" module-name="android.open_file" />
     <orderEntry type="module" module-name="android.url_launcher_android" />
+    <orderEntry type="module" module-name="android.stripe_android" />
+    <orderEntry type="module" module-name="android.webview_flutter_android" />
+    <orderEntry type="module" module-name="android.flutter_paystack" />
+    <orderEntry type="module" module-name="android.image_picker" />
+    <orderEntry type="module" module-name="android.path_provider_android" />
+    <orderEntry type="module" module-name="android.shared_preferences_android" />
   </component>
 </module>

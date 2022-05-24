@@ -57,6 +57,24 @@
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/url_launcher_ios/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/url_launcher_ios/example/build" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/url_launcher_ios/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/open_file/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/open_file/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/open_file/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/image_picker/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/image_picker/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/image_picker/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/open_file/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/open_file/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/open_file/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/webview_flutter_wkwebview/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/webview_flutter_wkwebview/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/webview_flutter_wkwebview/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/image_picker/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/image_picker/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/image_picker/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/webview_flutter_wkwebview/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/webview_flutter_wkwebview/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/webview_flutter_wkwebview/.dart_tool" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

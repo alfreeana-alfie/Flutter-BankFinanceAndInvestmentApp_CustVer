@@ -1,6 +1,7 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_banking_app/methods/config.dart';
+import 'package:flutter_banking_app/models/user.dart';
 import 'package:flutter_banking_app/models/users.dart';
 import 'package:flutter_banking_app/pages/admin/users_layout.dart';
 import 'package:flutter_banking_app/utils/api.dart';
@@ -15,14 +16,18 @@ import 'package:google_fonts/google_fonts.dart';
 class CardUser extends StatelessWidget {
   const CardUser(
       {Key? key,
+      this.userLoad,
       required this.users,
       required this.userList,
-      required this.index})
+      required this.index,
+      this.type})
       : super(key: key);
 
   final Users users;
+  final User? userLoad;
   final List<Users> userList;
   final int index;
+  final String? type;
 
   @override
   Widget build(BuildContext context) {
@@ -56,16 +61,23 @@ class CardUser extends StatelessWidget {
                         child: Row(
                           children: [
                             CircleAvatar(
-                                backgroundImage:
-                                    NetworkImage(userLoad.profilePicture ?? Values.userDefaultImage),
-                                // backgroundImage: AssetImage(Values.userPath),
-                                minRadius: 10,
-                                maxRadius: 50,
-                              ),
+                              backgroundImage: NetworkImage(
+                                  users.profilePicture ??
+                                      Values.userDefaultImage),
+                              // backgroundImage: AssetImage(Values.userPath),
+                              minRadius: 10,
+                              maxRadius: 20,
+                            ),
                             const Gap(20),
-                            Text(users.name ?? Field.emptyString,
+                            Container(
+                              constraints: const BoxConstraints(
+                                  minWidth: 100, maxWidth: 220),
+                              child: Text(
+                                users.name ?? Field.emptyString,
                                 style: Theme.of(context).textTheme.headline6,
-                                overflow: TextOverflow.ellipsis,),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
                           ],
                         )),
                     collapsed: const Text(
@@ -140,22 +152,28 @@ class CardUser extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DetailRow(
+                labelTitle: Str.userId,
+                labelDetails: users.ID. ?? Field.emptyString),
+            DetailRow(
                 labelTitle: Str.name,
                 labelDetails: users.name ?? Field.emptyString),
             DetailRow(
                 labelTitle: Str.email,
                 labelDetails: users.email ?? Field.emptyString),
             DetailRow(
+                labelTitle: Str.countryCode,
+                labelDetails: users.countryCode ?? Field.emptyString),
+            DetailRow(
                 labelTitle: Str.phoneNumber,
                 labelDetails: users.phone ?? Field.emptyString),
             DetailRow(
                 labelTitle: Str.userType,
                 labelDetails: users.userType ?? Field.emptyString),
-            DetailRow(
-                labelTitle: Str.role, labelDetails: users.roleId.toString()),
-            DetailRow(
-                labelTitle: Str.branch,
-                labelDetails: users.branchId.toString()),
+            // DetailRow(
+            //     labelTitle: Str.role, labelDetails: users.roleId.toString()),
+            // DetailRow(
+            //     labelTitle: Str.branch,
+            //     labelDetails: users.branchId.toString()),
             DetailRow(
                 labelTitle: Str.status, labelDetails: users.status.toString()),
             // DetailRow(labelTitle: Str.profilePicture, labelDetails: users.profilePicture ?? Field.emptyString),
@@ -165,13 +183,11 @@ class CardUser extends StatelessWidget {
             DetailRow(
                 labelTitle: Str.smsVerifiedAt,
                 labelDetails: users.smsVerifiedAt ?? Field.emptyString),
-            DetailRow(
-                labelTitle: Str.provider,
-                labelDetails: users.provider ?? Field.emptyString),
-            DetailRow(
-                labelTitle: Str.countryCode,
-                labelDetails: users.countryCode ?? Field.emptyString),
-            _buildButtonRow(context),
+            // DetailRow(
+            //     labelTitle: Str.provider,
+            //     labelDetails: users.provider ?? Field.emptyString),
+
+            if(type != Type.branchStaff) _buildButtonRow(context),
           ],
         ),
       ]),
@@ -189,6 +205,8 @@ class CardUser extends StatelessWidget {
                   builder: (context) => UsersLayout(
                     user: users,
                     type: Field.update,
+                    userLoad: userLoad,
+                    creatorType: userLoad!.userType,
                   ),
                 ),
               );
@@ -250,16 +268,19 @@ class CardUser extends StatelessWidget {
 
                 CustomToast.showMsg('Deleting...', Styles.dangerColor);
 
-                Method.delete(
+                Method.deleteUser(
                     context,
                     Uri.parse(
                         AdminAPI.deleteUser.toString() + users.id.toString()),
-                    Type.userList,
+                    Type.customerAdmin,
                     UsersLayout(
                       type: Field.create,
+                      userLoad: userLoad,
+                      creatorType: userLoad!.userType!,
                     ),
-                    Str.userList,
-                    Field.empty);
+                    Str.customerList,
+                    Field.empty,
+                    '');
               },
               child: Text(
                 Str.delete.toUpperCase(),
