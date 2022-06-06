@@ -160,7 +160,7 @@ class CardUser extends StatelessWidget {
           children: [
             DetailRow(
                 labelTitle: Str.userId,
-                labelDetails: type != Type.branchStaff
+                labelDetails: users.userType == Field.customer
                     ? users.id.toString()
                     : 'FVIS-$branchName-${users.id.toString()}'),
             // DetailRow(
