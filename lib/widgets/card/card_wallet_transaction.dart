@@ -225,7 +225,7 @@ class CardWalletTransaction extends StatelessWidget {
               dateAndTimeField.dateFormatString = 'E, MM.dd.yyyy';
 
               var url =
-                  "https://villasearch.de/assets/assets/images/logoTransparent.png";
+                  'https://villasearch.de/assets/assets/images/logoTransparent.png';
               var response = await http.get(Uri.parse(url));
               var data = response.bodyBytes;
 

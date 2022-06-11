@@ -3,7 +3,7 @@ import 'package:flutter_banking_app/utils/styles.dart';
 
 // ?? START -- CUSTOM TEXT FIELD
   class NewField extends StatefulWidget {
-    NewField(
+    const NewField(
         {this.onSaved,
         this.hintText,
         this.textInputType,
@@ -92,7 +92,7 @@ import 'package:flutter_banking_app/utils/styles.dart';
 
 // ?? START -- CLICKABLE TEXT FIELD
   class NewFieldClickable extends StatefulWidget {
-    NewFieldClickable(
+    const NewFieldClickable(
         {required this.onSaved,
         required this.hintText,
         this.textInputType,

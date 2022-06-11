@@ -55,7 +55,7 @@ class SuccessPage extends StatelessWidget {
                     width: double.maxFinite,
                     child: ElevatedButton(
                       onPressed: () {
-                        html.window.open('https://villasearch.de/#/dashboard-member',"_self");
+                        html.window.open('https://villasearch.de/#/dashboard-member','_self');
                         // Navigator.push(
                         //     context,
                         //     MaterialPageRoute(builder: (context) => const BottomNav()),

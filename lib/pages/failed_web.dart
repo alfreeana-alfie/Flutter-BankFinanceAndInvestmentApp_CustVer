@@ -59,7 +59,7 @@ class FailedPage extends StatelessWidget {
                         //     context,
                         //     MaterialPageRoute(builder: (context) => const BottomNav()),
                         //   );
-                        html.window.open('https://villasearch.de/#/dashboard-member',"_self");
+                        html.window.open('https://villasearch.de/#/dashboard-member','_self');
                       },
                       child: const Text(
                         'PROCEED',

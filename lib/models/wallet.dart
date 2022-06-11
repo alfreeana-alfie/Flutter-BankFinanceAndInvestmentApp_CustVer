@@ -29,6 +29,6 @@ class Wallet {
         amount = json[Field.amount];
 
   String walletAsString() {
-    return '#${this.description} ${this.amount}';
+    return '#${description} ${amount}';
   }
 }

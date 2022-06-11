@@ -326,7 +326,7 @@ class _PaymentMethodsMenuState extends State<PaymentMethodsMenu> {
         // } else {
         //   throw 'Could not launch BillPlz Redirect URL';
         // }
-        html.window.open(response.body,"_self");
+        html.window.open(response.body,'_self');
       }
     } else {
       // print(response.body);

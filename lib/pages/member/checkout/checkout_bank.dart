@@ -21,7 +21,7 @@ class _CheckoutMethodBankState extends State<CheckoutMethodBank> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Check method method(selectable)",
+          'Check method method(selectable)',
         ),
         centerTitle: true,
         elevation: 0.0,
@@ -31,7 +31,7 @@ class _CheckoutMethodBankState extends State<CheckoutMethodBank> {
           child: Center(
             child: ElevatedButton(
               child: Text(
-                isGeneratingCode ? "Processing.." : "Charge",
+                isGeneratingCode ? 'Processing..' : 'Charge',
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
@@ -47,7 +47,7 @@ class _CheckoutMethodBankState extends State<CheckoutMethodBank> {
     });
 
     Map accessCode = await createAccessCode(
-        "sk_test_faa379125c75547ae5db0b99b5f167ee052da92b", '1', '1');
+        'sk_test_faa379125c75547ae5db0b99b5f167ee052da92b', '1', '1');
 
     setState(() {
       isGeneratingCode = !isGeneratingCode;
@@ -55,7 +55,7 @@ class _CheckoutMethodBankState extends State<CheckoutMethodBank> {
 
     Charge charge = Charge()
       ..amount = 10000
-      ..accessCode = accessCode["data"]["access_code"]
+      ..accessCode = accessCode['data']['access_code']
       ..email = 'johnsonoye34@gmail.com';
     CheckoutResponse response = await plugin.checkout(
       context,
@@ -99,7 +99,7 @@ class _CheckoutMethodBankState extends State<CheckoutMethodBank> {
               ),
               SizedBox(height: 15),
               Text(
-                "Error in processing payment, please try again",
+                'Error in processing payment, please try again',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 13),
               ),
@@ -113,7 +113,7 @@ class _CheckoutMethodBankState extends State<CheckoutMethodBank> {
   @override
   void initState() {
     plugin.initialize(
-        publicKey: "pk_test_7577b1531016880743e16f17ba818cd14a08f1d2");
+        publicKey: 'pk_test_7577b1531016880743e16f17ba818cd14a08f1d2');
     super.initState();
   }
 
@@ -152,10 +152,10 @@ class _CheckoutMethodBankState extends State<CheckoutMethodBank> {
               ),
               SizedBox(height: 15),
               Text(
-                "Your payment has been successfully",
+                'Your payment has been successfully',
                 style: TextStyle(fontSize: 13),
               ),
-              Text("processed.", style: TextStyle(fontSize: 13)),
+              Text('processed.', style: TextStyle(fontSize: 13)),
             ],
           ),
         ),

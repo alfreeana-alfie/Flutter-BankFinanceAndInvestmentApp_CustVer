@@ -69,7 +69,7 @@ class WebPage extends StatefulWidget {
 class _WebPageState extends State<WebPage> {
   late WebViewController _control;
   User userLoad = User();
-  GlobalKey _globalKey = GlobalKey();
+  final GlobalKey _globalKey = GlobalKey();
 
   String? amount,
       userId,
@@ -374,7 +374,7 @@ class _WebPageState extends State<WebPage> {
             _control = webViewController;
           },
           onProgress: (int progress) {
-            print("WebView is loading (progress : $progress%)");
+            print('WebView is loading (progress : $progress%)');
           },
           javascriptChannels: {
             _toasterJavascriptChannel(context),
@@ -444,21 +444,21 @@ class _WebPageState extends State<WebPage> {
                         event.add(false);
                       },
 
-                      child: Text("No"), // No
+                      child: Text('No'), // No
                     ),
                     TextButton(
                       onPressed: () {
                         Navigator.of(context).pop();
                         event.add(true);
                       },
-                      child: Text("Yes"), // Yes
+                      child: Text('Yes'), // Yes
                     ),
                   ],
                 );
               }));
 
       //Navigator.pop(_globalKey.currentState!.context);
-      print("_notifier.isBack ${_notifier!.isBack}");
+      print('_notifier.isBack ${_notifier!.isBack}');
       return _notifier!.isBack;
     }
   }
