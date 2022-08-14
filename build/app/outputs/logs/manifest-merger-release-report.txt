@@ -1,0 +1,347 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:1:1-42:12
+INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:1:1-42:12
+INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:1:1-42:12
+INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:1:1-42:12
+MERGED from [:file_picker] /Users/nana/Document/GitHub/bank-fvisng/build/file_picker/intermediates/library_manifest/release/AndroidManifest.xml:2:1-17:12
+MERGED from [:sqflite] /Users/nana/Document/GitHub/bank-fvisng/build/sqflite/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
+MERGED from [:image_picker] /Users/nana/Document/GitHub/bank-fvisng/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:2:1-19:12
+MERGED from [:flutter_plugin_android_lifecycle] /Users/nana/Document/GitHub/bank-fvisng/build/flutter_plugin_android_lifecycle/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
+MERGED from [:open_file] /Users/nana/Document/GitHub/bank-fvisng/build/open_file/intermediates/library_manifest/release/AndroidManifest.xml:2:1-24:12
+MERGED from [:url_launcher_android] /Users/nana/Document/GitHub/bank-fvisng/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:2:1-14:12
+MERGED from [:webview_flutter_android] /Users/nana/Document/GitHub/bank-fvisng/build/webview_flutter_android/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
+MERGED from [:flutter_paystack] /Users/nana/Document/GitHub/bank-fvisng/build/flutter_paystack/intermediates/library_manifest/release/AndroidManifest.xml:2:1-15:12
+MERGED from [:path_provider_android] /Users/nana/Document/GitHub/bank-fvisng/build/path_provider_android/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
+MERGED from [:shared_preferences_android] /Users/nana/Document/GitHub/bank-fvisng/build/shared_preferences_android/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/nana/.gradle/caches/transforms-2/files-2.1/7af74f217ce57b14dddd5d8caa022856/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/nana/.gradle/caches/transforms-2/files-2.1/182240f8b16407e524ae37a84fd52c33/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/1577b6cf885419e92595df3cf41b3709/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.webkit:webkit:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/17b05a31d06143362d46f50a42b1cdc5/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.material:material:1.4.0-alpha01] /Users/nana/.gradle/caches/transforms-2/files-2.1/5ad1fac9aa21938856afe9a1f8c978e4/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/d6773df94d25d017c45c62363f5f071d/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/nana/.gradle/caches/transforms-2/files-2.1/ad5306631774dfbf91633e039613a5e8/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat:1.2.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/9a97cbfdbe6c01e070a9efeedd3c15ad/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/379efdb9bccd66f58b90f75f309feae7/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media:media:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/17e7bbd6fce0a70088d40794f82556e3/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/d4cbfe54d761f0406aacca9459beb7d9/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/61edfe9b2bac4bbb2fa22fc7c05f78ed/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/811d064b65bf0c1aa0156336cfe0af25/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/eff87588307c4f320b2b697e69d4dc28/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.2.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/9ed43edaf962ea8393cde5ced161d478/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.2.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/2494157c9f190cb4289e73f75403019f/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/d22070b4e8484a60e2dbeca018f97a30/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/2e859bd431be151d7dbd548cd1c74ec4/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/3935877efe974478fed18b450fa84df5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/8641e7a8f804aa9764909702d5ae409c/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/c485ac7e2c003675be3d735beba39029/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/e118a8175beb564ec890757fb6dc2c11/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/352a8af7d85797644b11606406531ad5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/95d41de5bfd6ef7675d9a96f7d2f6e7b/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/32dccc5bc6ea12adb7637a5fb4de5baf/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/f0dad4000251725a2f5214bf094b8a23/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/0defc531e89af4dd466c3ae33e9e2479/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.6.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/dfafbe39ad2eb551b215dd0bd7435ba0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/424da9fc5a5de43c481118873929b57d/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/3c4b6f16c9a66e711662f829a2130d8f/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/288b702a4bd10ee96075e6a61f805201/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/747924bad0e993703dbfaf141dc95c45/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/21658ea0709823076067ee3868a7912c/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/69f95230e5a395fe8df7d5328c7c02df/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/2ee86ff2c3e7fd4b1b2eaa62d5b925f5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/92754eaefeba170c756c231d4b5c4a03/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/nana/.gradle/caches/transforms-2/files-2.1/081be3b719aa4aa712220d6108dc6a38/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/b8a6ff4c27bd8c7e05481afbc7b04d7b/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/0be197b216b05f20b71bf18a497d4132/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/5f139cd80676863786a44fa88c89d7fe/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/fd82819a68d5b5651552f1bc0f882f56/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/51f614c62fbb9618a217ba25654e4294/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/e049b323e3bfc8c6cf3be947f1d1e0d4/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/e2899b5b00ccba046776765f67328380/AndroidManifest.xml:17:1-24:12
+INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:1:1-42:12
+INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:1:1-42:12
+INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:1:1-42:12
+	package
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:2:5-46
+		INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:1:1-42:12
+		INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:1:1-42:12
+		INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:3:5-66
+	android:name
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:3:22-64
+application
+ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:4:4-41:19
+MERGED from [:image_picker] /Users/nana/Document/GitHub/bank-fvisng/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:7:5-17:19
+MERGED from [:image_picker] /Users/nana/Document/GitHub/bank-fvisng/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:7:5-17:19
+MERGED from [:open_file] /Users/nana/Document/GitHub/bank-fvisng/build/open_file/intermediates/library_manifest/release/AndroidManifest.xml:11:5-22:19
+MERGED from [:open_file] /Users/nana/Document/GitHub/bank-fvisng/build/open_file/intermediates/library_manifest/release/AndroidManifest.xml:11:5-22:19
+MERGED from [:url_launcher_android] /Users/nana/Document/GitHub/bank-fvisng/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:7:5-12:19
+MERGED from [:url_launcher_android] /Users/nana/Document/GitHub/bank-fvisng/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:7:5-12:19
+MERGED from [:flutter_paystack] /Users/nana/Document/GitHub/bank-fvisng/build/flutter_paystack/intermediates/library_manifest/release/AndroidManifest.xml:9:5-13:19
+MERGED from [:flutter_paystack] /Users/nana/Document/GitHub/bank-fvisng/build/flutter_paystack/intermediates/library_manifest/release/AndroidManifest.xml:9:5-13:19
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/nana/.gradle/caches/transforms-2/files-2.1/182240f8b16407e524ae37a84fd52c33/AndroidManifest.xml:24:5-31:19
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/nana/.gradle/caches/transforms-2/files-2.1/182240f8b16407e524ae37a84fd52c33/AndroidManifest.xml:24:5-31:19
+MERGED from [com.google.android.material:material:1.4.0-alpha01] /Users/nana/.gradle/caches/transforms-2/files-2.1/5ad1fac9aa21938856afe9a1f8c978e4/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.4.0-alpha01] /Users/nana/.gradle/caches/transforms-2/files-2.1/5ad1fac9aa21938856afe9a1f8c978e4/AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/nana/.gradle/caches/transforms-2/files-2.1/ad5306631774dfbf91633e039613a5e8/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/nana/.gradle/caches/transforms-2/files-2.1/ad5306631774dfbf91633e039613a5e8/AndroidManifest.xml:9:5-20
+MERGED from [androidx.core:core:1.6.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/dfafbe39ad2eb551b215dd0bd7435ba0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.6.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/dfafbe39ad2eb551b215dd0bd7435ba0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/nana/.gradle/caches/transforms-2/files-2.1/081be3b719aa4aa712220d6108dc6a38/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/nana/.gradle/caches/transforms-2/files-2.1/081be3b719aa4aa712220d6108dc6a38/AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.6.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/dfafbe39ad2eb551b215dd0bd7435ba0/AndroidManifest.xml:24:18-86
+	android:label
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:5:9-43
+	android:icon
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:6:9-43
+activity#com.example.flutter_banking_app.MainActivity
+ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:7:9-35:20
+	android:launchMode
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:9:13-43
+	android:hardwareAccelerated
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:12:13-47
+	android:windowSoftInputMode
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:13:13-55
+	android:configChanges
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:11:13-163
+	android:theme
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:10:13-47
+	android:name
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:8:13-41
+meta-data#io.flutter.embedding.android.NormalTheme
+ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:18:13-21:17
+	android:resource
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:20:15-52
+	android:name
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:19:15-70
+meta-data#io.flutter.embedding.android.SplashScreenDrawable
+ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:27:13-30:17
+	android:resource
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:29:15-61
+	android:name
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:28:15-79
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:31:13-34:29
+action#android.intent.action.MAIN
+ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:32:17-68
+	android:name
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:32:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:33:17-76
+	android:name
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:33:27-74
+meta-data#flutterEmbedding
+ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:38:9-40:33
+	android:value
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:40:13-30
+	android:name
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml:39:13-44
+uses-sdk
+INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml
+MERGED from [:file_picker] /Users/nana/Document/GitHub/bank-fvisng/build/file_picker/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:file_picker] /Users/nana/Document/GitHub/bank-fvisng/build/file_picker/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] /Users/nana/Document/GitHub/bank-fvisng/build/sqflite/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] /Users/nana/Document/GitHub/bank-fvisng/build/sqflite/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:image_picker] /Users/nana/Document/GitHub/bank-fvisng/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:image_picker] /Users/nana/Document/GitHub/bank-fvisng/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] /Users/nana/Document/GitHub/bank-fvisng/build/flutter_plugin_android_lifecycle/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] /Users/nana/Document/GitHub/bank-fvisng/build/flutter_plugin_android_lifecycle/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:open_file] /Users/nana/Document/GitHub/bank-fvisng/build/open_file/intermediates/library_manifest/release/AndroidManifest.xml:6:5-44
+MERGED from [:open_file] /Users/nana/Document/GitHub/bank-fvisng/build/open_file/intermediates/library_manifest/release/AndroidManifest.xml:6:5-44
+MERGED from [:url_launcher_android] /Users/nana/Document/GitHub/bank-fvisng/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:url_launcher_android] /Users/nana/Document/GitHub/bank-fvisng/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:webview_flutter_android] /Users/nana/Document/GitHub/bank-fvisng/build/webview_flutter_android/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:webview_flutter_android] /Users/nana/Document/GitHub/bank-fvisng/build/webview_flutter_android/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_paystack] /Users/nana/Document/GitHub/bank-fvisng/build/flutter_paystack/intermediates/library_manifest/release/AndroidManifest.xml:7:5-44
+MERGED from [:flutter_paystack] /Users/nana/Document/GitHub/bank-fvisng/build/flutter_paystack/intermediates/library_manifest/release/AndroidManifest.xml:7:5-44
+MERGED from [:path_provider_android] /Users/nana/Document/GitHub/bank-fvisng/build/path_provider_android/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:path_provider_android] /Users/nana/Document/GitHub/bank-fvisng/build/path_provider_android/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences_android] /Users/nana/Document/GitHub/bank-fvisng/build/shared_preferences_android/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences_android] /Users/nana/Document/GitHub/bank-fvisng/build/shared_preferences_android/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/nana/.gradle/caches/transforms-2/files-2.1/7af74f217ce57b14dddd5d8caa022856/AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/nana/.gradle/caches/transforms-2/files-2.1/7af74f217ce57b14dddd5d8caa022856/AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/nana/.gradle/caches/transforms-2/files-2.1/182240f8b16407e524ae37a84fd52c33/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/nana/.gradle/caches/transforms-2/files-2.1/182240f8b16407e524ae37a84fd52c33/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/1577b6cf885419e92595df3cf41b3709/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/1577b6cf885419e92595df3cf41b3709/AndroidManifest.xml:20:5-44
+MERGED from [androidx.webkit:webkit:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/17b05a31d06143362d46f50a42b1cdc5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.webkit:webkit:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/17b05a31d06143362d46f50a42b1cdc5/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.4.0-alpha01] /Users/nana/.gradle/caches/transforms-2/files-2.1/5ad1fac9aa21938856afe9a1f8c978e4/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.4.0-alpha01] /Users/nana/.gradle/caches/transforms-2/files-2.1/5ad1fac9aa21938856afe9a1f8c978e4/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/d6773df94d25d017c45c62363f5f071d/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/d6773df94d25d017c45c62363f5f071d/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/nana/.gradle/caches/transforms-2/files-2.1/ad5306631774dfbf91633e039613a5e8/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/nana/.gradle/caches/transforms-2/files-2.1/ad5306631774dfbf91633e039613a5e8/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat:1.2.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/9a97cbfdbe6c01e070a9efeedd3c15ad/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.2.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/9a97cbfdbe6c01e070a9efeedd3c15ad/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/379efdb9bccd66f58b90f75f309feae7/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/379efdb9bccd66f58b90f75f309feae7/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media:media:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/17e7bbd6fce0a70088d40794f82556e3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/17e7bbd6fce0a70088d40794f82556e3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/d4cbfe54d761f0406aacca9459beb7d9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/d4cbfe54d761f0406aacca9459beb7d9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/61edfe9b2bac4bbb2fa22fc7c05f78ed/AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/61edfe9b2bac4bbb2fa22fc7c05f78ed/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/811d064b65bf0c1aa0156336cfe0af25/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/811d064b65bf0c1aa0156336cfe0af25/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/eff87588307c4f320b2b697e69d4dc28/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/eff87588307c4f320b2b697e69d4dc28/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/9ed43edaf962ea8393cde5ced161d478/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/9ed43edaf962ea8393cde5ced161d478/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.2.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/2494157c9f190cb4289e73f75403019f/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.2.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/2494157c9f190cb4289e73f75403019f/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/d22070b4e8484a60e2dbeca018f97a30/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/d22070b4e8484a60e2dbeca018f97a30/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/2e859bd431be151d7dbd548cd1c74ec4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/2e859bd431be151d7dbd548cd1c74ec4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/3935877efe974478fed18b450fa84df5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/3935877efe974478fed18b450fa84df5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/8641e7a8f804aa9764909702d5ae409c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/8641e7a8f804aa9764909702d5ae409c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/c485ac7e2c003675be3d735beba39029/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/c485ac7e2c003675be3d735beba39029/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/e118a8175beb564ec890757fb6dc2c11/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/e118a8175beb564ec890757fb6dc2c11/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/352a8af7d85797644b11606406531ad5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/352a8af7d85797644b11606406531ad5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/95d41de5bfd6ef7675d9a96f7d2f6e7b/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/95d41de5bfd6ef7675d9a96f7d2f6e7b/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/32dccc5bc6ea12adb7637a5fb4de5baf/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/32dccc5bc6ea12adb7637a5fb4de5baf/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/f0dad4000251725a2f5214bf094b8a23/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/f0dad4000251725a2f5214bf094b8a23/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/0defc531e89af4dd466c3ae33e9e2479/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/0defc531e89af4dd466c3ae33e9e2479/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.6.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/dfafbe39ad2eb551b215dd0bd7435ba0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.6.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/dfafbe39ad2eb551b215dd0bd7435ba0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/424da9fc5a5de43c481118873929b57d/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/424da9fc5a5de43c481118873929b57d/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/3c4b6f16c9a66e711662f829a2130d8f/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/3c4b6f16c9a66e711662f829a2130d8f/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/288b702a4bd10ee96075e6a61f805201/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/288b702a4bd10ee96075e6a61f805201/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/747924bad0e993703dbfaf141dc95c45/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/747924bad0e993703dbfaf141dc95c45/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/21658ea0709823076067ee3868a7912c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/21658ea0709823076067ee3868a7912c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/69f95230e5a395fe8df7d5328c7c02df/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/69f95230e5a395fe8df7d5328c7c02df/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/2ee86ff2c3e7fd4b1b2eaa62d5b925f5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/2ee86ff2c3e7fd4b1b2eaa62d5b925f5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/92754eaefeba170c756c231d4b5c4a03/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/92754eaefeba170c756c231d4b5c4a03/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/nana/.gradle/caches/transforms-2/files-2.1/081be3b719aa4aa712220d6108dc6a38/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/nana/.gradle/caches/transforms-2/files-2.1/081be3b719aa4aa712220d6108dc6a38/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/b8a6ff4c27bd8c7e05481afbc7b04d7b/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/b8a6ff4c27bd8c7e05481afbc7b04d7b/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/0be197b216b05f20b71bf18a497d4132/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/0be197b216b05f20b71bf18a497d4132/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/5f139cd80676863786a44fa88c89d7fe/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/5f139cd80676863786a44fa88c89d7fe/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/fd82819a68d5b5651552f1bc0f882f56/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/fd82819a68d5b5651552f1bc0f882f56/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/51f614c62fbb9618a217ba25654e4294/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/51f614c62fbb9618a217ba25654e4294/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/e049b323e3bfc8c6cf3be947f1d1e0d4/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/e049b323e3bfc8c6cf3be947f1d1e0d4/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/e2899b5b00ccba046776765f67328380/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/nana/.gradle/caches/transforms-2/files-2.1/e2899b5b00ccba046776765f67328380/AndroidManifest.xml:20:5-22:41
+INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from [:file_picker] /Users/nana/Document/GitHub/bank-fvisng/build/file_picker/intermediates/library_manifest/release/AndroidManifest.xml:7:5-80
+MERGED from [:open_file] /Users/nana/Document/GitHub/bank-fvisng/build/open_file/intermediates/library_manifest/release/AndroidManifest.xml:9:5-80
+MERGED from [:open_file] /Users/nana/Document/GitHub/bank-fvisng/build/open_file/intermediates/library_manifest/release/AndroidManifest.xml:9:5-80
+	android:name
+		ADDED from [:file_picker] /Users/nana/Document/GitHub/bank-fvisng/build/file_picker/intermediates/library_manifest/release/AndroidManifest.xml:7:22-77
+queries
+ADDED from [:file_picker] /Users/nana/Document/GitHub/bank-fvisng/build/file_picker/intermediates/library_manifest/release/AndroidManifest.xml:9:5-15:15
+intent
+ADDED from [:file_picker] /Users/nana/Document/GitHub/bank-fvisng/build/file_picker/intermediates/library_manifest/release/AndroidManifest.xml:10:9-14:18
+action#android.intent.action.GET_CONTENT
+ADDED from [:file_picker] /Users/nana/Document/GitHub/bank-fvisng/build/file_picker/intermediates/library_manifest/release/AndroidManifest.xml:11:13-72
+	android:name
+		ADDED from [:file_picker] /Users/nana/Document/GitHub/bank-fvisng/build/file_picker/intermediates/library_manifest/release/AndroidManifest.xml:11:21-69
+data
+ADDED from [:file_picker] /Users/nana/Document/GitHub/bank-fvisng/build/file_picker/intermediates/library_manifest/release/AndroidManifest.xml:13:13-44
+	android:mimeType
+		ADDED from [:file_picker] /Users/nana/Document/GitHub/bank-fvisng/build/file_picker/intermediates/library_manifest/release/AndroidManifest.xml:13:19-41
+provider#io.flutter.plugins.imagepicker.ImagePickerFileProvider
+ADDED from [:image_picker] /Users/nana/Document/GitHub/bank-fvisng/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:8:9-16:20
+	android:grantUriPermissions
+		ADDED from [:image_picker] /Users/nana/Document/GitHub/bank-fvisng/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:12:13-47
+	android:authorities
+		ADDED from [:image_picker] /Users/nana/Document/GitHub/bank-fvisng/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:10:13-74
+	android:exported
+		ADDED from [:image_picker] /Users/nana/Document/GitHub/bank-fvisng/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:11:13-37
+	android:name
+		ADDED from [:image_picker] /Users/nana/Document/GitHub/bank-fvisng/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:9:13-82
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:image_picker] /Users/nana/Document/GitHub/bank-fvisng/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:13:13-15:75
+	android:resource
+		ADDED from [:image_picker] /Users/nana/Document/GitHub/bank-fvisng/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:15:17-72
+	android:name
+		ADDED from [:image_picker] /Users/nana/Document/GitHub/bank-fvisng/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:14:17-67
+uses-permission#android.permission.REQUEST_INSTALL_PACKAGES
+ADDED from [:open_file] /Users/nana/Document/GitHub/bank-fvisng/build/open_file/intermediates/library_manifest/release/AndroidManifest.xml:8:5-83
+	android:name
+		ADDED from [:open_file] /Users/nana/Document/GitHub/bank-fvisng/build/open_file/intermediates/library_manifest/release/AndroidManifest.xml:8:22-80
+provider#com.crazecoder.openfile.FileProvider
+ADDED from [:open_file] /Users/nana/Document/GitHub/bank-fvisng/build/open_file/intermediates/library_manifest/release/AndroidManifest.xml:12:9-21:20
+	android:grantUriPermissions
+		ADDED from [:open_file] /Users/nana/Document/GitHub/bank-fvisng/build/open_file/intermediates/library_manifest/release/AndroidManifest.xml:16:13-47
+	android:authorities
+		ADDED from [:open_file] /Users/nana/Document/GitHub/bank-fvisng/build/open_file/intermediates/library_manifest/release/AndroidManifest.xml:14:13-88
+	android:exported
+		ADDED from [:open_file] /Users/nana/Document/GitHub/bank-fvisng/build/open_file/intermediates/library_manifest/release/AndroidManifest.xml:15:13-37
+	tools:replace
+		ADDED from [:open_file] /Users/nana/Document/GitHub/bank-fvisng/build/open_file/intermediates/library_manifest/release/AndroidManifest.xml:17:13-48
+	android:name
+		ADDED from [:open_file] /Users/nana/Document/GitHub/bank-fvisng/build/open_file/intermediates/library_manifest/release/AndroidManifest.xml:13:13-64
+activity#io.flutter.plugins.urllauncher.WebViewActivity
+ADDED from [:url_launcher_android] /Users/nana/Document/GitHub/bank-fvisng/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:8:9-11:74
+	android:exported
+		ADDED from [:url_launcher_android] /Users/nana/Document/GitHub/bank-fvisng/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:10:13-37
+	android:theme
+		ADDED from [:url_launcher_android] /Users/nana/Document/GitHub/bank-fvisng/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:11:13-71
+	android:name
+		ADDED from [:url_launcher_android] /Users/nana/Document/GitHub/bank-fvisng/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:9:13-74
+activity#co.paystack.flutterpaystack.AuthActivity
+ADDED from [:flutter_paystack] /Users/nana/Document/GitHub/bank-fvisng/build/flutter_paystack/intermediates/library_manifest/release/AndroidManifest.xml:10:9-12:54
+	android:theme
+		ADDED from [:flutter_paystack] /Users/nana/Document/GitHub/bank-fvisng/build/flutter_paystack/intermediates/library_manifest/release/AndroidManifest.xml:12:13-51
+	android:name
+		ADDED from [:flutter_paystack] /Users/nana/Document/GitHub/bank-fvisng/build/flutter_paystack/intermediates/library_manifest/release/AndroidManifest.xml:11:13-68
+uses-library#androidx.window.extensions
+ADDED from [androidx.window:window:1.0.0-beta04] /Users/nana/.gradle/caches/transforms-2/files-2.1/182240f8b16407e524ae37a84fd52c33/AndroidManifest.xml:25:9-27:40
+	android:required
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/nana/.gradle/caches/transforms-2/files-2.1/182240f8b16407e524ae37a84fd52c33/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/nana/.gradle/caches/transforms-2/files-2.1/182240f8b16407e524ae37a84fd52c33/AndroidManifest.xml:26:13-54
+uses-library#androidx.window.sidecar
+ADDED from [androidx.window:window:1.0.0-beta04] /Users/nana/.gradle/caches/transforms-2/files-2.1/182240f8b16407e524ae37a84fd52c33/AndroidManifest.xml:28:9-30:40
+	android:required
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/nana/.gradle/caches/transforms-2/files-2.1/182240f8b16407e524ae37a84fd52c33/AndroidManifest.xml:30:13-37
+	android:name
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/nana/.gradle/caches/transforms-2/files-2.1/182240f8b16407e524ae37a84fd52c33/AndroidManifest.xml:29:13-51

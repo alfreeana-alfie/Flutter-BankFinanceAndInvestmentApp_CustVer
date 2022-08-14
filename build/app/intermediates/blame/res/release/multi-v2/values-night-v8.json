@@ -1,0 +1,62 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/nana/Document/GitHub/bank-fvisng/build/app/intermediates/incremental/mergeReleaseResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "map": [
+                {
+                    "source": "/Users/nana/.gradle/caches/transforms-2/files-2.1/9a97cbfdbe6c01e070a9efeedd3c15ad/res/values-night-v8/values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,209,293,389,491,593,687",
+                        "endColumns": "69,83,83,95,101,101,93,88",
+                        "endOffsets": "120,204,288,384,486,588,682,771"
+                    },
+                    "to": {
+                        "startLines": "12,13,14,15,16,17,18,35",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "678,748,832,916,1012,1114,1216,3172",
+                        "endColumns": "69,83,83,95,101,101,93,88",
+                        "endOffsets": "743,827,911,1007,1109,1211,1305,3256"
+                    }
+                },
+                {
+                    "source": "/Users/nana/Document/GitHub/bank-fvisng/android/app/src/main/res/values-night/styles.xml",
+                    "from": {
+                        "startLines": "3,15",
+                        "startColumns": "4,4",
+                        "startOffsets": "172,898",
+                        "endLines": "8,18",
+                        "endColumns": "12,12",
+                        "endOffsets": "547,1136"
+                    },
+                    "to": {
+                        "startLines": "2,8",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,435",
+                        "endLines": "7,11",
+                        "endColumns": "12,12",
+                        "endOffsets": "430,673"
+                    }
+                },
+                {
+                    "source": "/Users/nana/.gradle/caches/transforms-2/files-2.1/5ad1fac9aa21938856afe9a1f8c978e4/res/values-night-v8/values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,143,267,369,471,587,689,803,931,1047,1169,1305,1425,1559,1679,1791,1917,2041,2171,2293,2431,2565,2681",
+                        "endColumns": "87,123,101,101,115,101,113,127,115,121,135,119,133,119,111,125,123,129,121,137,133,115,119",
+                        "endOffsets": "138,262,364,466,582,684,798,926,1042,1164,1300,1420,1554,1674,1786,1912,2036,2166,2288,2426,2560,2676,2796"
+                    },
+                    "to": {
+                        "startLines": "19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,36,37,38,39,40,41,42",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "1310,1398,1522,1624,1726,1842,1944,2058,2186,2302,2424,2560,2680,2814,2934,3046,3261,3385,3515,3637,3775,3909,4025",
+                        "endColumns": "87,123,101,101,115,101,113,127,115,121,135,119,133,119,111,125,123,129,121,137,133,115,119",
+                        "endOffsets": "1393,1517,1619,1721,1837,1939,2053,2181,2297,2419,2555,2675,2809,2929,3041,3167,3380,3510,3632,3770,3904,4020,4140"
+                    }
+                }
+            ]
+        }
+    ]
+}
